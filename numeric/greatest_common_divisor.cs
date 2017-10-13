@@ -19,7 +19,7 @@ namespace numeric
                     if ((Int32.TryParse(integers[0], out a) &&
                         Int32.TryParse(integers[1], out b)))
                     {
-                        int value = FindGreatestCommonDivisor(a, b);
+                        int value = euclidean_gcd(a, b);
                         Console.WriteLine("Greates common divisor of values " + a + " and " + b + " is " + value + ".");
                     }
 
@@ -28,7 +28,7 @@ namespace numeric
             }
         }
 
-        public static int FindGreatestCommonDivisor(int a, int b)
+        public static int euclidean_gcd(int a, int b)
         {
             if (a == 0)
             {
