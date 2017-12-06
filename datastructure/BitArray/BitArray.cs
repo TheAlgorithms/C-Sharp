@@ -150,7 +150,7 @@ namespace DataStructures.BitArray
 				}
 
 			} 
-			else 
+			else  
 			{ // error case
 
 				throw new Exception ("BitArray: N must been greater or equal to 1");
@@ -447,7 +447,7 @@ namespace DataStructures.BitArray
 		 * ToString: is the opposit of the Compile(...) method.
 		 * 
 		 * */
-		public string ToString ()
+		public override string ToString ()
 		{
 			string ans = "";
 
