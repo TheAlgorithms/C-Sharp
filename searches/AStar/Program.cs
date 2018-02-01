@@ -5,7 +5,7 @@ namespace AStar
 {
 	internal class Program
 	{
-        //Map to use
+		//Map to use
 		public static string[] map = new string[] {
 			"+------+",
 			"|      |",
@@ -17,11 +17,11 @@ namespace AStar
 			"+------+"
 		};
 
-        //Begin and end
+		//Begin and end
 		public static Location end;
 		public static Location start;
 
-        //get valid adjacent steps to the current location
+		//get valid adjacent steps to the current location
 		public static List<Location> adjacentSteps(Location l)
 		{
 			List<Location> proposedLocations = new List<Location> {
@@ -32,97 +32,96 @@ namespace AStar
 			};
 
 			List<Location> actualLocations = new List<Location>();
-            foreach (Location a in proposedLocations)
-            {	
+			foreach (Location a in proposedLocations)
+			{	
 				if (Program.map[a.Y][a.X] == ' ' || Program.map[a.Y][a.X] == 'B')
 				{
-                    actualLocations.Add(a);
+					actualLocations.Add(a);
 				}
 			}
 
-            return actualLocations;
+			return actualLocations;
 		}
 
-        //The one and only AStar algorithm
+		//The one and only AStar algorithm
 		public static List<Location> AStar()
 		{
-            //Going there
-            List<Location> OpenedList = new List<Location>();
+			//Going there
+			List<Location> OpenedList = new List<Location>();
 
-            //Been there
-            List<Location> ClosedList = new List<Location>();
+			//Been there
+			List<Location> ClosedList = new List<Location>();
 
 			Program.end = Program.FindEnd();
 			Program.start = Program.FindStart();
 
 			OpenedList.Add(Program.start);
 
-            //While there are still nodes to visit
+			//While there are still nodes to visit
 			while (OpenedList.Count > 0)
 			{
-                //Get the node that has the best chance
-                Location bestChoice = Program.MinimumF(OpenedList);
+				//Get the node that has the best chance
+				Location bestChoice = Program.MinimumF(OpenedList);
 
-                //Mark as visited
+				//Mark as visited
 				OpenedList.Remove(bestChoice);
 				ClosedList.Add(bestChoice);
 
-                //Did we hit the end?
+				//Did we hit the end?
 				if (bestChoice.X == Program.end.X && bestChoice.Y == Program.end.Y)
 				{
 					break;
 				}
 
-                //Find the next moves
-                List<Location> adjacentChoices = Program.adjacentSteps(bestChoice);
-                foreach (Location l in adjacentChoices)
+				//Find the next moves
+				List<Location> adjacentChoices = Program.adjacentSteps(bestChoice);
+				foreach (Location l in adjacentChoices)
 				{
-                    //Been there
-                    if (ClosedList.Contains(l))
-                        continue;
+					//Been there
+					if (ClosedList.Contains(l))
+						continue;
 
-                    //Haven't gone there yet!
-                    if (!OpenedList.Contains(l))
-                    {
-                        OpenedList.Insert(0, l);
-                    }
+					//Haven't gone there yet!
+					if (!OpenedList.Contains(l))
+					{
+						OpenedList.Insert(0, l);
+					}
 
-                    //We are going to go there, but did we come from a better path?
-                    else
-                    {
-                        //Find the same location we had
-                        Location sameLocation = OpenedList.Find((Location a) => a.X == l.X && a.Y == l.Y);
+					//We are going to go there, but did we come from a better path?
+					else
+					{
+						//Find the same location we had
+						Location sameLocation = OpenedList.Find((Location a) => a.X == l.X && a.Y == l.Y);
 
-                        //If our current location is better than the location we found earlier, update it with 
-                        //our new location
-                        if (bestChoice.G + 1 + l.H < sameLocation.F)
-                        {
-                            OpenedList.Remove(sameLocation);
-                            OpenedList.Add(l);
-                        }
-                    }
+						//If our current location is better than the location we found earlier, update it with 
+						//our new location
+						if (bestChoice.G + 1 + l.H < sameLocation.F)
+						{
+							OpenedList.Remove(sameLocation);
+							OpenedList.Add(l);
+						}
+					}
 				}
 			}
 
-            //Path to return
+			//Path to return
 			List<Location> result;
 
 
 			if (!ClosedList.Contains(Program.end))
 				result = null;
-            
+						
 			else
 				result = ReconstructPath(ClosedList);
 			
-
 			return result;
 		}
 
 		public static int ComputeHScore(int x, int y)
 		{
-            //If we created a new location for the end node, 
-            //don't worry about the Hueristic
-            int result;
+			//If we created a new location for the end node, 
+			//don't worry about the Hueristic
+			int result;
 
 			if (Program.end == null)
 				result = 0;
@@ -136,6 +135,7 @@ namespace AStar
 		public static Location FindEnd()
 		{
 			Location result = null;
+
 			for (int i = 0; i < Program.map.Length; i++)
 			{
 				bool flag = Program.map[i].Contains("B");
@@ -165,7 +165,7 @@ namespace AStar
 			return result;
 		}
 
-        //Get the best F score out of the list of locations
+		//Get the best F score out of the list of locations
 		public static Location MinimumF(List<Location> l)
 		{
 			Location min = l[0];
@@ -179,7 +179,7 @@ namespace AStar
 			return min;
 		}
 
-        //Reconstructs the path from beginning to end
+		//Reconstructs the path from beginning to end
 		public static List<Location> ReconstructPath(List<Location> ClosedList)
 		{
 			List<Location> path = new List<Location>();
@@ -191,28 +191,28 @@ namespace AStar
 			while (location.Parent != null)
 			{
 				location = location.Parent;
-                path.Insert(0, location);
+				path.Insert(0, location);
 			}
 
 			return path;
 		}
 
 		public static void Main(string[] args)
-        {
-            List<Location> list = Program.AStar();
-            
-            if (list == null)
-            {
-                Console.WriteLine("No solution!");
-            }
-            else
-            {
-                Console.WriteLine("Solution found as follows:");
-                foreach (Location current in list)
-                {
-                    Console.WriteLine(current.X + ", " + current.Y);
-                }
-            }
-        }
-    }
+		{
+			List<Location> list = Program.AStar();
+							
+			if (list == null)
+			{
+				Console.WriteLine("No solution!");
+			}
+			else
+			{
+				Console.WriteLine("Solution found as follows:");
+				foreach (Location current in list)
+				{
+					Console.WriteLine(current.X + ", " + current.Y);
+				}
+			}
+		}
+	}
 }
