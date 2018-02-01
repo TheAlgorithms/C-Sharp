@@ -79,12 +79,12 @@ namespace AStar
 				{
 					//Been there
 					if (ClosedList.Contains(l))
-							continue;
+						continue;
 
 					//Haven't gone there yet!
 					if (!OpenedList.Contains(l))
 					{
-							OpenedList.Insert(0, l);
+						OpenedList.Insert(0, l);
 					}
 
 					//We are going to go there, but did we come from a better path?
