@@ -104,7 +104,7 @@ namespace AStar
 				}
 			}
 
-						//Path to return
+			//Path to return
 			List<Location> result;
 
 
@@ -165,7 +165,7 @@ namespace AStar
 			return result;
 		}
 
-				//Get the best F score out of the list of locations
+		//Get the best F score out of the list of locations
 		public static Location MinimumF(List<Location> l)
 		{
 			Location min = l[0];
@@ -179,7 +179,7 @@ namespace AStar
 			return min;
 		}
 
-				//Reconstructs the path from beginning to end
+		//Reconstructs the path from beginning to end
 		public static List<Location> ReconstructPath(List<Location> ClosedList)
 		{
 			List<Location> path = new List<Location>();
