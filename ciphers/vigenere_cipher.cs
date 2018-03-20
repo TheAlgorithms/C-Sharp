@@ -1,5 +1,5 @@
 using System;
-
+using System.Text.RegularExpressions;
 
 namespace vigenere_cipher
 {
@@ -10,6 +10,7 @@ namespace vigenere_cipher
             Console.WriteLine("Encrypt/Decrypt? [e/d]: ");
             char option = Console.ReadKey().KeyChar;
 
+            // processes the user choice
             if (option != 'e' && option != 'd')
             {
                 Console.WriteLine("\nInvalid choice. Use 'e' or 'd'");
@@ -21,17 +22,18 @@ namespace vigenere_cipher
 
             Console.WriteLine("\nEnter KEY: ");
             string key = Console.ReadLine().ToUpper();
-            for (int i = 0; i < key.Length; i++)
+
+            // makes sure the key contains only letters
+            if (!Regex.IsMatch(key, @"^[a-zA-Z]+$"))
             {
-                if (!char.IsLetter(key[i]))
-                {
-                    Console.WriteLine("Illegal Character in KEY, use only alphabetic characters");
-                    return;
-                }
+                Console.WriteLine("Illegal Character in KEY, use only alphabetic characters");
+                return;
             }
+
 
             Console.WriteLine("\n******************\n");
 
+            // calls the method Cipher depending on the user choice
             switch (option)
             {
                 case 'e':
@@ -49,6 +51,8 @@ namespace vigenere_cipher
             string crypted = "";
             for (int i = 0; i < msg.Length; i++)
             {
+                // if the character not are letter then skips it and 
+                // don't en/dec it.
                 if (!char.IsLetter(msg[i]))
                 {
                     skip++;
@@ -56,14 +60,19 @@ namespace vigenere_cipher
                 }
                 else
                 {
+                    // computes the shift
                     int shift = key[(i - skip) % key.Length] - 'A';
+
+                    // modifying the shift depending on the option 'reverse'
                     shift = reverse ? -shift : shift;
 
+                    // shifts the letter of the message
                     int c = msg[i] + shift;
 
                     char letterA = char.IsUpper(msg[i]) ? 'A' : 'a';
                     char letterZ = char.IsUpper(msg[i]) ? 'Z' : 'z';
 
+                    // makes sure the en/dec character is a letter.
                     if (c < letterA) c += 26;
                     if (c > letterZ) c -= 26;
 
