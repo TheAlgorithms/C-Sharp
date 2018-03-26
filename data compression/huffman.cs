@@ -141,8 +141,12 @@ namespace DC5
                 stack.Push(parentNode);
                 stack = GetSortedStack(stack.ToList<Huff>());
             }
+
+            // generated huffman tree
             Huff parentNode1 = stack.Pop();
             Man man = new Man();
+
+            // generates and displays the huffman code
             Console.WriteLine("\nHuffman Code:");
             GenerateCode(parentNode1, "", man);
             string cStr = " ";
