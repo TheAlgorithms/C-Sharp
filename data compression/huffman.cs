@@ -80,6 +80,8 @@ namespace DC5
             }
             int temp;
             char ch;
+
+            // sorts array d1 (frequencies) and array c1
             for (int i = 0; i < pos; i++)
             {
                 for (int j = i + 1; j < pos; j++)
@@ -105,6 +107,8 @@ namespace DC5
             {
                 Console.Write("{0}\t", d1[i]);
             }
+
+            // computes the information content in bits
             double infoBit = 0;
             for (int i = 0; i < pos; i++)
             {
@@ -116,10 +120,14 @@ namespace DC5
             Console.WriteLine("\nTotal Information Count: {0}", infoBit + " Bits");
             Console.WriteLine("Number of Bits required before Compression: {0}", (n * 8));
             int[] array = new int[pos];
+
+            // copies array d1 in 'array'
             for (int i = 0; i < pos; i++)
             {
                 array[i] = d1[i];
             }
+
+            // fills the list 'list' with Huff-objects
             for (int i = 0; i < pos; i++)
             {
                 list.Add(new Huff(c1[i].ToString(), array[i]));
@@ -157,7 +165,7 @@ namespace DC5
         {
             for (int i = 0; i < list.Count; i++)
             {
-                for (int j = 0; j < list.Count; j++)
+                for (int j = i+1; j < list.Count; j++)
                 {
                     if (list[i].frequency > list[j].frequency)
                     {
