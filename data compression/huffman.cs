@@ -35,7 +35,8 @@ namespace DC5
             Console.Write("Enter String: ");
             string str = Console.ReadLine().ToLower().Replace(" ", "#");
             Console.WriteLine("Space will be represented by #");
-            int n = str.Length, count = 1, flag = 0, pos = 0;
+            int n = str.Length, count = 1, pos = 0;
+            bool flag = false;
             int[] d = new int[n];
             int[] d1 = new int[n];
             char[] c1 = new char[n];
@@ -58,16 +59,16 @@ namespace DC5
                 {
                     if (c[i] == c1[j])
                     {
-                        flag++;
+                        flag = true;
                     }
                 }
-                if (flag == 0)
+                if (!flag)
                 {
                     c1[pos] = c[i];
                     d1[pos] = d[i];
                     pos++;
                 }
-                flag = 0;
+                flag = false;
             }
             for (int i = 0; i < pos; i++)
             {
