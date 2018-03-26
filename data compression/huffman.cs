@@ -35,7 +35,8 @@ namespace DC5
             Console.Write("Enter String: ");
             string str = Console.ReadLine().ToLower().Replace(" ", "#");
             Console.WriteLine("Space will be represented by #");
-            int n = str.Length, count = 1, flag = 0, pos = 0;
+            int n = str.Length, count = 1, pos = 0;
+            bool flag = false;
             int[] d = new int[n];
             int[] d1 = new int[n];
             char[] c1 = new char[n];
@@ -58,16 +59,16 @@ namespace DC5
                 {
                     if (c[i] == c1[j])
                     {
-                        flag++;
+                        flag = true;
                     }
                 }
-                if (flag == 0)
+                if (!flag)
                 {
                     c1[pos] = c[i];
                     d1[pos] = d[i];
                     pos++;
                 }
-                flag = 0;
+                flag = false;
             }
             for (int i = 0; i < pos; i++)
             {
@@ -80,6 +81,8 @@ namespace DC5
             }
             int temp;
             char ch;
+
+            // sorts array d1 (frequencies) and array c1
             for (int i = 0; i < pos; i++)
             {
                 for (int j = i + 1; j < pos; j++)
@@ -105,6 +108,8 @@ namespace DC5
             {
                 Console.Write("{0}\t", d1[i]);
             }
+
+            // computes the information content in bits
             double infoBit = 0;
             for (int i = 0; i < pos; i++)
             {
@@ -116,10 +121,14 @@ namespace DC5
             Console.WriteLine("\nTotal Information Count: {0}", infoBit + " Bits");
             Console.WriteLine("Number of Bits required before Compression: {0}", (n * 8));
             int[] array = new int[pos];
+
+            // copies array d1 in 'array'
             for (int i = 0; i < pos; i++)
             {
                 array[i] = d1[i];
             }
+
+            // fills the list 'list' with Huff-objects
             for (int i = 0; i < pos; i++)
             {
                 list.Add(new Huff(c1[i].ToString(), array[i]));
@@ -133,8 +142,12 @@ namespace DC5
                 stack.Push(parentNode);
                 stack = GetSortedStack(stack.ToList<Huff>());
             }
+
+            // generated huffman tree
             Huff parentNode1 = stack.Pop();
             Man man = new Man();
+
+            // generates and displays the huffman code
             Console.WriteLine("\nHuffman Code:");
             GenerateCode(parentNode1, "", man);
             string cStr = " ";
@@ -157,7 +170,7 @@ namespace DC5
         {
             for (int i = 0; i < list.Count; i++)
             {
-                for (int j = 0; j < list.Count; j++)
+                for (int j = i+1; j < list.Count; j++)
                 {
                     if (list[i].frequency > list[j].frequency)
                     {
