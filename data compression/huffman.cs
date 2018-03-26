@@ -6,26 +6,38 @@ namespace DC5
 {
     class Huff
     {
-        public int frequency;
-        public string data;
-        public Huff leftChild, rightChild;
+        private int frequency;
+        private string data;
+        private Huff rightChild;
+        private Huff leftChild;
+
+        // propertys for the fields (above)
+        public string Data { get => data; set => data = value; }
+        public int Frequency { get => frequency; set => frequency = value; }
+        public Huff RightChild { get => rightChild; set => rightChild = value; }
+        public Huff LeftChild { get => leftChild; set => leftChild = value; }
+
         public Huff(string data, int frequency)
         {
-            this.data = data;
-            this.frequency = frequency;
+            this.Data = data;
+            this.Frequency = frequency;
         }
         public Huff(Huff leftChild, Huff rightChild)
         {
-            this.leftChild = leftChild;
-            this.rightChild = rightChild;
-            this.data = leftChild.data + ":" + rightChild.data;
-            this.frequency = leftChild.frequency + rightChild.frequency;
+            this.LeftChild = leftChild;
+            this.RightChild = rightChild;
+            this.Data = leftChild.Data + ":" + rightChild.Data;
+            this.Frequency = leftChild.Frequency + rightChild.Frequency;
         }
     }
     class Man
     {
-        public List<string> codec = new List<string>();
-        public List<string> data = new List<string>();
+        private List<string> codec = new List<string>();
+        private List<string> data = new List<string>();
+
+        // propertys for the fields (above)
+        public List<string> Codec { get => codec; set => codec = value; }
+        public List<string> Data { get => data; set => data = value; }
     }
     class Program
     {
@@ -153,8 +165,8 @@ namespace DC5
             string cStr = " ";
             foreach (var item in str)
             {
-                var index = man.data.IndexOf(item.ToString());
-                cStr += man.codec.ElementAt(index);
+                var index = man.Data.IndexOf(item.ToString());
+                cStr += man.Codec.ElementAt(index);
             }
             int hfBits = 0;
             foreach (var item in cStr.Replace(" ", ""))
@@ -172,7 +184,7 @@ namespace DC5
             {
                 for (int j = i+1; j < list.Count; j++)
                 {
-                    if (list[i].frequency > list[j].frequency)
+                    if (list[i].Frequency > list[j].Frequency)
                     {
                         Huff tempNode = list[j];
                         list[j] = list[i];
@@ -189,14 +201,14 @@ namespace DC5
         {
             if (parentNode != null)
             {
-                GenerateCode(parentNode.leftChild, code + "0", man);
-                if (parentNode.leftChild == null && parentNode.rightChild == null)
+                GenerateCode(parentNode.LeftChild, code + "0", man);
+                if (parentNode.LeftChild == null && parentNode.RightChild == null)
                 {
-                    Console.WriteLine(parentNode.data + "\t" + code);
-                    man.codec.Add(code);
-                    man.data.Add(parentNode.data);
+                    Console.WriteLine(parentNode.Data + "\t" + code);
+                    man.Codec.Add(code);
+                    man.Data.Add(parentNode.Data);
                 }
-                GenerateCode(parentNode.rightChild, code + "1", man);
+                GenerateCode(parentNode.RightChild, code + "1", man);
             }
         }
     }
