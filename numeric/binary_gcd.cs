@@ -6,7 +6,7 @@ public class Example
     {
         while (true)
         {
-            Console.Write("Please enter two numbers separated by a space: ");
+            Console.Write("Please enter two numbers separated by a space (exit with none inputs): ");
             string[] input = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (input.Length == 2)
