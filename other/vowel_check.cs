@@ -26,7 +26,7 @@ namespace VowelCheck_Con
                         else if (c == 'o') { o++; }
                         else if (c == 'u') { u++; }
                     }
-                    if (a == 0 || e == 0 || i == 0 || o == 0 || u == 0)
+                    if (a == 0 && e == 0 && i == 0 && o == 0 && u == 0)
                     {
                         Console.WriteLine("NO");
                     }
