@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace E
+namespace Example
 {
     public static class StringViewModel
     {
