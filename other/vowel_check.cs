@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace ConsoleApp1
+namespace VowelCheck_Con
 {
     class Program
     {
