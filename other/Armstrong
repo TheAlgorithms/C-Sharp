@@ -1,0 +1,13 @@
+
+    public static bool ArmstrongNumber(int number)
+    {
+        int sum = 0;
+        var value = number;
+        while (value > 0)
+        {
+            sum += (int)Math.Pow((value % 10), number.ToString().Length);
+            value = value / 10;
+        }
+
+        return sum == number;
+    }
