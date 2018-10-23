@@ -9,9 +9,9 @@ This repository contains algorithms and datastructures implemented in C# for edu
 * [Ciphers](./ciphers/)
     * [Caesar](./ciphers/caesar.cs)
     * [Vigenere](./ciphers/vigenere_cipher.cs)
-* [Data Compression]("./data compression")
-    * [Huffman Encoding]("./data compression/huffman.cs")
-    * [Shannon-Fano Encoding]("./data compression/shannon_fano.cs")
+* [Data Compression](<./data compression>)
+    * [Huffman Encoding](<./data compression/huffman.cs>)
+    * [Shannon-Fano Encoding](<./data compression/shannon_fano.cs>)
 * Datastructures
     * [Bit Array](./datastructure/BitArray)
 * [Numeric](./numeric/)
