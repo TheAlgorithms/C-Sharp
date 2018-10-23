@@ -12,7 +12,7 @@ This repository contains algorithms and datastructures implemented in C# for edu
 * [Data Compression](<./data compression>)
     * [Huffman Encoding](<./data compression/huffman.cs>)
     * [Shannon-Fano Encoding](<./data compression/shannon_fano.cs>)
-* Datastructures
+* [Datastructures](<./datastructure/)
     * [Bit Array](./datastructure/BitArray)
 * [Numeric](./numeric/)
     * [Binary GCD](./numeric/binary_gcd.cs)
