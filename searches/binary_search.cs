@@ -35,7 +35,7 @@ namespace Binary-Search
             int max = N - 1;
             do
             {
-                int mid = (min + max) / 2;
+                int mid = min + (max - min) / 2;
                 if (item > data[mid])
                     min = mid + 1;
                 else
