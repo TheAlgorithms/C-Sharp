@@ -8,6 +8,7 @@ This repository contains algorithms and datastructures implemented in C# for edu
 
 * [Ciphers](./ciphers/)
     * [Caesar](./ciphers/caesar.cs)
+    * [Random](./ciphers/random_cipher.cs)
     * [Vigenere](./ciphers/vigenere_cipher.cs)
 * [Data Compression](<./data compression>)
     * [Huffman Encoding](<./data compression/huffman.cs>)
@@ -26,6 +27,7 @@ This repository contains algorithms and datastructures implemented in C# for edu
     * [Binary](./searches/binary_search.cs)
     * [Linear](./searches/linear_search.cs)
 * [Sorts](./sorts/)
+    * [Binary Insertion](./sorts/binary_insertion_sort.cs)
     * [Bogo](./sorts/bogosort.cs)
     * [Bubble](./sorts/bubble_sort.cs)
     * [Bucket](./sorts/Bucket_Sort.cs)
