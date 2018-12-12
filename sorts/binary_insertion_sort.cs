@@ -39,7 +39,7 @@ namespace binary_insertion_sort {
 			}
 		}
 
-		/// <summary>Implementation of Binary Search using stack recursion.</summary>
+		/// <summary>Implementation of Binary Search using an iterative approach.</summary>
 		/// <param name="data">An array of integer values -in ascending sorted order between the index values left and right- to search through.</param>
 		/// <param name="left">The value of the starting left hand index.</param>
 		/// <param name="right">The value of the starting right hand index.</param>
