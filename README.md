@@ -30,6 +30,7 @@ This repository contains algorithms and datastructures implemented in C# for edu
     * [Binary Insertion](./sorts/binary_insertion_sort.cs)
     * [Bogo](./sorts/bogosort.cs)
     * [Bubble](./sorts/bubble_sort.cs)
+    * [Cocktail](./sorts/cocktail_sort.cs)
     * [Bucket](./sorts/Bucket_Sort.cs)
     * [Cycle](./sorts/cycle_sort.cs)
     * [Merge](./sorts/merge_sort.cs)
