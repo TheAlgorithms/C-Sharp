@@ -7,25 +7,20 @@ namespace cocktail_sort
         static void Main(string[] args)
         {
             Console.WriteLine("Please enter some integers, separated by spaces:");
+            
             string input = Console.ReadLine();
             string[] integers = input.Split(' ');
             int[] data = new int[integers.Length];
+
             for (int i = 0; i < data.Length; i++)
                 data[i] = int.Parse(integers[i]);
-            
-            Console.Write("\nUnsorted: ");
-            for (int i = 0; i < data.Length; i++)
-            {
-                Console.Write(data[i] + " ");
-            }
+    
+            Console.WriteLine("Unsorted: {0}", String.Join(" ", data));
 
             CocktailSort(data);
-            
-            Console.Write("\nSorted: ");
-            for (int i = 0; i < data.Length; i++)
-            {
-                Console.Write(data[i] + " ");
-            }
+
+            Console.WriteLine("Sorted: {0}", String.Join(" ", data));
+
             Console.ReadKey();
         }
 
