@@ -1,0 +1,14 @@
+D:\Solutions\C-Sharp\Algorithms.Tests\bin\Debug\netcoreapp2.2\NUnit3.TestAdapter.dll
+D:\Solutions\C-Sharp\Algorithms.Tests\bin\Debug\netcoreapp2.2\NUnit3.TestAdapter.pdb
+D:\Solutions\C-Sharp\Algorithms.Tests\bin\Debug\netcoreapp2.2\nunit.engine.netstandard.dll
+D:\Solutions\C-Sharp\Algorithms.Tests\bin\Debug\netcoreapp2.2\Algorithms.Tests.deps.json
+D:\Solutions\C-Sharp\Algorithms.Tests\bin\Debug\netcoreapp2.2\Algorithms.Tests.runtimeconfig.json
+D:\Solutions\C-Sharp\Algorithms.Tests\bin\Debug\netcoreapp2.2\Algorithms.Tests.runtimeconfig.dev.json
+D:\Solutions\C-Sharp\Algorithms.Tests\bin\Debug\netcoreapp2.2\Algorithms.Tests.dll
+D:\Solutions\C-Sharp\Algorithms.Tests\bin\Debug\netcoreapp2.2\Algorithms.Tests.pdb
+D:\Solutions\C-Sharp\Algorithms.Tests\obj\Debug\netcoreapp2.2\Algorithms.Tests.csprojAssemblyReference.cache
+D:\Solutions\C-Sharp\Algorithms.Tests\obj\Debug\netcoreapp2.2\Algorithms.Tests.csproj.CoreCompileInputs.cache
+D:\Solutions\C-Sharp\Algorithms.Tests\obj\Debug\netcoreapp2.2\Algorithms.Tests.AssemblyInfoInputs.cache
+D:\Solutions\C-Sharp\Algorithms.Tests\obj\Debug\netcoreapp2.2\Algorithms.Tests.AssemblyInfo.cs
+D:\Solutions\C-Sharp\Algorithms.Tests\obj\Debug\netcoreapp2.2\Algorithms.Tests.dll
+D:\Solutions\C-Sharp\Algorithms.Tests\obj\Debug\netcoreapp2.2\Algorithms.Tests.pdb

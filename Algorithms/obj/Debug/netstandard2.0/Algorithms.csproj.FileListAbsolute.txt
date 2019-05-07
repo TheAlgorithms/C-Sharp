@@ -1,0 +1,9 @@
+D:\Solutions\C-Sharp\Algorithms\bin\Debug\netstandard2.0\Algorithms.deps.json
+D:\Solutions\C-Sharp\Algorithms\bin\Debug\netstandard2.0\Algorithms.dll
+D:\Solutions\C-Sharp\Algorithms\bin\Debug\netstandard2.0\Algorithms.pdb
+D:\Solutions\C-Sharp\Algorithms\obj\Debug\netstandard2.0\Algorithms.csprojAssemblyReference.cache
+D:\Solutions\C-Sharp\Algorithms\obj\Debug\netstandard2.0\Algorithms.csproj.CoreCompileInputs.cache
+D:\Solutions\C-Sharp\Algorithms\obj\Debug\netstandard2.0\Algorithms.AssemblyInfoInputs.cache
+D:\Solutions\C-Sharp\Algorithms\obj\Debug\netstandard2.0\Algorithms.AssemblyInfo.cs
+D:\Solutions\C-Sharp\Algorithms\obj\Debug\netstandard2.0\Algorithms.dll
+D:\Solutions\C-Sharp\Algorithms\obj\Debug\netstandard2.0\Algorithms.pdb

@@ -1,0 +1,14 @@
+D:\Solutions\C-Sharp\DataStructures.Tests\bin\Debug\netcoreapp2.2\NUnit3.TestAdapter.dll
+D:\Solutions\C-Sharp\DataStructures.Tests\bin\Debug\netcoreapp2.2\NUnit3.TestAdapter.pdb
+D:\Solutions\C-Sharp\DataStructures.Tests\bin\Debug\netcoreapp2.2\nunit.engine.netstandard.dll
+D:\Solutions\C-Sharp\DataStructures.Tests\bin\Debug\netcoreapp2.2\DataStructures.Tests.deps.json
+D:\Solutions\C-Sharp\DataStructures.Tests\bin\Debug\netcoreapp2.2\DataStructures.Tests.runtimeconfig.json
+D:\Solutions\C-Sharp\DataStructures.Tests\bin\Debug\netcoreapp2.2\DataStructures.Tests.runtimeconfig.dev.json
+D:\Solutions\C-Sharp\DataStructures.Tests\bin\Debug\netcoreapp2.2\DataStructures.Tests.dll
+D:\Solutions\C-Sharp\DataStructures.Tests\bin\Debug\netcoreapp2.2\DataStructures.Tests.pdb
+D:\Solutions\C-Sharp\DataStructures.Tests\obj\Debug\netcoreapp2.2\DataStructures.Tests.csprojAssemblyReference.cache
+D:\Solutions\C-Sharp\DataStructures.Tests\obj\Debug\netcoreapp2.2\DataStructures.Tests.csproj.CoreCompileInputs.cache
+D:\Solutions\C-Sharp\DataStructures.Tests\obj\Debug\netcoreapp2.2\DataStructures.Tests.AssemblyInfoInputs.cache
+D:\Solutions\C-Sharp\DataStructures.Tests\obj\Debug\netcoreapp2.2\DataStructures.Tests.AssemblyInfo.cs
+D:\Solutions\C-Sharp\DataStructures.Tests\obj\Debug\netcoreapp2.2\DataStructures.Tests.dll
+D:\Solutions\C-Sharp\DataStructures.Tests\obj\Debug\netcoreapp2.2\DataStructures.Tests.pdb
