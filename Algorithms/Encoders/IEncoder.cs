@@ -1,8 +1,8 @@
 ﻿/// <summary>
-/// Summary description for Class1
+/// Encodes and decodes value based on specified key
 /// </summary>
-public interface IEncoder
+public interface IEncoder<TKey>
 {
-    string Encode(string value, string key);
-    string Decode(string value, string key);
+    string Encode(string value, TKey key);
+    string Decode(string value, TKey key);
 }
