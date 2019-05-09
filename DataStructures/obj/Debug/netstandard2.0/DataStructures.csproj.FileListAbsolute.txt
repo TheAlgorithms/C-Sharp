@@ -1,9 +1,0 @@
-D:\Solutions\C-Sharp\DataStructures\bin\Debug\netstandard2.0\DataStructures.deps.json
-D:\Solutions\C-Sharp\DataStructures\bin\Debug\netstandard2.0\DataStructures.dll
-D:\Solutions\C-Sharp\DataStructures\bin\Debug\netstandard2.0\DataStructures.pdb
-D:\Solutions\C-Sharp\DataStructures\obj\Debug\netstandard2.0\DataStructures.csprojAssemblyReference.cache
-D:\Solutions\C-Sharp\DataStructures\obj\Debug\netstandard2.0\DataStructures.csproj.CoreCompileInputs.cache
-D:\Solutions\C-Sharp\DataStructures\obj\Debug\netstandard2.0\DataStructures.AssemblyInfoInputs.cache
-D:\Solutions\C-Sharp\DataStructures\obj\Debug\netstandard2.0\DataStructures.AssemblyInfo.cs
-D:\Solutions\C-Sharp\DataStructures\obj\Debug\netstandard2.0\DataStructures.dll
-D:\Solutions\C-Sharp\DataStructures\obj\Debug\netstandard2.0\DataStructures.pdb
