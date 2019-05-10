@@ -4,10 +4,10 @@ namespace BucketSort
 {
     class BucketSort
     {
-        private int[] data; // array of values
-        private static Random generator = new Random();
+        private readonly int[] data; // array of values
+        private static readonly Random generator = new Random();
 
-        static void Main(string[] args)
+        static void Main()
         {
             // create object to perform bucket sort
             var sortArray = new BucketSort(10);

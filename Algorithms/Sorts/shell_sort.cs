@@ -4,7 +4,7 @@ namespace shell_sort
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("Please enter some integers, separated by spaces:");
             var input = Console.ReadLine();

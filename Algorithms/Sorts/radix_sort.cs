@@ -7,7 +7,7 @@ namespace radix_sort
     {
         private const int ItemCount = 20;
 
-        static void Main(string[] args)
+        static void Main()
         {            
             var data = new int[ItemCount];
             GenerateData(ref data, new Random(ItemCount));

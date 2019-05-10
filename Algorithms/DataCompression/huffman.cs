@@ -6,13 +6,10 @@ namespace DC5
 {
     class Huff
     {
-        private Huff leftChild;
-
-        // propertys for the fields (above)
         public string Data { get; set; }
         public int Frequency { get; set; }
         public Huff RightChild { get; set; }
-        public Huff LeftChild { get => leftChild; set => leftChild = value; }
+        public Huff LeftChild { get; set; }
 
         public Huff(string data, int frequency)
         {
@@ -29,11 +26,8 @@ namespace DC5
     }
     class Man
     {
-        private List<string> data = new List<string>();
-
-        // propertys for the fields (above)
         public List<string> Codec { get; set; } = new List<string>();
-        public List<string> Data { get => data; set => data = value; }
+        public List<string> Data { get; set; } = new List<string>();
     }
     class Program
     {

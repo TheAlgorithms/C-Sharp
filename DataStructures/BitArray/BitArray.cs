@@ -126,7 +126,7 @@ namespace DataStructures.BitArray
 {
 	public class BitArray  : IComparable, ICloneable, IEnumerator, IEnumerable
 	{
-		private bool[] field;		// the actual bit-field
+		private readonly bool[] field;		// the actual bit-field
 		private int position = -1;	// position for enumerator
 
 
@@ -201,19 +201,15 @@ namespace DataStructures.BitArray
 			}
 		}
 
-		/*
+        /*
 		 * constructor
 		 * input: a boolean array of bits.  
 		 * output: none
 		 * purpose: setups the bit-array with the input array.
 		 * */
-		public BitArray (bool[] bits)
-		{
-			field = bits;
+        public BitArray(bool[] bits) => field = bits;
 
-		}
-
-		/*
+        /*
 		 * Compile
 		 * input: a string sequence of 0's and 1's
 		 * output: none
@@ -221,7 +217,7 @@ namespace DataStructures.BitArray
 		 * assumes: the sequence must have the same length, as the bit-array.
 		 * 			the sequence may only be allowed contains onese or zeros.
 		 * */
-		public void Compile (string sequence)
+        public void Compile (string sequence)
 		{
             var tmp = "";
 
@@ -304,40 +300,23 @@ namespace DataStructures.BitArray
 
 						tmp += binaryNumber;
 						binaryNumber = tmp;
-
 					}
 
 					// actual compile procedure. 
 					for (var i = 0; i < binaryNumber.Length; i++) 
 					{
-
-						if (binaryNumber [i] == '1') 
-						{
-
-							field [i] = true;
-
-						} 
-						else 
-						{
-
-							field [i] = false;
-
-						}
-
-					}
+						field [i] = binaryNumber [i] == '1';
+                    }
 
 				} 
 				else 
 				{ // error case II
-
 					throw new Exception ("Compile: not apt length!");
-
 				}
 
 			} 
 			else 
 			{ // error case I
-
 				throw new Exception ("Compile: only positive numbers > 0");
 			}
 		}
@@ -385,19 +364,9 @@ namespace DataStructures.BitArray
 					for (var i = 0; i < binaryNumber.Length; i++) 
 					{
 
-						if (binaryNumber [i] == '1') 
-						{
+						field [i] = binaryNumber [i] == '1';
 
-							field [i] = true;
-
-						} else 
-						{
-
-							field [i] = false;
-
-						}
-
-					}
+                    }
 
 				} 
 				else 
@@ -448,25 +417,19 @@ namespace DataStructures.BitArray
 
 		}
 
-		/**
+        /**
 		 * Property
 		 * Length: returns the length of the current bit array.
 		 * */
-		public int Length 
-		{
-			get 
-			{
-				return field.Length;
-			}
-		}
+        public int Length => field.Length;
 
-		/**
+        /**
 		 * Operator &
 		 * input: two bit-arrays with equal length.
 		 * output: bit-array that represents the bit by bit AND.
 		 * assumes: the arrays have the same length.
 		 * */
-		public static BitArray operator & (BitArray one, BitArray two)
+        public static BitArray operator & (BitArray one, BitArray two)
 		{
 			var sequence1 = one.ToString ();
 			var sequence2 = two.ToString ();
@@ -832,47 +795,37 @@ namespace DataStructures.BitArray
 		}
 
 
-		/**
+        /**
 		 * Operator != (not-equal)
 		 * input: two bit-arrays
 		 * output: returns true if there inputs aren't equal otherwise false.
 		 * assumes: the input bit-arrays must have same length.
 		 * */
-		public static bool operator != (BitArray one, BitArray two)
-		{
-
-			return !(one == two);
-
-		}
+        public static bool operator !=(BitArray one, BitArray two) => !(one == two);
 
 
-		/**
+        /**
 		 * Indexer
 		 * for selecting the individual bits.
 		 * */
-		public bool this [int offset] 
-		{
+        public bool this [int offset]
+        {
 
-			get 
-			{
+            get => field[offset];
 
-				return field [offset];
-			}
+            set
+            {
+                field[offset] = value;
+            }
 
-			set 
-			{
-				
-				field [offset] = value;
-			}
+        }
 
-		}
-
-		/*
+        /*
 		 * NumberOfOneBits
 		 * input: none
 		 * output: the number of one-bits in the field. 
 		 * */
-		public int NumberOfOneBits ()
+        public int NumberOfOneBits ()
 		{
 			var counter = 0;
 
@@ -938,7 +891,6 @@ namespace DataStructures.BitArray
 
 			var sequence = ToString ();
 			return Convert.ToInt64 (sequence, 2);
-
 		}
 
 		/**
@@ -957,7 +909,6 @@ namespace DataStructures.BitArray
 
 			var sequence = ToString ();
 			return Convert.ToInt32 (sequence, 2);
-
 		}
 
 		/**
@@ -1008,19 +959,14 @@ namespace DataStructures.BitArray
 
 			if (valueThis > valueOther) 
 			{
-
 				status = 1;
-
 			} 
 			else if (valueOther > valueThis) 
 			{
-
 				status = -1;
-
 			} 
 
 			return status;
-
 		}
 
 
@@ -1041,24 +987,18 @@ namespace DataStructures.BitArray
 
 				for (var i = 0; i < Length; i++) 
 				{
-
 					if (field [i] != otherBitArray [i]) 
 					{
 						status = false;
 					}
-
 				}
-
 			} 
 			else 
 			{
-
 				throw new Exception ("== : inputs haven't same length!");
-
 			}
 
 			return status;
-
 		}
 
         /**
@@ -1091,19 +1031,15 @@ namespace DataStructures.BitArray
 		 * returns the current bit of the bit-field.
 		 * */
 		public object Current {
-			
 			get {
-				
 				try 
 				{
 					return field [position];
 				} 
-
 				catch (IndexOutOfRangeException) 
 				{
 					throw new InvalidOperationException ();
 				}
-
 			}
 		}
 
@@ -1155,10 +1091,8 @@ namespace DataStructures.BitArray
 
 			foreach (var ch in sequence) 
 			{
-
 				if (ch != '0' && ch != '1') 
 				{
-
 					status = false;
 				}
 
@@ -1166,7 +1100,5 @@ namespace DataStructures.BitArray
 
 			return status;
 		}
-			
 	}
 }
-

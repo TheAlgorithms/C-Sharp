@@ -21,8 +21,8 @@ namespace AStar
 		public static Location end;
 		public static Location start;
 
-		//get valid adjacent steps to the current location
-		public static List<Location> adjacentSteps(Location l)
+        //get valid adjacent steps to the current location
+        public static List<Location> AdjacentSteps(Location l)
 		{
 			var proposedLocations = new List<Location> {
 				new Location (l.X - 1, l.Y, l),
@@ -74,7 +74,7 @@ namespace AStar
 				}
 
 				//Find the next moves
-				var adjacentChoices = Program.adjacentSteps(bestChoice);
+				var adjacentChoices = Program.AdjacentSteps(bestChoice);
 				foreach (var l in adjacentChoices)
 				{
 					//Been there
@@ -106,37 +106,15 @@ namespace AStar
 				}
 			}
 
-			//Path to return
-			List<Location> result;
-
-
-			if (!ClosedList.Contains(Program.end))
-            {
-                result = null;
-            }
-            else
-            {
-                result = ReconstructPath(ClosedList);
-            }
-
-            return result;
+            //Path to return
+            return ClosedList.Contains(end) ? ReconstructPath(ClosedList) : null;
 		}
 
 		public static int ComputeHScore(int x, int y)
 		{
-			//If we created a new location for the end node, 
-			//don't worry about the Hueristic
-			int result;
-
-			if (Program.end == null)
-            {
-                result = 0;
-            }
-            else
-            {
-                result = Math.Abs(x - Program.end.X) + Math.Abs(y - Program.end.Y);
-            }
-
+            //If we created a new location for the end node, 
+            //don't worry about the Hueristic
+            var result = end == null ? 0 : Math.Abs(x - Program.end.X) + Math.Abs(y - Program.end.Y);
             return result;
 		}
 
@@ -205,7 +183,7 @@ namespace AStar
 			return path;
 		}
 
-		public static void Main(string[] args)
+		public static void Main()
 		{
 			var list = Program.AStar();
 							

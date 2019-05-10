@@ -2,7 +2,7 @@ using System;
 
 namespace cycle_sort {
     internal class Program {
-        private static void Main(string[] args) {
+        private static void Main() {
             Console.WriteLine("Please enter some integers, separated by spaces:");
             var input = Console.ReadLine();
             var integers = input.Split(' ');

@@ -5,7 +5,7 @@ namespace traversals
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var tree = new Random_Ordered_Tree();
             var rnd = new Random();
@@ -14,10 +14,10 @@ namespace traversals
                 var value = rnd.Next(1,100);
 
                 Console.WriteLine("Inserting {0}", value);
-                tree.insert(value);
+                tree.Insert(value);
             }
 
-            var tree_path = tree.traverse_tree(tree.root);
+            var tree_path = tree.Traverse_tree(tree.root);
 
             Console.Write("Path: ");
             for(var i = 0; i < tree_path.Length; i++)
@@ -29,21 +29,23 @@ namespace traversals
 
     class Tree<T>
     {
-        public int value {get; set;}
-        public Tree<T> left {get; set;}
-        public Tree<T> right {get; set;}
+        public int Value {get; set;}
+        public Tree<T> Left {get; set;}
+        public Tree<T> Right {get; set;}
     }
 
     class Random_Ordered_Tree
     {
         public Tree<int> root = null;
 
-        public void insert(int num)
+        public void Insert(int num)
         {
-            var node = new Tree<int>();
-            node.value = num;
+            var node = new Tree<int>
+            {
+                Value = num
+            };
 
-            if(root == null)
+            if (root == null)
             {
                 root = node;
             }
@@ -62,13 +64,13 @@ namespace traversals
                     // Case for Left Side
                     if(value == 0)
                     {
-                        if(current.left != null)
+                        if(current.Left != null)
                         {
-                            current = current.left;
+                            current = current.Left;
                         }
                         else
                         {
-                            current.left = node;
+                            current.Left = node;
                             break;
                         }
                     }
@@ -76,13 +78,13 @@ namespace traversals
                     // Case for right Side
                     else
                     {
-                        if(current.right != null)
+                        if(current.Right != null)
                         {
-                            current = current.right;
+                            current = current.Right;
                         }
                         else
                         {
-                            current.right = node;
+                            current.Right = node;
                             break;
                         }
                     }
@@ -90,7 +92,7 @@ namespace traversals
             }
         }
 
-        public int[] traverse_tree(Tree<int> t)
+        public int[] Traverse_tree(Tree<int> t)
         {
             var tree_values = new List<int>();
             var tree_queue = new Queue<Tree<int>>();
@@ -103,16 +105,16 @@ namespace traversals
             while(tree_queue.Count != 0)
             {
                 var node = tree_queue.Dequeue();
-                tree_values.Add(node.value);
+                tree_values.Add(node.Value);
 
-                if(node.left != null)
+                if(node.Left != null)
                 {
-                    tree_queue.Enqueue(node.left);
+                    tree_queue.Enqueue(node.Left);
                 }
 
-                if(node.right != null)
+                if(node.Right != null)
                 {
-                    tree_queue.Enqueue(node.right);
+                    tree_queue.Enqueue(node.Right);
                 }
             }
             return tree_values.ToArray();

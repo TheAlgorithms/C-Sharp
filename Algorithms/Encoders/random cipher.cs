@@ -18,7 +18,7 @@
 //		}
 //		return new string(array);
 //	}
-//	public static void Main(string[] args)
+//	public static void Main()
 //	{
 		
 //	}

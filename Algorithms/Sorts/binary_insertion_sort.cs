@@ -4,7 +4,7 @@ namespace binary_insertion_sort {
 		class Program {
 		private const int ARRAY_SIZE = 20;
 
-		static void Main( string[ ] args ) {
+		static void Main() {
 			var rnd = new Random( DateTime.Now.Millisecond );
 
 			var data = new int[ ARRAY_SIZE ];

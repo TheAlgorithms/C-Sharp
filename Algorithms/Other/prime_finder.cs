@@ -4,13 +4,12 @@ namespace prime_finder
 {
     class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
             Console.WriteLine("Enter the number you want to check:");
             var numStr = Console.ReadLine();
 
-            int num;
-            if (!int.TryParse(numStr, out num) | num < 2)
+            if (!int.TryParse(numStr, out var num) | num < 2)
             {
                 Console.WriteLine("Invalid input! Please enter a number higher than 1");
                 return;

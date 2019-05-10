@@ -5,7 +5,7 @@ namespace ConsoleApplication2
 {
     class QuickSortProgram
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var unsorted = new List<int> { 9, 8, 7, 6 };
             Console.WriteLine($"Unsorted: {string.Join(" ", unsorted.ToArray())}");

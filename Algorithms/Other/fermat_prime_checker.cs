@@ -6,7 +6,7 @@ namespace ConsoleTest
     class Program
     {
 		// Fermat's prime tester https://en.wikipedia.org/wiki/Fermat_primality_test
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("Welcome to Fermat's prime tester");
             Console.WriteLine("--------------------------------");

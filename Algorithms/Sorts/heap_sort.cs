@@ -26,17 +26,9 @@ namespace heap_sort
         {
             var left = (index + 1) * 2 - 1;
             var right = (index + 1) * 2;
-            int largest;
+            var largest = left < heapSize && input[left] > input[index] ? left : index;
 
             // finds the index of the largest
-            if (left < heapSize && input[left] > input[index])
-            {
-                largest = left;
-            }
-            else
-            {
-                largest = index;
-            }
             if (right < heapSize && input[right] > input[largest])
             {
                 largest = right;
@@ -51,7 +43,7 @@ namespace heap_sort
                 MakeHeap(input, heapSize, largest);
             }
         }
-        public static void Main(string[] args)
+        public static void Main()
         {
             Console.WriteLine("Please enter some integers, separated by spaces:");
             var input = Console.ReadLine();

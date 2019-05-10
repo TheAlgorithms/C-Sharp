@@ -5,7 +5,7 @@ namespace VowelCheck_Con
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             char[] vowels = { 'a', 'e', 'i', 'o', 'u', 'n' };
             var n = Convert.ToInt32(Console.ReadLine());

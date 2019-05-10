@@ -8,7 +8,6 @@ namespace Example
         public static Tuple<char, int> LongesConsecutiveCharacters(string input)
         {
             var max_char = input[0];
-            var current_char = input[0];
 
             var max = 1;
             var current = 1;
@@ -26,7 +25,6 @@ namespace Example
                 }
                 else
                 {
-                    current_char = input[i];
                     current = 1;
                 }
             }

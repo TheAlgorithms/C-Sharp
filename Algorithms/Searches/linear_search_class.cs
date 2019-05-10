@@ -2,13 +2,13 @@
 
 namespace LinearSearch
 {
-    class linear_search
+    class Linear_search
     {
         static int searchInt; // search
         static int position; // location of search key in array
         static int[] data; // array of values
 
-        static void Main(string[] args)
+        static void Main()
         {
             var generator = new Random();
 
