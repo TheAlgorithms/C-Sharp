@@ -20,7 +20,7 @@
 //	}
 //	public static void Main()
 //	{
-		
+
 //	}
 //	public static string Encode(string message)
 //	{
@@ -49,7 +49,7 @@
 //			}
 //			text6 += i;
 //			text6 += "\n";
-			
+
 //		}
 //		char[] chars = key.ToCharArray();
 //		string _cahrs = Shuffle(text);

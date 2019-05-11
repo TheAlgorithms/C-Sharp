@@ -124,42 +124,42 @@ using System.Collections;
 
 namespace DataStructures.BitArray
 {
-	public class BitArray  : IComparable, ICloneable, IEnumerator, IEnumerable
-	{
-		private readonly bool[] field;		// the actual bit-field
-		private int position = -1;	// position for enumerator
+    public class BitArray : IComparable, ICloneable, IEnumerator, IEnumerable
+    {
+        private readonly bool[] field;      // the actual bit-field
+        private int position = -1;  // position for enumerator
 
 
-		/*
+        /*
 		 * constructor
 		 * input: length (N) of the array
 		 * output: none
 		 * purpose: setups the array with false-values.
 		 * */
-		public BitArray (int N)
-		{
-			if (N >= 1) 
-			{
-				
-				field = new bool[N];
+        public BitArray(int N)
+        {
+            if (N >= 1)
+            {
 
-				// fills up the field with zero-bits.
-				for (var i = 0; i < N; i++) 
-				{
-					field [i] = false;
-				}
+                field = new bool[N];
 
-			} 
-			else  
-			{ // error case
+                // fills up the field with zero-bits.
+                for (var i = 0; i < N; i++)
+                {
+                    field[i] = false;
+                }
 
-				throw new Exception ("BitArray: N must been greater or equal to 1");
+            }
+            else
+            { // error case
 
-			}
-		}
+                throw new Exception("BitArray: N must been greater or equal to 1");
+
+            }
+        }
 
 
-		/*
+        /*
 		 * constructor
 		 * input: a string sequence of 0's and 1's. 
 		 * output: none
@@ -167,39 +167,39 @@ namespace DataStructures.BitArray
 		 * assumes: sequence must been greater or equal to 1.
 		 * 			the sequence may only be allowed contains onese or zeros.
 		 * */
-		public BitArray (string sequence)
-		{
+        public BitArray(string sequence)
+        {
 
-			// precondition I
-			if (sequence.Length > 0) 
-			{
-
-
-				// precondition II
-				if (Match (sequence)) 
-				{
+            // precondition I
+            if (sequence.Length > 0)
+            {
 
 
-					field = new bool[sequence.Length];
-					Compile (sequence);
+                // precondition II
+                if (Match(sequence))
+                {
 
-				} 
-				else 
-				{ // error case II
 
-					throw new Exception ("BitArray: the sequence may only " +
-					"be allowed contains onese or zeros.");
+                    field = new bool[sequence.Length];
+                    Compile(sequence);
 
-				}
+                }
+                else
+                { // error case II
 
-			} 
-			else 
-			{ // error case I
+                    throw new Exception("BitArray: the sequence may only " +
+                    "be allowed contains onese or zeros.");
 
-				throw new Exception ("BitArray: sequence must been greater or equal as 1");
+                }
 
-			}
-		}
+            }
+            else
+            { // error case I
+
+                throw new Exception("BitArray: sequence must been greater or equal as 1");
+
+            }
+        }
 
         /*
 		 * constructor
@@ -217,205 +217,205 @@ namespace DataStructures.BitArray
 		 * assumes: the sequence must have the same length, as the bit-array.
 		 * 			the sequence may only be allowed contains onese or zeros.
 		 * */
-        public void Compile (string sequence)
-		{
+        public void Compile(string sequence)
+        {
             var tmp = "";
 
-			sequence = sequence.Trim ();
+            sequence = sequence.Trim();
 
-			// precondition I
-			if (sequence.Length <= field.Length) 
-			{
+            // precondition I
+            if (sequence.Length <= field.Length)
+            {
 
-				// precondition II
-				if (Match (sequence)) 
-				{
+                // precondition II
+                if (Match(sequence))
+                {
 
 
-					// for appropriate scaling
-					if (sequence.Length < field.Length) 
-					{
+                    // for appropriate scaling
+                    if (sequence.Length < field.Length)
+                    {
                         var difference = field.Length - sequence.Length;
 
-                        for (var i = 0; i < difference; i++) 
-						{
-							tmp += '0';
-						}
+                        for (var i = 0; i < difference; i++)
+                        {
+                            tmp += '0';
+                        }
 
-						tmp += sequence;
-						sequence = tmp;
-					}
-
-					// actual compile procedure. 
-					for (var i = 0; i < sequence.Length; i++) 
-					{
-						field [i] = sequence [i] == '1';
+                        tmp += sequence;
+                        sequence = tmp;
                     }
-				} 
-				else 
-				{ // error case II
-					throw new Exception ("Compile: the sequence may only " +
-					"be allowed contains onese or zeros.");
-				}
 
-			} 
-			else 
-			{ // error case I
-				throw new Exception ("Compile: not equal length!");
-			}
-		}
+                    // actual compile procedure. 
+                    for (var i = 0; i < sequence.Length; i++)
+                    {
+                        field[i] = sequence[i] == '1';
+                    }
+                }
+                else
+                { // error case II
+                    throw new Exception("Compile: the sequence may only " +
+                    "be allowed contains onese or zeros.");
+                }
 
-		/**
+            }
+            else
+            { // error case I
+                throw new Exception("Compile: not equal length!");
+            }
+        }
+
+        /**
 		 * Compile
 		 * input: an positive integer number
 		 * output: none
 		 * purpose: compiles integer number into the inner data structure.
 		 * assumes: the number must have the same bit length.
 		 * */
-		public void Compile (int number)
-		{
+        public void Compile(int number)
+        {
             var tmp = "";
 
-			// precondition I
-			if (number > 0) 
-			{
+            // precondition I
+            if (number > 0)
+            {
 
                 // converts to binary representation
                 var binaryNumber = Convert.ToString(number, 2);
 
                 // precondition II
-                if (binaryNumber.Length <= field.Length) 
-				{
+                if (binaryNumber.Length <= field.Length)
+                {
 
-					// for appropriate scaling
-					if (binaryNumber.Length < field.Length) 
-					{
+                    // for appropriate scaling
+                    if (binaryNumber.Length < field.Length)
+                    {
 
                         var difference = field.Length - binaryNumber.Length;
 
-                        for (var i = 0; i < difference; i++) 
-						{
-							tmp += '0';
-						}
+                        for (var i = 0; i < difference; i++)
+                        {
+                            tmp += '0';
+                        }
 
-						tmp += binaryNumber;
-						binaryNumber = tmp;
-					}
-
-					// actual compile procedure. 
-					for (var i = 0; i < binaryNumber.Length; i++) 
-					{
-						field [i] = binaryNumber [i] == '1';
+                        tmp += binaryNumber;
+                        binaryNumber = tmp;
                     }
 
-				} 
-				else 
-				{ // error case II
-					throw new Exception ("Compile: not apt length!");
-				}
+                    // actual compile procedure. 
+                    for (var i = 0; i < binaryNumber.Length; i++)
+                    {
+                        field[i] = binaryNumber[i] == '1';
+                    }
 
-			} 
-			else 
-			{ // error case I
-				throw new Exception ("Compile: only positive numbers > 0");
-			}
-		}
+                }
+                else
+                { // error case II
+                    throw new Exception("Compile: not apt length!");
+                }
+
+            }
+            else
+            { // error case I
+                throw new Exception("Compile: only positive numbers > 0");
+            }
+        }
 
 
-		/**
+        /**
 		 * Compile
 		 * input: an positive long integer number
 		 * output: none
 		 * purpose: compiles integer number into the inner data structure.
 		 * assumes: the number must have the same bit length.
 		 * */
-		public void Compile (long number)
-		{
+        public void Compile(long number)
+        {
             var tmp = "";
 
-			// precondition I
-			if (number > 0) 
-			{
+            // precondition I
+            if (number > 0)
+            {
 
                 // converts to binary representation
                 var binaryNumber = Convert.ToString(number, 2);
 
                 // precondition II
-                if (binaryNumber.Length <= field.Length) 
-				{
+                if (binaryNumber.Length <= field.Length)
+                {
 
-					// for appropriate scaling
-					if (binaryNumber.Length < field.Length) 
-					{
+                    // for appropriate scaling
+                    if (binaryNumber.Length < field.Length)
+                    {
 
                         var difference = field.Length - binaryNumber.Length;
 
-                        for (var i = 0; i < difference; i++) 
-						{
-							tmp += '0';
-						}
+                        for (var i = 0; i < difference; i++)
+                        {
+                            tmp += '0';
+                        }
 
-						tmp += binaryNumber;
-						binaryNumber = tmp;
-
-					}
-
-					// actual compile procedure. 
-					for (var i = 0; i < binaryNumber.Length; i++) 
-					{
-
-						field [i] = binaryNumber [i] == '1';
+                        tmp += binaryNumber;
+                        binaryNumber = tmp;
 
                     }
 
-				} 
-				else 
-				{ // error case II
+                    // actual compile procedure. 
+                    for (var i = 0; i < binaryNumber.Length; i++)
+                    {
 
-					throw new Exception ("Compile: not apt length!");
+                        field[i] = binaryNumber[i] == '1';
 
-				}
+                    }
 
-			} 
-			else 
-			{ // error case I
+                }
+                else
+                { // error case II
 
-				throw new Exception ("Compile: only positive numbers > 0");
-			}
-		}
+                    throw new Exception("Compile: not apt length!");
+
+                }
+
+            }
+            else
+            { // error case I
+
+                throw new Exception("Compile: only positive numbers > 0");
+            }
+        }
 
 
-		/**
+        /**
 		 * ToString
 		 * input: none
 		 * output: a string representation of the inner data structure.
 		 * ToString: is the opposit of the Compile(...) method.
 		 * 
 		 * */
-		public override string ToString ()
-		{
-			var ans = "";
+        public override string ToString()
+        {
+            var ans = "";
 
-			// creates return-string
-			for (var i = 0; i < field.Length; i++) 
-			{
+            // creates return-string
+            for (var i = 0; i < field.Length; i++)
+            {
 
-				if (field [i]) 
-				{
+                if (field[i])
+                {
 
-					ans += "1";
-				} 
-				else 
-				{
+                    ans += "1";
+                }
+                else
+                {
 
-					ans += "0";
-				}
+                    ans += "0";
+                }
 
-			}
+            }
 
-			return ans;
+            return ans;
 
-		}
+        }
 
         /**
 		 * Property
@@ -429,16 +429,16 @@ namespace DataStructures.BitArray
 		 * output: bit-array that represents the bit by bit AND.
 		 * assumes: the arrays have the same length.
 		 * */
-        public static BitArray operator & (BitArray one, BitArray two)
-		{
-			var sequence1 = one.ToString ();
-			var sequence2 = two.ToString ();
-			var result = "";
+        public static BitArray operator &(BitArray one, BitArray two)
+        {
+            var sequence1 = one.ToString();
+            var sequence2 = two.ToString();
+            var result = "";
             var tmp = "";
 
             // for scaling of same length.
-            if (one.Length != two.Length) 
-			{
+            if (one.Length != two.Length)
+            {
                 int difference;
                 if (one.Length > two.Length)
                 { // one is greater
@@ -476,54 +476,54 @@ namespace DataStructures.BitArray
 
             var ans = new BitArray(one.Length);
 
-            for (var i = 0; i < one.Length; i++) 
-			{
+            for (var i = 0; i < one.Length; i++)
+            {
 
-				switch (sequence1 [i]) 
-				{
+                switch (sequence1[i])
+                {
 
-				case '0':
-					result += '0';
-					break;
-				case '1':
-					if (sequence2 [i] == '1') 
-					{
-						result += '1';
-					} 
-					else 
-					{
-						result += '0';
-					}
-					break;
+                    case '0':
+                        result += '0';
+                        break;
+                    case '1':
+                        if (sequence2[i] == '1')
+                        {
+                            result += '1';
+                        }
+                        else
+                        {
+                            result += '0';
+                        }
+                        break;
 
-				}
+                }
 
-			}
+            }
 
-			result = result.Trim ();
-			ans.Compile (result);
+            result = result.Trim();
+            ans.Compile(result);
 
-			return ans;
+            return ans;
 
-		}
+        }
 
 
-		/**
+        /**
 		 * Operator |
 		 * input: two bit-arrays with equal length.
 		 * output: bit-array that represents the bit by bit OR.
 		 * assumes: the arrays have the same length.
 		 * */
-		public static BitArray operator | (BitArray one, BitArray two)
-		{
-			var sequence1 = one.ToString ();
-			var sequence2 = two.ToString ();
-			var result = "";
+        public static BitArray operator |(BitArray one, BitArray two)
+        {
+            var sequence1 = one.ToString();
+            var sequence2 = two.ToString();
+            var result = "";
             var tmp = "";
 
             // for scaling of same length.
-            if (one.Length != two.Length) 
-			{
+            if (one.Length != two.Length)
+            {
                 int difference;
                 if (one.Length > two.Length)
                 { // one is greater
@@ -561,106 +561,109 @@ namespace DataStructures.BitArray
 
             var ans = new BitArray(one.Length);
 
-            for (var i = 0; i < one.Length; i++) 
-			{
+            for (var i = 0; i < one.Length; i++)
+            {
 
-				switch (sequence1 [i]) {
+                switch (sequence1[i])
+                {
 
-				case '0':
-					if (sequence2 [i] == '1') 
-					{
-						result += '1';
-					} 
-					else 
-					{
-						result += '0';
-					}
-					break;
-				case '1':
-					result += '1';
-					break;
+                    case '0':
+                        if (sequence2[i] == '1')
+                        {
+                            result += '1';
+                        }
+                        else
+                        {
+                            result += '0';
+                        }
+                        break;
+                    case '1':
+                        result += '1';
+                        break;
 
-				}
+                }
 
-			}
+            }
 
-			result = result.Trim ();
-			ans.Compile (result);
+            result = result.Trim();
+            ans.Compile(result);
 
 
-			return ans;
+            return ans;
 
-		}
+        }
 
-		/**
+        /**
 		 * Operator ~
 		 * input: BitArray
 		 * output: bitwise not 
 		 * */
-		public static BitArray operator ~ (BitArray one)
-		{
+        public static BitArray operator ~(BitArray one)
+        {
 
-			var ans = new BitArray (one.Length);
-			var sequence = one.ToString ();
-			var result = "";
+            var ans = new BitArray(one.Length);
+            var sequence = one.ToString();
+            var result = "";
 
-			foreach (var ch in sequence) 
-			{
-				if (ch == '1') 
-				{
-					result += '0';
-				} else 
-				{
-					result += '1';
-				}
-			}
+            foreach (var ch in sequence)
+            {
+                if (ch == '1')
+                {
+                    result += '0';
+                }
+                else
+                {
+                    result += '1';
+                }
+            }
 
-			result = result.Trim ();
-			ans.Compile (result);
+            result = result.Trim();
+            ans.Compile(result);
 
-			return ans;
+            return ans;
 
-		}
+        }
 
 
 
-		/**
+        /**
 		 * Operator << (bitwise shift left)
 		 * input: a BitArray and a number of bits.
 		 * output: bitwise shifted BitArray. 
 		 * */
-		public static BitArray operator << (BitArray other, int n)
-		{
+        public static BitArray operator <<(BitArray other, int n)
+        {
 
-			var ans = new BitArray (other.Length + n);
+            var ans = new BitArray(other.Length + n);
 
-			// actual shifting process
-			for (var i = 0; i < other.Length; i++) 
-			{
+            // actual shifting process
+            for (var i = 0; i < other.Length; i++)
+            {
 
-				ans [i] = other [i];
+                ans[i] = other[i];
 
-			}
+            }
 
 
-			return ans;
+            return ans;
 
-		}
+        }
 
-		/**
+        /**
 		 * operator ^ (bitwise XOR operation)
 		 * input: two bit-arrays.
 		 * output: BitArray 
 		 * */
-		public static BitArray operator ^ (BitArray one, BitArray two)
-		{
-			var sequence1 = one.ToString ();
-			var sequence2 = two.ToString ();
-			var result = "";
+        public static BitArray operator ^(BitArray one, BitArray two)
+        {
+            var sequence1 = one.ToString();
+            var sequence2 = two.ToString();
+            var result = "";
             var tmp = "";
 
             // for scaling of same length.
-            if (one.Length != two.Length) {
+            if (one.Length != two.Length)
+            {
                 int difference;
                 if (one.Length > two.Length)
                 { // one is greater
@@ -698,102 +701,96 @@ namespace DataStructures.BitArray
 
             var ans = new BitArray(one.Length);
 
-            for (var i = 0; i < one.Length; i++) 
-			{
+            for (var i = 0; i < one.Length; i++)
+            {
+                switch (sequence1[i])
+                {
+                    case '0':
+                        if (sequence2[i] == '1')
+                        {
+                            result += '1';
+                        }
+                        else
+                        {
+                            result += '0';
+                        }
+                        break;
+                    case '1':
+                        if (sequence2[i] == '0')
+                        {
+                            result += '1';
+                        }
+                        else
+                        {
+                            result += '0';
+                        }
+                        break;
+                }
 
-				switch (sequence1 [i]) 
-				{
+            }
 
-				case '0':
-					if (sequence2 [i] == '1') 
-					{
-						result += '1';
-					} 
-					else 
-					{
-						result += '0';
-					}
-					break;
-
-				case '1':
-					if (sequence2 [i] == '0') 
-					{
-						result += '1';
-					} 
-					else 
-					{
-						result += '0';
-					}
-					break;
-
-				}
-
-			}
-
-			result = result.Trim ();
-			ans.Compile (result);
+            result = result.Trim();
+            ans.Compile(result);
 
 
-			return ans;
-		}
+            return ans;
+        }
 
-
-		/**
+        /**
 		 * Operator >> (bitwise shift right)
 		 * input: a BitArray and a number of bits.
 		 * output: bitwise shifted BitArray. 
 		 * */
-		public static BitArray operator >> (BitArray other, int n)
-		{
+        public static BitArray operator >>(BitArray other, int n)
+        {
 
-			var ans = new BitArray (other.Length - n);
+            var ans = new BitArray(other.Length - n);
 
-			// actual shifting process.
-			for (var i = 0; i < other.Length - n; i++) 
-			{
+            // actual shifting process.
+            for (var i = 0; i < other.Length - n; i++)
+            {
 
-				ans [i] = other [i];
-			}
+                ans[i] = other[i];
+            }
 
-			return ans;
+            return ans;
 
-		}
+        }
 
-		/**
+        /**
 		 * Operator == (equal)
 		 * input: two bit-arrays
 		 * output: returns true if there inputs are equal otherwise false.
 		 * assumes: the input bit-arrays must have same length.
 		 * */
-		public static bool operator == (BitArray one, BitArray two)
-		{
-			var status = true;
+        public static bool operator ==(BitArray one, BitArray two)
+        {
+            var status = true;
 
-			if (one.Length == two.Length) 
-			{
+            if (one.Length == two.Length)
+            {
 
-				for (var i = 0; i < one.Length; i++) 
-				{
+                for (var i = 0; i < one.Length; i++)
+                {
 
-					if (one [i] != two [i]) 
-					{
-						status = false;
-					}
+                    if (one[i] != two[i])
+                    {
+                        status = false;
+                    }
 
-				}
+                }
 
-			} 
-			else 
-			{
+            }
+            else
+            {
 
-				throw new Exception ("== : inputs haven't same length!");
+                throw new Exception("== : inputs haven't same length!");
 
-			}
+            }
 
-			return status;
+            return status;
 
-		}
-
+        }
 
         /**
 		 * Operator != (not-equal)
@@ -803,21 +800,14 @@ namespace DataStructures.BitArray
 		 * */
         public static bool operator !=(BitArray one, BitArray two) => !(one == two);
 
-
         /**
 		 * Indexer
 		 * for selecting the individual bits.
 		 * */
-        public bool this [int offset]
+        public bool this[int offset]
         {
-
             get => field[offset];
-
-            set
-            {
-                field[offset] = value;
-            }
-
+            set => field[offset] = value;
         }
 
         /*
@@ -825,41 +815,40 @@ namespace DataStructures.BitArray
 		 * input: none
 		 * output: the number of one-bits in the field. 
 		 * */
-        public int NumberOfOneBits ()
-		{
-			var counter = 0;
+        public int NumberOfOneBits()
+        {
+            var counter = 0;
 
-			// counting one-bits.
-			foreach (var bit in field) 
-			{
-				if (bit) 
-				{
-					counter++;
-				}
-			}
-			return counter;
-		}
+            // counting one-bits.
+            foreach (var bit in field)
+            {
+                if (bit)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
 
-
-		/*
+        /*
 		 * NumberOfZeroBits
 		 * input: none
 		 * output: the number of one-bits in the field. 
 		 * */
-		public int NumberOfZeroBits ()
-		{
-			var counter = 0;
+        public int NumberOfZeroBits()
+        {
+            var counter = 0;
 
-			// counting zero-bits
-			foreach (var bit in field) 
-			{
-				if (!bit) 
-				{
-					counter++;
-				}
-			}
-			return counter;
-		}
+            // counting zero-bits
+            foreach (var bit in field)
+            {
+                if (!bit)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
 
         /**
 		 * EvenParity
@@ -881,67 +870,67 @@ namespace DataStructures.BitArray
 		 * output: returns a long integer representation of the bit-array.
 		 * assumes: the bit-array length must been smaller or equal to 64 bit. 
 		 * */
-        public long ToInt64 ()
-		{
-			// Precondition
-			if (field.Length > 64) 
-			{
-				throw new Exception ("ToInt: field is too long.");
-			}
+        public long ToInt64()
+        {
+            // Precondition
+            if (field.Length > 64)
+            {
+                throw new Exception("ToInt: field is too long.");
+            }
 
-			var sequence = ToString ();
-			return Convert.ToInt64 (sequence, 2);
-		}
+            var sequence = ToString();
+            return Convert.ToInt64(sequence, 2);
+        }
 
-		/**
+        /**
 		 * ToInt32
 		 * input: none
 		 * output: returns a integer representation of the bit-array.
 		 * assumes: the bit-array length must been smaller or equal to 32 bit. 
 		 * */
-		public int ToInt32 ()
-		{
-			// Precondition
-			if (field.Length > 32) 
-			{
-				throw new Exception ("ToInt: field is too long.");
-			}
+        public int ToInt32()
+        {
+            // Precondition
+            if (field.Length > 32)
+            {
+                throw new Exception("ToInt: field is too long.");
+            }
 
-			var sequence = ToString ();
-			return Convert.ToInt32 (sequence, 2);
-		}
+            var sequence = ToString();
+            return Convert.ToInt32(sequence, 2);
+        }
 
-		/**
+        /**
 		 * Reset
 		 * input: none
 		 * output: none
 		 * purpose: sets all bits on false.
 		 * */
-		public void ResetField ()
-		{
-			for (var i = 0; i < field.Length; i++) 
-			{
-				field [i] = false;
-			}
-		}
+        public void ResetField()
+        {
+            for (var i = 0; i < field.Length; i++)
+            {
+                field[i] = false;
+            }
+        }
 
 
-		/**
+        /**
 		 * SetAll
 		 * input: a boolean flag
 		 * output: none
 		 * purpose: sets all bits on the value of the flag.
 		 **/
-		public void SetAll (bool flag)
-		{
-			for (var i = 0; i < field.Length; i++) 
-			{
-				field [i] = flag;
-			}
-		}
+        public void SetAll(bool flag)
+        {
+            for (var i = 0; i < field.Length; i++)
+            {
+                field[i] = flag;
+            }
+        }
 
 
-		/**
+        /**
 		 * CompareTo (interfaces IComparable)
 		 * input: BitArray
 		 * output: 0 - if the bit-array a equal.
@@ -949,57 +938,57 @@ namespace DataStructures.BitArray
 		 * 			1 - if this bit-array is greater.
 		 * assumes: bit-array lentgh must been smaller or equal to 64 bit
 		 * */
-		public int CompareTo (object other)
-		{
+        public int CompareTo(object other)
+        {
 
-			var status = 0;
-			var valueThis = ToInt64 ();
-			var otherBitArray = (BitArray)other;
-			var valueOther = otherBitArray.ToInt64 ();
+            var status = 0;
+            var valueThis = ToInt64();
+            var otherBitArray = (BitArray)other;
+            var valueOther = otherBitArray.ToInt64();
 
-			if (valueThis > valueOther) 
-			{
-				status = 1;
-			} 
-			else if (valueOther > valueThis) 
-			{
-				status = -1;
-			} 
+            if (valueThis > valueOther)
+            {
+                status = 1;
+            }
+            else if (valueOther > valueThis)
+            {
+                status = -1;
+            }
 
-			return status;
-		}
+            return status;
+        }
 
 
-		/**
+        /**
 		 * Equals
 		 * input: BitArray
 		 * output: returns true if there inputs are equal otherwise false.
 		 * assumes: the input bit-arrays must have same length.
 		 * */
-		public override bool Equals (object other)
-		{
-			var status = true;
+        public override bool Equals(object other)
+        {
+            var status = true;
 
-			var otherBitArray = (BitArray)other;
+            var otherBitArray = (BitArray)other;
 
-			if (Length == otherBitArray.Length) 
-			{
+            if (Length == otherBitArray.Length)
+            {
 
-				for (var i = 0; i < Length; i++) 
-				{
-					if (field [i] != otherBitArray [i]) 
-					{
-						status = false;
-					}
-				}
-			} 
-			else 
-			{
-				throw new Exception ("== : inputs haven't same length!");
-			}
+                for (var i = 0; i < Length; i++)
+                {
+                    if (field[i] != otherBitArray[i])
+                    {
+                        status = false;
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception("== : inputs haven't same length!");
+            }
 
-			return status;
-		}
+            return status;
+        }
 
         /**
 		 * GetHashCode
@@ -1014,52 +1003,54 @@ namespace DataStructures.BitArray
 		 * input: none
 		 * output: a copy of this bit-array
 		 * */
-        public object Clone ()
-		{
-			var theClone = new BitArray (Length);
+        public object Clone()
+        {
+            var theClone = new BitArray(Length);
 
-			for (var i = 0; i < Length; i++) 
-			{
-				theClone [i] = field [i];
-			}
+            for (var i = 0; i < Length; i++)
+            {
+                theClone[i] = field[i];
+            }
 
-			return theClone;
-		}
+            return theClone;
+        }
 
-		/**
+        /**
 		 * Property (for interface IEnumerator)
 		 * returns the current bit of the bit-field.
 		 * */
-		public object Current {
-			get {
-				try 
-				{
-					return field [position];
-				} 
-				catch (IndexOutOfRangeException) 
-				{
-					throw new InvalidOperationException ();
-				}
-			}
-		}
+        public object Current
+        {
+            get
+            {
+                try
+                {
+                    return field[position];
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    throw new InvalidOperationException();
+                }
+            }
+        }
 
-		/**
+        /**
 		 * MoveNext (for interface IEnumerator)
 		 * input: none
 		 * output: returns true if 'position' successful increased otherwise false.
 		 * */
-		public bool MoveNext ()
-		{
-			if (position + 1 < field.Length) 
-			{
-				position++;
-				return true;
-			} 
-			else 
-			{
-				return false;
-			}
-		}
+        public bool MoveNext()
+        {
+            if (position + 1 < field.Length)
+            {
+                position++;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         /**
 		 * Reset (for interface IEnumerator)
@@ -1085,20 +1076,20 @@ namespace DataStructures.BitArray
 		 * 			and Compile(sequence : string) 
 		 * 
 		 **/
-        private bool Match (string sequence)
-		{
-			var status = true;
+        private bool Match(string sequence)
+        {
+            var status = true;
 
-			foreach (var ch in sequence) 
-			{
-				if (ch != '0' && ch != '1') 
-				{
-					status = false;
-				}
+            foreach (var ch in sequence)
+            {
+                if (ch != '0' && ch != '1')
+                {
+                    status = false;
+                }
 
-			}
+            }
 
-			return status;
-		}
-	}
+            return status;
+        }
+    }
 }

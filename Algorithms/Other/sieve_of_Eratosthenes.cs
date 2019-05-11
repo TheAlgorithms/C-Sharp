@@ -4,12 +4,12 @@ using System.Linq;
 
 namespace sieve_of_Eratosthenes
 {
-	class Program
-	{
-		public static void Main()
-		{
-			Console.WriteLine("Enter the number of prime numbers:");
-			var numStr = Console.ReadLine();
+    class Program
+    {
+        public static void Main()
+        {
+            Console.WriteLine("Enter the number of prime numbers:");
+            var numStr = Console.ReadLine();
 
             if (!int.TryParse(numStr, out var num) | num < 1)
             {
@@ -18,24 +18,24 @@ namespace sieve_of_Eratosthenes
             }
 
             Console.WriteLine(num + " prime numbers: " + string.Join(", ", GetPrimeNumbers(num)));
-		}
+        }
 
-		public static List<int> GetPrimeNumbers(int count)
-		{
-			var output = new List<int>();
+        public static List<int> GetPrimeNumbers(int count)
+        {
+            var output = new List<int>();
 
-			for (var i = 2; i < int.MaxValue && count > 0; i++)
-			{
-				if (output.Any(x => i % x == 0))
+            for (var i = 2; i < int.MaxValue && count > 0; i++)
+            {
+                if (output.Any(x => i % x == 0))
                 {
                     continue;
                 }
 
                 output.Add(i);
-				count--;
-			}
-			
-			return output;
-		}
-	}
+                count--;
+            }
+
+            return output;
+        }
+    }
 }

@@ -40,8 +40,8 @@ namespace bogosort
             while (!IsSorted(intArray))
             {
                 var random = new Random();
-                
-                for(var q = intArray.Length; q > 1; q--)
+
+                for (var q = intArray.Length; q > 1; q--)
                 {
                     // Pick random element
                     var j = random.Next(q);

@@ -39,7 +39,7 @@ namespace linear_search
 
         static int LinearSearch(int[] data, int searchItem)
         {
-            for(var i=0; i<data.Length; i++)
+            for (var i = 0; i < data.Length; i++)
             {
                 if (data[i] == searchItem)
                 {

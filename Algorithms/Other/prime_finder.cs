@@ -32,7 +32,7 @@ namespace prime_finder
                 return false;
             }
 
-            for (int i = 3, n = (int) Math.Sqrt(prime); i < n; i += 2)
+            for (int i = 3, n = (int)Math.Sqrt(prime); i < n; i += 2)
             {
                 if (prime % i == 0)
                 {

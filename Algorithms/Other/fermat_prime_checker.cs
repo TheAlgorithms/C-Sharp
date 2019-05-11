@@ -5,7 +5,7 @@ namespace ConsoleTest
 {
     class Program
     {
-		// Fermat's prime tester https://en.wikipedia.org/wiki/Fermat_primality_test
+        // Fermat's prime tester https://en.wikipedia.org/wiki/Fermat_primality_test
         static void Main()
         {
             Console.WriteLine("Welcome to Fermat's prime tester");
@@ -22,7 +22,7 @@ namespace ConsoleTest
             //   1. The pow operation between two int numbers usually overflows an int
             //   2. The pow and modular operation is very optimized
             var numberToTestBigInteger = new BigInteger(numberToTest);
-            var exponentBigInteger = new BigInteger(numberToTest-1);
+            var exponentBigInteger = new BigInteger(numberToTest - 1);
 
             //Create a random number generator using the current time as seed
             var r = new Random(new DateTime().Millisecond);
@@ -34,7 +34,7 @@ namespace ConsoleTest
             {
                 var randomNumber = r.Next(1, numberToTest);
                 var randomNumberBigInteger = new BigInteger(randomNumber);
-                if (BigInteger.ModPow(randomNumberBigInteger,exponentBigInteger,numberToTestBigInteger) != 1)
+                if (BigInteger.ModPow(randomNumberBigInteger, exponentBigInteger, numberToTestBigInteger) != 1)
                 {
                     prime = false;
                 }
@@ -43,10 +43,10 @@ namespace ConsoleTest
 
             if (prime)
             {
-                Console.WriteLine($"The number {0} seems prime",numberToTestEntry);
+                Console.WriteLine($"The number {0} seems prime", numberToTestEntry);
                 return;
             }
-            Console.WriteLine($"The number {0} isn't prime",numberToTestEntry);     
+            Console.WriteLine($"The number {0} isn't prime", numberToTestEntry);
         }
     }
 }

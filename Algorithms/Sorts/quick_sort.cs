@@ -45,7 +45,7 @@ namespace ConsoleApplication2
 
         public static List<int> Concat(List<int> less, int pivot, List<int> greater)
         {
-            var sorted = new List<int>(less) {pivot};
+            var sorted = new List<int>(less) { pivot };
             sorted.AddRange(greater);
             return sorted;
         }

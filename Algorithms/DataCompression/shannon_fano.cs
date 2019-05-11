@@ -130,7 +130,7 @@ namespace DC4
                 cStr += code.ElementAt(index);
             }
             Console.WriteLine("\nCoded String: ");
-            Console.WriteLine(cStr.Replace(" ",""));
+            Console.WriteLine(cStr.Replace(" ", ""));
             Console.ReadKey();
         }
         static void Shannon(int l, int h, Fano[] f)

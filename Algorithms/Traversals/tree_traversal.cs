@@ -9,9 +9,9 @@ namespace traversals
         {
             var tree = new Random_Ordered_Tree();
             var rnd = new Random();
-            for(var i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
-                var value = rnd.Next(1,100);
+                var value = rnd.Next(1, 100);
 
                 Console.WriteLine("Inserting {0}", value);
                 tree.Insert(value);
@@ -20,7 +20,7 @@ namespace traversals
             var tree_path = tree.Traverse_tree(tree.root);
 
             Console.Write("Path: ");
-            for(var i = 0; i < tree_path.Length; i++)
+            for (var i = 0; i < tree_path.Length; i++)
             {
                 Console.Write("{0} ", tree_path[i]);
             }
@@ -29,9 +29,9 @@ namespace traversals
 
     class Tree<T>
     {
-        public int Value {get; set;}
-        public Tree<T> Left {get; set;}
-        public Tree<T> Right {get; set;}
+        public int Value { get; set; }
+        public Tree<T> Left { get; set; }
+        public Tree<T> Right { get; set; }
     }
 
     class Random_Ordered_Tree
@@ -54,17 +54,17 @@ namespace traversals
                 var current = root;
                 var rnd = new Random();
 
-                while(current != null)
+                while (current != null)
                 {
 
-                     // if value is 0 try to place on left side
-                     // if value is 1 then try to place on right side
-                    var value = rnd.Next(0,2);
+                    // if value is 0 try to place on left side
+                    // if value is 1 then try to place on right side
+                    var value = rnd.Next(0, 2);
 
                     // Case for Left Side
-                    if(value == 0)
+                    if (value == 0)
                     {
-                        if(current.Left != null)
+                        if (current.Left != null)
                         {
                             current = current.Left;
                         }
@@ -78,7 +78,7 @@ namespace traversals
                     // Case for right Side
                     else
                     {
-                        if(current.Right != null)
+                        if (current.Right != null)
                         {
                             current = current.Right;
                         }
@@ -97,22 +97,22 @@ namespace traversals
             var tree_values = new List<int>();
             var tree_queue = new Queue<Tree<int>>();
 
-            if(t != null)
+            if (t != null)
             {
                 tree_queue.Enqueue(t);
             }
 
-            while(tree_queue.Count != 0)
+            while (tree_queue.Count != 0)
             {
                 var node = tree_queue.Dequeue();
                 tree_values.Add(node.Value);
 
-                if(node.Left != null)
+                if (node.Left != null)
                 {
                     tree_queue.Enqueue(node.Left);
                 }
 
-                if(node.Right != null)
+                if (node.Right != null)
                 {
                     tree_queue.Enqueue(node.Right);
                 }

@@ -172,7 +172,7 @@ namespace DC5
         {
             for (var i = 0; i < list.Count; i++)
             {
-                for (var j = i+1; j < list.Count; j++)
+                for (var j = i + 1; j < list.Count; j++)
                 {
                     if (list[i].Frequency > list[j].Frequency)
                     {

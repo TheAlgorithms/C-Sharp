@@ -7,7 +7,7 @@ namespace cocktail_sort
         static void Main()
         {
             Console.WriteLine("Please enter some integers, separated by spaces:");
-            
+
             var input = Console.ReadLine();
             var integers = input.Split(' ');
             var data = new int[integers.Length];
@@ -33,7 +33,7 @@ namespace cocktail_sort
             var startIndex = 0;
             var endIndex = intArray.Length - 1;
 
-            while(swapped)
+            while (swapped)
             {
                 for (var i = startIndex; i < endIndex; i++)
                 {
@@ -48,8 +48,8 @@ namespace cocktail_sort
                     }
                 }
                 endIndex--;
-                
-                if(!swapped)
+
+                if (!swapped)
                 {
                     break;
                 }

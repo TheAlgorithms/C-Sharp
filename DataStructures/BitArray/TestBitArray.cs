@@ -195,7 +195,7 @@
 //			Assert.AreEqual (result.ToInt32 (), 7);
 
 //		}
-			
+
 
 //		/*
 //		 * Test for indexer

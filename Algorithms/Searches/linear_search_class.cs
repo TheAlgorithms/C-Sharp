@@ -24,7 +24,7 @@ namespace LinearSearch
             }
 
             //display the array
-            foreach(var item in data)
+            foreach (var item in data)
             {
                 Console.Write(" {0} ", item);
             }
@@ -46,7 +46,7 @@ namespace LinearSearch
                 Console.WriteLine("The integer {0} was found in position {1}.\n", searchInt, position);
             }
 
-            
+
         }
 
         // perform a linear search on the data
