@@ -1,2 +1,6 @@
-# Visual Studio
-/.vs/
+# Visual Studio cache/options directory
+.vs/
+
+# Build results
+bin/
+obj/
