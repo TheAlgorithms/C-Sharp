@@ -6,7 +6,7 @@ namespace Algorithms.Sorters
     {       
         public void Sort(T[] array, IComparer<T> comparer)
         {
-            for (var i = 0; i < array.Length; i++)
+            for (var i = 0; i < array.Length - 1; i++)
             {
                 var wasChanged = false;
                 for (var j = 0; j < array.Length - i - 1; j++)
