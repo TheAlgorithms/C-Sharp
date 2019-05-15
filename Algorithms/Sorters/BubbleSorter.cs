@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Algorithms.Sorts
+namespace Algorithms.Sorters
 {
     public class BubbleSorter<T> : ISorter<T>
     {       

@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using Algorithms.Sorts;
+using Algorithms.Sorters;
 using System.Collections.Generic;
 
 namespace Algorithms.Tests.Sorters
