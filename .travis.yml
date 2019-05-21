@@ -1,0 +1,8 @@
+language: csharp
+solution: C-Sharp.sln
+mono: none
+dotnet: 2.1.300
+script:
+ - dotnet build
+ - dotnet test Algorithms.Tests
+ - dotnet test DataStructures.Tests

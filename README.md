@@ -1,4 +1,4 @@
-# C#  
+# C# [![Build Status](https://travis-ci.org/TheAlgorithms/C-Sharp.svg?branch=master)](https://travis-ci.org/TheAlgorithms/C-Sharp)
 
 This repository contains algorithms and datastructures implemented in C# for eductional purposes.  
 
