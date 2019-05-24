@@ -3,7 +3,7 @@ name: Bug report
 about: Create a report to help us improve
 title: Something works wrong
 labels: bug
-assignees: siriak
+assignees: ''
 
 ---
 
