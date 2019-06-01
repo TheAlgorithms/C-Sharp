@@ -3,7 +3,16 @@
 namespace Algorithms.Sorters
 {
     public class BubbleSorter<T> : ISorter<T>
-    {       
+    {
+        /// <summary>
+        /// Sorts array using specified comparer,
+        /// internal, in-place, stable,
+        /// time complexity: O(n^2),
+        /// space complexity: O(1),
+        /// where n - array length
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="comparer"></param>
         public void Sort(T[] array, IComparer<T> comparer)
         {
             for (var i = 0; i < array.Length - 1; i++)

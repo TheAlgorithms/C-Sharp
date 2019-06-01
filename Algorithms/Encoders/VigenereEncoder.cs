@@ -11,7 +11,10 @@ namespace Algorithms.Encoders
         readonly CaesarEncoder caesarEncoder = new CaesarEncoder();
 
         /// <summary>
-        /// Encodes text using specified key
+        /// Encodes text using specified key,
+        /// time complexity: O(n),
+        /// space complexity: O(n),
+        /// where n - text length
         /// </summary>
         /// <param name="text">Text to be encoded</param>
         /// <param name="key">Key that will be used to encode the text</param>
@@ -19,7 +22,10 @@ namespace Algorithms.Encoders
         public string Encode(string text, string key) => Cipher(text, key, caesarEncoder.Encode);
 
         /// <summary>
-        /// Decodes text that was encoded using specified key
+        /// Decodes text that was encoded using specified key,
+        /// time complexity: O(n),
+        /// space complexity: O(n),
+        /// where n - text length
         /// </summary>
         /// <param name="text">Text to be decoded</param>
         /// <param name="key">Key that was used to encode the text</param>
