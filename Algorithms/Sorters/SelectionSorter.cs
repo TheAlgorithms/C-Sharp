@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Algorithms.Sorters
 {
-    public class BubbleSorter<T> : ISorter<T>
+    public class SelectionSorter<T> : ISorter<T>
     {
         /// <summary>
         /// Sorts array using specified comparer,
@@ -17,21 +17,18 @@ namespace Algorithms.Sorters
         {
             for (var i = 0; i < array.Length - 1; i++)
             {
-                var wasChanged = false;
-                for (var j = 0; j < array.Length - i - 1; j++)
+                var jmin = i;
+                for (var j = i + 1; j < array.Length; j++)
                 {
-                    if (comparer.Compare(array[j], array[j + 1]) == 1)
+                    if (comparer.Compare(array[jmin], array[j]) == 1)
                     {
-                        var temp = array[j];
-                        array[j] = array[j + 1];
-                        array[j + 1] = temp;
-                        wasChanged = true;
+                        jmin = j;
                     }
                 }
-                if (!wasChanged)
-                {
-                    break;
-                }
+
+                var t = array[i];
+                array[i] = array[jmin];
+                array[jmin] = t;
             }
         }
     }

@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace Algorithms.Tests.Sorters
 {
-    public class BubbleSorterTests
+    public class SelectionSorterTests
     {
-        readonly BubbleSorter<int> sorter = new BubbleSorter<int>();
+        readonly SelectionSorter<int> sorter = new SelectionSorter<int>();
         readonly Random random = new Random();
 
         [Test]
