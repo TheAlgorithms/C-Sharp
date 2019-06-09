@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a4e95548f26946218d69a9660ec3090b)](https://app.codacy.com/app/siriak/C-Sharp?utm_source=github.com&utm_medium=referral&utm_content=TheAlgorithms/C-Sharp&utm_campaign=Badge_Grade_Dashboard)
 # C# [![Build Status](https://travis-ci.org/TheAlgorithms/C-Sharp.svg?branch=master)](https://travis-ci.org/TheAlgorithms/C-Sharp)
 
 This repository contains algorithms and datastructures implemented in C# for eductional purposes.  
