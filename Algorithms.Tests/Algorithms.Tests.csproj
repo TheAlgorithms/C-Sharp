@@ -5,6 +5,9 @@
     <IsPackable>false</IsPackable>
     <LangVersion>default</LangVersion>
     <NullableContextOptions>disable</NullableContextOptions>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+    <PackageReleaseNotes>Updates on Hill Cipher</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

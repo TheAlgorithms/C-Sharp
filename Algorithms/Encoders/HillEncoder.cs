@@ -74,15 +74,8 @@ namespace Algorithms.Encoders
 
             for (var i = 0; i < arr.Length; i++)
             {
-                // Try to cast it to its corresponding (char)value.
-                try
-                {
-                    strBuilder.Append((char)arr[i]);
-                }
-                catch (InvalidCastException)
-                {
-                    throw;
-                }
+                // To cast it to its corresponding (char)value.
+                strBuilder.Append((char)arr[i]);
             }
 
             return strBuilder.ToString();
@@ -111,7 +104,7 @@ namespace Algorithms.Encoders
         /// <param name="vector">list of splitted words as numbers.</param>
         /// <param name="key">Cipher selected key</param>
         /// <returns>Ciphered vector</returns>
-        private double[] MatrixCipher(double[] vector, double[,] key)
+        private static double[] MatrixCipher(double[] vector, double[,] key)
         {
             var multiplied = new double[vector.Length];
 
@@ -131,7 +124,7 @@ namespace Algorithms.Encoders
         /// </summary>
         /// <param name="chunked">chunked words list</param>
         /// <returns>spliiter char array.</returns>
-        private char[] SplitToCharArray(string[] chunked)
+        private static char[] SplitToCharArray(string[] chunked)
         {
             char[] splitted = new char[chunked.Length * 3];
 
@@ -151,7 +144,7 @@ namespace Algorithms.Encoders
         /// </summary>
         /// <param name="text">text message</param>
         /// <returns>array of words.</returns>
-        private string[] ChunkTextToArray(string text)
+        private static string[] ChunkTextToArray(string text)
         {
             //To split the message into chunks
             var div = text.Length / 3;
@@ -171,7 +164,7 @@ namespace Algorithms.Encoders
         /// </summary>
         /// <param name="text">Text Message</param>
         /// <returns>Modified text Message.</returns>
-        private string FillGaps(string text)
+        private static string FillGaps(string text)
         {
             string newText = text;
             var isChunkable = false;
@@ -196,7 +189,7 @@ namespace Algorithms.Encoders
         /// </summary>
         /// <param name="text">Text message</param>
         /// <returns>Deciphered Message</returns>
-        private string UnFillGaps(string text)
+        private static string UnFillGaps(string text)
         {
             return text.TrimEnd();
         }
@@ -227,7 +220,7 @@ namespace Algorithms.Encoders
 
             GaussJordanElimination.Solve(augM);
 
-            return new double[] { augM[0, 3], augM[1, 3], augM[2, 3] };
+            return new[] { augM[0, 3], augM[1, 3], augM[2, 3] };
         }
     }
 }
