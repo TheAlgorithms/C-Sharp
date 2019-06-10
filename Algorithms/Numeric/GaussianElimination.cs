@@ -86,9 +86,9 @@ namespace Algorithms.Numeric
                 for (int destRow = srcRow + 1; destRow < RowCount; destRow++)
                 {
                     var df = matrix[srcRow, srcRow];
-                    var sf = matrix[destRow, destRow];
+                    var sf = matrix[destRow, srcRow];
 
-                    for (int i = 0; i < RowCount; i++)
+                    for (int i = 0; i < RowCount + 1; i++)
                     {
                         matrix[destRow, i] = matrix[destRow, i] * df - matrix[srcRow, i] * sf;
                     }
@@ -98,7 +98,7 @@ namespace Algorithms.Numeric
 
         private static bool BackInsertion(ref double[,] matrix)
         {
-            for (int row = RowCount - 1; row >= 0; row--)
+            for (var row = RowCount - 1; row >= 0; row--)
             {
                 var element = matrix[row, row];
                 if (element == 0)
@@ -106,7 +106,7 @@ namespace Algorithms.Numeric
                     return false;
                 }
 
-                for (int i = 0; i < RowCount; i++)
+                for (int i = 0; i < RowCount + 1; i++)
                 {
                     matrix[row, i] /= element;
                 }
