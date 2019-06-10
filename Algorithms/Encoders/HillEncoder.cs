@@ -4,6 +4,11 @@ using System.Text;
 
 namespace Algorithms.Encoders
 {
+    /// <summary>
+    /// Lester S. Hill's polygraphic substitution cipher, 
+    /// without representing letters using mod26, using 
+    /// corresponding "(char)value" instead.
+    /// </summary>
     public class HillEncoder : IEncoder<double[,]>
     {
         #region DEFINITION
@@ -14,6 +19,7 @@ namespace Algorithms.Encoders
 
         #endregion DEFINITION
 
+        #region MAIN
         private string Cipher(string text, double[,] key)
         {
             var preparedText = FillGaps(text);
@@ -32,7 +38,7 @@ namespace Algorithms.Encoders
 
             var merged = MergeArrayList(ciphered);
 
-            return BuildStringFromIntArray(merged);
+            return BuildStringFromArray(merged);
         }
 
         private string Decipher(string text, double[,] key)
@@ -51,23 +57,42 @@ namespace Algorithms.Encoders
             }
 
             var merged = MergeArrayList(deciphered);
-            var str = BuildStringFromIntArray(merged);
+            var str = BuildStringFromArray(merged);
 
             return UnFillGaps(str);
         }
+        #endregion MAIN
 
-        private string BuildStringFromIntArray(double[] arr)
+        /// <summary>
+        /// To convert elements from the array to their corresponding char ASCII.
+        /// </summary>
+        /// <param name="arr">array of vectors</param>
+        /// <returns>Message</returns>
+        private string BuildStringFromArray(double[] arr)
         {
             var strBuilder = new StringBuilder();
 
             for (var i = 0; i < arr.Length; i++)
             {
-                strBuilder.Append((char)arr[i]);
+                // Try to cast it to its corresponding (char)value.
+                try
+                {
+                    strBuilder.Append((char)arr[i]);
+                }
+                catch (InvalidCastException)
+                {
+                    throw;
+                }
             }
 
             return strBuilder.ToString();
         }
 
+        /// <summary>
+        /// Given a list of vectors, returns a single array of elements.
+        /// </summary>
+        /// <param name="list">List of ciphered arrays</param>
+        /// <returns>unidimensional list</returns>
         private double[] MergeArrayList(double[][] list)
         {
             var merged = new double[list.Length * 3];
@@ -80,6 +105,12 @@ namespace Algorithms.Encoders
             return merged;
         }
 
+        /// <summary>
+        /// To multiply the key for the given scalar.
+        /// </summary>
+        /// <param name="vector">list of splitted words as numbers.</param>
+        /// <param name="key">Cipher selected key</param>
+        /// <returns>Ciphered vector</returns>
         private double[] MatrixCipher(double[] vector, double[,] key)
         {
             var multiplied = new double[vector.Length];
@@ -95,26 +126,31 @@ namespace Algorithms.Encoders
             return multiplied;
         }
 
+        /// <summary>
+        /// To split the input text message as chunks of words.
+        /// </summary>
+        /// <param name="chunked">chunked words list</param>
+        /// <returns>spliiter char array.</returns>
         private char[] SplitToCharArray(string[] chunked)
         {
-            char[] chopped = new char[chunked.Length * 3];
+            char[] splitted = new char[chunked.Length * 3];
 
             for (int i = 0; i < chunked.Length; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    chopped[(i * 3) + j] = chunked[i].ToCharArray()[j];
+                    splitted[(i * 3) + j] = chunked[i].ToCharArray()[j];
                 }
             }
 
-            return chopped;
+            return splitted;
         }
 
         /// <summary>
-        /// To chunck the incoming text message and fill the gaps to be divisible.
+        /// To chunk the input text message.
         /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <param name="text">text message</param>
+        /// <returns>array of words.</returns>
         private string[] ChunkTextToArray(string text)
         {
             //To split the message into chunks
@@ -129,12 +165,18 @@ namespace Algorithms.Encoders
             return chunks;
         }
 
+        /// <summary>
+        /// Fills a text message with spaces at the end
+        /// to enable a simple split by 3-length-word.
+        /// </summary>
+        /// <param name="text">Text Message</param>
+        /// <returns>Modified text Message.</returns>
         private string FillGaps(string text)
         {
             string newText = text;
-            var chunkable = false;
+            var isChunkable = false;
 
-            while (!chunkable)
+            while (!isChunkable)
             {
                 if (newText.Length % 3 != 0)
                 {
@@ -142,20 +184,32 @@ namespace Algorithms.Encoders
                 }
                 else
                 {
-                    chunkable = true;
+                    isChunkable = true;
                 }
             }
 
             return newText;
         }
 
+        /// <summary>
+        /// Removes the extra spaces included on the cipher phase.
+        /// </summary>
+        /// <param name="text">Text message</param>
+        /// <returns>Deciphered Message</returns>
         private string UnFillGaps(string text)
         {
             return text.TrimEnd();
         }
 
+        /// <summary>
+        /// Finds the inverse of the given matrix using a linear equation solver.
+        /// </summary>
+        /// <param name="vector">Splitted words vector.</param>
+        /// <param name="key">Key used for the cipher.</param>
+        /// <returns></returns>
         private double[] MatrixDeCipher(double[] vector, double[,] key)
         {
+            // To augment the original key with the given vector.
             var augM = new double[3, 4];
 
             for (var i = 0; i < key.GetLength(0); i++)
@@ -171,7 +225,7 @@ namespace Algorithms.Encoders
                 augM[k, 3] = vector[k];
             }
 
-            GaussianElimination.Solve(augM);
+            GaussJordanElimination.Solve(augM);
 
             return new double[] { augM[0, 3], augM[1, 3], augM[2, 3] };
         }

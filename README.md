@@ -18,7 +18,7 @@ This repository contains algorithms and datastructures implemented in C# for edu
 	* [Numeric](./Algorithms/Numeric/)
 		* [Binary GCD](./Algorithms/Numeric/binary_gcd.cs)
 		* [Euclidean GCD](./Algorithms/Numeric/euclidean_gcd.cs)
-		* [Gaussian Elimination](./Algorithms/Numeric/GaussianElimination.cs)
+		* [Gauss-Jordan Elimination](./Algorithms/Numeric/GaussJordanElimination.cs)
 	* [Other](./Algorithms/Other/)
 		* [Fermat Prime Checker](./Algorithms/Other/fermat_prime_checker.cs)
 		* [Prime Finder](./Algorithms/Other/prime_finder.cs)

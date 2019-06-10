@@ -2,7 +2,7 @@
 
 namespace Algorithms.Numeric
 {
-    public static class GaussianElimination
+    public static class GaussJordanElimination
     {
         private static int RowCount { get; set; }
 
@@ -10,7 +10,8 @@ namespace Algorithms.Numeric
         ///  Method to find a linear equation system using gaussian elimination.
         /// </summary>
         /// <param name="matrix">The key matrix to solve via algorithm.</param>
-        /// <returns>whether the input matrix has a unique solution or not.</returns>
+        /// <returns>whether the input matrix has a unique solution or not.
+        /// and solves on the given matrix. </returns>
         public static bool Solve(double[,] matrix)
         {
             RowCount = matrix.GetUpperBound(0) + 1;
@@ -28,9 +29,15 @@ namespace Algorithms.Numeric
 
             Elimination(ref matrix);
 
-            return BackInsertion(ref matrix);
+            return ElementaryReduction(ref matrix);
         }
 
+        /// <summary>
+        /// To make simple validation of the matrix to be used.
+        /// </summary>
+        /// <param name="matrix">Multidimensional array matrix</param>
+        /// <returns>True: if algorithm can be use for given matrix; 
+        /// False: Otherwise </returns>
         private static bool CanMatrixBeUsed(double[,] matrix)
         {
             if (matrix == null || matrix.Length != RowCount * (RowCount + 1))
@@ -41,6 +48,11 @@ namespace Algorithms.Numeric
             return RowCount > 1;
         }
 
+        /// <summary>
+        /// To prepare given matrix by pivoting rows.
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns>Matrix</returns>
         private static bool PivotMatrix(ref double[,] matrix)
         {
             for (int col = 0; col + 1 < RowCount; col++)
@@ -60,7 +72,7 @@ namespace Algorithms.Numeric
                     if (matrix[rowToSwap, col] != 0)
                     {
                         var tmp = new double[RowCount + 1];
-                        for (int i = 0; i < RowCount; i++)
+                        for (int i = 0; i < RowCount + 1; i++)
                         {
                             // To make the swap with the element above.
                             tmp[i] = matrix[rowToSwap, i];
@@ -79,14 +91,18 @@ namespace Algorithms.Numeric
             return true;
         }
 
+        /// <summary>
+        /// Applies REF.
+        /// </summary>
+        /// <param name="matrix">Matrix</param>
         private static void Elimination(ref double[,] matrix)
         {
             for (int srcRow = 0; srcRow + 1 < RowCount; srcRow++)
             {
                 for (int destRow = srcRow + 1; destRow < RowCount; destRow++)
                 {
-                    var df = matrix[srcRow, srcRow];
-                    var sf = matrix[destRow, srcRow];
+                    double df = matrix[srcRow, srcRow];
+                    double sf = matrix[destRow, srcRow];
 
                     for (int i = 0; i < RowCount + 1; i++)
                     {
@@ -96,7 +112,12 @@ namespace Algorithms.Numeric
             }
         }
 
-        private static bool BackInsertion(ref double[,] matrix)
+        /// <summary>
+        /// To continue reducing the matrix using RREF.
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        private static bool ElementaryReduction(ref double[,] matrix)
         {
             for (var row = RowCount - 1; row >= 0; row--)
             {
