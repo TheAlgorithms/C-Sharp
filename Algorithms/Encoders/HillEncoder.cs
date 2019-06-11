@@ -149,22 +149,8 @@ namespace Algorithms.Encoders
         /// <returns>Modified text Message.</returns>
         private static string FillGaps(string text)
         {
-            var newText = text;
-            var isChunkable = false;
-
-            while (!isChunkable)
-            {
-                if (newText.Length % 3 != 0)
-                {
-                    newText += " ";
-                }
-                else
-                {
-                    isChunkable = true;
-                }
-            }
-
-            return newText;
+            var remainder = text.Length % 3;
+            return remainder == 0 ? text : text + new string(' ', 3 - remainder);
         }
 
         /// <summary>
