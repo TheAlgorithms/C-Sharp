@@ -2,9 +2,9 @@
 
 namespace heap_sort
 {
-    class Program
+    internal class Program
     {
-        static void Sort(int[] data)
+        private static void Sort(int[] data)
         {
             var heapSize = data.Length;
             for (var p = (heapSize - 1) / 2; p >= 0; p--)
@@ -22,7 +22,8 @@ namespace heap_sort
                 MakeHeap(data, heapSize, 0);
             }
         }
-        static void MakeHeap(int[] input, int heapSize, int index)
+
+        private static void MakeHeap(int[] input, int heapSize, int index)
         {
             var left = (index + 1) * 2 - 1;
             var right = (index + 1) * 2;

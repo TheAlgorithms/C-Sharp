@@ -1,15 +1,16 @@
-﻿using System;
-using Algorithms.Encoders;
+﻿using Algorithms.Encoders;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
+using System;
 
 namespace Algorithms.Tests.Encoders
 {
     public class CaesarEncoderTests
     {
-        readonly Randomizer random = new Randomizer();
-        readonly CaesarEncoder encoder = new CaesarEncoder();
-        string RandomMessage => random.GetString();
+        private readonly Randomizer random = new Randomizer();
+        private readonly CaesarEncoder encoder = new CaesarEncoder();
+
+        private string RandomMessage => random.GetString();
 
         [Test]
         [Parallelizable]

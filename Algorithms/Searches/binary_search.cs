@@ -2,9 +2,9 @@
 
 namespace Algorithms.Searches
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             Console.WriteLine("Please enter some integers, sorted & separated by spaces:");
             var input = Console.ReadLine();

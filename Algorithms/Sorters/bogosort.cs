@@ -2,9 +2,9 @@ using System;
 
 namespace bogosort
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             Console.WriteLine("Please enter some integers, separated by spaces:");
 

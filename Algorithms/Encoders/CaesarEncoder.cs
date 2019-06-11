@@ -29,7 +29,7 @@ namespace Algorithms.Encoders
         /// <returns>Decoded text</returns>
         public string Decode(string text, int key) => Cipher(text, -key);
 
-        private string Cipher(string text, int key)
+        private static string Cipher(string text, int key)
         {
             var newText = new StringBuilder(text.Length);
             for (var i = 0; i < text.Length; i++)

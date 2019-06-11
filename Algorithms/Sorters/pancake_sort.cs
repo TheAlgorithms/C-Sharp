@@ -2,11 +2,11 @@
 // pancake sort 
 using System;
 
-class GFG
+internal class GFG
 {
 
     // Reverses arr[0..i] 
-    static void Flip(int[] arr, int i)
+    private static void Flip(int[] arr, int i)
     {
         int temp, start = 0;
         while (start < i)
@@ -22,7 +22,7 @@ class GFG
     // Returns index of the  
     // maximum element in  
     // arr[0..n-1]  
-    static int FindMax(int[] arr, int n)
+    private static int FindMax(int[] arr, int n)
     {
         int mi, i;
         for (mi = 0, i = 0; i < n; ++i)
@@ -39,7 +39,7 @@ class GFG
     // The main function that 
     // sorts given array using  
     // flip operations 
-    static int PancakeSort(int[] arr, int n)
+    private static int PancakeSort(int[] arr, int n)
     {
 
         // Start from the complete 
@@ -77,7 +77,7 @@ class GFG
 
     // Utility function to print 
     // array arr[] 
-    static void PrintArray(int[] arr,
+    private static void PrintArray(int[] arr,
                            int arr_size)
     {
         for (var i = 0; i < arr_size; i++)

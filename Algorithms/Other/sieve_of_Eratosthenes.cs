@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace sieve_of_Eratosthenes
 {
-    class Program
+    internal class Program
     {
         public static void Main()
         {
