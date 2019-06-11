@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace radix_sort
 {
-    class Program
+    internal class Program
     {
         private const int ItemCount = 20;
 
-        static void Main()
+        private static void Main()
         {
             var data = new int[ItemCount];
             GenerateData(ref data, new Random(ItemCount));

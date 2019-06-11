@@ -55,7 +55,7 @@ namespace Algorithms.Numeric
         /// <returns>Matrix</returns>
         private bool PivotMatrix(ref double[,] matrix)
         {
-            for (int col = 0; col + 1 < RowCount; col++)
+            for (var col = 0; col + 1 < RowCount; col++)
             {
                 if (matrix[col, col] == 0)
                 {
@@ -65,7 +65,7 @@ namespace Algorithms.Numeric
                     if (matrix[rowToSwap, col] != 0)
                     {
                         var tmp = new double[RowCount + 1];
-                        for (int i = 0; i < RowCount + 1; i++)
+                        for (var i = 0; i < RowCount + 1; i++)
                         {
                             // To make the swap with the element above.
                             tmp[i] = matrix[rowToSwap, i];
@@ -105,14 +105,14 @@ namespace Algorithms.Numeric
         /// <param name="matrix">Matrix</param>
         private void Elimination(ref double[,] matrix)
         {
-            for (int srcRow = 0; srcRow + 1 < RowCount; srcRow++)
+            for (var srcRow = 0; srcRow + 1 < RowCount; srcRow++)
             {
-                for (int destRow = srcRow + 1; destRow < RowCount; destRow++)
+                for (var destRow = srcRow + 1; destRow < RowCount; destRow++)
                 {
-                    double df = matrix[srcRow, srcRow];
-                    double sf = matrix[destRow, srcRow];
+                    var df = matrix[srcRow, srcRow];
+                    var sf = matrix[destRow, srcRow];
 
-                    for (int i = 0; i < RowCount + 1; i++)
+                    for (var i = 0; i < RowCount + 1; i++)
                     {
                         matrix[destRow, i] = matrix[destRow, i] * df - matrix[srcRow, i] * sf;
                     }
@@ -135,12 +135,12 @@ namespace Algorithms.Numeric
                     return false;
                 }
 
-                for (int i = 0; i < RowCount + 1; i++)
+                for (var i = 0; i < RowCount + 1; i++)
                 {
                     matrix[row, i] /= element;
                 }
 
-                for (int destRow = 0; destRow < row; destRow++)
+                for (var destRow = 0; destRow < row; destRow++)
                 {
                     matrix[destRow, RowCount] -= matrix[destRow, row] * matrix[row, RowCount];
                     matrix[destRow, row] = 0;

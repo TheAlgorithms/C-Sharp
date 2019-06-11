@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Algorithms.Sorters;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using Algorithms.Sorters;
+using System;
 using System.Collections.Generic;
 
 namespace Algorithms.Tests.Sorters
 {
     public class BubbleSorterTests
     {
-        readonly BubbleSorter<int> sorter = new BubbleSorter<int>();
-        readonly Random random = new Random();
+        private readonly BubbleSorter<int> sorter = new BubbleSorter<int>();
+        private readonly Random random = new Random();
 
         [Test]
         [Parallelizable]

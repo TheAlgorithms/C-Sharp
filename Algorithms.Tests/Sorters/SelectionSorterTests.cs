@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Algorithms.Sorters;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using Algorithms.Sorters;
+using System;
 using System.Collections.Generic;
 
 namespace Algorithms.Tests.Sorters
 {
     public class SelectionSorterTests
     {
-        readonly SelectionSorter<int> sorter = new SelectionSorter<int>();
-        readonly Random random = new Random();
+        private readonly SelectionSorter<int> sorter = new SelectionSorter<int>();
+        private readonly Random random = new Random();
 
         [Test]
         [Parallelizable]

@@ -2,12 +2,12 @@
 
 namespace BucketSort
 {
-    class BucketSort
+    internal class BucketSort
     {
         private readonly int[] data; // array of values
         private static readonly Random generator = new Random();
 
-        static void Main()
+        private static void Main()
         {
             // create object to perform bucket sort
             var sortArray = new BucketSort(10);

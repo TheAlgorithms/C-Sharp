@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace ConsoleApplication2
 {
-    class QuickSortProgram
+    internal class QuickSortProgram
     {
-        static void Main()
+        private static void Main()
         {
             var unsorted = new List<int> { 9, 8, 7, 6 };
             Console.WriteLine($"Unsorted: {string.Join(" ", unsorted.ToArray())}");

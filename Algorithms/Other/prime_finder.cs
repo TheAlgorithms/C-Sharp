@@ -2,7 +2,7 @@ using System;
 
 namespace prime_finder
 {
-    class Program
+    internal class Program
     {
         public static void Main()
         {

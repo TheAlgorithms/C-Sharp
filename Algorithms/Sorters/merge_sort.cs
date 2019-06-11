@@ -2,9 +2,9 @@
 
 namespace merge_sort
 {
-    class Program
+    internal class Program
     {
-        static public void MainMerge(int[] numbers, int left, int mid, int right)
+        public static void MainMerge(int[] numbers, int left, int mid, int right)
         {
             var temp = new int[25];
             int i, eol, num, pos;
@@ -42,7 +42,7 @@ namespace merge_sort
             }
         }
 
-        static public void SortMerge(int[] numbers, int left, int right)
+        public static void SortMerge(int[] numbers, int left, int right)
         {
             int mid;
 
@@ -56,7 +56,7 @@ namespace merge_sort
             }
         }
 
-        static void Main()
+        private static void Main()
         {
             Console.WriteLine("Please enter some integers, separated by spaces:");
             var input = Console.ReadLine();

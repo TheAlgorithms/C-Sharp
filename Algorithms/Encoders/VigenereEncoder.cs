@@ -8,7 +8,7 @@ namespace Algorithms.Encoders
     /// </summary>
     public class VigenereEncoder : IEncoder<string>
     {
-        readonly CaesarEncoder caesarEncoder = new CaesarEncoder();
+        private readonly CaesarEncoder caesarEncoder = new CaesarEncoder();
 
         /// <summary>
         /// Encodes text using specified key,

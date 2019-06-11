@@ -3,15 +3,16 @@ using System.Linq;
 
 namespace DC4
 {
-    class Program
+    internal class Program
     {
-        class Fano
+        private class Fano
         {
             public float pro;
             public int[] arr = new int[20];
             public int top;
         }
-        static void Main()
+
+        private static void Main()
         {
             var f = Enumerable.Range(0, 20).Select(ind => new Fano()).ToArray();
             Console.Write("Enter String: ");
@@ -133,7 +134,8 @@ namespace DC4
             Console.WriteLine(cStr.Replace(" ", ""));
             Console.ReadKey();
         }
-        static void Shannon(int l, int h, Fano[] f)
+
+        private static void Shannon(int l, int h, Fano[] f)
         {
             float set1 = 0, set2 = 0;
             int i, j, k = 0;

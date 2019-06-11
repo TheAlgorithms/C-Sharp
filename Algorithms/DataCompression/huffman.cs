@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DC5
 {
-    class Huff
+    internal class Huff
     {
         public string Data { get; set; }
         public int Frequency { get; set; }
@@ -24,14 +24,16 @@ namespace DC5
             Frequency = leftChild.Frequency + rightChild.Frequency;
         }
     }
-    class Man
+
+    internal class Man
     {
         public List<string> Codec { get; set; } = new List<string>();
         public List<string> Data { get; set; } = new List<string>();
     }
-    class Program
+
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             IList<Huff> list = new List<Huff>();
             Console.Write("Enter String: ");

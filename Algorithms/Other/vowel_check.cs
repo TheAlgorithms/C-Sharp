@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace VowelCheck_Con
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             char[] vowels = { 'a', 'e', 'i', 'o', 'u' };
             var n = Convert.ToInt32(Console.ReadLine());

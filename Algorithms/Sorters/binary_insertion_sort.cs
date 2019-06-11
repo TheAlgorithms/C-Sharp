@@ -2,11 +2,11 @@ using System;
 
 namespace binary_insertion_sort
 {
-    class Program
+    internal class Program
     {
         private const int ARRAY_SIZE = 20;
 
-        static void Main()
+        private static void Main()
         {
             var rnd = new Random(DateTime.Now.Millisecond);
 

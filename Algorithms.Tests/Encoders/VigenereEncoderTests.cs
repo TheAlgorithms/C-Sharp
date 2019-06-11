@@ -6,9 +6,10 @@ namespace Algorithms.Tests.Encoders
 {
     public class VigenereEncoderTests
     {
-        readonly Randomizer random = new Randomizer();
-        readonly VigenereEncoder encoder = new VigenereEncoder();
-        string RandomMessage => random.GetString();
+        private readonly Randomizer random = new Randomizer();
+        private readonly VigenereEncoder encoder = new VigenereEncoder();
+
+        private string RandomMessage => random.GetString();
 
         [Test]
         [Parallelizable]

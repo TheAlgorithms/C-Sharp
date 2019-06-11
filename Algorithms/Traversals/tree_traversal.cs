@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace traversals
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             var tree = new Random_Ordered_Tree();
             var rnd = new Random();
@@ -27,14 +27,14 @@ namespace traversals
         }
     }
 
-    class Tree<T>
+    internal class Tree<T>
     {
         public int Value { get; set; }
         public Tree<T> Left { get; set; }
         public Tree<T> Right { get; set; }
     }
 
-    class Random_Ordered_Tree
+    internal class Random_Ordered_Tree
     {
         public Tree<int> root = null;
 
