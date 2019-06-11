@@ -5,7 +5,6 @@
     <LangVersion>default</LangVersion>
     <NullableContextOptions>disable</NullableContextOptions>
     <Version>1.0.0</Version>
-    <FileVersion>1.0.0.1</FileVersion>
     <PackageReleaseNotes>Updates on Hill Cipher</PackageReleaseNotes>
   </PropertyGroup>
 
