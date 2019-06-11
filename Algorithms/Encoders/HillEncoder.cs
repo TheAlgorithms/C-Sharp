@@ -13,6 +13,13 @@ namespace Algorithms.Encoders
     {
         #region DEFINITION
 
+        private readonly GaussJordanElimination LinearEquationSolver;
+
+        public HillEncoder()
+        {
+            LinearEquationSolver = new GaussJordanElimination();
+        }
+
         public string Decode(string text, double[,] key) => Decipher(text, key);
 
         public string Encode(string text, double[,] key) => Cipher(text, key);
@@ -218,7 +225,7 @@ namespace Algorithms.Encoders
                 augM[k, 3] = vector[k];
             }
 
-            GaussJordanElimination.Solve(augM);
+            LinearEquationSolver.Solve(augM);
 
             return new[] { augM[0, 3], augM[1, 3], augM[2, 3] };
         }
