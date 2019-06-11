@@ -2,9 +2,9 @@
 
 namespace Algorithms.Numeric
 {
-    public static class GaussJordanElimination
+    public class GaussJordanElimination
     {
-        private static int RowCount { get; set; }
+        private int RowCount { get; set; }
 
         /// <summary>
         ///  Method to find a linear equation system using gaussian elimination.
@@ -12,7 +12,7 @@ namespace Algorithms.Numeric
         /// <param name="matrix">The key matrix to solve via algorithm.</param>
         /// <returns>whether the input matrix has a unique solution or not.
         /// and solves on the given matrix. </returns>
-        public static bool Solve(double[,] matrix)
+        public bool Solve(double[,] matrix)
         {
             RowCount = matrix.GetUpperBound(0) + 1;
 
@@ -38,7 +38,7 @@ namespace Algorithms.Numeric
         /// <param name="matrix">Multidimensional array matrix</param>
         /// <returns>True: if algorithm can be use for given matrix; 
         /// False: Otherwise </returns>
-        private static bool CanMatrixBeUsed(double[,] matrix)
+        private bool CanMatrixBeUsed(double[,] matrix)
         {
             if (matrix == null || matrix.Length != RowCount * (RowCount + 1))
             {
@@ -53,7 +53,7 @@ namespace Algorithms.Numeric
         /// </summary>
         /// <param name="matrix"></param>
         /// <returns>Matrix</returns>
-        private static bool PivotMatrix(ref double[,] matrix)
+        private bool PivotMatrix(ref double[,] matrix)
         {
             for (int col = 0; col + 1 < RowCount; col++)
             {
@@ -95,7 +95,7 @@ namespace Algorithms.Numeric
         /// Applies REF.
         /// </summary>
         /// <param name="matrix">Matrix</param>
-        private static void Elimination(ref double[,] matrix)
+        private void Elimination(ref double[,] matrix)
         {
             for (int srcRow = 0; srcRow + 1 < RowCount; srcRow++)
             {
@@ -117,7 +117,7 @@ namespace Algorithms.Numeric
         /// </summary>
         /// <param name="matrix"></param>
         /// <returns></returns>
-        private static bool ElementaryReduction(ref double[,] matrix)
+        private bool ElementaryReduction(ref double[,] matrix)
         {
             for (var row = RowCount - 1; row >= 0; row--)
             {
