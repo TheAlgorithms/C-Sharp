@@ -18,6 +18,7 @@ namespace Algorithms.Tests.Encoders
             // Act
             var encodedText = encoder.Encode(inputText, key);
             var decodeText = encoder.Decode(encodedText, key);
+
             // Assert
             Assert.AreEqual(inputText, decodeText);
         }
