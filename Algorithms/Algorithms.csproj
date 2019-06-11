@@ -6,8 +6,8 @@
     <NullableContextOptions>disable</NullableContextOptions>
     <Version>1.0.0</Version>
     <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
-    <PackageReleaseNotes>Updates on Hill Cipher</PackageReleaseNotes>
+    <FileVersion>1.0.0.0</FileVersion>
+    <PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>

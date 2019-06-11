@@ -68,7 +68,7 @@ namespace Algorithms.Encoders
         /// </summary>
         /// <param name="arr">array of vectors</param>
         /// <returns>Message</returns>
-        private string BuildStringFromArray(double[] arr)
+        private static string BuildStringFromArray(double[] arr)
         {
             var strBuilder = new StringBuilder();
 
