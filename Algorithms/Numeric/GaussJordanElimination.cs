@@ -60,14 +60,7 @@ namespace Algorithms.Numeric
                 if (matrix[col, col] == 0)
                 {
                     // To find a non-zero coefficient
-                    int rowToSwap = col + 1;
-                    for (; rowToSwap < RowCount; rowToSwap++)
-                    {
-                        if (matrix[rowToSwap, col] != 0)
-                        {
-                            break;
-                        }
-                    }
+                    var rowToSwap = FindNonZeroCoefficient(ref matrix, col);
 
                     if (matrix[rowToSwap, col] != 0)
                     {
@@ -89,6 +82,21 @@ namespace Algorithms.Numeric
             }
 
             return true;
+        }
+
+        private int FindNonZeroCoefficient(ref double[,] matrix, int col)
+        {
+            var rowToSwap = col + 1;
+            // To find a non-zero coefficient
+            for (; rowToSwap < RowCount; rowToSwap++)
+            {
+                if (matrix[rowToSwap, col] != 0)
+                {
+                    return rowToSwap;
+                }
+            }
+
+            return col + 1;
         }
 
         /// <summary>
