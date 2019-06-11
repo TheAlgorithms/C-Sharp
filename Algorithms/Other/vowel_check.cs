@@ -7,7 +7,7 @@ namespace VowelCheck_Con
     {
         static void Main()
         {
-            char[] vowels = { 'a', 'e', 'i', 'o', 'u', 'n' };
+            char[] vowels = { 'a', 'e', 'i', 'o', 'u' };
             var n = Convert.ToInt32(Console.ReadLine());
             if (n > 1 && n < 10000)
             {
