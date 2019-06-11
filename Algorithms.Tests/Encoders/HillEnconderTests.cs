@@ -14,6 +14,7 @@ namespace Algorithms.Tests.Encoders
             // Arrange
             var key = new double[,] { { 2, 4, 5 }, { 9, 2, 1 }, { 3, 17, 7 } };
             var inputText = "Attack at dawn";
+
             // Act
             var encodedText = encoder.Encode(inputText, key);
             var decodeText = encoder.Decode(encodedText, key);
