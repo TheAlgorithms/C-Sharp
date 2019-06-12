@@ -14,7 +14,7 @@ namespace Algorithms.Tests.Encoders
 
         [Test]
         [Parallelizable]
-        public void DecodedStringIsSame([Random(100, Distinct = true)]int key)
+        public void DecodedStringIsTheSame([Random(100)]int key)
         {
             var message = RandomMessage;
 
