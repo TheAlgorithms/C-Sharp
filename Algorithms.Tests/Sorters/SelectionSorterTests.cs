@@ -13,7 +13,7 @@ namespace Algorithms.Tests.Sorters
 
         [Test]
         [Parallelizable]
-        public void ArraySorted([Random(0, 100, 10)]int n)
+        public void ArraySorted([Random(0, 1000, 10)]int n)
         {
             var testArray = new int[n];
             var correctArray = new int[n];
@@ -24,8 +24,9 @@ namespace Algorithms.Tests.Sorters
                 correctArray[i] = t;
             }
 
-            sorter.Sort(testArray, new IntComparer());
-            Array.Sort(correctArray);
+            var intComparer = new IntComparer();
+            sorter.Sort(testArray, intComparer);
+            Array.Sort(correctArray, intComparer);
 
             Assert.AreEqual(testArray, correctArray);
         }
