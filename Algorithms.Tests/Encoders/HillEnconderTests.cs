@@ -7,6 +7,7 @@ namespace Algorithms.Tests.Encoders
     {
         private readonly HillEncoder encoder = new HillEncoder();
 
+        // TODO: Add more random tests
         [Test]
         [Parallelizable]
         public void DecodedStringIsTheSame()

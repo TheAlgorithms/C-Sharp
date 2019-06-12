@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Algorithms.Sorters
 {
-    public class InsertionSorter<T>: ISorter<T>
+    public class InsertionSorter<T> : ISorter<T>
     {
         /// <summary>
         /// Sorts array using specified comparer,
