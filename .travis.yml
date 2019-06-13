@@ -4,5 +4,5 @@ mono: none
 dotnet: 2.1.300
 script:
  - dotnet build
- - dotnet test Algorithms.Tests
- - dotnet test DataStructures.Tests
+ - dotnet test --collect:"XPlat Code Coverage"
+ - bash <(curl -s https://codecov.io/bash)
