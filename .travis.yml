@@ -5,5 +5,5 @@ dist: xenial
 dotnet: 2.2
 script:
  - dotnet build
- - dotnet test --collect:"XPlat Code Coverage"
+ - travis_wait 60 dotnet test --collect:"XPlat Code Coverage"
  - bash <(curl -s https://codecov.io/bash)
