@@ -1,7 +1,8 @@
 language: csharp
 solution: C-Sharp.sln
 mono: none
-dotnet: 2.1.300
+dist: xenial
+dotnet: 2.2
 script:
  - dotnet build
  - dotnet test --collect:"XPlat Code Coverage"
