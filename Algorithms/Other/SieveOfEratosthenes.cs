@@ -3,12 +3,13 @@ using System.Linq;
 
 namespace Algorithms.Other
 {
-    public class SieveOfEratosthenes
+    public static class SieveOfEratosthenes
     {
         public static List<int> GetPrimeNumbers(int count)
         {
             var output = new List<int>();
-            for (int n = 2, i = 0; n < int.MaxValue && i < count; n++)
+            var primesFound = 0;
+            for (var n = 2; n < int.MaxValue && primesFound < count; n++)
             {
                 if (output.Any(x => n % x == 0))
                 {
@@ -16,7 +17,7 @@ namespace Algorithms.Other
                 }
 
                 output.Add(n);
-                i++;
+                primesFound++;
             }
 
             return output;
