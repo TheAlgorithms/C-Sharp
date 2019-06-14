@@ -13,7 +13,7 @@ namespace Algorithms.Tests.Sorters
 
         [Test]
         [Parallelizable]
-        public void ArraySorted([Random(0, 1000, 100)]int n)
+        public void ArraySorted([Random(0, 1000, 1000)]int n)
         {
             var testArray = new int[n];
             var correctArray = new int[n];

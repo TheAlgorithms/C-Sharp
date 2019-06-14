@@ -20,7 +20,7 @@ namespace Algorithms.Sorters
                 var jmin = i;
                 for (var j = i + 1; j < array.Length; j++)
                 {
-                    if (comparer.Compare(array[jmin], array[j]) == 1)
+                    if (comparer.Compare(array[jmin], array[j]) > 0)
                     {
                         jmin = j;
                     }
