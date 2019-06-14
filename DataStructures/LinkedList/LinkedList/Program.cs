@@ -8,19 +8,19 @@ namespace LinkedList
 {
     //defines single elements of the list
     //gernerics make every type of data possible
-    public class ListElement<T>
+    public class LinkedListElement<T>
     {
         private T data;
-        private ListElement<T> next;
+        private LinkedListElement<T> next;
 
-        public ListElement(T data)
+        public LinkedListElement(T data)
         {
             this.data = data;
             this.next = null;
         }
 
         public T Data { get => data; set => data = value; }
-        public ListElement<T> Next { get => next; set => next = value; }
+        public LinkedListElement<T> Next { get => next; set => next = value; }
 
         public override string ToString()
         {
@@ -28,12 +28,12 @@ namespace LinkedList
         }
     }
 
-    public class List<T>
+    public class LinkedList<T>
     {
         //points to the start of the list
-        private ListElement<T> head { get; set; }
+        private LinkedListElement<T> head { get; set; }
 
-        public List()
+        public LinkedList()
         {
 
         }
@@ -41,7 +41,7 @@ namespace LinkedList
         //Add new element to the list
         public void AddListElement(T data)
         {
-            ListElement<T> newListElement = new ListElement<T>(data);
+            LinkedListElement<T> newListElement = new LinkedListElement<T>(data);
             //if head is null, the added element is the first, hence it is the head
             if (head == null)
             {
@@ -51,7 +51,7 @@ namespace LinkedList
             else
             {
                 //temp ListElement to avoid overwriting the original 
-                ListElement<T> tempElement = head;
+                LinkedListElement<T> tempElement = head;
 
                 //iterates through all elements
                 while(tempElement.Next != null)
@@ -66,7 +66,7 @@ namespace LinkedList
 
         public T getelementByIndex(int pos)
         {
-            ListElement<T> tempElement = head;
+            LinkedListElement<T> tempElement = head;
             //iterates through all elements until pos is reached
             for(int i = 0; i < pos; i++)
             {
@@ -88,7 +88,7 @@ namespace LinkedList
             if (head == null)
                 return length;
             
-            ListElement<T> tempElement = head;
+            LinkedListElement<T> tempElement = head;
 
             while (tempElement != null)
             {
@@ -103,7 +103,7 @@ namespace LinkedList
         public IEnumerable<T> getListData()
         {
             //temp ListElement to avoid overwriting the original 
-            ListElement<T> tempElement = head;
+            LinkedListElement<T> tempElement = head;
 
             //all elements where a next attribute exists 
             while (tempElement != null)
@@ -116,8 +116,8 @@ namespace LinkedList
         //delete a element
         public bool deleteElement(T element)
         {
-            ListElement<T> currentElement = head;
-            ListElement<T> previousElement = null;
+            LinkedListElement<T> currentElement = head;
+            LinkedListElement<T> previousElement = null;
 
             //iterates through all elements
             while (currentElement != null)
@@ -158,7 +158,7 @@ namespace LinkedList
             //Testing 
             //feel free to play around
 
-            List<String> list = new List<String>();
+            LinkedList<String> list = new LinkedList<String>();
 
             list.AddListElement("test1");
             list.AddListElement("test2");
