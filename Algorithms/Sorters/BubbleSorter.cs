@@ -20,7 +20,7 @@ namespace Algorithms.Sorters
                 var wasChanged = false;
                 for (var j = 0; j < array.Length - i - 1; j++)
                 {
-                    if (comparer.Compare(array[j], array[j + 1]) == 1)
+                    if (comparer.Compare(array[j], array[j + 1]) > 0)
                     {
                         var temp = array[j];
                         array[j] = array[j + 1];
