@@ -20,24 +20,29 @@ namespace Algorithms.Sorters
             {
                 for (var i = 0; i < step; i++)
                 {
-                    for (var j = i; j < array.Length - step; j += step)
+                    GappedBubbleSort(array, comparer, i, step);
+                }
+            }
+        }
+
+        private static void GappedBubbleSort(T[] array, IComparer<T> comparer, int start, int step)
+        {
+            for (var j = start; j < array.Length - step; j += step)
+            {
+                var wasChanged = false;
+                for (var k = start; k < array.Length - j - step; k += step)
+                {
+                    if (comparer.Compare(array[k], array[k + step]) > 0)
                     {
-                        var wasChanged = false;
-                        for (var k = i; k < array.Length - j - step; k += step)
-                        {
-                            if (comparer.Compare(array[k], array[k + step]) > 0)
-                            {
-                                var temp = array[k];
-                                array[k] = array[k + step];
-                                array[k + step] = temp;
-                                wasChanged = true;
-                            }
-                        }
-                        if (!wasChanged)
-                        {
-                            break;
-                        }
+                        var temp = array[k];
+                        array[k] = array[k + step];
+                        array[k + step] = temp;
+                        wasChanged = true;
                     }
+                }
+                if (!wasChanged)
+                {
+                    break;
                 }
             }
         }
