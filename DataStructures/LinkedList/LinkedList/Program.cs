@@ -158,7 +158,7 @@ namespace LinkedList
             //Testing 
             //feel free to play around
 
-            LinkedList<String> list = new LinkedList<String>();
+            LinkedList<string> list = new LinkedList<string>();
 
             list.AddListElement("test1");
             list.AddListElement("test2");
@@ -166,14 +166,11 @@ namespace LinkedList
             list.AddListElement("test4");
 
 
-
-            Console.WriteLine(list.getelementByIndex(14));
-
           /*  foreach (var x in list.getListData())
             {
                 Console.WriteLine(x);
             }*/
-            Console.ReadKey();
+
         }
     }
 }
