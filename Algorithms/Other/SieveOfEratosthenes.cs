@@ -1,23 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace Algorithms.Other
 {
     public static class SieveOfEratosthenes
     {
-        public static List<int> GetPrimeNumbers(int count)
+        public static List<BigInteger> GetPrimeNumbers(int count)
         {
-            var output = new List<int>();
-            var primesFound = 0;
-            for (var n = 2; n < int.MaxValue && primesFound < count; n++)
+            var output = new List<BigInteger>();
+            for (BigInteger n = 2; output.Count < count; n++)
             {
-                if (output.Any(x => n % x == 0))
+                if (output.All(x => n % x != 0))
                 {
-                    continue;
+                    output.Add(n);
                 }
-
-                output.Add(n);
-                primesFound++;
             }
 
             return output;
