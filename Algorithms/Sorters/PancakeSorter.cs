@@ -68,7 +68,7 @@ namespace Algorithms.Sorters
         private int FindMax(T[] array, int n, IComparer<T> comparer)
         {
             int mi, i;
-            for (mi = 0, i = 0; i < n; ++i)
+            for (var i = 0; i < n; i++)
             {
                 if (comparer.Compare(array[i], array[mi]) == 1)
                 {
