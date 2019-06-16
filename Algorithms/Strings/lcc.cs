@@ -1,11 +1,10 @@
 using System;
 
-namespace Example
+namespace Algorithms.Strings
 {
-    public static partial class StringViewModel
+    public static class StringViewModel
     {
-
-        public static Tuple<char, int> LongesConsecutiveCharacters(string input)
+        public static Tuple<char, int> LongestConsecutiveCharacters(string input)
         {
             var max_char = input[0];
 
@@ -31,7 +30,5 @@ namespace Example
 
             return new Tuple<char, int>(max_char, max);
         }
-
-
     }
 }
