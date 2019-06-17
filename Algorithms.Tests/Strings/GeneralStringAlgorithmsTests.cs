@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Strings
 {
-    public class LccTests
+    public class GeneralStringAlgorithmsTests
     {
         [Test]
         [Parallelizable]
@@ -16,9 +16,9 @@ namespace Algorithms.Tests.Strings
             const string input3 = "Control";
 
             // Act
-            var (rChar, rMax) = StringViewModel.LongestConsecutiveCharacters(input);
-            var (rChar2, rMax2) = StringViewModel.LongestConsecutiveCharacters(input2);
-            var (rChar3, rMax3) = StringViewModel.LongestConsecutiveCharacters(input3);
+            var (rChar, rMax) = GeneralStringAlgorithms.FindLongestConsecutiveCharacters(input);
+            var (rChar2, rMax2) = GeneralStringAlgorithms.FindLongestConsecutiveCharacters(input2);
+            var (rChar3, rMax3) = GeneralStringAlgorithms.FindLongestConsecutiveCharacters(input3);
 
             // Assert
             Assert.NotNull(rChar);
