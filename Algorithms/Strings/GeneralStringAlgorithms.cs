@@ -1,13 +1,12 @@
 using System;
 
-namespace Example
+namespace Algorithms.Strings
 {
-    public static partial class StringViewModel
+    public static class GeneralStringAlgorithms
     {
-
-        public static Tuple<char, int> LongesConsecutiveCharacters(string input)
+        public static Tuple<char, int> FindLongestConsecutiveCharacters(string input)
         {
-            var max_char = input[0];
+            var maxChar = input[0];
 
             var max = 1;
             var current = 1;
@@ -20,7 +19,7 @@ namespace Example
                     if (current > max)
                     {
                         max = current;
-                        max_char = input[i];
+                        maxChar = input[i];
                     }
                 }
                 else
@@ -29,9 +28,7 @@ namespace Example
                 }
             }
 
-            return new Tuple<char, int>(max_char, max);
+            return new Tuple<char, int>(maxChar, max);
         }
-
-
     }
 }
