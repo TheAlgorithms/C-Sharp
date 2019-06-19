@@ -6,20 +6,44 @@ namespace DataStructures.LinkedList
 {
     class LinkedListElement<T>
     {
-        private T data { get; set; }
-        private LinkedListElement<T> next { get; set; }
+        private T Content;
+        private LinkedListElement<T> PointerToNext;
 
         public LinkedListElement(T data)
         {
-            this.data = data;
-            this.next = null;
+            this.Data = data;
+            this.Next = null;
         }
 
-        
+        public T Data
+        {
+            get
+            {
+                return Content;
+            }
+
+            set
+            {
+                Content = value;
+            }
+        }
+
+        public LinkedListElement<T> Next
+        {
+            get
+            {
+                return PointerToNext;
+            }
+
+            set
+            {
+                PointerToNext = value;
+            }
+        }
 
         public override string ToString()
         {
-            return ("Data: " + data);
+            return ("Data: " + Data);
         }
     }
 }
