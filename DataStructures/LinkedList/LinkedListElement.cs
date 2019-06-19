@@ -6,8 +6,8 @@ namespace DataStructures.LinkedList
 {
     class LinkedListElement<T>
     {
-        private T data;
-        private LinkedListElement<T> next;
+        private T data { get; set; }
+        private LinkedListElement<T> next { get; set; }
 
         public LinkedListElement(T data)
         {
@@ -15,8 +15,7 @@ namespace DataStructures.LinkedList
             this.next = null;
         }
 
-        public T Data { get => data; set => data = value; }
-        public LinkedListElement<T> Next { get => next; set => next = value; }
+        
 
         public override string ToString()
         {
