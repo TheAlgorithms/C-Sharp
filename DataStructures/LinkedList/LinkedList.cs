@@ -1,42 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace LinkedList
+namespace DataStructures.LinkedList
 {
-    //defines single elements of the list
-    //gernerics make every type of data possible
-    public class LinkedListElement<T>
-    {
-        private T data;
-        private LinkedListElement<T> next;
-
-        public LinkedListElement(T data)
-        {
-            this.data = data;
-            this.next = null;
-        }
-
-        public T Data { get => data; set => data = value; }
-        public LinkedListElement<T> Next { get => next; set => next = value; }
-
-        public override string ToString()
-        {
-            return ("Data: " + data );
-        }
-    }
-
-    public class LinkedList<T>
+    class LinkedList<T>
     {
         //points to the start of the list
         private LinkedListElement<T> head { get; set; }
-
-        public LinkedList()
-        {
-
-        }
 
         //Add new element to the list
         public void AddListElement(T data)
@@ -54,25 +25,28 @@ namespace LinkedList
                 LinkedListElement<T> tempElement = head;
 
                 //iterates through all elements
-                while(tempElement.Next != null)
+                while (tempElement.Next != null)
                 {
                     tempElement = tempElement.Next;
                 }
                 //adds the new element to the last one 
                 tempElement.Next = newListElement;
             }
-            
+
         }
 
-        public T getelementByIndex(int pos)
+        public T GetElementByIndex(int pos)
         {
             LinkedListElement<T> tempElement = head;
             //iterates through all elements until pos is reached
-            for(int i = 0; i < pos; i++)
+            for (int i = 0; i < pos; i++)
             {
                 //iterate throuh list elements
                 if (tempElement.Next != null)
+                {
                     tempElement = tempElement.Next;
+                }
+                    
                 //if Next os null the index pos is out of range
                 else
                     throw new IndexOutOfRangeException();
@@ -86,8 +60,11 @@ namespace LinkedList
 
             //checks if there is a head
             if (head == null)
+            {
                 return length;
-            
+            }
+                
+
             LinkedListElement<T> tempElement = head;
 
             while (tempElement != null)
@@ -114,7 +91,7 @@ namespace LinkedList
         }
 
         //delete a element
-        public bool deleteElement(T element)
+        public bool DeleteElement(T element)
         {
             LinkedListElement<T> currentElement = head;
             LinkedListElement<T> previousElement = null;
@@ -132,7 +109,7 @@ namespace LinkedList
                         return true;
                     }
                     //else take the prev one and overwrite the next with the one behind the deleted
-                    else
+                    else if(previousElement != null)
                     {
                         previousElement.Next = currentElement.Next;
                         return true;
@@ -148,29 +125,9 @@ namespace LinkedList
             return false;
         }
     }
-    
-    class Program
-    {
-        static void Main(string[] args)
-        {
-
-            
-            //Testing 
-            //feel free to play around
-
-            LinkedList<string> list = new LinkedList<string>();
-
-            list.AddListElement("test1");
-            list.AddListElement("test2");
-            list.AddListElement("test3");
-            list.AddListElement("test4");
-
-
-          /*  foreach (var x in list.getListData())
-            {
-                Console.WriteLine(x);
-            }*/
-
-        }
-    }
 }
+
+
+
+
+
