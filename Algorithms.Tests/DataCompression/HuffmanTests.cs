@@ -3,11 +3,11 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.DataCompression
 {
-    public class HuffmanTests
+    public static class HuffmanTests
     {
         [Test]
         [Parallelizable]
-        public void CompressingPhrase()
+        public static void CompressingPhrase()
         {
             //Arrange
             const string phrase = "This is a string";
@@ -25,7 +25,7 @@ namespace Algorithms.Tests.DataCompression
 
         [Test]
         [Parallelizable]
-        public void CompressingSingleWord()
+        public static void CompressingSingleWord()
         {
             //Arrange
             const string word = "Hello";

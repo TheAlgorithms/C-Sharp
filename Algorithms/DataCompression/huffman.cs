@@ -54,7 +54,7 @@ namespace Algorithms.DataCompression
         public string Compress(string inputText)
         {
             // Replacing white spaces as #.
-            var text = inputText.ToLower().Replace(" ", "#");
+            var text = inputText.ToLowerInvariant().Replace(" ", "#");
             Len = text.Length;
 
             Console.WriteLine("Space will be represented by #");
@@ -124,14 +124,16 @@ namespace Algorithms.DataCompression
         private static void PrintHuffManInfo(string text)
         {
             var hfBits = 0;
-            foreach (var unused in text.Replace(" ", ""))
+            var s = text.Replace(" ", "");
+
+            foreach (var unused in s)
             {
                 hfBits++;
             }
 
             Console.WriteLine("Huffman Bits: " + hfBits);
             Console.WriteLine("\nCoded String: ");
-            Console.Write(text.Replace(" ", ""));
+            Console.WriteLine(s);
         }
 
         private static Man GenerateHuffmanTree(Stack<Huff> stack)
