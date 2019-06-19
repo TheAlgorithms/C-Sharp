@@ -46,10 +46,6 @@ namespace DataStructures.LinkedList
                 {
                     tempElement = tempElement.Next;
                 }
-                    
-                //if Next os null the index pos is out of range
-                else
-                    throw new IndexOutOfRangeException();
             }
             return tempElement.Data;
         }
