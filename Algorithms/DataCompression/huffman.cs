@@ -4,11 +4,17 @@ using System.Linq;
 
 namespace Algorithms.DataCompression
 {
+    /// <summary>
+    /// Represents Tree structure for the algorithm.
+    /// </summary>
     internal class Huff
     {
         public string Data { get; }
+
         public int Frequency { get; }
+
         public Huff RightChild { get; }
+
         public Huff LeftChild { get; }
 
         public Huff(string data, int frequency)
@@ -26,6 +32,9 @@ namespace Algorithms.DataCompression
         }
     }
 
+    /// <summary>
+    /// Stores encoded text message.
+    /// </summary>
     internal class Man
     {
         public List<string> Codec { get; } = new List<string>();
@@ -38,12 +47,8 @@ namespace Algorithms.DataCompression
     public class HuffmanAlgorithm
     {
         private int Len { get; set; }
-        private int Pos { get; set; }
 
-        private int[] _d;
-        private int[] _d1;
-        private char[] _c;
-        private char[] _c1;
+        private int Pos { get; set; }
 
         /// <summary>
         /// Given an input string, returns a new compressed string
@@ -53,28 +58,19 @@ namespace Algorithms.DataCompression
         /// <returns>Coded string</returns>
         public string Compress(string inputText)
         {
-            // Replacing white spaces as #.
             var text = inputText.ToLowerInvariant().Replace(" ", "#");
             Len = text.Length;
 
-            Console.WriteLine("Space will be represented by #");
+            var textAsCharArray = text.ToCharArray();
+            var initCharCountArray = GetCharFrequencies(textAsCharArray);
 
-            InitArrays(text);
+            var (fFreqArray, fCharArray) =
+                FlagCharsByFrequency(initCharCountArray, textAsCharArray);
 
-            GetCharFrequencies();
-            FlagCharsByFrequency();
+            SortArrays(fFreqArray, fCharArray);
 
-            PrintArray(_c1);
-            PrintArray(_d1);
+            var objects = FillHuffmanList(fFreqArray, fCharArray).ToList();
 
-            SortArrays();
-            Console.WriteLine("\n\nAfter Sorting: ");
-            PrintArray(_c1, true);
-            PrintArray(_d1, true);
-
-            ComputeInformationInBits();
-
-            var objects = FillHuffmanList().ToList();
             var stack = GetSortedStack(objects);
             while (stack.Count > 1)
             {
@@ -88,24 +84,16 @@ namespace Algorithms.DataCompression
             var genMan = GenerateHuffmanTree(stack);
             var hmanStr = GetHuffmanString(text, genMan);
 
-            PrintHuffManInfo(hmanStr);
-
             var resultStr = hmanStr.Replace(" ", "");
             return resultStr;
         }
 
         /// <summary>
-        /// Initializes global arrays given input.
+        /// Joins the encoded string
         /// </summary>
-        /// <param name="text"></param>
-        private void InitArrays(string text)
-        {
-            _d = new int[Len];
-            _d1 = new int[Len];
-            _c = text.ToCharArray();
-            _c1 = new char[Len];
-        }
-
+        /// <param name="text">Text message</param>
+        /// <param name="man">Encoded message</param>
+        /// <returns>Huffman String</returns>
         private static string GetHuffmanString(string text, Man man)
         {
             var cStr = " ";
@@ -117,24 +105,6 @@ namespace Algorithms.DataCompression
 
             return cStr;
         }
-        /// <summary>
-        /// Prints information on estimates of compression.
-        /// </summary>
-        /// <param name="text">Coded string</param>
-        private static void PrintHuffManInfo(string text)
-        {
-            var hfBits = 0;
-            var s = text.Replace(" ", "");
-
-            foreach (var unused in s)
-            {
-                hfBits++;
-            }
-
-            Console.WriteLine("Huffman Bits: " + hfBits);
-            Console.WriteLine("\nCoded String: ");
-            Console.WriteLine(s);
-        }
 
         private static Man GenerateHuffmanTree(Stack<Huff> stack)
         {
@@ -143,132 +113,109 @@ namespace Algorithms.DataCompression
             var man = new Man();
 
             // generates and displays the huffman code
-            Console.WriteLine("\nHuffman Code:");
             GenerateCode(parentNode1, "", man);
 
             return man;
         }
 
         /// <summary>
-        /// Find the frequency for each caracter on the text.
+        /// Find the frequency(# of incidences) for each caracter on the text.
         /// </summary>
         /// <returns>Updateds frequency Array</returns>
-        private void GetCharFrequencies()
+        private int[] GetCharFrequencies(IReadOnlyList<char> text)
         {
+            var temp = new int[Len];
             var count = 1;
 
             for (var i = 0; i < Len; i++)
             {
                 for (var j = i + 1; j < Len; j++)
                 {
-                    if (_c[i] == _c[j])
+                    if (text[i] == text[j])
                     {
                         count++;
                     }
                 }
 
-                _d[i] = count;
+                temp[i] = count;
                 count = 1;
             }
+
+            return temp;
         }
 
-        private void FlagCharsByFrequency()
+        /// <summary>
+        /// Segregated chars by frequency.
+        /// </summary>
+        /// <param name="countArray">initial count per char</param>
+        /// <param name="textAsCharArray">text message as array of chars.</param>
+        /// <returns>Filtered arrays</returns>
+        private Tuple<int[], char[]> FlagCharsByFrequency(
+            IReadOnlyList<int> countArray, IReadOnlyList<char> textAsCharArray)
         {
+            var filteredFreqArray = new int[Len];
+            var filteredCharArray = new char[Len];
+
             var flag = false;
 
             for (var i = 0; i < Len; i++)
             {
                 for (var j = 0; j < Len; j++)
                 {
-                    if (_c[i] == _c1[j])
+                    if (textAsCharArray[i] == filteredCharArray[j])
                     {
                         flag = true;
                     }
                 }
+
                 if (!flag)
                 {
-                    _c1[Pos] = _c[i];
-                    _d1[Pos] = _d[i];
+                    filteredCharArray[Pos] = textAsCharArray[i];
+                    filteredFreqArray[Pos] = countArray[i];
                     Pos++;
                 }
+
                 flag = false;
             }
-        }
 
-        /// <summary>
-        /// Prints to console the input array
-        /// </summary>
-        /// <param name="arr">Input array</param>
-        /// <param name="inverse">To print starting at last index/</param>
-        private void PrintArray(Array arr, bool inverse = false)
-        {
-            if (inverse)
-            {
-                for (var i = Pos - 1; i >= 0; i--)
-                {
-                    Console.Write("{0}\t", arr.GetValue(i));
-                }
-            }
-            else
-            {
-                for (var i = 0; i < Pos; i++)
-                {
-                    Console.Write("{0}\t", arr.GetValue(i));
-                }
-            }
-
-            Console.WriteLine();
+            return new Tuple<int[], char[]>(filteredFreqArray, filteredCharArray);
         }
 
         /// <summary>
         /// Sorts array frequencies(d1) array and char array (c1).
         /// </summary>
-        private void SortArrays()
+        private void SortArrays(IList<int> fFreqArray, IList<char> fCharArray)
         {
             for (var i = 0; i < Pos; i++)
             {
                 for (var j = i + 1; j < Pos; j++)
                 {
-                    if (_d1[i] <= _d1[j])
+                    if (fFreqArray[i] <= fFreqArray[j])
                     {
                         continue;
                     }
 
-                    var temp = _d1[i];
-                    var ch = _c1[i];
-                    _d1[i] = _d1[j];
-                    _c1[i] = _c1[j];
-                    _d1[j] = temp;
-                    _c1[j] = ch;
+                    var temp = fFreqArray[i];
+                    var ch = fCharArray[i];
+                    fFreqArray[i] = fFreqArray[j];
+                    fCharArray[i] = fCharArray[j];
+                    fFreqArray[j] = temp;
+                    fCharArray[j] = ch;
                 }
             }
         }
 
         /// <summary>
-        /// computes the information content in bits.
+        /// Fills the list  with Huff-objects
         /// </summary>
-        private void ComputeInformationInBits()
-        {
-            double infoBit = 0;
-            for (var i = 0; i < Pos; i++)
-            {
-                var prob = _d1[i] / (double)Len;
-                var si = -(Math.Log(prob) / Math.Log(2));
-                infoBit += si * _d1[i];
-            }
-
-            Console.WriteLine("\nTotal Information Count: {0}", infoBit + " Bits");
-            Console.WriteLine("Number of Bits required before Compression: {0}", Len * 8);
-        }
-
-        private IEnumerable<Huff> FillHuffmanList()
+        private IEnumerable<Huff> FillHuffmanList(IReadOnlyList<int> fFreqArray, char[] fCharArray)
         {
             var huffmanObjects = new List<Huff>();
 
             // fills the list  with Huff-objects
             for (var i = 0; i < Pos; i++)
             {
-                huffmanObjects.Add(new Huff(_c1[i].ToString(), _d1[i]));
+                huffmanObjects.Add(new Huff(fCharArray[i].ToString(), fFreqArray[i]));
             }
 
             return huffmanObjects;
@@ -302,17 +249,11 @@ namespace Algorithms.DataCompression
 
         private static void GenerateCode(Huff parentNode, string code, Man man)
         {
-            while (true)
+            while (parentNode != null)
             {
-                if (parentNode == null)
-                {
-                    return;
-                }
-
                 GenerateCode(parentNode.LeftChild, code + "0", man);
                 if (parentNode.LeftChild == null && parentNode.RightChild == null)
                 {
-                    Console.WriteLine(parentNode.Data + "\t" + code);
                     man.Codec.Add(code);
                     man.Data.Add(parentNode.Data);
                 }
