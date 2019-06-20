@@ -1,29 +1,30 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Algorithms.DataCompression
 {
     /// <summary>
     /// Represents Tree structure for the algorithm.
     /// </summary>
-    internal class Huff
+    internal class ListNode
     {
         public string Data { get; }
 
         public int Frequency { get; }
 
-        public Huff RightChild { get; }
+        public ListNode RightChild { get; }
 
-        public Huff LeftChild { get; }
+        public ListNode LeftChild { get; }
 
-        public Huff(string data, int frequency)
+        public ListNode(string data, int frequency)
         {
             Data = data;
             Frequency = frequency;
         }
 
-        public Huff(Huff leftChild, Huff rightChild)
+        public ListNode(ListNode leftChild, ListNode rightChild)
         {
             LeftChild = leftChild;
             RightChild = rightChild;
@@ -76,7 +77,7 @@ namespace Algorithms.DataCompression
             {
                 var leftChild = stack.Pop();
                 var rightChild = stack.Pop();
-                var parentNode = new Huff(leftChild, rightChild);
+                var parentNode = new ListNode(leftChild, rightChild);
                 stack.Push(parentNode);
                 stack = GetSortedStack(stack.ToList());
             }
@@ -106,14 +107,14 @@ namespace Algorithms.DataCompression
             return cStr;
         }
 
-        private static Man GenerateHuffmanTree(Stack<Huff> stack)
+        private static Man GenerateHuffmanTree(Stack<ListNode> stack)
         {
             // generated huffman tree
             var parentNode1 = stack.Pop();
             var man = new Man();
 
             // generates and displays the huffman code
-            GenerateCode(parentNode1, "", man);
+            GenerateCode(parentNode1, string.Empty, man);
 
             return man;
         }
@@ -206,22 +207,22 @@ namespace Algorithms.DataCompression
         }
 
         /// <summary>
-        /// Fills the list  with Huff-objects
+        /// Fills the list  with ListNode-objects
         /// </summary>
-        private IEnumerable<Huff> FillHuffmanList(IReadOnlyList<int> fFreqArray, char[] fCharArray)
+        private IEnumerable<ListNode> FillHuffmanList(IReadOnlyList<int> fFreqArray, char[] fCharArray)
         {
-            var huffmanObjects = new List<Huff>();
+            var huffmanObjects = new List<ListNode>();
 
-            // fills the list  with Huff-objects
+            // fills the list  with ListNode-objects
             for (var i = 0; i < Pos; i++)
             {
-                huffmanObjects.Add(new Huff(fCharArray[i].ToString(), fFreqArray[i]));
+                huffmanObjects.Add(new ListNode(fCharArray[i].ToString(), fFreqArray[i]));
             }
 
             return huffmanObjects;
         }
 
-        private static Stack<Huff> GetSortedStack(IList<Huff> list)
+        private static Stack<ListNode> GetSortedStack(IList<ListNode> list)
         {
             for (var i = 0; i < list.Count; i++)
             {
@@ -238,7 +239,7 @@ namespace Algorithms.DataCompression
                 }
             }
 
-            var stack = new Stack<Huff>();
+            var stack = new Stack<ListNode>();
             foreach (var t in list)
             {
                 stack.Push(t);
@@ -247,19 +248,21 @@ namespace Algorithms.DataCompression
             return stack;
         }
 
-        private static void GenerateCode(Huff parentNode, string code, Man man)
+        private static void GenerateCode(ListNode parentNode, string code, Man man)
         {
+            var sbl = new StringBuilder(code);
+
             while (parentNode != null)
             {
                 GenerateCode(parentNode.LeftChild, code + "0", man);
                 if (parentNode.LeftChild == null && parentNode.RightChild == null)
                 {
-                    man.Codec.Add(code);
+                    man.Codec.Add(sbl.ToString());
                     man.Data.Add(parentNode.Data);
                 }
 
                 parentNode = parentNode.RightChild;
-                code += "1";
+                sbl.Append("1");
             }
         }
     }
