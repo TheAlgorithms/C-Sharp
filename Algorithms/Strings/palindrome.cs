@@ -1,9 +1,24 @@
-using System.Linq;
+using System;
+using System.Text.RegularExpressions;
 
-namespace Example
+namespace Algorithms.Strings
 {
-    public static partial class StringViewModel
+    public static class Palindrome
     {
-        public static bool IsStringPalindrome(string word) => word.ToLower() == new string(word.Reverse().ToArray()).ToLower();
+        public static bool IsStringPalindrome(string word) =>
+            TypifyString(word).Equals(TypifyString(ReverseString(word)));
+
+        private static string TypifyString(string word)
+        {
+            // Typify string to lower and remove white spaces.
+            return Regex.Replace(word.ToLowerInvariant(), @"\s+", "");
+        }
+
+        private static string ReverseString(string s)
+        {
+            var arr = s.ToCharArray();
+            Array.Reverse(arr);
+            return new string(arr);
+        }
     }
 }

@@ -6,14 +6,14 @@ using System.Collections.Generic;
 
 namespace Algorithms.Tests.Sorters
 {
-    public class BogoSorterTests
+    public class ShellSorterTests
     {
-        private readonly BogoSorter<int> sorter = new BogoSorter<int>();
+        private readonly ShellSorter<int> sorter = new ShellSorter<int>();
         private readonly Random random = new Random();
 
         [Test]
         [Parallelizable]
-        public void ArraySorted([Random(0, 10, 1000)]int n)
+        public void ArraySorted([Random(0, 1000, 1000)]int n)
         {
             var testArray = new int[n];
             var correctArray = new int[n];
