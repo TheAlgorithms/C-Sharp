@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace DataStructures.LinkedList
 {
-    class LinkedList<T>
+    public class LinkedList<T>
     {
         //points to the start of the list
-        private LinkedListElement<T> Head { get; set; }
+        private LinkedListElementNode<T> Head { get; set; }
 
         //Add new element to the list
         public void AddListElement(T data)
         {
-            LinkedListElement<T> newListElement = new LinkedListElement<T>(data);
+            var newListElement = new LinkedListElementNode<T>(data);
             //if head is null, the added element is the first, hence it is the head
             if (Head == null)
             {
@@ -22,7 +20,7 @@ namespace DataStructures.LinkedList
             else
             {
                 //temp ListElement to avoid overwriting the original 
-                LinkedListElement<T> tempElement = Head;
+                var tempElement = Head;
 
                 //iterates through all elements
                 while (tempElement.Next != null)
@@ -37,9 +35,9 @@ namespace DataStructures.LinkedList
 
         public T GetElementByIndex(int pos)
         {
-            LinkedListElement<T> tempElement = Head;
+            var tempElement = Head;
             //iterates through all elements until pos is reached
-            for (int i = 0; i < pos; i++)
+            for (var i = 0; i < pos; i++)
             {
                 //iterate throuh list elements
                 if (tempElement.Next != null)
@@ -52,16 +50,16 @@ namespace DataStructures.LinkedList
 
         public int Length()
         {
-            int length = 0;
+            var length = 0;
 
             //checks if there is a head
             if (Head == null)
             {
                 return length;
             }
-                
 
-            LinkedListElement<T> tempElement = Head;
+
+            var tempElement = Head;
 
             while (tempElement != null)
             {
@@ -76,7 +74,7 @@ namespace DataStructures.LinkedList
         public IEnumerable<T> GetListData()
         {
             //temp ListElement to avoid overwriting the original 
-            LinkedListElement<T> tempElement = Head;
+            var tempElement = Head;
 
             //all elements where a next attribute exists 
             while (tempElement != null)
@@ -89,8 +87,8 @@ namespace DataStructures.LinkedList
         //delete a element
         public bool DeleteElement(T element)
         {
-            LinkedListElement<T> currentElement = Head;
-            LinkedListElement<T> previousElement = null;
+            var currentElement = Head;
+            LinkedListElementNode<T> previousElement = null;
 
             //iterates through all elements
             while (currentElement != null)
@@ -105,7 +103,7 @@ namespace DataStructures.LinkedList
                         return true;
                     }
                     //else take the prev one and overwrite the next with the one behind the deleted
-                    if(previousElement != null)
+                    if (previousElement != null)
                     {
                         previousElement.Next = currentElement.Next;
                         return true;
