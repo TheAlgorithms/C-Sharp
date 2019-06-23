@@ -30,12 +30,14 @@ namespace Algorithms.Sorters
 
         /// <summary>Implementation of Binary Search using an iterative approach</summary>
         /// <param name="array">An array of values sorted in ascending order between the index values left and right to search through</param>
-        /// <param name="left">Left index to search from</param>
-        /// <param name="right">Right index to search to</param>
+        /// <param name="left">Left index to search from (inclusive)</param>
+        /// <param name="right">Right index to search to (inclusive)</param>
         /// <param name="target">The value to find placefor in the provided array</param>
         /// <returns>The index where to insert target value</returns>
-        private static int BinarySearch(T[] array, int left, int right, T target, IComparer<T> comparer)
+        private static int BinarySearch(T[] array, int from, int to, T target, IComparer<T> comparer)
         {
+            var left = from;
+            var right = to;
             while (right > left)
             {
                 var middle = (left + right) / 2;
