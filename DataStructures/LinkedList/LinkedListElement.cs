@@ -1,23 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DataStructures.LinkedList
+﻿namespace DataStructures.LinkedList
 {
-    class LinkedListElement<T>
+    public class LinkedListElementNode<T>
     {
         public T Data { get; set; }
-        public LinkedListElement<T> Next { get; set; }
+        public LinkedListElementNode<T> Next { get; set; }
 
-        public LinkedListElement(T data)
+        public LinkedListElementNode(T data)
         {
-            this.Data = data;
-            this.Next = null;
-        }
-
-        public override string ToString()
-        {
-            return ("Data: " + Data);
+            Data = data;
+            Next = null;
         }
     }
 }
