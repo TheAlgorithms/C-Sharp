@@ -16,7 +16,7 @@ namespace Algorithms.Sorters
         /// 
         public void Sort(T[] array, IComparer<T> comparer)
         {
-            int n = array.Length;
+            var n = array.Length;
 
             // Start from the complete array and one by one 
             // reduce current size by one 
@@ -51,7 +51,7 @@ namespace Algorithms.Sorters
         private void Flip(T[] array, int i)
         {
             T temp;
-            int start = 0;
+            var start = 0;
             while (start < i)
             {
                 temp = array[start];
