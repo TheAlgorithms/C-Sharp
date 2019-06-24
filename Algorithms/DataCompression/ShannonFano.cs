@@ -199,51 +199,69 @@ namespace Algorithms.DataCompression
             return code;
         }
 
+        private static void UpdateTopValue(IReadOnlyList<FanoNode> f, int h, int tempIndex)
+        {
+            f[h].Arr[++f[h].Top] = 0;
+            f[tempIndex].Arr[++f[tempIndex].Top] = 1;
+        }
+
+        private static void UpdateTopValue(IReadOnlyList<FanoNode> f, int h, int tempIndex, int k)
+        {
+            int i;
+            for (i = tempIndex; i <= k; i++)
+            {
+                f[i].Arr[++f[i].Top] = 1;
+            }
+
+            for (i = k + 1; i <= h; i++)
+            {
+                f[i].Arr[++f[i].Top] = 0;
+            }
+        }
+
+        private static float GetInitDifference(IReadOnlyList<FanoNode> f, int h)
+        {
+            var set1 = f.AsEnumerable().Take(h).Sum(x => x.Probability);
+            var set2 = f[h].Probability;
+
+            var diff1 = set1 - set2;
+            if (diff1 < 0)
+            {
+                diff1 *= -1;
+            }
+
+            return diff1;
+        }
+
         private static void Shannon(int l, int h, IReadOnlyList<FanoNode> f)
         {
             while (true)
             {
                 var tempIndex = l;
-
-                float set1 = 0;
-                float set2 = 0;
-                var k = 0;
-
-                if (tempIndex + 1 == h || tempIndex == h || tempIndex > h)
+                if (tempIndex == h || tempIndex > h)
                 {
-                    if (tempIndex == h || tempIndex > h)
-                    {
-                        return;
-                    }
+                    return;
+                }
 
-                    f[h].Arr[++f[h].Top] = 0;
-                    f[tempIndex].Arr[++f[tempIndex].Top] = 1;
+                if (tempIndex + 1 == h)
+                {
+                    UpdateTopValue(f, h, tempIndex);
                 }
                 else
                 {
-                    int i;
-                    for (i = tempIndex; i <= h - 1; i++)
-                    {
-                        set1 += f[i].Probability;
-                    }
-
-                    set2 += f[h].Probability;
-                    var diff1 = set1 - set2;
-                    if (diff1 < 0)
-                    {
-                        diff1 *= -1;
-                    }
+                    var diff1 = GetInitDifference(f, h);
 
                     var j = 2;
+                    var k = 0;
+
                     while (j != h - tempIndex + 1)
                     {
                         k = h - j;
-                        set1 = set2 = 0;
-                        for (i = tempIndex; i <= k; i++)
-                        {
-                            set1 += f[i].Probability;
-                        }
+                        float set2 = 0;
 
+                        var set1 = f.AsEnumerable().Take(k + 1).Sum(x => x.Probability);
+
+                        int i;
                         for (i = h; i > k; i--)
                         {
                             set2 += f[i].Probability;
@@ -265,15 +283,7 @@ namespace Algorithms.DataCompression
                     }
 
                     k++;
-                    for (i = tempIndex; i <= k; i++)
-                    {
-                        f[i].Arr[++f[i].Top] = 1;
-                    }
-
-                    for (i = k + 1; i <= h; i++)
-                    {
-                        f[i].Arr[++f[i].Top] = 0;
-                    }
+                    UpdateTopValue(f, h, tempIndex, k);
 
                     Shannon(tempIndex, k, f);
                     l = k + 1;
