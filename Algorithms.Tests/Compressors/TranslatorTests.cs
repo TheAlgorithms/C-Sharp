@@ -11,7 +11,7 @@ namespace Algorithms.Tests.Compressors
         {
             // Arrange
             var translator = new Translator();
-            var dict = new Dictionary<string, string>()
+            var dict = new Dictionary<string, string>
             {
                 { "Hey", "Good day" },
                 { " ", " " },
