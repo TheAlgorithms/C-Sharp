@@ -1,0 +1,52 @@
+﻿using Algorithms.Compressors;
+using Algorithms.Sorters;
+using NUnit.Framework;
+using NUnit.Framework.Internal;
+using System;
+
+namespace Algorithms.Tests.DataCompression
+{
+    public class HuffmanCompressorTests
+    {
+        [Test]
+        [TestCase("This is a string", "101010110111011101110111100011111010010010010011000")]
+        [TestCase("Hello", "1101110010")]
+        [TestCase("dddddddddd", "1111111111")]
+        [TestCase("a", "1")]
+        [TestCase("", "")]
+        [Parallelizable]
+        public void CompressingPhrase(string uncompressedText, string expectedCompressedText)
+        {
+            //Arrange
+            var sorter = new BubbleSorter<ListNode>();
+            var translator = new Translator();
+            var huffman = new HuffmanCompressor(sorter, translator);
+
+            //Act
+            var (compressedText, decompressionKeys) = huffman.Compress(uncompressedText);
+            var decompressedText = translator.Translate(compressedText, decompressionKeys);
+
+            //Assert
+            Assert.AreEqual(expectedCompressedText, compressedText);
+            Assert.AreEqual(uncompressedText, decompressedText);
+        }
+
+        [Test]
+        [Parallelizable]
+        public void CompressingPhrase([Random(0, 1000, 1000)]int length)
+        {
+            //Arrange
+            var sorter = new BubbleSorter<ListNode>();
+            var translator = new Translator();
+            var huffman = new HuffmanCompressor(sorter, translator);
+            var text = Randomizer.CreateRandomizer().GetString(length);
+
+            //Act
+            var (compressedText, decompressionKeys) = huffman.Compress(text);
+            var decompressedText = translator.Translate(compressedText, decompressionKeys);
+
+            //Assert
+            Assert.AreEqual(text, decompressedText);
+        }
+    }
+}
