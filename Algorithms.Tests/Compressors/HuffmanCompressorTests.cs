@@ -15,7 +15,7 @@ namespace Algorithms.Tests.DataCompression
         [TestCase("a", "1")]
         [TestCase("", "")]
         [Parallelizable]
-        public static void CompressingPhrase(string uncompressedText, string expectedCompressedText)
+        public void CompressingPhrase(string uncompressedText, string expectedCompressedText)
         {
             //Arrange
             var sorter = new BubbleSorter<ListNode>();
@@ -33,7 +33,7 @@ namespace Algorithms.Tests.DataCompression
 
         [Test]
         [Parallelizable]
-        public static void CompressingPhrase([Random(0, 1000, 1000)]int length)
+        public void CompressingPhrase([Random(0, 1000, 1000)]int length)
         {
             //Arrange
             var sorter = new BubbleSorter<ListNode>();
