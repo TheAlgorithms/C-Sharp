@@ -5,7 +5,7 @@ using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Compressors
 {
-    public partial class ShannonFanoCompressorTests
+    public class ShannonFanoCompressorTests
     {
         [Test]
         [TestCase("dddddddddd", "1111111111")]
