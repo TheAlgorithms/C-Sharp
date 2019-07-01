@@ -1,5 +1,4 @@
-using Algorithms.Sorters;
-using System;
+using Algorithms.Knapsack;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,21 +7,20 @@ namespace Algorithms.Compressors
     /// <summary>
     /// Greedy lossless compression algorithm
     /// </summary>
-    public class HuffmanCompressor
+    public class ShannonFanoCompressor
     {
-        // TODO: Use partial sorter
-        private readonly ISorter<ListNode> sorter;
+        private readonly IHeuristicKnapsackSolver<(char symbol, double frequency)> splitter;
         private readonly Translator translator;
 
-        public HuffmanCompressor(ISorter<ListNode> sorter, Translator translator)
+        public ShannonFanoCompressor(IHeuristicKnapsackSolver<(char symbol, double frequency)> splitter, Translator translator)
         {
-            this.sorter = sorter;
+            this.splitter = splitter;
             this.translator = translator;
         }
 
         /// <summary>
         /// Given an input string, returns a new compressed string
-        /// using huffman enconding
+        /// using Shannon-Fano enconding
         /// </summary>
         /// <param name="inputText">Text message to compress</param>
         /// <returns>Compressed string and keys to decompress it</returns>
@@ -42,8 +40,8 @@ namespace Algorithms.Compressors
                 return (new string('1', uncompressedText.Length), dict);
             }
 
-            var nodes = GetListNodesFromText(uncompressedText);
-            var tree = GenerateHuffmanTree(nodes);
+            var node = GetListNodeFromText(uncompressedText);
+            var tree = GenerateShannonFanoTree(node);
             var (compressionKeys, decompressionKeys) = GetKeys(tree);
             return (translator.Translate(uncompressedText, compressionKeys), decompressionKeys);
         }
@@ -53,10 +51,10 @@ namespace Algorithms.Compressors
             var compressionKeys = new Dictionary<string, string>();
             var decompressionKeys = new Dictionary<string, string>();
 
-            if (tree.HasData)
+            if (tree.Data.Length == 1)
             {
-                compressionKeys.Add(tree.Data.ToString(), string.Empty);
-                decompressionKeys.Add(string.Empty, tree.Data.ToString());
+                compressionKeys.Add(tree.Data[0].symbol.ToString(), string.Empty);
+                decompressionKeys.Add(string.Empty, tree.Data[0].symbol.ToString());
                 return (compressionKeys, decompressionKeys);
             }
 
@@ -85,35 +83,27 @@ namespace Algorithms.Compressors
             }
         }
 
-        private ListNode GenerateHuffmanTree(ListNode[] nodes)
+        private ListNode GenerateShannonFanoTree(ListNode node)
         {
-            var comparer = new ListNodeComparer();
-            while (nodes.Length > 1)
+            if (node.Data.Length == 1)
             {
-                sorter.Sort(nodes, comparer);
-
-                var left = nodes[0];
-                var right = nodes[1];
-
-                var newNodes = new ListNode[nodes.Length - 1];
-                Array.Copy(nodes, 2, newNodes, 1, nodes.Length - 2);
-                newNodes[0] = new ListNode(left, right);
-                nodes = newNodes;
+                return node;
             }
 
-            return nodes[0];
-        }
+            var left = splitter.Solve(node.Data, 0.5 * node.Data.Sum(x => x.frequency), x => x.frequency, x => 1);
+            var right = node.Data.Except(left).ToArray();
 
-        private class ListNodeComparer : IComparer<ListNode>
-        {
-            public int Compare(ListNode x, ListNode y) => x.Frequency.CompareTo(y.Frequency);
+            node.LeftChild = GenerateShannonFanoTree(new ListNode(left));
+            node.RightChild = GenerateShannonFanoTree(new ListNode(right));
+
+            return node;
         }
 
         /// <summary>
         /// Finds frequency for each character in the text
         /// </summary>
         /// <returns>Symbol-frequency array</returns>
-        private ListNode[] GetListNodesFromText(string text)
+        private ListNode GetListNodeFromText(string text)
         {
             var occurenceCounts = new Dictionary<char, double>();
 
@@ -128,7 +118,7 @@ namespace Algorithms.Compressors
                 occurenceCounts[ch]++;
             }
 
-            return occurenceCounts.Select(kvp => new ListNode(kvp.Key, 1d * kvp.Value / text.Length)).ToArray();
+            return new ListNode(occurenceCounts.Select(kvp => (kvp.Key, 1d * kvp.Value / text.Length)).ToArray());
         }
 
         /// <summary>
@@ -136,29 +126,13 @@ namespace Algorithms.Compressors
         /// </summary>
         public class ListNode
         {
-            public char Data { get; }
+            public (char symbol, double frequency)[] Data { get; }
 
-            public bool HasData { get; }
+            public ListNode RightChild { get; set; }
 
-            public double Frequency { get; }
+            public ListNode LeftChild { get; set; }
 
-            public ListNode RightChild { get; }
-
-            public ListNode LeftChild { get; }
-
-            public ListNode(char data, double frequency)
-            {
-                HasData = true;
-                Data = data;
-                Frequency = frequency;
-            }
-
-            public ListNode(ListNode leftChild, ListNode rightChild)
-            {
-                LeftChild = leftChild;
-                RightChild = rightChild;
-                Frequency = leftChild.Frequency + rightChild.Frequency;
-            }
+            public ListNode((char symbol, double frequency)[] data) => Data = data;
         }
     }
 }
