@@ -1,16 +1,13 @@
 ﻿using Algorithms.Compressors;
-using Algorithms.Sorters;
+using Algorithms.Knapsack;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using System;
 
 namespace Algorithms.Tests.Compressors
 {
-    public class HuffmanCompressorTests
+    public class ShannonFanoCompressorTests
     {
         [Test]
-        [TestCase("This is a string", "101010110111011101110111100011111010010010010011000")]
-        [TestCase("Hello", "1101110010")]
         [TestCase("dddddddddd", "1111111111")]
         [TestCase("a", "1")]
         [TestCase("", "")]
@@ -18,12 +15,12 @@ namespace Algorithms.Tests.Compressors
         public void CompressingPhrase(string uncompressedText, string expectedCompressedText)
         {
             //Arrange
-            var sorter = new BubbleSorter<HuffmanCompressor.ListNode>();
+            var solver = new NaiveKnapsackSolver<(char, double)>();
             var translator = new Translator();
-            var huffman = new HuffmanCompressor(sorter, translator);
+            var shannonFanoCompressor = new ShannonFanoCompressor(solver, translator);
 
             //Act
-            var (compressedText, decompressionKeys) = huffman.Compress(uncompressedText);
+            var (compressedText, decompressionKeys) = shannonFanoCompressor.Compress(uncompressedText);
             var decompressedText = translator.Translate(compressedText, decompressionKeys);
 
             //Assert
@@ -36,13 +33,13 @@ namespace Algorithms.Tests.Compressors
         public void DecompressedTextTheSameAsOriginal([Random(0, 1000, 1000)]int length)
         {
             //Arrange
-            var sorter = new BubbleSorter<HuffmanCompressor.ListNode>();
+            var solver = new NaiveKnapsackSolver<(char, double)>();
             var translator = new Translator();
-            var huffman = new HuffmanCompressor(sorter, translator);
+            var shannonFanoCompressor = new ShannonFanoCompressor(solver, translator);
             var text = Randomizer.CreateRandomizer().GetString(length);
 
             //Act
-            var (compressedText, decompressionKeys) = huffman.Compress(text);
+            var (compressedText, decompressionKeys) = shannonFanoCompressor.Compress(text);
             var decompressedText = translator.Translate(compressedText, decompressionKeys);
 
             //Assert
