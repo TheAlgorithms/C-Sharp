@@ -12,7 +12,7 @@ namespace Algorithms.Tests.Search
     {       
         [Test]
         [Parallelizable]
-        public void FindIndex_ItemPresent_IndexCorrect([Random(0, 1_000_000, 1_000)]int n)
+        public void FindIndex_ItemPresent_IndexCorrect([Random(0, 1000, 1000)]int n)
         {
             // Arrange
             var searcher = new BinarySearcher<int>();
@@ -30,7 +30,7 @@ namespace Algorithms.Tests.Search
        
         [Test]
         [Parallelizable]
-        public void FindIndex_ItemMissing_MinusOneReturned([Random(0, 1_000_000, 1_000)]int n, [Random(-1_000, 1_001_000, 1_000)]int missingItem)
+        public void FindIndex_ItemMissing_MinusOneReturned([Random(0, 1000, 1000)]int n, [Random(-100, 1100, 1000)]int missingItem)
         {
             // Arrange
             var searcher = new BinarySearcher<int>();
