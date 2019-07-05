@@ -6,7 +6,6 @@ namespace Algorithms.Tests.Numeric.GreatestCommonDivisor
     public class BinaryGreatestCommonDivisorFinderTests
     {
         [Test]
-        [Parallelizable]
         [TestCase(2, 3, 1)]
         [TestCase(1, 1, 1)]
         [TestCase(13, 17, 1)]

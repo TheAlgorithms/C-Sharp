@@ -8,13 +8,11 @@ namespace Algorithms.Tests.Sorters
 {
     public class BubbleSorterTests
     {
-        private readonly BubbleSorter<int> sorter = new BubbleSorter<int>();
-        private readonly Random random = new Random();
-
         [Test]
-        [Parallelizable]
         public void ArraySorted([Random(0, 1000, 1000)]int n)
         {
+            var sorter = new BubbleSorter<int>();
+            var random = new Random();
             var testArray = new int[n];
             var correctArray = new int[n];
             for (var i = 0; i < n; i++)

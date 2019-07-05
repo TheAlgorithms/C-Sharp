@@ -8,13 +8,13 @@ namespace Algorithms.Tests.Sorters
 {
     public class ShellSorterTests
     {
-        private readonly ShellSorter<int> sorter = new ShellSorter<int>();
-        private readonly Random random = new Random();
-
         [Test]
-        [Parallelizable]
         public void ArraySorted([Random(0, 1000, 1000)]int n)
         {
+            // Arrange
+            var sorter = new ShellSorter<int>();
+            var random = new Random();
+            var intComparer = new IntComparer();
             var testArray = new int[n];
             var correctArray = new int[n];
             for (var i = 0; i < n; i++)
@@ -24,10 +24,11 @@ namespace Algorithms.Tests.Sorters
                 correctArray[i] = t;
             }
 
-            var intComparer = new IntComparer();
+            // Act
             sorter.Sort(testArray, intComparer);
             Array.Sort(correctArray, intComparer);
 
+            // Assert
             Assert.AreEqual(testArray, correctArray);
         }
 

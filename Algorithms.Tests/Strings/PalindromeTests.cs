@@ -5,14 +5,14 @@ namespace Algorithms.Tests.Strings
 {
     public class PalindromeTests
     {
+        // TODO: Split in 2 methods, use TestCase attribute
         [Test]
-        [Parallelizable]
         public void InputStringIsPalindrome()
         {
-            // Valid word
+            // Palindrome
             const string validWord = "Anna";
             const string validPhrase = "A Santa at Nasa";
-            // Invalid word
+            // Not palindrome
             const string invalidWord = "hallo";
             const string invalidPhare = "Once upon a time";
 

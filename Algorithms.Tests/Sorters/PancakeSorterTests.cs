@@ -8,13 +8,11 @@ namespace Algorithms.Tests.Sorters
 {
     public class PancakeSorterTests
     {
-        private readonly PancakeSorter<int> sorter = new PancakeSorter<int>();
-        private readonly Random random = new Random();
-
         [Test]
-        [Parallelizable]
         public void ArraySorted([Random(0, 1000, 100)]int n)
         {
+            var sorter = new PancakeSorter<int>();
+            var random = new Random();
             var testArray = new int[n];
             var correctArray = new int[n];
             for (var i = 0; i < n; i++)

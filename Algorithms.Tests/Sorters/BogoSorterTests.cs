@@ -8,13 +8,11 @@ namespace Algorithms.Tests.Sorters
 {
     public class BogoSorterTests
     {
-        private readonly BogoSorter<int> sorter = new BogoSorter<int>();
-        private readonly Random random = new Random();
-
         [Test]
-        [Parallelizable]
         public void ArraySorted([Random(0, 10, 1000)]int n)
         {
+            var sorter = new BogoSorter<int>();
+            var random = new Random();
             var testArray = new int[n];
             var correctArray = new int[n];
             for (var i = 0; i < n; i++)

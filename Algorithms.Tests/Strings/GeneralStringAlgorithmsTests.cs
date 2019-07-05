@@ -6,8 +6,8 @@ namespace Algorithms.Tests.Strings
 {
     public class GeneralStringAlgorithmsTests
     {
+        // TODO: Use [Test case] attribute
         [Test]
-        [Parallelizable]
         public void MaxCountCharIsObtained()
         {
             // Arrange
