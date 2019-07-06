@@ -11,7 +11,6 @@ namespace Algorithms.Tests.Compressors
         [TestCase("dddddddddd", "1111111111")]
         [TestCase("a", "1")]
         [TestCase("", "")]
-        [Parallelizable]
         public void CompressingPhrase(string uncompressedText, string expectedCompressedText)
         {
             //Arrange
@@ -29,7 +28,6 @@ namespace Algorithms.Tests.Compressors
         }
 
         [Test]
-        [Parallelizable]
         public void DecompressedTextTheSameAsOriginal([Random(0, 1000, 1000)]int length)
         {
             //Arrange

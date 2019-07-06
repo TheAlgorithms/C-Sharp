@@ -6,27 +6,29 @@ namespace Algorithms.Tests.Strings
     public class PalindromeTests
     {
         [Test]
-        [Parallelizable]
-        public void InputStringIsPalindrome()
+        [TestCase("Anna")]
+        [TestCase("A Santa at Nasa")]
+        public void TextIsPalindrome_TrueExpected(string text)
         {
-            // Valid word
-            const string validWord = "Anna";
-            const string validPhrase = "A Santa at Nasa";
-            // Invalid word
-            const string invalidWord = "hallo";
-            const string invalidPhare = "Once upon a time";
-
+            // Arrange
             // Act
-            var resultA = Palindrome.IsStringPalindrome(validWord);
-            var resultPhraseA = Palindrome.IsStringPalindrome(validPhrase);
-            var resultB = Palindrome.IsStringPalindrome(invalidWord);
-            var resultPhraseB = Palindrome.IsStringPalindrome(invalidPhare);
+            var isPalindrome = Palindrome.IsStringPalindrome(text);
 
             // Assert
-            Assert.True(resultA);
-            Assert.True(resultPhraseA);
-            Assert.False(resultB);
-            Assert.False(resultPhraseB);
+            Assert.True(isPalindrome);
+        }
+
+        [Test]
+        [TestCase("hallo")]
+        [TestCase("Once upon a time")]
+        public void TextNotPalindrome_FalseExpected(string text)
+        {
+            // Arrange
+            // Act
+            var isPalindrome = Palindrome.IsStringPalindrome(text);
+
+            // Assert
+            Assert.False(isPalindrome);
         }
     }
 }

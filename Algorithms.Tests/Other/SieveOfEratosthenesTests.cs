@@ -10012,7 +10012,6 @@ namespace Algorithms.Tests.Other
         };
 
         [Test]
-        [Parallelizable]
         public void First10_000PrimesCorrect() => Assert.AreEqual(first10_000PrimeNumbers, SieveOfEratosthenes.GetPrimeNumbers(10_000));
     }
 }

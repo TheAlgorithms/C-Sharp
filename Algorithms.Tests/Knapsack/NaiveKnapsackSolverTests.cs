@@ -9,7 +9,6 @@ namespace Algorithms.Tests.Knapsack
     public class NaiveKnapsackSolverTests
     {
         [Test]
-        [Parallelizable]
         public void TakesHalf([Random(0, 1000, 1000)]int length)
         {
             //Arrange
