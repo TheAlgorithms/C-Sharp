@@ -1,8 +1,8 @@
 ﻿using Algorithms.Sorters;
+using Algorithms.Tests.Helpers;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using System;
-using System.Collections.Generic;
 
 namespace Algorithms.Tests.Sorters
 {
@@ -11,7 +11,9 @@ namespace Algorithms.Tests.Sorters
         [Test]
         public void ArraySorted([Random(0, 1000, 1000)]int n)
         {
+            // Arrange
             var sorter = new BinaryInsertionSorter<int>();
+            var intComparer = new IntComparer();
             var random = new Random();
             var testArray = new int[n];
             var correctArray = new int[n];
@@ -22,16 +24,12 @@ namespace Algorithms.Tests.Sorters
                 correctArray[i] = t;
             }
 
-            var intComparer = new IntComparer();
+            // Act
             sorter.Sort(testArray, intComparer);
             Array.Sort(correctArray, intComparer);
 
+            // Assert
             Assert.AreEqual(testArray, correctArray);
-        }
-
-        private class IntComparer : IComparer<int>
-        {
-            public int Compare(int x, int y) => x.CompareTo(y);
         }
     }
 }
