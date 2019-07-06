@@ -7,7 +7,6 @@ namespace Algorithms.Tests.Encoders
 {
     public class CaesarEncoderTests
     {
-
         [Test]
         public void DecodedStringIsTheSame([Random(1000)]int key)
         {
