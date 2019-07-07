@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace Algorithms.Knapsack
 {
     /// <summary>
-    /// Greedy heurictic solver
+    /// Greedy heurictic solver.
     /// </summary>
-    /// <typeparam name="T">Type of items in knapsack</typeparam>
+    /// <typeparam name="T">Type of items in knapsack.</typeparam>
     public class NaiveKnapsackSolver<T> : IHeuristicKnapsackSolver<T>
     {
         public T[] Solve(T[] items, double capacity, Func<T, double> weightSelector, Func<T, double> valueSelector)

@@ -35,9 +35,9 @@ namespace Algorithms.Numeric
         /// <summary>
         /// To make simple validation of the matrix to be used.
         /// </summary>
-        /// <param name="matrix">Multidimensional array matrix</param>
-        /// <returns>True: if algorithm can be use for given matrix; 
-        /// False: Otherwise </returns>
+        /// <param name="matrix">Multidimensional array matrix.</param>
+        /// <returns>True: if algorithm can be use for given matrix;
+        /// False: Otherwise. </returns>
         private bool CanMatrixBeUsed(double[,] matrix)
         {
             if (matrix == null || matrix.Length != RowCount * (RowCount + 1))
@@ -52,7 +52,7 @@ namespace Algorithms.Numeric
         /// To prepare given matrix by pivoting rows.
         /// </summary>
         /// <param name="matrix"></param>
-        /// <returns>Matrix</returns>
+        /// <returns>Matrix.</returns>
         private bool PivotMatrix(ref double[,] matrix)
         {
             for (var col = 0; col + 1 < RowCount; col++)
@@ -87,6 +87,7 @@ namespace Algorithms.Numeric
         private int FindNonZeroCoefficient(ref double[,] matrix, int col)
         {
             var rowToSwap = col + 1;
+
             // To find a non-zero coefficient
             for (; rowToSwap < RowCount; rowToSwap++)
             {
@@ -102,7 +103,7 @@ namespace Algorithms.Numeric
         /// <summary>
         /// Applies REF.
         /// </summary>
-        /// <param name="matrix">Matrix</param>
+        /// <param name="matrix">Matrix.</param>
         private void Elimination(ref double[,] matrix)
         {
             for (var srcRow = 0; srcRow + 1 < RowCount; srcRow++)

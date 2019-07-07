@@ -1,6 +1,6 @@
-﻿using Algorithms.Compressors;
+﻿using System.Collections.Generic;
+using Algorithms.Compressors;
 using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace Algorithms.Tests.Compressors
 {

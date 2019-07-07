@@ -34,6 +34,7 @@ namespace heap_sort
             {
                 largest = right;
             }
+
             if (largest != index)
             {
                 // process of reheaping / swapping
@@ -44,6 +45,7 @@ namespace heap_sort
                 MakeHeap(input, heapSize, largest);
             }
         }
+
         public static void Main()
         {
             Console.WriteLine("Please enter some integers, separated by spaces:");
@@ -67,7 +69,8 @@ namespace heap_sort
             {
                 Console.Write(data[i] + " ");
             }
-            Console.ReadLine();
+
+            _ = Console.ReadLine();
         }
     }
 }

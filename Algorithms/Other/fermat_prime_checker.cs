@@ -24,7 +24,7 @@ namespace ConsoleTest
             var numberToTestBigInteger = new BigInteger(numberToTest);
             var exponentBigInteger = new BigInteger(numberToTest - 1);
 
-            //Create a random number generator using the current time as seed
+            // Create a random number generator using the current time as seed
             var r = new Random(new DateTime().Millisecond);
 
             var iterator = 1;
@@ -38,6 +38,7 @@ namespace ConsoleTest
                 {
                     prime = false;
                 }
+
                 iterator++;
             }
 
@@ -46,6 +47,7 @@ namespace ConsoleTest
                 Console.WriteLine($"The number {0} seems prime", numberToTestEntry);
                 return;
             }
+
             Console.WriteLine($"The number {0} isn't prime", numberToTestEntry);
         }
     }

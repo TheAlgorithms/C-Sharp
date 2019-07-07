@@ -4,11 +4,11 @@ namespace Algorithms.Numeric.GreatestCommonDivisor
     {
         /// <summary>
         /// Finds greatest common divisor for numbers a and b
-        /// using euclidean algorithm
+        /// using euclidean algorithm.
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
-        /// <returns>Greatest common divisor</returns>
+        /// <returns>Greatest common divisor.</returns>
         public int Find(int a, int b)
         {
             if (a == 0 && b == 0)

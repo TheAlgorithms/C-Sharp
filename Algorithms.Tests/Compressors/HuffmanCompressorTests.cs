@@ -1,8 +1,8 @@
-﻿using Algorithms.Compressors;
+﻿using System;
+using Algorithms.Compressors;
 using Algorithms.Sorters;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using System;
 
 namespace Algorithms.Tests.Compressors
 {

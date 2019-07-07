@@ -4,9 +4,7 @@ namespace AStar
 {
     public class Location : IEquatable<Location>
     {
-        //
         // Properties
-        //
         public int F
         {
             get;
@@ -40,31 +38,20 @@ namespace AStar
             get;
         }
 
-        //
         // Constructors
-        //
         public Location(int a, int b, Location p)
         {
             X = a;
             Y = b;
             Parent = p;
 
-            if (p == null)
-            {
-                G = 0;
-            }
-            else
-            {
-                G = p.G + 1;
-            }
+            G = p == null ? 0 : p.G + 1;
 
             H = Program.ComputeHScore(X, Y);
             F = G + H;
         }
 
-        //
         // Methods
-        //
         public bool Equals(Location other) => X == other.X && Y == other.Y;
     }
 }

@@ -1,6 +1,6 @@
-﻿using Algorithms.Strings;
+﻿using System;
+using Algorithms.Strings;
 using NUnit.Framework;
-using System;
 
 namespace Algorithms.Tests.Strings
 {

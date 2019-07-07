@@ -23,7 +23,7 @@ namespace cocktail_sort
 
             Console.WriteLine("Sorted: {0}", string.Join(" ", data));
 
-            Console.ReadKey();
+            _ = Console.ReadKey();
         }
 
         public static void CocktailSort(int[] intArray)
@@ -47,6 +47,7 @@ namespace cocktail_sort
                         swapped = true;
                     }
                 }
+
                 endIndex--;
 
                 if (!swapped)
@@ -68,6 +69,7 @@ namespace cocktail_sort
                         swapped = true;
                     }
                 }
+
                 startIndex++;
             }
         }

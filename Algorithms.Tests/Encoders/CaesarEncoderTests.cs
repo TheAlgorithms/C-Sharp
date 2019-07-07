@@ -1,7 +1,7 @@
-﻿using Algorithms.Encoders;
+﻿using System;
+using Algorithms.Encoders;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using System;
 
 namespace Algorithms.Tests.Encoders
 {

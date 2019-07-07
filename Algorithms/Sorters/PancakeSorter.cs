@@ -9,45 +9,39 @@ namespace Algorithms.Sorters
         /// internal, in-place, stable,
         /// time complexity: O(n^2),
         /// space complexity: O(1),
-        /// where n - array length
+        /// where n - array length.
         /// </summary>
-        /// <param name="array">Array to sort</param>
-        /// <param name="comparer">Compares elements</param>
-        /// 
+        /// <param name="array">Array to sort.</param>
+        /// <param name="comparer">Compares elements.</param>
+        ///
         public void Sort(T[] array, IComparer<T> comparer)
         {
             var n = array.Length;
 
-            // Start from the complete array and one by one 
-            // reduce current size by one 
-            //
+            // Start from the complete array and one by one
+            // reduce current size by one
             for (var curr_size = n; curr_size > 1; --curr_size)
             {
-                // Find index of the maximum element in 
-                // array[0..curr_size-1] 
-                //
+                // Find index of the maximum element in
+                // array[0..curr_size-1]
                 var mi = FindMax(array, curr_size, comparer);
 
-                // Move the maximum element to end of current array 
-                // if it's not already at  the end 
-                //
+                // Move the maximum element to end of current array
+                // if it's not already at  the end
                 if (mi != curr_size - 1)
                 {
-                    // To move to the end, first move maximum 
-                    // number to beginning 
-                    //
+                    // To move to the end, first move maximum
+                    // number to beginning
                     Flip(array, mi);
 
-                    // Now move the maximum number to end by 
-                    // reversing current array 
-                    //
+                    // Now move the maximum number to end by
+                    // reversing current array
                     Flip(array, curr_size - 1);
                 }
             }
         }
 
         // Reverses array[0..i]
-        //
         private void Flip(T[] array, int i)
         {
             T temp;
@@ -62,9 +56,8 @@ namespace Algorithms.Sorters
             }
         }
 
-        // Returns index of the maximum element 
+        // Returns index of the maximum element
         // in array[0..n-1]
-        //
         private int FindMax(T[] array, int n, IComparer<T> comparer)
         {
             var mi = 0;
@@ -75,6 +68,7 @@ namespace Algorithms.Sorters
                     mi = i;
                 }
             }
+
             return mi;
         }
     }
