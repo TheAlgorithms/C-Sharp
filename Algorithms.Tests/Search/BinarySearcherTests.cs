@@ -2,16 +2,14 @@
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Algorithms.Tests.Search
 {
     public class BinarySearcherTests
     {       
         [Test]
-        public void FindIndex_ItemPresent_IndexCorrect([Random(0, 1000, 1000)]int n)
+        public void FindIndex_ItemPresent_IndexCorrect([Random(1, 1000, 1000)]int n)
         {
             // Arrange
             var searcher = new BinarySearcher<int>();
@@ -27,7 +25,7 @@ namespace Algorithms.Tests.Search
         }
 
         [Test]
-        public void FindIndex_ItemMissing_MinusOneReturned([Random(0, 1000, 1000)]int n, [Random(-100, 1100, 1000)]int missingItem)
+        public void FindIndex_ItemMissing_MinusOneReturned([Random(0, 1000, 100)]int n, [Random(-100, 1100, 100)]int missingItem)
         {
             // Arrange
             var searcher = new BinarySearcher<int>();
