@@ -7,11 +7,11 @@ namespace Algorithms.Numeric.GreatestCommonDivisor
         /// <summary>
         /// Finds greatest common divisor for numbers u and v
         /// using binary algorithm.
-        /// Wiki: https://en.wikipedia.org/wiki/Binary_GCD_algorithm
+        /// Wiki: https://en.wikipedia.org/wiki/Binary_GCD_algorithm.
         /// </summary>
         /// <param name="u"></param>
         /// <param name="v"></param>
-        /// <returns>Greatest common divisor</returns>
+        /// <returns>Greatest common divisor.</returns>
         public int Find(int u, int v)
         {
             // GCD(0, 0) = 0
@@ -64,7 +64,8 @@ namespace Algorithms.Numeric.GreatestCommonDivisor
 
                 // Here v >= u and v - u is even
                 v -= u;
-            } while (v != 0);
+            }
+            while (v != 0);
 
             // Restore common factors of 2
             return u << shift;

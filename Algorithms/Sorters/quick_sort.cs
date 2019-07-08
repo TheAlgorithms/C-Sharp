@@ -12,7 +12,7 @@ namespace ConsoleApplication2
             var result = new List<int>(QuickSort(unsorted));
             Console.WriteLine($"Sorted: {string.Join(" ", result.ToArray())}");
 
-            Console.ReadLine();
+            _ = Console.ReadLine();
         }
 
         public static List<int> QuickSort(List<int> a)
@@ -40,6 +40,7 @@ namespace ConsoleApplication2
                     greater.Add(x);
                 }
             }
+
             return Concat(QuickSort(less), pivot, QuickSort(greater));
         }
 

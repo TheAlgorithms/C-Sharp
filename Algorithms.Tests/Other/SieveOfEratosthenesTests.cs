@@ -1,7 +1,7 @@
-﻿using Algorithms.Other;
+﻿using System.Numerics;
+using Algorithms.Other;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using System.Numerics;
 
 namespace Algorithms.Tests.Other
 {
@@ -10012,7 +10012,6 @@ namespace Algorithms.Tests.Other
         };
 
         [Test]
-        [Parallelizable]
         public void First10_000PrimesCorrect() => Assert.AreEqual(first10_000PrimeNumbers, SieveOfEratosthenes.GetPrimeNumbers(10_000));
     }
 }

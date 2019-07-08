@@ -1,15 +1,14 @@
-﻿using Algorithms.Knapsack;
+﻿using System;
+using System.Linq;
+using Algorithms.Knapsack;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using System;
-using System.Linq;
 
 namespace Algorithms.Tests.Knapsack
 {
     public class NaiveKnapsackSolverTests
     {
         [Test]
-        [Parallelizable]
         public void TakesHalf([Random(0, 1000, 1000)]int length)
         {
             //Arrange

@@ -1,15 +1,14 @@
-﻿using Algorithms.Search;
+﻿using System;
+using System.Linq;
+using Algorithms.Search;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using System;
-using System.Linq;
 
 namespace Algorithms.Tests.Search
 {
     public class LinearSearcherTests
     {
         [Test]
-        [Parallelizable]
         public void Find_ItemPresent_ItemCorrect([Random(0, 1_000_000, 1_000)]int n)
         {
             // Arrange
@@ -26,7 +25,6 @@ namespace Algorithms.Tests.Search
         }
 
         [Test]
-        [Parallelizable]
         public void FindIndex_ItemPresent_IndexCorrect([Random(0, 1_000_000, 1_000)]int n)
         {
             // Arrange
@@ -43,7 +41,6 @@ namespace Algorithms.Tests.Search
         }
 
         [Test]
-        [Parallelizable]
         public void Find_ItemMissing_ItemNotFoundExceptionThrown([Random(0, 1_000_000, 1_000)]int n)
         {
             // Arrange
@@ -53,11 +50,10 @@ namespace Algorithms.Tests.Search
 
             // Act
             // Assert
-            Assert.Throws(typeof(ItemNotFoundException), () => searcher.Find(arrayToSearch, x => false));
+            _ = Assert.Throws(typeof(ItemNotFoundException), () => searcher.Find(arrayToSearch, x => false));
         }
 
         [Test]
-        [Parallelizable]
         public void FindIndex_ItemMissing_MinusOneReturned([Random(0, 1_000_000, 1_000)]int n)
         {
             // Arrange

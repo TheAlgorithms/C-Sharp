@@ -15,14 +15,7 @@ namespace merge_sort
 
             while ((left <= eol) && (mid <= right))
             {
-                if (numbers[left] <= numbers[mid])
-                {
-                    temp[pos++] = numbers[left++];
-                }
-                else
-                {
-                    temp[pos++] = numbers[mid++];
-                }
+                temp[pos++] = numbers[left] <= numbers[mid] ? numbers[left++] : numbers[mid++];
             }
 
             while (left <= eol)
@@ -79,7 +72,8 @@ namespace merge_sort
             {
                 Console.Write(data[i] + " ");
             }
-            Console.ReadLine();
+
+            _ = Console.ReadLine();
         }
     }
 }

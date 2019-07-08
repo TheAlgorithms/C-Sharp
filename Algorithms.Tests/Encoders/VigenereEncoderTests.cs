@@ -6,22 +6,21 @@ namespace Algorithms.Tests.Encoders
 {
     public class VigenereEncoderTests
     {
-        private readonly Randomizer random = new Randomizer();
-        private readonly VigenereEncoder encoder = new VigenereEncoder();
-
-        private string RandomMessage => random.GetString();
-
         [Test]
-        [Parallelizable]
-        [Repeat(100)]
+        [Repeat(1000)]
         public void DecodedStringIsTheSame()
         {
-            var message = RandomMessage;
-            var key = RandomMessage;
+            // Arrange
+            var random = new Randomizer();
+            var encoder = new VigenereEncoder();
+            var message = random.GetString();
+            var key = random.GetString();
 
+            // Act
             var encoded = encoder.Encode(message, key);
             var decoded = encoder.Decode(encoded, key);
 
+            // Assert
             Assert.AreEqual(message, decoded);
         }
     }

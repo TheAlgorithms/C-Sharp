@@ -42,7 +42,7 @@ namespace traversals
         {
             var node = new Tree<int>
             {
-                Value = num
+                Value = num,
             };
 
             if (root == null)
@@ -56,7 +56,6 @@ namespace traversals
 
                 while (current != null)
                 {
-
                     // if value is 0 try to place on left side
                     // if value is 1 then try to place on right side
                     var value = rnd.Next(0, 2);
@@ -117,6 +116,7 @@ namespace traversals
                     tree_queue.Enqueue(node.Right);
                 }
             }
+
             return tree_values.ToArray();
         }
     }

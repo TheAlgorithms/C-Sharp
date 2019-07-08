@@ -1,12 +1,12 @@
-using Algorithms.Sorters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Algorithms.Sorters;
 
 namespace Algorithms.Compressors
 {
     /// <summary>
-    /// Greedy lossless compression algorithm
+    /// Greedy lossless compression algorithm.
     /// </summary>
     public class HuffmanCompressor
     {
@@ -22,10 +22,10 @@ namespace Algorithms.Compressors
 
         /// <summary>
         /// Given an input string, returns a new compressed string
-        /// using huffman enconding
+        /// using huffman enconding.
         /// </summary>
-        /// <param name="inputText">Text message to compress</param>
-        /// <returns>Compressed string and keys to decompress it</returns>
+        /// <param name="inputText">Text message to compress.</param>
+        /// <returns>Compressed string and keys to decompress it.</returns>
         public (string compressedText, Dictionary<string, string> decompressionKeys) Compress(string uncompressedText)
         {
             if (uncompressedText == string.Empty)
@@ -37,7 +37,7 @@ namespace Algorithms.Compressors
             {
                 var dict = new Dictionary<string, string>
                 {
-                    { "1", uncompressedText[0].ToString() }
+                    { "1", uncompressedText[0].ToString() },
                 };
                 return (new string('1', uncompressedText.Length), dict);
             }
@@ -110,9 +110,9 @@ namespace Algorithms.Compressors
         }
 
         /// <summary>
-        /// Finds frequency for each character in the text
+        /// Finds frequency for each character in the text.
         /// </summary>
-        /// <returns>Symbol-frequency array</returns>
+        /// <returns>Symbol-frequency array.</returns>
         private ListNode[] GetListNodesFromText(string text)
         {
             var occurenceCounts = new Dictionary<char, double>();
@@ -132,7 +132,7 @@ namespace Algorithms.Compressors
         }
 
         /// <summary>
-        /// Represents tree structure for the algorithm
+        /// Represents tree structure for the algorithm.
         /// </summary>
         public class ListNode
         {

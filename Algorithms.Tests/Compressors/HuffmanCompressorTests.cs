@@ -1,8 +1,8 @@
-﻿using Algorithms.Compressors;
+﻿using System;
+using Algorithms.Compressors;
 using Algorithms.Sorters;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using System;
 
 namespace Algorithms.Tests.Compressors
 {
@@ -14,7 +14,6 @@ namespace Algorithms.Tests.Compressors
         [TestCase("dddddddddd", "1111111111")]
         [TestCase("a", "1")]
         [TestCase("", "")]
-        [Parallelizable]
         public void CompressingPhrase(string uncompressedText, string expectedCompressedText)
         {
             //Arrange
@@ -32,7 +31,6 @@ namespace Algorithms.Tests.Compressors
         }
 
         [Test]
-        [Parallelizable]
         public void DecompressedTextTheSameAsOriginal([Random(0, 1000, 1000)]int length)
         {
             //Arrange

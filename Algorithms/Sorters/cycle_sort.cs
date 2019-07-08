@@ -27,7 +27,8 @@ namespace cycle_sort
             {
                 Console.Write(data[i] + " ");
             }
-            Console.ReadKey();
+
+            _ = Console.ReadKey();
         }
 
         public static void CycleSort(int[] data)
@@ -43,14 +44,17 @@ namespace cycle_sort
                         pos++;
                     }
                 }
+
                 if (pos == cycleStart)
                 {
                     continue;
                 }
+
                 while (data[pos] == item)
                 {
                     pos++;
                 }
+
                 var temp = data[pos];
                 data[pos] = item;
                 item = temp;
@@ -64,10 +68,12 @@ namespace cycle_sort
                             pos++;
                         }
                     }
+
                     while (data[pos] == item)
                     {
                         pos++;
                     }
+
                     temp = data[pos];
                     data[pos] = item;
                     item = temp;
