@@ -15,13 +15,13 @@ namespace Algorithms.Tests.Search
             var searcher = new BinarySearcher<int>();
             var random = Randomizer.CreateRandomizer();
             var arrayToSearch = Enumerable.Range(0, n).Select(x => random.Next(0, 1000)).OrderBy(x => x).ToArray();
-            var randomIndex = random.Next(0, n);
+            var selectedIndex = random.Next(0, n);
 
             // Act
-            var actualIndex = searcher.FindIndex(arrayToSearch, arrayToSearch[randomIndex]);
+            var actualIndex = searcher.FindIndex(arrayToSearch, arrayToSearch[selectedIndex]);
 
             // Assert
-            Assert.AreEqual(arrayToSearch[actualIndex], arrayToSearch[randomIndex]);
+            Assert.AreEqual(arrayToSearch[selectedIndex], arrayToSearch[actualIndex]);
         }
 
         [Test]

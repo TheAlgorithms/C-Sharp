@@ -27,15 +27,15 @@ namespace Algorithms.Searches
                     leftIndex = middleIndex + 1;
                     continue;
                 }
+
                 if (item.CompareTo(sortedData[middleIndex]) < 0)
                 {
                     rightIndex = middleIndex - 1;
                     continue;
                 }
-                if (item.CompareTo(sortedData[middleIndex]) == 0)
-                {
-                    return middleIndex;
-                }
+
+                return middleIndex;
+
             } while (leftIndex <= rightIndex);
 
             return -1;
