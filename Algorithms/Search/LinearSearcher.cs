@@ -2,7 +2,7 @@ using System;
 
 namespace Algorithms.Search
 {
-    public class LinearSearcher<T> : ISearcher<T>
+    public class LinearSearcher<T>
     {
         /// <summary>
         /// Finds first item in array that satisfies specified term
