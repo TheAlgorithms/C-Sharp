@@ -1,19 +1,19 @@
-﻿using Algorithms.Numeric;
-using System;
+﻿using System;
 using System.Linq;
+using Algorithms.Numeric;
 
 namespace Algorithms.Encoders
 {
     /// <summary>
-    /// Lester S. Hill's polygraphic substitution cipher, 
-    /// without representing letters using mod26, using 
+    /// Lester S. Hill's polygraphic substitution cipher,
+    /// without representing letters using mod26, using
     /// corresponding "(char)value" instead.
     /// </summary>
     public class HillEncoder : IEncoder<double[,]>
     {
         private readonly GaussJordanElimination LinearEquationSolver;
 
-        public HillEncoder() => LinearEquationSolver = new GaussJordanElimination(); //TODO: add DI
+        public HillEncoder() => LinearEquationSolver = new GaussJordanElimination(); // TODO: add DI
 
         public string Encode(string text, double[,] key)
         {
@@ -60,15 +60,15 @@ namespace Algorithms.Encoders
         /// <summary>
         /// Converts elements from the array to their corresponding Unicode characters.
         /// </summary>
-        /// <param name="arr">array of vectors</param>
-        /// <returns>Message</returns>
+        /// <param name="arr">array of vectors.</param>
+        /// <returns>Message.</returns>
         private static string BuildStringFromArray(double[] arr) => new string(arr.Select(c => (char)c).ToArray());
 
         /// <summary>
         /// Given a list of vectors, returns a single array of elements.
         /// </summary>
-        /// <param name="list">List of ciphered arrays</param>
-        /// <returns>unidimensional list</returns>
+        /// <param name="list">List of ciphered arrays.</param>
+        /// <returns>unidimensional list.</returns>
         private double[] MergeArrayList(double[][] list)
         {
             var merged = new double[list.Length * 3];
@@ -85,8 +85,8 @@ namespace Algorithms.Encoders
         /// Multiplies the key for the given scalar.
         /// </summary>
         /// <param name="vector">list of splitted words as numbers.</param>
-        /// <param name="key">Cipher selected key</param>
-        /// <returns>Ciphered vector</returns>
+        /// <param name="key">Cipher selected key.</param>
+        /// <returns>Ciphered vector.</returns>
         private static double[] MatrixCipher(double[] vector, double[,] key)
         {
             var multiplied = new double[vector.Length];
@@ -105,7 +105,7 @@ namespace Algorithms.Encoders
         /// <summary>
         /// Splits the input text message as chunks of words.
         /// </summary>
-        /// <param name="chunked">chunked words list</param>
+        /// <param name="chunked">chunked words list.</param>
         /// <returns>spliiter char array.</returns>
         private static char[] SplitToCharArray(string[] chunked)
         {
@@ -125,11 +125,11 @@ namespace Algorithms.Encoders
         /// <summary>
         /// Chunks the input text message.
         /// </summary>
-        /// <param name="text">text message</param>
+        /// <param name="text">text message.</param>
         /// <returns>array of words.</returns>
         private static string[] ChunkTextToArray(string text)
         {
-            //To split the message into chunks
+            // To split the message into chunks
             var div = text.Length / 3;
             var chunks = new string[div];
 
@@ -145,7 +145,7 @@ namespace Algorithms.Encoders
         /// Fills a text message with spaces at the end
         /// to enable a simple split by 3-length-word.
         /// </summary>
-        /// <param name="text">Text Message</param>
+        /// <param name="text">Text Message.</param>
         /// <returns>Modified text Message.</returns>
         private static string FillGaps(string text)
         {
@@ -156,8 +156,8 @@ namespace Algorithms.Encoders
         /// <summary>
         /// Removes the extra spaces included on the cipher phase.
         /// </summary>
-        /// <param name="text">Text message</param>
-        /// <returns>Deciphered Message</returns>
+        /// <param name="text">Text message.</param>
+        /// <returns>Deciphered Message.</returns>
         private static string UnFillGaps(string text) => text.TrimEnd();
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Algorithms.Encoders
                 augM[k, 3] = vector[k];
             }
 
-            LinearEquationSolver.Solve(augM);
+            _ = LinearEquationSolver.Solve(augM);
 
             return new[] { augM[0, 3], augM[1, 3], augM[2, 3] };
         }

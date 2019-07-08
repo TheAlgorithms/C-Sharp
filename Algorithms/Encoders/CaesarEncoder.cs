@@ -3,7 +3,7 @@ using System.Text;
 namespace Algorithms.Encoders
 {
     /// <summary>
-    /// Encodes using caesar cypher
+    /// Encodes using caesar cypher.
     /// </summary>
     public class CaesarEncoder : IEncoder<int>
     {
@@ -11,22 +11,22 @@ namespace Algorithms.Encoders
         /// Encodes text using specified key,
         /// time complexity: O(n),
         /// space complexity: O(n),
-        /// where n - text length
+        /// where n - text length.
         /// </summary>
-        /// <param name="text">Text to be encoded</param>
-        /// <param name="key">Key that will be used to encode the text</param>
-        /// <returns>Encoded text</returns>
+        /// <param name="text">Text to be encoded.</param>
+        /// <param name="key">Key that will be used to encode the text.</param>
+        /// <returns>Encoded text.</returns>
         public string Encode(string text, int key) => Cipher(text, key);
 
         /// <summary>
         /// Decodes text that was encoded using specified key,
         /// time complexity: O(n),
         /// space complexity: O(n),
-        /// where n - text length
+        /// where n - text length.
         /// </summary>
-        /// <param name="text">Text to be decoded</param>
-        /// <param name="key">Key that was used to encode the text</param>
-        /// <returns>Decoded text</returns>
+        /// <param name="text">Text to be decoded.</param>
+        /// <param name="key">Key that was used to encode the text.</param>
+        /// <returns>Decoded text.</returns>
         public string Decode(string text, int key) => Cipher(text, -key);
 
         private static string Cipher(string text, int key)
@@ -36,7 +36,7 @@ namespace Algorithms.Encoders
             {
                 if (!char.IsLetter(text[i]))
                 {
-                    newText.Append(text[i]);
+                    _ = newText.Append(text[i]);
                     continue;
                 }
 
@@ -47,7 +47,7 @@ namespace Algorithms.Encoders
                 c -= c > letterZ ? (26 * (1 + (c - letterZ - 1) / 26)) : 0;
                 c += c < letterA ? (26 * (1 + (letterA - c - 1) / 26)) : 0;
 
-                newText.Append((char)c);
+                _ = newText.Append((char)c);
             }
 
             return newText.ToString();

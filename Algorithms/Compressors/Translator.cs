@@ -15,7 +15,7 @@ namespace Algorithms.Compressors
                 var key = text.Substring(start, i - start + 1);
                 if (translationKeys.ContainsKey(key))
                 {
-                    sb.Append(translationKeys[key]);
+                    _ = sb.Append(translationKeys[key]);
                     start = i + 1;
                 }
             }

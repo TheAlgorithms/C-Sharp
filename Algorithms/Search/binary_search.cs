@@ -58,7 +58,8 @@ namespace Algorithms.Searches
                 {
                     return mid;
                 }
-            } while (min <= max);
+            }
+            while (min <= max);
             return -1;
         }
     }

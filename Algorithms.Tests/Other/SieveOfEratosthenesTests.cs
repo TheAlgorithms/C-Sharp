@@ -1,7 +1,7 @@
-﻿using Algorithms.Other;
+﻿using System.Numerics;
+using Algorithms.Other;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using System.Numerics;
 
 namespace Algorithms.Tests.Other
 {

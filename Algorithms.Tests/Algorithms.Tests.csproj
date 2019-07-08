@@ -5,7 +5,14 @@
     <IsPackable>false</IsPackable>
     <LangVersion>default</LangVersion>
     <NullableContextOptions>disable</NullableContextOptions>
+    <CodeAnalysisRuleSet>..\stylecop.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\stylecop.json" />
+    <ProjectReference Include="..\Algorithms\Algorithms.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="1.0.0">
@@ -15,10 +22,6 @@
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Algorithms\Algorithms.csproj" />
   </ItemGroup>
 
 </Project>

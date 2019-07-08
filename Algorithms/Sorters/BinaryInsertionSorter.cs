@@ -11,10 +11,10 @@ namespace Algorithms.Sorters
         /// internal, in-place, unstable,
         /// time complexity: O(n^2),
         /// space complexity: O(1),
-        /// where n - array length
+        /// where n - array length.
         /// </summary>
-        /// <param name="array">Array to sort</param>
-        /// <param name="comparer">Compares elements</param>
+        /// <param name="array">Array to sort.</param>
+        /// <param name="comparer">Compares elements.</param>
         public void Sort(T[] array, IComparer<T> comparer)
         {
             for (var i = 1; i < array.Length; i++)
@@ -28,12 +28,12 @@ namespace Algorithms.Sorters
             }
         }
 
-        /// <summary>Implementation of Binary Search using an iterative approach</summary>
-        /// <param name="array">An array of values sorted in ascending order between the index values left and right to search through</param>
-        /// <param name="left">Left index to search from (inclusive)</param>
-        /// <param name="right">Right index to search to (inclusive)</param>
-        /// <param name="target">The value to find placefor in the provided array</param>
-        /// <returns>The index where to insert target value</returns>
+        /// <summary>Implementation of Binary Search using an iterative approach.</summary>
+        /// <param name="array">An array of values sorted in ascending order between the index values left and right to search through.</param>
+        /// <param name="left">Left index to search from (inclusive).</param>
+        /// <param name="right">Right index to search to (inclusive).</param>
+        /// <param name="target">The value to find placefor in the provided array.</param>
+        /// <returns>The index where to insert target value.</returns>
         private static int BinarySearch(T[] array, int from, int to, T target, IComparer<T> comparer)
         {
             var left = from;

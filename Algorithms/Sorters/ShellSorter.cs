@@ -10,10 +10,10 @@ namespace Algorithms.Sorters
         /// internal, in-place, unstable,
         /// worst-case time complexity: O(n^2),
         /// space complexity: O(1),
-        /// where n - array length
+        /// where n - array length.
         /// </summary>
-        /// <param name="array">Array to sort</param>
-        /// <param name="comparer">Compares elements</param>
+        /// <param name="array">Array to sort.</param>
+        /// <param name="comparer">Compares elements.</param>
         public void Sort(T[] array, IComparer<T> comparer)
         {
             for (var step = array.Length / 2; step > 0; step /= 2)
@@ -40,6 +40,7 @@ namespace Algorithms.Sorters
                         wasChanged = true;
                     }
                 }
+
                 if (!wasChanged)
                 {
                     break;

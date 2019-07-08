@@ -1,8 +1,8 @@
-﻿using Algorithms.Sorters;
+﻿using System;
+using Algorithms.Sorters;
 using Algorithms.Tests.Helpers;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using System;
 
 namespace Algorithms.Tests.Sorters
 {

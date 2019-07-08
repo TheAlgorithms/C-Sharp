@@ -5,7 +5,14 @@
     <IsPackable>false</IsPackable>
     <LangVersion>default</LangVersion>
     <NullableContextOptions>disable</NullableContextOptions>
+    <CodeAnalysisRuleSet>..\stylecop.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\stylecop.json" />
+    <ProjectReference Include="..\DataStructures\DataStructures.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="1.0.0">

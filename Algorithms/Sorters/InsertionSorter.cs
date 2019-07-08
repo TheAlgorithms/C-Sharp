@@ -9,10 +9,10 @@ namespace Algorithms.Sorters
         /// internal, in-place, stable,
         /// time complexity: O(n^2),
         /// space complexity: O(1),
-        /// where n - array length
+        /// where n - array length.
         /// </summary>
-        /// <param name="array">Array to sort</param>
-        /// <param name="comparer">Compares elements</param>
+        /// <param name="array">Array to sort.</param>
+        /// <param name="comparer">Compares elements.</param>
         public void Sort(T[] array, IComparer<T> comparer)
         {
             for (var i = 0; i < array.Length - 1; i++)

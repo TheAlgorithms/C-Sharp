@@ -11,7 +11,7 @@ namespace Algorithms.Strings
         private static string TypifyString(string word)
         {
             // Typify string to lower and remove white spaces.
-            return Regex.Replace(word.ToLowerInvariant(), @"\s+", "");
+            return Regex.Replace(word.ToLowerInvariant(), @"\s+", string.Empty);
         }
 
         private static string ReverseString(string s)

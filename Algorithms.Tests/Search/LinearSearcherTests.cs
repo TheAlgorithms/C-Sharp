@@ -1,8 +1,8 @@
-﻿using Algorithms.Search;
+﻿using System;
+using System.Linq;
+using Algorithms.Search;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using System;
-using System.Linq;
 
 namespace Algorithms.Tests.Search
 {
@@ -50,7 +50,7 @@ namespace Algorithms.Tests.Search
 
             // Act
             // Assert
-            Assert.Throws(typeof(ItemNotFoundException), () => searcher.Find(arrayToSearch, x => false));
+            _ = Assert.Throws(typeof(ItemNotFoundException), () => searcher.Find(arrayToSearch, x => false));
         }
 
         [Test]
