@@ -18,7 +18,7 @@ namespace Algorithms.Searches
             var leftIndex = 0;
             var rightIndex = sortedData.Length - 1;
 
-            do
+            while (leftIndex <= rightIndex)
             {
                 var middleIndex = leftIndex + (rightIndex - leftIndex) / 2;
 
@@ -36,7 +36,6 @@ namespace Algorithms.Searches
 
                 return middleIndex;
             }
-            while (leftIndex <= rightIndex);
 
             return -1;
         }
