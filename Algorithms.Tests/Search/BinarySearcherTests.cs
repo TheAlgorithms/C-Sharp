@@ -30,15 +30,27 @@ namespace Algorithms.Tests.Search
             // Arrange
             var searcher = new BinarySearcher<int>();
             var random = Randomizer.CreateRandomizer();
-            var arrayToSearch = Enumerable.Range(0, n).Select(x => random.Next(0, 1000))
-                .Where(x => x != missingItem).OrderBy(x => x).ToArray();
-            var expectedIndex = -1;
+            var arrayToSearch = Enumerable.Range(0, n).Select(x => random.Next(0, 1000)).Where(x => x != missingItem).OrderBy(x => x).ToArray();
 
             // Act
             var actualIndex = searcher.FindIndex(arrayToSearch, missingItem);
 
             // Assert
-            Assert.AreEqual(expectedIndex, actualIndex);
+            Assert.AreEqual(-1, actualIndex);
+        }
+
+        [Test]
+        public void FindIndex_ArrayEmpty_MinusOneReturned([Random(100)]int itemToSearch)
+        {
+            // Arrange
+            var searcher = new BinarySearcher<int>();
+            var arrayToSearch = new int[0];
+
+            // Act
+            var actualIndex = searcher.FindIndex(arrayToSearch, itemToSearch);
+
+            // Assert
+            Assert.AreEqual(-1, actualIndex);
         }
     }
 }
