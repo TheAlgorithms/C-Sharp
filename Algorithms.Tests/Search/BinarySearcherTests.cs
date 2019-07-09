@@ -1,13 +1,13 @@
-﻿using Algorithms.Searches;
+﻿using System;
+using System.Linq;
+using Algorithms.Searches;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using System;
-using System.Linq;
 
 namespace Algorithms.Tests.Search
 {
     public class BinarySearcherTests
-    {       
+    {
         [Test]
         public void FindIndex_ItemPresent_IndexCorrect([Random(1, 1000, 1000)]int n)
         {
