@@ -8,7 +8,7 @@ namespace Algorithms.Tests.Encoders
     public class CaesarEncoderTests
     {
         [Test]
-        public void DecodedStringIsTheSame([Random(1000)]int key)
+        public void DecodedStringIsTheSame([Random(100)]int key)
         {
             // Arrange
             var encoder = new CaesarEncoder();
