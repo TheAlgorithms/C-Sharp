@@ -60,7 +60,7 @@ namespace Algorithms.Tests.Search
             var searcher = new LinearSearcher<int>();
             var random = Randomizer.CreateRandomizer();
             var arrayToSearch = Enumerable.Range(0, n).Select(x => random.Next(0, 1000)).ToArray();
-            var expectedIndex = -1;
+            const int expectedIndex = -1;
 
             // Act
             var actualIndex = searcher.FindIndex(arrayToSearch, x => false);
