@@ -7,7 +7,7 @@ namespace Algorithms.Tests.Encoders
     public class VigenereEncoderTests
     {
         [Test]
-        [Repeat(100)]
+        [Repeat(1000)]
         public void DecodedStringIsTheSame()
         {
             // Arrange

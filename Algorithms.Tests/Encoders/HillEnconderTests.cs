@@ -8,7 +8,7 @@ namespace Algorithms.Tests.Encoders
     {
         // TODO: Add more random tests
         [Test]
-        [Repeat(100)]
+        [Repeat(1000)]
         public void DecodedStringIsTheSame()
         {
             // Arrange
