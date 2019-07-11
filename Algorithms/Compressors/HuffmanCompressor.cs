@@ -17,8 +17,8 @@ namespace Algorithms.Compressors
         /// <summary>
         /// Initializes a new instance of the <see cref="HuffmanCompressor"/> class.
         /// </summary>
-        /// <param name="sorter"> sorter to use for compression.</param>
-        /// <param name="translator">translator.</param>
+        /// <param name="sorter">Sorter to use for compression.</param>
+        /// <param name="translator">Translator.</param>
         public HuffmanCompressor(ISorter<ListNode> sorter, Translator translator)
         {
             this.sorter = sorter;
@@ -72,15 +72,15 @@ namespace Algorithms.Compressors
                 AddMany(decompressionKeys, lsdk.Select(kvp => ("0" + kvp.Key, kvp.Value)));
             }
 
-            if (tree.RightChild == null)
+            if (tree.RightChild != null)
             {
-                return (compressionKeys, decompressionKeys);
-            }
+                {
+                    var (rsck, rsdk) = GetKeys(tree.RightChild);
+                    AddMany(compressionKeys, rsck.Select(kvp => (kvp.Key, "1" + kvp.Value)));
+                    AddMany(decompressionKeys, rsdk.Select(kvp => ("1" + kvp.Key, kvp.Value)));
+                }
 
-            {
-                var (rsck, rsdk) = GetKeys(tree.RightChild);
-                AddMany(compressionKeys, rsck.Select(kvp => (kvp.Key, "1" + kvp.Value)));
-                AddMany(decompressionKeys, rsdk.Select(kvp => ("1" + kvp.Key, kvp.Value)));
+                return (compressionKeys, decompressionKeys);
             }
 
             return (compressionKeys, decompressionKeys);
