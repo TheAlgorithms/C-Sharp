@@ -13,12 +13,12 @@ namespace Algorithms.Searches
         /// <param name="sortedData">Sorted array to search in.</param>
         /// <param name="item">Item to search for.</param>
         /// <returns>Index of item that equals to item searched for or -1 if none found.</returns>
-        public int FindIndex(T[] sortedData, T item) 
+        public int FindIndex(T[] sortedData, T item)
         {
             var leftIndex = 0;
             var rightIndex = sortedData.Length - 1;
 
-            do
+            while (leftIndex <= rightIndex)
             {
                 var middleIndex = leftIndex + (rightIndex - leftIndex) / 2;
 
@@ -35,8 +35,7 @@ namespace Algorithms.Searches
                 }
 
                 return middleIndex;
-
-            } while (leftIndex <= rightIndex);
+            }
 
             return -1;
         }
