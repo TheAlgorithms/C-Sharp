@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Tests
+namespace DataStructures.Tests
 {
     public class Tests
     {

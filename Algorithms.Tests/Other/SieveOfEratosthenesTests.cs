@@ -1,13 +1,12 @@
 ﻿using System.Numerics;
 using Algorithms.Other;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Other
 {
     public class SieveOfEratosthenesTests
     {
-        private static readonly BigInteger[] first10_000PrimeNumbers =
+        private static readonly BigInteger[] First10000PrimeNumbers =
         {
             2,
             3,
@@ -10012,6 +10011,6 @@ namespace Algorithms.Tests.Other
         };
 
         [Test]
-        public void First10_000PrimesCorrect() => Assert.AreEqual(first10_000PrimeNumbers, SieveOfEratosthenes.GetPrimeNumbers(10_000));
+        public void First10_000PrimesCorrect() => Assert.AreEqual(First10000PrimeNumbers, SieveOfEratosthenes.GetPrimeNumbers(10_000));
     }
 }

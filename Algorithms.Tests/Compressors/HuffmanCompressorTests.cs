@@ -1,5 +1,4 @@
-﻿using System;
-using Algorithms.Compressors;
+﻿using Algorithms.Compressors;
 using Algorithms.Sorters;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
@@ -31,7 +30,7 @@ namespace Algorithms.Tests.Compressors
         }
 
         [Test]
-        public void DecompressedTextTheSameAsOriginal([Random(0, 1000, 1000)]int length)
+        public void DecompressedTextTheSameAsOriginal([Random(0, 1000, 1000, Distinct = true)]int length)
         {
             //Arrange
             var sorter = new BubbleSorter<HuffmanCompressor.ListNode>();

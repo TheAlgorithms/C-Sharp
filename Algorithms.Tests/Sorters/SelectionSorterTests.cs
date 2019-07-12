@@ -2,7 +2,6 @@
 using Algorithms.Sorters;
 using Algorithms.Tests.Helpers;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Sorters
 {
