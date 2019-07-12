@@ -29,7 +29,6 @@ namespace Algorithms.Tests.Search
             // Arrange
             var searcher = new BinarySearcher<int>();
             var random = Randomizer.CreateRandomizer();
-
             var arrayToSearch = Enumerable.Range(0, n).Select(x => random.Next(0, 1000)).Where(x => x != missingItem).OrderBy(x => x).ToArray();
 
             // Act
