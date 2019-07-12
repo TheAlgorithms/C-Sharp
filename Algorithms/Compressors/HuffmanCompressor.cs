@@ -74,11 +74,9 @@ namespace Algorithms.Compressors
 
             if (tree.RightChild != null)
             {
-                {
-                    var (rsck, rsdk) = GetKeys(tree.RightChild);
-                    AddMany(compressionKeys, rsck.Select(kvp => (kvp.Key, "1" + kvp.Value)));
-                    AddMany(decompressionKeys, rsdk.Select(kvp => ("1" + kvp.Key, kvp.Value)));
-                }
+                var (rsck, rsdk) = GetKeys(tree.RightChild);
+                AddMany(compressionKeys, rsck.Select(kvp => (kvp.Key, "1" + kvp.Value)));
+                AddMany(decompressionKeys, rsdk.Select(kvp => ("1" + kvp.Key, kvp.Value)));
 
                 return (compressionKeys, decompressionKeys);
             }

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Algorithms.Searches;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
