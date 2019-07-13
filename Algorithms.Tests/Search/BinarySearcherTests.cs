@@ -8,7 +8,7 @@ namespace Algorithms.Tests.Search
     public class BinarySearcherTests
     {
         [Test]
-        public void FindIndex_ItemPresent_IndexCorrect([Random(1, 1000, 1000)]int n)
+        public void FindIndex_ItemPresent_IndexCorrect([Random(1, 1000, 100)]int n)
         {
             // Arrange
             var searcher = new BinarySearcher<int>();
@@ -24,7 +24,7 @@ namespace Algorithms.Tests.Search
         }
 
         [Test]
-        public void FindIndex_ItemMissing_MinusOneReturned([Random(0, 1000, 100)]int n, [Random(-100, 1100, 100)]int missingItem)
+        public void FindIndex_ItemMissing_MinusOneReturned([Random(0, 1000, 10)]int n, [Random(-100, 1100, 10)]int missingItem)
         {
             // Arrange
             var searcher = new BinarySearcher<int>();
