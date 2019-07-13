@@ -8,7 +8,7 @@ namespace Algorithms.Tests.Sorters
     public class BinaryInsertionSorterTests
     {
         [Test]
-        public void ArraySorted([Random(0, 1000, 1000)]int n)
+        public void ArraySorted([Random(0, 1000, 100)]int n)
         {
             // Arrange
             var sorter = new BinaryInsertionSorter<int>();

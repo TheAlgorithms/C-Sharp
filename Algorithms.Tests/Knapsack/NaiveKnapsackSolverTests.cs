@@ -7,7 +7,7 @@ namespace Algorithms.Tests.Knapsack
     public class NaiveKnapsackSolverTests
     {
         [Test]
-        public void TakesHalf([Random(0, 1000, 1000)]int length)
+        public void TakesHalf([Random(0, 1000, 100)]int length)
         {
             //Arrange
             var solver = new NaiveKnapsackSolver<int>();

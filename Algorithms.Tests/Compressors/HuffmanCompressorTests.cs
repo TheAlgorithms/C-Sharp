@@ -30,7 +30,7 @@ namespace Algorithms.Tests.Compressors
         }
 
         [Test]
-        public void DecompressedTextTheSameAsOriginal([Random(0, 1000, 1000, Distinct = true)]int length)
+        public void DecompressedTextTheSameAsOriginal([Random(0, 1000, 100, Distinct = true)]int length)
         {
             //Arrange
             var sorter = new BubbleSorter<HuffmanCompressor.ListNode>();
