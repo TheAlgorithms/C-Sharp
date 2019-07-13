@@ -1,5 +1,4 @@
-﻿using System;
-using Algorithms.Encoders;
+﻿using Algorithms.Encoders;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 

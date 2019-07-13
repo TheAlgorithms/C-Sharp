@@ -14,6 +14,11 @@ namespace Algorithms.Compressors
         private readonly ISorter<ListNode> sorter;
         private readonly Translator translator;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HuffmanCompressor"/> class.
+        /// </summary>
+        /// <param name="sorter">Sorter to use for compression.</param>
+        /// <param name="translator">Translator.</param>
         public HuffmanCompressor(ISorter<ListNode> sorter, Translator translator)
         {
             this.sorter = sorter;
@@ -24,7 +29,7 @@ namespace Algorithms.Compressors
         /// Given an input string, returns a new compressed string
         /// using huffman enconding.
         /// </summary>
-        /// <param name="inputText">Text message to compress.</param>
+        /// <param name="uncompressedText">Text message to compress.</param>
         /// <returns>Compressed string and keys to decompress it.</returns>
         public (string compressedText, Dictionary<string, string> decompressionKeys) Compress(string uncompressedText)
         {
@@ -72,12 +77,14 @@ namespace Algorithms.Compressors
                 var (rsck, rsdk) = GetKeys(tree.RightChild);
                 AddMany(compressionKeys, rsck.Select(kvp => (kvp.Key, "1" + kvp.Value)));
                 AddMany(decompressionKeys, rsdk.Select(kvp => ("1" + kvp.Key, kvp.Value)));
+
+                return (compressionKeys, decompressionKeys);
             }
 
             return (compressionKeys, decompressionKeys);
         }
 
-        private void AddMany(Dictionary<string, string> keys, IEnumerable<(string key, string value)> enumerable)
+        private static void AddMany(IDictionary<string, string> keys, IEnumerable<(string key, string value)> enumerable)
         {
             foreach (var (key, value) in enumerable)
             {
@@ -104,11 +111,6 @@ namespace Algorithms.Compressors
             return nodes[0];
         }
 
-        private class ListNodeComparer : IComparer<ListNode>
-        {
-            public int Compare(ListNode x, ListNode y) => x.Frequency.CompareTo(y.Frequency);
-        }
-
         /// <summary>
         /// Finds frequency for each character in the text.
         /// </summary>
@@ -117,9 +119,8 @@ namespace Algorithms.Compressors
         {
             var occurenceCounts = new Dictionary<char, double>();
 
-            for (var i = 0; i < text.Length; i++)
+            foreach (var ch in text)
             {
-                var ch = text[i];
                 if (!occurenceCounts.ContainsKey(ch))
                 {
                     occurenceCounts.Add(ch, 0);
@@ -159,6 +160,11 @@ namespace Algorithms.Compressors
                 RightChild = rightChild;
                 Frequency = leftChild.Frequency + rightChild.Frequency;
             }
+        }
+
+        private class ListNodeComparer : IComparer<ListNode>
+        {
+            public int Compare(ListNode x, ListNode y) => x.Frequency.CompareTo(y.Frequency);
         }
     }
 }

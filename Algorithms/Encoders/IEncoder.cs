@@ -3,6 +3,7 @@
     /// <summary>
     /// Encodes and decodes text based on specified key.
     /// </summary>
+    /// <typeparam name="TKey">Type of the key.</typeparam>
     public interface IEncoder<TKey>
     {
         /// <summary>
