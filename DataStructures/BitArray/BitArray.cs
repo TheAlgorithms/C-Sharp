@@ -529,7 +529,7 @@ namespace DataStructures.BitArray
                 {
                     result += '0';
                 }
-                else if (sequence1[i] == '1')
+                else
                 {
                     if (sequence2[i] == '1')
                     {
@@ -610,7 +610,7 @@ namespace DataStructures.BitArray
                         result += '0';
                     }
                 }
-                else if (sequence1[i] == '1')
+                else
                 {
                     result += '1';
                 }

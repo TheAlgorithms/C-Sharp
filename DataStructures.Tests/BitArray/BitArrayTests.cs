@@ -74,7 +74,7 @@ namespace DataStructures.Tests.BitArray
             // Assert
             _ = Assert.Throws<Exception>(() =>
               {
-                  var unused = new DataStructures.BitArray.BitArray(sequence);
+                  _ = new DataStructures.BitArray.BitArray(sequence);
               });
         }
 
