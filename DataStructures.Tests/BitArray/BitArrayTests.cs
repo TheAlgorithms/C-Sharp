@@ -8,6 +8,8 @@ namespace DataStructures.Tests.BitArray
     /// </summary>
     public static class BitArrayTests
     {
+        #region COMPILE TESTS
+
         [Test]
         [TestCase("00100", "00100")]
         [TestCase("01101", "01101")]
@@ -25,57 +27,57 @@ namespace DataStructures.Tests.BitArray
         }
 
         [Test]
-        [TestCase("klgml", "010111111")]
-        public static void TestCompileToStringThorwsException(string sequence, string expectedSequence)
+        [TestCase("klgml", 5)]
+        [TestCase("klgml", 3)]
+        public static void TestCompileToStringThorwsException(string sequence, int arrLen)
+        {
+            // Arrange
+            var testObj = new DataStructures.BitArray.BitArray(arrLen);
+
+            // Act
+            void Act() => testObj.Compile(sequence);
+
+            // Assert
+            var ex = Assert.Throws<Exception>(Act);
+            if (sequence.Length > arrLen || sequence.Length < arrLen)
+            {
+                Assert.AreEqual("Compile: not equal length!", ex.Message);
+            }
+        }
+
+        [Test]
+        [TestCase(15, "01111")]
+        [TestCase(17, "10001")]
+        [TestCase(4, "00100")]
+        public static void TestCompileLong(int number, string expected)
         {
             // Arrange
             var testObj = new DataStructures.BitArray.BitArray(5);
 
             // Act
+            testObj.Compile((long)number);
 
             // Assert
-            _ = Assert.Throws<Exception>(() => testObj.Compile(sequence));
+            Assert.AreEqual(expected, testObj.ToString());
         }
 
         [Test]
-        [TestCase("00100", 4)]
-        public static void TestConstructor(string sequence, int expected)
+        [TestCase(46, 3)]
+        [TestCase(-46, 5)]
+        public static void TestCompileLongThrowsException(int number, int arrLen)
         {
             // Arrange
-            var testObj1 = new DataStructures.BitArray.BitArray(sequence);
+            var testObj = new DataStructures.BitArray.BitArray(arrLen);
 
             // Act
+            void Act() => testObj.Compile((long)number);
 
             // Assert
-            Assert.AreEqual(expected, testObj1.ToInt64());
-        }
-        
-        [Test]
-        [TestCase(new[] { true, false, true }, 5)]
-        public static void TestConstructorBoolArray(bool[] sequence, int expected)
-        {
-            // Arrange
-            var testObj3 = new DataStructures.BitArray.BitArray(sequence);
+            var ex = Assert.Throws<Exception>(Act);
 
-            // Act
-
-            // Assert
-            Assert.AreEqual(expected, testObj3.ToInt64());
-        }
-
-        [Test]
-        [TestCase("000120")]
-        public static void TestConstructorThrowsException(string sequence)
-        {
-            // Arrange
-
-            // Act
-
-            // Assert
-            _ = Assert.Throws<Exception>(() =>
-              {
-                  _ = new DataStructures.BitArray.BitArray(sequence);
-              });
+            Assert.AreEqual(number < 0 ?
+                "Compile: only positive numbers > 0" :
+                "Compile: not apt length!", ex.Message);
         }
 
         [Test]
@@ -103,11 +105,64 @@ namespace DataStructures.Tests.BitArray
             var testObj = new DataStructures.BitArray.BitArray(arrayLength);
 
             // Act
+            void Act() => testObj.Compile(number);
 
             // Assert
-            var ex = Assert.Throws<Exception>(() => testObj.Compile(number));
+            var ex = Assert.Throws<Exception>(Act);
             Assert.AreEqual(expectedErrorMsg, ex.Message);
         }
+
+        #endregion COMPILE TESTS
+
+        #region CONSTRUCTOR TESTS
+
+        [Test]
+        [TestCase("00100", 4)]
+        public static void TestConstructor(string sequence, int expected)
+        {
+            // Arrange
+            var testObj1 = new DataStructures.BitArray.BitArray(sequence);
+
+            // Act
+
+            // Assert
+            Assert.AreEqual(expected, testObj1.ToInt64());
+        }
+
+        [Test]
+        [TestCase(new[] { true, false, true }, 5)]
+        public static void TestConstructorBoolArray(bool[] sequence, int expected)
+        {
+            // Arrange
+            var testObj3 = new DataStructures.BitArray.BitArray(sequence);
+
+            // Act
+
+            // Assert
+            Assert.AreEqual(expected, testObj3.ToInt64());
+        }
+
+        [Test]
+        [TestCase("000120")]
+        [TestCase("")]
+        public static void TestConstructorThrowsException(string sequence)
+        {
+            // Arrange
+            void CodeTest() => _ = new DataStructures.BitArray.BitArray(sequence);
+
+            // Act
+            var ex = Assert.Throws<Exception>(CodeTest);
+
+            // Assert
+            if (string.IsNullOrEmpty(sequence))
+            {
+                Assert.AreEqual("BitArray: sequence must been greater or equal as 1", ex.Message);
+            }
+        }
+
+        #endregion CONSTRUCTOR TESTS
+
+        #region OPERATOR TESTS
 
         [Test]
         [TestCase(17, 17, "10001")]
@@ -162,6 +217,24 @@ namespace DataStructures.Tests.BitArray
         }
 
         [Test]
+        [TestCase(25, 30, 7)]
+        public static void TestOperatorXor(int testNum, int testNum2, int expected)
+        {
+            // Arrange
+            var testObj1 = new DataStructures.BitArray.BitArray(5);
+            var testObj2 = new DataStructures.BitArray.BitArray(5);
+
+            // Act
+            testObj1.Compile(testNum);
+            testObj2.Compile(testNum2);
+
+            var result = testObj1 ^ testObj2;
+
+            // Assert
+            Assert.AreEqual(expected, result.ToInt32());
+        }
+
+        [Test]
         [TestCase(16, "10000000")]
         public static void TestOperatorShiftLeft(int number, string expected)
         {
@@ -191,23 +264,69 @@ namespace DataStructures.Tests.BitArray
             Assert.AreEqual(expected, testObj.ToString());
         }
 
+        #endregion OPERATOR TESTS
+
+        #region COMPARE TESTS
+
         [Test]
-        [TestCase(25, 30, 7)]
-        public static void TestOperatorXor(int testNum, int testNum2, int expected)
+        public static void TestParity()
         {
             // Arrange
-            var testObj1 = new DataStructures.BitArray.BitArray(5);
-            var testObj2 = new DataStructures.BitArray.BitArray(5);
+            var testObj = new DataStructures.BitArray.BitArray(5);
 
             // Act
-            testObj1.Compile(testNum);
-            testObj2.Compile(testNum2);
-
-            var result = testObj1 ^ testObj2;
+            testObj.Compile(26);
 
             // Assert
-            Assert.AreEqual(expected, result.ToInt32());
+            Assert.IsFalse(testObj.EvenParity());
+            Assert.IsTrue(testObj.OddParity());
         }
+
+        [Test]
+        public static void TestCompare()
+        {
+            // Arrange
+            var testObj1 = new DataStructures.BitArray.BitArray("110");
+            var testObj2 = new DataStructures.BitArray.BitArray("110");
+            var testObj3 = new DataStructures.BitArray.BitArray("100");
+
+            // Act
+
+            // Assert
+            Assert.IsTrue(testObj1 == testObj2);
+            Assert.IsTrue(testObj1 != testObj3);
+        }
+
+        [Test]
+        public static void TestCompareThrowsException()
+        {
+            // Arrange
+            var testObj1 = new DataStructures.BitArray.BitArray("110");
+            var testObj2 = new DataStructures.BitArray.BitArray("10101");
+
+            // Act
+
+            // Assert
+            _ = Assert.Throws<Exception>(() => Assert.IsTrue(testObj1 == testObj2));
+        }
+
+        [Test]
+        public static void TestCompareTo()
+        {
+            // Arrange
+            var testObj1 = new DataStructures.BitArray.BitArray("110");
+            var testObj2 = new DataStructures.BitArray.BitArray("110");
+            var testObj3 = new DataStructures.BitArray.BitArray("100");
+
+            // Act
+
+            // Assert
+            Assert.AreEqual(testObj1.CompareTo(testObj3), 1);
+            Assert.AreEqual(testObj3.CompareTo(testObj1), -1);
+            Assert.AreEqual(testObj1.CompareTo(testObj2), 0);
+        }
+
+        #endregion COMPARE TESTS
 
         [Test]
         public static void TestIndexer()
@@ -253,20 +372,6 @@ namespace DataStructures.Tests.BitArray
         }
 
         [Test]
-        public static void TestParity()
-        {
-            // Arrange
-            var testObj = new DataStructures.BitArray.BitArray(5);
-
-            // Act
-            testObj.Compile(26);
-
-            // Assert
-            Assert.IsFalse(testObj.EvenParity());
-            Assert.IsTrue(testObj.OddParity());
-        }
-
-        [Test]
         [TestCase(33, 33)]
         public static void TestToInt64(int number, int expected)
         {
@@ -274,38 +379,34 @@ namespace DataStructures.Tests.BitArray
             var testObj = new DataStructures.BitArray.BitArray(6);
 
             // Act
-            testObj.Compile(33);
+            testObj.Compile(number);
 
             // Assert
-            Assert.AreEqual(testObj.ToInt64(), 33);
+            Assert.AreEqual(expected, testObj.ToInt64());
         }
 
         [Test]
-        public static void TestCompare()
+        public static void TestToInt32MaxValue()
         {
             // Arrange
-            var testObj1 = new DataStructures.BitArray.BitArray("110");
-            var testObj2 = new DataStructures.BitArray.BitArray("110");
-            var testObj3 = new DataStructures.BitArray.BitArray("100");
+            var testObj = new DataStructures.BitArray.BitArray(33);
 
             // Act
 
             // Assert
-            Assert.IsTrue(testObj1 == testObj2);
-            Assert.IsTrue(testObj1 != testObj3);
+            _ = Assert.Throws<Exception>(() => testObj.ToInt32());
         }
 
         [Test]
-        public static void TestCompareThrowsException()
+        public static void TestToInt64MaxValue()
         {
             // Arrange
-            var testObj1 = new DataStructures.BitArray.BitArray("110");
-            var testObj2 = new DataStructures.BitArray.BitArray("10101");
+            var testObj = new DataStructures.BitArray.BitArray(65);
 
             // Act
 
             // Assert
-            _ = Assert.Throws<Exception>(() => Assert.IsTrue(testObj1 == testObj2));
+            _ = Assert.Throws<Exception>(() => testObj.ToInt64());
         }
 
         [Test]
@@ -337,22 +438,6 @@ namespace DataStructures.Tests.BitArray
         }
 
         [Test]
-        public static void TestCompareTo()
-        {
-            // Arrange
-            var testObj1 = new DataStructures.BitArray.BitArray("110");
-            var testObj2 = new DataStructures.BitArray.BitArray("110");
-            var testObj3 = new DataStructures.BitArray.BitArray("100");
-
-            // Act
-
-            // Assert
-            Assert.AreEqual(testObj1.CompareTo(testObj3), 1);
-            Assert.AreEqual(testObj3.CompareTo(testObj1), -1);
-            Assert.AreEqual(testObj1.CompareTo(testObj2), 0);
-        }
-
-        [Test]
         public static void TestCloneEquals()
         {
             // Arrange
@@ -363,6 +448,38 @@ namespace DataStructures.Tests.BitArray
 
             // Assert
             Assert.IsTrue(testObj1.Equals(testObj2));
+        }
+
+        [Test]
+        public static void TestCloneNotEquals()
+        {
+            // Arrange
+            var testObj1 = new DataStructures.BitArray.BitArray("101");
+            var testObj2 = new DataStructures.BitArray.BitArray(15);
+            var testObj3 = new DataStructures.BitArray.BitArray(3);
+
+            // Act
+            testObj3.Reset();
+
+            // Assert
+            _ = Assert.Throws<Exception>(() => _ = testObj1.Equals(testObj2));
+            Assert.IsFalse(testObj1.Equals(testObj3));
+        }
+
+        [Test]
+        public static void TestHasCode()
+        {
+            // Arrange
+            const int num = 5;
+            var testObj = new DataStructures.BitArray.BitArray(3);
+
+            // Act
+            testObj.Compile(num);
+            var result = testObj.GetHashCode();
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.AreEqual(5, result);
         }
 
         [Test]
@@ -387,6 +504,19 @@ namespace DataStructures.Tests.BitArray
 
             Assert.AreEqual(counterOnes, 5);
             Assert.AreEqual(counterZeros, 2);
+        }
+
+        [Test]
+        public static void CurrentThrowsException()
+        {
+            // Arragne
+            var testObj = new DataStructures.BitArray.BitArray(5);
+
+            // Act
+            testObj.Compile(16);
+
+            // Assert
+            _ = Assert.Throws<InvalidOperationException>(() => _ = testObj.Current);
         }
     }
 }
