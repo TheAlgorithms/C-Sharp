@@ -136,19 +136,17 @@ namespace DataStructures.BitArray
 		 * */
         public BitArray(int n)
         {
-            if (n >= 1)
+            if (n < 1)
             {
-                _field = new bool[n];
-
-                // fills up the field with zero-bits.
-                for (var i = 0; i < n; i++)
-                {
-                    _field[i] = false;
-                }
+                return;
             }
-            else
+
+            _field = new bool[n];
+
+            // fills up the field with zero-bits.
+            for (var i = 0; i < n; i++)
             {
-                throw new Exception("BitArray: n must been greater or equal to 1");
+                _field[i] = false;
             }
         }
 
@@ -470,15 +468,8 @@ namespace DataStructures.BitArray
 		 * */
         public override string ToString()
         {
-            var ans = string.Empty;
-
             // creates return-string
-            foreach (var t in _field)
-            {
-                ans += t ? "1" : "0";
-            }
-
-            return ans;
+            return _field.Aggregate(string.Empty, (current, t) => current + (t ? "1" : "0"));
         }
 
         /**

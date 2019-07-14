@@ -6,13 +6,13 @@ namespace DataStructures.Tests.BitArray
     /// <summary>
     /// This class contains some tests for the class BitArray.
     /// </summary>
-    public class BitArrayTests
+    public static class BitArrayTests
     {
         [Test]
         [TestCase("00100", "00100")]
         [TestCase("01101", "01101")]
         [TestCase("100", "00100")]
-        public void TestCompileToString(string sequence, string expectedSequence)
+        public static void TestCompileToString(string sequence, string expectedSequence)
         {
             // Arrange
             var testObj = new DataStructures.BitArray.BitArray(5);
@@ -26,7 +26,7 @@ namespace DataStructures.Tests.BitArray
 
         [Test]
         [TestCase("klgml", "010111111")]
-        public void TestCompileToStringThorwsException(string sequence, string expectedSequence)
+        public static void TestCompileToStringThorwsException(string sequence, string expectedSequence)
         {
             // Arrange
             var testObj = new DataStructures.BitArray.BitArray(5);
@@ -39,7 +39,7 @@ namespace DataStructures.Tests.BitArray
 
         [Test]
         [TestCase("00100", 4)]
-        public void TestConstructor(string sequence, int expected)
+        public static void TestConstructor(string sequence, int expected)
         {
             // Arrange
             var testObj1 = new DataStructures.BitArray.BitArray(sequence);
@@ -49,25 +49,10 @@ namespace DataStructures.Tests.BitArray
             // Assert
             Assert.AreEqual(expected, testObj1.ToInt64());
         }
-
-        [Test]
-        public void TestConstructorThrowsException()
-        {
-            // Arrange
-            var ex = Assert.Throws<Exception>(() =>
-            {
-                var unused = new DataStructures.BitArray.BitArray(-1);
-            });
-
-            // Act
-
-            // Assert
-            Assert.AreEqual("BitArray: n must been greater or equal to 1", ex.Message);
-        }
-
+        
         [Test]
         [TestCase(new[] { true, false, true }, 5)]
-        public void TestConstructorBoolArray(bool[] sequence, int expected)
+        public static void TestConstructorBoolArray(bool[] sequence, int expected)
         {
             // Arrange
             var testObj3 = new DataStructures.BitArray.BitArray(sequence);
@@ -80,7 +65,7 @@ namespace DataStructures.Tests.BitArray
 
         [Test]
         [TestCase("000120")]
-        public void TestConstructorThrowsException(string sequence)
+        public static void TestConstructorThrowsException(string sequence)
         {
             // Arrange
 
@@ -97,7 +82,7 @@ namespace DataStructures.Tests.BitArray
         [TestCase(17, "10001")]
         [TestCase(25, "11001")]
         [TestCase(4, "00100")]
-        public void TestCompileInteger(int number, string expected)
+        public static void TestCompileInteger(int number, string expected)
         {
             // Arrange
             var testObj = new DataStructures.BitArray.BitArray(5);
@@ -112,7 +97,7 @@ namespace DataStructures.Tests.BitArray
         [Test]
         [TestCase(-8, "Compile: only positive numbers > 0", 5)]
         [TestCase(18, "Compile: not apt length!", 3)]
-        public void TestCompileIntegerThrowsException(int number, string expectedErrorMsg, int arrayLength)
+        public static void TestCompileIntegerThrowsException(int number, string expectedErrorMsg, int arrayLength)
         {
             // Arrange
             var testObj = new DataStructures.BitArray.BitArray(arrayLength);
@@ -127,7 +112,7 @@ namespace DataStructures.Tests.BitArray
         [Test]
         [TestCase(17, 17, "10001")]
         [TestCase(25, 31, "11001")]
-        public void TestOperatorAnd(int tObj1, int tObj2, string expected)
+        public static void TestOperatorAnd(int tObj1, int tObj2, string expected)
         {
             // Arrange
             var testObj1 = new DataStructures.BitArray.BitArray(5);
@@ -145,7 +130,7 @@ namespace DataStructures.Tests.BitArray
 
         [Test]
         [TestCase(25, 30, "11111")]
-        public void TestOperatorOr(int tObj1, int tObj2, string expected)
+        public static void TestOperatorOr(int tObj1, int tObj2, string expected)
         {
             // Arrange
             var testObj1 = new DataStructures.BitArray.BitArray(5);
@@ -163,7 +148,7 @@ namespace DataStructures.Tests.BitArray
 
         [Test]
         [TestCase(16, "01111")]
-        public void TestOperatorNot(int number, string expected)
+        public static void TestOperatorNot(int number, string expected)
         {
             // Arrange
             var testObj = new DataStructures.BitArray.BitArray(5);
@@ -178,7 +163,7 @@ namespace DataStructures.Tests.BitArray
 
         [Test]
         [TestCase(16, "10000000")]
-        public void TestOperatorShiftLeft(int number, string expected)
+        public static void TestOperatorShiftLeft(int number, string expected)
         {
             // Arrange
             var testObj = new DataStructures.BitArray.BitArray(5);
@@ -193,7 +178,7 @@ namespace DataStructures.Tests.BitArray
 
         [Test]
         [TestCase(24, "110")]
-        public void TestOperatorShiftRight(int number, string expected)
+        public static void TestOperatorShiftRight(int number, string expected)
         {
             // Arrange
             var testObj = new DataStructures.BitArray.BitArray(5);
@@ -208,7 +193,7 @@ namespace DataStructures.Tests.BitArray
 
         [Test]
         [TestCase(25, 30, 7)]
-        public void TestOperatorXor(int testNum, int testNum2, int expected)
+        public static void TestOperatorXor(int testNum, int testNum2, int expected)
         {
             // Arrange
             var testObj1 = new DataStructures.BitArray.BitArray(5);
@@ -225,7 +210,7 @@ namespace DataStructures.Tests.BitArray
         }
 
         [Test]
-        public void TestIndexer()
+        public static void TestIndexer()
         {
             // Arrange
             var testObj = new DataStructures.BitArray.BitArray(5);
@@ -241,7 +226,7 @@ namespace DataStructures.Tests.BitArray
 
         [Test]
         [TestCase(19, 3)]
-        public void TestNumberOfOneBits(int number, int expected)
+        public static void TestNumberOfOneBits(int number, int expected)
         {
             // Arrange
             var testObj = new DataStructures.BitArray.BitArray(5);
@@ -255,7 +240,7 @@ namespace DataStructures.Tests.BitArray
 
         [Test]
         [TestCase(26, 2)]
-        public void TestNumberOfZeroBits(int number, int expected)
+        public static void TestNumberOfZeroBits(int number, int expected)
         {
             // Arrange
             var testObj = new DataStructures.BitArray.BitArray(5);
@@ -268,7 +253,7 @@ namespace DataStructures.Tests.BitArray
         }
 
         [Test]
-        public void TestParity()
+        public static void TestParity()
         {
             // Arrange
             var testObj = new DataStructures.BitArray.BitArray(5);
@@ -283,7 +268,7 @@ namespace DataStructures.Tests.BitArray
 
         [Test]
         [TestCase(33, 33)]
-        public void TestToInt64(int number, int expected)
+        public static void TestToInt64(int number, int expected)
         {
             // Arrange
             var testObj = new DataStructures.BitArray.BitArray(6);
@@ -296,7 +281,7 @@ namespace DataStructures.Tests.BitArray
         }
 
         [Test]
-        public void TestCompare()
+        public static void TestCompare()
         {
             // Arrange
             var testObj1 = new DataStructures.BitArray.BitArray("110");
@@ -311,7 +296,7 @@ namespace DataStructures.Tests.BitArray
         }
 
         [Test]
-        public void TestCompareThrowsException()
+        public static void TestCompareThrowsException()
         {
             // Arrange
             var testObj1 = new DataStructures.BitArray.BitArray("110");
@@ -325,7 +310,7 @@ namespace DataStructures.Tests.BitArray
 
         [Test]
         [TestCase("110")]
-        public void TestResetField(string sequence)
+        public static void TestResetField(string sequence)
         {
             // Arrange
             var testObj = new DataStructures.BitArray.BitArray(sequence);
@@ -339,7 +324,7 @@ namespace DataStructures.Tests.BitArray
 
         [Test]
         [TestCase("101001", 63)]
-        public void TestSetAll(string sequence, int expected)
+        public static void TestSetAll(string sequence, int expected)
         {
             // Arrange
             var testObj = new DataStructures.BitArray.BitArray(sequence);
@@ -352,7 +337,7 @@ namespace DataStructures.Tests.BitArray
         }
 
         [Test]
-        public void TestCompareTo()
+        public static void TestCompareTo()
         {
             // Arrange
             var testObj1 = new DataStructures.BitArray.BitArray("110");
@@ -368,7 +353,7 @@ namespace DataStructures.Tests.BitArray
         }
 
         [Test]
-        public void TestCloneEquals()
+        public static void TestCloneEquals()
         {
             // Arrange
             var testObj1 = new DataStructures.BitArray.BitArray("110");
@@ -381,7 +366,7 @@ namespace DataStructures.Tests.BitArray
         }
 
         [Test]
-        public void TestMoveNextCurrent()
+        public static void TestMoveNextCurrent()
         {
             var testObj1 = new DataStructures.BitArray.BitArray("1111010");
 
