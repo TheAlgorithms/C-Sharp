@@ -128,12 +128,10 @@ namespace DataStructures.BitArray
         private readonly bool[] _field; // the actual bit-field
         private int _position = -1; // position for enumerator
 
-        /*
-		 * constructor
-		 * input: length (N) of the array
-		 * output: none
-		 * purpose: setups the array with false-values.
-		 * */
+        /// <summary>
+        /// setups the array with false-values.
+        /// </summary> 
+        /// <param name="n">length (N) of the array</param>
         public BitArray(int n)
         {
             if (n < 1)
