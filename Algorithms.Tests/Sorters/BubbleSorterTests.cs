@@ -8,20 +8,12 @@ namespace Algorithms.Tests.Sorters
     public class BubbleSorterTests
     {
         [Test]
-        public void ArraySorted([Random(0, 1000, 100)]int n)
+        public void ArraySorted([Random(0, 1000, 100, Distinct = true)]int n)
         {
             // Arrange
             var sorter = new BubbleSorter<int>();
             var intComparer = new IntComparer();
-            var random = new Random();
-            var testArray = new int[n];
-            var correctArray = new int[n];
-            for (var i = 0; i < n; i++)
-            {
-                var t = random.Next(0, 1000);
-                testArray[i] = t;
-                correctArray[i] = t;
-            }
+            var (correctArray, testArray) = RandomHelper.GetArrays(n);
 
             // Act
             sorter.Sort(testArray, intComparer);
