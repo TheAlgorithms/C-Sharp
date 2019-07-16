@@ -5,13 +5,13 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Sorters
 {
-    public class BucketSortTests
+    public class BucketSorterTests
     {
         [Test]
         public void ArraySorted([Random(0, 1000, 100, Distinct = true)]int n)
         {
             // Arrange
-            var sorter = new BucketSort();
+            var sorter = new BucketSorter();
             var intComparer = new IntComparer();
             var (correctArray, testArray) = RandomHelper.GetArrays(n);
 

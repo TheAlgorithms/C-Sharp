@@ -30,7 +30,9 @@ namespace traversals
     internal class Tree<T>
     {
         public int Value { get; set; }
+
         public Tree<T> Left { get; set; }
+
         public Tree<T> Right { get; set; }
     }
 

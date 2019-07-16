@@ -1,4 +1,4 @@
-﻿using Algorithms.Compressors;
+﻿using Algorithms.DataCompression;
 using Algorithms.Knapsack;
 using NUnit.Framework;
 using NUnit.Framework.Internal;

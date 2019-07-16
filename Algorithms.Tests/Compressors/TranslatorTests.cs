@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Algorithms.Compressors;
+using Algorithms.DataCompression;
 using NUnit.Framework;
 
 namespace Algorithms.Tests.Compressors

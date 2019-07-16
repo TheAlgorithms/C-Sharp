@@ -25,7 +25,7 @@ namespace ConsoleTest
             var exponentBigInteger = new BigInteger(numberToTest - 1);
 
             // Create a random number generator using the current time as seed
-            var r = new Random(new DateTime().Millisecond);
+            var r = new Random(default(DateTime).Millisecond);
 
             var iterator = 1;
             var prime = true;

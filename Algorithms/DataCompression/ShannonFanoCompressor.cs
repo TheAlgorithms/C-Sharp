@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Algorithms.Knapsack;
 
-namespace Algorithms.Compressors
+namespace Algorithms.DataCompression
 {
     /// <summary>
     /// Greedy lossless compression algorithm.
@@ -22,7 +22,7 @@ namespace Algorithms.Compressors
         /// Given an input string, returns a new compressed string
         /// using Shannon-Fano enconding.
         /// </summary>
-        /// <param name="inputText">Text message to compress.</param>
+        /// <param name="uncompressedText">Text message to compress.</param>
         /// <returns>Compressed string and keys to decompress it.</returns>
         public (string compressedText, Dictionary<string, string> decompressionKeys) Compress(string uncompressedText)
         {
@@ -126,13 +126,13 @@ namespace Algorithms.Compressors
         /// </summary>
         public class ListNode
         {
+            public ListNode((char symbol, double frequency)[] data) => Data = data;
+
             public (char symbol, double frequency)[] Data { get; }
 
             public ListNode RightChild { get; set; }
 
             public ListNode LeftChild { get; set; }
-
-            public ListNode((char symbol, double frequency)[] data) => Data = data;
         }
     }
 }

@@ -1,31 +1,7 @@
-﻿using System;
-
-namespace cocktail_sort
+﻿namespace cocktail_sort
 {
     internal class Program
     {
-        private static void Main()
-        {
-            Console.WriteLine("Please enter some integers, separated by spaces:");
-
-            var input = Console.ReadLine();
-            var integers = input.Split(' ');
-            var data = new int[integers.Length];
-
-            for (var i = 0; i < data.Length; i++)
-            {
-                data[i] = int.Parse(integers[i]);
-            }
-
-            Console.WriteLine("Unsorted: {0}", string.Join(" ", data));
-
-            CocktailSort(data);
-
-            Console.WriteLine("Sorted: {0}", string.Join(" ", data));
-
-            _ = Console.ReadKey();
-        }
-
         public static void CocktailSort(int[] intArray)
         {
             var swapped = true;

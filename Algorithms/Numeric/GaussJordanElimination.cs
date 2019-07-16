@@ -40,12 +40,8 @@ namespace Algorithms.Numeric
         /// False: Otherwise. </returns>
         private bool CanMatrixBeUsed(double[,] matrix)
         {
-            if (matrix == null || matrix.Length != RowCount * (RowCount + 1))
-            {
-                return false;
-            }
-
-            return RowCount > 1;
+            var validMatrix = matrix?.Length == RowCount * (RowCount + 1);
+            return validMatrix ? RowCount > 1 : false;
         }
 
         /// <summary>
