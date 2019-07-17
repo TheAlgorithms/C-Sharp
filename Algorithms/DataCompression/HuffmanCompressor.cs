@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Algorithms.Sorters;
 
-namespace Algorithms.Compressors
+namespace Algorithms.DataCompression
 {
     /// <summary>
     /// Greedy lossless compression algorithm.
@@ -53,6 +53,14 @@ namespace Algorithms.Compressors
             return (translator.Translate(uncompressedText, compressionKeys), decompressionKeys);
         }
 
+        private static void AddMany(IDictionary<string, string> keys, IEnumerable<(string key, string value)> enumerable)
+        {
+            foreach (var (key, value) in enumerable)
+            {
+                keys.Add(key, value);
+            }
+        }
+
         private (Dictionary<string, string> compressionKeys, Dictionary<string, string> decompressionKeys) GetKeys(ListNode tree)
         {
             var compressionKeys = new Dictionary<string, string>();
@@ -82,14 +90,6 @@ namespace Algorithms.Compressors
             }
 
             return (compressionKeys, decompressionKeys);
-        }
-
-        private static void AddMany(IDictionary<string, string> keys, IEnumerable<(string key, string value)> enumerable)
-        {
-            foreach (var (key, value) in enumerable)
-            {
-                keys.Add(key, value);
-            }
         }
 
         private ListNode GenerateHuffmanTree(ListNode[] nodes)
@@ -137,16 +137,6 @@ namespace Algorithms.Compressors
         /// </summary>
         public class ListNode
         {
-            public char Data { get; }
-
-            public bool HasData { get; }
-
-            public double Frequency { get; }
-
-            public ListNode RightChild { get; }
-
-            public ListNode LeftChild { get; }
-
             public ListNode(char data, double frequency)
             {
                 HasData = true;
@@ -160,6 +150,16 @@ namespace Algorithms.Compressors
                 RightChild = rightChild;
                 Frequency = leftChild.Frequency + rightChild.Frequency;
             }
+
+            public char Data { get; }
+
+            public bool HasData { get; }
+
+            public double Frequency { get; }
+
+            public ListNode RightChild { get; }
+
+            public ListNode LeftChild { get; }
         }
 
         private class ListNodeComparer : IComparer<ListNode>

@@ -7,7 +7,7 @@ namespace Algorithms.Sorters
     /// <summary>
     /// Class that implements the BuckerSort Algorithm.
     /// </summary>
-    public class BucketSort : ISorter<int>
+    public class BucketSorter : ISorter<int>
     {
         private const int NumOfDigitsInBase10 = 10;
 

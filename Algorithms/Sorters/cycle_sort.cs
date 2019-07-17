@@ -1,36 +1,7 @@
-using System;
-
 namespace cycle_sort
 {
     internal class Program
     {
-        private static void Main()
-        {
-            Console.WriteLine("Please enter some integers, separated by spaces:");
-            var input = Console.ReadLine();
-            var integers = input.Split(' ');
-            var data = new int[integers.Length];
-            for (var i = 0; i < data.Length; i++)
-            {
-                data[i] = int.Parse(integers[i]);
-            }
-
-            Console.Write("\nUnsorted: ");
-            for (var i = 0; i < data.Length; i++)
-            {
-                Console.Write(data[i] + " ");
-            }
-
-            CycleSort(data);
-            Console.Write("\nSorted: ");
-            for (var i = 0; i < data.Length; i++)
-            {
-                Console.Write(data[i] + " ");
-            }
-
-            _ = Console.ReadKey();
-        }
-
         public static void CycleSort(int[] data)
         {
             for (var cycleStart = 0; cycleStart <= data.Length - 2; cycleStart++)

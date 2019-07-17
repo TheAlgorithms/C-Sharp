@@ -4,6 +4,19 @@ namespace AStar
 {
     public class Location : IEquatable<Location>
     {
+        // Constructors
+        public Location(int a, int b, Location p)
+        {
+            X = a;
+            Y = b;
+            Parent = p;
+
+            G = p == null ? 0 : p.G + 1;
+
+            H = Program.ComputeHScore(X, Y);
+            F = G + H;
+        }
+
         // Properties
         public int F
         {
@@ -36,19 +49,6 @@ namespace AStar
         public int Y
         {
             get;
-        }
-
-        // Constructors
-        public Location(int a, int b, Location p)
-        {
-            X = a;
-            Y = b;
-            Parent = p;
-
-            G = p == null ? 0 : p.G + 1;
-
-            H = Program.ComputeHScore(X, Y);
-            F = G + H;
         }
 
         // Methods

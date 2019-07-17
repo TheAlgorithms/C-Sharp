@@ -38,15 +38,7 @@ namespace Algorithms.Numeric
         /// <param name="matrix">Multidimensional array matrix.</param>
         /// <returns>True: if algorithm can be use for given matrix;
         /// False: Otherwise. </returns>
-        private bool CanMatrixBeUsed(double[,] matrix)
-        {
-            if (matrix == null || matrix.Length != RowCount * (RowCount + 1))
-            {
-                return false;
-            }
-
-            return RowCount > 1;
-        }
+        private bool CanMatrixBeUsed(double[,] matrix) => matrix?.Length == RowCount * (RowCount + 1) && RowCount > 1;
 
         /// <summary>
         /// To prepare given matrix by pivoting rows.

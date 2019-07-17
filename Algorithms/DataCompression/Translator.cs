@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace Algorithms.Compressors
+namespace Algorithms.DataCompression
 {
     public class Translator
     {

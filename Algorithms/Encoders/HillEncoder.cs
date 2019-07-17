@@ -65,23 +65,6 @@ namespace Algorithms.Encoders
         private static string BuildStringFromArray(double[] arr) => new string(arr.Select(c => (char)c).ToArray());
 
         /// <summary>
-        /// Given a list of vectors, returns a single array of elements.
-        /// </summary>
-        /// <param name="list">List of ciphered arrays.</param>
-        /// <returns>unidimensional list.</returns>
-        private double[] MergeArrayList(double[][] list)
-        {
-            var merged = new double[list.Length * 3];
-
-            for (var i = 0; i < list.Length; i++)
-            {
-                Array.Copy(list[i], 0, merged, i * 3, list[0].Length);
-            }
-
-            return merged;
-        }
-
-        /// <summary>
         /// Multiplies the key for the given scalar.
         /// </summary>
         /// <param name="vector">list of splitted words as numbers.</param>
@@ -100,6 +83,23 @@ namespace Algorithms.Encoders
             }
 
             return multiplied;
+        }
+
+        /// <summary>
+        /// Given a list of vectors, returns a single array of elements.
+        /// </summary>
+        /// <param name="list">List of ciphered arrays.</param>
+        /// <returns>unidimensional list.</returns>
+        private double[] MergeArrayList(double[][] list)
+        {
+            var merged = new double[list.Length * 3];
+
+            for (var i = 0; i < list.Length; i++)
+            {
+                Array.Copy(list[i], 0, merged, i * 3, list[0].Length);
+            }
+
+            return merged;
         }
 
         /// <summary>

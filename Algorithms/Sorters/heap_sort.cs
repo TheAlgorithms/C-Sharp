@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace heap_sort
+﻿namespace heap_sort
 {
     internal class Program
     {
@@ -44,33 +42,6 @@ namespace heap_sort
 
                 MakeHeap(input, heapSize, largest);
             }
-        }
-
-        public static void Main()
-        {
-            Console.WriteLine("Please enter some integers, separated by spaces:");
-            var input = Console.ReadLine();
-            var integers = input.Split(' ');
-            var data = new int[integers.Length];
-            for (var i = 0; i < data.Length; i++)
-            {
-                data[i] = int.Parse(integers[i]);
-            }
-
-            Console.Write("\nUnsorted: ");
-            for (var i = 0; i < data.Length; i++)
-            {
-                Console.Write(data[i] + " ");
-            }
-
-            Sort(data);
-            Console.Write("\nSorted: ");
-            for (var i = 0; i < data.Length; i++)
-            {
-                Console.Write(data[i] + " ");
-            }
-
-            _ = Console.ReadLine();
         }
     }
 }

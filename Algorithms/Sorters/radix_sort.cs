@@ -1,30 +1,7 @@
-﻿using System;
-using System.Linq;
-
-namespace radix_sort
+﻿namespace radix_sort
 {
     internal class Program
     {
-        private const int ItemCount = 20;
-
-        private static void Main()
-        {
-            var data = new int[ItemCount];
-            GenerateData(ref data, new Random(ItemCount));
-            const int bits = 4;
-            RadixSort(ref data, bits);
-            Console.WriteLine($"Sorted: {string.Join(" ", data.ToArray())}");
-            _ = Console.ReadLine();
-        }
-
-        private static void GenerateData(ref int[] x, Random randomNumGen)
-        {
-            for (var i = 0; i <= x.Length - 1; i++)
-            {
-                x[i] = (int)(randomNumGen.NextDouble() * x.Length);
-            }
-        }
-
         /// <summary>
         /// Radix sort is a non-comparative integer sorting algorithm that sorts data with integer keys by grouping keys by the individual
         /// digits which share the same significant position and value. A positional notation is required, but because integers can represent
