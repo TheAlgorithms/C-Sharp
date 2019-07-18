@@ -2,7 +2,7 @@
 
 namespace Algorithms.Tests.Helpers
 {
-    internal class RandomHelper
+    internal static class RandomHelper
     {
         public static (int[] correctArray, int[] testArray) GetArrays(int n)
         {
