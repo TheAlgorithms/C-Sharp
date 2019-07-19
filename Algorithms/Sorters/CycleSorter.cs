@@ -17,58 +17,63 @@ namespace Algorithms.Sorters
         /// </summary>
         /// <param name="array">Input array.</param>
         /// <param name="comparer">Integer comparer.</param>
-        public void Sort(T[] array, IComparer<T> comparer) => CycleSort(array, comparer);
-
-        private static void CycleSort(IList<T> data, IComparer<T> comparer)
+        public void Sort(T[] array, IComparer<T> comparer)
         {
-            for (var cycleStart = 0; cycleStart <= data.Count - 2; cycleStart++)
+            for (var i = 0; i < array.Length - 1; i++)
             {
-                var item = data[cycleStart];
-                var pos = cycleStart;
+                MoveCycle(array, i, comparer);
+            }
+        }
 
-                for (var i = cycleStart + 1; i <= data.Count - 1; i++)
-                {
-                    if (comparer.Compare(data[i], item) == -1)
-                    {
-                        pos++;
-                    }
-                }
+        private static void MoveCycle(T[] array, int startingIndex, IComparer<T> comparer)
+        {
+            var item = array[startingIndex];
+            var pos = startingIndex + CountSmallerElements(array, startingIndex + 1, item, comparer);
 
-                if (pos == cycleStart)
-                {
-                    continue;
-                }
+            if (pos == startingIndex)
+            {
+                return;
+            }
 
-                while (comparer.Compare(data[pos], item) == 0)
-                {
-                    pos++;
-                }
+            pos = SkipSameElements(array, pos, item, comparer);
 
-                var temp = data[pos];
-                data[pos] = item;
+            var temp = array[pos];
+            array[pos] = item;
+            item = temp;
+
+            while (pos != startingIndex)
+            {
+                pos = startingIndex + CountSmallerElements(array, startingIndex + 1, item, comparer);
+                pos = SkipSameElements(array, pos, item, comparer);
+
+                temp = array[pos];
+                array[pos] = item;
                 item = temp;
+            }
+        }
 
-                while (pos != cycleStart)
+        private static int SkipSameElements(T[] array, int nextIndex, T item, IComparer<T> comparer)
+        {
+            while (comparer.Compare(array[nextIndex], item) == 0)
+            {
+                nextIndex++;
+            }
+
+            return nextIndex;
+        }
+
+        private static int CountSmallerElements(T[] array, int startingIndex, T element, IComparer<T> comparer)
+        {
+            var smallerElements = 0;
+            for (var i = startingIndex; i < array.Length; i++)
+            {
+                if (comparer.Compare(array[i], element) < 0)
                 {
-                    pos = cycleStart;
-                    for (var i = cycleStart + 1; i <= data.Count - 1; i++)
-                    {
-                        if (comparer.Compare(data[i], item) == -1)
-                        {
-                            pos++;
-                        }
-                    }
-
-                    while (comparer.Compare(data[pos], item) == 0)
-                    {
-                        pos++;
-                    }
-
-                    temp = data[pos];
-                    data[pos] = item;
-                    item = temp;
+                    smallerElements++;
                 }
             }
+
+            return smallerElements;
         }
     }
 }
