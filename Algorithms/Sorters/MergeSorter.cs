@@ -2,25 +2,25 @@
 
 namespace Algorithms.Sorters
 {
+
     /// <summary>
     /// Divide and Conquer algorithm, which splits#
     /// input array in two halves, calls itself for the two halves and
     /// then merges the two sorted halves.
     /// </summary>
-    public class MergeSorter : ISorter<int>
+    /// <typeparam name="T">type of array</typeparam>
+    public class MergeSorter<T> : ISorter<T>
     {
-        private static int Len { get; set; }
-
         /// <summary>
         /// Sorts array using merge algorithm.
         /// </summary>
         /// <param name="array">Input integer array.</param>
         /// <param name="comparer">Comparer.</param>
-        public void Sort(int[] array, IComparer<int> comparer) => SortMerge(array, 0, array.Length - 1);
+        public void Sort(T[] array, IComparer<T> comparer) => SortMerge(array, 0, array.Length - 1, comparer);
 
-        private static void MainMerge(IList<int> numbers, int left, int mid, int right)
+        private static void MainMerge(IList<T> numbers, int left, int mid, int right, IComparer<T> comparer)
         {
-            var temp = new int[Len];
+            var temp = new T[numbers.Count];
 
             int i;
 
@@ -30,7 +30,8 @@ namespace Algorithms.Sorters
 
             while (left <= eol && mid <= right)
             {
-                temp[pos++] = numbers[left] <= numbers[mid] ? numbers[left++] : numbers[mid++];
+                var compResult = comparer.Compare(numbers[left], numbers[mid]);
+                temp[pos++] = compResult <= 0 ? numbers[left++] : numbers[mid++];
             }
 
             while (left <= eol)
@@ -50,19 +51,17 @@ namespace Algorithms.Sorters
             }
         }
 
-        private static void SortMerge(IList<int> numbers, int left, int right)
+        private static void SortMerge(IList<T> numbers, int left, int right, IComparer<T> comparer)
         {
-            Len = numbers.Count;
-
             if (right <= left)
             {
                 return;
             }
 
-            var mid = (right + left) / 2;
-            SortMerge(numbers, left, mid);
-            SortMerge(numbers, mid + 1, right);
-            MainMerge(numbers, left, mid + 1, right);
+            var mid = left + (right - left) / 2;
+            SortMerge(numbers, left, mid, comparer);
+            SortMerge(numbers, mid + 1, right, comparer);
+            MainMerge(numbers, left, mid + 1, right, comparer);
         }
     }
 }

@@ -9,16 +9,17 @@ namespace Algorithms.Sorters
     /// It is based on the idea that the permutation to be sorted can be factored
     /// into cycles, which can individually be rotated to give a sorted result.
     /// </summary>
-    public class CycleSorter : ISorter<int>
+    /// <typeparam name="T">Type array input.</typeparam>
+    public class CycleSorter<T> : ISorter<T>
     {
         /// <summary>
         /// Sorts input array using Cycle sort.
         /// </summary>
         /// <param name="array">Input array.</param>
         /// <param name="comparer">Integer comparer.</param>
-        public void Sort(int[] array, IComparer<int> comparer) => CycleSort(array);
+        public void Sort(T[] array, IComparer<T> comparer) => CycleSort(array, comparer);
 
-        private static void CycleSort(IList<int> data)
+        private static void CycleSort(IList<T> data, IComparer<T> comparer)
         {
             for (var cycleStart = 0; cycleStart <= data.Count - 2; cycleStart++)
             {
@@ -27,7 +28,7 @@ namespace Algorithms.Sorters
 
                 for (var i = cycleStart + 1; i <= data.Count - 1; i++)
                 {
-                    if (data[i] < item)
+                    if (comparer.Compare(data[i], item) == -1)
                     {
                         pos++;
                     }
@@ -38,7 +39,7 @@ namespace Algorithms.Sorters
                     continue;
                 }
 
-                while (data[pos] == item)
+                while (comparer.Compare(data[pos], item) == 0)
                 {
                     pos++;
                 }
@@ -52,13 +53,13 @@ namespace Algorithms.Sorters
                     pos = cycleStart;
                     for (var i = cycleStart + 1; i <= data.Count - 1; i++)
                     {
-                        if (data[i] < item)
+                        if (comparer.Compare(data[i], item) == -1)
                         {
                             pos++;
                         }
                     }
 
-                    while (data[pos] == item)
+                    while (comparer.Compare(data[pos], item) == 0)
                     {
                         pos++;
                     }

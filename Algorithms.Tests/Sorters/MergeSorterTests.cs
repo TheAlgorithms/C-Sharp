@@ -16,7 +16,7 @@ namespace Algorithms.Tests.Sorters
         public static void TestOnMergeSorter([Random(0, 1000, 100, Distinct = true)]int n)
         {
             // Arrange 
-            var sorter = new MergeSorter();
+            var sorter = new MergeSorter<int>();
             var intComparer = new IntComparer();
             var (correctArray, testArray) = RandomHelper.GetArrays(n);
 
