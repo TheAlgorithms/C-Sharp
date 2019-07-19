@@ -1,67 +1,67 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Algorithms.Sorters
 {
 
     /// <summary>
-    /// Divide and Conquer algorithm, which splits#
-    /// input array in two halves, calls itself for the two halves and
-    /// then merges the two sorted halves.
+    /// Divide and Conquer algorithm, which splits
+    /// array in two halves, calls itself for the two
+    /// halves and then merges the two sorted halves.
     /// </summary>
-    /// <typeparam name="T">type of array</typeparam>
+    /// <typeparam name="T">Type of array elements.</typeparam>
     public class MergeSorter<T> : ISorter<T>
     {
         /// <summary>
-        /// Sorts array using merge algorithm.
+        /// Sorts array using merge sort algorithm,
+        /// originally designed as external sorting algorithm,
+        /// internal, stable,
+        /// time complexity: O(n log(n)),
+        /// space complexity: O(n),
+        /// where n - array length.
         /// </summary>
-        /// <param name="array">Input integer array.</param>
-        /// <param name="comparer">Comparer.</param>
-        public void Sort(T[] array, IComparer<T> comparer) => SortMerge(array, 0, array.Length - 1, comparer);
-
-        private static void MainMerge(IList<T> numbers, int left, int mid, int right, IComparer<T> comparer)
+        /// <param name="array">Array to sort.</param>
+        /// <param name="comparer">Comparer to compare elements of <paramref name="array"/>.</param>
+        public void Sort(T[] array, IComparer<T> comparer)
         {
-            var temp = new T[numbers.Count];
-
-            int i;
-
-            var eol = mid - 1;
-            var pos = left;
-            var num = right - left + 1;
-
-            while (left <= eol && mid <= right)
-            {
-                var compResult = comparer.Compare(numbers[left], numbers[mid]);
-                temp[pos++] = compResult <= 0 ? numbers[left++] : numbers[mid++];
-            }
-
-            while (left <= eol)
-            {
-                temp[pos++] = numbers[left++];
-            }
-
-            while (mid <= right)
-            {
-                temp[pos++] = numbers[mid++];
-            }
-
-            for (i = 0; i < num; i++)
-            {
-                numbers[right] = temp[right];
-                right--;
-            }
-        }
-
-        private static void SortMerge(IList<T> numbers, int left, int right, IComparer<T> comparer)
-        {
-            if (right <= left)
+            if (array.Length <= 1)
             {
                 return;
             }
 
-            var mid = left + (right - left) / 2;
-            SortMerge(numbers, left, mid, comparer);
-            SortMerge(numbers, mid + 1, right, comparer);
-            MainMerge(numbers, left, mid + 1, right, comparer);
+            var (left, right) = Split(array);
+            Sort(left, comparer);
+            Sort(right, comparer);
+            Merge(array, left, right, comparer);
+        }
+
+        private static void Merge(T[] array, T[] left, T[] right, IComparer<T> comparer)
+        {
+            var mainIndex = 0;
+            var leftIndex = 0;
+            var rightIndex = 0;
+
+            while (leftIndex < left.Length && rightIndex < right.Length)
+            {
+                var compResult = comparer.Compare(left[leftIndex], right[rightIndex]);
+                array[mainIndex++] = compResult <= 0 ? left[leftIndex++] : right[rightIndex++];
+            }
+
+            while (leftIndex < left.Length)
+            {
+                array[mainIndex++] = left[leftIndex++];
+            }
+
+            while (rightIndex < right.Length)
+            {
+                array[mainIndex++] = right[rightIndex++];
+            }
+        }
+
+        private static (T[] left, T[] right) Split(T[] array)
+        {
+            var mid = array.Length / 2;
+            return (array.Take(mid).ToArray(), array.Skip(mid).ToArray());
         }
     }
 }
