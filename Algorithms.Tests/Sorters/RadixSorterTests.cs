@@ -17,7 +17,7 @@ namespace Algorithms.Tests.Sorters
             var (correctArray, testArray) = RandomHelper.GetArrays(n);
 
             // Act
-            RadixSorter.Sort(ref testArray, bits);
+            RadixSorter.Sort(testArray, bits);
             Array.Sort(correctArray);
 
             // Assert

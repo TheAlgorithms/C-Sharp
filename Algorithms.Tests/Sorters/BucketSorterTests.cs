@@ -7,10 +7,10 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Sorters
 {
-    public class BucketSorterTests
+    public static class BucketSorterTests
     {
         [Test]
-        public void ArraySorted([Random(0, 1000, 1000, Distinct = true)]int n)
+        public static void ArraySorted([Random(0, 1000, 1000, Distinct = true)]int n)
         {
             // Arrange
             var sorter = new BucketSorter();

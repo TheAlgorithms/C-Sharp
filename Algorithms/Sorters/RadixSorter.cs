@@ -12,7 +12,7 @@
         /// </summary>
         /// <param name="x">The x.</param>
         /// <param name="bits">The number of bits our group will be long.</param>
-        public static void Sort(ref int[] x, int bits)
+        public static void Sort(int[] x, int bits)
         {
             var b = new int[x.Length];
             var rshift = 0;
