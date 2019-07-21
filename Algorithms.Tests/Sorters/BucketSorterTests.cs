@@ -1,6 +1,8 @@
 ﻿using System;
+
 using Algorithms.Sorters;
 using Algorithms.Tests.Helpers;
+
 using NUnit.Framework;
 
 namespace Algorithms.Tests.Sorters
