@@ -7,18 +7,17 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Sorters
 {
-    public static class BucketSorterTests
+    public static class RadixSorterTests
     {
         [Test]
-        public static void ArraySorted([Random(0, 1000, 1000, Distinct = true)]int n)
+        public static void SortsArray([Random(0, 1000, 100, Distinct = true)]int n)
         {
             // Arrange
-            var sorter = new BucketSorter();
-            var intComparer = new IntComparer();
+            const int bits = 4;
             var (correctArray, testArray) = RandomHelper.GetArrays(n);
 
             // Act
-            sorter.Sort(testArray, intComparer);
+            RadixSorter.Sort(testArray, bits);
             Array.Sort(correctArray);
 
             // Assert

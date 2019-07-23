@@ -1,23 +1,21 @@
 using System;
 using System.Numerics;
 
-namespace ConsoleTest
+namespace Algorithms.Other
 {
-    internal class Program
+    /// <summary>
+    /// Fermat's prime tester https://en.wikipedia.org/wiki/Fermat_primality_test.
+    /// </summary>
+    public static class FermatPrimeChecker
     {
-        // Fermat's prime tester https://en.wikipedia.org/wiki/Fermat_primality_test
-        private static void Main()
+        /// <summary>
+        /// Checks if input number is a probable prime.
+        /// </summary>
+        /// <param name="numberToTest">Input number.</param>
+        /// <param name="timesToCheck">Number of times to check.</param>
+        /// <returns>True if is a prime; False otherwise.</returns>
+        public static bool IsPrime(int numberToTest, int timesToCheck)
         {
-            Console.WriteLine("Welcome to Fermat's prime tester");
-            Console.WriteLine("--------------------------------");
-            Console.Write("Introduce a number to check if it is prime: ");
-            var numberToTestEntry = Console.ReadLine();
-            Console.Write("How many times this test is going to be run?: ");
-            var timesToCheckEntry = Console.ReadLine();
-
-            var numberToTest = int.Parse(numberToTestEntry);
-            var timesToCheck = int.Parse(timesToCheckEntry);
-
             // You have to use BigInteger for two reasons:
             //   1. The pow operation between two int numbers usually overflows an int
             //   2. The pow and modular operation is very optimized
@@ -42,13 +40,7 @@ namespace ConsoleTest
                 iterator++;
             }
 
-            if (prime)
-            {
-                Console.WriteLine($"The number {0} seems prime", numberToTestEntry);
-                return;
-            }
-
-            Console.WriteLine($"The number {0} isn't prime", numberToTestEntry);
+            return prime;
         }
     }
 }

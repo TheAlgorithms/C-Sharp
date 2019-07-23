@@ -1,15 +1,18 @@
-﻿namespace radix_sort
+﻿namespace Algorithms.Sorters
 {
-    internal class Program
+    /// <summary>
+    /// Radix sort is a non-comparative integer sorting algorithm that sorts data with integer keys by grouping keys by the individual
+    /// digits which share the same significant position and value. A positional notation is required, but because integers can represent
+    /// strings of characters (e.g., names or dates) and specially formatted floating point numbers, radix sort is not limited to integers.
+    /// </summary>
+    public static class RadixSorter
     {
         /// <summary>
-        /// Radix sort is a non-comparative integer sorting algorithm that sorts data with integer keys by grouping keys by the individual
-        /// digits which share the same significant position and value. A positional notation is required, but because integers can represent
-        /// strings of characters (e.g., names or dates) and specially formatted floating point numbers, radix sort is not limited to integers.
+        /// Sorts input array using radix sort algorithm.
         /// </summary>
         /// <param name="x">The x.</param>
-        /// <param name="bits">The bits.</param>
-        public static void RadixSort(ref int[] x, int bits)
+        /// <param name="bits">The number of bits our group will be long.</param>
+        public static void Sort(int[] x, int bits)
         {
             var b = new int[x.Length];
             var rshift = 0;
