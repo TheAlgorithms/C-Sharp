@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace traversals
+namespace Algorithms.Traversals
 {
     internal class Program
     {

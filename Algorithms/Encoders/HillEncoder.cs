@@ -11,9 +11,9 @@ namespace Algorithms.Encoders
     /// </summary>
     public class HillEncoder : IEncoder<double[,]>
     {
-        private readonly GaussJordanElimination LinearEquationSolver;
+        private readonly GaussJordanElimination linearEquationSolver;
 
-        public HillEncoder() => LinearEquationSolver = new GaussJordanElimination(); // TODO: add DI
+        public HillEncoder() => linearEquationSolver = new GaussJordanElimination(); // TODO: add DI
 
         public string Encode(string text, double[,] key)
         {
@@ -90,7 +90,7 @@ namespace Algorithms.Encoders
         /// </summary>
         /// <param name="list">List of ciphered arrays.</param>
         /// <returns>unidimensional list.</returns>
-        private double[] MergeArrayList(double[][] list)
+        private static double[] MergeArrayList(double[][] list)
         {
             var merged = new double[list.Length * 3];
 
@@ -184,7 +184,7 @@ namespace Algorithms.Encoders
                 augM[k, 3] = vector[k];
             }
 
-            _ = LinearEquationSolver.Solve(augM);
+            _ = linearEquationSolver.Solve(augM);
 
             return new[] { augM[0, 3], augM[1, 3], augM[2, 3] };
         }
