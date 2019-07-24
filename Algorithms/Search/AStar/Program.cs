@@ -1,196 +1,97 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 
 namespace AStar
 {
     internal class Program
     {
+        // Begin and end
+        public static Node End;
+        public static Node Start;
+        private static Node[] _map = null;
         // Map to use
-        public static string[] map = new string[]
+
+        /// <summary>
+        /// The string representation of the map
+        /// A = Start
+        /// B = End
+        /// X = Wall
+        /// Q = Quicksand(Traversal Multiplier: 5)
+        /// </summary>
+        private static string[] map = new string[]
         {
             "+------+",
             "|      |",
             "|A X   |",
             "|XXX   |",
-            "|   X  |",
+            "|  QX  |",
             "| B    |",
             "|      |",
             "+------+",
         };
 
-        // Begin and end
-        public static Location end;
-        public static Location start;
-
-        // get valid adjacent steps to the current location
-        public static List<Location> AdjacentSteps(Location l)
+        /// <summary>
+        /// Creating the Nodes and connecting them.
+        /// Returns the cached version once it was generated.
+        /// </summary>
+        public static Node[] Map
         {
-            var proposedLocations = new List<Location>
+            get
             {
-                new Location(l.X - 1, l.Y, l),
-                new Location(l.X, l.Y - 1, l),
-                new Location(l.X + 1, l.Y, l),
-                new Location(l.X, l.Y + 1, l),
-            };
-
-            var actualLocations = new List<Location>();
-            foreach (var a in proposedLocations)
-            {
-                if (Program.map[a.Y][a.X] == ' ' || Program.map[a.Y][a.X] == 'B')
+                if (_map != null) return _map; // Return the cached result
+                List<Node> ret = new List<Node>();
+                for (int y = 0; y < map.Length; y++)
                 {
-                    actualLocations.Add(a);
-                }
-            }
-
-            return actualLocations;
-        }
-
-        // The one and only AStar algorithm
-        public static List<Location> AStar()
-        {
-            // Going there
-            var OpenedList = new List<Location>();
-
-            // Been there
-            var ClosedList = new List<Location>();
-
-            Program.end = Program.FindEnd();
-            Program.start = Program.FindStart();
-
-            OpenedList.Add(Program.start);
-
-            // While there are still nodes to visit
-            while (OpenedList.Count > 0)
-            {
-                // Get the node that has the best chance
-                var bestChoice = Program.MinimumF(OpenedList);
-
-                // Mark as visited
-                _ = OpenedList.Remove(bestChoice);
-                ClosedList.Add(bestChoice);
-
-                // Did we hit the end?
-                if (bestChoice.X == Program.end.X && bestChoice.Y == Program.end.Y)
-                {
-                    break;
+                    for (int x = 0; x < map[y].Length; x++)
+                    {
+                        bool trav = map[y][x] == ' ' || map[y][x] == 'B' || map[y][x] == 'A';
+                        ret.Add(new Node(new VecN(x, y), null, trav));
+                        // Create Nodes and make them traversable when empty, start or end node
+                    }
                 }
 
-                // Find the next moves
-                var adjacentChoices = Program.AdjacentSteps(bestChoice);
-                foreach (var l in adjacentChoices)
+                for (int y = 0; y < map.Length; y++)
                 {
-                    // Been there
-                    if (ClosedList.Contains(l))
+                    for (int x = 0; x < map[y].Length; x++)
                     {
-                        continue;
-                    }
+                        // Index of the node that we are connecting
+                        var idx = y * map[y].Length + x;
 
-                    // Haven't gone there yet!
-                    if (!OpenedList.Contains(l))
-                    {
-                        OpenedList.Insert(0, l);
-                    }
+                        // Fill the Start/End nodes from the string array
+                        if (map[y][x] == 'A') Start = ret[idx];
+                        else if (map[y][x] == 'B') End = ret[idx];
 
-                    // We are going to go there, but did we come from a better path?
-                    else
-                    {
-                        // Find the same location we had
-                        var sameLocation = OpenedList.Find((Location a) => a.X == l.X && a.Y == l.Y);
-
-                        // If our current location is better than the location we found earlier, update it with
-                        // our new location
-                        if (bestChoice.G + 1 + l.H < sameLocation.F)
+                        List<Node> connections = new List<Node>();
+                        // Loop through the neighbours
+                        for (int i = y - 1; i <= y + 1; i++)
                         {
-                            _ = OpenedList.Remove(sameLocation);
-                            OpenedList.Add(l);
+                            for (int j = x - 1; j <= x + 1; j++)
+                            {
+                                if (i < 0 || j < 0 || i >= map.Length || j >= map[i].Length) continue;
+
+                                var connectionIndex = i * map[y].Length + j;
+                                if (idx != connectionIndex) // If not self
+                                    connections.Add(ret[connectionIndex]);
+                            }
                         }
+
+                        ret[idx].ConnectedNodes = connections.ToArray();
                     }
                 }
+
+                _map = ret.ToArray();
+                return _map;
             }
-
-            // Path to return
-            return ClosedList.Contains(end) ? ReconstructPath(ClosedList) : null;
-        }
-
-        public static int ComputeHScore(int x, int y)
-        {
-            // If we created a new location for the end node,
-            // don't worry about the Hueristic
-            var result = end == null ? 0 : Math.Abs(x - Program.end.X) + Math.Abs(y - Program.end.Y);
-            return result;
-        }
-
-        public static Location FindEnd()
-        {
-            Location result = null;
-
-            for (var i = 0; i < Program.map.Length; i++)
-            {
-                var flag = Program.map[i].Contains("B");
-                if (flag)
-                {
-                    result = new Location(Program.map[i].IndexOf('B'), i, null);
-                    return result;
-                }
-            }
-
-            return result;
-        }
-
-        public static Location FindStart()
-        {
-            Location result = null;
-            for (var i = 0; i < Program.map.Length; i++)
-            {
-                var flag = Program.map[i].Contains("A");
-                if (flag)
-                {
-                    result = new Location(Program.map[i].IndexOf('A'), i, null);
-                    return result;
-                }
-            }
-
-            return result;
-        }
-
-        // Get the best F score out of the list of locations
-        public static Location MinimumF(List<Location> l)
-        {
-            var min = l[0];
-            foreach (var current in l)
-            {
-                if (current.F < min.F)
-                {
-                    min = current;
-                }
-            }
-
-            return min;
-        }
-
-        // Reconstructs the path from beginning to end
-        public static List<Location> ReconstructPath(List<Location> closedList)
-        {
-            var path = new List<Location>();
-
-            var location = closedList.Find(x => x.X == end.X && x.Y == end.Y);
-
-            path.Add(location);
-
-            while (location.Parent != null)
-            {
-                location = location.Parent;
-                path.Insert(0, location);
-            }
-
-            return path;
         }
 
         public static void Main()
         {
-            var list = Program.AStar();
+            List<Node> map = Map.ToList();
+            var list = AStar.Compute(Start, End);
 
-            if (list == null)
+            if (list.Count == 0)
             {
                 Console.WriteLine("No solution!");
             }
@@ -199,9 +100,11 @@ namespace AStar
                 Console.WriteLine("Solution found as follows:");
                 foreach (var current in list)
                 {
-                    Console.WriteLine(current.X + ", " + current.Y);
+                    Console.WriteLine(current.Position);
                 }
             }
+
+            Console.ReadLine();
         }
     }
 }
