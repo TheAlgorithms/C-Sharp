@@ -2,6 +2,10 @@
 
 namespace Algorithms.Sorters
 {
+    /// <summary>
+    /// Class that implements bubble sort algorithm.
+    /// </summary>
+    /// <typeparam name="T">Type of array element.</typeparam>
     public class BubbleSorter<T> : ISorter<T>
     {
         /// <summary>

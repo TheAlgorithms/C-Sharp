@@ -5,7 +5,7 @@ using System.Linq;
 namespace Algorithms.Sorters
 {
     /// <summary>
-    /// Class that implements the BuckerSort Algorithm.
+    /// Class that implements bucket sort algorithm.
     /// </summary>
     public class BucketSorter : ISorter<int>
     {

@@ -3,8 +3,17 @@ using System.Text;
 
 namespace Algorithms.DataCompression
 {
+    /// <summary>
+    /// TODO.
+    /// </summary>
     public class Translator
     {
+        /// <summary>
+        /// TODO.
+        /// </summary>
+        /// <param name="text">TODO. 2.</param>
+        /// <param name="translationKeys">TODO. 3.</param>
+        /// <returns>TODO. 4.</returns>
         public string Translate(string text, Dictionary<string, string> translationKeys)
         {
             var sb = new StringBuilder();

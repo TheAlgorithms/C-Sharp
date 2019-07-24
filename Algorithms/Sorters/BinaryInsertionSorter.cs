@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace Algorithms.Sorters
 {
+    /// <summary>
+    /// TODO.
+    /// </summary>
+    /// <typeparam name="T">TODO. 2.</typeparam>
     public class BinaryInsertionSorter<T> : ISorter<T>
     {
         /// <summary>
