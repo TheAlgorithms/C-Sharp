@@ -1,121 +1,118 @@
-﻿/**
- * Author: Christian Bender
- * Class: BitArray
- *
- * implements IComparable, ICloneable, IEnumerator, IEnumerable
- *
- * This class implements a bit-array and provides some
- * useful functions/operations to deal with this type of
- * data structure. You see a overview about the functionality, below.
- *
- *
- * Overview
- *
- * Constructor (N : int)
- * The constructor receives a length (N) of the to create bit-field.
- *
- * Constructor (sequence : string)
- * setups the array with the input sequence.
- * assumes: the sequence may only be allowed contains onese or zeros.
- *
- * Constructor (bits : bool[] )
- * setups the bit-field with the input array.
- *
- * Compile(sequence : string)
- * compiles a string sequence of 0's and 1's in the inner structure.
- * assumes: the sequence may only be allowed contains onese or zeros.
- *
- * Compile (number : int)
- * compiles a positive integer number in the inner data structure.
- *
- * Compile (number : long)
- * compiles a positive long integer number in the inner data structure.
- *
- * ToString ()
- * returns a string representation of the inner structure.
- * The returned string is a sequence of 0's and 1's.
- *
- * Length : int
- * Is a property that returns the length of the bit-field.
- *
- * Indexer : bool
- * indexer for selecting the individual bits of the bit array.
- *
- * NumberOfOneBits() : int
- * returns the number of One-bits.
- *
- * NumberOfZeroBits() : int
- * returns the number of Zero-Bits.
- *
- * EvenParity() : bool
- * returns true if parity is even, otherwise false.
- *
- * OddParity() : bool
- * returns true if parity is odd, otherwise false.
- *
- * ToInt64() : long
- * returns a long integer representation of the bit-array.
- * assumes: the bit-array length must been smaller or equal to 64 bit.
- *
- * ToInt32() : int
- * returns a integer representation of the bit-array.
- * assumes: the bit-array length must been smaller or equal to 32 bit.
- *
- * ResetField() : void
- * sets all bits on false.
- *
- * SetAll(flag : bool) : void
- * sets all bits on the value of the flag.
- *
- * GetHashCode() : int
- * returns hash-code (ToInt32())
- *
- * Equals (other : Object) : bool
- * returns true if there inputs are equal otherwise false.
- * assumes: the input bit-arrays must have same length.
- *
- * CompareTo (other : Object) : int  (interface IComparable)
- * output:  0 - if the bit-arrays a equal.
- * -1 - if this bit-array is smaller.
- * 1 - if this bit-array is greater.
- * assumes: bit-array lentgh must been smaller or equal to 64 bit
- *
- * Clone () : object
- * returns a copy of this bit-array
- *
- * Current : object
- * returns the current selected bit.
- *
- * MoveNext() : bool
- * purpose: increases the position of the enumerator
- * returns true if 'position' successful increased otherwise false.
- *
- * Reset() : void
- * resets the position of the enumerator.
- *
- * GetEnumerator() : IEnumerator
- * returns a enumerator for this BitArray-object.
- *
- * Operations:
- *
- * & bitwise AND
- * | bitwise OR
- * ~ bitwise NOT
- * >> bitwise shift right
- * << bitwise shift left
- *  ^ bitwise XOR
- *
- * Each operation (above) returns a new BitArray-object.
- *
- *  == equal operator. : bool
- *      returns true if there inputs are equal otherwise false.
- *      assumes: the input bit-arrays must have same length.
- *
- *  != not-equal operator : bool
- *      returns true if there inputs aren't equal otherwise false.
- *      assumes: the input bit-arrays must have same length.
- *
- * */
+﻿// Author: Christian Bender
+// Class: BitArray
+//
+// implements IComparable, ICloneable, IEnumerator, IEnumerable
+//
+// This class implements a bit-array and provides some
+// useful functions/operations to deal with this type of
+// data structure. You see a overview about the functionality, below.
+//
+//
+// Overview
+//
+// Constructor (N : int)
+// The constructor receives a length (N) of the to create bit-field.
+//
+// Constructor (sequence : string)
+// setups the array with the input sequence.
+// assumes: the sequence may only be allowed contains onese or zeros.
+//
+// Constructor (bits : bool[] )
+// setups the bit-field with the input array.
+//
+// Compile(sequence : string)
+// compiles a string sequence of 0's and 1's in the inner structure.
+// assumes: the sequence may only be allowed contains onese or zeros.
+//
+// Compile (number : int)
+// compiles a positive integer number in the inner data structure.
+//
+// Compile (number : long)
+// compiles a positive long integer number in the inner data structure.
+//
+// ToString ()
+// returns a string representation of the inner structure.
+// The returned string is a sequence of 0's and 1's.
+//
+// Length : int
+// Is a property that returns the length of the bit-field.
+//
+// Indexer : bool
+// indexer for selecting the individual bits of the bit array.
+//
+// NumberOfOneBits() : int
+// returns the number of One-bits.
+//
+// NumberOfZeroBits() : int
+// returns the number of Zero-Bits.
+//
+// EvenParity() : bool
+// returns true if parity is even, otherwise false.
+//
+// OddParity() : bool
+// returns true if parity is odd, otherwise false.
+//
+// ToInt64() : long
+// returns a long integer representation of the bit-array.
+// assumes: the bit-array length must been smaller or equal to 64 bit.
+//
+// ToInt32() : int
+// returns a integer representation of the bit-array.
+// assumes: the bit-array length must been smaller or equal to 32 bit.
+//
+// ResetField() : void
+// sets all bits on false.
+//
+// SetAll(flag : bool) : void
+// sets all bits on the value of the flag.
+//
+// GetHashCode() : int
+// returns hash-code (ToInt32())
+//
+// Equals (other : Object) : bool
+// returns true if there inputs are equal otherwise false.
+// assumes: the input bit-arrays must have same length.
+//
+// CompareTo (other : Object) : int  (interface IComparable)
+// output:  0 - if the bit-arrays a equal.
+// -1 - if this bit-array is smaller.
+// 1 - if this bit-array is greater.
+// assumes: bit-array lentgh must been smaller or equal to 64 bit
+//
+// Clone () : object
+// returns a copy of this bit-array
+//
+// Current : object
+// returns the current selected bit.
+//
+// MoveNext() : bool
+// purpose: increases the position of the enumerator
+// returns true if 'position' successful increased otherwise false.
+//
+// Reset() : void
+// resets the position of the enumerator.
+//
+// GetEnumerator() : IEnumerator
+// returns a enumerator for this BitArray-object.
+//
+// Operations:
+//
+// &amp; bitwise AND
+// | bitwise OR
+// ~ bitwise NOT
+// >> bitwise shift right
+// >> bitwise shift left
+// ^ bitwise XOR
+//
+// Each operation (above) returns a new BitArray-object.
+//
+// == equal operator. : bool
+// returns true if there inputs are equal otherwise false.
+// assumes: the input bit-arrays must have same length.
+//
+// != not-equal operator : bool
+// returns true if there inputs aren't equal otherwise false.
+// assumes: the input bit-arrays must have same length.
 using System;
 using System.Collections;
 using System.Linq;
@@ -246,7 +243,7 @@ namespace DataStructures.BitArray
         /// <param name="two">TODO. 3.</param>
         /// <returns>TODO. 4.</returns>
         /**
-         * Operator &
+         * Operator &amp;
          * input: two bit-arrays with equal length.
          * output: bit-array that represents the bit by bit AND.
          * assumes: the arrays have the same length.
@@ -440,7 +437,7 @@ namespace DataStructures.BitArray
         /// <param name="n">TODO. 3.</param>
         /// <returns>TODO. 4.</returns>
         /**
-         * Operator << (bitwise shift left)
+         * Operator &gt;&gt; (bitwise shift left)
          * input: a BitArray and a number of bits.
          * output: bitwise shifted BitArray.
          * */
