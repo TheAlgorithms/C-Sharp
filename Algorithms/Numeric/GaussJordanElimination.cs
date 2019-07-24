@@ -2,6 +2,9 @@
 
 namespace Algorithms.Numeric
 {
+    /// <summary>
+    /// TODO.
+    /// </summary>
     public class GaussJordanElimination
     {
         private int RowCount { get; set; }
@@ -43,7 +46,7 @@ namespace Algorithms.Numeric
         /// <summary>
         /// To prepare given matrix by pivoting rows.
         /// </summary>
-        /// <param name="matrix"></param>
+        /// <param name="matrix">TODO.</param>
         /// <returns>Matrix.</returns>
         private bool PivotMatrix(ref double[,] matrix)
         {
@@ -116,8 +119,8 @@ namespace Algorithms.Numeric
         /// <summary>
         /// To continue reducing the matrix using RREF.
         /// </summary>
-        /// <param name="matrix"></param>
-        /// <returns></returns>
+        /// <param name="matrix">TODO.</param>
+        /// <returns>TODO. 2.</returns>
         private bool ElementaryReduction(ref double[,] matrix)
         {
             for (var row = RowCount - 1; row >= 0; row--)

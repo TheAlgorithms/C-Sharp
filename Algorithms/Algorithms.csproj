@@ -5,6 +5,11 @@
     <LangVersion>default</LangVersion>
     <NullableContextOptions>disable</NullableContextOptions>
     <CodeAnalysisRuleSet>..\stylecop.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>./bin/Algorithms.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

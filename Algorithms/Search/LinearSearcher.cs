@@ -2,6 +2,10 @@ using System;
 
 namespace Algorithms.Search
 {
+    /// <summary>
+    /// Class that implements linear search algorithm.
+    /// </summary>
+    /// <typeparam name="T">Type of array element.</typeparam>
     public class LinearSearcher<T>
     {
         /// <summary>

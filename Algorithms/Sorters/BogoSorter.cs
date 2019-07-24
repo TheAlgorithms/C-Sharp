@@ -3,10 +3,19 @@ using System.Collections.Generic;
 
 namespace Algorithms.Sorters
 {
+    /// <summary>
+    /// Class that implements bogo sort algorithm.
+    /// </summary>
+    /// <typeparam name="T">Type of array element.</typeparam>
     public class BogoSorter<T> : ISorter<T>
     {
         private readonly Random random = new Random();
 
+        /// <summary>
+        /// TODO.
+        /// </summary>
+        /// <param name="array">TODO. 2.</param>
+        /// <param name="comparer">TODO. 3.</param>
         public void Sort(T[] array, IComparer<T> comparer)
         {
             while (!IsSorted(array, comparer))
