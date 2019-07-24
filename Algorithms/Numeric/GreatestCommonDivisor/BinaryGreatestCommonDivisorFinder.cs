@@ -2,6 +2,9 @@ using System;
 
 namespace Algorithms.Numeric.GreatestCommonDivisor
 {
+    /// <summary>
+    /// TODO.
+    /// </summary>
     public class BinaryGreatestCommonDivisorFinder : IGreatestCommonDivisorFinder
     {
         /// <summary>
@@ -9,8 +12,8 @@ namespace Algorithms.Numeric.GreatestCommonDivisor
         /// using binary algorithm.
         /// Wiki: https://en.wikipedia.org/wiki/Binary_GCD_algorithm.
         /// </summary>
-        /// <param name="u"></param>
-        /// <param name="v"></param>
+        /// <param name="u">TODO.</param>
+        /// <param name="v">TODO. 2.</param>
         /// <returns>Greatest common divisor.</returns>
         public int Find(int u, int v)
         {

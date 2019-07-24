@@ -11,10 +11,20 @@ namespace Algorithms.Encoders
     /// </summary>
     public class HillEncoder : IEncoder<double[,]>
     {
-        private readonly GaussJordanElimination LinearEquationSolver;
+        private readonly GaussJordanElimination linearEquationSolver;
 
-        public HillEncoder() => LinearEquationSolver = new GaussJordanElimination(); // TODO: add DI
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HillEncoder"/> class.
+        /// TODO.
+        /// </summary>
+        public HillEncoder() => linearEquationSolver = new GaussJordanElimination(); // TODO: add DI
 
+        /// <summary>
+        /// TODO.
+        /// </summary>
+        /// <param name="text">TODO. 2.</param>
+        /// <param name="key">TODO. 3.</param>
+        /// <returns>TODO. 4.</returns>
         public string Encode(string text, double[,] key)
         {
             var preparedText = FillGaps(text);
@@ -36,6 +46,12 @@ namespace Algorithms.Encoders
             return BuildStringFromArray(merged);
         }
 
+        /// <summary>
+        /// TODO.
+        /// </summary>
+        /// <param name="text">TODO. 1.</param>
+        /// <param name="key">TODO. 2.</param>
+        /// <returns>TODO. 3.</returns>
         public string Decode(string text, double[,] key)
         {
             var chunked = ChunkTextToArray(text);
@@ -90,7 +106,7 @@ namespace Algorithms.Encoders
         /// </summary>
         /// <param name="list">List of ciphered arrays.</param>
         /// <returns>unidimensional list.</returns>
-        private double[] MergeArrayList(double[][] list)
+        private static double[] MergeArrayList(double[][] list)
         {
             var merged = new double[list.Length * 3];
 
@@ -165,7 +181,7 @@ namespace Algorithms.Encoders
         /// </summary>
         /// <param name="vector">Splitted words vector.</param>
         /// <param name="key">Key used for the cipher.</param>
-        /// <returns></returns>
+        /// <returns>TODO.</returns>
         private double[] MatrixDeCipher(double[] vector, double[,] key)
         {
             // To augment the original key with the given vector.
@@ -184,7 +200,7 @@ namespace Algorithms.Encoders
                 augM[k, 3] = vector[k];
             }
 
-            _ = LinearEquationSolver.Solve(augM);
+            _ = linearEquationSolver.Solve(augM);
 
             return new[] { augM[0, 3], augM[1, 3], augM[2, 3] };
         }

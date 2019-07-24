@@ -2,6 +2,10 @@ using System.Collections.Generic;
 
 namespace Algorithms.Sorters
 {
+    /// <summary>
+    /// Class that implements insertion sort algorithm.
+    /// </summary>
+    /// <typeparam name="T">Type of array element.</typeparam>
     public class InsertionSorter<T> : ISorter<T>
     {
         /// <summary>

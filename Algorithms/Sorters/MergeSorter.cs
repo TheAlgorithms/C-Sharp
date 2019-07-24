@@ -3,7 +3,6 @@ using System.Linq;
 
 namespace Algorithms.Sorters
 {
-
     /// <summary>
     /// Divide and Conquer algorithm, which splits
     /// array in two halves, calls itself for the two
