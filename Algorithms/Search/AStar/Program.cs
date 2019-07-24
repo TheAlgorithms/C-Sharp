@@ -6,7 +6,7 @@ namespace AStar
     internal class Program
     {
         // Map to use
-        public static string[] map = new string[]
+        public static string[] Map = new string[]
         {
             "+------+",
             "|      |",
@@ -19,8 +19,8 @@ namespace AStar
         };
 
         // Begin and end
-        public static Location end;
-        public static Location start;
+        public static Location End;
+        public static Location Start;
 
         // get valid adjacent steps to the current location
         public static List<Location> AdjacentSteps(Location l)
@@ -36,7 +36,7 @@ namespace AStar
             var actualLocations = new List<Location>();
             foreach (var a in proposedLocations)
             {
-                if (Program.map[a.Y][a.X] == ' ' || Program.map[a.Y][a.X] == 'B')
+                if (Program.Map[a.Y][a.X] == ' ' || Program.Map[a.Y][a.X] == 'B')
                 {
                     actualLocations.Add(a);
                 }
@@ -54,10 +54,10 @@ namespace AStar
             // Been there
             var ClosedList = new List<Location>();
 
-            Program.end = Program.FindEnd();
-            Program.start = Program.FindStart();
+            Program.End = Program.FindEnd();
+            Program.Start = Program.FindStart();
 
-            OpenedList.Add(Program.start);
+            OpenedList.Add(Program.Start);
 
             // While there are still nodes to visit
             while (OpenedList.Count > 0)
@@ -70,7 +70,7 @@ namespace AStar
                 ClosedList.Add(bestChoice);
 
                 // Did we hit the end?
-                if (bestChoice.X == Program.end.X && bestChoice.Y == Program.end.Y)
+                if (bestChoice.X == Program.End.X && bestChoice.Y == Program.End.Y)
                 {
                     break;
                 }
@@ -109,14 +109,14 @@ namespace AStar
             }
 
             // Path to return
-            return ClosedList.Contains(end) ? ReconstructPath(ClosedList) : null;
+            return ClosedList.Contains(End) ? ReconstructPath(ClosedList) : null;
         }
 
         public static int ComputeHScore(int x, int y)
         {
             // If we created a new location for the end node,
             // don't worry about the Hueristic
-            var result = end == null ? 0 : Math.Abs(x - Program.end.X) + Math.Abs(y - Program.end.Y);
+            var result = End == null ? 0 : Math.Abs(x - Program.End.X) + Math.Abs(y - Program.End.Y);
             return result;
         }
 
@@ -124,12 +124,12 @@ namespace AStar
         {
             Location result = null;
 
-            for (var i = 0; i < Program.map.Length; i++)
+            for (var i = 0; i < Program.Map.Length; i++)
             {
-                var flag = Program.map[i].Contains("B");
+                var flag = Program.Map[i].Contains("B");
                 if (flag)
                 {
-                    result = new Location(Program.map[i].IndexOf('B'), i, null);
+                    result = new Location(Program.Map[i].IndexOf('B'), i, null);
                     return result;
                 }
             }
@@ -140,12 +140,12 @@ namespace AStar
         public static Location FindStart()
         {
             Location result = null;
-            for (var i = 0; i < Program.map.Length; i++)
+            for (var i = 0; i < Program.Map.Length; i++)
             {
-                var flag = Program.map[i].Contains("A");
+                var flag = Program.Map[i].Contains("A");
                 if (flag)
                 {
-                    result = new Location(Program.map[i].IndexOf('A'), i, null);
+                    result = new Location(Program.Map[i].IndexOf('A'), i, null);
                     return result;
                 }
             }
@@ -173,7 +173,7 @@ namespace AStar
         {
             var path = new List<Location>();
 
-            var location = closedList.Find(x => x.X == end.X && x.Y == end.Y);
+            var location = closedList.Find(x => x.X == End.X && x.Y == End.Y);
 
             path.Add(location);
 

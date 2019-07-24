@@ -17,7 +17,7 @@ namespace Algorithms.Traversals
                 tree.Insert(value);
             }
 
-            var tree_path = tree.Traverse_tree(tree.root);
+            var tree_path = tree.Traverse_tree(tree.Root);
 
             Console.Write("Path: ");
             for (var i = 0; i < tree_path.Length; i++)
@@ -38,7 +38,7 @@ namespace Algorithms.Traversals
 
     internal class Random_Ordered_Tree
     {
-        public Tree<int> root = null;
+        public Tree<int> Root = null;
 
         public void Insert(int num)
         {
@@ -47,13 +47,13 @@ namespace Algorithms.Traversals
                 Value = num,
             };
 
-            if (root == null)
+            if (Root == null)
             {
-                root = node;
+                Root = node;
             }
             else
             {
-                var current = root;
+                var current = Root;
                 var rnd = new Random();
 
                 while (current != null)
