@@ -3,42 +3,9 @@ using System.Collections.Generic;
 
 namespace Algorithms.Traversals
 {
-    internal class Program
-    {
-        private static void Main()
-        {
-            var tree = new Random_Ordered_Tree();
-            var rnd = new Random();
-            for (var i = 0; i < 10; i++)
-            {
-                var value = rnd.Next(1, 100);
-
-                Console.WriteLine("Inserting {0}", value);
-                tree.Insert(value);
-            }
-
-            var tree_path = tree.Traverse_tree(tree.Root);
-
-            Console.Write("Path: ");
-            for (var i = 0; i < tree_path.Length; i++)
-            {
-                Console.Write("{0} ", tree_path[i]);
-            }
-        }
-    }
-
-    internal class Tree<T>
-    {
-        public int Value { get; set; }
-
-        public Tree<T> Left { get; set; }
-
-        public Tree<T> Right { get; set; }
-    }
-
     internal class Random_Ordered_Tree
     {
-        public Tree<int> Root = null;
+        public Tree<int> Root { get; set; }
 
         public void Insert(int num)
         {

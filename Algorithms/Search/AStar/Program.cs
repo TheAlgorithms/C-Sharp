@@ -6,7 +6,7 @@ namespace AStar
     internal class Program
     {
         // Map to use
-        public static string[] Map = new string[]
+        private static readonly string[] Map = new string[]
         {
             "+------+",
             "|      |",
@@ -19,8 +19,8 @@ namespace AStar
         };
 
         // Begin and end
-        public static Location End;
-        public static Location Start;
+        private static Location end;
+        private static Location start;
 
         // get valid adjacent steps to the current location
         public static List<Location> AdjacentSteps(Location l)
@@ -36,7 +36,7 @@ namespace AStar
             var actualLocations = new List<Location>();
             foreach (var a in proposedLocations)
             {
-                if (Program.Map[a.Y][a.X] == ' ' || Program.Map[a.Y][a.X] == 'B')
+                if (Map[a.Y][a.X] == ' ' || Map[a.Y][a.X] == 'B')
                 {
                     actualLocations.Add(a);
                 }
@@ -49,74 +49,74 @@ namespace AStar
         public static List<Location> AStar()
         {
             // Going there
-            var OpenedList = new List<Location>();
+            var openedList = new List<Location>();
 
             // Been there
-            var ClosedList = new List<Location>();
+            var closedList = new List<Location>();
 
-            Program.End = Program.FindEnd();
-            Program.Start = Program.FindStart();
+            end = FindEnd();
+            start = FindStart();
 
-            OpenedList.Add(Program.Start);
+            openedList.Add(start);
 
             // While there are still nodes to visit
-            while (OpenedList.Count > 0)
+            while (openedList.Count > 0)
             {
                 // Get the node that has the best chance
-                var bestChoice = Program.MinimumF(OpenedList);
+                var bestChoice = MinimumF(openedList);
 
                 // Mark as visited
-                _ = OpenedList.Remove(bestChoice);
-                ClosedList.Add(bestChoice);
+                _ = openedList.Remove(bestChoice);
+                closedList.Add(bestChoice);
 
                 // Did we hit the end?
-                if (bestChoice.X == Program.End.X && bestChoice.Y == Program.End.Y)
+                if (bestChoice.X == end.X && bestChoice.Y == end.Y)
                 {
                     break;
                 }
 
                 // Find the next moves
-                var adjacentChoices = Program.AdjacentSteps(bestChoice);
+                var adjacentChoices = AdjacentSteps(bestChoice);
                 foreach (var l in adjacentChoices)
                 {
                     // Been there
-                    if (ClosedList.Contains(l))
+                    if (closedList.Contains(l))
                     {
                         continue;
                     }
 
                     // Haven't gone there yet!
-                    if (!OpenedList.Contains(l))
+                    if (!openedList.Contains(l))
                     {
-                        OpenedList.Insert(0, l);
+                        openedList.Insert(0, l);
                     }
 
                     // We are going to go there, but did we come from a better path?
                     else
                     {
                         // Find the same location we had
-                        var sameLocation = OpenedList.Find((Location a) => a.X == l.X && a.Y == l.Y);
+                        var sameLocation = openedList.Find((Location a) => a.X == l.X && a.Y == l.Y);
 
                         // If our current location is better than the location we found earlier, update it with
                         // our new location
                         if (bestChoice.G + 1 + l.H < sameLocation.F)
                         {
-                            _ = OpenedList.Remove(sameLocation);
-                            OpenedList.Add(l);
+                            _ = openedList.Remove(sameLocation);
+                            openedList.Add(l);
                         }
                     }
                 }
             }
 
             // Path to return
-            return ClosedList.Contains(End) ? ReconstructPath(ClosedList) : null;
+            return closedList.Contains(end) ? ReconstructPath(closedList) : null;
         }
 
         public static int ComputeHScore(int x, int y)
         {
             // If we created a new location for the end node,
             // don't worry about the Hueristic
-            var result = End == null ? 0 : Math.Abs(x - Program.End.X) + Math.Abs(y - Program.End.Y);
+            var result = end == null ? 0 : Math.Abs(x - end.X) + Math.Abs(y - end.Y);
             return result;
         }
 
@@ -124,12 +124,12 @@ namespace AStar
         {
             Location result = null;
 
-            for (var i = 0; i < Program.Map.Length; i++)
+            for (var i = 0; i < Map.Length; i++)
             {
-                var flag = Program.Map[i].Contains("B");
+                var flag = Map[i].Contains("B");
                 if (flag)
                 {
-                    result = new Location(Program.Map[i].IndexOf('B'), i, null);
+                    result = new Location(Map[i].IndexOf('B'), i, null);
                     return result;
                 }
             }
@@ -140,12 +140,12 @@ namespace AStar
         public static Location FindStart()
         {
             Location result = null;
-            for (var i = 0; i < Program.Map.Length; i++)
+            for (var i = 0; i < Map.Length; i++)
             {
-                var flag = Program.Map[i].Contains("A");
+                var flag = Map[i].Contains("A");
                 if (flag)
                 {
-                    result = new Location(Program.Map[i].IndexOf('A'), i, null);
+                    result = new Location(Map[i].IndexOf('A'), i, null);
                     return result;
                 }
             }
@@ -173,7 +173,7 @@ namespace AStar
         {
             var path = new List<Location>();
 
-            var location = closedList.Find(x => x.X == End.X && x.Y == End.Y);
+            var location = closedList.Find(x => x.X == end.X && x.Y == end.Y);
 
             path.Add(location);
 
@@ -188,7 +188,7 @@ namespace AStar
 
         public static void Main()
         {
-            var list = Program.AStar();
+            var list = AStar();
 
             if (list == null)
             {
