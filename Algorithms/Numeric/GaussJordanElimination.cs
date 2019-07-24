@@ -43,7 +43,7 @@ namespace Algorithms.Numeric
         /// <summary>
         /// To prepare given matrix by pivoting rows.
         /// </summary>
-        /// <param name="matrix"></param>
+        /// <param name="matrix">Input matrix.</param>
         /// <returns>Matrix.</returns>
         private bool PivotMatrix(ref double[,] matrix)
         {
@@ -95,7 +95,7 @@ namespace Algorithms.Numeric
         /// <summary>
         /// Applies REF.
         /// </summary>
-        /// <param name="matrix">Matrix.</param>
+        /// <param name="matrix">Input matrix.</param>
         private void Elimination(ref double[,] matrix)
         {
             for (var srcRow = 0; srcRow + 1 < RowCount; srcRow++)
@@ -116,8 +116,8 @@ namespace Algorithms.Numeric
         /// <summary>
         /// To continue reducing the matrix using RREF.
         /// </summary>
-        /// <param name="matrix"></param>
-        /// <returns></returns>
+        /// <param name="matrix">Input matrix.</param>
+        /// <returns>True if it has a unique solution; false otherwise.</returns>
         private bool ElementaryReduction(ref double[,] matrix)
         {
             for (var row = RowCount - 1; row >= 0; row--)
