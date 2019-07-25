@@ -9,6 +9,14 @@ namespace Algorithms.Knapsack
     /// <typeparam name="T">Type of items in knapsack.</typeparam>
     public class NaiveKnapsackSolver<T> : IHeuristicKnapsackSolver<T>
     {
+        /// <summary>
+        /// TODO.
+        /// </summary>
+        /// <param name="items">TODO. 2.</param>
+        /// <param name="capacity">TODO. 3.</param>
+        /// <param name="weightSelector">TODO. 4.</param>
+        /// <param name="valueSelector">TODO. 5.</param>
+        /// <returns>TODO. 6.</returns>
         public T[] Solve(T[] items, double capacity, Func<T, double> weightSelector, Func<T, double> valueSelector)
         {
             var weight = 0d;

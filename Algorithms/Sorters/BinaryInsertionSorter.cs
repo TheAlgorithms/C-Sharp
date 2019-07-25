@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace Algorithms.Sorters
 {
+    /// <summary>
+    /// TODO.
+    /// </summary>
+    /// <typeparam name="T">TODO. 2.</typeparam>
     public class BinaryInsertionSorter<T> : ISorter<T>
     {
         /// <summary>
@@ -33,6 +37,7 @@ namespace Algorithms.Sorters
         /// <param name="from">Left index to search from (inclusive).</param>
         /// <param name="to">Right index to search to (inclusive).</param>
         /// <param name="target">The value to find placefor in the provided array.</param>
+        /// <param name="comparer">TODO.</param>
         /// <returns>The index where to insert target value.</returns>
         private static int BinarySearch(T[] array, int from, int to, T target, IComparer<T> comparer)
         {

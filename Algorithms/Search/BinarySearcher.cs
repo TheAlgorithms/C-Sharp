@@ -2,6 +2,10 @@
 
 namespace Algorithms.Searches
 {
+    /// <summary>
+    /// TODO.
+    /// </summary>
+    /// <typeparam name="T">TODO. 2.</typeparam>
     public class BinarySearcher<T> where T : IComparable<T>
     {
         /// <summary>

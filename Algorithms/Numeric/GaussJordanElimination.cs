@@ -2,6 +2,9 @@
 
 namespace Algorithms.Numeric
 {
+    /// <summary>
+    /// TODO.
+    /// </summary>
     public class GaussJordanElimination
     {
         private int RowCount { get; set; }

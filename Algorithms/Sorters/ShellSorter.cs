@@ -2,6 +2,10 @@
 
 namespace Algorithms.Sorters
 {
+    /// <summary>
+    /// TODO.
+    /// </summary>
+    /// <typeparam name="T">TODO. 2.</typeparam>
     public class ShellSorter<T> : ISorter<T>
     {
         /// <summary>

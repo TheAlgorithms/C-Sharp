@@ -2,6 +2,10 @@
 
 namespace Algorithms.Sorters
 {
+    /// <summary>
+    /// Class that implements pancake sort algorithm.
+    /// </summary>
+    /// <typeparam name="T">Type of array element.</typeparam>
     public class PancakeSorter<T> : ISorter<T>
     {
         /// <summary>
