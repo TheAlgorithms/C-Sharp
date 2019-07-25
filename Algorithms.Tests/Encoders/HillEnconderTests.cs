@@ -1,5 +1,4 @@
 ﻿using Algorithms.Encoders;
-
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 
