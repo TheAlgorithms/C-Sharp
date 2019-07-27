@@ -6,7 +6,6 @@ namespace Algorithms.Tests.Numeric
 {
     public static class BinomialCoefficientTests
     {
-
         [TestCase(4, 2, 6)]
         [TestCase(7, 3, 35)]
         public static void CalculateFromPairs(int n, int k, long expected)

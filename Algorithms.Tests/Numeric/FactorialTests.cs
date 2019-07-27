@@ -1,4 +1,5 @@
-﻿using Algorithms.Numeric;
+﻿using System;
+using Algorithms.Numeric;
 using NUnit.Framework;
 
 namespace Algorithms.Tests.Numeric
@@ -8,6 +9,7 @@ namespace Algorithms.Tests.Numeric
         [Test]
         [TestCase(5, 120)]
         [TestCase(1, 1)]
+        [TestCase(0, 1)]
         [TestCase(4, 24)]
         [TestCase(18, 6402373705728000)]
         [TestCase(10, 3628800)]
@@ -20,6 +22,19 @@ namespace Algorithms.Tests.Numeric
 
             // Assert
             Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public static void GetsFactorialExceptionForNonPositiveNumbers([Random(-1000, -1, 10, Distinct = true)]int input)
+        {
+            // Arrange
+
+            // Act
+            void Act() => Factorial.Calculate(input);
+
+            // Assert
+
+            _ = Assert.Throws<ArgumentException>(Act);
         }
     }
 }

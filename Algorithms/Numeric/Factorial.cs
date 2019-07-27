@@ -1,4 +1,6 @@
-﻿namespace Algorithms.Numeric
+﻿using System;
+
+namespace Algorithms.Numeric
 {
     /// <summary>
     /// The factorial of a positive integer n, denoted by n!,
@@ -11,6 +13,14 @@
         /// </summary>
         /// <param name="num">Input number.</param>
         /// <returns>Factorial of input number.</returns>
-        public static long Calculate(int num) => num == 0 ? 1 : num == 1 ? 1 : num * Calculate(num - 1);
+        public static long Calculate(int num)
+        {
+            if (num < 0)
+            {
+                throw new ArgumentException("Only for num >= 0");
+            }
+
+            return num == 0 ? 1 : num == 1 ? 1 : num * Calculate(num - 1);
+        }
     }
 }
