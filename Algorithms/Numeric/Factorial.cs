@@ -20,7 +20,7 @@ namespace Algorithms.Numeric
                 throw new ArgumentException("Only for num >= 0");
             }
 
-            return num == 0 ? 1 : num == 1 ? 1 : num * Calculate(num - 1);
+            return num == 0 ? 1 : num * Calculate(num - 1);
         }
     }
 }
