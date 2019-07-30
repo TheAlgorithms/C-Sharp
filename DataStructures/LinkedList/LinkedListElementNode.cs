@@ -18,7 +18,7 @@
         }
 
         /// <summary>
-        /// Gets tODO. TODO.
+        /// Gets elements from current LinkedList.
         /// </summary>
         public T Data { get; }
 
