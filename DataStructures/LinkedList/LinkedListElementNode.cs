@@ -18,9 +18,9 @@
         }
 
         /// <summary>
-        /// Gets or sets tODO. TODO.
+        /// Gets elements from current LinkedList.
         /// </summary>
-        public T Data { get; set; }
+        public T Data { get; }
 
         /// <summary>
         /// Gets or sets tODO. TODO.
