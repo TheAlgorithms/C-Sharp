@@ -71,7 +71,7 @@ namespace DataStructures.SinglyLinkedList
         {
             if (index < 0)
             {
-                throw new IndexOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(index));
             }
 
             var tempElement = Head;
@@ -83,7 +83,7 @@ namespace DataStructures.SinglyLinkedList
 
             if (tempElement is null)
             {
-                throw new IndexOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(index));
             }
 
             return tempElement.Data;

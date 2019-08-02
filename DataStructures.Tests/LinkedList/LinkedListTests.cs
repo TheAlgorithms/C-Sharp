@@ -57,7 +57,7 @@ namespace DataStructures.Tests.LinkedList
         }
 
         [Test]
-        public static void GetElementByIndex_IndexOutOfRange_ExceptionThrown()
+        public static void GetElementByIndex_IndexOutOfRange_ArgumentOutOfRangeExceptionThrown()
         {
             // Arrange
             var list = new SinglyLinkedList<int>();
@@ -68,8 +68,8 @@ namespace DataStructures.Tests.LinkedList
             _ = list.AddFirst(3);
 
             // Assert
-            _ = Assert.Throws<IndexOutOfRangeException>(() => list.GetElementByIndex(-1));
-            _ = Assert.Throws<IndexOutOfRangeException>(() => list.GetElementByIndex(3));
+            _ = Assert.Throws<ArgumentOutOfRangeException>(() => list.GetElementByIndex(-1));
+            _ = Assert.Throws<ArgumentOutOfRangeException>(() => list.GetElementByIndex(3));
         }
 
 
