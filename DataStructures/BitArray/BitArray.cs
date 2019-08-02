@@ -116,6 +116,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using System.Text;
 
 namespace DataStructures.BitArray
 {
@@ -410,7 +411,6 @@ namespace DataStructures.BitArray
         {
             var sequence1 = one.ToString();
             var sequence2 = two.ToString();
-            var result = string.Empty;
             var tmp = string.Empty;
 
             // for scaling of same length.
@@ -450,21 +450,23 @@ namespace DataStructures.BitArray
             var len = one.Length > two.Length ? one.Length : two.Length;
             var ans = new BitArray(len);
 
+            var sb = new StringBuilder();
+
             for (var i = 0; i < len; i++)
             {
                 switch (sequence1[i])
                 {
                     case '1' when sequence2[i].Equals('1'):
                     case '0' when sequence2[i].Equals('0'):
-                        result += 0;
+                        _ = sb.Append(0);
                         break;
                     default:
-                        result += 1;
+                        _ = sb.Append(1);
                         break;
                 }
             }
 
-            result = result.Trim();
+            var result = sb.ToString().Trim();
             ans.Compile(result);
 
             return ans;
