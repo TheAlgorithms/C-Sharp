@@ -1,43 +1,64 @@
 ﻿using System.Collections.Generic;
 
-namespace DataStructures.LinkedList
+namespace DataStructures.SinglyLinkedList
 {
     /// <summary>
     /// TODO.
     /// </summary>
     /// <typeparam name="T">TODO. 2.</typeparam>
-    public class LinkedList<T>
+    public class SinglyLinkedList<T>
     {
         // points to the start of the list
-        private LinkedListElementNode<T> Head { get; set; }
+        private SinglyLinkedListNode<T> Head { get; set; }
 
         /// <summary>
-        /// TODO. Add new element to the list.
+        /// Adds new node to the start of the list,
+        /// time complexity: O(1),
+        /// space complexity: O(1).
         /// </summary>
-        /// <param name="data">TODO. 2.</param>
-        public void AddListElement(T data)
+        /// <param name="data">Contents of newly added node.</param>
+        /// <returns>Added list node.</returns>
+        public SinglyLinkedListNode<T> AddFirst(T data)
         {
-            var newListElement = new LinkedListElementNode<T>(data);
+            var newListElement = new SinglyLinkedListNode<T>(data)
+            {
+                Next = Head,
+            };
+            Head = newListElement;
+            return newListElement;
+        }
+
+        /// <summary>
+        /// Adds new node to the end of the list,
+        /// time complexity: O(n),
+        /// space complexity: O(1),
+        /// where n - number of nodes in the list.
+        /// </summary>
+        /// <param name="data">Contents of newly added node.</param>
+        /// <returns>Added list node.</returns>
+        public SinglyLinkedListNode<T> AddLast(T data)
+        {
+            var newListElement = new SinglyLinkedListNode<T>(data);
 
             // if head is null, the added element is the first, hence it is the head
-            if (Head == null)
+            if (Head is null)
             {
                 Head = newListElement;
+                return newListElement;
             }
-            else
+
+            // temp ListElement to avoid overwriting the original
+            var tempElement = Head;
+
+            // iterates through all elements
+            while (tempElement.Next != null)
             {
-                // temp ListElement to avoid overwriting the original
-                var tempElement = Head;
-
-                // iterates through all elements
-                while (tempElement.Next != null)
-                {
-                    tempElement = tempElement.Next;
-                }
-
-                // adds the new element to the last one
-                tempElement.Next = newListElement;
+                tempElement = tempElement.Next;
             }
+
+            // adds the new element to the last one
+            tempElement.Next = newListElement;
+            return newListElement;
         }
 
         /// <summary>
@@ -112,7 +133,7 @@ namespace DataStructures.LinkedList
         public bool DeleteElement(T element)
         {
             var currentElement = Head;
-            LinkedListElementNode<T> previousElement = null;
+            SinglyLinkedListNode<T> previousElement = null;
 
             // iterates through all elements
             while (currentElement != null)

@@ -1,17 +1,17 @@
-﻿namespace DataStructures.LinkedList
+﻿namespace DataStructures.SinglyLinkedList
 {
     /// <summary>
     /// TODO.
     /// </summary>
     /// <typeparam name="T">TODO. 2.</typeparam>
-    public class LinkedListElementNode<T>
+    public class SinglyLinkedListNode<T>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="LinkedListElementNode{T}"/> class.
+        /// Initializes a new instance of the <see cref="SinglyLinkedListNode{T}"/> class.
         /// TODO.
         /// </summary>
         /// <param name="data">TODO. 2.</param>
-        public LinkedListElementNode(T data)
+        public SinglyLinkedListNode(T data)
         {
             Data = data;
             Next = null;
@@ -25,6 +25,6 @@
         /// <summary>
         /// Gets or sets tODO. TODO.
         /// </summary>
-        public LinkedListElementNode<T> Next { get; set; }
+        public SinglyLinkedListNode<T> Next { get; set; }
     }
 }
