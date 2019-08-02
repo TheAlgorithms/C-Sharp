@@ -1,40 +1,35 @@
 ﻿using System;
 using System.Linq;
-using DataStructures.LinkedList;
+using DataStructures.SinglyLinkedList;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace DataStructures.Tests.LinkedList
 {
     public static class LinkedListTests
     {
         [Test]
-        [TestCase(5, 2)]
-        public static void AddsElements(int q, int firstElement)
+        public static void LengthWorksCorrectly([Random(0, 1000, 100)]int quantity)
         {
             // Arrange
-            var a = new LinkedList<int>();
+            var a = new SinglyLinkedList<int>();
 
             // Act
-            var r = new Random();
-            a.AddListElement(firstElement);
-            for (var i = 0; i < q; i++)
+            var r = TestContext.CurrentContext.Random;
+            for (var i = 0; i < quantity; i++)
             {
-                a.AddListElement(r.Next(0, 100));
+                _ = a.AddFirst(r.Next());
             }
 
-            var d = a.GetListData();
-
             // Assert
-            Assert.AreEqual(6, a.Length());
-            Assert.AreEqual(firstElement, d.First());
-            Assert.AreEqual(firstElement, a.GetElementByIndex(0));
+            Assert.AreEqual(quantity, a.Length());
         }
 
         [Test]
-        public static void LengthOnZeroElements()
+        public static void LengthOnEmptyListIsZero()
         {
             // Arrange
-            var a = new LinkedList<int>();
+            var a = new SinglyLinkedList<int>();
 
             // Act
 
@@ -46,12 +41,12 @@ namespace DataStructures.Tests.LinkedList
         public static void GetItemsFromLinkedList()
         {
             // Arrange
-            var testObj = new LinkedList<string>();
-            testObj.AddListElement("H");
-            testObj.AddListElement("E");
-            testObj.AddListElement("L");
-            testObj.AddListElement("L");
-            testObj.AddListElement("O");
+            var testObj = new SinglyLinkedList<string>();
+            _ = testObj.AddLast("H");
+            _ = testObj.AddLast("E");
+            _ = testObj.AddLast("L");
+            _ = testObj.AddLast("L");
+            _ = testObj.AddLast("O");
 
             // Act
             var items = testObj.GetListData();
@@ -62,23 +57,19 @@ namespace DataStructures.Tests.LinkedList
         }
 
         [Test]
-        public static void OutOfRangeIndexGetsFirstOrLastItem()
+        public static void GetElementByIndex_IndexOutOfRange_ArgumentOutOfRangeExceptionThrown()
         {
             // Arrange
-            var testObj = new LinkedList<string>();
-            testObj.AddListElement("H");
-            testObj.AddListElement("E");
-            testObj.AddListElement("L");
-            testObj.AddListElement("L");
-            testObj.AddListElement("O");
+            var list = new SinglyLinkedList<int>();
 
             // Act
-            var firstItem = testObj.GetElementByIndex(-1);
-            var lastItem = testObj.GetElementByIndex(6);
+            _ = list.AddFirst(1);
+            _ = list.AddFirst(2);
+            _ = list.AddFirst(3);
 
             // Assert
-            Assert.AreEqual("O", lastItem);
-            Assert.AreEqual("H", firstItem);
+            _ = Assert.Throws<ArgumentOutOfRangeException>(() => list.GetElementByIndex(-1));
+            _ = Assert.Throws<ArgumentOutOfRangeException>(() => list.GetElementByIndex(3));
         }
 
 
@@ -86,14 +77,14 @@ namespace DataStructures.Tests.LinkedList
         public static void RemoveItemsFromList()
         {
             // Arrange
-            var testObj = new LinkedList<string>();
-            testObj.AddListElement("X");
-            testObj.AddListElement("H");
-            testObj.AddListElement("E");
-            testObj.AddListElement("L");
-            testObj.AddListElement("L");
-            testObj.AddListElement("I");
-            testObj.AddListElement("O");
+            var testObj = new SinglyLinkedList<string>();
+            _ = testObj.AddLast("X");
+            _ = testObj.AddLast("H");
+            _ = testObj.AddLast("E");
+            _ = testObj.AddLast("L");
+            _ = testObj.AddLast("L");
+            _ = testObj.AddLast("I");
+            _ = testObj.AddLast("O");
 
             // Act
             var xRemoveSucess = testObj.DeleteElement("X");

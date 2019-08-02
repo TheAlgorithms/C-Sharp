@@ -1,62 +1,89 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace DataStructures.LinkedList
+namespace DataStructures.SinglyLinkedList
 {
     /// <summary>
     /// TODO.
     /// </summary>
     /// <typeparam name="T">TODO. 2.</typeparam>
-    public class LinkedList<T>
+    public class SinglyLinkedList<T>
     {
         // points to the start of the list
-        private LinkedListElementNode<T> Head { get; set; }
+        private SinglyLinkedListNode<T> Head { get; set; }
 
         /// <summary>
-        /// TODO. Add new element to the list.
+        /// Adds new node to the start of the list,
+        /// time complexity: O(1),
+        /// space complexity: O(1).
         /// </summary>
-        /// <param name="data">TODO. 2.</param>
-        public void AddListElement(T data)
+        /// <param name="data">Contents of newly added node.</param>
+        /// <returns>Added list node.</returns>
+        public SinglyLinkedListNode<T> AddFirst(T data)
         {
-            var newListElement = new LinkedListElementNode<T>(data);
-
-            // if head is null, the added element is the first, hence it is the head
-            if (Head == null)
+            var newListElement = new SinglyLinkedListNode<T>(data)
             {
-                Head = newListElement;
-            }
-            else
-            {
-                // temp ListElement to avoid overwriting the original
-                var tempElement = Head;
-
-                // iterates through all elements
-                while (tempElement.Next != null)
-                {
-                    tempElement = tempElement.Next;
-                }
-
-                // adds the new element to the last one
-                tempElement.Next = newListElement;
-            }
+                Next = Head,
+            };
+            Head = newListElement;
+            return newListElement;
         }
 
         /// <summary>
-        /// TODO.
+        /// Adds new node to the end of the list,
+        /// time complexity: O(n),
+        /// space complexity: O(1),
+        /// where n - number of nodes in the list.
         /// </summary>
-        /// <param name="pos">TODO. 2.</param>
-        /// <returns>TODO. 3.</returns>
-        public T GetElementByIndex(int pos)
+        /// <param name="data">Contents of newly added node.</param>
+        /// <returns>Added list node.</returns>
+        public SinglyLinkedListNode<T> AddLast(T data)
         {
+            var newListElement = new SinglyLinkedListNode<T>(data);
+
+            // if head is null, the added element is the first, hence it is the head
+            if (Head is null)
+            {
+                Head = newListElement;
+                return newListElement;
+            }
+
+            // temp ListElement to avoid overwriting the original
             var tempElement = Head;
 
-            // iterates through all elements until pos is reached
-            for (var i = 0; i < pos; i++)
+            // iterates through all elements
+            while (tempElement.Next != null)
             {
-                // iterate throuh list elements
-                if (tempElement.Next != null)
-                {
-                    tempElement = tempElement.Next;
-                }
+                tempElement = tempElement.Next;
+            }
+
+            // adds the new element to the last one
+            tempElement.Next = newListElement;
+            return newListElement;
+        }
+
+        /// <summary>
+        /// Returns element at index <paramref name="index"/> in the list.
+        /// </summary>
+        /// <param name="index">Index of an element to be returned.</param>
+        /// <returns>Element at index <paramref name="index"/>.</returns>
+        public T GetElementByIndex(int index)
+        {
+            if (index < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
+
+            var tempElement = Head;
+
+            for (var i = 0; tempElement != null && i < index; i++)
+            {
+                tempElement = tempElement.Next;
+            }
+
+            if (tempElement is null)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
             }
 
             return tempElement.Data;
@@ -112,7 +139,7 @@ namespace DataStructures.LinkedList
         public bool DeleteElement(T element)
         {
             var currentElement = Head;
-            LinkedListElementNode<T> previousElement = null;
+            SinglyLinkedListNode<T> previousElement = null;
 
             // iterates through all elements
             while (currentElement != null)
