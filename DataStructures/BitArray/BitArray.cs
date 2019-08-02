@@ -454,15 +454,14 @@ namespace DataStructures.BitArray
 
             for (var i = 0; i < len; i++)
             {
-                switch (sequence1[i])
+                if ((sequence1[i] == '1' && sequence2[i].Equals('1')) ||
+                    (sequence1[i] == '0' && sequence2[i].Equals('0')))
                 {
-                    case '1' when sequence2[i].Equals('1'):
-                    case '0' when sequence2[i].Equals('0'):
-                        _ = sb.Append(0);
-                        break;
-                    default:
-                        _ = sb.Append(1);
-                        break;
+                    _ = sb.Append(0);
+                }
+                else
+                {
+                    _ = sb.Append(1);
                 }
             }
 
