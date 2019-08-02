@@ -57,23 +57,19 @@ namespace DataStructures.Tests.LinkedList
         }
 
         [Test]
-        public static void OutOfRangeIndexGetsFirstOrLastItem()
+        public static void GetElementByIndex_IndexOutOfRange_ExceptionThrown()
         {
             // Arrange
-            var testObj = new SinglyLinkedList<string>();
-            _ = testObj.AddLast("H");
-            _ = testObj.AddLast("E");
-            _ = testObj.AddLast("L");
-            _ = testObj.AddLast("L");
-            _ = testObj.AddLast("O");
+            var list = new SinglyLinkedList<int>();
 
             // Act
-            var firstItem = testObj.GetElementByIndex(-1);
-            var lastItem = testObj.GetElementByIndex(6);
+            _ = list.AddFirst(1);
+            _ = list.AddFirst(2);
+            _ = list.AddFirst(3);
 
             // Assert
-            Assert.AreEqual("O", lastItem);
-            Assert.AreEqual("H", firstItem);
+            _ = Assert.Throws<IndexOutOfRangeException>(() => list.GetElementByIndex(-1));
+            _ = Assert.Throws<IndexOutOfRangeException>(() => list.GetElementByIndex(3));
         }
 
 

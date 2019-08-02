@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DataStructures.SinglyLinkedList
 {
@@ -62,22 +63,27 @@ namespace DataStructures.SinglyLinkedList
         }
 
         /// <summary>
-        /// TODO.
+        /// Returns element at index <paramref name="index"/> in the list.
         /// </summary>
-        /// <param name="pos">TODO. 2.</param>
-        /// <returns>TODO. 3.</returns>
-        public T GetElementByIndex(int pos)
+        /// <param name="index">Index of an element to be returned.</param>
+        /// <returns>Element at index <paramref name="index"/>.</returns>
+        public T GetElementByIndex(int index)
         {
+            if (index < 0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
             var tempElement = Head;
 
-            // iterates through all elements until pos is reached
-            for (var i = 0; i < pos; i++)
+            for (var i = 0; tempElement != null && i < index; i++)
             {
-                // iterate throuh list elements
-                if (tempElement.Next != null)
-                {
-                    tempElement = tempElement.Next;
-                }
+                tempElement = tempElement.Next;
+            }
+
+            if (tempElement is null)
+            {
+                throw new IndexOutOfRangeException();
             }
 
             return tempElement.Data;
