@@ -1,4 +1,4 @@
-﻿// Author: Christian Bender
+﻿// Original Author: Christian Bender
 // Class: BitArray
 //
 // implements IComparable, ICloneable, IEnumerator, IEnumerable
@@ -116,11 +116,14 @@
 using System;
 using System.Collections;
 using System.Linq;
+using System.Text;
 
 namespace DataStructures.BitArray
 {
     /// <summary>
-    /// TODO.
+    /// This class implements a bit-array and provides some
+    /// useful functions/operations to deal with this type of
+    /// data structure.
     /// </summary>
     public class BitArray : IComparable, ICloneable, IEnumerator, IEnumerable
     {
@@ -136,7 +139,7 @@ namespace DataStructures.BitArray
         {
             if (n < 1)
             {
-                return;
+                field = new bool[0];
             }
 
             field = new bool[n];
@@ -148,20 +151,15 @@ namespace DataStructures.BitArray
             }
         }
 
-        /*
-         * constructor
-         * input: a string sequence of 0's and 1's.
-         * output: none
-         * purpose: setups the array with the input sequence.
-         * assumes: sequence must been greater or equal to 1.
-         *          the sequence may only be allowed contains onese or zeros.
-         * */
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BitArray"/> class.
-        /// TODO.
+        /// Setups the array with the input sequence.
+        ///
+        /// purpose: Setups the array with the input sequence.
+        /// assumes: sequence must been greater or equal to 1.
+        /// the sequence may only be allowed contains onese or zeros.
         /// </summary>
-        /// <param name="sequence">TODO. 2.</param>
+        /// <param name="sequence">A string sequence of 0's and 1's.</param>
         public BitArray(string sequence)
         {
             // precondition I
@@ -187,22 +185,15 @@ namespace DataStructures.BitArray
             }
         }
 
-        /*
-         * constructor
-         * input: a boolean array of bits.
-         * output: none
-         * purpose: setups the bit-array with the input array.
-         * */
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BitArray"/> class.
-        /// TODO.
+        /// Setups the bit-array with the input array.
         /// </summary>
-        /// <param name="bits">TODO. 2.</param>
+        /// <param name="bits">A boolean array of bits.</param>
         public BitArray(bool[] bits) => field = bits;
 
         /// <summary>
-        /// Gets tODO. TODO. Property (for interface IEnumerator) returns the current bit of the bit-field.
+        /// Gets the current bit of the array.
         /// </summary>
         public object Current
         {
@@ -219,17 +210,16 @@ namespace DataStructures.BitArray
             }
         }
 
-        /**
-         * Property
-         * Length: returns the length of the current bit array.
-         * */
+        /// <summary>
+        /// Gets the length of the current bit array.
+        /// </summary>
         private int Length => field.Length;
 
         /// <summary>
-        /// TODO.
+        /// Gets element given an offset.
         /// </summary>
-        /// <param name="offset">TODO. 2.</param>
-        /// <returns>TODO. 3.</returns>
+        /// <param name="offset">Position.</param>
+        /// <returns>Element on array.</returns>
         public bool this[int offset]
         {
             get => field[offset];
@@ -237,17 +227,12 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Returns a bit-array that represents the bit by bit AND (&amp;).
+        /// Assumes arrays have the same length.
         /// </summary>
-        /// <param name="one">TODO. 2.</param>
-        /// <param name="two">TODO. 3.</param>
-        /// <returns>TODO. 4.</returns>
-        /**
-         * Operator &amp;
-         * input: two bit-arrays with equal length.
-         * output: bit-array that represents the bit by bit AND.
-         * assumes: the arrays have the same length.
-         * */
+        /// <param name="one">First bit-array.</param>
+        /// <param name="two">Second bit-array.</param>
+        /// <returns>bit-array.</returns>
         public static BitArray operator &(BitArray one, BitArray two)
         {
             var sequence1 = one.ToString();
@@ -289,25 +274,12 @@ namespace DataStructures.BitArray
                 }
             } // end scaling
 
-            var ans = new BitArray(one.Length);
+            var len = one.Length > two.Length ? one.Length : two.Length;
+            var ans = new BitArray(len);
 
             for (var i = 0; i < one.Length; i++)
             {
-                if (sequence1[i] == '0')
-                {
-                    result += '0';
-                }
-                else
-                {
-                    if (sequence2[i] == '1')
-                    {
-                        result += '1';
-                    }
-                    else
-                    {
-                        result += '0';
-                    }
-                }
+                result += sequence1[i].Equals('1') && sequence2[i].Equals('1') ? '1' : '0';
             }
 
             result = result.Trim();
@@ -317,17 +289,12 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Returns a bit-array that represents the bit by bit OR.
+        /// Assumes arrays have the same length.
         /// </summary>
-        /// <param name="one">TODO. 2.</param>
-        /// <param name="two">TODO. 3.</param>
-        /// <returns>TODO. 4.</returns>
-        /**
-         * Operator |
-         * input: two bit-arrays with equal length.
-         * output: bit-array that represents the bit by bit OR.
-         * assumes: the arrays have the same length.
-         * */
+        /// <param name="one">First bit-array.</param>
+        /// <param name="two">Second bit-array.</param>
+        /// <returns>bit-array that represents the bit by bit OR.</returns>
         public static BitArray operator |(BitArray one, BitArray two)
         {
             var sequence1 = one.ToString();
@@ -369,25 +336,12 @@ namespace DataStructures.BitArray
                 }
             } // end scaling
 
-            var ans = new BitArray(one.Length);
+            var len = one.Length > two.Length ? one.Length : two.Length;
+            var ans = new BitArray(len);
 
-            for (var i = 0; i < one.Length; i++)
+            for (var i = 0; i < len; i++)
             {
-                if (sequence1[i] == '0')
-                {
-                    if (sequence2[i] == '1')
-                    {
-                        result += '1';
-                    }
-                    else
-                    {
-                        result += '0';
-                    }
-                }
-                else
-                {
-                    result += '1';
-                }
+                result += sequence1[i].Equals('0') && sequence2[i].Equals('0') ? '0' : '1';
             }
 
             result = result.Trim();
@@ -397,15 +351,11 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Returns a bit-array that represents the operator ~ (NOT).
+        /// Assumes arrays have the same length.
         /// </summary>
-        /// <param name="one">TODO. 2.</param>
-        /// <returns>TODO. 3.</returns>
-        /**
-         * Operator ~
-         * input: BitArray
-         * output: bitwise not
-         * */
+        /// <param name="one">Bit-array.</param>
+        /// <returns>bitwise not.</returns>
         public static BitArray operator ~(BitArray one)
         {
             var ans = new BitArray(one.Length);
@@ -431,16 +381,12 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Returns a bit-array that represents bitwise shift left (&gt;&gt;).
+        /// Assumes arrays have the same length.
         /// </summary>
-        /// <param name="other">TODO. 2.</param>
-        /// <param name="n">TODO. 3.</param>
-        /// <returns>TODO. 4.</returns>
-        /**
-         * Operator &gt;&gt; (bitwise shift left)
-         * input: a BitArray and a number of bits.
-         * output: bitwise shifted BitArray.
-         * */
+        /// <param name="other">Bit-array.</param>
+        /// <param name="n">Number of bits.</param>
+        /// <returns>Bitwise shifted BitArray.</returns>
         public static BitArray operator <<(BitArray other, int n)
         {
             var ans = new BitArray(other.Length + n);
@@ -455,21 +401,16 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Returns a bit-array that represents the bit by bit XOR.
+        /// Assumes arrays have the same length.
         /// </summary>
-        /// <param name="one">TODO. 2.</param>
-        /// <param name="two">TODO. 3.</param>
-        /// <returns>TODO. 4.</returns>
-        /**
-         * operator ^ (bitwise XOR operation)
-         * input: two bit-arrays.
-         * output: BitArray
-         * */
+        /// <param name="one">First bit-array.</param>
+        /// <param name="two">Second bit-array.</param>
+        /// <returns>bit-array.</returns>
         public static BitArray operator ^(BitArray one, BitArray two)
         {
             var sequence1 = one.ToString();
             var sequence2 = two.ToString();
-            var result = string.Empty;
             var tmp = string.Empty;
 
             // for scaling of same length.
@@ -506,51 +447,37 @@ namespace DataStructures.BitArray
                 }
             } // end scaling
 
-            var ans = new BitArray(one.Length);
+            var len = one.Length > two.Length ? one.Length : two.Length;
+            var ans = new BitArray(len);
 
-            for (var i = 0; i < one.Length; i++)
+            var sb = new StringBuilder();
+
+            for (var i = 0; i < len; i++)
             {
-                if (sequence1[i] == '0')
+                if ((sequence1[i] == '1' && sequence2[i].Equals('1')) ||
+                    (sequence1[i] == '0' && sequence2[i].Equals('0')))
                 {
-                    if (sequence2[i] == '1')
-                    {
-                        result += '1';
-                    }
-                    else
-                    {
-                        result += '0';
-                    }
+                    _ = sb.Append(0);
                 }
                 else
                 {
-                    if (sequence2[i] == '0')
-                    {
-                        result += '1';
-                    }
-                    else
-                    {
-                        result += '0';
-                    }
+                    _ = sb.Append(1);
                 }
             }
 
-            result = result.Trim();
+            var result = sb.ToString().Trim();
             ans.Compile(result);
 
             return ans;
         }
 
         /// <summary>
-        /// TODO.
+        /// Returns a bit-array that represents bitwise shift right (>>).
+        /// Assumes arrays have the same length.
         /// </summary>
-        /// <param name="other">TODO. 2.</param>
-        /// <param name="n">TODO. 3.</param>
-        /// <returns>TODO. 4.</returns>
-        /**
-         * Operator >> (bitwise shift right)
-         * input: a BitArray and a number of bits.
-         * output: bitwise shifted BitArray.
-         * */
+        /// <param name="other">Bit-array.</param>
+        /// <param name="n">Number of bits.</param>
+        /// <returns>Bitwise shifted BitArray.</returns>
         public static BitArray operator >>(BitArray other, int n)
         {
             var ans = new BitArray(other.Length - n);
@@ -565,17 +492,12 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Checks if both arrays are == (equal).
+        /// The input assumes arrays have the same length.
         /// </summary>
-        /// <param name="one">TODO. 2.</param>
-        /// <param name="two">TODO. 3.</param>
-        /// <returns>TODO. 4.</returns>
-        /**
-         * Operator == (equal)
-         * input: two bit-arrays
-         * output: returns true if there inputs are equal otherwise false.
-         * assumes: the input bit-arrays must have same length.
-         * */
+        /// <param name="one">First bit-array.</param>
+        /// <param name="two">Second bit-array.</param>
+        /// <returns>Returns True if there inputs are equal; False otherwise.</returns>
         public static bool operator ==(BitArray one, BitArray two)
         {
             var status = true;
@@ -599,23 +521,18 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Checks if both arrays are != (not-equal).
+        /// The input assumes arrays have the same length.
         /// </summary>
-        /// <param name="one">TODO. 2.</param>
-        /// <param name="two">TODO. 3.</param>
-        /// <returns>TODO. 4.</returns>
-        /**
-         * Operator != (not-equal)
-         * input: two bit-arrays
-         * output: returns true if there inputs aren't equal otherwise false.
-         * assumes: the input bit-arrays must have same length.
-         * */
+        /// <param name="one">First bit-array.</param>
+        /// <param name="two">Second bit-array.</param>
+        /// <returns>Returns True if there inputs aren't equal; False otherwise.</returns>
         public static bool operator !=(BitArray one, BitArray two) => !(one == two);
 
         /// <summary>
-        /// TODO. Clone (interface ICloneable) input: none output: a copy of this bit-array.
+        /// Returns a copy of the current bit-array.
         /// </summary>
-        /// <returns>TODO. 2.</returns>
+        /// <returns>Bit-array clone.</returns>
         public object Clone()
         {
             var theClone = new BitArray(Length);
@@ -629,16 +546,12 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Compares if given bit-array is equal, greater or smaller than current.
         /// * CompareTo (interfaces IComparable)
-        /// input: BitArray
-        /// output: 0 - if the bit-array a equal.
-        /// -1 - if this bit-array is smaller.
-        /// 1 - if this bit-array is greater.
         /// assumes: bit-array lentgh must been smaller or equal to 64 bit.
         /// </summary>
-        /// <param name="other">TODO. 2.</param>
-        /// <returns>TODO. 3.</returns>
+        /// <param name="other">Bit-array object.</param>
+        /// <returns>0 - if the bit-array a equal; -1 - if this bit-array is smaller; 1 - if this bit-array is greater. .</returns>
         public int CompareTo(object other)
         {
             var status = 0;
@@ -659,25 +572,15 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Gets a enumerator for this BitArray-Object.
         /// </summary>
-        /// <returns>TODO. 2.</returns>
-        /**
-         * GetEnumerator (for interface IEnumerable)
-         * input: none
-         * output: returns a enumerator for this BitArray-Object.
-         * */
+        /// <returns>Returns a enumerator for this BitArray-Object.</returns>
         public IEnumerator GetEnumerator() => this;
 
         /// <summary>
-        /// TODO.
+        /// MoveNext (for interface IEnumerator).
         /// </summary>
-        /// <returns>TODO. 2.</returns>
-        /**
-         * MoveNext (for interface IEnumerator)
-         * input: none
-         * output: returns true if 'position' successful increased otherwise false.
-         * */
+        /// <returns>Returns True if 'position' successful increased; False otherwise.</returns>
         public bool MoveNext()
         {
             if (position + 1 >= field.Length)
@@ -690,27 +593,17 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Resets the position of the enumerator.
+        /// Reset (for interface IEnumerator).
         /// </summary>
-
-        /**
-         * Reset (for interface IEnumerator)
-         * resets the position of the enumerator.
-         * */
         public void Reset() => position = -1;
 
         /// <summary>
-        /// TODO.
+        /// Compiles the binary sequence into the inner data structure.
+        /// The sequence must have the same length, as the bit-array.
+        /// The sequence may only be allowed contains onese or zeros.
         /// </summary>
-        /// <param name="sequence">TODO. 2.</param>
-        /*
-         * Compile
-         * input: a string sequence of 0's and 1's
-         * output: none
-         * purpose: compiles the binary sequence into the inner data structure.
-         * assumes: the sequence must have the same length, as the bit-array.
-         *          the sequence may only be allowed contains onese or zeros.
-         * */
+        /// <param name="sequence">A string sequence of 0's and 1's.</param>
         public void Compile(string sequence)
         {
             var tmp = string.Empty;
@@ -758,17 +651,10 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Compiles integer number into the inner data structure.
+        /// Assumes: the number must have the same bit length.
         /// </summary>
-        /// <param name="number">TODO. 2.</param>
-
-        /**
-         * Compile
-         * input: an positive integer number
-         * output: none
-         * purpose: compiles integer number into the inner data structure.
-         * assumes: the number must have the same bit length.
-         * */
+        /// <param name="number">A positive integer number.</param>
         public void Compile(int number)
         {
             var tmp = string.Empty;
@@ -816,16 +702,10 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Compiles integer number into the inner data structure.
+        /// The number must have the same bit length.
         /// </summary>
-        /// <param name="number">TODO. 2.</param>
-        /**
-         * Compile
-         * input: an positive long integer number
-         * output: none
-         * purpose: compiles integer number into the inner data structure.
-         * assumes: the number must have the same bit length.
-         * */
+        /// <param name="number">A positive long integer number.</param>
         public void Compile(long number)
         {
             var tmp = string.Empty;
@@ -873,16 +753,9 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Is the opposit of the Compile(...) method.
         /// </summary>
-        /// <returns>TODO. 2.</returns>
-        /**
-         * ToString
-         * input: none
-         * output: a string representation of the inner data structure.
-         * ToString: is the opposit of the Compile(...) method.
-         *
-         * */
+        /// <returns>Returns a string representation of the inner data structure.</returns>
         public override string ToString()
         {
             // creates return-string
@@ -890,14 +763,9 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Gets the number of one-bits in the field.
         /// </summary>
-        /// <returns>TODO. 2.</returns>
-        /*
-         * NumberOfOneBits
-         * input: none
-         * output: the number of one-bits in the field.
-         * */
+        /// <returns>quantity of bits in current bit-array.</returns>
         public int NumberOfOneBits()
         {
             // counting one-bits.
@@ -905,14 +773,9 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Gets the number of zero-bits in the field.
         /// </summary>
-        /// <returns>TODO. 2.</returns>
-        /*
-         * NumberOfZeroBits
-         * input: none
-         * output: the number of one-bits in the field.
-         * */
+        /// <returns>quantity of bits.</returns>
         public int NumberOfZeroBits()
         {
             // counting zero-bits
@@ -920,37 +783,22 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// To check for even parity.
         /// </summary>
-        /// <returns>TODO. 2.</returns>
-        /**
-         * EvenParity
-         * input: none
-         * output: returns true if parity is even, otherwise false.
-         * */
+        /// <returns>Returns True if parity is even; False otherwise.</returns>
         public bool EvenParity() => NumberOfOneBits() % 2 == 0;
 
         /// <summary>
-        /// TODO.
+        /// To check for odd parity.
         /// </summary>
-        /// <returns>TODO. 2.</returns>
-        /**
-         * OddParity
-         * input: none
-         * output: returns true if parity is odd, otherwise false.
-         * */
+        /// <returns>Returns True if parity is odd; False otherwise.</returns>
         public bool OddParity() => NumberOfOneBits() % 2 != 0;
 
         /// <summary>
-        /// TODO.
+        /// Returns a long integer representation of the bit-array.
+        /// Assumes the bit-array length must been smaller or equal to 64 bit.
         /// </summary>
-        /// <returns>TODO. 2.</returns>
-        /**
-         * ToInt64
-         * input: none
-         * output: returns a long integer representation of the bit-array.
-         * assumes: the bit-array length must been smaller or equal to 64 bit.
-         * */
+        /// <returns>Long integer array.</returns>
         public long ToInt64()
         {
             // Precondition
@@ -964,15 +812,10 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Returns a long integer representation of the bit-array.
+        /// Assumes the bit-array length must been smaller or equal to 32 bit.
         /// </summary>
-        /// <returns>TODO. 2.</returns>
-        /**
-         * ToInt32
-         * input: none
-         * output: returns a integer representation of the bit-array.
-         * assumes: the bit-array length must been smaller or equal to 32 bit.
-         * */
+        /// <returns>integer array.</returns>
         public int ToInt32()
         {
             // Precondition
@@ -986,14 +829,8 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Sets all bits on false.
         /// </summary>
-        /**
-         * Reset
-         * input: none
-         * output: none
-         * purpose: sets all bits on false.
-         * */
         public void ResetField()
         {
             for (var i = 0; i < field.Length; i++)
@@ -1003,15 +840,9 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Sets all bits on the value of the flag.
         /// </summary>
-        /// <param name="flag">TODO. 2.</param>
-        /**
-         * SetAll
-         * input: a boolean flag
-         * output: none
-         * purpose: sets all bits on the value of the flag.
-         **/
+        /// <param name="flag">Bollean flag (false-true).</param>
         public void SetAll(bool flag)
         {
             for (var i = 0; i < field.Length; i++)
@@ -1021,16 +852,11 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Checks if bit-array are equal.
+        /// Assumes the input bit-arrays must have same length.
         /// </summary>
-        /// <param name="other">TODO. 2.</param>
-        /// <returns>TODO. 3.</returns>
-        /**
-         * Equals
-         * input: BitArray
-         * output: returns true if there inputs are equal otherwise false.
-         * assumes: the input bit-arrays must have same length.
-         * */
+        /// <param name="other">Bit-array object.</param>
+        /// <returns>Returns true if there inputs are equal otherwise false.</returns>
         public override bool Equals(object other)
         {
             var status = true;
@@ -1056,27 +882,18 @@ namespace DataStructures.BitArray
         }
 
         /// <summary>
-        /// TODO.
+        /// Gets has-code of bit-array.
+        /// Assumes bit-array lentgh must been smaller or equal to 32.
         /// </summary>
-        /// <returns>TODO. 2.</returns>
-        /**
-         * GetHashCode
-         * input: none
-         * output: hash-code for this BitArray instanz.
-         * assumes: bit-array lentgh must been smaller or equal to 32
-         * */
+        /// <returns>hash-code for this BitArray instance.</returns>
         public override int GetHashCode() => ToInt32();
 
-        /***
-         * Utility method
-         * input: string sequence
-         * output: returns true if sequence contains only zeros and ones,
-         *          otherwise false.
-         * purpose: checks a given sequence contains only zeros and ones.
-         *          This method will used in Constructor (sequence : string)
-         *          and Compile(sequence : string)
-         *
-         **/
+        /// <summary>
+        /// Utility method foir checking a given sequence contains only zeros and ones.
+        /// This method will used in Constructor (sequence : string) and Compile(sequence : string).
+        /// </summary>
+        /// <param name="sequence">String sequence.</param>
+        /// <returns>returns True if sequence contains only zeros and ones; False otherwise.</returns>
         private static bool Match(string sequence)
         {
             var status = true;
