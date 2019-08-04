@@ -5,10 +5,10 @@ using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Search
 {
-    public class BinarySearcherTests
+    public static class BinarySearcherTests
     {
         [Test]
-        public void FindIndex_ItemPresent_IndexCorrect([Random(1, 1000, 100)]int n)
+        public static void FindIndex_ItemPresent_IndexCorrect([Random(1, 1000, 100)]int n)
         {
             // Arrange
             var searcher = new BinarySearcher<int>();
@@ -24,7 +24,7 @@ namespace Algorithms.Tests.Search
         }
 
         [Test]
-        public void FindIndex_ItemMissing_MinusOneReturned([Random(0, 1000, 10)]int n, [Random(-100, 1100, 10)]int missingItem)
+        public static void FindIndex_ItemMissing_MinusOneReturned([Random(0, 1000, 10)]int n, [Random(-100, 1100, 10)]int missingItem)
         {
             // Arrange
             var searcher = new BinarySearcher<int>();
@@ -39,7 +39,7 @@ namespace Algorithms.Tests.Search
         }
 
         [Test]
-        public void FindIndex_ArrayEmpty_MinusOneReturned([Random(100)]int itemToSearch)
+        public static void FindIndex_ArrayEmpty_MinusOneReturned([Random(100)]int itemToSearch)
         {
             // Arrange
             var searcher = new BinarySearcher<int>();

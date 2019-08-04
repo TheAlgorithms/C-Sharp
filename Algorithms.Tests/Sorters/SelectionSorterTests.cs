@@ -5,10 +5,10 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Sorters
 {
-    public class SelectionSorterTests
+    public static class SelectionSorterTests
     {
         [Test]
-        public void ArraySorted([Random(0, 1000, 100, Distinct = true)]int n)
+        public static void ArraySorted([Random(0, 1000, 100, Distinct = true)]int n)
         {
             // Arrange
             var sorter = new SelectionSorter<int>();

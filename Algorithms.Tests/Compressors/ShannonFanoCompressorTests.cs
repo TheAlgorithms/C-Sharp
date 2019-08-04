@@ -5,13 +5,13 @@ using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Compressors
 {
-    public class ShannonFanoCompressorTests
+    public static class ShannonFanoCompressorTests
     {
         [Test]
         [TestCase("dddddddddd", "1111111111")]
         [TestCase("a", "1")]
         [TestCase("", "")]
-        public void CompressingPhrase(string uncompressedText, string expectedCompressedText)
+        public static void CompressingPhrase(string uncompressedText, string expectedCompressedText)
         {
             //Arrange
             var solver = new NaiveKnapsackSolver<(char, double)>();
@@ -28,7 +28,7 @@ namespace Algorithms.Tests.Compressors
         }
 
         [Test]
-        public void DecompressedTextTheSameAsOriginal([Random(0, 1000, 100)]int length)
+        public static void DecompressedTextTheSameAsOriginal([Random(0, 1000, 100)]int length)
         {
             //Arrange
             var solver = new NaiveKnapsackSolver<(char, double)>();
