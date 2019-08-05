@@ -61,6 +61,27 @@ namespace Algorithms.DataCompression
             }
         }
 
+        /// <summary>
+        /// Finds frequency for each character in the text.
+        /// </summary>
+        /// <returns>Symbol-frequency array.</returns>
+        private static ListNode[] GetListNodesFromText(string text)
+        {
+            var occurenceCounts = new Dictionary<char, double>();
+
+            foreach (var ch in text)
+            {
+                if (!occurenceCounts.ContainsKey(ch))
+                {
+                    occurenceCounts.Add(ch, 0);
+                }
+
+                occurenceCounts[ch]++;
+            }
+
+            return occurenceCounts.Select(kvp => new ListNode(kvp.Key, 1d * kvp.Value / text.Length)).ToArray();
+        }
+
         private (Dictionary<string, string> compressionKeys, Dictionary<string, string> decompressionKeys) GetKeys(ListNode tree)
         {
             var compressionKeys = new Dictionary<string, string>();
@@ -109,27 +130,6 @@ namespace Algorithms.DataCompression
             }
 
             return nodes[0];
-        }
-
-        /// <summary>
-        /// Finds frequency for each character in the text.
-        /// </summary>
-        /// <returns>Symbol-frequency array.</returns>
-        private ListNode[] GetListNodesFromText(string text)
-        {
-            var occurenceCounts = new Dictionary<char, double>();
-
-            foreach (var ch in text)
-            {
-                if (!occurenceCounts.ContainsKey(ch))
-                {
-                    occurenceCounts.Add(ch, 0);
-                }
-
-                occurenceCounts[ch]++;
-            }
-
-            return occurenceCounts.Select(kvp => new ListNode(kvp.Key, 1d * kvp.Value / text.Length)).ToArray();
         }
 
         /// <summary>

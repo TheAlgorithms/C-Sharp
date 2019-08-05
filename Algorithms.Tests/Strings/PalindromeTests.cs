@@ -3,12 +3,12 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Strings
 {
-    public class PalindromeTests
+    public static class PalindromeTests
     {
         [Test]
         [TestCase("Anna")]
         [TestCase("A Santa at Nasa")]
-        public void TextIsPalindrome_TrueExpected(string text)
+        public static void TextIsPalindrome_TrueExpected(string text)
         {
             // Arrange
             // Act
@@ -21,7 +21,7 @@ namespace Algorithms.Tests.Strings
         [Test]
         [TestCase("hallo")]
         [TestCase("Once upon a time")]
-        public void TextNotPalindrome_FalseExpected(string text)
+        public static void TextNotPalindrome_FalseExpected(string text)
         {
             // Arrange
             // Act

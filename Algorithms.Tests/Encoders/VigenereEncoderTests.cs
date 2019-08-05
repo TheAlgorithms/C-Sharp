@@ -4,17 +4,17 @@ using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Encoders
 {
-    public class VigenereEncoderTests
+    public static class VigenereEncoderTests
     {
         [Test]
         [Repeat(100)]
-        public void DecodedStringIsTheSame()
+        public static void DecodedStringIsTheSame()
         {
             // Arrange
             var random = new Randomizer();
             var encoder = new VigenereEncoder();
             var message = random.GetString();
-            var key = random.GetString();
+            var key = random.GetString(random.Next(0,1000));
 
             // Act
             var encoded = encoder.Encode(message, key);

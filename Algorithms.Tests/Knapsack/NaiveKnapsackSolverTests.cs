@@ -4,10 +4,10 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Knapsack
 {
-    public class NaiveKnapsackSolverTests
+    public static class NaiveKnapsackSolverTests
     {
         [Test]
-        public void TakesHalf([Random(0, 1000, 100)]int length)
+        public static void TakesHalf([Random(0, 1000, 100, Distinct = true)]int length)
         {
             //Arrange
             var solver = new NaiveKnapsackSolver<int>();
@@ -15,7 +15,7 @@ namespace Algorithms.Tests.Knapsack
             var expectedResult = Enumerable.Repeat(42, length);
 
             //Act
-            var result = solver.Solve(items, length, x => 1, x => 1);
+            var result = solver.Solve(items, length, x => 1, y => 1);
 
             //Assert
             Assert.AreEqual(expectedResult, result);

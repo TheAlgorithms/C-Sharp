@@ -5,7 +5,7 @@ using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Compressors
 {
-    public class HuffmanCompressorTests
+    public static class HuffmanCompressorTests
     {
         [Test]
         [TestCase("This is a string", "101010110111011101110111100011111010010010010011000")]
@@ -13,7 +13,7 @@ namespace Algorithms.Tests.Compressors
         [TestCase("dddddddddd", "1111111111")]
         [TestCase("a", "1")]
         [TestCase("", "")]
-        public void CompressingPhrase(string uncompressedText, string expectedCompressedText)
+        public static void CompressingPhrase(string uncompressedText, string expectedCompressedText)
         {
             //Arrange
             var sorter = new BubbleSorter<HuffmanCompressor.ListNode>();
@@ -30,7 +30,7 @@ namespace Algorithms.Tests.Compressors
         }
 
         [Test]
-        public void DecompressedTextTheSameAsOriginal([Random(0, 1000, 100, Distinct = true)]int length)
+        public static void DecompressedTextTheSameAsOriginal([Random(0, 1000, 100, Distinct = true)]int length)
         {
             //Arrange
             var sorter = new BubbleSorter<HuffmanCompressor.ListNode>();

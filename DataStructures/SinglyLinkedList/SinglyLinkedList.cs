@@ -25,6 +25,7 @@ namespace DataStructures.SinglyLinkedList
             {
                 Next = Head,
             };
+
             Head = newListElement;
             return newListElement;
         }

@@ -4,10 +4,10 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Compressors
 {
-    public class TranslatorTests
+    public static class TranslatorTests
     {
         [Test]
-        public void TranslateCorrectly()
+        public static void TranslateCorrectly()
         {
             // Arrange
             var translator = new Translator();
