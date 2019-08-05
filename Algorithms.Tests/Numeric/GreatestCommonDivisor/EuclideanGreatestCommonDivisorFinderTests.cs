@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Numeric.GreatestCommonDivisor
 {
-    public class EuclideanGreatestCommonDivisorFinderTests
+    public static class EuclideanGreatestCommonDivisorFinderTests
     {
         [Test]
         [TestCase(2, 3, 1)]
@@ -15,7 +15,7 @@ namespace Algorithms.Tests.Numeric.GreatestCommonDivisor
         [TestCase(2 * 17, 17, 17)]
         [TestCase(0, 0, int.MaxValue)]
         [TestCase(2 * 13 * 17, 4 * 9 * 13, 2 * 13)]
-        public void GreatestCommonDivisorCorrect(int a, int b, int expectedGcd)
+        public static void GreatestCommonDivisorCorrect(int a, int b, int expectedGcd)
         {
             // Arrange
             var gcdFinder = new EuclideanGreatestCommonDivisorFinder();

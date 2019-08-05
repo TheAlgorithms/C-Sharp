@@ -4,11 +4,11 @@ using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Encoders
 {
-    public class VigenereEncoderTests
+    public static class VigenereEncoderTests
     {
         [Test]
         [Repeat(100)]
-        public void DecodedStringIsTheSame()
+        public static void DecodedStringIsTheSame()
         {
             // Arrange
             var random = new Randomizer();

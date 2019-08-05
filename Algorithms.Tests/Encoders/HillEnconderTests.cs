@@ -4,12 +4,11 @@ using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Encoders
 {
-    public class HillEnconderTests
+    public static class HillEnconderTests
     {
-        // TODO: Add more random tests
         [Test]
         [Repeat(100)]
-        public void DecodedStringIsTheSame()
+        public static void DecodedStringIsTheSame()
         {
             // Arrange
             var encoder = new HillEncoder();
