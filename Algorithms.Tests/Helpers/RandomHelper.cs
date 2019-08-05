@@ -6,15 +6,17 @@ namespace Algorithms.Tests.Helpers
     {
         public static (int[] correctArray, int[] testArray) GetArrays(int n)
         {
-            var testArray = new int[n];
+            var testArr = new int[n];
             var correctArray = new int[n];
+
             for (var i = 0; i < n; i++)
             {
                 var t = TestContext.CurrentContext.Random.Next(0, 1000);
-                testArray[i] = t;
+                testArr[i] = t;
                 correctArray[i] = t;
             }
-            return (correctArray, testArray);
+
+            return (correctArray, testArr);
         }
     }
 }

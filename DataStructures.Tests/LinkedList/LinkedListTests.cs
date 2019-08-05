@@ -2,7 +2,6 @@
 using System.Linq;
 using DataStructures.SinglyLinkedList;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 
 namespace DataStructures.Tests.LinkedList
 {

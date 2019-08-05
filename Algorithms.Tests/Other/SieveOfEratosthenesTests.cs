@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Other
 {
-    public class SieveOfEratosthenesTests
+    public static class SieveOfEratosthenesTests
     {
         private static readonly BigInteger[] First10000PrimeNumbers =
         {
@@ -10011,6 +10011,6 @@ namespace Algorithms.Tests.Other
         };
 
         [Test]
-        public void First10_000PrimesCorrect() => Assert.AreEqual(First10000PrimeNumbers, SieveOfEratosthenes.GetPrimeNumbers(10_000));
+        public static void First10_000PrimesCorrect() => Assert.AreEqual(First10000PrimeNumbers, SieveOfEratosthenes.GetPrimeNumbers(10_000));
     }
 }

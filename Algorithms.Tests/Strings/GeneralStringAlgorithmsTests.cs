@@ -4,13 +4,13 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Strings
 {
-    public class GeneralStringAlgorithmsTests
+    public static class GeneralStringAlgorithmsTests
     {
         [Test]
         [TestCase("Griffith", 'f', 2)]
         [TestCase("Randomwoooord", 'o', 4)]
         [TestCase("Control", 'C', 1)]
-        public void MaxCountCharIsObtained(string text, char expectedSymbol, int expectedCount)
+        public static void MaxCountCharIsObtained(string text, char expectedSymbol, int expectedCount)
         {
             // Arrange
             // Act

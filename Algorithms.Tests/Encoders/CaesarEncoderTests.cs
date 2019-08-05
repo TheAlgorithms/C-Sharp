@@ -4,10 +4,10 @@ using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Encoders
 {
-    public class CaesarEncoderTests
+    public static class CaesarEncoderTests
     {
         [Test]
-        public void DecodedStringIsTheSame([Random(100)]int key)
+        public static void DecodedStringIsTheSame([Random(100)]int key)
         {
             // Arrange
             var encoder = new CaesarEncoder();
