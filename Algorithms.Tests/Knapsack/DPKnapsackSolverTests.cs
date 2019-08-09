@@ -49,7 +49,6 @@ namespace Algorithms.Tests.Knapsack
 
             var expected = new char[] { 'A', 'B', 'C', 'D', 'F' };
 
-
             //Act
             var solver = new DPKnapsackSolver<char>();
             var actual = solver.Solve(items, capacity, weightSelector, valueSelector);
@@ -92,16 +91,15 @@ namespace Algorithms.Tests.Knapsack
 
             //Arrange
             var val = new double[] { 13.5, 13.9, 14.9, 15.0, 15.6, 16.3, 17.3, 18.4, 19.2, 20.1, 21.0, 21.4, 22.1, 22.9, 24.0 };
-            var wt = new double[] { 7.0, 7.3, 7.7, 8.0, 8.2, 8.7, 9.0, 9.4, 9.8, 10.6, 11.0, 11.3, 11.5, 11.8, 12.0 };
+            var wt = new double[] { 70, 73, 77, 80, 82, 87, 90, 94, 98, 106, 110, 113, 115, 118, 120 };
             var items = Enumerable.Range(1, val.Count()).ToArray();
 
-            double capacity = 75.0;
+            double capacity = 750;
 
             Func<int, double> weightSelector = x => wt[Array.IndexOf(items, x)];
             Func<int, double> valueSelector = x => val[Array.IndexOf(items, x)];
 
             var expected = new int[] { 1, 3, 5, 7, 8, 9, 14, 15 };
-
 
             //Act
             var solver = new DPKnapsackSolver<int>();
