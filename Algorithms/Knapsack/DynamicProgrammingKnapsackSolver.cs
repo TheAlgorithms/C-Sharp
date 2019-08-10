@@ -9,7 +9,7 @@ namespace Algorithms.Knapsack
     /// Dynamic Programming Knapsack solver.
     /// </summary>
     /// <typeparam name="T">Type of items in knapsack.</typeparam>
-    public class DPKnapsackSolver<T> : IKnapsackSolver<T>
+    public class DynamicProgrammingKnapsackSolver<T> : IKnapsackSolver<T>
     {
         /// <summary>
         /// Returns the knapsack containing the items that
