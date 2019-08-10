@@ -29,7 +29,7 @@ namespace Algorithms.Tests.Knapsack
             var actual = solver.Solve(items, capacity, weightSelector, valueSelector);
 
             //Assert
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected.OrderBy(x => x), actual.OrderBy(x => x));
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace Algorithms.Tests.Knapsack
             var actual = solver.Solve(items, capacity, weightSelector, valueSelector);
 
             //Assert
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected.OrderBy(x => x), actual.OrderBy(x => x));
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace Algorithms.Tests.Knapsack
             var actual = solver.Solve(items, capacity * 10.0, weightSelector, valueSelector);
 
             //Assert
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected.OrderBy(x => x), actual.OrderBy(x => x));
         }
 
 

@@ -18,7 +18,7 @@ namespace Algorithms.Knapsack
         /// <param name="items">The list of items from which we select ones to be in the knapsack.</param>
         /// <param name="capacity">The maximum weight capacity of the knapsack
         /// to be filled. Only integer values of this capacity are tried. If
-        /// a greater resolution is needed, trying multiplying the
+        /// a greater resolution is needed, multiply the
         /// weights/capacity by a factor of 10.</param>
         /// <param name="weightSelector">A function that returns the value of the specified item
         /// from the <paramref name="items">items</paramref> list.</param>
@@ -30,18 +30,18 @@ namespace Algorithms.Knapsack
         {
             int maxCapacity = Convert.ToInt32(Math.Floor(capacity));
             Func<T, int> intWeightSelector = x => Convert.ToInt32(Math.Ceiling(weightSelector(x)));
-            var memoTable = Memoize(items, intWeightSelector, valueSelector, maxCapacity);
-            return GetOptimalItems(items, intWeightSelector, memoTable, maxCapacity);
+            var cache = Tabulate(items, intWeightSelector, valueSelector, maxCapacity);
+            return GetOptimalItems(items, intWeightSelector, cache, maxCapacity);
         }
 
-        private static T[] GetOptimalItems(T[] items, Func<T, int> weightSelector, double[,] memoTable, int capacity)
+        private static T[] GetOptimalItems(T[] items, Func<T, int> weightSelector, double[,] cache, int capacity)
         {
             int currentCapacity = capacity;
 
             var result = new List<T>();
-            for (int i = items.Count() - 1; i >= 0; i--)
+            for (int i = items.Length - 1; i >= 0; i--)
             {
-                if (memoTable[i + 1, currentCapacity] > memoTable[i, currentCapacity])
+                if (cache[i + 1, currentCapacity] > cache[i, currentCapacity])
                 {
                     var item = items[i];
                     result.Add(item);
@@ -53,11 +53,11 @@ namespace Algorithms.Knapsack
             return result.ToArray();
         }
 
-        private static double[,] Memoize(T[] items, Func<T, int> weightSelector, Func<T, double> valueSelector, int maxCapacity)
+        private static double[,] Tabulate(T[] items, Func<T, int> weightSelector, Func<T, double> valueSelector, int maxCapacity)
         {
-            // Memoize in a bottom up manner
-            int n = items.Count();
-            var rv = new double[n + 1, maxCapacity + 1];
+            // Store the incremental results in a bottom up manner
+            int n = items.Length;
+            var results = new double[n + 1, maxCapacity + 1];
             for (var i = 0; i <= n; i++)
             {
                 for (var w = 0; w <= maxCapacity; w++)
@@ -67,7 +67,7 @@ namespace Algorithms.Knapsack
                         // If we have no items to take, or
                         // if we have no capacity in our knapsack
                         // we cannot possibly have any value
-                        rv[i, w] = 0;
+                        results[i, w] = 0;
                     }
                     else if (weightSelector(items[i - 1]) <= w)
                     {
@@ -75,19 +75,19 @@ namespace Algorithms.Knapsack
                         var iut = items[i - 1]; // iut = Item under test
                         var vut = valueSelector(iut); // vut = Value of item under test
                         var wut = weightSelector(iut); // wut = Weight of item under test
-                        var valueIfTaken = vut + rv[i - 1, w - wut];
-                        var valueIfNotTaken = rv[i - 1, w];
-                        rv[i, w] = Math.Max(valueIfTaken, valueIfNotTaken);
+                        var valueIfTaken = vut + results[i - 1, w - wut];
+                        var valueIfNotTaken = results[i - 1, w];
+                        results[i, w] = Math.Max(valueIfTaken, valueIfNotTaken);
                     }
                     else
                     {
                         // There is not enough room to take this item
-                        rv[i, w] = rv[i - 1, w];
+                        results[i, w] = results[i - 1, w];
                     }
                 }
             }
 
-            return rv;
+            return results;
         }
     }
 }
