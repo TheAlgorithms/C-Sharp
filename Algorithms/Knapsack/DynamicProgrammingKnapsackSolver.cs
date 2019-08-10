@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Algorithms.Knapsack
 {
@@ -9,7 +7,7 @@ namespace Algorithms.Knapsack
     /// Dynamic Programming Knapsack solver.
     /// </summary>
     /// <typeparam name="T">Type of items in knapsack.</typeparam>
-    public class DynamicProgrammingKnapsackSolver<T> : IKnapsackSolver<T>
+    public class DynamicProgrammingKnapsackSolver<T>
     {
         /// <summary>
         /// Returns the knapsack containing the items that
@@ -26,20 +24,18 @@ namespace Algorithms.Knapsack
         /// from the <paramref name="items">items</paramref> list.</param>
         /// <returns>The array of items that provides the maximum value of the
         /// knapsack without exceeding the specified weight <paramref name="capacity">capacity</paramref>.</returns>
-        public T[] Solve(T[] items, double capacity, Func<T, double> weightSelector, Func<T, double> valueSelector)
+        public T[] Solve(T[] items, int capacity, Func<T, int> weightSelector, Func<T, double> valueSelector)
         {
-            int maxCapacity = Convert.ToInt32(Math.Floor(capacity));
-            Func<T, int> intWeightSelector = x => Convert.ToInt32(Math.Ceiling(weightSelector(x)));
-            var cache = Tabulate(items, intWeightSelector, valueSelector, maxCapacity);
-            return GetOptimalItems(items, intWeightSelector, cache, maxCapacity);
+            var cache = Tabulate(items, weightSelector, valueSelector, capacity);
+            return GetOptimalItems(items, weightSelector, cache, capacity);
         }
 
         private static T[] GetOptimalItems(T[] items, Func<T, int> weightSelector, double[,] cache, int capacity)
         {
-            int currentCapacity = capacity;
+            var currentCapacity = capacity;
 
             var result = new List<T>();
-            for (int i = items.Length - 1; i >= 0; i--)
+            for (var i = items.Length - 1; i >= 0; i--)
             {
                 if (cache[i + 1, currentCapacity] > cache[i, currentCapacity])
                 {
@@ -56,7 +52,7 @@ namespace Algorithms.Knapsack
         private static double[,] Tabulate(T[] items, Func<T, int> weightSelector, Func<T, double> valueSelector, int maxCapacity)
         {
             // Store the incremental results in a bottom up manner
-            int n = items.Length;
+            var n = items.Length;
             var results = new double[n + 1, maxCapacity + 1];
             for (var i = 0; i <= n; i++)
             {
