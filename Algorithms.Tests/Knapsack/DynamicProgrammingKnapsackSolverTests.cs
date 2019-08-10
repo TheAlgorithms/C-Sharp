@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Knapsack
 {
-    public static class DPKnapsackSolverTests
+    public static class DynamicProgrammingKnapsackSolverTests
     {
 
         [Test]
@@ -73,7 +73,7 @@ namespace Algorithms.Tests.Knapsack
             Func<int, double> weightSelector = x => wt[Array.IndexOf(items, x)] * 10.0;
             Func<int, double> valueSelector = x => val[Array.IndexOf(items, x)];
 
-            var expected = new int[] { 1, 3, 5, 7, 8, 9, 14, 15 };
+            var expected = new [] { 1, 3, 5, 7, 8, 9, 14, 15 };
 
 
             //Act
