@@ -56,7 +56,7 @@ namespace Algorithms.Knapsack
         private static double[,] Memoize(T[] items, Func<T, int> weightSelector, Func<T, double> valueSelector, int maxCapacity)
         {
             // Memoize in a bottom up manner
-            int n = items.Count();
+            int n = items.Length;
             var rv = new double[n + 1, maxCapacity + 1];
             for (var i = 0; i <= n; i++)
             {
