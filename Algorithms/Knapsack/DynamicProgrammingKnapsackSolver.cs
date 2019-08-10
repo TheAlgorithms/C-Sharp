@@ -28,20 +28,18 @@ namespace Algorithms.Knapsack
         /// knapsack without exceeding the specified weight <paramref name="capacity">capacity</paramref>.</returns>
         public T[] Solve(T[] items, double capacity, Func<T, double> weightSelector, Func<T, double> valueSelector)
         {
-            int maxCapacity = Convert.ToInt32(Math.Floor(capacity));
-            Func<T, int> intWeightSelector = x => Convert.ToInt32(Math.Ceiling(weightSelector(x)));
-            var cache = Tabulate(items, intWeightSelector, valueSelector, maxCapacity);
-            return GetOptimalItems(items, intWeightSelector, cache, maxCapacity);
+            var cache = Tabulate(items, weightSelector, valueSelector, capacity);
+            return GetOptimalItems(items, weightSelector, cache, capacity);
         }
 
-        private static T[] GetOptimalItems(T[] items, Func<T, int> weightSelector, double[,] cache, int capacity)
+        private static T[] GetOptimalItems(T[] items, Func<T, double> weightSelector, Dictionary<(int, double), double> cache, double capacity)
         {
-            int currentCapacity = capacity;
+            double currentCapacity = capacity;
 
             var result = new List<T>();
             for (int i = items.Length - 1; i >= 0; i--)
             {
-                if (cache[i + 1, currentCapacity] > cache[i, currentCapacity])
+                if (cache[(i + 1, currentCapacity)] > cache[(i, currentCapacity)])
                 {
                     var item = items[i];
                     result.Add(item);
@@ -53,11 +51,11 @@ namespace Algorithms.Knapsack
             return result.ToArray();
         }
 
-        private static double[,] Tabulate(T[] items, Func<T, int> weightSelector, Func<T, double> valueSelector, int maxCapacity)
+        private static Dictionary<(int, double), double> Tabulate(T[] items, Func<T, double> weightSelector, Func<T, double> valueSelector, double maxCapacity)
         {
             // Store the incremental results in a bottom up manner
             int n = items.Length;
-            var results = new double[n + 1, maxCapacity + 1];
+            var results = new Dictionary<(int, double), double>();
             for (var i = 0; i <= n; i++)
             {
                 for (var w = 0; w <= maxCapacity; w++)
@@ -67,7 +65,7 @@ namespace Algorithms.Knapsack
                         // If we have no items to take, or
                         // if we have no capacity in our knapsack
                         // we cannot possibly have any value
-                        results[i, w] = 0;
+                        results[(i, w)] = 0;
                     }
                     else if (weightSelector(items[i - 1]) <= w)
                     {
@@ -75,14 +73,14 @@ namespace Algorithms.Knapsack
                         var iut = items[i - 1]; // iut = Item under test
                         var vut = valueSelector(iut); // vut = Value of item under test
                         var wut = weightSelector(iut); // wut = Weight of item under test
-                        var valueIfTaken = vut + results[i - 1, w - wut];
-                        var valueIfNotTaken = results[i - 1, w];
-                        results[i, w] = Math.Max(valueIfTaken, valueIfNotTaken);
+                        var valueIfTaken = vut + results[(i - 1, w - wut)];
+                        var valueIfNotTaken = results[(i - 1, w)];
+                        results[(i, w)] = Math.Max(valueIfTaken, valueIfNotTaken);
                     }
                     else
                     {
                         // There is not enough room to take this item
-                        results[i, w] = results[i - 1, w];
+                        results[(i, w)] = results[(i - 1, w)];
                     }
                 }
             }
