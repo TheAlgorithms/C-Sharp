@@ -39,7 +39,7 @@ namespace Algorithms.Knapsack
             int currentCapacity = capacity;
 
             var result = new List<T>();
-            for (int i = items.Count() - 1; i >= 0; i--)
+            for (int i = items.Length - 1; i >= 0; i--)
             {
                 if (memoTable[i + 1, currentCapacity] > memoTable[i, currentCapacity])
                 {
