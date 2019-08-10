@@ -18,7 +18,7 @@ namespace Algorithms.Knapsack
         /// <param name="items">The list of items from which we select ones to be in the knapsack.</param>
         /// <param name="capacity">The maximum weight capacity of the knapsack
         /// to be filled. Only integer values of this capacity are tried. If
-        /// a greater resolution is needed, trying multiplying the
+        /// a greater resolution is needed, multiply the
         /// weights/capacity by a factor of 10.</param>
         /// <param name="weightSelector">A function that returns the value of the specified item
         /// from the <paramref name="items">items</paramref> list.</param>
