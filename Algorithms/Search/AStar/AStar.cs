@@ -1,5 +1,7 @@
-﻿using System.CodeDom.Compiler;
+﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using Algorithms.Search;
 
@@ -13,7 +15,7 @@ namespace AStar
         /// <summary>
         /// Resets the Nodes in the list.
         /// </summary>
-        /// <param name="nodes"></param>
+        /// <param name="nodes">Resets the nodes to be used again.</param>
         public static void ResetNodes(List<Node> nodes)
         {
             foreach (var node in nodes)
@@ -28,8 +30,8 @@ namespace AStar
         /// <summary>
         /// Generates the Path from an (solved) node graph, before it gets reset.
         /// </summary>
-        /// <param name="target"></param>
-        /// <returns></returns>
+        /// <param name="target">The node where we want to go.</param>
+        /// <returns>The Path to the target node.</returns>
         public static List<Node> GeneratePath(Node target)
         {
             List<Node> ret = new List<Node>();
@@ -44,12 +46,11 @@ namespace AStar
             return ret;
         }
 
-
         /// <summary>
         /// Computes the path from => to.
         /// </summary>
-        /// <param name="from">Start node</param>
-        /// <param name="to">end node</param>
+        /// <param name="from">Start node.</param>
+        /// <param name="to">end node.</param>
         /// <returns>Path from start to end.</returns>
         public static List<Node> Compute(Node from, Node to)
         {
@@ -101,34 +102,45 @@ namespace AStar
                 }
                 else
                 {
-                    foreach (var connected in current.ConnectedNodes)
+                    AddOrUpdateConnected(current, to, open);
+                }
+            }
+        }
+
+        private static void AddOrUpdateConnected(Node current, Node to, PriorityQueue<Node> queue)
+        {
+            foreach (var connected in current.ConnectedNodes)
+            {
+                if (!connected.Traversable ||
+                    connected.State == NodeState.CLOSED)
+                {
+                    continue; // Do ignore already checked and not traversable nodes.
+                }
+
+                // Adds a previously not "seen" node into the Queue
+                if (connected.State == NodeState.UNCONSIDERED)
+                {
+                    connected.Parent = current;
+                    connected.CurrentCost = current.CurrentCost + current.DistanceTo(connected) * connected.TraversalCostMultiplier;
+                    connected.EstimatedCost = connected.CurrentCost + connected.DistanceTo(to);
+                    connected.State = NodeState.OPEN;
+                    queue.Enqueue(connected);
+                }
+                else if (current != connected)
+                {
+                    // Updating the cost of the node if the current way is cheaper than the previous
+                    float newCCost = current.CurrentCost + current.DistanceTo(connected);
+                    float newTCost = newCCost + current.EstimatedCost;
+                    if (newTCost < connected.TotalCost)
                     {
-                        if (!connected.Traversable ||
-                            connected.State == NodeState.CLOSED)
-                            continue; // Do ignore already checked and not traversable nodes.
-
-                        // Adds a previously not "seen" node into the Queue
-                        if (connected.State == NodeState.UNCONSIDERED)
-                        {
-                            connected.Parent = current;
-                            connected.CurrentCost = current.CurrentCost + current.DistanceTo(connected) * connected.TraversalCostMultiplier;
-                            connected.EstimatedCost = connected.CurrentCost + connected.DistanceTo(to);
-                            connected.State = NodeState.OPEN;
-                            open.Enqueue(connected);
-                        }
-
-                        // Updating the cost of the node if the current way is cheaper than the previous
-                        else if (current != connected)
-                        {
-                            float newCCost = current.CurrentCost + current.DistanceTo(connected);
-                            float newTCost = newCCost + current.EstimatedCost;
-                            if (newTCost < connected.TotalCost)
-                            {
-                                connected.Parent = current;
-                                connected.CurrentCost = newCCost;
-                            }
-                        }
+                        connected.Parent = current;
+                        connected.CurrentCost = newCCost;
                     }
+                }
+                else
+                {
+                    // Codacy made me do it.
+                    throw new Exception("Detected the same node twice. Confusion how this could ever happen");
                 }
             }
         }

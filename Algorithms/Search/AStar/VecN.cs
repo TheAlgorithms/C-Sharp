@@ -1,18 +1,32 @@
 ﻿using System;
 using System.Runtime.InteropServices.ComTypes;
+using System.Text;
 
 namespace AStar
 {
-    public struct VecN
+    /// <summary>
+    /// Vector Struct with N Dimensions.
+    /// </summary>
+    public struct VecN : IEquatable<VecN>
     {
+        private static readonly StringBuilder Builder = new StringBuilder();
+        private readonly float[] data;
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="vals">Vector components as array.</param>
+        public VecN(params float[] vals) => data = vals;
+
+        /// <summary>
+        /// Gets the dimension count of this vector.
+        /// </summary>
         public int Dimensions => data.Length;
-        private float[] data;
 
-        public VecN(params float[] vals)
-        {
-            data = vals;
-        }
-
+        /// <summary>
+        /// Returns the Length squared.
+        /// </summary>
+        /// <returns>The squared length of the vector.</returns>
         public float SqrLength()
         {
             float ret = 0;
@@ -24,49 +38,103 @@ namespace AStar
             return ret;
         }
 
-        public float Length()
-        {
-            return (float)Math.Sqrt(SqrLength());
-        }
+        /// <summary>
+        /// Returns the Length of the vector.
+        /// </summary>
+        /// <returns>Length of the Vector.</returns>
+        public float Length() => (float)Math.Sqrt(SqrLength());
 
+        /// <summary>
+        /// Returns the Distance between this and other.
+        /// </summary>
+        /// <param name="other">Other vector.</param>
+        /// <returns>The distance between this and other.</returns>
         public float Distance(VecN other)
         {
-            VecN delta = Substract(other);
+            VecN delta = Subtract(other);
             return delta.Length();
         }
 
+        /// <summary>
+        /// Returns the squared Distance between this and other.
+        /// </summary>
+        /// <param name="other">Other vector.</param>
+        /// <returns>The squared distance between this and other.</returns>
         public float SqrDistance(VecN other)
         {
-            VecN delta = Substract(other);
+            VecN delta = Subtract(other);
             return delta.SqrLength();
         }
 
-        public VecN Substract(VecN other)
+        /// <summary>
+        /// Substracts other from this vector.
+        /// </summary>
+        /// <param name="other">Other vector.</param>
+        /// <returns>The new vector.</returns>
+        public VecN Subtract(VecN other)
         {
-            float[] dd = new float[Math.Max(this.data.Length, other.data.Length)];
+            float[] dd = new float[Math.Max(data.Length, other.data.Length)];
             for (int i = 0; i < dd.Length; i++)
             {
                 float val = 0;
-                if (data.Length > i) val = data[i];
-                if (other.data.Length > i) val -= other.data[i];
+                if (data.Length > i)
+                {
+                    val = data[i];
+                }
+
+                if (other.data.Length > i)
+                {
+                    val -= other.data[i];
+                }
+
                 dd[i] = val;
             }
 
             return new VecN(dd);
         }
 
-
+        /// <summary>
+        /// Overridden ToString method to give better console output.
+        /// </summary>
+        /// <returns>Vector string representation.</returns>
         public override string ToString()
         {
-            string ret = "[";
+            Builder.Clear();
+            Builder.Append('[');
             for (int i = 0; i < data.Length; i++)
             {
-                ret += data[i];
-                if (i != data.Length - 1) ret += ", ";
+                Builder.Append(data[i]);
+                if (i != data.Length - 1)
+                {
+                    Builder.Append(", ");
+                }
             }
 
-            ret += "]";
-            return ret;
+            Builder.Append(']');
+            return Builder.ToString();
+        }
+
+        /// <summary>
+        /// Is used to compare Vectors with each other.
+        /// </summary>
+        /// <param name="other">The vector to be compared.</param>
+        /// <returns>A value indicating if other has the same values as this.</returns>
+        public bool Equals(VecN other)
+        {
+            if (other.Dimensions != Dimensions)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < other.data.Length; i++)
+            {
+                if (Math.Abs(data[i] - other.data[i]) > 0.001f)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
