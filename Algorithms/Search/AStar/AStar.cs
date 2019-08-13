@@ -1,9 +1,5 @@
-﻿using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using Algorithms.Search;
+﻿using System.Collections.Generic;
+using Algorithms.Search.AStar;
 
 namespace AStar
 {
@@ -140,7 +136,7 @@ namespace AStar
                 else
                 {
                     // Codacy made me do it.
-                    throw new Exception("Detected the same node twice. Confusion how this could ever happen");
+                    throw new PathfindingException("Detected the same node twice. Confusion how this could ever happen");
                 }
             }
         }
