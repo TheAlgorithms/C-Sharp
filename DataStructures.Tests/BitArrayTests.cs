@@ -196,16 +196,10 @@ namespace DataStructures.Tests
         }
 
         [Test]
-        [TestCase(1, 1, 1, 1, "1", "AND")]
-        [TestCase(5, 3, 8, 4, "0000", "AND")]
-        [TestCase(9, 4, 4, 3, "0000", "AND")]
-        [TestCase(9, 4, 4, 3, "1101", "OR")]
-        [TestCase(1, 1, 1, 1, "1", "OR")]
-        [TestCase(5, 3, 8, 4, "1101", "OR")]
-        [TestCase(1, 1, 1, 1, "0", "XOR")]
-        [TestCase(5, 3, 8, 4, "1101", "XOR")]
-        [TestCase(9, 4, 4, 3, "1101", "XOR")]
-        public static void TestOperatorAndDiffSizes(int t1, int s1, int t2, int s2, string expected, string testOp)
+        [TestCase(1, 1, 1, 1, "0")]
+        [TestCase(5, 3, 8, 4, "1101")]
+        [TestCase(9, 4, 4, 3, "1101")]
+        public static void TestOperatorXorAndDiffSizes(int t1, int s1, int t2, int s2, string expected)
         {
             // Arrange
             var testObj1 = new BitArray(s1);
@@ -214,20 +208,45 @@ namespace DataStructures.Tests
             // Act
             testObj1.Compile(t1);
             testObj2.Compile(t2);
+            var result = testObj1 ^ testObj2;
 
-            BitArray result;
-            if (testOp.Equals("AND"))
-            {
-                result = testObj1 & testObj2;
-            }
-            else if (testOp.Equals("OR"))
-            {
-                result = testObj1 | testObj2;
-            }
-            else
-            {
-                result = testObj1 ^ testObj2;
-            }
+            // Assert
+            Assert.AreEqual(expected, result.ToString());
+        }
+
+        [Test]
+        [TestCase(9, 4, 4, 3, "1101")]
+        [TestCase(1, 1, 1, 1, "1")]
+        [TestCase(5, 3, 8, 4, "1101")]
+        public static void TestOperatorOrAndDiffSizes(int t1, int s1, int t2, int s2, string expected)
+        {
+            // Arrange
+            var testObj1 = new BitArray(s1);
+            var testObj2 = new BitArray(s2);
+
+            // Act
+            testObj1.Compile(t1);
+            testObj2.Compile(t2);
+            var result = testObj1 | testObj2;
+
+            // Assert
+            Assert.AreEqual(expected, result.ToString());
+        }
+
+        [Test]
+        [TestCase(1, 1, 1, 1, "1")]
+        [TestCase(5, 3, 8, 4, "0000")]
+        [TestCase(9, 4, 4, 3, "0000")]
+        public static void TestOperatorAndAndDiffSizes(int t1, int s1, int t2, int s2, string expected)
+        {
+            // Arrange
+            var testObj1 = new BitArray(s1);
+            var testObj2 = new BitArray(s2);
+
+            // Act
+            testObj1.Compile(t1);
+            testObj2.Compile(t2);
+            var result = testObj1 & testObj2;
 
             // Assert
             Assert.AreEqual(expected, result.ToString());
