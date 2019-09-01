@@ -15,6 +15,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 		* [Hill](./Algorithms/Encoders/HillEncoder.cs)
 	* [Knapsack problem](./Algorithms/Knapsack/)
 		* [Naive solver](./Algorithms/Knapsack/NaiveKnapsackSolver.cs)
+		* [Dynamic Programming solver](./Algorithms/Knapsack/DynamicProgrammingKnapsackSolver.cs)
 	* [Numeric](./Algorithms/Numeric/)
 		* [Greatest Common Divisor](./Algorithms/Numeric/GreatestCommonDivisor)
 			* [Euclidean GCD](./Algorithms/Numeric/GreatestCommonDivisor/EuclideanGreatestCommonDivisorFinder.cs)
