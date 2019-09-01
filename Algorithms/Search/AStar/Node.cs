@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Drawing;
-using System.Runtime.CompilerServices;
 
 namespace AStar
 {
@@ -13,7 +11,7 @@ namespace AStar
         // Constructors
 
         /// <summary>
-        /// Self explanatory Constructor.
+        /// Initializes a new instance of the <see cref="Node"/> class.
         /// </summary>
         /// <param name="position">Position of the node.</param>
         /// <param name="traversable">Flag if the node is traversable.</param>
@@ -103,17 +101,52 @@ namespace AStar
             get;
         }
 
-        // Operator Overrides.
+        /// <summary>
+        /// TODO.
+        /// </summary>
+        /// <param name="left">TODO 2.</param>
+        /// <param name="right">TODO 3.</param>
+        /// <returns>TODO 4.</returns>
         public static bool operator ==(Node left, Node right) => left?.Equals(right) != false;
 
+        /// <summary>
+        /// TODO.
+        /// </summary>
+        /// <param name="left">TODO 2.</param>
+        /// <param name="right">TODO 3.</param>
+        /// <returns>TODO 4.</returns>
         public static bool operator >(Node left, Node right) => left.CompareTo(right) > 0;
 
+        /// <summary>
+        /// TODO.
+        /// </summary>
+        /// <param name="left">TODO 2.</param>
+        /// <param name="right">TODO 3.</param>
+        /// <returns>TODO 4.</returns>
         public static bool operator <(Node left, Node right) => left.CompareTo(right) < 0;
 
+        /// <summary>
+        /// TODO.
+        /// </summary>
+        /// <param name="left">TODO 2.</param>
+        /// <param name="right">TODO 3.</param>
+        /// <returns>TODO 4.</returns>
         public static bool operator !=(Node left, Node right) => !(left == right);
 
+        /// <summary>
+        /// TODO.
+        /// </summary>
+        /// <param name="left">TODO 2.</param>
+        /// <param name="right">TODO 3.</param>
+        /// <returns>TODO 4.</returns>
         public static bool operator <=(Node left, Node right) => left.CompareTo(right) <= 0;
 
+        /// <summary>
+        /// TODO.
+        /// </summary>
+        /// <param name="left">TODO 2.</param>
+        /// <param name="right">TODO 3.</param>
+        /// <returns>TODO 4.</returns>
         public static bool operator >=(Node left, Node right) => left.CompareTo(right) >= 0;
 
         /// <summary>

@@ -30,8 +30,8 @@ namespace AStar
         /// <returns>The Path to the target node.</returns>
         public static List<Node> GeneratePath(Node target)
         {
-            List<Node> ret = new List<Node>();
-            Node current = target;
+            var ret = new List<Node>();
+            var current = target;
             while (current != null)
             {
                 ret.Add(current);
@@ -50,10 +50,10 @@ namespace AStar
         /// <returns>Path from start to end.</returns>
         public static List<Node> Compute(Node from, Node to)
         {
-            List<Node> done = new List<Node>();
+            var done = new List<Node>();
 
             // A priority queue that will sort our nodes based on the total cost estimate
-            PriorityQueue<Node> open = new PriorityQueue<Node>();
+            var open = new PriorityQueue<Node>();
             foreach (var node in from.ConnectedNodes)
             {
                 // Add connecting nodes if traversable
@@ -89,7 +89,7 @@ namespace AStar
                 // EndCondition( Path was found )
                 if (current == to)
                 {
-                    List<Node> ret = GeneratePath(to); // Create the Path
+                    var ret = GeneratePath(to); // Create the Path
 
                     // Reset all Nodes that were used.
                     ResetNodes(done);
@@ -125,8 +125,8 @@ namespace AStar
                 else if (current != connected)
                 {
                     // Updating the cost of the node if the current way is cheaper than the previous
-                    float newCCost = current.CurrentCost + current.DistanceTo(connected);
-                    float newTCost = newCCost + current.EstimatedCost;
+                    var newCCost = current.CurrentCost + current.DistanceTo(connected);
+                    var newTCost = newCCost + current.EstimatedCost;
                     if (newTCost < connected.TotalCost)
                     {
                         connected.Parent = current;

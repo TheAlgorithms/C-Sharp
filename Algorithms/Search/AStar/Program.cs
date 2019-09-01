@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 
 namespace AStar
 {
@@ -19,7 +17,7 @@ namespace AStar
         /// X = Wall
         /// Q = Quicksand(Traversal Multiplier: 5).
         /// </summary>
-        private static readonly string[] map = new[]
+        private static readonly string[] MapStr = new[]
         {
             "+------+",
             "|      |",
@@ -32,10 +30,10 @@ namespace AStar
         };
 
         // Begin and end
-        private static Node _end;
-        private static Node _start;
+        private static Node end;
+        private static Node start;
 
-        private static Node[] _map;
+        private static Node[] map;
 
         /// <summary>
         /// Gets the Nodes and connecting them.
@@ -45,13 +43,13 @@ namespace AStar
         {
             get
             {
-                if (_map != null)
+                if (map != null)
                 {
-                    return _map; // Return the cached result
+                    return map; // Return the cached result
                 }
 
-                _map = CreateNodeGraph().ToArray();
-                return _map;
+                map = CreateNodeGraph().ToArray();
+                return map;
             }
         }
 
@@ -60,8 +58,8 @@ namespace AStar
         /// </summary>
         public static void Main()
         {
-            _map = CreateNodeGraph().ToArray();
-            var list = AStar.Compute(_start, _end);
+            map = CreateNodeGraph().ToArray();
+            var list = AStar.Compute(start, end);
 
             if (list.Count == 0)
             {
@@ -76,17 +74,17 @@ namespace AStar
                 }
             }
 
-            Console.ReadLine();
+            _ = Console.ReadLine();
         }
 
         private static List<Node> CreateNodeGraph()
         {
-            List<Node> ret = GenerateNodeGraph();
+            var ret = GenerateNodeGraph();
 
             // ConnectNodes
-            for (int y = 0; y < map.Length; y++)
+            for (var y = 0; y < MapStr.Length; y++)
             {
-                for (int x = 0; x < map[y].Length; x++)
+                for (var x = 0; x < MapStr[y].Length; x++)
                 {
                     ConnectNodes(ret, x, y);
                 }
@@ -98,35 +96,35 @@ namespace AStar
         private static void ConnectNodes(List<Node> ret, int x, int y)
         {
             // Index of the node that we are connecting
-            var idx = y * map[y].Length + x;
+            var idx = y * MapStr[y].Length + x;
 
             // Fill the Start/End nodes from the string array
-            if (map[y][x] == 'A')
+            if (MapStr[y][x] == 'A')
             {
-                _start = ret[idx];
+                start = ret[idx];
             }
-            else if (map[y][x] == 'B')
+            else if (MapStr[y][x] == 'B')
             {
-                _end = ret[idx];
+                end = ret[idx];
             }
             else
             {
                 // ...
             }
 
-            List<Node> connections = new List<Node>();
+            var connections = new List<Node>();
 
             // Loop through the neighbours
-            for (int i = y - 1; i <= y + 1; i++)
+            for (var i = y - 1; i <= y + 1; i++)
             {
-                for (int j = x - 1; j <= x + 1; j++)
+                for (var j = x - 1; j <= x + 1; j++)
                 {
-                    if (i < 0 || j < 0 || i >= map.Length || j >= map[i].Length)
+                    if (i < 0 || j < 0 || i >= MapStr.Length || j >= MapStr[i].Length)
                     {
                         continue;
                     }
 
-                    var connectionIndex = i * map[y].Length + j;
+                    var connectionIndex = i * MapStr[y].Length + j;
                     if (idx != connectionIndex)
                     {
                         connections.Add(ret[connectionIndex]);
@@ -139,12 +137,12 @@ namespace AStar
 
         private static List<Node> GenerateNodeGraph()
         {
-            List<Node> ret = new List<Node>();
-            for (int y = 0; y < map.Length; y++)
+            var ret = new List<Node>();
+            for (var y = 0; y < MapStr.Length; y++)
             {
-                for (int x = 0; x < map[y].Length; x++)
+                for (var x = 0; x < MapStr[y].Length; x++)
                 {
-                    bool trav = map[y][x] == ' ' || map[y][x] == 'B' || map[y][x] == 'A';
+                    var trav = MapStr[y][x] == ' ' || MapStr[y][x] == 'B' || MapStr[y][x] == 'A';
                     ret.Add(new Node(new VecN(x, y), trav, 1));
 
                     // Create Nodes and make them traversable when empty, start or end node

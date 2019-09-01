@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
 namespace AStar
@@ -13,6 +12,7 @@ namespace AStar
         private readonly float[] data;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="VecN"/> struct.
         /// Constructor.
         /// </summary>
         /// <param name="vals">Vector components as array.</param>
@@ -30,7 +30,7 @@ namespace AStar
         public float SqrLength()
         {
             float ret = 0;
-            for (int i = 0; i < data.Length; i++)
+            for (var i = 0; i < data.Length; i++)
             {
                 ret += data[i] * data[i];
             }
@@ -51,7 +51,7 @@ namespace AStar
         /// <returns>The distance between this and other.</returns>
         public float Distance(VecN other)
         {
-            VecN delta = Subtract(other);
+            var delta = Subtract(other);
             return delta.Length();
         }
 
@@ -62,7 +62,7 @@ namespace AStar
         /// <returns>The squared distance between this and other.</returns>
         public float SqrDistance(VecN other)
         {
-            VecN delta = Subtract(other);
+            var delta = Subtract(other);
             return delta.SqrLength();
         }
 
@@ -73,8 +73,8 @@ namespace AStar
         /// <returns>The new vector.</returns>
         public VecN Subtract(VecN other)
         {
-            float[] dd = new float[Math.Max(data.Length, other.data.Length)];
-            for (int i = 0; i < dd.Length; i++)
+            var dd = new float[Math.Max(data.Length, other.data.Length)];
+            for (var i = 0; i < dd.Length; i++)
             {
                 float val = 0;
                 if (data.Length > i)
@@ -99,18 +99,18 @@ namespace AStar
         /// <returns>Vector string representation.</returns>
         public override string ToString()
         {
-            Builder.Clear();
-            Builder.Append('[');
-            for (int i = 0; i < data.Length; i++)
+            _ = Builder.Clear();
+            _ = Builder.Append('[');
+            for (var i = 0; i < data.Length; i++)
             {
-                Builder.Append(data[i]);
+                _ = Builder.Append(data[i]);
                 if (i != data.Length - 1)
                 {
-                    Builder.Append(", ");
+                    _ = Builder.Append(", ");
                 }
             }
 
-            Builder.Append(']');
+            _ = Builder.Append(']');
             return Builder.ToString();
         }
 
@@ -126,7 +126,7 @@ namespace AStar
                 return false;
             }
 
-            for (int i = 0; i < other.data.Length; i++)
+            for (var i = 0; i < other.data.Length; i++)
             {
                 if (Math.Abs(data[i] - other.data[i]) > 0.001f)
                 {
