@@ -118,7 +118,7 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 
-namespace DataStructures.BitArray
+namespace DataStructures
 {
     /// <summary>
     /// This class implements a bit-array and provides some
@@ -454,15 +454,7 @@ namespace DataStructures.BitArray
 
             for (var i = 0; i < len; i++)
             {
-                if ((sequence1[i] == '1' && sequence2[i].Equals('1')) ||
-                    (sequence1[i] == '0' && sequence2[i].Equals('0')))
-                {
-                    _ = sb.Append(0);
-                }
-                else
-                {
-                    _ = sb.Append(1);
-                }
+                _ = sb.Append(sequence1[i] == sequence2[i] ? '0' : '1');
             }
 
             var result = sb.ToString().Trim();

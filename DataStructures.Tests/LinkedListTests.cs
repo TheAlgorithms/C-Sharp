@@ -3,7 +3,7 @@ using System.Linq;
 using DataStructures.SinglyLinkedList;
 using NUnit.Framework;
 
-namespace DataStructures.Tests.LinkedList
+namespace DataStructures.Tests
 {
     public static class LinkedListTests
     {

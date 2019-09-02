@@ -14,7 +14,7 @@ namespace Algorithms.Tests.Encoders
             var random = new Randomizer();
             var encoder = new VigenereEncoder();
             var message = random.GetString();
-            var key = random.GetString(random.Next(0,1000));
+            var key = random.GetString(random.Next(0, 1000));
 
             // Act
             var encoded = encoder.Encode(message, key);

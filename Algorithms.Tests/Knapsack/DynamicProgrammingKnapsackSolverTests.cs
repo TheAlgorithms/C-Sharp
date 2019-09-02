@@ -7,7 +7,6 @@ namespace Algorithms.Tests.Knapsack
 {
     public static class DynamicProgrammingKnapsackSolverTests
     {
-
         [Test]
         public static void SmallSampleOfChar()
         {
