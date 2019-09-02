@@ -16,7 +16,7 @@ namespace AStar
         /// <param name="position">Position of the node.</param>
         /// <param name="traversable">Flag if the node is traversable.</param>
         /// <param name="traverseMultiplier">Multiplier for traversal costs.</param>
-        public Node(VecN position, bool traversable, float traverseMultiplier)
+        public Node(VecN position, bool traversable, double traverseMultiplier)
         {
             Traversable = traversable;
             Position = position;
@@ -29,77 +29,48 @@ namespace AStar
         /// Gets the Total cost of the Node.
         /// The Current Costs + the estimated costs.
         /// </summary>
-        public float TotalCost => EstimatedCost + CurrentCost;
+        public double TotalCost => EstimatedCost + CurrentCost;
 
         /// <summary>
         /// Gets or sets the Distance between this node and the target node.
         /// </summary>
-        public float EstimatedCost
-        {
-            get;
-            set;
-        }
+        public double EstimatedCost { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether how costly it is to traverse over this node.
         /// </summary>
-        public float TraversalCostMultiplier
-        {
-            get;
-        }
+        public double TraversalCostMultiplier { get; }
 
         /// <summary>
         /// Gets or sets a value indicating whether to go from the start node to this node.
         /// </summary>
-        public float CurrentCost
-        {
-            get;
-            set;
-        }
+        public double CurrentCost { get; set; }
 
         /// <summary>
         /// Gets or sets the state of the Node
         /// Can be Unconsidered(Default), Open and Closed.
         /// </summary>
-        public NodeState State
-        {
-            get;
-            set;
-        }
+        public NodeState State { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether the node is traversable.
         /// </summary>
-        public bool Traversable
-        {
-            get;
-        }
+        public bool Traversable { get; }
 
         /// <summary>
         /// Gets or sets a list of all connected nodes.
         /// </summary>
-        public Node[] ConnectedNodes
-        {
-            get;
-            set;
-        }
+        public Node[] ConnectedNodes { get; set; }
 
         /// <summary>
         /// Gets or sets he "previous" node that was processed before this node.
         /// </summary>
-        public Node Parent
-        {
-            get;
-            set;
-        }
+        public Node Parent { get; set; }
 
         /// <summary>
         /// Gets the positional information of the node.
         /// </summary>
-        public VecN Position
-        {
-            get;
-        }
+        public VecN Position { get; }
 
         /// <summary>
         /// TODO.
@@ -164,7 +135,7 @@ namespace AStar
         /// </summary>
         /// <param name="obj">The object to be checked against.</param>
         /// <returns>True if Equal, False if Not Equal.</returns>
-        public override bool Equals(object obj) => (obj is Node other) && CompareTo(other) == 0;
+        public override bool Equals(object obj) => (obj is Node other) && Equals(other);
 
         /// <summary>
         /// Useless override to shut up the automated testing.
@@ -177,14 +148,14 @@ namespace AStar
         /// </summary>
         /// <param name="other">The object to be checked against.</param>
         /// <returns>True if Equal, False if not Equal.</returns>
-        public bool Equals(Node other) => Equals(other as object);
+        public bool Equals(Node other) => CompareTo(other) == 0;
 
         /// <summary>
-        /// returns the distance to the other node.
+        /// Returns the distance to the other node.
         /// </summary>
         /// <param name="other">The other node.</param>
         /// <returns>Distance between this and other.</returns>
-        public float DistanceTo(Node other)
+        public double DistanceTo(Node other)
         {
             // Since we are only using the distance in comparison with other distances, we can skip using Math.Sqrt
             return Position.SqrDistance(other.Position);
