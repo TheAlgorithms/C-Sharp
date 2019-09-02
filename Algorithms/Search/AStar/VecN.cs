@@ -39,7 +39,7 @@ namespace AStar
         /// Returns the Length of the vector.
         /// </summary>
         /// <returns>Length of the Vector.</returns>
-        public double Length() => (double)Math.Sqrt(SqrLength());
+        public double Length() => Math.Sqrt(SqrLength());
 
         /// <summary>
         /// Returns the Distance between this and other.
