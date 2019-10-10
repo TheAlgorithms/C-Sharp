@@ -1,0 +1,91 @@
+using System;
+
+namespace Algorithms.Other
+{
+    /// <summary>
+    /// Manually converts an integer of certain size to a string of the binary representation
+    /// </summary>
+    public static class Int2Binary
+    {
+        /// <summary>
+        /// Returns string of the binary representation of given Int
+        /// </summary>
+        /// <param name="input">Number to be converted</param>
+        /// <returns>Binary representation of input</returns>
+        static string int2bin(Int16 input)
+        {
+            Int16 msb = Int16.MaxValue;
+            String output = "";
+            for (int i = 0; i < 16; i++)
+            {
+                if (input >= msb && msb != 0)
+                {
+                    output += "1";
+                    input -= msb;
+                    msb /= 2;
+                }
+                else
+                {
+                    output += "0";
+                    msb /= 2;
+                }
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Returns string of the binary representation of given Int
+        /// </summary>
+        /// <param name="input">Number to be converted</param>
+        /// <returns>Binary representation of input</returns>
+        static string int2bin(Int32 input)
+        {
+            Int32 msb = Int32.MaxValue;
+            String output = "";
+            for (int i = 0; i < 32; i++)
+            {
+                if (input >= msb && msb != 0)
+                {
+                    output += "1";
+                    input -= msb;
+                    msb /= 2;
+                }
+                else
+                {
+                    output += "0";
+                    msb /= 2;
+                }
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Returns string of the binary representation of given Int
+        /// </summary>
+        /// <param name="input">Number to be converted</param>
+        /// <returns>Binary representation of input</returns>
+        static string int2bin(Int64 input)
+        {
+            Int64 msb = Int64.MaxValue;
+            String output = "";
+            for (int i = 0; i < 64; i++)
+            {
+                if (input >= msb && msb != 0)
+                {
+                    output += "1";
+                    input -= msb;
+                    msb /= 2;
+                }
+                else
+                {
+                    output += "0";
+                    msb /= 2;
+                }
+            }
+
+            return output;
+        }
+    }
+}
