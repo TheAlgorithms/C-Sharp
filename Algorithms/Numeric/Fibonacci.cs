@@ -52,7 +52,7 @@ namespace Algorithms.Numeric
                 GenerateFibonacci();
             }
 
-            foreach (long element in Sequence)
+            foreach (ulong element in Sequence)
             {
                 Console.WriteLine(element);
             }
