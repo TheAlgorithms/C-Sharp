@@ -8,10 +8,6 @@ namespace Algorithms.Numeric
     /// The class Fibonacci handles the generation and printing of the fibonacci sequence up to its nth element.
     /// For additional information, see https://en.wikipedia.org/wiki/Fibonacci_number.
     /// </summary>
-    /// <summary>
-    /// The class Fibonacci handles the generation of the fibonacci sequence.
-    /// For additional information, see https://en.wikipedia.org/wiki/Fibonacci_number.
-    /// </summary>
     public abstract class Fibonacci
     {
         /// <summary>
