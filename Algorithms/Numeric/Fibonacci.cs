@@ -6,74 +6,36 @@ namespace Algorithms.Numeric
 {
     /// <summary>
     /// The class Fibonacci handles the generation and printing of the fibonacci sequence up to its nth element.
+    /// For additional information, see https://en.wikipedia.org/wiki/Fibonacci_number.
     /// </summary>
-    public class Fibonacci
+    public abstract class Fibonacci
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Fibonacci"/> class.
+        /// Generates and returns the first n elements of the Fibonacci sequence.
         /// </summary>
-        /// <param name="size">The number of elements in the Fibonacci sequence to generate.</param>
-        public Fibonacci(int size)
+        /// <param name="size">The number of elements in the sequence to generate.</param>
+        /// <returns>An IEnumerable of ulong variables containing the first elements of the Fibonacci sequence.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">This exception is thrown if a negative size is specified.</exception>
+        public static IEnumerable<ulong> GetSequence(int size)
         {
-            if (size < 1)
+            List<ulong> sequence = new List<ulong>(size);
+            if (size >= 2)
             {
-                size = 1;
+                sequence.Add(0);
+                sequence.Add(1);
+                ulong a = 0;
+                ulong b = 1;
+                for (int i = 2; i < size; ++i)
+                {
+                    sequence.Add(a + b);
+
+                    ulong temp = a + b;
+                    a = b;
+                    b = temp;
+                }
             }
 
-            Size = size;
-            GenerateFibonacci();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Fibonacci"/> class with a default value of 10 as the value of field <see cref="Size"/>.
-        /// </summary>
-        public Fibonacci()
-            : this(10)
-        {
-        }
-
-        /// <summary>
-        /// Gets or sets the number of elements to generate in the Fibonacci sequence.
-        /// </summary>
-        public int Size { get; set; }
-
-        /// <summary>
-        /// Gets the Fibonacci sequence generated via a call to method <see cref="GenerateFibonacci" />.
-        /// </summary>
-        public ulong[] Sequence { get; private set; }
-
-        /// <summary>
-        /// Prints the first n elements in the Fibonacci sequence, where n is equal to the value of <see cref="Size" />.
-        /// </summary>
-        public void PrintFibonacci()
-        {
-            if (Sequence.Length != Size)
-            {
-                GenerateFibonacci();
-            }
-
-            foreach (ulong element in Sequence)
-            {
-                Console.WriteLine(element);
-            }
-        }
-
-        /// <summary>
-        /// Generates the first n elements in the Fibonacci sequence, where n is equal to the value of <see cref="Size" />.
-        /// </summary>
-        private void GenerateFibonacci()
-        {
-            Sequence = new ulong[Size];
-            Sequence[0] = 0;
-            if (Size >= 2)
-            {
-                Sequence[1] = 1;
-            }
-
-            for (int i = 2; i < Size; i++)
-            {
-                Sequence[i] = Sequence[i - 1] + Sequence[i - 2];
-            }
+            return sequence;
         }
     }
 }
