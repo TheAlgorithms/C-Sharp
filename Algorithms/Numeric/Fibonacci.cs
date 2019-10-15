@@ -8,7 +8,7 @@ namespace Algorithms.Numeric
     /// The class Fibonacci handles the generation and printing of the fibonacci sequence up to its nth element.
     /// For additional information, see https://en.wikipedia.org/wiki/Fibonacci_number.
     /// </summary>
-    public abstract class Fibonacci
+    public static class Fibonacci
     {
         /// <summary>
         /// Yields the Fibonacci sequence.
@@ -22,8 +22,8 @@ namespace Algorithms.Numeric
             ulong b = 1;
             while (true)
             {
-                yield return a + b;
-                ulong temp = a + b;
+                var temp = a + b;
+                yield return temp;
                 a = b;
                 b = temp;
             }
