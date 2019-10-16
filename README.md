@@ -43,6 +43,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 		* [Pancake](./Algorithms/Sorters/PancakeSorter.cs)
 		* [Quick](./Algorithms/Sorters/QuickSorter.cs)
 		* [Radix](./Algorithms/Sorters/RadixSorter.cs)
+		* [MSD Radix](./Algorithms/Sorters/MsdRadixSorter.cs)
 		* [Selection](./Algorithms/Sorters/SelectionSorter.cs)
 		* [Shell](./Algorithms/Sorters/ShellSorter.cs)
 	* [String](./Algorithms/Strings/)
