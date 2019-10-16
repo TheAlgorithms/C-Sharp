@@ -51,7 +51,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 		* [Palindrome Checker](./Algorithms/Strings/palindrome.cs)
 
 * [Data Structures](./DataStructures/)
-	* [Bit Array](./DataStructures/BitArray)
+	* [Bit Array](./DataStructures/BitArray.cs)
 	* [Singly Linked List](./DataStructures/SinglyLinkedList)
 ---
 
