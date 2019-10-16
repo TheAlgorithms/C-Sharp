@@ -21,6 +21,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 			* [Euclidean GCD](./Algorithms/Numeric/GreatestCommonDivisor/EuclideanGreatestCommonDivisorFinder.cs)
 			* [Binary GCD](./Algorithms/Numeric/GreatestCommonDivisor/BinaryGreatestCommonDivisorFinder.cs)
 		* [Gauss-Jordan Elimination](./Algorithms/Numeric/GaussJordanElimination.cs)
+		* [Fibonacci Sequence](./Algorithms/Numeric/Fibonacci.cs)
 	* [Other](./Algorithms/Other/)
 		* [Fermat Prime Checker](./Algorithms/Other/FermatPrimeChecker.cs)
 		* [Sieve of Eratosthenes](./Algorithms/Other/SieveOfEratosthenes.cs)
