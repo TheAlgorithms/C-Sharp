@@ -1,4 +1,4 @@
-namespace Algorithms.Sorters
+namespace Algorithms.Sorters.String
 {
     /// <summary>
     ///     Radix sort is a non-comparative sorting algorithm. It avoids comparison by creating
@@ -8,7 +8,7 @@ namespace Algorithms.Sorters
     ///     MSD radix sorts are most suitable for sorting array of strings with variable length
     ///     in lexicographical order.
     /// </summary>
-    public class MsdRadixSorter
+    public class MsdRadixStringSorter : IStringSorter
     {
         /// <summary>
         ///     Sort array of strings using MSD radix sort algorithm.
@@ -18,11 +18,6 @@ namespace Algorithms.Sorters
 
         private static void Sort(string[] array, int l, int r, int d, string[] temp)
         {
-            int CharCodeAt(string s)
-            {
-                return d >= s.Length ? -1 : s[d];
-            }
-
             if (l >= r)
             {
                 return;
@@ -33,7 +28,7 @@ namespace Algorithms.Sorters
             var count = new int[k + 2];
             for (var i = l; i <= r; i++)
             {
-                var j = CharCodeAt(array[i]);
+                var j = Key(array[i]);
                 count[j + 2]++;
             }
 
@@ -44,7 +39,7 @@ namespace Algorithms.Sorters
 
             for (var i = l; i <= r; i++)
             {
-                var j = CharCodeAt(array[i]);
+                var j = Key(array[i]);
                 temp[count[j + 1]++] = array[i];
             }
 
@@ -57,6 +52,8 @@ namespace Algorithms.Sorters
             {
                 Sort(array, l + count[i], l + count[i + 1] - 1, d + 1, temp);
             }
+
+            int Key(string s) => d >= s.Length ? -1 : s[d];
         }
     }
 }
