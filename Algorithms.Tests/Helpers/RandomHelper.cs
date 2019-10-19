@@ -11,7 +11,7 @@ namespace Algorithms.Tests.Helpers
 
             for (var i = 0; i < n; i++)
             {
-                var t = TestContext.CurrentContext.Random.Next(0, 1000);
+                var t = TestContext.CurrentContext.Random.Next(1_000_000);
                 testArr[i] = t;
                 correctArray[i] = t;
             }

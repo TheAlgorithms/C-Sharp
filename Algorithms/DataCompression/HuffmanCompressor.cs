@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Algorithms.Sorters;
+using Algorithms.Sorters.Comparison;
 
 namespace Algorithms.DataCompression
 {
@@ -11,7 +11,7 @@ namespace Algorithms.DataCompression
     public class HuffmanCompressor
     {
         // TODO: Use partial sorter
-        private readonly ISorter<ListNode> sorter;
+        private readonly IComparisonSorter<ListNode> sorter;
         private readonly Translator translator;
 
         /// <summary>
@@ -19,7 +19,7 @@ namespace Algorithms.DataCompression
         /// </summary>
         /// <param name="sorter">Sorter to use for compression.</param>
         /// <param name="translator">Translator.</param>
-        public HuffmanCompressor(ISorter<ListNode> sorter, Translator translator)
+        public HuffmanCompressor(IComparisonSorter<ListNode> sorter, Translator translator)
         {
             this.sorter = sorter;
             this.translator = translator;

@@ -1,5 +1,5 @@
 ﻿using Algorithms.DataCompression;
-using Algorithms.Sorters;
+using Algorithms.Sorters.Comparison;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 
