@@ -13,7 +13,7 @@
         /// <param name="array">Array to sort.</param>
         public void Sort(int[] array)
         {
-            int bits = 4;
+            var bits = 4;
             var b = new int[array.Length];
             var rshift = 0;
             for (var mask = ~(-1 << bits); mask != 0; mask <<= bits, rshift += bits)
