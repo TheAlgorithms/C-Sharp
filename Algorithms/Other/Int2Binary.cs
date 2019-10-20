@@ -3,7 +3,6 @@ namespace Algorithms.Other
     /// <summary>
     /// Manually converts an integer of certain size to a string of the binary representation.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1121:Use built-in type alias", Justification = "Built-in type aliases aren't as clear as concerning the amount of bits")]
     public static class Int2Binary
     {
         /// <summary>
@@ -11,7 +10,7 @@ namespace Algorithms.Other
         /// </summary>
         /// <param name="input">Number to be converted.</param>
         /// <returns>Binary representation of input.</returns>
-        public static string Int2bin(ushort input)
+        public static string Int2Bin(ushort input)
         {
             ushort msb = ushort.MaxValue / 2 + 1;
             var output = string.Empty;
@@ -38,7 +37,7 @@ namespace Algorithms.Other
         /// </summary>
         /// <param name="input">Number to be converted.</param>
         /// <returns>Binary representation of input.</returns>
-        public static string Int2bin(uint input)
+        public static string Int2Bin(uint input)
         {
             var msb = uint.MaxValue / 2 + 1;
             var output = string.Empty;
@@ -65,7 +64,7 @@ namespace Algorithms.Other
         /// </summary>
         /// <param name="input">Number to be converted.</param>
         /// <returns>Binary representation of input.</returns>
-        public static string Int2bin(ulong input)
+        public static string Int2Bin(ulong input)
         {
             var msb = ulong.MaxValue / 2 + 1;
             var output = string.Empty;

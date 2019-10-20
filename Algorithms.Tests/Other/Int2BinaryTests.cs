@@ -17,7 +17,7 @@ namespace Algorithms.Tests.Other
             // Arrange
 
             // Act
-            var result = Int2Binary.Int2bin(input);
+            var result = Int2Binary.Int2Bin(input);
 
             // Assert
             Assert.AreEqual(expected, result);
@@ -37,7 +37,7 @@ namespace Algorithms.Tests.Other
             // Arrange
 
             // Act
-            var result = Int2Binary.Int2bin(input);
+            var result = Int2Binary.Int2Bin(input);
 
             // Assert
             Assert.AreEqual(expected, result);
@@ -57,7 +57,7 @@ namespace Algorithms.Tests.Other
             // Arrange
 
             // Act
-            var result = Int2Binary.Int2bin(input);
+            var result = Int2Binary.Int2Bin(input);
 
             // Assert
             Assert.AreEqual(expected, result);
