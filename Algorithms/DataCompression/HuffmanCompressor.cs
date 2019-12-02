@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Algorithms.Sorters.Comparison;
+using Utility.Extension;
 
 namespace Algorithms.DataCompression
 {
@@ -53,14 +54,6 @@ namespace Algorithms.DataCompression
             return (translator.Translate(uncompressedText, compressionKeys), decompressionKeys);
         }
 
-        private static void AddMany(IDictionary<string, string> keys, IEnumerable<(string key, string value)> enumerable)
-        {
-            foreach (var (key, value) in enumerable)
-            {
-                keys.Add(key, value);
-            }
-        }
-
         /// <summary>
         /// Finds frequency for each character in the text.
         /// </summary>
@@ -97,15 +90,15 @@ namespace Algorithms.DataCompression
             if (tree.LeftChild != null)
             {
                 var (lsck, lsdk) = GetKeys(tree.LeftChild);
-                AddMany(compressionKeys, lsck.Select(kvp => (kvp.Key, "0" + kvp.Value)));
-                AddMany(decompressionKeys, lsdk.Select(kvp => ("0" + kvp.Key, kvp.Value)));
+                compressionKeys.AddMany(lsck.Select(kvp => (kvp.Key, "0" + kvp.Value)));
+                decompressionKeys.AddMany(lsdk.Select(kvp => ("0" + kvp.Key, kvp.Value)));
             }
 
             if (tree.RightChild != null)
             {
                 var (rsck, rsdk) = GetKeys(tree.RightChild);
-                AddMany(compressionKeys, rsck.Select(kvp => (kvp.Key, "1" + kvp.Value)));
-                AddMany(decompressionKeys, rsdk.Select(kvp => ("1" + kvp.Key, kvp.Value)));
+                compressionKeys.AddMany(rsck.Select(kvp => (kvp.Key, "1" + kvp.Value)));
+                decompressionKeys.AddMany(rsdk.Select(kvp => ("1" + kvp.Key, kvp.Value)));
 
                 return (compressionKeys, decompressionKeys);
             }
