@@ -33,7 +33,7 @@ namespace Algorithms.DataCompression
         /// <returns>Compressed string and keys to decompress it.</returns>
         public (string compressedText, Dictionary<string, string> decompressionKeys) Compress(string uncompressedText)
         {
-            if (uncompressedText == string.Empty)
+            if (string.IsNullOrEmpty(uncompressedText))
             {
                 return (string.Empty, new Dictionary<string, string>());
             }
