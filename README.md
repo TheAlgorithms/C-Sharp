@@ -29,6 +29,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 		* [A-Star](./Algorithms/Search/AStar/)
 		* [Binary](./Algorithms/Search/BinarySearcher.cs)
 		* [Linear](./Algorithms/Search/LinearSearcher.cs)
+		* [FastSearch](./Algorithms/Search/FastSearcher.cs)
 	* [Sorts](./Algorithms/Sorters/)
 		* [Comparison](./Algorithms/Sorters/Comparison)
 			* [Binary Insertion](./Algorithms/Sorters/Comparison/BinaryInsertionSorter.cs)
