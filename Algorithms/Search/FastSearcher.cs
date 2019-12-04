@@ -54,6 +54,7 @@ namespace Algorithms.Search
                 indexInterpolation = temp;
             }
 
+            int from, to;
             if (item == array[indexBinary])
             {
                 return indexBinary;
@@ -64,21 +65,22 @@ namespace Algorithms.Search
             }
             else if (item < array[indexBinary])
             {
-                var segment = new ArraySegment<int>(array, 0, indexBinary - 2).Array;
-                return FindIndex(segment, item);
+                from = 0;
+                to = indexBinary - 1;
             }
             else if (item < array[indexInterpolation])
             {
-                var segment = new ArraySegment<int>(array, indexBinary + 1, indexInterpolation - 2).Array;
-                return FindIndex(segment, item);
+                from = indexBinary + 1;
+                to = indexInterpolation - 1;
             }
             else
             {
-                var segment = new ArraySegment<int>(array, indexInterpolation + 1, array.Length - 1).Array;
-                return FindIndex(segment, item);
+                from = indexInterpolation + 1;
+                to = array.Length - 1;
             }
 
-            throw new ItemNotFoundException();
+            var segment = new ArraySegment<int>(array, from, to - 1).Array;
+            return FindIndex(segment, item);
         }
     }
 }
