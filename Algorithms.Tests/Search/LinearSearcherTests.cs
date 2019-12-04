@@ -51,7 +51,7 @@ namespace Algorithms.Tests.Search
 
             // Act
             // Assert
-            _ = Assert.Throws(typeof(ItemNotFoundException), () => searcher.Find(arrayToSearch, x => false));
+            _ = Assert.Throws<ItemNotFoundException>(() => searcher.Find(arrayToSearch, x => false));
         }
 
         [Test]
