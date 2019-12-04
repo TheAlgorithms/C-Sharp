@@ -9,7 +9,6 @@ namespace Algorithms.Tests.Search
 {
     public static class FastSearcherTests
     {
-
         [Test]
         public static void FindIndex_ItemPresent_IndexCorrect()
         {
