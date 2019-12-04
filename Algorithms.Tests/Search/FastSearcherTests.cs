@@ -15,7 +15,7 @@ namespace Algorithms.Tests.Search
         {
             // Arrange
             var searcher = new FastSearcher();
-            var arr = new int[100000];
+            var arr = new int[10];
             for (var i = 0; i < arr.Length; i++)
             {
                 arr[i] = i;
@@ -23,12 +23,15 @@ namespace Algorithms.Tests.Search
 
             Array.Sort(arr);
 
-            const int expectedIndex = 3;
-            var x = arr[expectedIndex];
-            var actualIndex = searcher.FindIndex(arr, x);
+            for (int i = 0; i < arr.Length; i++)
+            {
+                int expectedIndex = i;
+                var x = arr[expectedIndex];
+                var actualIndex = searcher.FindIndex(arr, x);
 
-            // Assert
-            Assert.AreEqual(expectedIndex, actualIndex);
+                // Assert
+                Assert.AreEqual(expectedIndex, actualIndex);
+            }
         }
 
         [Test]
@@ -36,7 +39,7 @@ namespace Algorithms.Tests.Search
         {
             // Arrange
             var searcher = new FastSearcher();
-            var arr = new int[100001];
+            var arr = new int[11];
             for (var i = 0; i < arr.Length; i++)
             {
                 arr[i] = i;
@@ -44,16 +47,17 @@ namespace Algorithms.Tests.Search
 
             Array.Sort(arr);
 
-            const int expectedIndex = 3;
-            var x = arr[expectedIndex];
-            var actualIndex = searcher.FindIndex(arr, x);
+            for (int i = 0; i < arr.Length; i++)
+            {
+                int expectedIndex = i;
+                var x = arr[expectedIndex];
+                var actualIndex = searcher.FindIndex(arr, x);
 
-            // Assert
-            Assert.AreEqual(expectedIndex, actualIndex);
+                // Assert
+                Assert.AreEqual(expectedIndex, actualIndex);
+            }
+           
         }
-
-       
-
 
         [Test]
         public static void FindIndex_ItemMissing_ItemNotFoundExceptionThrown()
