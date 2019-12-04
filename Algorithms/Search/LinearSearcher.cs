@@ -1,4 +1,5 @@
 using System;
+using Utility.Exception;
 
 namespace Algorithms.Search
 {

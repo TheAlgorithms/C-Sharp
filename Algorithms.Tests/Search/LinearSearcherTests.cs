@@ -3,6 +3,7 @@ using System.Linq;
 using Algorithms.Search;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
+using Utility.Exception;
 
 namespace Algorithms.Tests.Search
 {

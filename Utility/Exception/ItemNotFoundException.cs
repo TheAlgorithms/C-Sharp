@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Algorithms.Search
+namespace Utility.Exception
 {
     /// <summary>
     /// Signs that sequence doesn't contain any items that one was looking for.
