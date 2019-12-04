@@ -32,6 +32,7 @@ namespace Algorithms.Search
                  array[array.Length - 1] - array[0],
             };
 
+            // prevents division by zero
             if (section[2] == 0)
             {
                 section[2]++;
