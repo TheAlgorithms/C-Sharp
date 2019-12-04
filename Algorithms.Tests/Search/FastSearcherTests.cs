@@ -21,11 +21,9 @@ namespace Algorithms.Tests.Search
                 arr[i] = i;
             }
 
-            Array.Sort(arr);
-
-            for (int i = 0; i < arr.Length; i++)
+            for (var i = 0; i < arr.Length; i++)
             {
-                int expectedIndex = i;
+                var expectedIndex = i;
                 var x = arr[expectedIndex];
                 var actualIndex = searcher.FindIndex(arr, x);
 
@@ -45,9 +43,7 @@ namespace Algorithms.Tests.Search
                 arr[i] = i;
             }
 
-            Array.Sort(arr);
-
-            for (int i = 0; i < arr.Length; i++)
+            for (var i = 0; i < arr.Length; i++)
             {
                 int expectedIndex = i;
                 var x = arr[expectedIndex];
