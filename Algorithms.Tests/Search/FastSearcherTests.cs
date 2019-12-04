@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Algorithms.Search;
 
 using NUnit.Framework;
