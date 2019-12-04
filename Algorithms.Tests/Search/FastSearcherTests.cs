@@ -73,7 +73,7 @@ namespace Algorithms.Tests.Search
             // Act
             const int x = 12;
             // Assert
-            _ = Assert.Throws(typeof(ItemNotFoundException), () => searcher.FindIndex(arr, x));
+            _ = Assert.Throws<ItemNotFoundException>(() => searcher.FindIndex(arr, x));
         }
     }
 }
