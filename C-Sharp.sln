@@ -17,6 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		.gitignore = .gitignore
 		.travis.yml = .travis.yml
 		README.md = README.md
+		CONTRIBUTING.md = CONTRIBUTING.md
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
+		LICENSE = LICENSE
 		stylecop.json = stylecop.json
 		stylecop.ruleset = stylecop.ruleset
 	EndProjectSection

@@ -1,8 +1,4 @@
-# Description
-
 Please include a brief summary of the change. Please also include relevant motivation and context (if applicable).
-
-# Checklist:
 
 - [ ] I have performed a self-review of my own code
 - [ ] My code follows the style guidelines of this project
