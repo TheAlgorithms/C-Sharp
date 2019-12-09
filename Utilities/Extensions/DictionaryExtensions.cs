@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Utility.Extension
+namespace Utilities.Extensions
 {
-    public static class DictionaryExtension
+    public static class DictionaryExtensions
     {
         public static void AddMany<TKey, TValue>(this Dictionary<TKey, TValue> keys, IEnumerable<(TKey, TValue)> enumerable)
         {
