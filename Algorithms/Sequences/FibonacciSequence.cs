@@ -14,7 +14,7 @@ namespace Algorithms.Sequences
     ///     OEIS: https://oeis.org/A000045.
     /// </para>
     /// </summary>
-    public class A000045_FibonacciSequence : ISequence
+    public class FibonacciSequence : ISequence
     {
         /// <summary>
         /// Gets Fibonacci sequence.

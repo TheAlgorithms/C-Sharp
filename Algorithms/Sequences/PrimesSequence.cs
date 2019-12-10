@@ -15,7 +15,7 @@ namespace Algorithms.Sequences
     ///     OEIS: https://oeis.org/A000040.
     /// </para>
     /// </summary>
-    public class A000040_PrimesSequence : ISequence
+    public class PrimesSequence : ISequence
     {
         /// <summary>
         /// Gets sequence of prime numbers.

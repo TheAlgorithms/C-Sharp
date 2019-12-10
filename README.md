@@ -50,6 +50,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 		* [String](./Algorithms/Sorters/String)
 			* [MSD Radix](./Algorithms/Sorters/String/MsdRadixStringSorter.cs)
 	* [Sequences](./Algorithms/Sequences/)
+		* [A000040 Primes](./Algorithms/Sequences/PrimesSequence.cs)
 		* [A000045 Fibonacci](./Algorithms/Sequences/FibonacciSequence.cs)
 	* [String](./Algorithms/Strings/)
 		* [Longest Consecutive Character](./Algorithms/Strings/GeneralStringAlgorithms.cs)
