@@ -24,8 +24,12 @@ namespace Algorithms.Sequences
         {
             get
             {
-                var primes = new List<BigInteger>();
-                var n = new BigInteger(2);
+                yield return 2;
+                var primes = new List<BigInteger>
+                {
+                    2,
+                };
+                var n = new BigInteger(3);
 
                 while (true)
                 {
@@ -35,7 +39,7 @@ namespace Algorithms.Sequences
                         primes.Add(n);
                     }
 
-                    n++;
+                    n += 2;
                 }
             }
         }
