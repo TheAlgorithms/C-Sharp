@@ -1,4 +1,4 @@
-Please include a brief summary of the change. Please also include relevant motivation and context (if applicable).
+Please include a summary of the change. Please also include relevant motivation and context (if applicable).
 
 - [ ] I have performed a self-review of my code
 - [ ] My code follows the style guidelines of this project
