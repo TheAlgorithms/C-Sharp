@@ -54,6 +54,11 @@ namespace Algorithms.Encoders
 
         private string AppendKey(string key, int length)
         {
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentOutOfRangeException($"{nameof(key)} must be non-empty string");
+            }
+
             var keyBuilder = new StringBuilder(key, length);
             while (keyBuilder.Length < length)
             {
