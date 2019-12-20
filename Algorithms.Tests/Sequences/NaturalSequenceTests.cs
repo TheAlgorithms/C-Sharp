@@ -10,7 +10,7 @@ namespace Algorithms.Tests.Sequences
         [Test]
         public void First10ElementsCorrect()
         {
-            var sequence = new PrimesSequence().Sequence;
+            var sequence = new NaturalSequence().Sequence;
 
             Assert.AreEqual(new BigInteger[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, sequence.Take(10));
         }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 
 namespace Algorithms.Sequences
@@ -25,7 +24,6 @@ namespace Algorithms.Sequences
             get
             {
                 var n = new BigInteger(1);
-
                 while (true)
                 {
                     yield return n++;
