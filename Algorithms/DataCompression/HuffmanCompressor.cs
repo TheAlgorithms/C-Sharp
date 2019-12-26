@@ -174,12 +174,12 @@ namespace Algorithms.DataCompression
             /// <summary>
             /// Gets tODO. TODO.
             /// </summary>
-            public ListNode RightChild { get; }
+            public ListNode? RightChild { get; }
 
             /// <summary>
             /// Gets tODO. TODO.
             /// </summary>
-            public ListNode LeftChild { get; }
+            public ListNode? LeftChild { get; }
         }
 
         private class ListNodeComparer : IComparer<ListNode>

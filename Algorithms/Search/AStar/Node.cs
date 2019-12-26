@@ -60,12 +60,12 @@ namespace AStar
         /// <summary>
         /// Gets or sets a list of all connected nodes.
         /// </summary>
-        public Node[] ConnectedNodes { get; set; }
+        public Node[] ConnectedNodes { get; set; } = new Node[0];
 
         /// <summary>
         /// Gets or sets he "previous" node that was processed before this node.
         /// </summary>
-        public Node Parent { get; set; }
+        public Node? Parent { get; set; }
 
         /// <summary>
         /// Gets the positional information of the node.

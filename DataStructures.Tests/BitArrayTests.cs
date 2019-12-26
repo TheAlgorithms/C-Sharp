@@ -367,7 +367,7 @@ namespace DataStructures.Tests
         }
 
         [Test]
-        public static void TestCompareThrowsException()
+        public static void ArraysOfDifferentLengthsAreNotEqual()
         {
             // Arrange
             var testObj1 = new BitArray("110");
@@ -376,7 +376,7 @@ namespace DataStructures.Tests
             // Act
 
             // Assert
-            _ = Assert.Throws<Exception>(() => Assert.IsTrue(testObj1 == testObj2));
+            Assert.False(testObj1 == testObj2);
         }
 
         [Test]

@@ -115,6 +115,7 @@
 // assumes: the input bit-arrays must have same length.
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -125,7 +126,7 @@ namespace DataStructures
     /// useful functions/operations to deal with this type of
     /// data structure.
     /// </summary>
-    public class BitArray : IComparable, ICloneable, IEnumerator, IEnumerable
+    public class BitArray : IComparable, ICloneable, IEnumerator<bool>, IEnumerable<bool>
     {
         private readonly bool[] field; // the actual bit-field
         private int position = -1; // position for enumerator
@@ -193,9 +194,27 @@ namespace DataStructures
         public BitArray(bool[] bits) => field = bits;
 
         /// <summary>
-        /// Gets the current bit of the array.
+        /// Gets a value indicating whether the current bit of the array is set.
         /// </summary>
-        public object Current
+        public bool Current
+        {
+            get
+            {
+                try
+                {
+                    return field[position];
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    throw new InvalidOperationException();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the current bit of the array is set.
+        /// </summary>
+        object IEnumerator.Current
         {
             get
             {
@@ -492,21 +511,29 @@ namespace DataStructures
         /// <returns>Returns True if there inputs are equal; False otherwise.</returns>
         public static bool operator ==(BitArray one, BitArray two)
         {
-            var status = true;
-
-            if (one?.Length == two?.Length)
+            if (ReferenceEquals(one, two))
             {
-                for (var i = 0; i < one?.Length; i++)
-                {
-                    if (one[i] != two[i])
-                    {
-                        status = false;
-                    }
-                }
+                return true;
             }
-            else
+
+            if (one is null || two is null)
             {
-                throw new Exception("== : inputs haven't same length!");
+                return false;
+            }
+
+            if (one.Length != two.Length)
+            {
+                return false;
+            }
+
+            var status = true;
+            for (var i = 0; i < one.Length; i++)
+            {
+                if (one[i] != two[i])
+                {
+                    status = false;
+                    break;
+                }
             }
 
             return status;
@@ -567,7 +594,13 @@ namespace DataStructures
         /// Gets a enumerator for this BitArray-Object.
         /// </summary>
         /// <returns>Returns a enumerator for this BitArray-Object.</returns>
-        public IEnumerator GetEnumerator() => this;
+        public IEnumerator<bool> GetEnumerator() => this;
+
+        /// <summary>
+        /// Gets a enumerator for this BitArray-Object.
+        /// </summary>
+        /// <returns>Returns a enumerator for this BitArray-Object.</returns>
+        IEnumerator IEnumerable.GetEnumerator() => this;
 
         /// <summary>
         /// MoveNext (for interface IEnumerator).
@@ -879,6 +912,14 @@ namespace DataStructures
         /// </summary>
         /// <returns>hash-code for this BitArray instance.</returns>
         public override int GetHashCode() => ToInt32();
+
+        /// <summary>
+        /// Disposes object, nothing to dispose here though.
+        /// </summary>
+        public void Dispose()
+        {
+            // Done
+        }
 
         /// <summary>
         /// Utility method foir checking a given sequence contains only zeros and ones.

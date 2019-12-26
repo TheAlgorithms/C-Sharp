@@ -31,8 +31,8 @@ namespace AStar
         public static List<Node> GeneratePath(Node target)
         {
             var ret = new List<Node>();
-            var current = target;
-            while (current != null)
+            Node? current = target;
+            while (!(current is null))
             {
                 ret.Add(current);
                 current = current.Parent;

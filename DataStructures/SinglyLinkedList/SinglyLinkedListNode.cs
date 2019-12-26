@@ -25,6 +25,6 @@
         /// <summary>
         /// Gets or sets tODO. TODO.
         /// </summary>
-        public SinglyLinkedListNode<T> Next { get; set; }
+        public SinglyLinkedListNode<T>? Next { get; set; }
     }
 }
