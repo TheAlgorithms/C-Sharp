@@ -25,6 +25,11 @@ namespace Algorithms.Search
 
         private int FindIndex(int[] array, int item, int offset)
         {
+            if (array[0] == array[array.Length - 1])
+            {
+                return item == array[0] ? offset : throw new ItemNotFoundException();
+            }
+
             var indexBinary = array.Length / 2;
 
             int[] section =
@@ -34,18 +39,9 @@ namespace Algorithms.Search
                 array[array.Length - 1] - array[0],
             };
 
-            // prevents division by zero
-            if (section[2] == 0)
-            {
-                section[2]++;
-            }
-
             var indexInterpolation = section[0] * section[1] / section[2];
 
-            indexInterpolation = Math.Abs(indexInterpolation);
-            indexBinary = Math.Abs(indexBinary);
-
-            if (indexInterpolation > array[array.Length - 1])
+            if (indexInterpolation >= array.Length)
             {
                 throw new ItemNotFoundException();
             }
