@@ -25,9 +25,14 @@ namespace Algorithms.Sorters.Integer
         ///         Space complexity: O(n+k), where k is the range of the non-negative key values.
         ///     </para>
         /// </summary>
-        /// <param name="array">input array.</param>
+        /// <param name="array">Input array.</param>
         public void Sort(int[] array)
         {
+            if (array.Length == 0)
+            {
+                return;
+            }
+
             var max = array.Max();
             var min = array.Min();
             var count = new int[max - min + 1];

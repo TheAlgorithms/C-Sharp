@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Algorithms.Knapsack;
-using Utility.Extension;
+using Utilities.Extensions;
 
 namespace Algorithms.DataCompression
 {

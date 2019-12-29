@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Algorithms.Sorters.Comparison;
-using Utility.Extension;
+using Utilities.Extensions;
 
 namespace Algorithms.DataCompression
 {
