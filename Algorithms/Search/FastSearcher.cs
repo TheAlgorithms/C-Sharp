@@ -1,5 +1,5 @@
 ﻿using System;
-using Utility.Exception;
+using Utilities.Exceptions;
 
 namespace Algorithms.Search
 {
@@ -61,24 +61,31 @@ namespace Algorithms.Search
             {
                 return indexBinary;
             }
-            else if (item == array[indexInterpolation])
+
+            if (item == array[indexInterpolation])
             {
                 return indexInterpolation;
             }
-            else if (item < array[indexBinary])
+
+            if (item < array[indexBinary])
             {
-                from = 0;
+                @from = 0;
                 to = indexBinary - 1;
             }
             else if (item < array[indexInterpolation])
             {
-                from = indexBinary + 1;
+                @from = indexBinary + 1;
                 to = indexInterpolation - 1;
             }
             else
             {
-                from = indexInterpolation + 1;
+                @from = indexInterpolation + 1;
                 to = array.Length - 1;
+            }
+
+            if (from >= to)
+            {
+                throw new ItemNotFoundException();
             }
 
             var segment = new ArraySegment<int>(array, from, to - 1).Array;
