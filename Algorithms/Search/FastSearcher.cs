@@ -21,15 +21,17 @@ namespace Algorithms.Search
         /// <param name="item">Term to check against.</param>
         /// <returns>Index of first item that satisfies term.</returns>
         /// <exception cref="ItemNotFoundException"> Gets thrown when the given item couldn't be found in the array.</exception>
-        public int FindIndex(int[] array, int item)
+        public int FindIndex(int[] array, int item) => FindIndex(array, item, 0);
+
+        private int FindIndex(int[] array, int item, int offset)
         {
             var indexBinary = array.Length / 2;
 
             int[] section =
             {
-                 array.Length - 1,
-                 item - array[0],
-                 array[array.Length - 1] - array[0],
+                array.Length - 1,
+                item - array[0],
+                array[array.Length - 1] - array[0],
             };
 
             // prevents division by zero
@@ -50,21 +52,18 @@ namespace Algorithms.Search
 
             if (indexBinary > indexInterpolation)
             {
-                // Swap
-                var temp = indexBinary;
-                indexBinary = indexInterpolation;
-                indexInterpolation = temp;
+                (indexBinary, indexInterpolation) = (indexInterpolation, indexBinary);
             }
 
             int from, to;
             if (item == array[indexBinary])
             {
-                return indexBinary;
+                return offset + indexBinary;
             }
 
             if (item == array[indexInterpolation])
             {
-                return indexInterpolation;
+                return offset + indexInterpolation;
             }
 
             if (item < array[indexBinary])
@@ -88,8 +87,9 @@ namespace Algorithms.Search
                 throw new ItemNotFoundException();
             }
 
-            var segment = new ArraySegment<int>(array, from, to - 1).Array;
-            return FindIndex(segment, item);
+            var segment = new int[to - from + 1];
+            Array.Copy(array, from, segment, 0, segment.Length);
+            return FindIndex(segment, item, offset + from);
         }
     }
 }
