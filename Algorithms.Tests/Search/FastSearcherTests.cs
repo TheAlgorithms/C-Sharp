@@ -42,5 +42,24 @@ namespace Algorithms.Tests.Search
             var missing = Helper.GetItemBiggerThanAllIn(arr);
             _ = Assert.Throws<ItemNotFoundException>(() => searcher.FindIndex(arr, missing));
         }
+
+        [Test]
+        public static void FindIndex_ArrayOfDuplicatesItemPresent_IndexCorrect()
+        {
+            var searcher = new FastSearcher();
+            var arr = new int[1000];
+            var present = 0;
+            var index = searcher.FindIndex(arr, present);
+            Assert.AreEqual(0, arr[index]);
+        }
+
+        [Test]
+        public static void FindIndex_ArrayOfDuplicatesItemMissing_ItemNotFoundExceptionThrown()
+        {
+            var searcher = new FastSearcher();
+            var arr = new int[1000];
+            var missing = 1;
+            _ = Assert.Throws<ItemNotFoundException>(() => searcher.FindIndex(arr, missing));
+        }
     }
 }
