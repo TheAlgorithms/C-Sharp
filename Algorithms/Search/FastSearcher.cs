@@ -25,6 +25,11 @@ namespace Algorithms.Search
 
         private int FindIndex(int[] array, int item, int offset)
         {
+            if (item < array[0] || item > array[array.Length - 1])
+            {
+                throw new ItemNotFoundException();
+            }
+
             if (array[0] == array[array.Length - 1])
             {
                 return item == array[0] ? offset : throw new ItemNotFoundException();
@@ -41,40 +46,34 @@ namespace Algorithms.Search
 
             var indexInterpolation = section[0] * section[1] / section[2];
 
-            if (indexInterpolation >= array.Length)
-            {
-                throw new ItemNotFoundException();
-            }
-
-            if (indexBinary > indexInterpolation)
-            {
-                (indexBinary, indexInterpolation) = (indexInterpolation, indexBinary);
-            }
+            var (i1, i2) = indexBinary > indexInterpolation
+                ? (indexInterpolation, indexBinary)
+                : (indexBinary, indexInterpolation);
 
             int from, to;
-            if (item == array[indexBinary])
+            if (item == array[i1])
             {
-                return offset + indexBinary;
+                return offset + i1;
             }
 
-            if (item == array[indexInterpolation])
+            if (item == array[i2])
             {
-                return offset + indexInterpolation;
+                return offset + i2;
             }
 
-            if (item < array[indexBinary])
+            if (item < array[i1])
             {
                 @from = 0;
-                to = indexBinary - 1;
+                to = i1 - 1;
             }
-            else if (item < array[indexInterpolation])
+            else if (item < array[i2])
             {
-                @from = indexBinary + 1;
-                to = indexInterpolation - 1;
+                @from = i1 + 1;
+                to = i2 - 1;
             }
             else
             {
-                @from = indexInterpolation + 1;
+                @from = i2 + 1;
                 to = array.Length - 1;
             }
 
