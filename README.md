@@ -24,6 +24,8 @@ This repository contains algorithms and data structures implemented in C# for ed
 		* [Greatest Common Divisor](./Algorithms/Numeric/GreatestCommonDivisor)
 			* [Euclidean GCD](./Algorithms/Numeric/GreatestCommonDivisor/EuclideanGreatestCommonDivisorFinder.cs)
 			* [Binary GCD](./Algorithms/Numeric/GreatestCommonDivisor/BinaryGreatestCommonDivisorFinder.cs)
+		* [Factorization](./Algorithms/Numeric/Factorization)
+		    * [Trial division](./Algorithms/Numeric/Factorization/TrialDivisionFactorizer.cs)
 		* [Gauss-Jordan Elimination](./Algorithms/Numeric/GaussJordanElimination.cs)
 	* [Searches](./Algorithms/Search/)
 		* [A-Star](./Algorithms/Search/AStar/)
