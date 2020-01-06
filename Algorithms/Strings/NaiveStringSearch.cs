@@ -6,9 +6,9 @@ namespace Algorithms.Strings
 {
    public static class NaiveStringSearch
    {
-	 		/// <summary>
-	 		/// Implements the traditional naive string matching algorithm in C#.
-	 		/// </summary>
+      /// <summary>
+      /// Implements the traditional naive string matching algorithm in C#.
+      /// </summary>
       public static int[] NaiveSearch(String content, String pattern)
       {
          /// <summary>
@@ -30,16 +30,12 @@ namespace Algorithms.Strings
                {
                   break;
                }
-
             }
-
             if (j == m)
             {
                indices.Add(e);
             }
-
          }
-
          return indices.ToArray();
       }
 
@@ -52,7 +48,5 @@ namespace Algorithms.Strings
          String pattern = "fox";
          NaiveSearch(content, pattern);
       }
-
    }
-
 }
