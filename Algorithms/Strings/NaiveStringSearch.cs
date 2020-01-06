@@ -22,12 +22,17 @@ namespace Algorithms.Strings
             for (j = 0; j < m; j++)
                 {
                   if (content[e + j] != pattern[j])
+                  {
                   break;
+                  }
                  }
 
             if (j == m)
+                {
                 indices.Add(e);
+                }
            }
+
            return indices.ToArray();
       }
 
@@ -38,5 +43,4 @@ namespace Algorithms.Strings
         NaiveSearch(content, pattern);
       }
     }
-
 }
