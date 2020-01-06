@@ -16,9 +16,9 @@ namespace Algorithms.Strings
 			/// <summary>
 			/// NaiveSearch(Content, Pattern) will return an array containing each index of Content in which Pattern appears.
 			/// Cost:  O(n*m)
+            /// </summary>
 			/// <param name="content">The text body across which to search for a given pattern</param>
 			/// <param name="pattern">The pattern against which to check the given text body.</param>
-			/// </summary>
 			int m = pattern.Length;
 			int n = content.Length;
 			List<int> indices = new List<int>();
