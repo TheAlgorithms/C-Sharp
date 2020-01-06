@@ -1,16 +1,14 @@
 using System;
 using System.Collections.Generic;
 
-/// <summary>
 /// Implements the traditional naive string matching algorithm in C# for TheAlgorithms/C-Sharp.
-/// </summary>
 namespace Algorithms.Strings
 {
-   /// <summary>
-   /// Implements the traditional naive string matching algorithm in C#.
-   /// </summary>
    public static class NaiveStringSearch
    {
+	 		/// <summary>
+	 		/// Implements the traditional naive string matching algorithm in C#.
+	 		/// </summary>
       public static int[] NaiveSearch(String content, String pattern)
       {
          /// <summary>
@@ -19,7 +17,7 @@ namespace Algorithms.Strings
          /// </summary>
          /// <param name="content">The text body across which to search for a given pattern</param>
          /// <param name="pattern">The pattern against which to check the given text body.</param>
-         /// <returns>Array containing each index of Content in which Pattern appears</returns> 
+         /// <returns>Array containing each index of Content in which Pattern appears</returns>
          int m = pattern.Length;
          int n = content.Length;
          List<int> indices = new List<int>();
@@ -32,15 +30,19 @@ namespace Algorithms.Strings
                {
                   break;
                }
+
             }
+
             if (j == m)
             {
                indices.Add(e);
             }
+
          }
-         
+
          return indices.ToArray();
       }
+
       public static void Main()
       {
          /// <summary>
@@ -50,5 +52,7 @@ namespace Algorithms.Strings
          String pattern = "fox";
          NaiveSearch(content, pattern);
       }
+
    }
+
 }
