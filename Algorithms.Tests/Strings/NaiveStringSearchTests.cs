@@ -1,5 +1,6 @@
 using Algorithms.Strings;
 using NUnit.Framework;
+using System.Linq;
 
 namespace Algorithms.Tests.Strings
 {
@@ -9,8 +10,8 @@ namespace Algorithms.Tests.Strings
       public static void ThreeMatchesFound_PassExpected()
       {
          // Arrange
-         var pattern = String("ABB");
-         var content = String("ABBBAAABBAABBBBAB");
+         var pattern = "ABB";
+         var content = "ABBBAAABBAABBBBAB";
 
          // Act
          var expectedOccurrences = new int[] {0, 6, 10};
@@ -25,8 +26,8 @@ namespace Algorithms.Tests.Strings
       public static void OneMatchFound_PassExpected()
       {
          // Arrange
-         var pattern = String("BAAB");
-         var content = String("ABBBAAABBAABBBBAB");
+         var pattern = "BAAB";
+         var content = "ABBBAAABBAABBBBAB";
 
          // Act
          var expectedOccurrences = new int[] {8};
@@ -41,12 +42,12 @@ namespace Algorithms.Tests.Strings
       public static void NoMatchFound_PassExpected()
       {
          // Arrange
-         var pattern = String("XYZ");
-         var content = String("ABBBAAABBAABBBBAB");
+         var pattern = "XYZ";
+         var content = "ABBBAAABBAABBBBAB";
 
          // Act
          var expectedOccurrences = new System.Int32[0];
-         var actualOccurrences = NaiveSearch(content, pattern);
+         var actualOccurrences = NaiveStringSearch.NaiveSearch(content, pattern);
          bool sequencesAreEqual = expectedOccurrences.SequenceEqual(actualOccurrences);
 
          // Assert
