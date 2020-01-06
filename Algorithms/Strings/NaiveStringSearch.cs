@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Algorithms.Strings
 {
@@ -8,10 +9,11 @@ namespace Algorithms.Strings
     /// </summary>
     public static class NaiveStringSearch
     {
-      public static void NaiveSearch(String content, String pattern)
+      public static int[] NaiveSearch(String content, String pattern)
       {
           int m = pattern.Length;
           int n = content.Length;
+          List<int> indices = new List<int>();
 
           for (int e = 0; e <= (n - m); e++)
           {
@@ -24,8 +26,9 @@ namespace Algorithms.Strings
                  }
 
             if (j == m)
-                Console.WriteLine("Pattern occurs in content at index " + e);
+                indices.Add(e);
            }
+           return indices.ToArray();
       }
 
       public static void Main()
