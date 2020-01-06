@@ -6,7 +6,7 @@ namespace Algorithms.Strings
     /// Implements the traditional naive string matching algorithm in C#.
     /// Cost:  O(n*m), where m is pattern length and n is content length.
     /// </summary>
-    class NaiveStringSearch
+    public static class NaiveStringSearch
     {
       public static void NaiveSearch(String content, String pattern)
       {
