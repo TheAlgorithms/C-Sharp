@@ -1,6 +1,9 @@
 # Visual Studio cache/options directory
 .vs/
 
+# Rider cache/options directory
+.idea/
+
 # Build results
 bin/
 obj/

@@ -1,7 +1,7 @@
 # The Algorithms - C#
-[![Build Status](https://travis-ci.com/TheAlgorithms/C-Sharp.svg?branch=master)](https://travis-ci.com/TheAlgorithms/C-Sharp)&nbsp;
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6f6c4c370fc04857914dd04b91c5d675)](https://www.codacy.com/app/siriak/C-Sharp?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TheAlgorithms/C-Sharp&amp;utm_campaign=Badge_Grade)&nbsp;
-[![codecov](https://codecov.io/gh/TheAlgorithms/C-Sharp/branch/master/graph/badge.svg)](https://codecov.io/gh/TheAlgorithms/C-Sharp)&nbsp;
+[![Build Status](https://travis-ci.com/TheAlgorithms/C-Sharp.svg?branch=master)](https://travis-ci.com/TheAlgorithms/C-Sharp)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6f6c4c370fc04857914dd04b91c5d675)](https://www.codacy.com/app/siriak/C-Sharp?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TheAlgorithms/C-Sharp&amp;utm_campaign=Badge_Grade)
+[![codecov](https://codecov.io/gh/TheAlgorithms/C-Sharp/branch/master/graph/badge.svg)](https://codecov.io/gh/TheAlgorithms/C-Sharp)
 [![GuardRails badge](https://badges.guardrails.io/TheAlgorithms/C-Sharp.svg?token=84805208ba243f0931a74c5148883f894cbe9fd97fe54d64d6d0a89852067548)](https://dashboard.guardrails.io/default/gh/TheAlgorithms/C-Sharp)
 
 This repository contains algorithms and data structures implemented in C# for eductional purposes.  
@@ -24,11 +24,14 @@ This repository contains algorithms and data structures implemented in C# for ed
 		* [Greatest Common Divisor](./Algorithms/Numeric/GreatestCommonDivisor)
 			* [Euclidean GCD](./Algorithms/Numeric/GreatestCommonDivisor/EuclideanGreatestCommonDivisorFinder.cs)
 			* [Binary GCD](./Algorithms/Numeric/GreatestCommonDivisor/BinaryGreatestCommonDivisorFinder.cs)
+		* [Factorization](./Algorithms/Numeric/Factorization)
+		    * [Trial division](./Algorithms/Numeric/Factorization/TrialDivisionFactorizer.cs)
 		* [Gauss-Jordan Elimination](./Algorithms/Numeric/GaussJordanElimination.cs)
 	* [Searches](./Algorithms/Search/)
 		* [A-Star](./Algorithms/Search/AStar/)
 		* [Binary](./Algorithms/Search/BinarySearcher.cs)
 		* [Linear](./Algorithms/Search/LinearSearcher.cs)
+		* [FastSearch](./Algorithms/Search/FastSearcher.cs)
 	* [Sorts](./Algorithms/Sorters/)
 		* [Comparison](./Algorithms/Sorters/Comparison)
 			* [Binary Insertion](./Algorithms/Sorters/Comparison/BinaryInsertionSorter.cs)
