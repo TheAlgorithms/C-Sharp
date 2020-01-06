@@ -14,7 +14,7 @@ namespace Algorithms.Tests.Strings
          var content = "ABBBAAABBAABBBBAB";
 
          // Act
-         var expectedOccurrences = new int[] {0, 6, 10};
+         var expectedOccurrences = new [] {0, 6, 10};
          var actualOccurrences = NaiveStringSearch.NaiveSearch(content, pattern);
          bool sequencesAreEqual = expectedOccurrences.SequenceEqual(actualOccurrences);
 
@@ -30,7 +30,7 @@ namespace Algorithms.Tests.Strings
          var content = "ABBBAAABBAABBBBAB";
 
          // Act
-         var expectedOccurrences = new int[] {8};
+         var expectedOccurrences = new [] {8};
          var actualOccurrences = NaiveStringSearch.NaiveSearch(content, pattern);
          bool sequencesAreEqual = expectedOccurrences.SequenceEqual(actualOccurrences);
 
