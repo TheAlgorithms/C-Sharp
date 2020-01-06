@@ -25,13 +25,13 @@ namespace Algorithms.Strings
                   {
                   break;
                   }
-                 }
+                }
 
             if (j == m)
                 {
                 indices.Add(e);
                 }
-           }
+          }
 
            return indices.ToArray();
       }
