@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-/// Implements the traditional naive string matching algorithm in C# for TheAlgorithms/C-Sharp.
+// Implements the traditional naive string matching algorithm in C# for TheAlgorithms/C-Sharp.
 namespace Algorithms.Strings
 {
    /// <summary>
@@ -11,12 +11,12 @@ namespace Algorithms.Strings
    {
       /// <summary>
       /// NaiveSearch(Content, Pattern) will return an array containing each index of Content in which Pattern appears.
-      /// Cost:  O(n*m)
+      /// Cost:  O(n*m).
       /// </summary>
-      /// <param name="content">The text body across which to search for a given pattern</param>
+      /// <param name="content">The text body across which to search for a given pattern.</param>
       /// <param name="pattern">The pattern against which to check the given text body.</param>
-      /// <returns>Array containing each index of Content in which Pattern appears</returns>
-      public static int[] NaiveSearch(String content, String pattern)
+      /// <returns>Array containing each index of Content in which Pattern appears.</returns>
+      public static int[] NaiveSearch(string content, string pattern)
       {
          int m = pattern.Length;
          int n = content.Length;
@@ -46,8 +46,8 @@ namespace Algorithms.Strings
       /// </summary>
       public static void Main()
       {
-         String content = "The foxy cheetah hunted a brown fox";
-         String pattern = "fox";
+         string content = "The foxy cheetah hunted a brown fox";
+         string pattern = "fox";
          NaiveSearch(content, pattern);
       }
    }
