@@ -40,15 +40,5 @@ namespace Algorithms.Strings
 
          return indices.ToArray();
       }
-
-      /// <summary>
-      /// Main() demonstrates the Naive string search against a sample content body and pattern.
-      /// </summary>
-      public static void Main()
-      {
-         string content = "The foxy cheetah hunted a brown fox";
-         string pattern = "fox";
-         NaiveSearch(content, pattern);
-      }
    }
 }
