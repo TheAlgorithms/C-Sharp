@@ -58,6 +58,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 		* [A000045 Fibonacci](./Algorithms/Sequences/FibonacciSequence.cs)
 	* [String](./Algorithms/Strings/)
 		* [Longest Consecutive Character](./Algorithms/Strings/GeneralStringAlgorithms.cs)
+		* [Naive String Search](./Algorithms/Strings/NaiveStringSearch.cs)
 		* [Palindrome Checker](./Algorithms/Strings/palindrome.cs)
 	* [Other](./Algorithms/Other/)
 		* [Fermat Prime Checker](./Algorithms/Other/FermatPrimeChecker.cs)
