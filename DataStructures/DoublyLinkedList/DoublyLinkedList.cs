@@ -219,7 +219,7 @@ namespace DataStructures.DoublyLinkedList
             {
                 if (current is null)
                 {
-                    throw new NullReferenceException("current");
+                    throw new ArgumentNullException("current");
                 }
 
                 current = current.Next;
