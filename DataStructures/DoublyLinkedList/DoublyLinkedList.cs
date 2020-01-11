@@ -217,11 +217,6 @@ namespace DataStructures.DoublyLinkedList
             var current = Head;
             for (var i = 0; i < position; i++)
             {
-                if (current is null)
-                {
-                    throw new ArgumentNullException("current");
-                }
-
                 current = current.Next;
             }
 

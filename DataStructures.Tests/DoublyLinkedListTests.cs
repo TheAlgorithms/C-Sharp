@@ -109,12 +109,12 @@ namespace DataStructures.Tests {
 
         [Test]
         public static void TestGetDataReversed() {
-            var dll = new DoublyLinkedList<int>(new int[] { 0, 1, 2, 3, 4 });
+            var dll = new DoublyLinkedList<int>(new [] { 0, 1, 2, 3, 4 });
             var arr = dll.GetData().ToArray();
             var reversedArr = dll.GetDataReversed().ToArray();
 
             Assert.AreEqual(arr, new [] {0, 1, 2, 3, 4});
-            Assert.AreEqual(reversedArr, new int[] {4, 3, 2, 1, 0});
+            Assert.AreEqual(reversedArr, new [] {4, 3, 2, 1, 0});
         }
     }
 }
