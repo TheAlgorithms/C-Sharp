@@ -172,7 +172,12 @@ namespace DataStructures.DoublyLinkedList
             }
 
             Tail = Head;
-            Head = temp;
+
+            // temp can be null on empty list
+            if (temp != null)
+            {
+                Head = temp.Previous;
+            }
         }
 
         /// <summary>
