@@ -3,7 +3,8 @@ using System.Linq;
 using DataStructures.DoublyLinkedList;
 using NUnit.Framework;
 
-namespace DataStructures.Tests {
+namespace DataStructures.Tests
+{
     public static class DoublyLinkedListTests {
         [Test]
         public static void TestGetData() {
