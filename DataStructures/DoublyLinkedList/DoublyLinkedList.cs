@@ -19,11 +19,6 @@ namespace DataStructures.DoublyLinkedList
         /// <param name="data"> Data of the original head of the list.</param>
         public DoublyLinkedList(T data)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException("data");
-            }
-
             Head = new DoublyLinkedListNode<T>(data);
             Tail = Head;
             Count = 1;
