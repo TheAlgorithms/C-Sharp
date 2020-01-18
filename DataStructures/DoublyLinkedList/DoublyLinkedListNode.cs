@@ -25,11 +25,11 @@ namespace DataStructures.DoublyLinkedList
         /// <summary>
         /// Gets or sets the reference to the next node in the Doubly Linked List.
         /// </summary>
-        public DoublyLinkedListNode<T> Next { get; set; }
+        public DoublyLinkedListNode<T>? Next { get; set; }
 
         /// <summary>
         /// Gets or sets the reference to the previous node in the Doubly Linked List.
         /// </summary>
-        public DoublyLinkedListNode<T> Previous { get; set; }
+        public DoublyLinkedListNode<T>? Previous { get; set; }
     }
 }

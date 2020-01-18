@@ -139,12 +139,12 @@ namespace Algorithms.DataCompression
             /// <summary>
             /// Gets or sets tODO. TODO.
             /// </summary>
-            public ListNode RightChild { get; set; }
+            public ListNode? RightChild { get; set; }
 
             /// <summary>
             /// Gets or sets tODO. TODO.
             /// </summary>
-            public ListNode LeftChild { get; set; }
+            public ListNode? LeftChild { get; set; }
         }
     }
 }

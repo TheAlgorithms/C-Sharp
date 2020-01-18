@@ -10,7 +10,7 @@ namespace DataStructures.SinglyLinkedList
     public class SinglyLinkedList<T>
     {
         // points to the start of the list
-        private SinglyLinkedListNode<T> Head { get; set; }
+        private SinglyLinkedListNode<T>? Head { get; set; }
 
         /// <summary>
         /// Adds new node to the start of the list,
@@ -96,17 +96,16 @@ namespace DataStructures.SinglyLinkedList
         /// <returns>TODO. 2.</returns>
         public int Length()
         {
-            var length = 0;
-
             // checks if there is a head
-            if (Head == null)
+            if (Head is null)
             {
-                return length;
+                return 0;
             }
 
             var tempElement = Head;
+            var length = 1;
 
-            while (tempElement != null)
+            while (tempElement.Next != null)
             {
                 tempElement = tempElement.Next;
                 length++;
@@ -122,7 +121,7 @@ namespace DataStructures.SinglyLinkedList
         public IEnumerable<T> GetListData()
         {
             // temp ListElement to avoid overwriting the original
-            var tempElement = Head;
+            SinglyLinkedListNode<T>? tempElement = Head;
 
             // all elements where a next attribute exists
             while (tempElement != null)
@@ -140,13 +139,13 @@ namespace DataStructures.SinglyLinkedList
         public bool DeleteElement(T element)
         {
             var currentElement = Head;
-            SinglyLinkedListNode<T> previousElement = null;
+            SinglyLinkedListNode<T>? previousElement = null;
 
             // iterates through all elements
             while (currentElement != null)
             {
                 // checks if the element, which should get deleted is in this list element
-                if (currentElement.Data.Equals(element))
+                if ((currentElement.Data is null && element is null) || (currentElement.Data != null && currentElement.Data.Equals(element)))
                 {
                     // if element is head just take the next one as head
                     if (currentElement.Equals(Head))

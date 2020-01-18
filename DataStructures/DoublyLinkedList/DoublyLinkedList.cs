@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Utilities.Exceptions;
 
 namespace DataStructures.DoublyLinkedList
 {
@@ -44,12 +45,12 @@ namespace DataStructures.DoublyLinkedList
         /// <summary>
         /// Gets or sets the first node of the list.
         /// </summary>
-        private DoublyLinkedListNode<T> Head { get; set; }
+        private DoublyLinkedListNode<T>? Head { get; set; }
 
         /// <summary>
         /// Gets or sets the last node of the list.
         /// </summary>
-        private DoublyLinkedListNode<T> Tail { get; set; }
+        private DoublyLinkedListNode<T>? Tail { get; set; }
 
         /// <summary>
         /// Replaces the Head of the list with the new value.
@@ -88,7 +89,7 @@ namespace DataStructures.DoublyLinkedList
             }
 
             var node = new DoublyLinkedListNode<T>(data);
-            Tail.Next = node;
+            Tail!.Next = node;
             node.Previous = Tail;
             Tail = node;
             Count++;
@@ -155,8 +156,8 @@ namespace DataStructures.DoublyLinkedList
         /// </summary>
         public void Reverse()
         {
-            DoublyLinkedListNode<T> current = Head;
-            DoublyLinkedListNode<T> temp = null;
+            DoublyLinkedListNode<T>? current = Head;
+            DoublyLinkedListNode<T>? temp = null;
 
             while (current != null)
             {
@@ -185,7 +186,7 @@ namespace DataStructures.DoublyLinkedList
             var current = Head;
             while (current != null)
             {
-                if (current.Data.Equals(data))
+                if ((current.Data is null && data is null) || (current.Data != null && current.Data.Equals(data)))
                 {
                     return current;
                 }
@@ -193,7 +194,7 @@ namespace DataStructures.DoublyLinkedList
                 current = current.Next;
             }
 
-            return null;
+            throw new ItemNotFoundException();
         }
 
         /// <summary>
@@ -212,85 +213,92 @@ namespace DataStructures.DoublyLinkedList
             var current = Head;
             for (var i = 0; i < position; i++)
             {
-                current = current.Next;
+                current = current!.Next;
             }
 
-            return current;
+            return current ?? throw new ArgumentOutOfRangeException($"{nameof(position)} must be an index in the list");
         }
 
         /// <summary>
         /// Removes the Head and replaces it with the second node in the list.
         /// </summary>
-        /// <returns>True if the node was able to be removed. False if it wasn't.</returns>
-        public bool RemoveHead()
+        public void RemoveHead()
         {
             if (Head is null)
             {
-                return false;
+                throw new InvalidOperationException();
             }
 
             Head = Head.Next;
-            Head.Previous = null;
-            Count--;
-
             if (Head is null)
             {
                 Tail = null;
                 Count = 0;
+                return;
             }
 
-            return true;
+            Head.Previous = null;
+            Count--;
         }
 
         /// <summary>
         /// Removes the last node in the list.
         /// </summary>
-        /// <returns>True if the node was able to be removed. False if it wasn't.</returns>
-        public bool Remove()
+        public void Remove()
         {
             if (Tail is null)
             {
-                return false;
+                throw new InvalidOperationException("Cannot prune empty list");
             }
 
             Tail = Tail.Previous;
+            if (Tail is null)
+            {
+                Head = null;
+                Count = 0;
+                return;
+            }
+
             Tail.Next = null;
             Count--;
-            return true;
         }
 
         /// <summary>
-        /// Removes an especific node.
+        /// Removes specific node.
         /// </summary>
         /// <param name="node"> Node to be removed.</param>
-        /// <returns>True if the node was able to be removed. False if it wasn't.</returns>
-        public bool RemoveNode(DoublyLinkedListNode<T> node)
+        public void RemoveNode(DoublyLinkedListNode<T> node)
         {
             if (node == Head)
             {
-                return RemoveHead();
+                RemoveHead();
+                return;
             }
 
             if (node == Tail)
             {
-                return Remove();
+                Remove();
+                return;
+            }
+
+            if (node.Previous is null || node.Next is null)
+            {
+                throw new ArgumentException($"{nameof(node)} cannot have Previous or Next null if it's an internal node");
             }
 
             node.Previous.Next = node.Next;
             node.Next.Previous = node.Previous;
             Count--;
-            return true;
         }
 
         /// <summary>
         /// Removes a node that contains the data from the parameter.
         /// </summary>
         /// <param name="data"> Data to be removed form the list.</param>
-        /// <returns>True if the node was able to be removed. False if it wasn't.</returns>
-        public bool Remove(T data)
+        public void Remove(T data)
         {
             var node = Find(data);
-            return RemoveNode(node);
+            RemoveNode(node);
         }
 
         /// <summary>
@@ -304,7 +312,7 @@ namespace DataStructures.DoublyLinkedList
             var index = 0;
             while (current != null)
             {
-                if (current.Data.Equals(data))
+                if ((current.Data is null && data is null) || (current.Data != null && current.Data.Equals(data)))
                 {
                     return index;
                 }

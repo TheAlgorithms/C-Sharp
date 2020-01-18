@@ -2,7 +2,7 @@ language: csharp
 solution: C-Sharp.sln
 mono: none
 dist: xenial
-dotnet: 2.2
+dotnet: 3.1
 script:
  - dotnet build
  - travis_wait 60 dotnet test --collect:"XPlat Code Coverage"
