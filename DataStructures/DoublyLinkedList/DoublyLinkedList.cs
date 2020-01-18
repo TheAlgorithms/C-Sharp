@@ -216,7 +216,7 @@ namespace DataStructures.DoublyLinkedList
                 current = current!.Next;
             }
 
-            return current ?? throw new ArgumentOutOfRangeException();
+            return current ?? throw new ArgumentOutOfRangeException($"{nameof(position)} must be an index in the list");
         }
 
         /// <summary>
@@ -248,7 +248,7 @@ namespace DataStructures.DoublyLinkedList
         {
             if (Tail is null)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Cannot prune empty list");
             }
 
             Tail = Tail.Previous;
@@ -283,7 +283,7 @@ namespace DataStructures.DoublyLinkedList
 
             if (node.Previous is null || node.Next is null)
             {
-                throw new ArgumentException();
+                throw new ArgumentException($"{nameof(node)} cannot have Previous or Next null if it's an internal node");
             }
 
             node.Previous.Next = node.Next;
