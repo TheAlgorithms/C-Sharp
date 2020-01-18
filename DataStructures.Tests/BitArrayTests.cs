@@ -379,22 +379,6 @@ namespace DataStructures.Tests
             Assert.False(testObj1 == testObj2);
         }
 
-        [Test]
-        public static void TestCompareTo()
-        {
-            // Arrange
-            var testObj1 = new BitArray("110");
-            var testObj2 = new BitArray("110");
-            var testObj3 = new BitArray("100");
-
-            // Act
-
-            // Assert
-            Assert.AreEqual(testObj1.CompareTo(testObj3), 1);
-            Assert.AreEqual(testObj3.CompareTo(testObj1), -1);
-            Assert.AreEqual(testObj1.CompareTo(testObj2), 0);
-        }
-
         #endregion COMPARE TESTS
 
         [Test]

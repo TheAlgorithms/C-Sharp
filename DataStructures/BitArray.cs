@@ -126,7 +126,7 @@ namespace DataStructures
     /// useful functions/operations to deal with this type of
     /// data structure.
     /// </summary>
-    public class BitArray : IComparable, ICloneable, IEnumerator<bool>, IEnumerable<bool>
+    public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
     {
         private readonly bool[] field; // the actual bit-field
         private int position = -1; // position for enumerator
@@ -562,32 +562,6 @@ namespace DataStructures
             }
 
             return theClone;
-        }
-
-        /// <summary>
-        /// Compares if given bit-array is equal, greater or smaller than current.
-        /// * CompareTo (interfaces IComparable)
-        /// assumes: bit-array lentgh must been smaller or equal to 64 bit.
-        /// </summary>
-        /// <param name="other">Bit-array object.</param>
-        /// <returns>0 - if the bit-array a equal; -1 - if this bit-array is smaller; 1 - if this bit-array is greater. .</returns>
-        public int CompareTo(object other)
-        {
-            var status = 0;
-            var valueThis = ToInt64();
-            var otherBitArray = (BitArray)other;
-            var valueOther = otherBitArray.ToInt64();
-
-            if (valueThis > valueOther)
-            {
-                status = 1;
-            }
-            else if (valueOther > valueThis)
-            {
-                status = -1;
-            }
-
-            return status;
         }
 
         /// <summary>
