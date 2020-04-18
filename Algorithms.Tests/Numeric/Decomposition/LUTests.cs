@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Algorithms.Numeric.Decomposition;
 using NUnit.Framework;
 
@@ -6,6 +7,8 @@ namespace Algorithms.Tests.Numeric.Decomposition
 {
     public class LUTests
     {
+        private readonly double epsilon = Math.Pow(10, -6);
+        
         [Test]
         public void DecomposeIdentityMatrix()
         {
@@ -93,7 +96,7 @@ namespace Algorithms.Tests.Numeric.Decomposition
             var solution = LU.Eliminate(source, coefficients);
             
             // Assert
-            Assert.AreEqual(expectedSolution, solution);
+            Assert.IsTrue(VectorMembersAreEqual(expectedSolution, solution));
         }
         
         [Test]
@@ -102,13 +105,13 @@ namespace Algorithms.Tests.Numeric.Decomposition
             // Arrange
             var source = new double[,] {{1.0, 2.0, -3.0, -1.0}, {0.0, -3.0, 2.0, 6.0}, {0.0, 5.0, -6.0, -2.0}, {0.0, -1.0, 8.0, 1.0}};
             var coefficients = new double[] {0.0, -8.0, 0.0, -8.0};
-            var expectedSolution = new double[] {-1.0000000000000004, -2.0000000000000018, -1.0000000000000011, -2.0000000000000004};
+            var expectedSolution = new double[] {-1.0, -2.0, -1.0, -2.0};
 
             // Act
             var solution = LU.Eliminate(source, coefficients);
             
             // Assert
-            Assert.AreEqual(expectedSolution, solution);
+            Assert.IsTrue(VectorMembersAreEqual(expectedSolution, solution));
         }
         
         [Test]
@@ -124,5 +127,10 @@ namespace Algorithms.Tests.Numeric.Decomposition
             // Assert
             Assert.Throws<ArgumentException>(() => Act(nonSquareMatrix, coefficients));
         }
+
+        private bool VectorMembersAreEqual(double[] expected, double[] actual) =>
+            expected
+            .Zip(actual, (e, a) => new {Expected = e, Actual = a})
+            .All(pair => Math.Abs(pair.Expected - pair.Actual) < epsilon);
     }
 }
