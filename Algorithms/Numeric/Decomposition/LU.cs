@@ -24,8 +24,8 @@ namespace Algorithms.Numeric.Decomposition
             }
 
             var pivot = source.GetLength(0);
-            var lower = new double[pivot, source.GetLength(1)];
-            var upper = new double[pivot, source.GetLength(1)];
+            var lower = new double[pivot, pivot];
+            var upper = new double[pivot, pivot];
 
             for (var i = 0; i < pivot; i++)
             {
@@ -72,7 +72,7 @@ namespace Algorithms.Numeric.Decomposition
         /// <param name="coefficients">Vector of absolute terms of equations.</param>
         /// <returns>Vector-solution for linear equations system.</returns>
         /// <exception cref="ArgumentException">Matrix of equation coefficients is not square shaped.</exception>
-        public static double[,] Eliminate(double[,] matrix, double[,] coefficients)
+        public static double[] Eliminate(double[,] matrix, double[] coefficients)
         {
             if (matrix.GetLength(0) != matrix.GetLength(1))
             {
@@ -81,7 +81,7 @@ namespace Algorithms.Numeric.Decomposition
 
             var pivot = matrix.GetLength(0);
             var upperTransform = new double[pivot, 1]; // U * upperTransform = coefficients
-            var solution = new double[pivot, 1]; // L * solution = upperTransform
+            var solution = new double[pivot]; // L * solution = upperTransform
             (double[,] l, double[,] u) = LU.Decompose(matrix);
 
             for (var i = 0; i < pivot; i++)
@@ -93,19 +93,19 @@ namespace Algorithms.Numeric.Decomposition
                     pivotPointSum += upperTransform[j, 0] * l[i, j];
                 }
 
-                upperTransform[i, 0] = (coefficients[i, 0] - pivotPointSum) / l[i, i];
+                upperTransform[i, 0] = (coefficients[i] - pivotPointSum) / l[i, i];
             }
 
             for (var i = pivot - 1; i >= 0; i--)
             {
-                double constantSum = 0;
+                double pivotPointSum = 0;
 
                 for (var j = i; j < pivot; j++)
                 {
-                    constantSum += solution[j, 0] * u[i, j];
+                    pivotPointSum += solution[j] * u[i, j];
                 }
 
-                solution[i, 0] = (upperTransform[i, 0] - constantSum) / u[i, i];
+                solution[i] = (upperTransform[i, 0] - pivotPointSum) / u[i, i];
             }
 
             return solution;
