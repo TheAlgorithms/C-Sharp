@@ -61,10 +61,10 @@ namespace Algorithms.Tests.Numeric.Decomposition
             var nonSquareMatrix = new double[,] {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}, {0, 0, 0}};
 
             // Act
-            void Act() => LU.Decompose(nonSquareMatrix ?? new double[,] {});
+            void Act(double[,] source) => LU.Decompose(source);
 
             // Assert
-            Assert.Throws<ArgumentException>(Act);
+            Assert.Throws<ArgumentException>(() => Act(nonSquareMatrix));
         }
         
         [Test]
@@ -72,26 +72,25 @@ namespace Algorithms.Tests.Numeric.Decomposition
         {
             // Arrange
             var identityMatrix = new double[,] {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
-            var coefficients = new double[,] {{1}, {2}, {3}};
-            var expectedSolution = new double[,] {{1}, {2}, {3}};
+            var coefficients = new double[] {1, 2, 3};
 
             // Act
             var solution = LU.Eliminate(identityMatrix, coefficients);
             
             // Assert
-            Assert.AreEqual(expectedSolution, solution);
+            Assert.AreEqual(coefficients, solution);
         }
         
         [Test]
         public void EliminateEquation_Case3X3()
         {
             // Arrange
-            var identityMatrix = new double[,] {{2, 1, -1}, {-3, -1, 2}, {-2, 1, 2}};
-            var coefficients = new double[,] {{8}, {-11}, {-3}};
-            var expectedSolution = new double[,] {{2}, {3}, {-1}};
+            var source = new double[,] {{2, 1, -1}, {-3, -1, 2}, {-2, 1, 2}};
+            var coefficients = new double[] {8, -11, -3};
+            var expectedSolution = new double[] {2, 3, -1};
 
             // Act
-            var solution = LU.Eliminate(identityMatrix, coefficients);
+            var solution = LU.Eliminate(source, coefficients);
             
             // Assert
             Assert.AreEqual(expectedSolution, solution);
@@ -101,12 +100,12 @@ namespace Algorithms.Tests.Numeric.Decomposition
         public void EliminateEquation_Case4X4()
         {
             // Arrange
-            var identityMatrix = new double[,] {{1.0, 2.0, -3.0, -1.0}, {0.0, -3.0, 2.0, 6.0}, {0.0, 5.0, -6.0, -2.0}, {0.0, -1.0, 8.0, 1.0}};
-            var coefficients = new double[,] {{0.0}, {-8.0}, {0.0}, {-8.0}};
-            var expectedSolution = new double[,] {{-1.0000000000000004}, {-2.0000000000000018}, {-1.0000000000000011}, {-2.0000000000000004}};
+            var source = new double[,] {{1.0, 2.0, -3.0, -1.0}, {0.0, -3.0, 2.0, 6.0}, {0.0, 5.0, -6.0, -2.0}, {0.0, -1.0, 8.0, 1.0}};
+            var coefficients = new double[] {0.0, -8.0, 0.0, -8.0};
+            var expectedSolution = new double[] {-1.0000000000000004, -2.0000000000000018, -1.0000000000000011, -2.0000000000000004};
 
             // Act
-            var solution = LU.Eliminate(identityMatrix, coefficients);
+            var solution = LU.Eliminate(source, coefficients);
             
             // Assert
             Assert.AreEqual(expectedSolution, solution);
@@ -117,13 +116,13 @@ namespace Algorithms.Tests.Numeric.Decomposition
         {
             // Arrange
             var nonSquareMatrix = new double[,] {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}, {0, 0, 0}};
-            var coefficients = new double[,] {{1}, {2}, {3}, {4}};
+            var coefficients = new double[] {1, 2, 3, 4};
 
             // Act
-            void Act() => LU.Eliminate(nonSquareMatrix ?? new double[,] {}, coefficients ?? new double[,] {});
+            void Act(double[,] source, double[] c) => LU.Eliminate(source, c);
 
             // Assert
-            Assert.Throws<ArgumentException>(Act);
+            Assert.Throws<ArgumentException>(() => Act(nonSquareMatrix, coefficients));
         }
     }
 }
