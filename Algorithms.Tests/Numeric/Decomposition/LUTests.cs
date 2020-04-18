@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Algorithms.Numeric.Decomposition;
+using Utilities.Extensions;
 using NUnit.Framework;
 
 namespace Algorithms.Tests.Numeric.Decomposition
@@ -23,6 +24,7 @@ namespace Algorithms.Tests.Numeric.Decomposition
             // Assert
             Assert.AreEqual(expectedLower, lower);
             Assert.AreEqual(expectedUpper, upper);
+            Assert.AreEqual(lower.Multiply(upper), identityMatrix);
         }
         
         [Test]
@@ -39,6 +41,7 @@ namespace Algorithms.Tests.Numeric.Decomposition
             // Assert
             Assert.AreEqual(expectedLower, lower);
             Assert.AreEqual(expectedUpper, upper);
+            Assert.AreEqual(lower.Multiply(upper), source);
         }
         
         [Test]
@@ -55,6 +58,7 @@ namespace Algorithms.Tests.Numeric.Decomposition
             // Assert
             Assert.AreEqual(expectedLower, lower);
             Assert.AreEqual(expectedUpper, upper);
+            Assert.AreEqual(lower.Multiply(upper), source);
         }
 
         [Test]
