@@ -6,20 +6,20 @@ using NUnit.Framework;
 
 namespace DataStructures.Tests
 {
-    [TestFixture()]
+    [TestFixture]
     public static class MinMaxHeapTests
     {
         private static readonly object[] collectionsSource = new object[] {
-            new int[] { 5, 10, -2, 0, 3, 13, 5, -8, 41, -5, -7, -60, -12 },
-            new char[] {'e', '4', 'x', 'D', '!', '$', '-', '_', '2', ')', 'Z', 'q'},
-            new string[] { "abc", "abc", "xyz", "bcd", "klm", "opq", "ijk" }
+            new [] { 5, 10, -2, 0, 3, 13, 5, -8, 41, -5, -7, -60, -12 },
+            new [] {'e', '4', 'x', 'D', '!', '$', '-', '_', '2', ')', 'Z', 'q'},
+            new [] { "abc", "abc", "xyz", "bcd", "klm", "opq", "ijk" }
         };
 
 
-        [Test()]
+        [Test]
         public static void CustomComparerTest()
         {
-            var arr = new string[] { "aaaa", "c", "dd", "bbb" };
+            var arr = new [] { "aaaa", "c", "dd", "bbb" };
             var comparer = Comparer<string>.Create((a, b) => Comparer<int>.Default.Compare(a.Length, b.Length));
 
             var mmh = new MinMaxHeap<string>(comparer);
@@ -33,7 +33,7 @@ namespace DataStructures.Tests
             Assert.AreEqual("aaaa", mmh.GetMax());
         }
 
-        [Test()]
+        [Test]
         [TestCaseSource("collectionsSource")]
         public static void AddTest<T>(IEnumerable<T> collection)
         {
@@ -50,7 +50,7 @@ namespace DataStructures.Tests
             Assert.AreEqual(collection.Count(), mmh.Count);
         }
 
-        [Test()]
+        [Test]
         [TestCaseSource("collectionsSource")]
         public static void RemoveMaxTest<T>(IEnumerable<T> collection)
         {
@@ -72,7 +72,7 @@ namespace DataStructures.Tests
             Assert.AreEqual(collection.Count() - 1, mmh.Count);
         }
 
-        [Test()]
+        [Test]
         [TestCaseSource("collectionsSource")]
         public static void RemoveMinTest<T>(IEnumerable<T> collection)
         {
@@ -95,7 +95,7 @@ namespace DataStructures.Tests
             Assert.AreEqual(collection.Count() - 1, mmh.Count);
         }
 
-        [Test()]
+        [Test]
         [TestCaseSource("collectionsSource")]
         public static void ExtractMaxTest<T>(IEnumerable<T> collection)
         {
@@ -112,7 +112,7 @@ namespace DataStructures.Tests
             Assert.AreEqual(collection.Count() - 1, mmh.Count);
         }
 
-        [Test()]
+        [Test]
         [TestCaseSource("collectionsSource")]
         public static void ExtractMinTest<T>(IEnumerable<T> collection)
         {
@@ -130,7 +130,7 @@ namespace DataStructures.Tests
         }
 
 
-        [Test()]
+        [Test]
         [TestCaseSource("collectionsSource")]
         public static void GetMaxTest<T>(IEnumerable<T> collection)
         {
@@ -143,7 +143,7 @@ namespace DataStructures.Tests
             Assert.AreEqual(collection.Max(), maxValue);
         }
 
-        [Test()]
+        [Test]
         [TestCaseSource("collectionsSource")]
         public static void GetMinTest<T>(IEnumerable<T> collection)
         {
@@ -156,7 +156,7 @@ namespace DataStructures.Tests
             Assert.AreEqual(collection.Min(), minValue);
         }
 
-        [Test()]
+        [Test]
         public static void HeapSortUsingGetAndRemove<T>([ValueSource("collectionsSource")]IEnumerable<T> collection, [Values]bool ascending)
         {
             var ordered = ascending ? collection.OrderBy(x => x) : collection.OrderByDescending(x => x);
@@ -182,7 +182,7 @@ namespace DataStructures.Tests
             Assert.IsTrue(ordered.SequenceEqual(extracted));
         }
 
-        [Test()]
+        [Test]
         public static void HeapSortUsingExtract<T>([ValueSource("collectionsSource")]IEnumerable<T> collection, [Values]bool ascending)
         {
             var ordered = ascending ? collection.OrderBy(x => x) : collection.OrderByDescending(x => x);

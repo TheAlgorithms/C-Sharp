@@ -180,7 +180,7 @@ namespace DataStructures
         /// <returns>Index of the maximum or minimum descendant.</returns>
         private int ExtremumChildOrGrandchild(int index, bool minimum)
         {
-            var descendants = new int[] { 2 * index + 1, 2 * index + 2, 4 * index + 3, 4 * index + 4, 4 * index + 5, 4 * index + 6 };
+            var descendants = new[] { 2 * index + 1, 2 * index + 2, 4 * index + 3, 4 * index + 4, 4 * index + 5, 4 * index + 6 };
             int resIndex = descendants[0];
             foreach (int descendant in descendants)
             {
@@ -274,9 +274,12 @@ namespace DataStructures
                     PushDownMax(maxIndex);
                 }
             }
-            else if (Comparer.Compare(Heap[maxIndex], Heap[index]) > 0)
+            else
             {
-                SwapNodes(maxIndex, index);
+                if (Comparer.Compare(Heap[maxIndex], Heap[index]) > 0)
+                {
+                    SwapNodes(maxIndex, index);
+                }
             }
         }
 
@@ -304,9 +307,12 @@ namespace DataStructures
                     PushDownMin(minIndex);
                 }
             }
-            else if (Comparer.Compare(Heap[minIndex], Heap[index]) < 0)
+            else
             {
-                SwapNodes(minIndex, index);
+                if (Comparer.Compare(Heap[minIndex], Heap[index]) < 0)
+                {
+                    SwapNodes(minIndex, index);
+                }
             }
         }
 
