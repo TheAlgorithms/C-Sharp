@@ -13,6 +13,8 @@ namespace DataStructures
     /// <typeparam name="T">Generic type.</typeparam>
     public class MinMaxHeap<T>
     {
+        private readonly List<T> heap = new List<T>();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MinMaxHeap{T}"/> class that contains
         /// elements copied from a specified enumerable collection and that uses a specified comparer.
@@ -24,7 +26,7 @@ namespace DataStructures
             Comparer = comparer ?? Comparer<T>.Default;
             collection ??= Enumerable.Empty<T>();
 
-            Heap = collection.ToList();
+            heap = collection.ToList();
             for (int i = Count / 2 - 1; i >= 0; --i)
             {
                 PushDown(i);
@@ -34,14 +36,12 @@ namespace DataStructures
         /// <summary>
         /// Gets the  <see cref="IComparer{T}"/>. object that is used to order the values in the <see cref="MinMaxHeap{T}"/>.
         /// </summary>
-        public IComparer<T> Comparer { get; private set; }
+        public IComparer<T> Comparer { get; }
 
         /// <summary>
         /// Gets the number of elements in the <see cref="MinMaxHeap{T}"/>.
         /// </summary>
-        public int Count => Heap.Count;
-
-        private List<T> Heap { get; set; } = new List<T>();
+        public int Count => heap.Count;
 
         /// <summary>
         /// Adds an element to the heap.
@@ -49,7 +49,7 @@ namespace DataStructures
         /// <param name="item">The element to add to the heap.</param>
         public void Add(T item)
         {
-            Heap.Add(item);
+            heap.Add(item);
             PushUp(Count - 1);
         }
 
@@ -129,7 +129,7 @@ namespace DataStructures
                 throw new InvalidOperationException("Heap is empty");
             }
 
-            return Heap[GetMaxNodeIndex()];
+            return heap[GetMaxNodeIndex()];
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace DataStructures
                 throw new InvalidOperationException("Heap is empty");
             }
 
-            return Heap[0];
+            return heap[0];
         }
 
         /// <summary>
@@ -164,8 +164,8 @@ namespace DataStructures
                     break;
                 }
 
-                if ((minimum && Comparer.Compare(Heap[descendant], Heap[resIndex]) < 0) ||
-                    (!minimum && Comparer.Compare(Heap[descendant], Heap[resIndex]) > 0))
+                if ((minimum && Comparer.Compare(heap[descendant], heap[resIndex]) < 0) ||
+                    (!minimum && Comparer.Compare(heap[descendant], heap[resIndex]) > 0))
                 {
                     resIndex = descendant;
                 }
@@ -181,7 +181,7 @@ namespace DataStructures
                 0 => throw new InvalidOperationException("Heap is empty"),
                 1 => 0,
                 2 => 1,
-                _ => Comparer.Compare(Heap[1], Heap[2]) > 0 ? 1 : 2
+                _ => Comparer.Compare(heap[1], heap[2]) > 0 ? 1 : 2
             };
         }
 
@@ -238,10 +238,10 @@ namespace DataStructures
             // If smaller element are put at max level, PushDownMax() should be called for that node.
             if (IsGrandchild(index, maxIndex))
             {
-                if (Comparer.Compare(Heap[maxIndex], Heap[index]) > 0)
+                if (Comparer.Compare(heap[maxIndex], heap[index]) > 0)
                 {
                     SwapNodes(maxIndex, index);
-                    if (Comparer.Compare(Heap[maxIndex], Heap[Parent(maxIndex)]) < 0)
+                    if (Comparer.Compare(heap[maxIndex], heap[Parent(maxIndex)]) < 0)
                     {
                         SwapNodes(maxIndex, Parent(maxIndex));
                     }
@@ -251,7 +251,7 @@ namespace DataStructures
             }
             else
             {
-                if (Comparer.Compare(Heap[maxIndex], Heap[index]) > 0)
+                if (Comparer.Compare(heap[maxIndex], heap[index]) > 0)
                 {
                     SwapNodes(maxIndex, index);
                 }
@@ -271,10 +271,10 @@ namespace DataStructures
             // If bigger element are put at min level, PushDownMin() should be called for that node.
             if (IsGrandchild(index, minIndex))
             {
-                if (Comparer.Compare(Heap[minIndex], Heap[index]) < 0)
+                if (Comparer.Compare(heap[minIndex], heap[index]) < 0)
                 {
                     SwapNodes(minIndex, index);
-                    if (Comparer.Compare(Heap[minIndex], Heap[Parent(minIndex)]) > 0)
+                    if (Comparer.Compare(heap[minIndex], heap[Parent(minIndex)]) > 0)
                     {
                         SwapNodes(minIndex, Parent(minIndex));
                     }
@@ -284,7 +284,7 @@ namespace DataStructures
             }
             else
             {
-                if (Comparer.Compare(Heap[minIndex], Heap[index]) < 0)
+                if (Comparer.Compare(heap[minIndex], heap[index]) < 0)
                 {
                     SwapNodes(minIndex, index);
                 }
@@ -310,7 +310,7 @@ namespace DataStructures
 
             if (IsMinLevelIndex(index))
             {
-                if (Comparer.Compare(Heap[index], Heap[parent]) > 0)
+                if (Comparer.Compare(heap[index], heap[parent]) > 0)
                 {
                     SwapNodes(index, parent);
                     PushUpMax(parent);
@@ -322,7 +322,7 @@ namespace DataStructures
             }
             else
             {
-                if (Comparer.Compare(Heap[index], Heap[parent]) < 0)
+                if (Comparer.Compare(heap[index], heap[parent]) < 0)
                 {
                     SwapNodes(index, parent);
                     PushUpMin(parent);
@@ -339,7 +339,7 @@ namespace DataStructures
             if (index > 2)
             {
                 int grandparent = Grandparent(index);
-                if (Comparer.Compare(Heap[index], Heap[grandparent]) > 0)
+                if (Comparer.Compare(heap[index], heap[grandparent]) > 0)
                 {
                     SwapNodes(index, grandparent);
                     PushUpMax(grandparent);
@@ -352,7 +352,7 @@ namespace DataStructures
             if (index > 2)
             {
                 int grandparent = Grandparent(index);
-                if (Comparer.Compare(Heap[index], Heap[grandparent]) < 0)
+                if (Comparer.Compare(heap[index], heap[grandparent]) < 0)
                 {
                     SwapNodes(index, grandparent);
                     PushUpMin(grandparent);
@@ -363,7 +363,7 @@ namespace DataStructures
         private void RemoveNode(int index)
         {
             SwapNodes(index, Count - 1);
-            Heap.RemoveAt(Count - 1);
+            heap.RemoveAt(Count - 1);
             if (Count != 0)
             {
                 PushDown(index);
@@ -372,9 +372,9 @@ namespace DataStructures
 
         private void SwapNodes(int i, int j)
         {
-            T temp = Heap[i];
-            Heap[i] = Heap[j];
-            Heap[j] = temp;
+            T temp = heap[i];
+            heap[i] = heap[j];
+            heap[j] = temp;
         }
     }
 }
