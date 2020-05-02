@@ -22,7 +22,7 @@ namespace DataStructures.Tests
             var arr = new [] { "aaaa", "c", "dd", "bbb" };
             var comparer = Comparer<string>.Create((a, b) => Comparer<int>.Default.Compare(a.Length, b.Length));
 
-            var mmh = new MinMaxHeap<string>(comparer);
+            var mmh = new MinMaxHeap<string>(comparer: comparer);
             foreach (var s in arr)
             {
                 mmh.Add(s);

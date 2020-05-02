@@ -14,41 +14,16 @@ namespace DataStructures
     public class MinMaxHeap<T>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MinMaxHeap{T}"/> class.
-        /// </summary>
-        public MinMaxHeap()
-        {
-            Comparer = Comparer<T>.Default;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MinMaxHeap{T}"/> class that uses a specified comparer.
-        /// </summary>
-        /// <param name="comparer">The default comparer to use for comparing objects.</param>
-        public MinMaxHeap(IComparer<T> comparer)
-        {
-            Comparer = comparer ?? Comparer<T>.Default;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MinMaxHeap{T}"/> class that contains elements copied from a specified enumerable collection.
-        /// </summary>
-        /// <param name="collection">The enumerable collection to be copied.</param>
-        public MinMaxHeap(IEnumerable<T> collection)
-            : this(collection, Comparer<T>.Default)
-        {
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MinMaxHeap{T}"/> class that contains
         /// elements copied from a specified enumerable collection and that uses a specified comparer.
         /// </summary>
         /// <param name="collection">The enumerable collection to be copied.</param>
         /// <param name="comparer">The default comparer to use for comparing objects.</param>
-        public MinMaxHeap(IEnumerable<T> collection, IComparer<T> comparer)
-            : this(comparer)
+        public MinMaxHeap(IEnumerable<T>? collection = null, IComparer<T>? comparer = null)
         {
+            Comparer = comparer ?? Comparer<T>.Default;
             collection ??= Enumerable.Empty<T>();
+
             Heap = collection.ToList();
             for (int i = Count / 2 - 1; i >= 0; --i)
             {
