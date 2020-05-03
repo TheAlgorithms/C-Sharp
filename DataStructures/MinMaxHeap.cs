@@ -13,7 +13,7 @@ namespace DataStructures
     /// <typeparam name="T">Generic type.</typeparam>
     public class MinMaxHeap<T>
     {
-        private readonly List<T> heap = new List<T>();
+        private readonly List<T> heap;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MinMaxHeap{T}"/> class that contains
