@@ -70,6 +70,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 	* [Bit Array](./DataStructures/BitArray.cs)
 	* [Singly Linked List](./DataStructures/SinglyLinkedList)
 	* [Doubly Linked List](./DataStructures/DoublyLinkedList)
+	* [Min-Max Heap](./DataStructures/MinMaxHeap.cs)
 ---
 
 ## Contribution
