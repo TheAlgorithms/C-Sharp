@@ -148,12 +148,11 @@ namespace DataStructures
         }
 
         /// <summary>
-        /// Finds maximum or minumum value among children and grandchildren of the specified node.
+        /// Finds maximum value among children and grandchildren of the specified node.
         /// </summary>
         /// <param name="index">Index of the node in the Heap array.</param>
-        /// <param name="minimum">If true find minimum value, otherwise - maximum.</param>
-        /// <returns>Index of the maximum or minimum descendant.</returns>
-        private int ExtremumChildOrGrandchild(int index, bool minimum)
+        /// <returns>Index of the maximum descendant.</returns>
+        private int IndexOfMaxChildOrGrandchild(int index)
         {
             var descendants = new[] { 2 * index + 1, 2 * index + 2, 4 * index + 3, 4 * index + 4, 4 * index + 5, 4 * index + 6 };
             int resIndex = descendants[0];
@@ -164,8 +163,32 @@ namespace DataStructures
                     break;
                 }
 
-                if ((minimum && Comparer.Compare(heap[descendant], heap[resIndex]) < 0) ||
-                    (!minimum && Comparer.Compare(heap[descendant], heap[resIndex]) > 0))
+                if (Comparer.Compare(heap[descendant], heap[resIndex]) > 0)
+                {
+                    resIndex = descendant;
+                }
+            }
+
+            return resIndex;
+        }
+
+        /// <summary>
+        /// Finds minumum value among children and grandchildren of the specified node.
+        /// </summary>
+        /// <param name="index">Index of the node in the Heap array.</param>
+        /// <returns>Index of the minimum descendant.</returns>
+        private int IndexOfMinChildOrGrandchild(int index)
+        {
+            var descendants = new[] { 2 * index + 1, 2 * index + 2, 4 * index + 3, 4 * index + 4, 4 * index + 5, 4 * index + 6 };
+            int resIndex = descendants[0];
+            foreach (int descendant in descendants)
+            {
+                if (descendant >= Count)
+                {
+                    break;
+                }
+
+                if (Comparer.Compare(heap[descendant], heap[resIndex]) < 0)
                 {
                     resIndex = descendant;
                 }
@@ -232,7 +255,7 @@ namespace DataStructures
                 return;
             }
 
-            int maxIndex = ExtremumChildOrGrandchild(index, minimum: false);
+            int maxIndex = IndexOfMaxChildOrGrandchild(index);
 
             // If smaller element are put at min level (as result of swaping), it doesn't affect sub-tree validity.
             // If smaller element are put at max level, PushDownMax() should be called for that node.
@@ -265,7 +288,7 @@ namespace DataStructures
                 return;
             }
 
-            int minIndex = ExtremumChildOrGrandchild(index, minimum: true);
+            int minIndex = IndexOfMinChildOrGrandchild(index);
 
             // If bigger element are put at max level (as result of swaping), it doesn't affect sub-tree validity.
             // If bigger element are put at min level, PushDownMin() should be called for that node.
