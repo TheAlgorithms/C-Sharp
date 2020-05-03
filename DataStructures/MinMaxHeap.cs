@@ -54,36 +54,6 @@ namespace DataStructures
         }
 
         /// <summary>
-        /// Removes the maximum value from the heap.
-        /// </summary>
-        /// <returns>true if value is removed; otherwise false.</returns>
-        public bool RemoveMax()
-        {
-            if (Count == 0)
-            {
-                return false;
-            }
-
-            RemoveNode(GetMaxNodeIndex());
-            return true;
-        }
-
-        /// <summary>
-        /// Removes the minimum value from the heap.
-        /// </summary>
-        /// <returns>true if value is removed; otherwise false.</returns>
-        public bool RemoveMin()
-        {
-            if (Count == 0)
-            {
-                return false;
-            }
-
-            RemoveNode(0);
-            return true;
-        }
-
-        /// <summary>
         /// Removes the maximum node from the heap and returns its value.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown if heap is empty.</exception>
