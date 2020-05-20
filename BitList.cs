@@ -1,6 +1,7 @@
 // By Lorenzo Lotti
 
 using System;
+using System.Linq
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -733,7 +734,7 @@ public sealed class BitList :
     {
         if (!IsEmpty && index < Count && index >= 0)
         {
-            var bools = ToBooleanArray() as IEnumerable<bool> as List<bool>;
+            var bools = ToBooleanArray().ToList();
             bools.RemoveAt(index);
             bits = new BitArray(bools.ToArray());
         }
@@ -751,7 +752,7 @@ public sealed class BitList :
     {
         if (!IsEmpty && index < bits.Length && index >= 0 && count <= bits.Length - index && count > 0)
         {
-            var bools = ToBooleanArray() as IEnumerable<bool> as List<bool>;
+            var bools = ToBooleanArray().ToList();
             bools.RemoveRange(index, count);
             bits = new BitArray(bools.ToArray());
         }
@@ -805,7 +806,7 @@ public sealed class BitList :
             this.bits = new BitArray(bits.bits);
         else if (index < bits.Count && index >= 0)
         {
-            var bools = ToBooleanArray() as IEnumerable<bool> as List<bool>;
+            var bools = ToBooleanArray().ToList();
             bools.InsertRange(index, bits.ToBooleanArray());
             this.bits = new BitArray(bools.ToArray());
         }
@@ -823,7 +824,7 @@ public sealed class BitList :
             bits = new BitArray(new[] { bit });
         else if (index < bits.Length && index >= 0)
         {
-            var bools = ToBooleanArray() as IEnumerable<bool> as List<bool>;
+            var bools = ToBooleanArray().ToList();
             bools.Insert(index, bit);
             bits = new BitArray(bools.ToArray());
         }
@@ -869,7 +870,7 @@ public sealed class BitList :
     {
         if (!IsEmpty && index < bits.Length && index >= 0 && value.Count <= bits.Length - index && value.Count > 0)
         {
-            var bools = ToBooleanArray() as IEnumerable<bool> as List<bool>;
+            var bools = ToBooleanArray().ToList();
             bools.RemoveRange(index, value.Count);
             bools.InsertRange(index, value.ToBooleanArray());
             bits = new BitArray(bools.ToArray());
@@ -1411,7 +1412,7 @@ public sealed class BitList :
     {
         var leftBitList = left.ToBooleanArray();
         var rightBitList = right.ToBooleanArray();
-        var leftList = leftBitList as IEnumerable<bool> as List<bool>;
+        var leftList = leftBitList.ToList();
         foreach (var bit in rightBitList)
             leftList.Add(bit);
         return new BitList(leftList.ToArray());
