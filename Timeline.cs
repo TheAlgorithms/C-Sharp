@@ -1,3 +1,5 @@
+//By Lorenzo Lotti
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +10,6 @@ using System.Linq;
 /// </summary>
 /// <typeparam name="TValue">Value associated with a <see cref="System.DateTime"/>.</typeparam>
 internal class Timeline<TValue>:
-    IEnumerable<(DateTime Time, TValue Value)>,
     ICollection<(DateTime Time, TValue Value)>,
     IEquatable<Timeline<TValue>>,
     ICloneable
@@ -478,13 +479,13 @@ internal class Timeline<TValue>:
         return !(left == right);
     }
 
-    private class TimelineEnumerator: IEnumerator<(DateTime Time, TValue Value)>, IDisposable
+    private class TimelineEnumerator: IEnumerator<(DateTime Time, TValue Value)>
     {
         internal int index;
         internal Timeline<TValue> timeline;
         object IEnumerator.Current { get => timeline.timeline[index]; }
         (DateTime Time, TValue Value) IEnumerator<(DateTime Time, TValue Value)>.Current { get => timeline.timeline[index]; }
-        void IDisposable.Dispose() { }
+        void IDisposable.Dispose() { /*Do nothing because is useless but necessary for the IEnumerator interface*/ }
 
         internal TimelineEnumerator(Timeline<TValue> timeline)
         {
