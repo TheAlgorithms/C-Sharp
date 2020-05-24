@@ -472,13 +472,13 @@ public class Timeline<TValue>:
 
     private class TimelineEnumerator: IEnumerator<(DateTime Time, TValue Value)>
     {
-        private int index;
-        private Timeline<TValue> timeline;
+        public int index;
+        public Timeline<TValue> timeline;
         object IEnumerator.Current => timeline.timeline[index]
         (DateTime Time, TValue Value) IEnumerator<(DateTime Time, TValue Value)>.Current => timeline.timeline[index];
         void IDisposable.Dispose() { /*Do nothing because is useless but necessary for the IEnumerator interface*/ }
 
-        private TimelineEnumerator(Timeline<TValue> timeline)
+        public TimelineEnumerator(Timeline<TValue> timeline)
         {
             index = -1;
             this.timeline = timeline;
