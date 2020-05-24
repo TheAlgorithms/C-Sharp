@@ -9,18 +9,17 @@ using System.Linq;
 /// A collection of <see cref="System.DateTime"/> and <see cref="TValue"/> sorted by <see cref="System.DateTime"/> field.
 /// </summary>
 /// <typeparam name="TValue">Value associated with a <see cref="System.DateTime"/>.</typeparam>
-internal class Timeline<TValue>:
+public class Timeline<TValue>:
     ICollection<(DateTime Time, TValue Value)>,
-    IEquatable<Timeline<TValue>>,
-    ICloneable
+    IEquatable<Timeline<TValue>>
 {
     private List<(DateTime Time, TValue Value)> timeline;
-    bool ICollection<(DateTime Time, TValue Value)>.IsReadOnly { get => false; }
+    bool ICollection<(DateTime Time, TValue Value)>.IsReadOnly => false;
 
     /// <summary>
     /// The count of items.
     /// </summary>
-    public int Count { get => timeline.Count; }
+    public int Count => timeline.Count;
 
     /// <summary>
     /// Get all values associated with <paramref name="time"/>.
@@ -51,7 +50,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Initialize the instance without items.
     /// </summary>
-    internal Timeline()
+    public Timeline()
     {
         timeline = new List<(DateTime, TValue)>();
     }
@@ -59,7 +58,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Initialize the instance with a <paramref name="time"/> and a <paramref name="value"/>.
     /// </summary>
-    internal Timeline(DateTime time, TValue value)
+    public Timeline(DateTime time, TValue value)
     {
         timeline = new List<(DateTime, TValue)> { (time, value) };
     }
@@ -67,7 +66,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Initialize the instance with a <paramref name="value"/> associated with <see cref="System.DateTime.Now"/>.
     /// </summary>
-    internal Timeline(params TValue[] value)
+    public Timeline(params TValue[] value)
     {
         timeline = new List<(DateTime, TValue)>();
         var now = DateTime.Now;
@@ -79,7 +78,7 @@ internal class Timeline<TValue>:
     /// Initialize the instance with a set of time and value.
     /// </summary>
     /// <param name="timeline"></param>
-    internal Timeline(params (DateTime, TValue)[] timeline)
+    public Timeline(params (DateTime, TValue)[] timeline)
     {
         this.timeline = timeline.ToList();
         this.timeline = this.timeline.OrderBy(pair => pair.Time).ToList();
@@ -92,14 +91,6 @@ internal class Timeline<TValue>:
     public bool Equals(Timeline<TValue> other)
     {
         return this == other;
-    }
-
-    /// <summary>
-    /// Returns a <see cref="System.Object"/> clone of the current instance.
-    /// </summary>
-    public object Clone()
-    {
-        return this;
     }
 
     /// <summary>
@@ -122,7 +113,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Get all <see cref="System.DateTime"/> of the timeline.
     /// </summary>
-    internal DateTime[] GetAllTimes()
+    public DateTime[] GetAllTimes()
     {
         var result = new List<DateTime>();
         foreach (var pair in timeline)
@@ -138,7 +129,7 @@ internal class Timeline<TValue>:
     /// </summary>
     /// <param name="value"></param>
     /// <returns></returns>
-    internal DateTime[] GetTimesByValue(TValue value)
+    public DateTime[] GetTimesByValue(TValue value)
     {
         return (from pair in timeline
                 where pair.Value.Equals(value)
@@ -148,7 +139,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Get all <see cref="TValue"/> of the timeline.
     /// </summary>
-    internal TValue[] GetAllValues()
+    public TValue[] GetAllValues()
     {
         return (from pair in timeline
                 select pair.Value).ToArray();
@@ -157,77 +148,77 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Get all values associated with <paramref name="time"/>.
     /// </summary>
-    internal TValue[] GetValuesByTime(DateTime time)
+    public TValue[] GetValuesByTime(DateTime time)
     {
         return (from pair in timeline
                 where pair.Time == time
                 select pair.Value).ToArray();
     }
 
-    internal Timeline<TValue> GetValuesByMillisecond(int millisecond)
+    public Timeline<TValue> GetValuesByMillisecond(int millisecond)
     {
         return new Timeline<TValue>((from pair in timeline
                                      where pair.Time.Millisecond == millisecond
                                      select pair).ToArray());
     }
 
-    internal Timeline<TValue> GetValuesBySecond(int second)
+    public Timeline<TValue> GetValuesBySecond(int second)
     {
         return new Timeline<TValue>((from pair in timeline
                                      where pair.Time.Second == second
                                      select pair).ToArray());
     }
 
-    internal Timeline<TValue> GetValuesByMinute(int minute)
+    public Timeline<TValue> GetValuesByMinute(int minute)
     {
         return new Timeline<TValue>((from pair in timeline
                                      where pair.Time.Minute == minute
                                      select pair).ToArray());
     }
 
-    internal Timeline<TValue> GetValuesByHour(int hour)
+    public Timeline<TValue> GetValuesByHour(int hour)
     {
         return new Timeline<TValue>((from pair in timeline
                                      where pair.Time.Hour == hour
                                      select pair).ToArray());
     }
 
-    internal Timeline<TValue> GetValuesByDay(int day)
+    public Timeline<TValue> GetValuesByDay(int day)
     {
         return new Timeline<TValue>((from pair in timeline
                                      where pair.Time.Day == day
                                      select pair).ToArray());
     }
 
-    internal Timeline<TValue> GetValuesByTimeOfDay(TimeSpan timeOfDay)
+    public Timeline<TValue> GetValuesByTimeOfDay(TimeSpan timeOfDay)
     {
         return new Timeline<TValue>((from pair in timeline
                                      where pair.Time.TimeOfDay == timeOfDay
                                      select pair).ToArray());
     }
 
-    internal Timeline<TValue> GetValuesByDayOfWeek(DayOfWeek dayOfWeek)
+    public Timeline<TValue> GetValuesByDayOfWeek(DayOfWeek dayOfWeek)
     {
         return new Timeline<TValue>((from pair in timeline
                                      where pair.Time.DayOfWeek == dayOfWeek
                                      select pair).ToArray());
     }
 
-    internal Timeline<TValue> GetValuesByDayOfYear(int dayOfYear)
+    public Timeline<TValue> GetValuesByDayOfYear(int dayOfYear)
     {
         return new Timeline<TValue>((from pair in timeline
                                      where pair.Time.DayOfYear == dayOfYear
                                      select pair).ToArray());
     }
 
-    internal Timeline<TValue> GetValuesByMonth(int month)
+    public Timeline<TValue> GetValuesByMonth(int month)
     {
         return new Timeline<TValue>((from pair in timeline
                                      where pair.Time.Month == month
                                      select pair).ToArray());
     }
 
-    internal Timeline<TValue> GetValuesByYear(int year)
+    public Timeline<TValue> GetValuesByYear(int year)
     {
         return new Timeline<TValue>((from pair in timeline
                                      where pair.Time.Year == year
@@ -237,7 +228,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Add a <see cref="System.DateTime"/> and a <see cref="TValue"/> to the timeline.
     /// </summary>
-    internal void Add(DateTime time, TValue value)
+    public void Add(DateTime time, TValue value)
     {
         timeline.Add((time, value));
         timeline = timeline.OrderBy(pair => pair.Time).ToList();
@@ -246,7 +237,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Add a set of <see cref="System.DateTime"/> and <see cref="TValue"/> to the timeline.
     /// </summary>
-    internal void Add(params (DateTime, TValue)[] timeline)
+    public void Add(params (DateTime, TValue)[] timeline)
     {
         this.timeline.AddRange(timeline);
         this.timeline = this.timeline.OrderBy(pair => pair.Time).ToList();
@@ -255,7 +246,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Add an existing timeline to this timeline.
     /// </summary>
-    internal void Add(Timeline<TValue> timeline)
+    public void Add(Timeline<TValue> timeline)
     {
         Add(timeline.ToArray());
     }
@@ -263,7 +254,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Add a <paramref name="value"/> associated with <see cref="System.DateTime.Now"/> to the timeline.
     /// </summary>
-    internal void AddNow(params TValue[] value)
+    public void AddNow(params TValue[] value)
     {
         var now = DateTime.Now;
         foreach (var v in value)
@@ -273,7 +264,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Returns true if the timeline contains this value pair.
     /// </summary>
-    internal bool Contains(DateTime time, TValue value)
+    public bool Contains(DateTime time, TValue value)
     {
         return timeline.Contains((time, value));
     }
@@ -281,7 +272,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Returns true if the timeline contains this set of value pairs.
     /// </summary>
-    internal bool Contains(params (DateTime, TValue)[] timeline)
+    public bool Contains(params (DateTime, TValue)[] timeline)
     {
         var result = true;
         foreach (var (time, value) in timeline)
@@ -292,7 +283,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Returns true if this timeline contains an existing timeline.
     /// </summary>
-    internal bool Contains(Timeline<TValue> timeline)
+    public bool Contains(Timeline<TValue> timeline)
     {
         return Contains(timeline.ToArray());
     }
@@ -300,7 +291,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Returns true if the timeline constains <paramref name="time"/>.
     /// </summary>
-    internal bool ContainsTime(params DateTime[] time)
+    public bool ContainsTime(params DateTime[] time)
     {
         var result = true;
         foreach (var TValue in time)
@@ -311,7 +302,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Returns true if the timeline constains <paramref name="value"/>.
     /// </summary>
-    internal bool ContainsValue(params TValue[] value)
+    public bool ContainsValue(params TValue[] value)
     {
         var result = true;
         foreach (var v in value)
@@ -323,7 +314,7 @@ internal class Timeline<TValue>:
     /// Remove a value pair from the timeline.
     /// </summary>
     /// <returns>Returns true if the operation completed successfully.</returns>
-    internal bool Remove(DateTime time, TValue value)
+    public bool Remove(DateTime time, TValue value)
     {
         return timeline.Remove((time, value));
     }
@@ -332,7 +323,7 @@ internal class Timeline<TValue>:
     /// Remove a set of value pairs from the timeline.
     /// </summary>
     /// <returns>Returns true if the operation completed successfully.</returns>
-    internal bool Remove(params (DateTime, TValue)[] timeline)
+    public bool Remove(params (DateTime, TValue)[] timeline)
     {
         var result = false;
         foreach (var (time, value) in timeline)
@@ -344,7 +335,7 @@ internal class Timeline<TValue>:
     /// Remove an existing timeline from this timeline.
     /// </summary>
     /// <returns>Returns true if the operation completed successfully.</returns>
-    internal bool Remove(Timeline<TValue> timeline)
+    public bool Remove(Timeline<TValue> timeline)
     {
         return Remove(timeline.ToArray());
     }
@@ -353,7 +344,7 @@ internal class Timeline<TValue>:
     /// Remove a value pair from the timeline if the time is equal to <paramref name="time"/>.
     /// </summary>
     /// <returns>Returns true if the operation completed successfully.</returns>
-    internal bool RemoveTime(params DateTime[] time)
+    public bool RemoveTime(params DateTime[] time)
     {
         var result = false;
         foreach (var TValue in time)
@@ -371,7 +362,7 @@ internal class Timeline<TValue>:
     /// Remove a value pair from the timeline if the value is equal to <paramref name="value"/>.
     /// </summary>
     /// <returns>Returns true if the operation completed successfully.</returns>
-    internal bool RemoveValue(params TValue[] value)
+    public bool RemoveValue(params TValue[] value)
     {
         var result = false;
         foreach (var v in value)
@@ -388,7 +379,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Convert the timeline to an array.
     /// </summary>
-    internal (DateTime Time, TValue Value)[] ToArray()
+    public (DateTime Time, TValue Value)[] ToArray()
     {
         return timeline.ToArray();
     }
@@ -396,7 +387,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Convert the timeline to a list.
     /// </summary>
-    internal IList<(DateTime Time, TValue Value)> ToList()
+    public IList<(DateTime Time, TValue Value)> ToList()
     {
         return timeline;
     }
@@ -404,7 +395,7 @@ internal class Timeline<TValue>:
     /// <summary>
     /// Convert the timeline to a dictionary.
     /// </summary>
-    internal IDictionary<DateTime, TValue> ToDictionary()
+    public IDictionary<DateTime, TValue> ToDictionary()
     {
         var dictionary = new Dictionary<DateTime, TValue>();
         foreach (var (date, time) in timeline)
@@ -481,13 +472,13 @@ internal class Timeline<TValue>:
 
     private class TimelineEnumerator: IEnumerator<(DateTime Time, TValue Value)>
     {
-        internal int index;
-        internal Timeline<TValue> timeline;
-        object IEnumerator.Current { get => timeline.timeline[index]; }
-        (DateTime Time, TValue Value) IEnumerator<(DateTime Time, TValue Value)>.Current { get => timeline.timeline[index]; }
+        private int index;
+        private Timeline<TValue> timeline;
+        object IEnumerator.Current => timeline.timeline[index]
+        (DateTime Time, TValue Value) IEnumerator<(DateTime Time, TValue Value)>.Current => timeline.timeline[index];
         void IDisposable.Dispose() { /*Do nothing because is useless but necessary for the IEnumerator interface*/ }
 
-        internal TimelineEnumerator(Timeline<TValue> timeline)
+        private TimelineEnumerator(Timeline<TValue> timeline)
         {
             index = -1;
             this.timeline = timeline;
