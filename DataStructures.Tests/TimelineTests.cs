@@ -576,7 +576,7 @@ namespace DataStructures.Tests
             dictionaryList.OrderBy(pair => pair.Time);
             Assert.IsTrue(timelineList.Count == dictionaryList.Count);
             for (int i = 0; i < timelineList.Count; i++)
-                Assert.IsTrue(timelineList[i].Time == dictionaryList[i].Time && timelineList[i].Value == timelineList[i].Value);
+                Assert.IsTrue(timelineList[i].Time == dictionaryList[i].Time && timelineList[i].Value == dictionaryList[i].Value);
         }
 
         [Test]
