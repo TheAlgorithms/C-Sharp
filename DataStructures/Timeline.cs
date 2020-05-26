@@ -470,13 +470,13 @@ public class Timeline<TValue>:
         return !(left == right);
     }
 
-    private class TimelineEnumerator: IEnumerator<(DateTime Time, TValue Value)>
+    private sealed class TimelineEnumerator: IEnumerator<(DateTime Time, TValue Value)>
     {
         public int index;
         public Timeline<TValue> timeline;
         object IEnumerator.Current => timeline.timeline[index]
         (DateTime Time, TValue Value) IEnumerator<(DateTime Time, TValue Value)>.Current => timeline.timeline[index];
-        void IDisposable.Dispose() { /*Do nothing because is useless but necessary for the IEnumerator interface*/ }
+        public void Dispose() { /*Do nothing because is useless but necessary for the IEnumerator interface*/ }
 
         public TimelineEnumerator(Timeline<TValue> timeline)
         {
