@@ -4,7 +4,9 @@ using System.Linq;
 
 namespace DataStructures.Tests
 {
-    [Test]
+    public static class TimelineTests
+    {
+        [Test]
         public static void CountTest()
         {
             var timeline = new Timeline<string>
@@ -16,6 +18,34 @@ namespace DataStructures.Tests
                 { new DateTime(2015, 1, 1), "TestTime5" }
             };
             Assert.IsTrue(timeline.Count == 5);
+        }
+
+        [Test]
+        public static void TimesCountTest()
+        {
+            var timeline = new Timeline<string>
+            {
+                { new DateTime(1995, 1, 1), "TestTime1" },
+                { new DateTime(2000, 1, 1), "TestTime2" },
+                { new DateTime(2005, 1, 1), "TestTime3" },
+                { new DateTime(2010, 1, 1), "TestTime4" },
+                { new DateTime(2015, 1, 1), "TestTime5" }
+            };
+            Assert.IsTrue(timeline.TimesCount == timeline.GetAllTimes().Length);
+        }
+
+        [Test]
+        public static void ValuesCountTest()
+        {
+            var timeline = new Timeline<string>
+            {
+                { new DateTime(1995, 1, 1), "TestTime1" },
+                { new DateTime(2000, 1, 1), "TestTime2" },
+                { new DateTime(2005, 1, 1), "TestTime3" },
+                { new DateTime(2010, 1, 1), "TestTime4" },
+                { new DateTime(2015, 1, 1), "TestTime5" }
+            };
+            Assert.IsTrue(timeline.ValuesCount == timeline.GetAllValues().Length);
         }
 
         [Test]
