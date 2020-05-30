@@ -1,13 +1,10 @@
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using System;
 using System.Linq;
 
 namespace DataStructures.Tests
 {
-    public static class TimelineTests
-    {
-        [Test]
+    [Test]
         public static void CountTest()
         {
             var timeline = new Timeline<string>
@@ -145,6 +142,41 @@ namespace DataStructures.Tests
         }
 
         [Test]
+        public static void GetTimesBeforeTest()
+        {
+            var timeline = new Timeline<string>
+            {
+                { new DateTime(1995, 1, 1), "TestTime1" },
+                { new DateTime(2000, 1, 1), "TestTime2" },
+                { new DateTime(2005, 1, 1), "TestTime3" },
+                { new DateTime(2010, 1, 1), "TestTime4" },
+                { new DateTime(2015, 1, 1), "TestTime5" }
+            };
+            var times = timeline.GetTimesBefore(new DateTime(2003, 1, 1));
+            Assert.IsTrue(times.Length == 2);
+            Assert.IsTrue(times[0] == new DateTime(1995, 1, 1));
+            Assert.IsTrue(times[1] == new DateTime(2000, 1, 1));
+        }
+
+        [Test]
+        public static void GetTimesAfterTest()
+        {
+            var timeline = new Timeline<string>
+            {
+                { new DateTime(1995, 1, 1), "TestTime1" },
+                { new DateTime(2000, 1, 1), "TestTime2" },
+                { new DateTime(2005, 1, 1), "TestTime3" },
+                { new DateTime(2010, 1, 1), "TestTime4" },
+                { new DateTime(2015, 1, 1), "TestTime5" }
+            };
+            var times = timeline.GetTimesAfter(new DateTime(2003, 1, 1));
+            Assert.IsTrue(times.Length == 3);
+            Assert.IsTrue(times[0] == new DateTime(2005, 1, 1));
+            Assert.IsTrue(times[1] == new DateTime(2010, 1, 1));
+            Assert.IsTrue(times[2] == new DateTime(2015, 1, 1));
+        }
+
+        [Test]
         public static void GetAllValuesTest()
         {
             var timeline = new Timeline<string>
@@ -176,6 +208,41 @@ namespace DataStructures.Tests
                 { new DateTime(2015, 1, 1), "TestTime5" }
             };
             Assert.IsTrue(timeline.GetValuesByTime(new DateTime(2000, 1, 1))[0] == "TestTime2");
+        }
+
+        [Test]
+        public static void GetValuesBeforeTest()
+        {
+            var timeline = new Timeline<string>
+            {
+                { new DateTime(1995, 1, 1), "TestTime1" },
+                { new DateTime(2000, 1, 1), "TestTime2" },
+                { new DateTime(2005, 1, 1), "TestTime3" },
+                { new DateTime(2010, 1, 1), "TestTime4" },
+                { new DateTime(2015, 1, 1), "TestTime5" }
+            };
+            var array = timeline.GetValuesBefore(new DateTime(2003, 1, 1)).ToArray();
+            Assert.IsTrue(array.Length == 2);
+            Assert.IsTrue(array[0].Time == new DateTime(1995, 1, 1));
+            Assert.IsTrue(array[1].Time == new DateTime(2000, 1, 1));
+        }
+
+        [Test]
+        public static void GetValuesAfterTest()
+        {
+            var timeline = new Timeline<string>
+            {
+                { new DateTime(1995, 1, 1), "TestTime1" },
+                { new DateTime(2000, 1, 1), "TestTime2" },
+                { new DateTime(2005, 1, 1), "TestTime3" },
+                { new DateTime(2010, 1, 1), "TestTime4" },
+                { new DateTime(2015, 1, 1), "TestTime5" }
+            };
+            var array = timeline.GetValuesAfter(new DateTime(2003, 1, 1)).ToArray();
+            Assert.IsTrue(array.Length == 3);
+            Assert.IsTrue(array[0].Time == new DateTime(2005, 1, 1));
+            Assert.IsTrue(array[1].Time == new DateTime(2010, 1, 1));
+            Assert.IsTrue(array[2].Time == new DateTime(2015, 1, 1));
         }
 
         [Test]
@@ -576,7 +643,7 @@ namespace DataStructures.Tests
             dictionaryList.OrderBy(pair => pair.Time);
             Assert.IsTrue(timelineList.Count == dictionaryList.Count);
             for (int i = 0; i < timelineList.Count; i++)
-                Assert.IsTrue(timelineList[i].Time == dictionaryList[i].Time && timelineList[i].Value == dictionaryList[i].Value);
+                Assert.IsTrue(timelineList[i].Time == dictionaryList[i].Time && timelineList[i].Value == timelineList[i].Value);
         }
 
         [Test]
