@@ -8,14 +8,14 @@ namespace Algorithms.Search {
     ///     Time compl is O(root(n))
     /// Note: the array has to be sorted beforehand.
     /// </summary>
-    public class JumpSearch {
+    public class JumpSearcher {
         /// <summary>
         /// Code is really easy we find step size first
         /// Later we find the block where this element should be.!
         /// In this block we go search for value.! If found return index
         /// Otherwise return -1!
         /// </summary>
-        private int jumpSearch (int[] arr, int val) {
+        private int JumpSearch (int[] arr, int val) {
             double temp = Math.Sqrt (val);
             int step = (int) Math.Floor (temp);
 
