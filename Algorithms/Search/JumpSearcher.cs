@@ -15,29 +15,30 @@ namespace Algorithms.Search {
         /// In this block we go search for value.! If found return index
         /// Otherwise return -1!
         /// </summary>
-        private int JumpSearch (int[] arr, int val) {
-            double temp = Math.Sqrt (val);
-            int step = (int) Math.Floor (temp);
+        private int JumpSearch (int[] arr, int elem) {
+            int size = arr.Length;
+            int step = (int) Math.Floor (Math.Sqrt (elem));
 
-            int old = 0;
-            while (val > arr[Math.Min (step, arr.Length) - 1]) {
-                old = step;
-                temp = Math.Sqrt (arr.Length);
-                step += (int) Math.Floor (temp);
-                if (arr.Length <= old) {
+            int prev = 0;
+            int new_step = step;
+            while (elem > arr[Math.Min (step, size) - 1]) {
+                prev = new_step;
+                new_step = prev + (int) Math.Floor (Math.Sqrt(size));
+                if (arr.Length <= prev) {
+                    return -1;
+                }
+            }
+            step = new_step;
+            while (elem > arr[prev]) {
+                prev++;
+                int my_min = Math.Min(step, size);
+                if (prev == my_min) {
                     return -1;
                 }
             }
 
-            while (val > arr[old]) {
-                old++;
-                if (old == Math.Min (step, arr.Length)) {
-                    return -1;
-                }
-            }
-
-            if (arr[old] == val) {
-                return old;
+            if (arr[prev] == elem) {
+                return prev;
             }
 
             return -1;
