@@ -1,3 +1,17 @@
+/*
+    Author: Lorenzo Lotti
+    Name: Timeline (DataStructures.Timeline<TValue>)
+    Type: Data structure (class)
+    Description: A collection of dates/times and values sorted by dates/times easy to query.
+    Usage:
+        this data structure can be used to represent an ordered series of dates or times with which to associate values.
+        An example is a chronology of events:
+            306: Constantine is the new emperor,
+            312: Battle of the Milvian Bridge,
+            313: Edict of Milan,
+            330: Constantine move the capital to Constantinople.
+*/
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,20 +55,13 @@ namespace DataStructures
             get => GetValuesByTime(time);
             set
             {
-                var c = -1;
-                int i;
-                for (i = 0; i < Count; i++)
+                for (int i = 0; i < Count; i++)
                 {
                     if (timeline[i].Time == time)
-                    {
-                        if (c == value.Length)
-                            timeline.RemoveAt(i);
-                        else
-                            timeline[i] = (timeline[i].Time, value[++c]);
-                    }
+                        timeline.RemoveAt(i);
                 }
-                while (i < c)
-                    Add(time, value[c]);
+                foreach (var v in value)
+                    Add(time, v);
             }
         }
 
