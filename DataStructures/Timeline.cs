@@ -24,7 +24,6 @@ namespace DataStructures
     /// </summary>
     /// <typeparam name="TValue">Value associated with a <see cref="DateTime"/>.</typeparam>
     public class Timeline<TValue>:
-        IEnumerable<(DateTime Time, TValue Value)>,
         ICollection<(DateTime Time, TValue Value)>,
         IEquatable<Timeline<TValue>>
     {
@@ -525,7 +524,7 @@ namespace DataStructures
             return !(left == right);
         }
 
-        private sealed class TimelineEnumerator: IEnumerator<(DateTime Time, TValue Value)>, IDisposable
+        private sealed class TimelineEnumerator: IEnumerator<(DateTime Time, TValue Value)>
         {
             public int index;
             public Timeline<TValue> timeline;
