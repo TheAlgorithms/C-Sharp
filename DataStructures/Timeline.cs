@@ -23,57 +23,23 @@ namespace DataStructures
     /// A collection of <see cref="DateTime"/> and <see cref="TValue"/> sorted by <see cref="DateTime"/> field.
     /// </summary>
     /// <typeparam name="TValue">Value associated with a <see cref="DateTime"/>.</typeparam>
-    public class Timeline<TValue>:
+    public class Timeline<TValue> :
         ICollection<(DateTime Time, TValue Value)>,
         IEquatable<Timeline<TValue>>
     {
-        private List<(DateTime Time, TValue Value)> timeline;
-        bool ICollection<(DateTime Time, TValue Value)>.IsReadOnly => false;
+        private List<(DateTime Time, TValue Value)> timeline = new List<(DateTime Time, TValue Value)>();
 
         /// <summary>
-        /// The count of pairs.
-        /// </summary>
-        public int Count => timeline.Count;
-
-        /// <summary>
-        /// The count of times.
-        /// </summary>
-        public int TimesCount => GetAllTimes().Length;
-
-        /// <summary>
-        /// The count of values.
-        /// </summary>
-        public int ValuesCount => GetAllValues().Length;
-
-        /// <summary>
-        /// Get all values associated with <paramref name="time"/>.
-        /// </summary>
-        /// <returns>Values associated with <paramref name="time"/>.</returns>
-        public TValue[] this[DateTime time]
-        {
-            get => GetValuesByTime(time);
-            set
-            {
-                for (int i = 0; i < Count; i++)
-                {
-                    if (timeline[i].Time == time)
-                        timeline.RemoveAt(i);
-                }
-                foreach (var v in value)
-                    Add(time, v);
-            }
-        }
-
-        /// <summary>
-        /// Initialize the instance without items.
+        /// Initializes a new instance of the <see cref="Timeline{TValue}"/> class.
         /// </summary>
         public Timeline()
         {
+            // todo: improve performance and consider removing unnecessary methods
             timeline = new List<(DateTime, TValue)>();
         }
 
         /// <summary>
-        /// Initialize the instance with a <paramref name="time"/> and a <paramref name="value"/>.
+        /// Initializes a new instance of the <see cref="Timeline{TValue}"/> class.
         /// </summary>
         public Timeline(DateTime time, TValue value)
         {
@@ -81,23 +47,97 @@ namespace DataStructures
         }
 
         /// <summary>
-        /// Initialize the instance with a <paramref name="value"/> associated with <see cref="DateTime.Now"/>.
+        /// Initializes a new instance of the <see cref="Timeline{TValue}"/> class.
         /// </summary>
         public Timeline(params TValue[] value)
         {
-            timeline = new List<(DateTime, TValue)>();
             var now = DateTime.Now;
             foreach (var v in value)
+            {
                 timeline.Add((now, v));
+            }
         }
 
         /// <summary>
-        /// Initialize the instance with a set of time and value.
+        /// Initializes a new instance of the <see cref="Timeline{TValue}"/> class.
         /// </summary>>
         public Timeline(params (DateTime, TValue)[] timeline)
         {
             this.timeline = timeline.ToList();
             this.timeline = this.timeline.OrderBy(pair => pair.Time).ToList();
+        }
+
+        bool ICollection<(DateTime Time, TValue Value)>.IsReadOnly => false;
+
+        /// <summary>
+        /// Gets the count of pairs.
+        /// </summary>
+        public int Count => timeline.Count;
+
+        /// <summary>
+        /// Gets the count of times.
+        /// </summary>
+        public int TimesCount => GetAllTimes().Length;
+
+        /// <summary>
+        /// Gets the count of values.
+        /// </summary>
+        public int ValuesCount => GetAllValues().Length;
+
+        /// <summary>
+        /// Get all values associated with <paramref name="time"/>.
+        /// </summary>
+        /// <param name="time">Time to get events for.</param>
+        /// <returns>Values associated with <paramref name="time"/>.</returns>
+        public TValue[] this[DateTime time]
+        {
+            get => GetValuesByTime(time);
+            set
+            {
+                for (var i = 0; i < Count; i++)
+                {
+                    if (timeline[i].Time == time)
+                    {
+                        timeline.RemoveAt(i);
+                    }
+                }
+
+                foreach (var v in value)
+                {
+                    Add(time, v);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Returns true if <paramref name="left"/> is equal to <paramref name="right"/>.
+        /// </summary>
+        public static bool operator ==(Timeline<TValue> left, Timeline<TValue> right)
+        {
+            var leftArray = left.ToArray();
+            var rightArray = right.ToArray();
+            if (leftArray.Length == rightArray.Length)
+            {
+                for (int i = 0; i < leftArray.Length; i++)
+                {
+                    if (leftArray[i].Time != rightArray[i].Time && !leftArray[i].Value!.Equals(rightArray[i].Value))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Returns true if <paramref name="left"/> is unequal to <paramref name="right"/>.
+        /// </summary>
+        public static bool operator !=(Timeline<TValue> left, Timeline<TValue> right)
+        {
+            return !(left == right);
         }
 
         /// <summary>
@@ -120,6 +160,7 @@ namespace DataStructures
         /// <summary>
         /// Copy a value to an array.
         /// </summary>
+        /// <param name="array">Destination array.</param>
         /// <param name="arrayIndex">The start index.</param>
         public void CopyTo((DateTime, TValue)[] array, int arrayIndex)
         {
@@ -135,8 +176,11 @@ namespace DataStructures
             foreach (var (time, _) in timeline)
             {
                 if (!result.Contains(time))
+                {
                     result.Add(time);
+                }
             }
+
             return result.ToArray();
         }
 
@@ -272,6 +316,11 @@ namespace DataStructures
                                          select pair).ToArray());
         }
 
+        /// <summary>
+        /// Gets all values that happened at specified year.
+        /// </summary>
+        /// <param name="year">Value to look for.</param>
+        /// <returns>Array of values.</returns>
         public Timeline<TValue> GetValuesByYear(int year)
         {
             return new Timeline<TValue>((from pair in timeline
@@ -312,7 +361,9 @@ namespace DataStructures
         {
             var now = DateTime.Now;
             foreach (var v in value)
+            {
                 Add(now, v);
+            }
         }
 
         /// <summary>
@@ -330,7 +381,10 @@ namespace DataStructures
         {
             var result = true;
             foreach (var (time, value) in timeline)
+            {
                 result &= Contains(time, value);
+            }
+
             return result;
         }
 
@@ -348,8 +402,11 @@ namespace DataStructures
         public bool ContainsTime(params DateTime[] time)
         {
             var result = true;
-            foreach (var TValue in time)
-                result &= GetAllTimes().Contains(TValue);
+            foreach (var value in time)
+            {
+                result &= GetAllTimes().Contains(value);
+            }
+
             return result;
         }
 
@@ -360,7 +417,10 @@ namespace DataStructures
         {
             var result = true;
             foreach (var v in value)
+            {
                 result &= GetAllValues().Contains(v);
+            }
+
             return result;
         }
 
@@ -381,7 +441,10 @@ namespace DataStructures
         {
             var result = false;
             foreach (var (time, value) in timeline)
+            {
                 result |= this.timeline.Remove((time, value));
+            }
+
             return result;
         }
 
@@ -401,14 +464,18 @@ namespace DataStructures
         public bool RemoveTime(params DateTime[] time)
         {
             var result = false;
-            foreach (var TValue in time)
-                result |= GetAllTimes().Contains(TValue);
+            foreach (var value in time)
+            {
+                result |= GetAllTimes().Contains(value);
+            }
+
             if (result)
             {
                 timeline = (from pair in timeline
                             where !time.Contains(pair.Time)
                             select pair).ToList();
             }
+
             return result;
         }
 
@@ -420,13 +487,17 @@ namespace DataStructures
         {
             var result = false;
             foreach (var v in value)
+            {
                 result |= GetAllValues().Contains(v);
+            }
+
             if (result)
             {
                 timeline = (from pair in timeline
                             where !value.Contains(pair.Value)
                             select pair).ToList();
             }
+
             return result;
         }
 
@@ -453,7 +524,10 @@ namespace DataStructures
         {
             var dictionary = new Dictionary<DateTime, TValue>();
             foreach (var (date, time) in timeline)
+            {
                 dictionary.Add(date, time);
+            }
+
             return dictionary;
         }
 
@@ -463,9 +537,13 @@ namespace DataStructures
         /// <param name="obj">A <see cref="Timeline{TValue}"/> instance.</param>
         public override bool Equals(object obj)
         {
-            return this == obj as Timeline<TValue>;
+            return obj is Timeline<TValue> timeline && this == timeline;
         }
 
+        /// <summary>
+        /// Gets hash code.
+        /// </summary>
+        /// <returns>Hash code.</returns>
         public override int GetHashCode()
         {
             return base.GetHashCode();
@@ -488,66 +566,12 @@ namespace DataStructures
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return new TimelineEnumerator(this);
+            return timeline.GetEnumerator();
         }
 
         IEnumerator<(DateTime Time, TValue Value)> IEnumerable<(DateTime Time, TValue Value)>.GetEnumerator()
         {
-            return new TimelineEnumerator(this);
-        }
-
-        /// <summary>
-        /// Returns true if <paramref name="left"/> is equal to <paramref name="right"/>.
-        /// </summary>
-        public static bool operator ==(Timeline<TValue> left, Timeline<TValue> right)
-        {
-            var leftArray = left.ToArray();
-            var rightArray = right.ToArray();
-            if (leftArray.Length == rightArray.Length)
-            {
-                for (int i = 0; i < leftArray.Length; i++)
-                {
-                    if (leftArray[i].Time != rightArray[i].Time && !leftArray[i].Value.Equals(rightArray[i].Value))
-                        return false;
-                }
-                return true;
-            }
-            else
-                return false;
-        }
-
-        /// <summary>
-        /// Returns true if <paramref name="left"/> is unequal to <paramref name="right"/>.
-        /// </summary>
-        public static bool operator !=(Timeline<TValue> left, Timeline<TValue> right)
-        {
-            return !(left == right);
-        }
-
-        private sealed class TimelineEnumerator: IEnumerator<(DateTime Time, TValue Value)>
-        {
-            public int index;
-            public Timeline<TValue> timeline;
-            object IEnumerator.Current { get => timeline.timeline[index]; }
-            (DateTime Time, TValue Value) IEnumerator<(DateTime Time, TValue Value)>.Current { get => timeline.timeline[index]; }
-            public void Dispose() { /*Do nothing because is useless but necessary for the IEnumerator<bool> interface*/ }
-
-            public TimelineEnumerator(Timeline<TValue> timeline)
-            {
-                index = -1;
-                this.timeline = timeline;
-            }
-
-            bool IEnumerator.MoveNext()
-            {
-                index++;
-                return index < timeline.Count;
-            }
-
-            void IEnumerator.Reset()
-            {
-                index = -1;
-            }
+            return timeline.GetEnumerator();
         }
     }
 }

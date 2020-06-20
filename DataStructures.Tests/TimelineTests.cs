@@ -665,15 +665,23 @@ namespace DataStructures.Tests
             var dictionary = timeline.ToDictionary();
             var timelineList = new System.Collections.Generic.List<(DateTime Time, string Value)>();
             foreach (var pair in timeline)
+            {
                 timelineList.Add(pair);
+            }
+
             var dictionaryList = new System.Collections.Generic.List<(DateTime Time, string Value)>();
             foreach (var (key, value) in dictionary)
+            {
                 dictionaryList.Add((key, value));
+            }
+
             timelineList.OrderBy(pair => pair.Time);
             dictionaryList.OrderBy(pair => pair.Time);
             Assert.IsTrue(timelineList.Count == dictionaryList.Count);
             for (int i = 0; i < timelineList.Count; i++)
+            {
                 Assert.IsTrue(timelineList[i].Time == dictionaryList[i].Time && timelineList[i].Value == dictionaryList[i].Value);
+            }
         }
 
         [Test]
