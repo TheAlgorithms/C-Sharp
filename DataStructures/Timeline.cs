@@ -264,7 +264,7 @@ namespace DataStructures
                                          where pair.Time.Millisecond == millisecond
                                          select pair).ToArray());
         }
-        
+
         /// <summary>
         /// Gets all values that happened at specified second.
         /// </summary>
@@ -288,7 +288,7 @@ namespace DataStructures
                                          where pair.Time.Minute == minute
                                          select pair).ToArray());
         }
-        
+
         /// <summary>
         /// Gets all values that happened at specified hour.
         /// </summary>
@@ -300,7 +300,7 @@ namespace DataStructures
                                          where pair.Time.Hour == hour
                                          select pair).ToArray());
         }
-        
+
         /// <summary>
         /// Gets all values that happened at specified day.
         /// </summary>
@@ -348,7 +348,7 @@ namespace DataStructures
                                          where pair.Time.DayOfYear == dayOfYear
                                          select pair).ToArray());
         }
-        
+
         /// <summary>
         /// Gets all values that happened at specified month.
         /// </summary>
