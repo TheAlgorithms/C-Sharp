@@ -87,7 +87,7 @@ namespace DataStructures
         /// <summary>
         /// Get all values associated with <paramref name="time"/>.
         /// </summary>
-        /// <param name="time">Time to get events for.</param>
+        /// <param name="time">Time to get values for.</param>
         /// <returns>Values associated with <paramref name="time"/>.</returns>
         public TValue[] this[DateTime time]
         {
@@ -253,13 +253,23 @@ namespace DataStructures
                                          select pair).ToArray());
         }
 
+        /// <summary>
+        /// Gets all values that happened at specified millisecond.
+        /// </summary>
+        /// <param name="millisecond">Value to look for.</param>
+        /// <returns>Array of values.</returns>
         public Timeline<TValue> GetValuesByMillisecond(int millisecond)
         {
             return new Timeline<TValue>((from pair in timeline
                                          where pair.Time.Millisecond == millisecond
                                          select pair).ToArray());
         }
-
+        
+        /// <summary>
+        /// Gets all values that happened at specified second.
+        /// </summary>
+        /// <param name="second">Value to look for.</param>
+        /// <returns>Array of values.</returns>
         public Timeline<TValue> GetValuesBySecond(int second)
         {
             return new Timeline<TValue>((from pair in timeline
@@ -267,20 +277,35 @@ namespace DataStructures
                                          select pair).ToArray());
         }
 
+        /// <summary>
+        /// Gets all values that happened at specified minute.
+        /// </summary>
+        /// <param name="minute">Value to look for.</param>
+        /// <returns>Array of values.</returns>
         public Timeline<TValue> GetValuesByMinute(int minute)
         {
             return new Timeline<TValue>((from pair in timeline
                                          where pair.Time.Minute == minute
                                          select pair).ToArray());
         }
-
+        
+        /// <summary>
+        /// Gets all values that happened at specified hour.
+        /// </summary>
+        /// <param name="hour">Value to look for.</param>
+        /// <returns>Array of values.</returns>
         public Timeline<TValue> GetValuesByHour(int hour)
         {
             return new Timeline<TValue>((from pair in timeline
                                          where pair.Time.Hour == hour
                                          select pair).ToArray());
         }
-
+        
+        /// <summary>
+        /// Gets all values that happened at specified day.
+        /// </summary>
+        /// <param name="day">Value to look for.</param>
+        /// <returns>Array of values.</returns>
         public Timeline<TValue> GetValuesByDay(int day)
         {
             return new Timeline<TValue>((from pair in timeline
@@ -288,6 +313,11 @@ namespace DataStructures
                                          select pair).ToArray());
         }
 
+        /// <summary>
+        /// Gets all values that happened at specified time of the day.
+        /// </summary>
+        /// <param name="timeOfDay">Value to look for.</param>
+        /// <returns>Array of values.</returns>
         public Timeline<TValue> GetValuesByTimeOfDay(TimeSpan timeOfDay)
         {
             return new Timeline<TValue>((from pair in timeline
@@ -295,6 +325,11 @@ namespace DataStructures
                                          select pair).ToArray());
         }
 
+        /// <summary>
+        /// Gets all values that happened at specified day of the week.
+        /// </summary>
+        /// <param name="dayOfWeek">Value to look for.</param>
+        /// <returns>Array of values.</returns>
         public Timeline<TValue> GetValuesByDayOfWeek(DayOfWeek dayOfWeek)
         {
             return new Timeline<TValue>((from pair in timeline
@@ -302,13 +337,23 @@ namespace DataStructures
                                          select pair).ToArray());
         }
 
+        /// <summary>
+        /// Gets all values that happened at specified day of the year.
+        /// </summary>
+        /// <param name="dayOfYear">Value to look for.</param>
+        /// <returns>Array of values.</returns>
         public Timeline<TValue> GetValuesByDayOfYear(int dayOfYear)
         {
             return new Timeline<TValue>((from pair in timeline
                                          where pair.Time.DayOfYear == dayOfYear
                                          select pair).ToArray());
         }
-
+        
+        /// <summary>
+        /// Gets all values that happened at specified month.
+        /// </summary>
+        /// <param name="month">Value to look for.</param>
+        /// <returns>Array of values.</returns>
         public Timeline<TValue> GetValuesByMonth(int month)
         {
             return new Timeline<TValue>((from pair in timeline
