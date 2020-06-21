@@ -487,17 +487,7 @@ namespace DataStructures
         public BitList this[int index, int count]
         {
             get => Get(index, count);
-            set
-            {
-                if (count >= value.Count)
-                {
-                    Set(index, value);
-                }
-                else
-                {
-                    Set(index, value[0, count]);
-                }
-            }
+            set => Set(index, (count >= value.Count) ? value : value[0, count]);
         }
 
         public static bool operator ==(BitList left, BitList right)
