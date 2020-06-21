@@ -112,13 +112,19 @@ namespace DataStructures
             //Convert the Int16 array to a Byte array and then create a new BitArray instance.
             var bytesList = new List<byte[]>();
             foreach (var num in bits)
+            {
                 bytesList.Add(BitConverter.GetBytes(num));
+            }
+
             var byteList = new List<byte>();
             foreach (var bytes in bytesList)
             {
                 foreach (var num in bytes)
+                {
                     byteList.Add(num);
+                }
             }
+
             this.bits = new BitArray(byteList.ToArray());
         }
 
@@ -158,13 +164,19 @@ namespace DataStructures
             //Convert the Int64 array to a Byte array and then create a new BitArray instance.
             var bytesList = new List<byte[]>();
             foreach (var num in bits)
+            {
                 bytesList.Add(BitConverter.GetBytes(num));
+            }
+
             var byteList = new List<byte>();
             foreach (var bytes in bytesList)
             {
                 foreach (var num in bytes)
+                {
                     byteList.Add(num);
+                }
             }
+
             this.bits = new BitArray(byteList.ToArray());
         }
 
@@ -185,8 +197,11 @@ namespace DataStructures
         {
             //Convert the SByte array to a Byte array and then create a new BitArray instance.
             var bytes = new byte[bits.Length];
-            for (int i = 0; i < bits.Length; i++)
+            for (var i = 0; i < bits.Length; i++)
+            {
                 bytes[i] = (byte)bits[i];
+            }
+
             this.bits = new BitArray(bytes);
         }
 
@@ -208,13 +223,19 @@ namespace DataStructures
             //Convert the UInt64 array to a Byte array and then create a new BitArray instance.
             var bytesList = new List<byte[]>();
             foreach (var num in bits)
+            {
                 bytesList.Add(BitConverter.GetBytes(num));
+            }
+
             var byteList = new List<byte>();
             foreach (var bytes in bytesList)
             {
                 foreach (var num in bytes)
+                {
                     byteList.Add(num);
+                }
             }
+
             this.bits = new BitArray(byteList.ToArray());
         }
 
@@ -235,8 +256,11 @@ namespace DataStructures
         {
             //Convert the UInt32 array to a Int32 array and then create a new BitArray instance.
             var ints = new int[bits.Length];
-            for (int i = 0; i < bits.Length; i++)
+            for (var i = 0; i < bits.Length; i++)
+            {
                 ints[i] = (int)bits[i];
+            }
+
             this.bits = new BitArray(ints);
         }
 
@@ -258,13 +282,19 @@ namespace DataStructures
             //Convert the UInt64 array to a Byte array and then create a new BitArray instance.
             var bytesList = new List<byte[]>();
             foreach (var num in bits)
+            {
                 bytesList.Add(BitConverter.GetBytes(num));
+            }
+
             var byteList = new List<byte>();
             foreach (var bytes in bytesList)
             {
                 foreach (var num in bytes)
+                {
                     byteList.Add(num);
+                }
             }
+
             this.bits = new BitArray(byteList.ToArray());
         }
 
@@ -286,13 +316,19 @@ namespace DataStructures
             //Convert the Single array to a Byte array and then create a new BitArray instance.
             var bytesList = new List<byte[]>();
             foreach (var num in bits)
+            {
                 bytesList.Add(BitConverter.GetBytes(num));
+            }
+
             var byteList = new List<byte>();
             foreach (var bytes in bytesList)
             {
                 foreach (var num in bytes)
+                {
                     byteList.Add(num);
+                }
             }
+
             this.bits = new BitArray(byteList.ToArray());
         }
 
@@ -314,13 +350,19 @@ namespace DataStructures
             //Convert the Double array to a Byte array and then create a new BitArray instance.
             var bytesList = new List<byte[]>();
             foreach (var num in bits)
+            {
                 bytesList.Add(BitConverter.GetBytes(num));
+            }
+
             var byteList = new List<byte>();
             foreach (var bytes in bytesList)
             {
                 foreach (var num in bytes)
+                {
                     byteList.Add(num);
+                }
             }
+
             this.bits = new BitArray(byteList.ToArray());
         }
 
@@ -342,13 +384,19 @@ namespace DataStructures
             //Convert the Decimal array to a Int32 array and then create a new BitArray instance.
             var intsList = new List<int[]>();
             foreach (var num in bits)
+            {
                 intsList.Add(decimal.GetBits(num));
+            }
+
             var intList = new List<int>();
             foreach (var ints in intsList)
             {
                 foreach (var num in ints)
+                {
                     intList.Add(num);
+                }
             }
+
             this.bits = new BitArray(intList.ToArray());
         }
 
@@ -370,13 +418,19 @@ namespace DataStructures
             //Convert the Char array to a Byte array and then create a new BitArray instance.
             var bytesList = new List<byte[]>();
             foreach (var num in bits)
+            {
                 bytesList.Add(BitConverter.GetBytes(num));
+            }
+
             var byteList = new List<byte>();
             foreach (var bytes in bytesList)
             {
                 foreach (var num in bytes)
+                {
                     byteList.Add(num);
+                }
             }
+
             this.bits = new BitArray(byteList.ToArray());
         }
 
@@ -397,7 +451,10 @@ namespace DataStructures
         {
             var bitList = new BitList();
             foreach (var str in bits)
+            {
                 bitList += new BitList(str);
+            }
+
             this.bits = bitList.bits;
         }
 
@@ -433,9 +490,13 @@ namespace DataStructures
             set
             {
                 if (count >= value.Count)
+                {
                     Set(index, value);
+                }
                 else if (count < value.Count)
+                {
                     Set(index, value[0, count]);
+                }
             }
         }
 
@@ -483,7 +544,10 @@ namespace DataStructures
             var leftBitList = left.ToBooleanArray().ToList();
             var rightBitList = right.ToBooleanArray();
             foreach (var bit in rightBitList)
+            {
                 leftBitList.Add(bit);
+            }
+
             return new BitList(leftBitList.ToArray());
         }
 
@@ -594,6 +658,7 @@ namespace DataStructures
             {
                 throw new FileReadingException();
             }
+
             return new BitList(bytes);
         }
 
@@ -603,10 +668,16 @@ namespace DataStructures
         public static BitList Parse(string text)
         {
             if (string.IsNullOrEmpty(text))
+            {
                 return new BitList();
+            }
+
             var bools = new List<bool>();
             foreach (var stringBit in text)
+            {
                 bools.Add(stringBit == '1');
+            }
+
             return new BitList(bools.ToArray());
         }
 
@@ -619,12 +690,17 @@ namespace DataStructures
             if (Count == other.Count)
             {
                 var result = true;
-                for (int i = 0; i < Count; i++)
+                for (var i = 0; i < Count; i++)
+                {
                     result &= this[i] == other[i];
+                }
+
                 return result;
             }
             else
+            {
                 return false;
+            }
         }
 
         /// <summary>
@@ -759,9 +835,13 @@ namespace DataStructures
         public bool Get(int index)
         {
             if (!IsEmpty && index < bits.Length && index >= 0)
+            {
                 return bits[index];
+            }
             else
+            {
                 throw new IndexOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -773,12 +853,17 @@ namespace DataStructures
             if (!IsEmpty && index < bits.Length && index >= 0 && index + count <= bits.Length - index && count > 0)
             {
                 var bools = new List<bool>();
-                for (int i = 0; i < count; i++)
+                for (var i = 0; i < count; i++)
+                {
                     bools.Add(bits[index + i]);
+                }
+
                 return new BitList(bools.ToArray());
             }
             else
+            {
                 throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -788,9 +873,13 @@ namespace DataStructures
         public void Set(int index, bool value)
         {
             if (!IsEmpty && index < bits.Length && index >= 0)
+            {
                 bits[index] = value;
+            }
             else
+            {
                 throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -807,7 +896,9 @@ namespace DataStructures
                 bits = new BitArray(bools.ToArray());
             }
             else
+            {
                 throw new IndexOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -879,7 +970,9 @@ namespace DataStructures
                 bits = new BitArray(bools.ToArray());
             }
             else
+            {
                 throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -897,7 +990,9 @@ namespace DataStructures
                 bits = new BitArray(bools.ToArray());
             }
             else
+            {
                 throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -923,13 +1018,18 @@ namespace DataStructures
         public bool Remove(BitList items)
         {
             if (IsEmpty)
+            {
                 throw new EmptyInstanceException();
+            }
             else
             {
                 var thisBitList = ToText();
                 var thoseBitList = items.ToText();
                 if (!thisBitList.Contains(thoseBitList))
+                {
                     return false;
+                }
+
                 var newBitList = thisBitList.Replace(thoseBitList, string.Empty);
                 bits = Parse(newBitList).bits;
                 return true;
@@ -943,11 +1043,14 @@ namespace DataStructures
         /// <returns>The <paramref name="item"/> index.</returns>
         public int IndexOf(bool item)
         {
-            for (int i = 0; i < Count; i++)
+            for (var i = 0; i < Count; i++)
             {
                 if (item == this[i])
+                {
                     return i;
+                }
             }
+
             return -1;
         }
 
@@ -957,11 +1060,14 @@ namespace DataStructures
         /// <param name="items">A list of bit.</param>
         public int IndexOf(BitList items)
         {
-            for (int i = 0; i < Count; i++)
+            for (var i = 0; i < Count; i++)
             {
                 if (items == this[i, items.Count])
+                {
                     return i;
+                }
             }
+
             return -1;
         }
 
@@ -972,10 +1078,12 @@ namespace DataStructures
         {
             if (count != 0)
             {
-                for (int i = 1; i == Math.Abs(count); i++)
+                for (var i = 1; i == Math.Abs(count); i++)
                 {
                     if (count > 0)
+                    {
                         Add(false);
+                    }
                     else
                     {
                         try
@@ -988,8 +1096,11 @@ namespace DataStructures
                         }
                     }
                 }
+
                 if (Count == 0 || IsEmpty)
+                {
                     Add(false);
+                }
             }
         }
 
@@ -1000,10 +1111,12 @@ namespace DataStructures
         {
             if (count != 0)
             {
-                for (int i = 1; i == Math.Abs(count); i++)
+                for (var i = 1; i == Math.Abs(count); i++)
                 {
                     if (count < 0)
+                    {
                         Add(false);
+                    }
                     else
                     {
                         try
@@ -1016,8 +1129,11 @@ namespace DataStructures
                         }
                     }
                 }
+
                 if (Count == 0 || IsEmpty)
+                {
                     Add(false);
+                }
             }
         }
 
@@ -1028,9 +1144,13 @@ namespace DataStructures
         public void Not()
         {
             if (IsEmpty)
+            {
                 throw new BooleanAlgebraException();
+            }
             else
+            {
                 bits.Not();
+            }
         }
 
         /// <summary>
@@ -1040,12 +1160,17 @@ namespace DataStructures
         public bool And()
         {
             if (IsEmpty)
+            {
                 throw new BooleanAlgebraException();
+            }
             else
             {
                 bool result = bits[0];
-                for (int i = 1; i < bits.Length; i++)
+                for (var i = 1; i < bits.Length; i++)
+                {
                     result &= bits[i];
+                }
+
                 return result;
             }
         }
@@ -1057,9 +1182,13 @@ namespace DataStructures
         public void And(BitList bits)
         {
             if (IsEmpty)
+            {
                 throw new BooleanAlgebraException();
+            }
             else
+            {
                 this.bits.And(bits.bits);
+            }
         }
 
         /// <summary>
@@ -1069,12 +1198,17 @@ namespace DataStructures
         public bool Or()
         {
             if (IsEmpty)
+            {
                 throw new BooleanAlgebraException();
+            }
             else
             {
                 bool result = bits[0];
-                for (int i = 1; i < bits.Length; i++)
+                for (var i = 1; i < bits.Length; i++)
+                {
                     result |= bits[i];
+                }
+
                 return result;
             }
         }
@@ -1086,9 +1220,13 @@ namespace DataStructures
         public void Or(BitList bits)
         {
             if (IsEmpty)
+            {
                 throw new BooleanAlgebraException();
+            }
             else
+            {
                 this.bits.Or(bits.bits);
+            }
         }
 
         /// <summary>
@@ -1098,12 +1236,17 @@ namespace DataStructures
         public bool Xor()
         {
             if (IsEmpty)
+            {
                 throw new BooleanAlgebraException();
+            }
             else
             {
                 bool result = bits[0];
-                for (int i = 1; i < bits.Length; i++)
+                for (var i = 1; i < bits.Length; i++)
+                {
                     result ^= bits[i];
+                }
+
                 return result;
             }
         }
@@ -1115,9 +1258,13 @@ namespace DataStructures
         public void Xor(BitList bits)
         {
             if (IsEmpty)
+            {
                 throw new BooleanAlgebraException();
+            }
             else
+            {
                 this.bits.Xor(bits.bits);
+            }
         }
 
         /// <summary>
@@ -1127,7 +1274,9 @@ namespace DataStructures
         public void Insert(int index, BitList items)
         {
             if (IsEmpty)
+            {
                 bits = new BitArray(items.bits);
+            }
             else if (index < bits.Count && index >= 0)
             {
                 var bools = ToBooleanArray().ToList();
@@ -1135,7 +1284,9 @@ namespace DataStructures
                 bits = new BitArray(bools.ToArray());
             }
             else
+            {
                 throw new IndexOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -1145,7 +1296,9 @@ namespace DataStructures
         public void Insert(int index, bool item)
         {
             if (IsEmpty)
+            {
                 bits = new BitArray(new[] { item });
+            }
             else if (index < bits.Length && index >= 0)
             {
                 var bools = ToBooleanArray().ToList();
@@ -1153,7 +1306,9 @@ namespace DataStructures
                 bits = new BitArray(bools.ToArray());
             }
             else
+            {
                 throw new IndexOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -1163,7 +1318,9 @@ namespace DataStructures
         public void Replace(BitList oldBitList, BitList newBitList)
         {
             if (IsEmpty)
+            {
                 throw new EmptyInstanceException();
+            }
             else
             {
                 var thisBitListText = ToText();
@@ -1196,10 +1353,16 @@ namespace DataStructures
         public string ToText()
         {
             if (IsEmpty)
+            {
                 return string.Empty;
+            }
+
             var text = string.Empty;
             foreach (var bit in ToBooleanArray())
+            {
                 text += bit ? "1" : "0";
+            }
+
             return text;
         }
 
@@ -1209,9 +1372,10 @@ namespace DataStructures
         /// <returns>A <see cref="bool"/> array.</returns>
         public bool[] ToBooleanArray()
         {
-            //Convert the bits field (BitArray) to a Boolean array
             if (IsEmpty)
+            {
                 return new bool[0];
+            }
             else
             {
                 var bools = new bool[bits.Length];
@@ -1228,12 +1392,17 @@ namespace DataStructures
         {
             //Convert the bits field (BitArray) to a Byte array dividing the bits field in 8 parts.
             if (IsEmpty)
+            {
                 return new byte[0];
+            }
             else
             {
                 int num = bits.Length / 8;
                 if (bits.Length % 8 != 0)
+                {
                     num++;
+                }
+
                 var bytes = new byte[num];
                 bits.CopyTo(bytes, 0);
                 return bytes;
@@ -1246,16 +1415,25 @@ namespace DataStructures
         /// <returns>A <see cref="short"/> array.</returns>
         public short[] ToInt16Array()
         {
+            //Convert the bits field (BitArray) to a Byte array and then to a Int16 array.
             if (IsEmpty)
+            {
                 return new short[0];
+            }
             else
             {
                 var bytes = ToByteArray().ToList();
                 if (bytes.Count % 2 != 0)
+                {
                     bytes.Add(0);
+                }
+
                 var shorts = new List<short>();
-                for (int i = 0; i < bytes.Count; i+= 2)
+                for (var i = 0; i < bytes.Count; i+= 2)
+                {
                     shorts.Add(BitConverter.ToInt16(bytes.ToArray(), i));
+                }
+
                 return shorts.ToArray();
             }
         }
@@ -1266,13 +1444,19 @@ namespace DataStructures
         /// <returns>A <see cref="int"/> array.</returns>
         public int[] ToInt32Array()
         {
+            //Convert the bits field (BitArray) to a Byte array dividing the bits field in 32 parts.
             if (IsEmpty)
+            {
                 return new int[0];
+            }
             else
             {
                 int num = bits.Length / 32;
                 if (bits.Length % 32 != 0)
+                {
                     num++;
+                }
+
                 var ints = new int[num];
                 bits.CopyTo(ints, 0);
                 return ints;
@@ -1285,16 +1469,25 @@ namespace DataStructures
         /// <returns>A <see cref="long"/> array.</returns>
         public long[] ToInt64Array()
         {
+            //Convert the bits field (BitArray) to a Int32 array and then to a Int64 array.
             if (IsEmpty)
+            {
                 return new long[0];
+            }
             else
             {
                 var ints = ToInt32Array().ToList();
                 if (ints.Count % 2 != 0)
+                {
                     ints.Add(0);
+                }
+
                 var longs = new List<long>();
-                for (int i = 0; i < ints.Count; i += 2)
+                for (var i = 0; i < ints.Count; i += 2)
+                {
                     longs.Add(BitConverter.ToInt64(new BitList(new[] { ints[i], ints[i + 1] }).ToByteArray(), 0));
+                }
+
                 return longs.ToArray();
             }
         }
@@ -1305,14 +1498,20 @@ namespace DataStructures
         /// <returns>A <see cref="sbyte"/> array.</returns>
         public sbyte[] ToSByteArray()
         {
+            //Convert the bits field (BitArray) to a Byte array and then to a SByte array.
             if (IsEmpty)
+            {
                 return new sbyte[0];
+            }
             else
             {
                 var bytes = ToByteArray();
                 var sbytes = new List<sbyte>();
                 foreach (var bits in bytes)
+                {
                     sbytes.Add((sbyte)bits);
+                }
+
                 return sbytes.ToArray();
             }
         }
@@ -1323,14 +1522,20 @@ namespace DataStructures
         /// <returns>A <see cref="ushort"/> array.</returns>
         public ushort[] ToUInt16Array()
         {
+            //Convert the bits field (BitArray) to a Int16 array and then to a UInt64 array.
             if (IsEmpty)
+            {
                 return new ushort[0];
+            }
             else
             {
                 var shorts = ToInt16Array();
                 var ushorts = new List<ushort>();
                 foreach (var bits in shorts)
+                {
                     ushorts.Add((ushort)bits);
+                }
+
                 return ushorts.ToArray();
             }
         }
@@ -1341,14 +1546,20 @@ namespace DataStructures
         /// <returns>A <see cref="uint"/> array.</returns>
         public uint[] ToUInt32Array()
         {
+            //Convert the bits field (BitArray) to a Int32 array and then to a UInt32 array.
             if (IsEmpty)
+            {
                 return new uint[0];
+            }
             else
             {
                 var ints = ToInt32Array();
                 var uints = new List<uint>();
                 foreach (var bits in ints)
+                {
                     uints.Add((uint)bits);
+                }
+
                 return uints.ToArray();
             }
         }
@@ -1359,14 +1570,20 @@ namespace DataStructures
         /// <returns>A <see cref="ulong"/> array.</returns>
         public ulong[] ToUInt64Array()
         {
+            //Convert the bits field (BitArray) to a Int64 array and then to a UInt64 array.
             if (IsEmpty)
+            {
                 return new ulong[0];
+            }
             else
             {
                 var longs = ToInt64Array();
                 var ulongs = new List<ulong>();
                 foreach (var bits in longs)
+                {
                     ulongs.Add((ulong)bits);
+                }
+
                 return ulongs.ToArray();
             }
         }
@@ -1377,14 +1594,20 @@ namespace DataStructures
         /// <returns>A <see cref="float"/> array.</returns>
         public float[] ToSingleArray()
         {
+            //Convert the bits field (BitArray) to a Int32 array and then to a Single array.
             if (IsEmpty)
+            {
                 return new float[0];
+            }
             else
             {
                 var ints = ToInt32Array();
                 var floats = new List<float>();
                 foreach (var bits in ints)
+                {
                     floats.Add(BitConverter.Int32BitsToSingle(bits));
+                }
+
                 return floats.ToArray();
             }
         }
@@ -1395,14 +1618,20 @@ namespace DataStructures
         /// <returns>A <see cref="double"/> array.</returns>
         public double[] ToDoubleArray()
         {
+            //Convert the bits field (BitArray) to a Int64 array and then to a Double array.
             if (IsEmpty)
+            {
                 return new double[0];
+            }
             else
             {
                 var longs = ToInt64Array();
                 var doubles = new List<double>();
                 foreach (var bits in longs)
+                {
                     doubles.Add(BitConverter.Int64BitsToDouble(bits));
+                }
+
                 return doubles.ToArray();
             }
         }
@@ -1413,18 +1642,27 @@ namespace DataStructures
         /// <returns>A <see cref="decimal"/> array.</returns>
         public decimal[] ToDecimalArray()
         {
+            //Convert the bits field (BitArray) to a Int64 array and then to a Int32 array and then to a Decimal array.
             if (IsEmpty)
+            {
                 return new decimal[0];
+            }
             else
             {
                 try
                 {
                     var longs = ToInt64Array().ToList();
                     if (longs.Count % 2 != 0)
+                    {
                         longs.Add(0);
+                    }
+
                     var decimals = new List<decimal>();
-                    for (int i = 0; i < longs.Count; i += 2)
+                    for (var i = 0; i < longs.Count; i += 2)
+                    {
                         decimals.Add(new decimal(new BitList(new[] { longs[i], longs[i + 1] }).ToInt32Array()));
+                    }
+
                     return decimals.ToArray();
                 }
                 catch
@@ -1440,14 +1678,20 @@ namespace DataStructures
         /// <returns>A <see cref="char"/> array.</returns>
         public char[] ToCharArray()
         {
+            //Convert the bits field (BitArray) to Int16 array and then to a Char array.
             if (IsEmpty)
+            {
                 return new char[0];
+            }
             else
             {
                 var shorts = ToInt16Array();
                 var chars = new List<char>();
                 foreach (var bits in shorts)
+                {
                     chars.Add((char)bits);
+                }
+
                 return chars.ToArray();
             }
         }
@@ -1458,10 +1702,15 @@ namespace DataStructures
         /// <returns>A <see cref="string"/> array.</returns>
         public override string ToString()
         {
+            //Convert the bits field (BitArray) to a Char array and then to a String.
             if (IsEmpty)
+            {
                 return string.Empty;
+            }
             else
+            {
                 return new string(ToCharArray());
+            }
         }
 
         /// <summary>
