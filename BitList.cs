@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 
-namespace LLF
+namespace DataStructures
 {
     /// <summary>
     /// Exception generated calling a method when the BitList instance is empty.
