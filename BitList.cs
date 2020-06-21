@@ -134,7 +134,7 @@ namespace DataStructures
         /// <param name="bits">A 32 bit integer.</param>
         public BitList(int bits)
         {
-            this.bits = new BitArray(new int[] { bits });
+            this.bits = new BitArray(new[] { bits });
         }
 
         /// <summary>
@@ -1703,14 +1703,7 @@ namespace DataStructures
         public override string ToString()
         {
             //Convert the bits field (BitArray) to a Char array and then to a String.
-            if (IsEmpty)
-            {
-                return string.Empty;
-            }
-            else
-            {
-                return new string(ToCharArray());
-            }
+            return IsEmpty ? string.Empty : new string(ToCharArray());
         }
 
         /// <summary>
