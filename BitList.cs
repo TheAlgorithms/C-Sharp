@@ -493,7 +493,7 @@ namespace DataStructures
                 {
                     Set(index, value);
                 }
-                else if (count < value.Count)
+                else
                 {
                     Set(index, value[0, count]);
                 }
