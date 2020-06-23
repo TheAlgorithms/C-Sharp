@@ -3,6 +3,7 @@ using System.Linq;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace DataStructures
 {
@@ -59,6 +60,101 @@ namespace DataStructures
         }
 
         /// <summary>
+        /// Ctor (Copy the <paramref name="bits"/> <see cref="BitList"/> object).
+        /// </summary>
+        public BitList(BitList bits)
+        {
+            this.bits = new BitArray(bits.bits);
+        }
+
+        /// <summary>
+        /// Ctor (<paramref name="unmanagedNonPrimitiveBits"/> is an unmanaged value type object).
+        /// </summary>
+        public BitList(ValueType unmanagedNonPrimitiveBits)
+        {
+            //try
+            //{
+            if (unmanagedNonPrimitiveBits.GetType().IsPrimitive)
+            {
+                throw new Exception();
+            }
+
+            //Throw an exception if the type of unmanagedBits isn't unmanaged; otherwise, continue.
+            typeof(Unmanaged<>).MakeGenericType(unmanagedNonPrimitiveBits.GetType());
+
+            //Unit of measure: byte (8 bit).
+            var size = Marshal.SizeOf(
+                unmanagedNonPrimitiveBits.GetType().IsEnum ?
+                    Enum.GetUnderlyingType(unmanagedNonPrimitiveBits.GetType()) : unmanagedNonPrimitiveBits.GetType()
+            );
+
+            if (unmanagedNonPrimitiveBits.GetType().IsEnum)
+            {
+                switch (Enum.GetUnderlyingType(unmanagedNonPrimitiveBits.GetType()).Name)
+                {
+                    case "Byte":
+                        bits = new BitArray(new[] { (byte)unmanagedNonPrimitiveBits });
+                        break;
+
+                    case "SByte":
+                        bits = new BitArray(new[] { (byte)(sbyte)unmanagedNonPrimitiveBits });
+                        break;
+
+                    case "Int16":
+                        bits = new BitArray(BitConverter.GetBytes((short)unmanagedNonPrimitiveBits));
+                        break;
+
+                    case "UInt16":
+                        bits = new BitArray(BitConverter.GetBytes((ushort)unmanagedNonPrimitiveBits));
+                        break;
+
+                    case "Int32":
+                        bits = new BitArray(new[] { (int)unmanagedNonPrimitiveBits });
+                        break;
+
+                    case "UInt32":
+                        bits = new BitArray(new[] { (int)(uint)unmanagedNonPrimitiveBits });
+                        break;
+
+                    case "Int64":
+                        bits = new BitArray(BitConverter.GetBytes((long)unmanagedNonPrimitiveBits));
+                        break;
+
+                    case "UInt64":
+                        bits = new BitArray(BitConverter.GetBytes((ulong)unmanagedNonPrimitiveBits));
+                        break;
+                }
+            }
+            else
+            {
+                var destination = new byte[size]; //A buffer that can contains unmanagedBits.
+                var ptr = Marshal.AllocHGlobal(size); //Will be a pointer to unmanagedNonPrimitiveBits
+                Marshal.StructureToPtr(unmanagedNonPrimitiveBits, ptr, false);
+                Marshal.Copy(ptr, destination, 0, size); //Copy unmanagedBits into destination buffer.
+                bits = new BitArray(destination); //Create a new BitArray object using destination buffer.
+            }
+            //}
+            //catch
+            //{
+            //    throw new ConversionErrorException();
+            //}
+        }
+
+        /// <summary>
+        /// Ctor (<paramref name="unmanagedNonPrimitiveBits"/> is an array of unmanaged value type object).
+        /// </summary>
+        public BitList(ValueType[] unmanagedNonPrimitiveBits)
+        {
+            var result = new BitList();
+            foreach (var value in unmanagedNonPrimitiveBits)
+            {
+                result += new BitList(value);
+            }
+
+            bits = result.bits;
+        }
+
+        /// <summary>
         /// Ctor.
         /// </summary>
         /// <param name="bit">A bit.</param>
@@ -109,23 +205,13 @@ namespace DataStructures
         /// <param name="bits">A 16 bit integer array.</param>
         public BitList(short[] bits)
         {
-            //Convert the Int16 array to a Byte array and then create a new BitArray instance.
-            var bytesList = new List<byte[]>();
-            foreach (var num in bits)
+            var result = new BitList();
+            foreach (var value in bits)
             {
-                bytesList.Add(BitConverter.GetBytes(num));
+                result += new BitList(value);
             }
 
-            var byteList = new List<byte>();
-            foreach (var bytes in bytesList)
-            {
-                foreach (var num in bytes)
-                {
-                    byteList.Add(num);
-                }
-            }
-
-            this.bits = new BitArray(byteList.ToArray());
+            this.bits = result.bits;
         }
 
         /// <summary>
@@ -161,23 +247,13 @@ namespace DataStructures
         /// <param name="bits">A 64 bit integer array.</param>
         public BitList(long[] bits)
         {
-            //Convert the Int64 array to a Byte array and then create a new BitArray instance.
-            var bytesList = new List<byte[]>();
-            foreach (var num in bits)
+            var result = new BitList();
+            foreach (var value in bits)
             {
-                bytesList.Add(BitConverter.GetBytes(num));
+                result += new BitList(value);
             }
 
-            var byteList = new List<byte>();
-            foreach (var bytes in bytesList)
-            {
-                foreach (var num in bytes)
-                {
-                    byteList.Add(num);
-                }
-            }
-
-            this.bits = new BitArray(byteList.ToArray());
+            this.bits = result.bits;
         }
 
         /// <summary>
@@ -195,14 +271,7 @@ namespace DataStructures
         /// <param name="bits">A signed byte array.</param>
         public BitList(sbyte[] bits)
         {
-            //Convert the SByte array to a Byte array and then create a new BitArray instance.
-            var bytes = new byte[bits.Length];
-            for (var i = 0; i < bits.Length; i++)
-            {
-                bytes[i] = (byte)bits[i];
-            }
-
-            this.bits = new BitArray(bytes);
+            this.bits = new BitArray((byte[])(Array)bits);
         }
 
         /// <summary>
@@ -220,23 +289,7 @@ namespace DataStructures
         /// <param name="bits">An unsigned 16 bit integer array.</param>
         public BitList(ushort[] bits)
         {
-            //Convert the UInt64 array to a Byte array and then create a new BitArray instance.
-            var bytesList = new List<byte[]>();
-            foreach (var num in bits)
-            {
-                bytesList.Add(BitConverter.GetBytes(num));
-            }
-
-            var byteList = new List<byte>();
-            foreach (var bytes in bytesList)
-            {
-                foreach (var num in bytes)
-                {
-                    byteList.Add(num);
-                }
-            }
-
-            this.bits = new BitArray(byteList.ToArray());
+            this.bits = new BitList((short[])(Array)bits).bits;
         }
 
         /// <summary>
@@ -254,14 +307,7 @@ namespace DataStructures
         /// <param name="bits">An unsigned 32 bit integer array.</param>
         public BitList(uint[] bits)
         {
-            //Convert the UInt32 array to a Int32 array and then create a new BitArray instance.
-            var ints = new int[bits.Length];
-            for (var i = 0; i < bits.Length; i++)
-            {
-                ints[i] = (int)bits[i];
-            }
-
-            this.bits = new BitArray(ints);
+            this.bits = new BitArray((int[])(Array)bits);
         }
 
         /// <summary>
@@ -279,23 +325,7 @@ namespace DataStructures
         /// <param name="bits">An unsigned 64 bit integer array.</param>
         public BitList(ulong[] bits)
         {
-            //Convert the UInt64 array to a Byte array and then create a new BitArray instance.
-            var bytesList = new List<byte[]>();
-            foreach (var num in bits)
-            {
-                bytesList.Add(BitConverter.GetBytes(num));
-            }
-
-            var byteList = new List<byte>();
-            foreach (var bytes in bytesList)
-            {
-                foreach (var num in bytes)
-                {
-                    byteList.Add(num);
-                }
-            }
-
-            this.bits = new BitArray(byteList.ToArray());
+            this.bits = new BitList((long[])(Array)bits).bits;
         }
 
         /// <summary>
@@ -313,23 +343,13 @@ namespace DataStructures
         /// <param name="bits">A 32 bit real array.</param>
         public BitList(float[] bits)
         {
-            //Convert the Single array to a Byte array and then create a new BitArray instance.
-            var bytesList = new List<byte[]>();
-            foreach (var num in bits)
+            var result = new BitList();
+            foreach (var value in bits)
             {
-                bytesList.Add(BitConverter.GetBytes(num));
+                result += new BitList(value);
             }
 
-            var byteList = new List<byte>();
-            foreach (var bytes in bytesList)
-            {
-                foreach (var num in bytes)
-                {
-                    byteList.Add(num);
-                }
-            }
-
-            this.bits = new BitArray(byteList.ToArray());
+            this.bits = result.bits;
         }
 
         /// <summary>
@@ -347,23 +367,13 @@ namespace DataStructures
         /// <param name="bits">A 64 bit real array.</param>
         public BitList(double[] bits)
         {
-            //Convert the Double array to a Byte array and then create a new BitArray instance.
-            var bytesList = new List<byte[]>();
-            foreach (var num in bits)
+            var result = new BitList();
+            foreach (var value in bits)
             {
-                bytesList.Add(BitConverter.GetBytes(num));
+                result += new BitList(value);
             }
 
-            var byteList = new List<byte>();
-            foreach (var bytes in bytesList)
-            {
-                foreach (var num in bytes)
-                {
-                    byteList.Add(num);
-                }
-            }
-
-            this.bits = new BitArray(byteList.ToArray());
+            this.bits = result.bits;
         }
 
         /// <summary>
@@ -381,23 +391,13 @@ namespace DataStructures
         /// <param name="bits">A <see cref="decimal"/> array.</param>
         public BitList(decimal[] bits)
         {
-            //Convert the Decimal array to a Int32 array and then create a new BitArray instance.
-            var intsList = new List<int[]>();
-            foreach (var num in bits)
+            var result = new BitList();
+            foreach (var value in bits)
             {
-                intsList.Add(decimal.GetBits(num));
+                result += new BitList(value);
             }
 
-            var intList = new List<int>();
-            foreach (var ints in intsList)
-            {
-                foreach (var num in ints)
-                {
-                    intList.Add(num);
-                }
-            }
-
-            this.bits = new BitArray(intList.ToArray());
+            this.bits = result.bits;
         }
 
         /// <summary>
@@ -415,23 +415,13 @@ namespace DataStructures
         /// <param name="bits">A 16 bit character array (<see cref="char"/> array).</param>
         public BitList(char[] bits)
         {
-            //Convert the Char array to a Byte array and then create a new BitArray instance.
-            var bytesList = new List<byte[]>();
-            foreach (var num in bits)
+            var result = new BitList();
+            foreach (var value in bits)
             {
-                bytesList.Add(BitConverter.GetBytes(num));
+                result += new BitList(value);
             }
 
-            var byteList = new List<byte>();
-            foreach (var bytes in bytesList)
-            {
-                foreach (var num in bytes)
-                {
-                    byteList.Add(num);
-                }
-            }
-
-            this.bits = new BitArray(byteList.ToArray());
+            this.bits = result.bits;
         }
 
         /// <summary>
@@ -449,13 +439,13 @@ namespace DataStructures
         /// <param name="bits">A 16 bit character array of array.</param>
         public BitList(string[] bits)
         {
-            var bitList = new BitList();
-            foreach (var str in bits)
+            var result = new BitList();
+            foreach (var value in bits)
             {
-                bitList += new BitList(str);
+                result += new BitList(value);
             }
 
-            this.bits = bitList.bits;
+            this.bits = result.bits;
         }
 
         bool ICollection<bool>.IsReadOnly => false;
@@ -487,7 +477,17 @@ namespace DataStructures
         public BitList this[int index, int count]
         {
             get => Get(index, count);
-            set => Set(index, (count >= value.Count) ? value : value[0, count]);
+            set
+            {
+                if (count >= value.Count)
+                {
+                    Set(index, value);
+                }
+                else if (count < value.Count)
+                {
+                    Set(index, value[0, count]);
+                }
+            }
         }
 
         public static bool operator ==(BitList left, BitList right)
@@ -636,7 +636,6 @@ namespace DataStructures
         /// <summary>
         /// Create a list of bit from a file.
         /// </summary>
-        /// <exception cref="FileReadingException" />
         public static BitList Read(string filePath)
         {
             byte[] bytes;
@@ -699,6 +698,15 @@ namespace DataStructures
         public void Clear()
         {
             bits = null;
+        }
+
+        /// <summary>
+        /// Copy this instance to the specified array.
+        /// </summary>
+        /// <param name="arrayIndex">Start position.</param>
+        public void CopyTo<T>(T[] unmanagedNonPrimitiveValueArray, int arrayIndex) where T : unmanaged
+        {
+            ToUnmanagedNonPrimitiveValueArray<T>().CopyTo(unmanagedNonPrimitiveValueArray, arrayIndex);
         }
 
         /// <summary>
@@ -821,7 +829,6 @@ namespace DataStructures
         /// <summary>
         /// Get a the value in the specified index.
         /// </summary>
-        /// <exception cref="IndexOutOfRangeException" />
         public bool Get(int index)
         {
             if (!IsEmpty && index < bits.Length && index >= 0)
@@ -837,7 +844,6 @@ namespace DataStructures
         /// <summary>
         /// Get a range of value in the specified index.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException" />
         public BitList Get(int index, int count)
         {
             if (!IsEmpty && index < bits.Length && index >= 0 && index + count <= bits.Length - index && count > 0)
@@ -859,7 +865,6 @@ namespace DataStructures
         /// <summary>
         /// Set the value in the specified index with a new value.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException" />
         public void Set(int index, bool value)
         {
             if (!IsEmpty && index < bits.Length && index >= 0)
@@ -875,7 +880,6 @@ namespace DataStructures
         /// <summary>
         /// Set the value in the specified index with a new collection of values.
         /// </summary>
-        /// <exception cref="IndexOutOfRangeException" />
         public void Set(int index, BitList value)
         {
             if (!IsEmpty && index < bits.Length && index >= 0 && index + value.Count <= bits.Length - index && value.Count > 0)
@@ -950,7 +954,6 @@ namespace DataStructures
         /// <summary>
         /// Remove a bit in the specified position.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException" />
         public void RemoveAt(int index)
         {
             if (!IsEmpty && index < Count && index >= 0)
@@ -970,7 +973,6 @@ namespace DataStructures
         /// </summary>
         /// <param name="index">Start index.</param>
         /// <param name="count">Count of bits.</param>
-        /// <exception cref="ArgumentOutOfRangeException" />
         public void RemoveRange(int index, int count)
         {
             if (!IsEmpty && index < bits.Length && index >= 0 && index + count <= bits.Length - index && count > 0)
@@ -1004,7 +1006,6 @@ namespace DataStructures
         /// <summary>
         /// Remove the specified list of bit from this instance.
         /// </summary>
-        /// <exception cref="EmptyInstanceException" />
         public bool Remove(BitList items)
         {
             if (IsEmpty)
@@ -1130,7 +1131,6 @@ namespace DataStructures
         /// <summary>
         /// NOT boolean operation.
         /// </summary>
-        /// <exception cref="BooleanAlgebraException" />
         public void Not()
         {
             if (IsEmpty)
@@ -1146,7 +1146,6 @@ namespace DataStructures
         /// <summary>
         /// AND boolean operation of this instance.
         /// </summary>
-        /// <exception cref="BooleanAlgebraException" />
         public bool And()
         {
             if (IsEmpty)
@@ -1168,7 +1167,6 @@ namespace DataStructures
         /// <summary>
         /// AND boolean operation with another list of bit.
         /// </summary>
-        /// <exception cref="BooleanAlgebraException" />
         public void And(BitList bits)
         {
             if (IsEmpty)
@@ -1184,7 +1182,6 @@ namespace DataStructures
         /// <summary>
         /// OR boolean operation in this instance.
         /// </summary>
-        /// <exception cref="BooleanAlgebraException" />
         public bool Or()
         {
             if (IsEmpty)
@@ -1206,7 +1203,6 @@ namespace DataStructures
         /// <summary>
         /// OR boolean operation with another list of bit.
         /// </summary>
-        /// <exception cref="BooleanAlgebraException" />
         public void Or(BitList bits)
         {
             if (IsEmpty)
@@ -1222,7 +1218,6 @@ namespace DataStructures
         /// <summary>
         /// XOR boolean operation in this instance.
         /// </summary>
-        /// <exception cref="BooleanAlgebraException" />
         public bool Xor()
         {
             if (IsEmpty)
@@ -1244,7 +1239,6 @@ namespace DataStructures
         /// <summary>
         /// XOR boolean operation with another list of bit.
         /// </summary>
-        /// <exception cref="BooleanAlgebraException" />
         public void Xor(BitList bits)
         {
             if (IsEmpty)
@@ -1260,7 +1254,6 @@ namespace DataStructures
         /// <summary>
         /// Insert the specified list of bit in the specified index.
         /// </summary>
-        /// <exception cref="IndexOutOfRangeException" />
         public void Insert(int index, BitList items)
         {
             if (IsEmpty)
@@ -1282,7 +1275,6 @@ namespace DataStructures
         /// <summary>
         /// Insert the specified bit in the specified index.
         /// </summary>
-        /// <exception cref="IndexOutOfRangeException" />
         public void Insert(int index, bool item)
         {
             if (IsEmpty)
@@ -1304,7 +1296,6 @@ namespace DataStructures
         /// <summary>
         /// Replace a list of bit of the current instance with another list of bit.
         /// </summary>
-        /// <exception cref="EmptyInstanceException" />
         public void Replace(BitList oldBitList, BitList newBitList)
         {
             if (IsEmpty)
@@ -1324,7 +1315,6 @@ namespace DataStructures
         /// <summary>
         /// Write the current instance into a file.
         /// </summary>
-        /// <exception cref="FileWritingException" />
         public void Write(string filePath)
         {
             try
@@ -1354,6 +1344,93 @@ namespace DataStructures
             }
 
             return text;
+        }
+
+        /// <summary>
+        /// Convert this instance to a specified unmanaged non primitive value array.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T[] ToUnmanagedNonPrimitiveValueArray<T>() where T : unmanaged
+        {
+            try
+            {
+                if (typeof(T).IsPrimitive || typeof(T).IsPointer)
+                {
+                    throw new Exception();
+                }
+                else if (IsEmpty)
+                {
+                    return new T[0];
+                }
+
+                var bytes = ToByteArray().ToList();
+
+                //Unit of measure: byte (8 bit).
+                var size = Marshal.SizeOf(typeof(T).IsEnum ? Enum.GetUnderlyingType(typeof(T)) : typeof(T));
+
+                while (bytes.Count % size != 0)
+                {
+                    //Add a missing byte.
+                    bytes.Add(0);
+                }
+
+                var result = new List<T>(); //A list of unmanaged non primitive value type objects.
+                for (var i = 0; i < bytes.Count; i += size)
+                {
+                    if (typeof(T).IsEnum)
+                    {
+                        T obj = default;
+                        switch (Enum.GetUnderlyingType(typeof(T)).Name)
+                        {
+                            case "Byte":
+                                obj = (T)Enum.ToObject(typeof(T), bytes[i]);
+                                break;
+
+                            case "SByte":
+                                obj = (T)Enum.ToObject(typeof(T), (sbyte)bytes[i]);
+                                break;
+
+                            case "Int16":
+                                obj = (T)Enum.ToObject(typeof(T), BitConverter.ToInt16(bytes.GetRange(i, 2).ToArray()));
+                                break;
+
+                            case "UInt16":
+                                obj = (T)Enum.ToObject(typeof(T), BitConverter.ToUInt16(bytes.GetRange(i, 2).ToArray()));
+                                break;
+
+                            case "Int32":
+                                obj = (T)Enum.ToObject(typeof(T), BitConverter.ToInt32(bytes.GetRange(i, 4).ToArray()));
+                                break;
+
+                            case "UInt32":
+                                obj = (T)Enum.ToObject(typeof(T), BitConverter.ToUInt32(bytes.GetRange(i, 4).ToArray()));
+                                break;
+
+                            case "Int64":
+                                obj = (T)Enum.ToObject(typeof(T), BitConverter.ToInt64(bytes.GetRange(i, 8).ToArray()));
+                                break;
+
+                            case "UInt64":
+                                obj = (T)Enum.ToObject(typeof(T), BitConverter.ToUInt64(bytes.GetRange(i, 8).ToArray()));
+                                break;
+                        }
+                        result.Add(obj);
+                    }
+                    else
+                    {
+                        var ptr = Marshal.AllocHGlobal(size); //An unmanaged type object pointer.
+                        Marshal.Copy(bytes.GetRange(i, size).ToArray(), 0, ptr, size); //Copy the current buffer to ptr.
+                        result.Add(Marshal.PtrToStructure<T>(ptr)); //Get the value pointed by ptr and add it to List<T> result.
+                    }
+                }
+
+                return result.ToArray();
+            }
+            catch
+            {
+                throw new ConversionErrorException();
+            }
         }
 
         /// <summary>
@@ -1488,22 +1565,7 @@ namespace DataStructures
         /// <returns>A <see cref="sbyte"/> array.</returns>
         public sbyte[] ToSByteArray()
         {
-            //Convert the bits field (BitArray) to a Byte array and then to a SByte array.
-            if (IsEmpty)
-            {
-                return new sbyte[0];
-            }
-            else
-            {
-                var bytes = ToByteArray();
-                var sbytes = new List<sbyte>();
-                foreach (var bits in bytes)
-                {
-                    sbytes.Add((sbyte)bits);
-                }
-
-                return sbytes.ToArray();
-            }
+            return (sbyte[])(Array)ToByteArray();
         }
 
         /// <summary>
@@ -1512,22 +1574,7 @@ namespace DataStructures
         /// <returns>A <see cref="ushort"/> array.</returns>
         public ushort[] ToUInt16Array()
         {
-            //Convert the bits field (BitArray) to a Int16 array and then to a UInt64 array.
-            if (IsEmpty)
-            {
-                return new ushort[0];
-            }
-            else
-            {
-                var shorts = ToInt16Array();
-                var ushorts = new List<ushort>();
-                foreach (var bits in shorts)
-                {
-                    ushorts.Add((ushort)bits);
-                }
-
-                return ushorts.ToArray();
-            }
+            return (ushort[])(Array)ToInt16Array();
         }
 
         /// <summary>
@@ -1536,22 +1583,7 @@ namespace DataStructures
         /// <returns>A <see cref="uint"/> array.</returns>
         public uint[] ToUInt32Array()
         {
-            //Convert the bits field (BitArray) to a Int32 array and then to a UInt32 array.
-            if (IsEmpty)
-            {
-                return new uint[0];
-            }
-            else
-            {
-                var ints = ToInt32Array();
-                var uints = new List<uint>();
-                foreach (var bits in ints)
-                {
-                    uints.Add((uint)bits);
-                }
-
-                return uints.ToArray();
-            }
+            return (uint[])(Array)ToInt32Array();
         }
 
         /// <summary>
@@ -1560,22 +1592,7 @@ namespace DataStructures
         /// <returns>A <see cref="ulong"/> array.</returns>
         public ulong[] ToUInt64Array()
         {
-            //Convert the bits field (BitArray) to a Int64 array and then to a UInt64 array.
-            if (IsEmpty)
-            {
-                return new ulong[0];
-            }
-            else
-            {
-                var longs = ToInt64Array();
-                var ulongs = new List<ulong>();
-                foreach (var bits in longs)
-                {
-                    ulongs.Add((ulong)bits);
-                }
-
-                return ulongs.ToArray();
-            }
+            return (ulong[])(Array)ToInt64Array();
         }
 
         /// <summary>
@@ -1693,7 +1710,14 @@ namespace DataStructures
         public override string ToString()
         {
             //Convert the bits field (BitArray) to a Char array and then to a String.
-            return IsEmpty ? string.Empty : new string(ToCharArray());
+            if (IsEmpty)
+            {
+                return string.Empty;
+            }
+            else
+            {
+                return new string(ToCharArray());
+            }
         }
 
         /// <summary>
@@ -1723,5 +1747,7 @@ namespace DataStructures
         {
             return ToBooleanArray().ToList().GetEnumerator();
         }
+
+        private class Unmanaged<T> where T : unmanaged { }
     }
 }
