@@ -171,14 +171,14 @@ namespace DataStructures.Tests
         [Test]
         public static void AddBitListTest() //void Add(BitList items)
         {
-            var bits = new BitList() { new BitList(true) };
+            var bits = new BitList { new BitList(true) };
             Assert.IsTrue(bits.Count == 1 && bits[0]);
         }
 
         [Test]
         public static void AddBooleanTest() //void Add(bool item)
         {
-            var bits = new BitList() { true };
+            var bits = new BitList { true };
             Assert.IsTrue(bits.Count == 1 && bits[0]);
         }
 
