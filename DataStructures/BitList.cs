@@ -72,72 +72,72 @@ namespace DataStructures
         /// </summary>
         public BitList(ValueType unmanagedNonPrimitiveBits)
         {
-            //try
-            //{
-            if (unmanagedNonPrimitiveBits.GetType().IsPrimitive)
+            try
             {
-                throw new Exception();
-            }
-
-            //Throw an exception if the type of unmanagedBits isn't unmanaged; otherwise, continue.
-            typeof(Unmanaged<>).MakeGenericType(unmanagedNonPrimitiveBits.GetType());
-
-            //Unit of measure: byte (8 bit).
-            var size = Marshal.SizeOf(
-                unmanagedNonPrimitiveBits.GetType().IsEnum ?
-                    Enum.GetUnderlyingType(unmanagedNonPrimitiveBits.GetType()) : unmanagedNonPrimitiveBits.GetType()
-            );
-
-            if (unmanagedNonPrimitiveBits.GetType().IsEnum)
-            {
-                switch (Enum.GetUnderlyingType(unmanagedNonPrimitiveBits.GetType()).Name)
+                if (unmanagedNonPrimitiveBits.GetType().IsPrimitive)
                 {
-                    case "Byte":
-                        bits = new BitArray(new[] { (byte)unmanagedNonPrimitiveBits });
-                        break;
+                    throw new Exception();
+                }
 
-                    case "SByte":
-                        bits = new BitArray(new[] { (byte)(sbyte)unmanagedNonPrimitiveBits });
-                        break;
+                //Throw an exception if the type of unmanagedBits isn't unmanaged; otherwise, continue.
+                typeof(Unmanaged<>).MakeGenericType(unmanagedNonPrimitiveBits.GetType());
 
-                    case "Int16":
-                        bits = new BitArray(BitConverter.GetBytes((short)unmanagedNonPrimitiveBits));
-                        break;
+                //Unit of measure: byte (8 bit).
+                var size = Marshal.SizeOf(
+                    unmanagedNonPrimitiveBits.GetType().IsEnum ?
+                        Enum.GetUnderlyingType(unmanagedNonPrimitiveBits.GetType()) : unmanagedNonPrimitiveBits.GetType()
+                );
 
-                    case "UInt16":
-                        bits = new BitArray(BitConverter.GetBytes((ushort)unmanagedNonPrimitiveBits));
-                        break;
+                if (unmanagedNonPrimitiveBits.GetType().IsEnum)
+                {
+                    switch (Enum.GetUnderlyingType(unmanagedNonPrimitiveBits.GetType()).Name)
+                    {
+                        case "Byte":
+                            bits = new BitArray(new[] { (byte)unmanagedNonPrimitiveBits });
+                            break;
 
-                    case "Int32":
-                        bits = new BitArray(new[] { (int)unmanagedNonPrimitiveBits });
-                        break;
+                        case "SByte":
+                            bits = new BitArray(new[] { (byte)(sbyte)unmanagedNonPrimitiveBits });
+                            break;
 
-                    case "UInt32":
-                        bits = new BitArray(new[] { (int)(uint)unmanagedNonPrimitiveBits });
-                        break;
+                        case "Int16":
+                            bits = new BitArray(BitConverter.GetBytes((short)unmanagedNonPrimitiveBits));
+                            break;
 
-                    case "Int64":
-                        bits = new BitArray(BitConverter.GetBytes((long)unmanagedNonPrimitiveBits));
-                        break;
+                        case "UInt16":
+                            bits = new BitArray(BitConverter.GetBytes((ushort)unmanagedNonPrimitiveBits));
+                            break;
 
-                    case "UInt64":
-                        bits = new BitArray(BitConverter.GetBytes((ulong)unmanagedNonPrimitiveBits));
-                        break;
+                        case "Int32":
+                            bits = new BitArray(new[] { (int)unmanagedNonPrimitiveBits });
+                            break;
+
+                        case "UInt32":
+                            bits = new BitArray(new[] { (int)(uint)unmanagedNonPrimitiveBits });
+                            break;
+
+                        case "Int64":
+                            bits = new BitArray(BitConverter.GetBytes((long)unmanagedNonPrimitiveBits));
+                            break;
+
+                        case "UInt64":
+                            bits = new BitArray(BitConverter.GetBytes((ulong)unmanagedNonPrimitiveBits));
+                            break;
+                    }
+                }
+                else
+                {
+                    var destination = new byte[size]; //A buffer that can contains unmanagedBits.
+                    var ptr = Marshal.AllocHGlobal(size); //Will be a pointer to unmanagedNonPrimitiveBits
+                    Marshal.StructureToPtr(unmanagedNonPrimitiveBits, ptr, false);
+                    Marshal.Copy(ptr, destination, 0, size); //Copy unmanagedBits into destination buffer.
+                    bits = new BitArray(destination); //Create a new BitArray object using destination buffer.
                 }
             }
-            else
+            catch
             {
-                var destination = new byte[size]; //A buffer that can contains unmanagedBits.
-                var ptr = Marshal.AllocHGlobal(size); //Will be a pointer to unmanagedNonPrimitiveBits
-                Marshal.StructureToPtr(unmanagedNonPrimitiveBits, ptr, false);
-                Marshal.Copy(ptr, destination, 0, size); //Copy unmanagedBits into destination buffer.
-                bits = new BitArray(destination); //Create a new BitArray object using destination buffer.
+                throw new ConversionErrorException();
             }
-            //}
-            //catch
-            //{
-            //    throw new ConversionErrorException();
-            //}
         }
 
         /// <summary>
