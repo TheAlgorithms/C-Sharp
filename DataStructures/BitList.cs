@@ -1358,7 +1358,7 @@ namespace DataStructures
             {
                 if (typeof(T).IsPrimitive || typeof(T).IsPointer)
                 {
-                    throw new Exception();
+                    throw new ConversionErrorException();
                 }
                 else if (IsEmpty)
                 {
