@@ -76,7 +76,7 @@ namespace DataStructures
             {
                 if (unmanagedNonPrimitiveBits.GetType().IsPrimitive)
                 {
-                    throw new Exception();
+                    throw new ConversionErrorException();
                 }
 
                 //Throw an exception if the type of unmanagedBits isn't unmanaged; otherwise, continue.
@@ -112,6 +112,7 @@ namespace DataStructures
                             bits = new BitArray(new[] { (int)unmanagedNonPrimitiveBits });
                             break;
 
+                        default:
                         case "UInt32":
                             bits = new BitArray(new[] { (int)(uint)unmanagedNonPrimitiveBits });
                             break;
@@ -483,7 +484,7 @@ namespace DataStructures
                 {
                     Set(index, value);
                 }
-                else if (count < value.Count)
+                else
                 {
                     Set(index, value[0, count]);
                 }
@@ -837,7 +838,7 @@ namespace DataStructures
             }
             else
             {
-                throw new IndexOutOfRangeException();
+                throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -1363,69 +1364,72 @@ namespace DataStructures
                 {
                     return new T[0];
                 }
-
-                var bytes = ToByteArray().ToList();
-
-                //Unit of measure: byte (8 bit).
-                var size = Marshal.SizeOf(typeof(T).IsEnum ? Enum.GetUnderlyingType(typeof(T)) : typeof(T));
-
-                while (bytes.Count % size != 0)
+                else
                 {
-                    //Add a missing byte.
-                    bytes.Add(0);
-                }
+                    var bytes = ToByteArray().ToList();
 
-                var result = new List<T>(); //A list of unmanaged non primitive value type objects.
-                for (var i = 0; i < bytes.Count; i += size)
-                {
-                    if (typeof(T).IsEnum)
+                    //Unit of measure: byte (8 bit).
+                    var size = Marshal.SizeOf(typeof(T).IsEnum ? Enum.GetUnderlyingType(typeof(T)) : typeof(T));
+
+                    while (bytes.Count % size != 0)
                     {
-                        T obj = default;
-                        switch (Enum.GetUnderlyingType(typeof(T)).Name)
+                        //Add a missing byte.
+                        bytes.Add(0);
+                    }
+
+                    var result = new List<T>(); //A list of unmanaged non primitive value type objects.
+                    for (var i = 0; i < bytes.Count; i += size)
+                    {
+                        if (typeof(T).IsEnum)
                         {
-                            case "Byte":
-                                obj = (T)Enum.ToObject(typeof(T), bytes[i]);
-                                break;
+                            T obj;
+                            switch (Enum.GetUnderlyingType(typeof(T)).Name)
+                            {
+                                case "Byte":
+                                    obj = (T)Enum.ToObject(typeof(T), bytes[i]);
+                                    break;
 
-                            case "SByte":
-                                obj = (T)Enum.ToObject(typeof(T), (sbyte)bytes[i]);
-                                break;
+                                case "SByte":
+                                    obj = (T)Enum.ToObject(typeof(T), (sbyte)bytes[i]);
+                                    break;
 
-                            case "Int16":
-                                obj = (T)Enum.ToObject(typeof(T), BitConverter.ToInt16(bytes.GetRange(i, 2).ToArray()));
-                                break;
+                                case "Int16":
+                                    obj = (T)Enum.ToObject(typeof(T), BitConverter.ToInt16(bytes.GetRange(i, 2).ToArray()));
+                                    break;
 
-                            case "UInt16":
-                                obj = (T)Enum.ToObject(typeof(T), BitConverter.ToUInt16(bytes.GetRange(i, 2).ToArray()));
-                                break;
+                                case "UInt16":
+                                    obj = (T)Enum.ToObject(typeof(T), BitConverter.ToUInt16(bytes.GetRange(i, 2).ToArray()));
+                                    break;
 
-                            case "Int32":
-                                obj = (T)Enum.ToObject(typeof(T), BitConverter.ToInt32(bytes.GetRange(i, 4).ToArray()));
-                                break;
+                                default:
+                                case "Int32":
+                                    obj = (T)Enum.ToObject(typeof(T), BitConverter.ToInt32(bytes.GetRange(i, 4).ToArray()));
+                                    break;
 
-                            case "UInt32":
-                                obj = (T)Enum.ToObject(typeof(T), BitConverter.ToUInt32(bytes.GetRange(i, 4).ToArray()));
-                                break;
+                                case "UInt32":
+                                    obj = (T)Enum.ToObject(typeof(T), BitConverter.ToUInt32(bytes.GetRange(i, 4).ToArray()));
+                                    break;
 
-                            case "Int64":
-                                obj = (T)Enum.ToObject(typeof(T), BitConverter.ToInt64(bytes.GetRange(i, 8).ToArray()));
-                                break;
+                                case "Int64":
+                                    obj = (T)Enum.ToObject(typeof(T), BitConverter.ToInt64(bytes.GetRange(i, 8).ToArray()));
+                                    break;
 
-                            case "UInt64":
-                                obj = (T)Enum.ToObject(typeof(T), BitConverter.ToUInt64(bytes.GetRange(i, 8).ToArray()));
-                                break;
+                                case "UInt64":
+                                    obj = (T)Enum.ToObject(typeof(T), BitConverter.ToUInt64(bytes.GetRange(i, 8).ToArray()));
+                                    break;
+                            }
+                            result.Add(obj);
                         }
-                        result.Add(obj);
+                        else
+                        {
+                            var ptr = Marshal.AllocHGlobal(size); //An unmanaged type object pointer.
+                            Marshal.Copy(bytes.GetRange(i, size).ToArray(), 0, ptr, size); //Copy the current buffer to ptr.
+                            result.Add(Marshal.PtrToStructure<T>(ptr)); //Get the value pointed by ptr and add it to List<T> result.
+                        }
                     }
-                    else
-                    {
-                        var ptr = Marshal.AllocHGlobal(size); //An unmanaged type object pointer.
-                        Marshal.Copy(bytes.GetRange(i, size).ToArray(), 0, ptr, size); //Copy the current buffer to ptr.
-                        result.Add(Marshal.PtrToStructure<T>(ptr)); //Get the value pointed by ptr and add it to List<T> result.
-                    }
-                }
 
-                return result.ToArray();
+                    return result.ToArray();
+                }
             }
             catch
             {
@@ -1710,14 +1714,7 @@ namespace DataStructures
         public override string ToString()
         {
             //Convert the bits field (BitArray) to a Char array and then to a String.
-            if (IsEmpty)
-            {
-                return string.Empty;
-            }
-            else
-            {
-                return new string(ToCharArray());
-            }
+            return IsEmpty ? string.Empty : new string(ToCharArray());
         }
 
         /// <summary>
