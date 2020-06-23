@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Drawing;
 using System.IO;
 
 namespace DataStructures.Tests
@@ -302,6 +303,15 @@ namespace DataStructures.Tests
         }
 
         [Test]
+        public static void CopyToUnmanagedNonPrimitiveValueArrayTest() //void CopyTo<T>(T[] unmanagedNonPrimitiveValueArray, int arrayIndex)
+        {
+            var bits = new BitList(new Size(100, 50));
+            var array = new Size[1];
+            bits.CopyTo(array, 0);
+            Assert.IsTrue(array.Length == 1 && array[0] == new Size(100, 50));
+        }
+
+        [Test]
         public static void CopyToBooleanArrayTest() //void CopyTo(bool[] array, int arrayIndex)
         {
             var bits = new BitList(true);
@@ -416,6 +426,13 @@ namespace DataStructures.Tests
             var array = new char[1];
             bits.CopyTo(array, 0);
             Assert.IsTrue(array.Length == 1 && array[0] == 'a');
+        }
+
+        [Test]
+        public static void ToUnmanagedNonPrimitiveValueArrayTest()
+        {
+            var array = new BitList(new Size(100, 50)).ToUnmanagedNonPrimitiveValueArray<Size>();
+            Assert.IsTrue(array.Length == 1 && array[0] == new Size(100, 50));
         }
 
         [Test]
