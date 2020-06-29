@@ -71,6 +71,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 	* [Singly Linked List](./DataStructures/SinglyLinkedList)
 	* [Doubly Linked List](./DataStructures/DoublyLinkedList)
 	* [Min-Max Heap](./DataStructures/MinMaxHeap.cs)
+	* [Timeline](./DataStructures/Timeline.cs)
 ---
 
 ## Contribution
