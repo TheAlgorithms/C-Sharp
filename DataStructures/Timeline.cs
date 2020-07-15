@@ -201,7 +201,8 @@ namespace DataStructures
         {
             return (from t in GetAllTimes()
                     where t < time
-                    select t).OrderBy(t => t).ToArray();
+                    orderby t
+                    select t).ToArray();
         }
 
         /// <summary>
@@ -211,7 +212,8 @@ namespace DataStructures
         {
             return (from t in GetAllTimes()
                     where t > time
-                    select t).OrderBy(t => t).ToArray();
+                    orderby t
+                    select t).ToArray();
         }
 
         /// <summary>
