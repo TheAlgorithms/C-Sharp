@@ -23,7 +23,7 @@ namespace DataStructures
     /// A collection of <see cref="DateTime"/> and <see cref="TValue"/> sorted by <see cref="DateTime"/> field.
     /// </summary>
     /// <typeparam name="TValue">Value associated with a <see cref="DateTime"/>.</typeparam>
-    public class Timeline<TValue>:
+    public class Timeline<TValue> :
         ICollection<(DateTime Time, TValue Value)>,
         IEquatable<Timeline<TValue>>
     {
