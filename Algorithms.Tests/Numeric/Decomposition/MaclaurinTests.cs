@@ -23,17 +23,8 @@ namespace Algorithms.Tests.Numeric.Decomposition
         }
         
         [Test]
-        public void Exp_TermsForm_InvalidCase()
-        {
-            // Arrange
-            const int invalidTermsCount = -1;
-
-            // Act
-            void Act(int terms) => Maclaurin.Exp(0, terms);
-
-            // Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() => Act(invalidTermsCount));
-        }
+        public void Exp_TermsForm_InvalidCase() => 
+            Assert.Throws<ArgumentOutOfRangeException>(() => Maclaurin.Exp(0, -1));
         
         [TestCase(0, 1, 0.001)]
         [TestCase(1, 7, 0.001)]
@@ -52,17 +43,8 @@ namespace Algorithms.Tests.Numeric.Decomposition
         }
         
         [Test]
-        public void Sin_TermsForm_InvalidCase()
-        {
-            // Arrange
-            const int invalidTermsCount = -1;
-
-            // Act
-            void Act(int terms) => Maclaurin.Sin(0, terms);
-
-            // Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() => Act(invalidTermsCount));
-        }
+        public void Sin_TermsForm_InvalidCase() => 
+            Assert.Throws<ArgumentOutOfRangeException>(() => Maclaurin.Sin(0, -1));
         
         [TestCase(0, 1, 0.001)]
         [TestCase(1, 7, 0.001)]
@@ -81,16 +63,29 @@ namespace Algorithms.Tests.Numeric.Decomposition
         }
         
         [Test]
-        public void Cos_TermsForm_InvalidCase()
+        public void Cos_TermsForm_InvalidCase() => 
+            Assert.Throws<ArgumentOutOfRangeException>(() => Maclaurin.Cos(0, -1));
+
+        [TestCase(0.1, 0.001)]
+        [TestCase(0.1, 0.00001)]
+        [TestCase(2.1, 0.001)]
+        [TestCase(-1.2,  0.001)]
+        public void Exp_ErrorForm_ValidCases(double point, double error)
         {
             // Arrange
-            const int invalidTermsCount = -1;
-
+            var expected = Math.Exp(point);
+            
             // Act
-            void Act(int terms) => Maclaurin.Cos(0, terms);
+            var actual = Maclaurin.Exp(point, error);
 
             // Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() => Act(invalidTermsCount));
+            Assert.IsTrue(Math.Abs(expected - actual) < error);
         }
+
+        [TestCase(0.1, 0.0)]
+        [TestCase(0.1, 1.0)]
+        [TestCase(0.001, 0.1)]
+        public void Exp_ErrorForm_InvalidCases(double point, double error) =>
+            Assert.Throws<ArgumentException>(() => Maclaurin.Exp(point, error));
     }
 }
