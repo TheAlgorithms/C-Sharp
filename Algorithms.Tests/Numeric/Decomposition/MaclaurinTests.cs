@@ -82,10 +82,51 @@ namespace Algorithms.Tests.Numeric.Decomposition
             Assert.IsTrue(Math.Abs(expected - actual) < error);
         }
 
-        [TestCase(0.1, 0.0)]
-        [TestCase(0.1, 1.0)]
-        [TestCase(0.001, 0.1)]
-        public void Exp_ErrorForm_InvalidCases(double point, double error) =>
-            Assert.Throws<ArgumentException>(() => Maclaurin.Exp(point, error));
+        [TestCase(0.0)]
+        [TestCase(1.0)]
+        public void Exp_ErrorForm_InvalidCases(double error) =>
+            Assert.Throws<ArgumentException>(() => Maclaurin.Exp(0.0, error));
+        
+        [TestCase(0, 0.001)]
+        [TestCase(1, 0.00001)]
+        [TestCase(1.57, 0.0001)]
+        [TestCase(3.14, 0.0001)]
+        public void Sin_ErrorForm_ValidCases(double point, double error)
+        {
+            // Arrange
+            var expected = Math.Sin(point);
+            
+            // Act
+            var actual = Maclaurin.Sin(point, error);
+
+            // Assert
+            Assert.IsTrue(Math.Abs(expected - actual) < error);
+        }
+
+        [TestCase(0.0)]
+        [TestCase(1.0)]
+        public void Sin_ErrorForm_InvalidCases(double error) =>
+            Assert.Throws<ArgumentException>(() => Maclaurin.Sin(0.0, error));
+        
+        [TestCase(0, 0.001)]
+        [TestCase(1, 0.00001)]
+        [TestCase(1.57, 0.0001)]
+        [TestCase(3.14, 0.0001)]
+        public void Cos_ErrorForm_ValidCases(double point, double error)
+        {
+            // Arrange
+            var expected = Math.Cos(point);
+            
+            // Act
+            var actual = Maclaurin.Cos(point, error);
+
+            // Assert
+            Assert.IsTrue(Math.Abs(expected - actual) < error);
+        }
+
+        [TestCase(0.0)]
+        [TestCase(1.0)]
+        public void Cos_ErrorForm_InvalidCases(double error) =>
+            Assert.Throws<ArgumentException>(() => Maclaurin.Cos(0.0, error));
     }
 }

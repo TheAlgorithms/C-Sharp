@@ -60,7 +60,6 @@ namespace Algorithms.Numeric.Series
         /// <param name="error">Last term error value.</param>
         /// <returns>Approximated value of the function in the given point.</returns>
         /// <exception cref="ArgumentException">Error value is not on interval (0.0; 1.0).</exception>
-        /// <exception cref="ArgumentException">Series will not converge, when <b>|x|</b> is less than <b>eps</b>.</exception>
         public static double Exp(double x, double error = 0.00001)
         {
             if (error <= 0.0 || error >= 1.0)
@@ -68,21 +67,79 @@ namespace Algorithms.Numeric.Series
                 throw new ArgumentException("Error value is not on interval (0.0; 1.0).");
             }
 
-            if (Math.Abs(x) < error)
-            {
-                throw new ArgumentException("Series will not converge: |x| < eps.");
-            }
-
-            var n = 1;
-            var termCoefficient = 1.0;
+            var n = 0;
+            var termCoefficient = 0.0;
             var result = 0.0;
 
-            while (Math.Abs(termCoefficient) > error)
+            do
             {
                 result += termCoefficient;
                 termCoefficient = Math.Pow(x, n) / Factorial.Calculate(n);
                 n++;
             }
+            while (Math.Abs(termCoefficient) > error);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Calculates approximation of sin(x) function:
+        /// sin(x) = x - x^3 / 3! + ... + (-1)^n * x^(2*n + 1) / (2*n + 1)! + ...,
+        /// and x is given point (rational number).
+        /// </summary>
+        /// <param name="x">Given point.</param>
+        /// <param name="error">Last term error value.</param>
+        /// <returns>Approximated value of the function in the given point.</returns>
+        /// <exception cref="ArgumentException">Error value is not on interval (0.0; 1.0).</exception>
+        public static double Sin(double x, double error = 0.00001)
+        {
+            if (error <= 0.0 || error >= 1.0)
+            {
+                throw new ArgumentException("Error value is not on interval (0.0; 1.0).");
+            }
+
+            var n = 0;
+            var termCoefficient = 0.0;
+            var result = 0.0;
+
+            do
+            {
+                result += termCoefficient;
+                termCoefficient = (Math.Pow(-1, n) / Factorial.Calculate(2 * n + 1)) * Math.Pow(x, 2 * n + 1);
+                n++;
+            }
+            while (Math.Abs(termCoefficient) > error);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Calculates approximation of cos(x) function:
+        /// cos(x) = 1 - x^2 / 2! + ... + (-1)^n * x^(2*n) / (2*n)! + ...,
+        /// and x is given point (rational number).
+        /// </summary>
+        /// <param name="x">Given point.</param>
+        /// <param name="error">Last term error value.</param>
+        /// <returns>Approximated value of the function in the given point.</returns>
+        /// <exception cref="ArgumentException">Error value is not on interval (0.0; 1.0).</exception>
+        public static double Cos(double x, double error = 0.00001)
+        {
+            if (error <= 0.0 || error >= 1.0)
+            {
+                throw new ArgumentException("Error value is not on interval (0.0; 1.0).");
+            }
+
+            var n = 0;
+            var termCoefficient = 0.0;
+            var result = 0.0;
+
+            do
+            {
+                result += termCoefficient;
+                termCoefficient = (Math.Pow(-1, n) / Factorial.Calculate(2 * n)) * Math.Pow(x, 2 * n);
+                n++;
+            }
+            while (Math.Abs(termCoefficient) > error);
 
             return result;
         }
