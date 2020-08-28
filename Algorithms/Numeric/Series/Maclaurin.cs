@@ -22,8 +22,7 @@ namespace Algorithms.Numeric.Series
         /// <param name="n">The number of terms in polynomial.</param>
         /// <returns>Approximated value of the function in the given point.</returns>
         public static double Exp(double x, int n) =>
-            Enumerable.Range(0, n)
-                .Sum(i => Math.Pow(x, i) / Factorial.Calculate(i));
+            Enumerable.Range(0, n).Sum(i => ExpTerm(x, i));
 
         /// <summary>
         /// Calculates approximation of sin(x) function:
@@ -35,8 +34,7 @@ namespace Algorithms.Numeric.Series
         /// <param name="n">The number of terms in polynomial.</param>
         /// <returns>Approximated value of the function in the given point.</returns>
         public static double Sin(double x, int n) =>
-            Enumerable.Range(0, n)
-                .Sum(i => (Math.Pow(-1, i) / Factorial.Calculate(2 * i + 1)) * Math.Pow(x, 2 * i + 1));
+            Enumerable.Range(0, n).Sum(i => SinTerm(x, i));
 
         /// <summary>
         /// Calculates approximation of cos(x) function:
@@ -48,8 +46,7 @@ namespace Algorithms.Numeric.Series
         /// <param name="n">The number of terms in polynomial.</param>
         /// <returns>Approximated value of the function in the given point.</returns>
         public static double Cos(double x, int n) =>
-            Enumerable.Range(0, n)
-                .Sum(i => (Math.Pow(-1, i) / Factorial.Calculate(2 * i)) * Math.Pow(x, 2 * i));
+            Enumerable.Range(0, n).Sum(i => CosTerm(x, i));
 
         /// <summary>
         /// Calculates approximation of e^x function:
@@ -60,27 +57,7 @@ namespace Algorithms.Numeric.Series
         /// <param name="error">Last term error value.</param>
         /// <returns>Approximated value of the function in the given point.</returns>
         /// <exception cref="ArgumentException">Error value is not on interval (0.0; 1.0).</exception>
-        public static double Exp(double x, double error = 0.00001)
-        {
-            if (error <= 0.0 || error >= 1.0)
-            {
-                throw new ArgumentException("Error value is not on interval (0.0; 1.0).");
-            }
-
-            var n = 0;
-            var termCoefficient = 0.0;
-            var result = 0.0;
-
-            do
-            {
-                result += termCoefficient;
-                termCoefficient = Math.Pow(x, n) / Factorial.Calculate(n);
-                n++;
-            }
-            while (Math.Abs(termCoefficient) > error);
-
-            return result;
-        }
+        public static double Exp(double x, double error = 0.00001) => ErrorTermWrapper(x, error, ExpTerm);
 
         /// <summary>
         /// Calculates approximation of sin(x) function:
@@ -91,27 +68,7 @@ namespace Algorithms.Numeric.Series
         /// <param name="error">Last term error value.</param>
         /// <returns>Approximated value of the function in the given point.</returns>
         /// <exception cref="ArgumentException">Error value is not on interval (0.0; 1.0).</exception>
-        public static double Sin(double x, double error = 0.00001)
-        {
-            if (error <= 0.0 || error >= 1.0)
-            {
-                throw new ArgumentException("Error value is not on interval (0.0; 1.0).");
-            }
-
-            var n = 0;
-            var termCoefficient = 0.0;
-            var result = 0.0;
-
-            do
-            {
-                result += termCoefficient;
-                termCoefficient = (Math.Pow(-1, n) / Factorial.Calculate(2 * n + 1)) * Math.Pow(x, 2 * n + 1);
-                n++;
-            }
-            while (Math.Abs(termCoefficient) > error);
-
-            return result;
-        }
+        public static double Sin(double x, double error = 0.00001) => ErrorTermWrapper(x, error, SinTerm);
 
         /// <summary>
         /// Calculates approximation of cos(x) function:
@@ -122,26 +79,63 @@ namespace Algorithms.Numeric.Series
         /// <param name="error">Last term error value.</param>
         /// <returns>Approximated value of the function in the given point.</returns>
         /// <exception cref="ArgumentException">Error value is not on interval (0.0; 1.0).</exception>
-        public static double Cos(double x, double error = 0.00001)
+        public static double Cos(double x, double error = 0.00001) => ErrorTermWrapper(x, error, CosTerm);
+
+        /// <summary>
+        /// Wrapper function for calculating approximation with estimated
+        /// count of terms, where last term value is less than given error.
+        /// </summary>
+        /// <param name="x">Given point.</param>
+        /// <param name="error">Last term error value.</param>
+        /// <param name="term">Indexed term of approximation series.</param>
+        /// <returns>Approximated value of the function in the given point.</returns>
+        /// <exception cref="ArgumentException">Error value is not on interval (0.0; 1.0).</exception>
+        private static double ErrorTermWrapper(double x, double error, Func<double, int, double> term)
         {
             if (error <= 0.0 || error >= 1.0)
             {
                 throw new ArgumentException("Error value is not on interval (0.0; 1.0).");
             }
 
-            var n = 0;
+            var i = 0;
             var termCoefficient = 0.0;
             var result = 0.0;
 
             do
             {
                 result += termCoefficient;
-                termCoefficient = (Math.Pow(-1, n) / Factorial.Calculate(2 * n)) * Math.Pow(x, 2 * n);
-                n++;
+                termCoefficient = term(x, i);
+                i++;
             }
             while (Math.Abs(termCoefficient) > error);
 
             return result;
         }
+
+        /// <summary>
+        /// Single term for e^x function approximation: x^i / i!.
+        /// </summary>
+        /// <param name="x">Given point.</param>
+        /// <param name="i">Term index from 0 to n.</param>
+        /// <returns>Single term value.</returns>
+        private static double ExpTerm(double x, int i) => Math.Pow(x, i) / Factorial.Calculate(i);
+
+        /// <summary>
+        /// Single term for sin(x) function approximation: (-1)^i * x^(2*i + 1) / (2*i + 1)!.
+        /// </summary>
+        /// <param name="x">Given point.</param>
+        /// <param name="i">Term index from 0 to n.</param>
+        /// <returns>Single term value.</returns>
+        private static double SinTerm(double x, int i) =>
+            (Math.Pow(-1, i) / Factorial.Calculate(2 * i + 1)) * Math.Pow(x, 2 * i + 1);
+
+        /// <summary>
+        /// Single term for cos(x) function approximation: (-1)^i * x^(2*i) / (2*i)!.
+        /// </summary>
+        /// <param name="x">Given point.</param>
+        /// <param name="i">Term index from 0 to n.</param>
+        /// <returns>Single term value.</returns>
+        private static double CosTerm(double x, int i) =>
+            (Math.Pow(-1, i) / Factorial.Calculate(2 * i)) * Math.Pow(x, 2 * i);
     }
 }
