@@ -38,6 +38,19 @@ namespace Algorithms.Search
                 return item == array[0] ? 0 : throw new ItemNotFoundException();
             }
 
+            var (left, right) = ComputeIndices(array, item);
+            var (from, to) = SelectSegment(array, left, right, item);
+
+            if (from > to)
+            {
+                throw new ItemNotFoundException();
+            }
+
+            return from + FindIndex(array.Slice(from, to - from + 1), item);
+        }
+
+        private (int left, int right) ComputeIndices(Span<int> array, int item)
+        {
             var indexBinary = array.Length / 2;
 
             int[] section =
@@ -46,46 +59,27 @@ namespace Algorithms.Search
                 item - array[0],
                 array[^1] - array[0],
             };
-
             var indexInterpolation = section[0] * section[1] / section[2];
 
-            var (i1, i2) = indexBinary > indexInterpolation
-                ? (indexInterpolation, indexBinary)
-                : (indexBinary, indexInterpolation);
+            // Left is min and right is max of the indices
+            return indexInterpolation > indexBinary
+                ? (indexBinary, indexInterpolation)
+                : (indexInterpolation, indexBinary);
+        }
 
-            if (item == array[i1])
+        private (int from, int to) SelectSegment(Span<int> array, int left, int right, int item)
+        {
+            if (item < array[left])
             {
-                return i1;
-            }
-
-            if (item == array[i2])
-            {
-                return i2;
-            }
-
-            int from, to;
-            if (item < array[i1])
-            {
-                from = 0;
-                to = i1 - 1;
-            }
-            else if (item < array[i2])
-            {
-                from = i1 + 1;
-                to = i2 - 1;
-            }
-            else
-            {
-                from = i2 + 1;
-                to = array.Length - 1;
+                return (0, left - 1);
             }
 
-            if (from >= to)
+            if (item < array[right])
             {
-                throw new ItemNotFoundException();
+                return (left, right - 1);
             }
 
-            return from + FindIndex(array.Slice(from, to - from + 1), item);
+            return (right, array.Length - 1);
         }
     }
 }
