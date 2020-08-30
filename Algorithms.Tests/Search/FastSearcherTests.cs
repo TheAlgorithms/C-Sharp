@@ -34,6 +34,13 @@ namespace Algorithms.Tests.Search
             _ = Assert.Throws<ItemNotFoundException>(() => searcher.FindIndex(arr, missing));
         }
 
+        [TestCase(new int[0], 2)]
+        public static void FindIndex_ItemMissingInSpecificCase_ItemNotFoundExceptionThrown(int[] arr, int missing)
+        {
+            var searcher = new FastSearcher();
+            _ = Assert.Throws<ItemNotFoundException>(() => searcher.FindIndex(arr, missing));
+        }
+
         [Test]
         public static void FindIndex_ItemSmallerThanAllMissing_ItemNotFoundExceptionThrown()
         {
