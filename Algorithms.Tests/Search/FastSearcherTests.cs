@@ -15,6 +15,15 @@ namespace Algorithms.Tests.Search
             var index = searcher.FindIndex(arr, present);
             Assert.AreEqual(present, arr[index]);
         }
+        
+        [TestCase(new [] { 1, 2 }, 1)]
+        [TestCase(new [] { 1, 2 }, 2)]
+        public static void FindIndex_ItemPresentInSpecificCase_IndexCorrect(int[] arr, int present)
+        {
+            var searcher = new FastSearcher();
+            var index = searcher.FindIndex(arr, present);
+            Assert.AreEqual(present, arr[index]);
+        }
 
         [Test]
         public static void FindIndex_ItemMissing_ItemNotFoundExceptionThrown()

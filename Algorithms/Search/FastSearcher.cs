@@ -21,18 +21,21 @@ namespace Algorithms.Search
         /// <param name="item">Term to check against.</param>
         /// <returns>Index of first item that satisfies term.</returns>
         /// <exception cref="ItemNotFoundException"> Gets thrown when the given item couldn't be found in the array.</exception>
-        public int FindIndex(int[] array, int item) => FindIndex(array, item, 0);
-
-        private int FindIndex(int[] array, int item, int offset)
+        public int FindIndex(Span<int> array, int item)
         {
-            if (item < array[0] || item > array[array.Length - 1])
+            if (array.Length == 0)
             {
                 throw new ItemNotFoundException();
             }
 
-            if (array[0] == array[array.Length - 1])
+            if (item < array[0] || item > array[^1])
             {
-                return item == array[0] ? offset : throw new ItemNotFoundException();
+                throw new ItemNotFoundException();
+            }
+
+            if (array[0] == array[^1])
+            {
+                return item == array[0] ? 0 : throw new ItemNotFoundException();
             }
 
             var indexBinary = array.Length / 2;
@@ -41,7 +44,7 @@ namespace Algorithms.Search
             {
                 array.Length - 1,
                 item - array[0],
-                array[array.Length - 1] - array[0],
+                array[^1] - array[0],
             };
 
             var indexInterpolation = section[0] * section[1] / section[2];
@@ -50,30 +53,30 @@ namespace Algorithms.Search
                 ? (indexInterpolation, indexBinary)
                 : (indexBinary, indexInterpolation);
 
-            int from, to;
             if (item == array[i1])
             {
-                return offset + i1;
+                return i1;
             }
 
             if (item == array[i2])
             {
-                return offset + i2;
+                return i2;
             }
 
+            int from, to;
             if (item < array[i1])
             {
-                @from = 0;
+                from = 0;
                 to = i1 - 1;
             }
             else if (item < array[i2])
             {
-                @from = i1 + 1;
+                from = i1 + 1;
                 to = i2 - 1;
             }
             else
             {
-                @from = i2 + 1;
+                from = i2 + 1;
                 to = array.Length - 1;
             }
 
@@ -82,9 +85,7 @@ namespace Algorithms.Search
                 throw new ItemNotFoundException();
             }
 
-            var segment = new int[to - from + 1];
-            Array.Copy(array, from, segment, 0, segment.Length);
-            return FindIndex(segment, item, offset + from);
+            return from + FindIndex(array.Slice(from, to - from + 1), item);
         }
     }
 }

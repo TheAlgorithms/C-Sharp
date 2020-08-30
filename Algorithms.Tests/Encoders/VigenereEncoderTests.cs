@@ -26,6 +26,22 @@ namespace Algorithms.Tests.Encoders
         }
 
         [Test]
+        public static void Encode_KeyIsTooShort_KeyIsAppended()
+        {
+            // Arrange
+            var encoder = new VigenereEncoder();
+            var message = new string('a', 2);
+            var key = new string('a', 1);
+
+            // Act
+            var encoded = encoder.Encode(message, key);
+            var decoded = encoder.Decode(encoded, key);
+
+            // Assert
+            Assert.AreEqual(message, decoded);
+        }
+
+        [Test]
         public static void EmptyKeyThrowsException()
         {
             var random = new Randomizer();
