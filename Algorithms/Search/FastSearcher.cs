@@ -41,11 +41,6 @@ namespace Algorithms.Search
             var (left, right) = ComputeIndices(array, item);
             var (from, to) = SelectSegment(array, left, right, item);
 
-            if (from > to)
-            {
-                throw new ItemNotFoundException();
-            }
-
             return from + FindIndex(array.Slice(from, to - from + 1), item);
         }
 
