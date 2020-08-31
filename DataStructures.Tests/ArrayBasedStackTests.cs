@@ -67,5 +67,18 @@ namespace DataStructures.Tests
             stack.Push(4);
             Assert.IsTrue(stack.Peek() == 4);
         }
+
+        [Test]
+        public static void AutomaticResizesTest()
+        {
+            var stack = new ArrayBasedStack<int>();
+            stack.Capacity = 2;
+            stack.Push(0);
+            stack.Push(1);
+            stack.Push(2);
+            stack.Push(3);
+            stack.Push(4);
+            Assert.IsTrue(stack.Capacity > 2);
+        }
     }
 }
