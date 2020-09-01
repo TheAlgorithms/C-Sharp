@@ -3,7 +3,7 @@
 namespace DataStructures.ListBasedStack
 {
     /// <summary>
-    /// Implementation of a list based stack. FIFO style.
+    /// Implementation of a list based stack. FILO style.
     /// </summary>
     /// <typeparam name="T">Generic Type.</typeparam>
     public class ListBasedStack<T>
@@ -11,12 +11,12 @@ namespace DataStructures.ListBasedStack
         /// <summary>
         /// <see cref="List{T}"/> based stack.
         /// </summary>
-        private readonly List<T> stack;
+        private readonly LinkedList<T> stack;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ListBasedStack{T}"/> class.
         /// </summary>
-        public ListBasedStack() => stack = new List<T>();
+        public ListBasedStack() => stack = new LinkedList<T>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ListBasedStack{T}"/> class.
@@ -59,7 +59,7 @@ namespace DataStructures.ListBasedStack
         /// Returns the item at the top of the <see cref="ListBasedStack{T}"/> without removing it.
         /// </summary>
         /// <returns>The item at the top of the <see cref="ListBasedStack{T}"/>.</returns>
-        public T Peek() => stack[^1];
+        public T Peek() => stack.First.Value;
 
         /// <summary>
         /// Removes and returns the item at the top of the <see cref="ListBasedStack{T}"/>.
@@ -67,8 +67,8 @@ namespace DataStructures.ListBasedStack
         /// <returns>The item removed from the top of the <see cref="ListBasedStack{T}"/>.</returns>
         public T Pop()
         {
-            var item = stack[^1];
-            stack.RemoveAt(stack.Count - 1);
+            var item = stack.First.Value;
+            stack.RemoveFirst();
             return item;
         }
 
@@ -76,6 +76,6 @@ namespace DataStructures.ListBasedStack
         /// Inserts an item at the top of the <see cref="ListBasedStack{T}"/>.
         /// </summary>
         /// <param name="item">The item to push onto the <see cref="ListBasedStack{T}"/>.</param>
-        public void Push(T item) => stack.Add(item);
+        public void Push(T item) => stack.AddFirst(item);
     }
 }
