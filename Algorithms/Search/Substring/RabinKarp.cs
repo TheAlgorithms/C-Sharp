@@ -6,6 +6,10 @@ namespace Algorithms.Search.Substring
     /// <summary>
     /// The idea: You calculate the hash for the pattern <c>s</c> and the hash values for all the prefixes of the text <c>t</c>.
     /// Now, you can compare a substring in constant time using the calculated hashes.
+    /// time complexity: O(s + t),
+    /// space complexity: O(t),
+    /// where   t - text length
+    ///         s - pattern length
     /// </summary>
     public class RabinKarp
     {
