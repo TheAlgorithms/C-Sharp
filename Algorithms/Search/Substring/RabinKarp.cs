@@ -9,15 +9,15 @@ namespace Algorithms.Search.Substring
     /// time complexity: O(s + t),
     /// space complexity: O(t),
     /// where   t - text length
-    ///         s - pattern length
+    ///         s - pattern length.
     /// </summary>
     public class RabinKarp
     {
         /// <summary>
         /// Finds the index of all occurrences of the pattern <c>s</c> int <c>t</c>.
         /// </summary>
-        /// <param name="t">Input text</param>
-        /// <param name="s">Search pattern</param>
+        /// <param name="t">Input text.</param>
+        /// <param name="s">Search pattern.</param>
         public static List<int> FindAllOccurrences(string t, string s)
         {
             // Prime number
@@ -35,7 +35,7 @@ namespace Algorithms.Search.Substring
             }
 
             // hash_t[i] is the sum of the previous hash values of the letters (t[0], t[1], ..., t[i-1]) and the hash value of t[i] itself (mod M).
-            // The hash value of a letter t[i] is equal to the product of t[i] and p_pow[i] (mod M)
+            // The hash value of a letter t[i] is equal to the product of t[i] and p_pow[i] (mod M).
             ulong[] hash_t = new ulong[t.Length + 1];
             Array.Fill<ulong>(hash_t, 0);
             for (int i = 0; i < t.Length; i++)
@@ -58,7 +58,7 @@ namespace Algorithms.Search.Substring
                 // By storing the hash values of the letters as a prefixes you can do this in constant time.
                 ulong current_hash = (hash_t[i + s.Length] + M - hash_t[i]) % M;
 
-                // Now you can compare the hash value of the substring with the product of the hash value of the pattern and p_pow[i]
+                // Now you can compare the hash value of the substring with the product of the hash value of the pattern and p_pow[i].
                 if (current_hash == hash_s * p_pow[i] % M)
                 {
                     // If the hash values are identical, a substring was found that matches the pattern.
