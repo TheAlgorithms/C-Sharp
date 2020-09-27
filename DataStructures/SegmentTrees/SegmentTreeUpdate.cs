@@ -8,8 +8,8 @@ namespace DataStructures.SegmentTrees
     public class SegmentTreeUpdate : SegmentTree
     {
         /// <summary>
-        /// Initializes the segment tree.
-        /// Runtime complexity: O(n) where n equals the array-length
+        /// Initializes a new instance of the <see cref="SegmentTreeUpdate"/> class.
+        /// Runtime complexity: O(n) where n equals the array-length.
         /// </summary>
         /// <param name="arr">Array on which the queries should be made.</param>
         public SegmentTreeUpdate(int[] arr)

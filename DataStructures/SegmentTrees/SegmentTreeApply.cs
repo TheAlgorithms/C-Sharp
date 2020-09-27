@@ -8,20 +8,21 @@ namespace DataStructures.SegmentTrees
     public class SegmentTreeApply : SegmentTree
     {
         /// <summary>
-        /// Initializes the segment tree.
-        /// Runtime complexity: O(n) where n equals the array-length
+        /// Initializes a new instance of the <see cref="SegmentTreeApply"/> class.
+        /// Runtime complexity: O(n) where n equals the array-length.
         /// </summary>
-        /// <param name="arr">Array on which the operations should be made.</param>        
+        /// <param name="arr">Array on which the operations should be made.</param>
         public SegmentTreeApply(int[] arr)
         : base(arr)
         {
-            // Initilizes and fills "operation" array with neutral element (in this case 1, because x * 1 = x)
+            // Initilizes and fills "operation" array with neutral element (in this case 1, because value * 1 = value)
             Operation = new int[Tree.Length];
             Array.Fill<int>(Operation, 1);
         }
 
         /// <summary>
-        /// In each node we store an operation, which must be applied to all direct and indirect child nodes of this node 
+        /// Gets an array that stores for each node an operation,
+        /// which must be applied to all direct and indirect child nodes of this node
         /// (but not to the node itself).
         /// </summary>
         public int[] Operation { get; }
@@ -49,7 +50,7 @@ namespace DataStructures.SegmentTrees
         /// <param name="a">Left end of the subarray enclosed by <c>i</c>.</param>
         /// <param name="b">Right end of the subarray enclosed by <c>i</c>.</param>
         /// <param name="i">Current node.</param>
-        /// <returns>Sum of a subarray between <c>l</c> and <c>r</c> (including <c>l</c> and <c>r</c>).<returns>
+        /// <returns>Sum of a subarray between <c>l</c> and <c>r</c> (including <c>l</c> and <c>r</c>).</returns>
         protected override int Query(int l, int r, int a, int b, int i)
         {
             if (l <= a && b <= r)
@@ -63,6 +64,7 @@ namespace DataStructures.SegmentTrees
             }
 
             int m = (a + b) / 2;
+
             // Application of the saved operation to the direct and indrect child nodes
             return Operation[i] * (Query(l, r, a, m, Left(i)) + Query(l, r, m + 1, b, Right(i)));
         }
@@ -72,17 +74,18 @@ namespace DataStructures.SegmentTrees
         /// </summary>
         /// <param name="l">Left border of the Application.</param>
         /// <param name="r">Right border of the Application.</param>
+        /// <param name="value">Multiplier by which the subarray is to be multiplied.</param>
         /// <param name="a">Left end of the subarray enclosed by <c>i</c>.</param>
         /// <param name="b">Right end of the subarray enclosed by <c>i</c>.</param>
         /// <param name="i">Current node.</param>
-        private void Apply(int l, int r, int x, int a, int b, int i)
+        private void Apply(int l, int r, int value, int a, int b, int i)
         {
             // If a and b are in the (by l and r) specified subarray
             if (l <= a && b <= r)
             {
                 // Applies the operation to the current node and saves it for the direct and indirect child nodes
-                Operation[i] = x * Operation[i];
-                Tree[i] = x * Tree[i];
+                Operation[i] = value * Operation[i];
+                Tree[i] = value * Tree[i];
                 return;
             }
 
@@ -96,8 +99,8 @@ namespace DataStructures.SegmentTrees
             int m = (a + b) / 2;
 
             // Applies the operation to both halfes
-            Apply(l, r, x, a, m, Left(i));
-            Apply(l, r, x, m + 1, b, Right(i));
+            Apply(l, r, value, a, m, Left(i));
+            Apply(l, r, value, m + 1, b, Right(i));
 
             // Recalculates the value of this node by its (possibly new) children.
             Tree[i] = Operation[i] * (Tree[Left(i)] + Tree[Right(i)]);
