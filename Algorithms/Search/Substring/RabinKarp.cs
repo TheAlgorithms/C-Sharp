@@ -4,21 +4,22 @@ using System.Collections.Generic;
 namespace Algorithms.Search.Substring
 {
     /// <summary>
-    /// The idea: You calculate the hash for the pattern <c>s</c> and the hash values for all the prefixes of the text <c>t</c>.
+    /// The idea: You calculate the hash for the pattern <c>p</c> and the hash values for all the prefixes of the text <c>t</c>.
     /// Now, you can compare a substring in constant time using the calculated hashes.
-    /// time complexity: O(s + t),
+    /// time complexity: O(p + t),
     /// space complexity: O(t),
     /// where   t - text length
-    ///         s - pattern length.
+    ///         p - pattern length.
     /// </summary>
     public class RabinKarp
     {
         /// <summary>
-        /// Finds the index of all occurrences of the pattern <c>s</c> int <c>t</c>.
+        /// Finds the index of all occurrences of the pattern <c>p</c> int <c>t</c>.
         /// </summary>
         /// <param name="t">Input text.</param>
-        /// <param name="s">Search pattern.</param>
-        public static List<int> FindAllOccurrences(string t, string s)
+        /// <param name="p">Search pattern.</param>
+        /// <returns>List of starting indices of the pattern in the text.</returns>
+        public static List<int> FindAllOccurrences(string t, string p)
         {
             // Prime number
             const ulong P = 101;
@@ -27,7 +28,7 @@ namespace Algorithms.Search.Substring
             const ulong M = (ulong)1e9 + 7;
 
             // p_pow[i] = P^i mod M
-            ulong[] p_pow = new ulong[Math.Max(s.Length, t.Length)];
+            ulong[] p_pow = new ulong[Math.Max(p.Length, t.Length)];
             p_pow[0] = 1;
             for (int i = 1; i < p_pow.Length; i++)
             {
@@ -45,18 +46,18 @@ namespace Algorithms.Search.Substring
 
             // hash_s is equal to sum of the hash values of the pattern (mod M).
             ulong hash_s = 0;
-            for (int i = 0; i < s.Length; i++)
+            for (int i = 0; i < p.Length; i++)
             {
-                hash_s = (hash_s + ((ulong)(s[i] - 'A' + 1)) * p_pow[i]) % M;
+                hash_s = (hash_s + ((ulong)(p[i] - 'A' + 1)) * p_pow[i]) % M;
             }
 
             // In the next step you iterate over the text with the pattern.
             List<int> occurences = new List<int>();
-            for (int i = 0; i + s.Length - 1 < t.Length; i++)
+            for (int i = 0; i + p.Length - 1 < t.Length; i++)
             {
                 // In each step you calculate the hash value of the substring to be tested.
                 // By storing the hash values of the letters as a prefixes you can do this in constant time.
-                ulong current_hash = (hash_t[i + s.Length] + M - hash_t[i]) % M;
+                ulong current_hash = (hash_t[i + p.Length] + M - hash_t[i]) % M;
 
                 // Now you can compare the hash value of the substring with the product of the hash value of the pattern and p_pow[i].
                 if (current_hash == hash_s * p_pow[i] % M)
