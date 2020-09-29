@@ -21,6 +21,7 @@ namespace Algorithms.Sorters.External.Storages
 
             public void Dispose()
             {
+                // Nothing to dispose here
             }
 
             public int Read() => storage[offset++];
@@ -37,6 +38,7 @@ namespace Algorithms.Sorters.External.Storages
 
             public void Dispose()
             {
+                // Nothing to dispose here
             }
         }
     }

@@ -102,25 +102,21 @@ namespace Algorithms.Sorters.External
             if (leftIndex < leftLength)
             {
                 output.Write(l);
-                leftIndex++;
-                while (leftIndex < leftLength)
-                {
-                    l = left.Read();
-                    output.Write(l);
-                    leftIndex++;
-                }
+                Copy(left, output, leftLength - leftIndex - 1);
             }
 
             if (rightIndex < rightLength)
             {
                 output.Write(r);
-                rightIndex++;
-                while (rightIndex < rightLength)
-                {
-                    r = right.Read();
-                    output.Write(r);
-                    rightIndex++;
-                }
+                Copy(right, output, rightLength - rightIndex - 1);
+            }
+        }
+
+        private static void Copy(ISequentialStorageReader<T> from, ISequentialStorageWriter<T> to, long count)
+        {
+            for (var i = 0; i < count; i++)
+            {
+                to.Write(from.Read());
             }
         }
     }
