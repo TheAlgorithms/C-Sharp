@@ -1,20 +1,19 @@
 using System;
-using System.Collections.Generic;
 
 namespace DataStructures
 {
     /// <summary>
-    /// Implementation of a list based queue. LIFO style.
+    /// Implementation of an array based queue. FIFO style.
     /// </summary>
     /// <typeparam name="T">Generic Type.</typeparam>
     public class ArrayBasedQueue<T>
     {
-        /// <summary>
-        /// <see cref="List{T}"/> based queue.
-        /// </summary>
         private readonly T[] queue;
-        private int currentIndex;
-        private int capacity;
+        private readonly int capacity;
+        private int startIndex;
+        private int endIndex;
+        private bool isEmpty;
+        private bool isFull;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ArrayBasedQueue{T}"/> class.
@@ -23,6 +22,7 @@ namespace DataStructures
         {
             this.capacity = capacity;
             queue = new T[capacity];
+            Clear();
         }
 
         /// <summary>
@@ -30,7 +30,10 @@ namespace DataStructures
         /// </summary>
         public void Clear()
         {
-            currentIndex = 0;
+            startIndex = 0;
+            endIndex = 0;
+            isEmpty = true;
+            isFull = false;
         }
 
         /// <summary>
@@ -44,16 +47,17 @@ namespace DataStructures
                 throw new InvalidOperationException("There are no items in the queue.");
             }
 
-            var item = queue[0];
-
-            for (int i = 0; i < currentIndex - 1; i++)
+            var dequeueIndex = endIndex;
+            endIndex++;
+            if (endIndex >= queue.Length)
             {
-                queue[i] = queue[i + 1];
+                endIndex = 0;
             }
 
-            currentIndex--;
+            isFull = false;
+            isEmpty = startIndex == endIndex;
 
-            return item;
+            return queue[dequeueIndex];
         }
 
         /// <summary>
@@ -61,7 +65,7 @@ namespace DataStructures
         /// </summary>
         public bool IsEmpty()
         {
-            return currentIndex == 0;
+            return isEmpty;
         }
 
         /// <summary>
@@ -69,7 +73,7 @@ namespace DataStructures
         /// </summary>
         public bool IsFull()
         {
-            return currentIndex >= capacity;
+            return isFull;
         }
 
         /// <summary>
@@ -83,7 +87,7 @@ namespace DataStructures
                 throw new InvalidOperationException("There are no items in the queue.");
             }
 
-            return queue[0];
+            return queue[endIndex];
         }
 
         /// <summary>
@@ -97,8 +101,16 @@ namespace DataStructures
                 throw new InvalidOperationException("The queue has reached its capacity.");
             }
 
-            queue[currentIndex] = item;
-            currentIndex++;
+            queue[startIndex] = item;
+
+            startIndex++;
+            if (startIndex >= queue.Length)
+            {
+                startIndex = 0;
+            }
+
+            isEmpty = false;
+            isFull = startIndex == endIndex;
         }
     }
 }

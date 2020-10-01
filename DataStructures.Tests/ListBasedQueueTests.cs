@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using NUnit.Framework;
 
 namespace DataStructures.Tests
@@ -13,16 +14,16 @@ namespace DataStructures.Tests
             q.Enqueue('A');
             q.Enqueue('B');
             q.Enqueue('C');
+            var result = new StringBuilder();
 
             // Act
-            string result = "";
             for (int i = 0; i < 3; i++)
             {
-                result += q.Dequeue();
+                result.Append(q.Dequeue());
             }
 
             // Assert
-            Assert.AreEqual(result, "ABC");
+            Assert.AreEqual(expected: "ABC", actual: result.ToString());
             Assert.IsTrue(q.IsEmpty(), "Queue is empty");
             Assert.IsFalse(q.IsFull(), "Queue is full");
         }
@@ -34,16 +35,16 @@ namespace DataStructures.Tests
             var q = new ListBasedQueue<int>();
             q.Enqueue(1);
             q.Enqueue(2);
+            int peeked = 0;
 
             // Act
-            int peeked = 0;
             for (int i = 0; i < 3; i++)
             {
                 peeked = q.Peek();
             }
 
             // Assert
-            Assert.AreEqual(peeked, 1);
+            Assert.AreEqual(expected: 1, actual: peeked);
             Assert.IsFalse(q.IsEmpty(), "Queue is empty");
             Assert.IsFalse(q.IsFull(), "Queue is full");
         }
@@ -53,9 +54,9 @@ namespace DataStructures.Tests
         {
             // Arrange
             var q = new ListBasedQueue<int>();
+            Exception? exception = null;
 
             // Act
-            Exception? exception = null;
             try
             {
                 q.Dequeue();
@@ -66,7 +67,7 @@ namespace DataStructures.Tests
             }
 
             // Assert
-            Assert.AreEqual(typeof(InvalidOperationException), exception?.GetType());
+            Assert.AreEqual(expected: typeof(InvalidOperationException), actual: exception?.GetType());
         }
 
         [Test]
@@ -74,9 +75,9 @@ namespace DataStructures.Tests
         {
             // Arrange
             var q = new ListBasedQueue<int>();
+            Exception? exception = null;
 
             // Act
-            Exception? exception = null;
             try
             {
                 q.Peek();
@@ -87,7 +88,7 @@ namespace DataStructures.Tests
             }
 
             // Assert
-            Assert.AreEqual(typeof(InvalidOperationException), exception?.GetType());
+            Assert.AreEqual(expected: typeof(InvalidOperationException), actual: exception?.GetType());
         }
 
         [Test]

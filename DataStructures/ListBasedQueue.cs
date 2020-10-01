@@ -5,14 +5,11 @@ using System.Linq;
 namespace DataStructures
 {
     /// <summary>
-    /// Implementation of a list based queue. LIFO style.
+    /// Implementation of a list based queue. FIFO style.
     /// </summary>
     /// <typeparam name="T">Generic Type.</typeparam>
     public class ListBasedQueue<T>
     {
-        /// <summary>
-        /// <see cref="List{T}"/> based queue.
-        /// </summary>
         private readonly LinkedList<T> queue;
 
         /// <summary>
