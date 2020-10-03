@@ -199,6 +199,14 @@ namespace DataStructures.Tests
         }
 
         [Test]
+        public static void Remove_EmptyTree_ReturnsFalse()
+        {
+            var tree = new BinarySearchTree<int>();
+            Assert.IsFalse(tree.Remove(8));
+            Assert.AreEqual(0, tree.Count);
+        }
+
+        [Test]
         public static void Remove_RemoveRoot_CorrectlyRemovesRoot()
         {
             var tree = new BinarySearchTree<int>();

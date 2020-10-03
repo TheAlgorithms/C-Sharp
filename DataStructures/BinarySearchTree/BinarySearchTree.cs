@@ -41,9 +41,6 @@ namespace DataStructures.BinarySearchTree
         /// Insert a key into the BST.
         /// </summary>
         /// <param name="key">The key to insert.</param>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown if key is null.
-        /// </exception>
         /// <exception cref="ArgumentException">
         /// Thrown if key is already in BST.
         /// </exception>
@@ -66,9 +63,6 @@ namespace DataStructures.BinarySearchTree
         /// Keys are inserted in the order they appear in the sequence.
         /// </summary>
         /// <param name="keys">Sequence of keys to insert.</param>
-        /// <exception cref="ArgumentException">
-        /// Thrown if a key in the sequence is already in BST.
-        /// </exception>
         public void AddRange(IEnumerable<TKey> keys)
         {
             foreach (TKey key in keys)
@@ -82,9 +76,6 @@ namespace DataStructures.BinarySearchTree
         /// </summary>
         /// <param name="key">The key to search for.</param>
         /// <returns>The node with the specified key if it exists, otherwise a default value is returned.</returns>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown if key is null.
-        /// </exception>
         public BinarySearchTreeNode<TKey>? Search(TKey key) => Search(root, key);
 
         /// <summary>
@@ -92,9 +83,6 @@ namespace DataStructures.BinarySearchTree
         /// </summary>
         /// <param name="key">The key to search for.</param>
         /// <returns>true if the key is in the BST, false otherwise.</returns>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown if key is null.
-        /// </exception>
         public bool Contains(TKey key) => Search(root, key) != null;
 
         /// <summary>
@@ -102,7 +90,6 @@ namespace DataStructures.BinarySearchTree
         /// </summary>
         /// <param name="key">The key to search for.</param>
         /// <returns>true if the removal was successful, false otherwise.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if key is null.</exception>
         public bool Remove(TKey key)
         {
             if (root is null)
@@ -232,9 +219,6 @@ namespace DataStructures.BinarySearchTree
         /// <br></br>
         /// More information: https://en.wikipedia.org/wiki/Binary_search_tree#Deletion .
         /// </remarks>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown if key is null.
-        /// </exception>
         private bool Remove(BinarySearchTreeNode<TKey> parent, BinarySearchTreeNode<TKey>? node, TKey key)
         {
             if (node is null)
@@ -254,17 +238,12 @@ namespace DataStructures.BinarySearchTree
             }
             else
             {
-                BinarySearchTreeNode<TKey>? replacementNode = null;
+                BinarySearchTreeNode<TKey>? replacementNode;
+
+                // Case 0: Node has no children.
                 if (node.Left == null && node.Right == null)
                 {
-                    if (node == root)
-                    {
-                        root = null;
-                    }
-                    else
-                    {
-                        replacementNode = default;
-                    }
+                    replacementNode = default;
                 }
 
                 // Case 1: Node has one child.
@@ -277,16 +256,20 @@ namespace DataStructures.BinarySearchTree
                 else
                 {
                     var predecessorNode = GetMax(node.Left);
-                    Remove(node, node, predecessorNode.Key);
+                    _ = Remove(node, node, predecessorNode.Key);
 
                     replacementNode = new BinarySearchTreeNode<TKey>(predecessorNode.Key);
-
                     replacementNode.Left = node.Left;
                     replacementNode.Right = node.Right;
                 }
 
                 // Replace the relevant node with a replacement found in the previous stages.
-                if (parent.Left == node)
+                // Special case for removing the root node of tree with no children.
+                if (node == root && replacementNode == default)
+                {
+                    root = replacementNode;
+                }
+                else if (parent.Left == node)
                 {
                     parent.Left = replacementNode;
                 }
