@@ -38,7 +38,7 @@ namespace DataStructures.Tests
         public static void AddRange_MultipleKeys_FormsCorrectBST()
         {
             var tree = new BinarySearchTree<int>();
-            tree.AddRange(new List<int>() { 5, 3, 4, 2 });
+            tree.AddRange(new List<int> { 5, 3, 4, 2 });
 
             Assert.AreEqual(4, tree.Count);
             Assert.IsNull(tree.Search(5)!.Parent);
@@ -57,7 +57,7 @@ namespace DataStructures.Tests
         public static void Search_MultipleKeys_FindsAllKeys()
         {
             var tree = new BinarySearchTree<int>();
-            tree.AddRange(new List<int>() { 5, 3, 4, 2, 7, 6, 8 });
+            tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
             Assert.AreEqual(2, tree.Search(2)!.Key);
             Assert.AreEqual(3, tree.Search(3)!.Key);
@@ -71,7 +71,7 @@ namespace DataStructures.Tests
         public static void Contains_MultipleKeys_FindsAllKeys()
         {
             var tree = new BinarySearchTree<int>();
-            tree.AddRange(new List<int>() { 5, 3, 4, 2, 7, 6, 8 });
+            tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
             Assert.IsTrue(tree.Contains(2));
             Assert.IsTrue(tree.Contains(3));
@@ -86,7 +86,7 @@ namespace DataStructures.Tests
         public static void Remove_MultipleKeys_CorrectlyRemovesNodesInAllCases()
         {
             var tree = new BinarySearchTree<int>();
-            tree.AddRange(new List<int>() { 5, 3, 4, 2, 7, 6, 8 });
+            tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
             var twoRemoveResult = tree.Remove(2);
             Assert.IsTrue(twoRemoveResult);
@@ -114,7 +114,7 @@ namespace DataStructures.Tests
         public static void GetMax_NonEmptyTree_ReturnsCorrectValue()
         {
             var tree = new BinarySearchTree<int>();
-            tree.AddRange(new List<int>() { 5, 3, 4, 2, 7, 6, 8 });
+            tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
             Assert.AreEqual(8, tree.GetMax()!.Key);
         }
@@ -123,7 +123,7 @@ namespace DataStructures.Tests
         public static void GetMin_NonEmptyTree_ReturnsCorrectValue()
         {
             var tree = new BinarySearchTree<int>();
-            tree.AddRange(new List<int>() { 5, 3, 4, 2, 7, 6, 8 });
+            tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
             Assert.AreEqual(2, tree.GetMin()!.Key);
         }
@@ -132,10 +132,10 @@ namespace DataStructures.Tests
         public static void GetKeysInOrder_MultipleKeys_ReturnsAllKeysInCorrectOrder()
         {
             var tree = new BinarySearchTree<int>();
-            tree.AddRange(new List<int>() { 5, 3, 4, 2, 7, 6, 8 });
+            tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
             var keys = tree.GetKeysInOrder();
-            var expected = new List<int>() { 2, 3, 4, 5, 6, 7, 8 };
+            var expected = new List<int> { 2, 3, 4, 5, 6, 7, 8 };
             Assert.IsTrue(Enumerable.SequenceEqual<int>(keys, expected));
         }
 
@@ -143,10 +143,10 @@ namespace DataStructures.Tests
         public static void GetKeysPreOrder_MultipleKeys_ReturnsAllKeysInCorrectOrder()
         {
             var tree = new BinarySearchTree<int>();
-            tree.AddRange(new List<int>() { 5, 3, 4, 2, 7, 6, 8 });
+            tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
             var keys = tree.GetKeysPreOrder();
-            var expected = new List<int>() { 5, 3, 2, 4, 7, 6, 8 };
+            var expected = new List<int> { 5, 3, 2, 4, 7, 6, 8 };
             Assert.IsTrue(Enumerable.SequenceEqual<int>(keys, expected));
         }
 
@@ -154,10 +154,10 @@ namespace DataStructures.Tests
         public static void GetKeysPostOrder_MultipleKeys_ReturnsAllKeysInCorrectOrder()
         {
             var tree = new BinarySearchTree<int>();
-            tree.AddRange(new List<int>() { 5, 3, 4, 2, 7, 6, 8 });
+            tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
             var keys = tree.GetKeysPostOrder();
-            var expected = new List<int>() { 2, 4, 3, 6, 8, 7, 5 };
+            var expected = new List<int> { 2, 4, 3, 6, 8, 7, 5 };
             Assert.IsTrue(Enumerable.SequenceEqual<int>(keys, expected));
         }
     }

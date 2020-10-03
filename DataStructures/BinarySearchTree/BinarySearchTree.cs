@@ -49,9 +49,9 @@ namespace DataStructures.BinarySearchTree
         /// </exception>
         public void Add(TKey key)
         {
-            if (key == null)
+            if (Equals(key, default))
             {
-                throw new ArgumentNullException("Key cannot be null!");
+                throw new ArgumentNullException(nameof(key));
             }
 
             if (root == null)
@@ -92,9 +92,9 @@ namespace DataStructures.BinarySearchTree
         /// </exception>
         public BinarySearchTreeNode<TKey>? Search(TKey key)
         {
-            if (key == null)
+            if (Equals(key, default))
             {
-                throw new ArgumentNullException("Key cannot be null!");
+                throw new ArgumentNullException(nameof(key));
             }
 
             return Search(root, key);
@@ -110,9 +110,9 @@ namespace DataStructures.BinarySearchTree
         /// </exception>
         public bool Contains(TKey key)
         {
-            if (key == null)
+            if (Equals(key, default))
             {
-                throw new ArgumentNullException("Key cannot be null!");
+                throw new ArgumentNullException(nameof(key));
             }
 
             return Search(root, key) != null;
@@ -123,27 +123,27 @@ namespace DataStructures.BinarySearchTree
         /// </summary>
         /// <param name="key">The key to remove.</param>
         /// <returns>true if the operation was successful, false otherwise.</returns>
+        /// <remarks>
+        /// Removing a node from the BST can be split into three cases:
+        /// 0. The node to be removed has no children.In this case, the node can just be removed from the tree.
+        /// 1. The node to be removed has one child. In this case, the node's child is moved to the node's parent,
+        /// then the node is removed from the tree.
+        /// 2. The node to be removed has two children. In this case, we must find a suitable node among the children
+        /// subtrees to replace the node. This can be done with either the in-order predecessor or the in-order successor.
+        /// The in-order predecessor is the largest node in Left subtree, or the largest node that is still smaller then the
+        /// current node. The in-order successor is the smallest node in the Right subtree, or the smallest node that is
+        /// still larger than the current node. Either way, once this suitable node is found, remove it from the tree (it
+        /// should be either a case 1 or 2 node) and replace the node to be removed with this suitable node.
+        /// More information: https://en.wikipedia.org/wiki/Binary_search_tree#Deletion .
+        /// </remarks>
         /// <exception cref="ArgumentNullException">
         /// Thrown if key is null.
         /// </exception>
         public bool Remove(TKey key)
         {
-            /* Removing a node from the BST can be split into three cases:
-             * 0. The node to be removed has no children. In this case, the node can just be removed from the tree.
-             * 1. The node to be removed has one child. In this case, the node's child is moved to the node's parent,
-             * then the node is removed from the tree.
-             * 2. The node to be removed has two children. In this case, we must find a suitable node among the children
-             * subtrees to replace the node. This can be done with either the in-order predecessor or the in-order successor.
-             * The in-order predecessor is the largest node in Left subtree, or the largest node that is still smaller then the
-             * current node. The in-order successor is the smallest node in the Right subtree, or the smallest node that is
-             * still larger than the current node. Either way, once this suitable node is found, remove it from the tree (it
-             * should be either a case 1 or 2 node) and replace the node to be removed with this suitable node.
-             * More information: https://en.wikipedia.org/wiki/Binary_search_tree#Deletion
-             */
-
-            if (key == null)
+            if (Equals(key, default))
             {
-                throw new ArgumentNullException("Key cannot be null!");
+                throw new ArgumentNullException(nameof(key));
             }
 
             BinarySearchTreeNode<TKey>? node = Search(root, key);
@@ -151,6 +151,8 @@ namespace DataStructures.BinarySearchTree
             {
                 return false;
             }
+
+            BinarySearchTreeNode<TKey>? replacementNode = default;
 
             // Case 0: Node has no children
             if (node.Left == null && node.Right == null)
@@ -161,53 +163,38 @@ namespace DataStructures.BinarySearchTree
                 }
                 else
                 {
-                    if (node.Parent!.Left == node)
-                    {
-                        node.Parent!.Left = null;
-                    }
-                    else if (node.Parent!.Right == node)
-                    {
-                        node.Parent!.Right = null;
-                    }
+                    replacementNode = default;
                 }
             }
 
             // Case 1: Node has one child.
             else if (node.Left == null || node.Right == null)
             {
-                var childNode = node.Left ?? node.Right;
-
-                if (node.Parent!.Left == node)
-                {
-                    node.Parent!.Left = childNode;
-                }
-                else if (node.Parent!.Right == node)
-                {
-                    node.Parent!.Right = childNode;
-                }
+                replacementNode = node.Left ?? node.Right;
             }
 
             // Case 2: Node has two children. (This implementation uses the in-order predecessor to replace node.)
             else
             {
-                var replacementNode = GetMax(node.Left);
-                Remove(replacementNode.Key);
+                var predecessorNode = GetMax(node.Left);
+                Remove(predecessorNode.Key);
 
                 // Removing the replacementNode decrements the counter, but since it's getting added back, increment the count.
                 Count++;
-                var newNode = new BinarySearchTreeNode<TKey>(replacementNode.Key);
-                newNode.Parent = node.Parent;
-                newNode.Left = node.Left;
-                newNode.Right = node.Right;
+                replacementNode = new BinarySearchTreeNode<TKey>(predecessorNode.Key);
+                replacementNode.Parent = node.Parent;
+                replacementNode.Left = node.Left;
+                replacementNode.Right = node.Right;
+            }
 
-                if (node.Parent!.Left == node)
-                {
-                    node.Parent!.Left = newNode;
-                }
-                else if (node.Parent!.Right == node)
-                {
-                    node.Parent!.Right = newNode;
-                }
+            // Replace the relevant node with a replacement found in the previous stages.
+            if (node.Parent!.Left == node)
+            {
+                node.Parent!.Left = replacementNode;
+            }
+            else
+            {
+                node.Parent!.Right = replacementNode;
             }
 
             Count--;
@@ -299,7 +286,9 @@ namespace DataStructures.BinarySearchTree
                     node.Right = newNode;
                 }
             }
-            else if (compareResult == 0)
+
+            // Key is already in tree.
+            else
             {
                 throw new ArgumentException($"Key \"{key}\" already exists in tree!");
             }
@@ -410,7 +399,7 @@ namespace DataStructures.BinarySearchTree
             {
                 return Search(node.Left, key);
             }
-            else if (compareResult < 0)
+            else
             {
                 return Search(node.Right, key);
             }
