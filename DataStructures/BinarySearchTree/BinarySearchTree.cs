@@ -399,12 +399,14 @@ namespace DataStructures.BinarySearchTree
             {
                 return Search(node.Left, key);
             }
-            else
+            else if (compareResult < 0)
             {
                 return Search(node.Right, key);
             }
-
-            return node;
+            else
+            {
+                return node;
+            }
         }
     }
 }
