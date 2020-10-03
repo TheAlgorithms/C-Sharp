@@ -195,6 +195,15 @@ namespace DataStructures.Tests
 
             Assert.AreEqual(0, tree.Count);
             Assert.IsNull(tree.Search(5));
+
+            tree.AddRange(new List<int> { 5, 4, 6 });
+            tree.Remove(5);
+
+            Assert.AreEqual(2, tree.Count);
+            Assert.IsNull(tree.Search(5));
+            Assert.IsNotNull(tree.Search(4));
+            Assert.IsNotNull(tree.Search(6));
+            Assert.AreEqual(6, tree.Search(4)!.Right!.Key);
         }
 
         [Test]

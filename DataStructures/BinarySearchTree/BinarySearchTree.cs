@@ -205,7 +205,7 @@ namespace DataStructures.BinarySearchTree
         /// <remarks>
         /// Removing a node from the BST can be split into three cases:
         /// <br></br>
-        /// 0. The node to be removed has no children.In this case, the node can just be removed from the tree.
+        /// 0. The node to be removed has no children. In this case, the node can just be removed from the tree.
         /// <br></br>
         /// 1. The node to be removed has one child. In this case, the node's child is moved to the node's parent,
         /// then the node is removed from the tree.
@@ -219,9 +219,9 @@ namespace DataStructures.BinarySearchTree
         /// <br></br>
         /// More information: https://en.wikipedia.org/wiki/Binary_search_tree#Deletion .
         /// </remarks>
-        private bool Remove(BinarySearchTreeNode<TKey> parent, BinarySearchTreeNode<TKey>? node, TKey key)
+        private bool Remove(BinarySearchTreeNode<TKey>? parent, BinarySearchTreeNode<TKey>? node, TKey key)
         {
-            if (node is null)
+            if (node is null || parent is null)
             {
                 return false;
             }
@@ -238,13 +238,6 @@ namespace DataStructures.BinarySearchTree
             }
             else
             {
-                // Special case if root is the only node in tree.
-                if (node == root)
-                {
-                    root = null;
-                    return true;
-                }
-
                 BinarySearchTreeNode<TKey>? replacementNode;
 
                 // Case 0: Node has no children.
@@ -258,7 +251,7 @@ namespace DataStructures.BinarySearchTree
                 else
                 {
                     var predecessorNode = GetMax(node.Left);
-                    Remove(node, node, predecessorNode.Key);
+                    Remove(root, root, predecessorNode.Key);
                     replacementNode = new BinarySearchTreeNode<TKey>(predecessorNode.Key)
                     {
                         Left = node.Left,
@@ -267,7 +260,12 @@ namespace DataStructures.BinarySearchTree
                 }
 
                 // Replace the relevant node with a replacement found in the previous stages.
-                if (parent.Left == node)
+                // Special case for replacing the root node.
+                if (node == root)
+                {
+                    root = replacementNode;
+                }
+                else if (parent.Left == node)
                 {
                     parent.Left = replacementNode;
                 }
