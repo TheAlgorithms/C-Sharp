@@ -9,13 +9,14 @@ namespace Algorithms.Search.Substring
     ///             does not occur in the pattern at all, then the pattern can be shifted
     ///             by m positions behind this text symbol.
     /// Complexity:
-    ///     Time:   Preprocessing: O(a + m²)
-    ///             Comparison: O(n/m)
+    ///     Time:   Preprocessing: O(m²)
+    ///             Comparison: O(mn)
     ///     Space:  O(m + a)
     ///     where   m - pattern length
     ///             n - text length
     ///             a - alphabet length.
-    /// Source: https://www.inf.hs-flensburg.de/lang/algorithmen/pattern/bmen.htm .
+    /// Source:     https://www.inf.hs-flensburg.de/lang/algorithmen/pattern/bmen.htm
+    ///             https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string-search_algorithm.
     /// </summary>
     public static class BoyerMoore
     {
