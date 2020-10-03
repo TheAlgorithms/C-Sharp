@@ -4,11 +4,10 @@ using System.Collections.Generic;
 namespace Algorithms.Search.Substring
 {
     /// <summary>
-    /// The idea:   You compare the pattern with the text from right to lef.
+    /// The idea:   You compare the pattern with the text from right to left.
     ///             If the text symbol that is compared with the rightmost pattern symbol
     ///             does not occur in the pattern at all, then the pattern can be shifted
     ///             by m positions behind this text symbol.
-    /// Source: https://www.inf.hs-flensburg.de/lang/algorithmen/pattern/bmen.htm
     /// Complexity:
     ///     Time:   Preprocessing: O(a + m²)
     ///             Comparison: O(n/m)
@@ -16,6 +15,7 @@ namespace Algorithms.Search.Substring
     ///     where   m - pattern length
     ///             n - text length
     ///             a - alphabet length.
+    /// Source: https://www.inf.hs-flensburg.de/lang/algorithmen/pattern/bmen.htm
     /// </summary>
     public static class BoyerMoore
     {
@@ -82,7 +82,7 @@ namespace Algorithms.Search.Substring
         /// <returns>Array of the named postition for each symbol of the alphabet.</returns>
         private static int[] BadCharacterRule(string p, int m)
         {
-            // For each ASCII character
+            // For each character (note that there are more than 256 characters)
             int[] badChar = new int[256];
             Array.Fill<int>(badChar, -1);
 
@@ -108,7 +108,7 @@ namespace Algorithms.Search.Substring
             // The matching suffix occurs somewhere else in the pattern
             // --> matching suffix is a border of a suffix of the pattern
 
-            // f[i] ontains starting position of widest border of the suffix of the pattern beginning at position i
+            // f[i] contains starting position of the widest border of the suffix of the pattern beginning at position i
             int[] f = new int[p.Length + 1];
 
             // Suffix of p[m] has no border --> f[m] = m+1
