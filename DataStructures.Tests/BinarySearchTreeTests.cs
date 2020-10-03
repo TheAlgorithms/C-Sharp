@@ -95,6 +95,7 @@ namespace DataStructures.Tests
             Assert.AreEqual(8, tree.Search(8)!.Key);
         }
 
+        [Test]
         public static void Contains_MultipleKeys_FindsAllKeys()
         {
             var tree = new BinarySearchTree<int>();
@@ -196,6 +197,16 @@ namespace DataStructures.Tests
             Assert.IsNull(tree.Search(6)!.Left);
             Assert.IsNotNull(tree.Search(6)!.Right);
             Assert.AreEqual(6, tree.Count);
+        }
+
+        [Test]
+        public static void Remove_NonExistentElement_ReturnsFalse()
+        {
+            var tree = new BinarySearchTree<int>();
+            tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
+
+            Assert.IsFalse(tree.Remove(999));
+            Assert.AreEqual(7, tree.Count);
         }
 
         [Test]
