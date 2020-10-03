@@ -11,7 +11,7 @@ namespace Algorithms.Search.Substring
     /// where   t - text length
     ///         p - pattern length.
     /// </summary>
-    public class RabinKarp
+    public static class RabinKarp
     {
         /// <summary>
         /// Finds the index of all occurrences of the pattern <c>p</c> int <c>t</c>.
