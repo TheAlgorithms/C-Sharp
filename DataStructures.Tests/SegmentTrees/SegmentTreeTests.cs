@@ -7,7 +7,7 @@ namespace DataStructures.Tests.SegmentTrees
     [TestFixture]
     public class SegmentTreeTests
     {
-        private SegmentTree testTree = new SegmentTree(new int[] {8, 9, 1, 4, 8, 7, 2});
+        private readonly SegmentTree testTree = new SegmentTree(new [] {8, 9, 1, 4, 8, 7, 2});
 
         [Test]
         public void TreeArray_Test()

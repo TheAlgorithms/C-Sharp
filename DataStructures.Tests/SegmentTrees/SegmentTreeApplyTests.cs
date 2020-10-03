@@ -7,7 +7,7 @@ namespace DataStructures.Tests.SegmentTrees
     [TestFixture]
     public class SegmentTreeApplyTests
     {
-        private SegmentTreeApply testTree = new SegmentTreeApply(new int[] {8, 9, 1, 4, 8, 7, 2});
+        private readonly SegmentTreeApply testTree = new SegmentTreeApply(new [] {8, 9, 1, 4, 8, 7, 2});
 
         [Test]
         public void Apply_Query_Update_Query_Test()
