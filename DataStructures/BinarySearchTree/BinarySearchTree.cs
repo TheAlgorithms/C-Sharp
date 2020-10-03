@@ -238,23 +238,18 @@ namespace DataStructures.BinarySearchTree
             }
             else
             {
+                // Special case if root is the only node in tree.
+                if (node == root)
+                {
+                    root = null;
+                    return true;
+                }
+
                 BinarySearchTreeNode<TKey>? replacementNode;
 
                 // Case 0: Node has no children.
-                if (node.Left == null && node.Right == null)
-                {
-                    // Special case if root is the only node in tree.
-                    if (node == root)
-                    {
-                        root = null;
-                        return true;
-                    }
-
-                    replacementNode = default;
-                }
-
                 // Case 1: Node has one child.
-                else if (node.Left == null || node.Right == null)
+                if (node.Left == null || node.Right == null)
                 {
                     replacementNode = node.Left ?? node.Right;
                 }
@@ -264,7 +259,6 @@ namespace DataStructures.BinarySearchTree
                 {
                     var predecessorNode = GetMax(node.Left);
                     Remove(node, node, predecessorNode.Key);
-
                     replacementNode = new BinarySearchTreeNode<TKey>(predecessorNode.Key)
                     {
                         Left = node.Left,
