@@ -15,7 +15,7 @@ namespace Algorithms.Search.Substring
     ///     where   m - pattern length
     ///             n - text length
     ///             a - alphabet length.
-    /// Source: https://www.inf.hs-flensburg.de/lang/algorithmen/pattern/bmen.htm
+    /// Source: https://www.inf.hs-flensburg.de/lang/algorithmen/pattern/bmen.htm .
     /// </summary>
     public static class BoyerMoore
     {
