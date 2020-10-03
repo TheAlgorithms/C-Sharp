@@ -17,7 +17,7 @@ namespace Algorithms.Search.Substring
     ///             n - text length
     ///             a - alphabet length.
     /// </summary>
-    public class BoyerMoore
+    public static class BoyerMoore
     {
         /// <summary>
         /// Finds the index of the first occurrence of the pattern <c>p</c> in <c>t</c>.
