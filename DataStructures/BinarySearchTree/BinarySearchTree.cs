@@ -228,13 +228,7 @@ namespace DataStructures.BinarySearchTree
 
             int compareResult = node.Key.CompareTo(key);
 
-            // Special case for removing the root node of tree with no children.
-            if (node == parent && node == root && compareResult == 0)
-            {
-                root = null;
-                return true;
-            }
-            else if (compareResult > 0)
+            if (compareResult > 0)
             {
                 return Remove(node, node.Left, key);
             }
@@ -249,6 +243,13 @@ namespace DataStructures.BinarySearchTree
                 // Case 0: Node has no children.
                 if (node.Left == null && node.Right == null)
                 {
+                    // Special case if root is the only node in tree.
+                    if (node == root)
+                    {
+                        root = null;
+                        return true;
+                    }
+
                     replacementNode = default;
                 }
 
@@ -262,11 +263,13 @@ namespace DataStructures.BinarySearchTree
                 else
                 {
                     var predecessorNode = GetMax(node.Left);
-                    _ = Remove(node, node, predecessorNode.Key);
+                    Remove(node, node, predecessorNode.Key);
 
-                    replacementNode = new BinarySearchTreeNode<TKey>(predecessorNode.Key);
-                    replacementNode.Left = node.Left;
-                    replacementNode.Right = node.Right;
+                    replacementNode = new BinarySearchTreeNode<TKey>(predecessorNode.Key)
+                    {
+                        Left = node.Left,
+                        Right = node.Right,
+                    };
                 }
 
                 // Replace the relevant node with a replacement found in the previous stages.
