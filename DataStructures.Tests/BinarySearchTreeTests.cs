@@ -8,7 +8,7 @@ namespace DataStructures.Tests
     [TestFixture]
     class BinarySearchTreeTests
     {
-        BinarySearchTree<int> testTree = new BinarySearchTree<int>();
+        private readonly BinarySearchTree<int> testTree = new BinarySearchTree<int>();
         
         [OneTimeSetUp]
         public void SetUp()
@@ -25,11 +25,11 @@ namespace DataStructures.Tests
         [Test, Order(1)]
         public void Order_Test()
         {
-            List<int> expectedList = new List<int>(new int [] {8, 5, 1, 4, 3, 7, 9});
+            List<int> expectedList = new List<int>(new [] {8, 5, 1, 4, 3, 7, 9});
             Assert.AreEqual(expectedList, testTree.Preorder());
-            expectedList = new List<int>(new int [] {1, 3, 4, 5, 7, 8, 9});
+            expectedList = new List<int>(new [] {1, 3, 4, 5, 7, 8, 9});
             Assert.AreEqual(expectedList, testTree.Inorder());
-            expectedList = new List<int>(new int [] {3, 4, 1, 7, 5, 9, 8});
+            expectedList = new List<int>(new [] {3, 4, 1, 7, 5, 9, 8});
             Assert.AreEqual(expectedList, testTree.Postorder());   
         }
 
@@ -37,16 +37,19 @@ namespace DataStructures.Tests
         public void Insert_Inorder_Test()
         {
             testTree.Insert(4);
-            List<int> expectedList = new List<int>(new int [] {1, 3, 4, 4, 5, 7, 8, 9});
+            List<int> expectedList = new List<int>(new [] {1, 3, 4, 4, 5, 7, 8, 9});
             Assert.AreEqual(expectedList, testTree.Inorder());
         }
 
-        [Test, Order(3)]
-        public void Remove_Postorder_Test()
+        [TestCase(4, new [] {3, 4, 1, 7, 5, 9, 8})]
+        [TestCase(4, new [] {3, 1, 7, 5, 9, 8})]
+        [TestCase(3, new [] {1, 7, 5, 9, 8})]
+        [TestCase(3, new [] {1, 7, 5, 9, 8})]
+        [Order(3)]
+        public void Remove_Postorder_Test(int value, int[] expectedPostorder)
         {
-            testTree.Remove(3);
-            List<int> expectedList = new List<int>(new int [] {4, 4, 1, 7, 5, 9, 8});
-            Assert.AreEqual(expectedList, testTree.Postorder());
+            testTree.Remove(value);
+            Assert.AreEqual(expectedPostorder, testTree.Postorder());
         }
 
         [TestCase(5, false)]

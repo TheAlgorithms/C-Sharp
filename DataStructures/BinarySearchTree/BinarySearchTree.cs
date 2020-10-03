@@ -20,13 +20,6 @@ namespace DataStructures.BinarySearchTree
         private Node<T>? rootNode;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BinarySearchTree{T}"/> class.
-        /// </summary>
-        public BinarySearchTree()
-        {
-        }
-
-        /// <summary>
         /// Function to insert a new node with given key in BST.
         /// </summary>
         /// <param name="value">Inbput key value of type <c>T</c>.</param>
@@ -173,13 +166,15 @@ namespace DataStructures.BinarySearchTree
                 {
                     return node.Left;
                 }
+                else
+                {
+                    // Node with two children: Get the smallest node in the right subtree (inorder successor)
+                    Node<T> temp = MinValueNode(node.Right);
 
-                // Node with two children: Get the smallest node in the right subtree (inorder successor)
-                Node<T> temp = MinValueNode(node.Right);
-
-                // Copy the inorder successor's value to the current node and delete the inorder successor
-                node.Value = temp.Value;
-                node.Right = Remove(temp.Value, node.Right);
+                    // Copy the inorder successor's value to the current node and delete the inorder successor
+                    node.Value = temp.Value;
+                    node.Right = Remove(temp.Value, node.Right);
+                }
             }
 
             // Returns the current node
