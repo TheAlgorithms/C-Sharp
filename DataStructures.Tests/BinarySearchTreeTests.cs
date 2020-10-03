@@ -111,37 +111,6 @@ namespace DataStructures.Tests
         }
 
         [Test]
-        public static void Remove_MultipleKeys_CorrectlyRemovesNodesInAllCases()
-        {
-            var tree = new BinarySearchTree<int>();
-            tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
-
-            // Case 0: no children
-            var twoRemoveResult = tree.Remove(2);
-            Assert.IsTrue(twoRemoveResult);
-            Assert.IsNull(tree.Search(2));
-            Assert.IsNull(tree.Search(3)!.Left);
-            Assert.IsNotNull(tree.Search(3)!.Right);
-            Assert.AreEqual(6, tree.Count);
-
-            // Case 1: one child
-            var threeRemoveResult = tree.Remove(3);
-            Assert.IsTrue(threeRemoveResult);
-            Assert.IsNull(tree.Search(3));
-            Assert.IsNull(tree.Search(4)!.Left);
-            Assert.IsNull(tree.Search(4)!.Right);
-            Assert.AreEqual(5, tree.Count);
-
-            // Case 2: two children
-            var sevenRemoveResult = tree.Remove(7);
-            Assert.IsTrue(sevenRemoveResult);
-            Assert.IsNull(tree.Search(7));
-            Assert.IsNull(tree.Search(6)!.Left);
-            Assert.IsNotNull(tree.Search(6)!.Right);
-            Assert.AreEqual(4, tree.Count);
-        }
-
-        [Test]
         public static void Remove_LeafNodes_CorrectlyRemovesNodes()
         {
             var tree = new BinarySearchTree<int>();
