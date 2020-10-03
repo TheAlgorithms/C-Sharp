@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using DataStructures.BinarySearchTree;
@@ -16,22 +17,42 @@ namespace DataStructures.Tests
 
             tree.Add(5);
             Assert.AreEqual(1, tree.Count);
-            Assert.IsNull(tree.Search(5)!.Parent);
 
             tree.Add(3);
             Assert.AreEqual(2, tree.Count);
-            Assert.IsNotNull(tree.Search(3)!.Parent);
-            Assert.AreEqual(5, tree.Search(3)!.Parent!.Key);
 
             tree.Add(4);
             Assert.AreEqual(3, tree.Count);
-            Assert.IsNotNull(tree.Search(4)!.Parent);
-            Assert.AreEqual(3, tree.Search(4)!.Parent!.Key);
 
             tree.Add(2);
             Assert.AreEqual(4, tree.Count);
-            Assert.IsNotNull(tree.Search(2)!.Parent);
-            Assert.AreEqual(3, tree.Search(2)!.Parent!.Key);
+
+            var rootNode = tree.Search(5);
+            Assert.AreEqual(5, rootNode!.Key);
+            Assert.AreEqual(3, rootNode!.Left!.Key);
+            Assert.IsNull(rootNode!.Right);
+
+            var threeNode = tree.Search(3);
+            Assert.AreEqual(3, threeNode!.Key);
+            Assert.AreEqual(2, threeNode!.Left!.Key);
+            Assert.AreEqual(4, threeNode!.Right!.Key);
+
+            var twoNode = tree.Search(2);
+            Assert.IsNull(twoNode!.Left);
+            Assert.IsNull(twoNode!.Right);
+
+            var fourNode = tree.Search(4);
+            Assert.IsNull(fourNode!.Left);
+            Assert.IsNull(fourNode!.Right);
+        }
+
+        [Test]
+        public static void Add_KeyAlreadyInTree_ThrowsCorrectException()
+        {
+            var tree = new BinarySearchTree<int>();
+            tree.AddRange(new List<int> { 5, 3, 4, 2 });
+
+            _ = Assert.Throws<ArgumentException>(() => tree.Add(5));
         }
 
         [Test]
@@ -40,17 +61,23 @@ namespace DataStructures.Tests
             var tree = new BinarySearchTree<int>();
             tree.AddRange(new List<int> { 5, 3, 4, 2 });
 
-            Assert.AreEqual(4, tree.Count);
-            Assert.IsNull(tree.Search(5)!.Parent);
+            var rootNode = tree.Search(5);
+            Assert.AreEqual(5, rootNode!.Key);
+            Assert.AreEqual(3, rootNode!.Left!.Key);
+            Assert.IsNull(rootNode!.Right);
 
-            Assert.IsNotNull(tree.Search(3)!.Parent);
-            Assert.AreEqual(5, tree.Search(3)!.Parent!.Key);
+            var threeNode = tree.Search(3);
+            Assert.AreEqual(3, threeNode!.Key);
+            Assert.AreEqual(2, threeNode!.Left!.Key);
+            Assert.AreEqual(4, threeNode!.Right!.Key);
 
-            Assert.IsNotNull(tree.Search(4)!.Parent);
-            Assert.AreEqual(3, tree.Search(4)!.Parent!.Key);
+            var twoNode = tree.Search(2);
+            Assert.IsNull(twoNode!.Left);
+            Assert.IsNull(twoNode!.Right);
 
-            Assert.IsNotNull(tree.Search(2)!.Parent);
-            Assert.AreEqual(3, tree.Search(2)!.Parent!.Key);
+            var fourNode = tree.Search(4);
+            Assert.IsNull(fourNode!.Left);
+            Assert.IsNull(fourNode!.Right);
         }
 
         [Test]
@@ -88,6 +115,7 @@ namespace DataStructures.Tests
             var tree = new BinarySearchTree<int>();
             tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
+            // Case 0: no children
             var twoRemoveResult = tree.Remove(2);
             Assert.IsTrue(twoRemoveResult);
             Assert.IsNull(tree.Search(2));
@@ -95,6 +123,7 @@ namespace DataStructures.Tests
             Assert.IsNotNull(tree.Search(3)!.Right);
             Assert.AreEqual(6, tree.Count);
 
+            // Case 1: one child
             var threeRemoveResult = tree.Remove(3);
             Assert.IsTrue(threeRemoveResult);
             Assert.IsNull(tree.Search(3));
@@ -102,12 +131,82 @@ namespace DataStructures.Tests
             Assert.IsNull(tree.Search(4)!.Right);
             Assert.AreEqual(5, tree.Count);
 
+            // Case 2: two children
             var sevenRemoveResult = tree.Remove(7);
             Assert.IsTrue(sevenRemoveResult);
             Assert.IsNull(tree.Search(7));
             Assert.IsNull(tree.Search(6)!.Left);
             Assert.IsNotNull(tree.Search(6)!.Right);
             Assert.AreEqual(4, tree.Count);
+        }
+
+        [Test]
+        public static void Remove_LeafNodes_CorrectlyRemovesNodes()
+        {
+            var tree = new BinarySearchTree<int>();
+            tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
+
+            var twoRemoveResult = tree.Remove(2);
+            Assert.IsTrue(twoRemoveResult);
+            Assert.IsNull(tree.Search(2));
+            Assert.IsNull(tree.Search(3)!.Left);
+            Assert.IsNotNull(tree.Search(3)!.Right);
+            Assert.AreEqual(6, tree.Count);
+
+            var fourRemoveResult = tree.Remove(4);
+            Assert.IsTrue(fourRemoveResult);
+            Assert.IsNull(tree.Search(4));
+            Assert.IsNull(tree.Search(3)!.Left);
+            Assert.IsNull(tree.Search(3)!.Right);
+            Assert.AreEqual(5, tree.Count);
+        }
+
+        [Test]
+        public static void Remove_NodesWithOneChild_CorrectlyRemovesNodes()
+        {
+            var tree = new BinarySearchTree<int>();
+            tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
+
+            tree.Remove(4);
+            var threeRemoveResult = tree.Remove(3);
+            Assert.IsTrue(threeRemoveResult);
+            Assert.IsNull(tree.Search(3));
+            Assert.IsNull(tree.Search(2)!.Left);
+            Assert.IsNull(tree.Search(2)!.Right);
+            Assert.AreEqual(5, tree.Count);
+
+            tree.Remove(6);
+            var sevenRemoveResult = tree.Remove(7);
+            Assert.IsTrue(sevenRemoveResult);
+            Assert.IsNull(tree.Search(7));
+            Assert.IsNull(tree.Search(8)!.Left);
+            Assert.IsNull(tree.Search(8)!.Right);
+            Assert.AreEqual(3, tree.Count);
+        }
+
+        [Test]
+        public static void Remove_NodesWithTwoChildren_CorrectlyRemovesNodes()
+        {
+            var tree = new BinarySearchTree<int>();
+            tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
+
+            var sevenRemoveResult = tree.Remove(7);
+            Assert.IsTrue(sevenRemoveResult);
+            Assert.IsNull(tree.Search(7));
+            Assert.IsNull(tree.Search(6)!.Left);
+            Assert.IsNotNull(tree.Search(6)!.Right);
+            Assert.AreEqual(6, tree.Count);
+        }
+
+        [Test]
+        public static void Remove_RemoveRoot_CorrectlyRemovesRoot()
+        {
+            var tree = new BinarySearchTree<int>();
+            tree.Add(5);
+            tree.Remove(5);
+
+            Assert.AreEqual(0, tree.Count);
+            Assert.IsNull(tree.Search(5));
         }
 
         [Test]
@@ -120,12 +219,26 @@ namespace DataStructures.Tests
         }
 
         [Test]
+        public static void GetMax_EmptyTree_ReturnsDefaultValue()
+        {
+            var tree = new BinarySearchTree<int>();
+            Assert.IsNull(tree.GetMax());
+        }
+
+        [Test]
         public static void GetMin_NonEmptyTree_ReturnsCorrectValue()
         {
             var tree = new BinarySearchTree<int>();
             tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
             Assert.AreEqual(2, tree.GetMin()!.Key);
+        }
+
+        [Test]
+        public static void GetMin_EmptyTree_ReturnsDefaultValue()
+        {
+            var tree = new BinarySearchTree<int>();
+            Assert.IsNull(tree.GetMin());
         }
 
         [Test]

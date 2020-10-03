@@ -21,11 +21,6 @@ namespace DataStructures.BinarySearchTree
         public TKey Key { get; }
 
         /// <summary>
-        /// Gets or sets the reference to the parent node for this node.
-        /// </summary>
-        public BinarySearchTreeNode<TKey>? Parent { get; set; }
-
-        /// <summary>
         /// Gets or sets the reference to a child node that precedes/comes before this node.
         /// </summary>
         public BinarySearchTreeNode<TKey>? Left { get; set; }
