@@ -29,7 +29,7 @@ namespace Algorithms.Search
             int j = 0;
             int[] lps = new int[m];
 
-            ComputeLPSArray(pat, m, lps);
+            ComputeLpsArray(pat, m, lps);
 
             while (i < n)
             {
@@ -44,15 +44,18 @@ namespace Algorithms.Search
                     retVal.Add(i - j);
                     j = lps[j - 1];
                 }
-                else if (i < n && pat[j] != str[i])
+                else
                 {
-                    if (j != 0)
+                    if (i < n && pat[j] != str[i])
                     {
-                        j = lps[j - 1];
-                    }
-                    else
-                    {
-                        i = i + 1;
+                        if (j != 0)
+                        {
+                            j = lps[j - 1];
+                        }
+                        else
+                        {
+                            i = i + 1;
+                        }
                     }
                 }
             }
@@ -65,7 +68,7 @@ namespace Algorithms.Search
             return retVal;
         }
 
-        private void ComputeLPSArray(string pat, int m, int[] lps)
+        private void ComputeLpsArray(string pat, int m, int[] lps)
         {
             int len = 0;
             int i = 1;

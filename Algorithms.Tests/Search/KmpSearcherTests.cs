@@ -11,7 +11,7 @@ using Utilities.Extensions;
 
 namespace Algorithms.Tests.Search
 {
-    public class KmpSearcherTests
+    public static class KmpSearcherTests
     {
         [Test]
         public static void FindIndexes_ItemsPresent_IndexsCorrect()
