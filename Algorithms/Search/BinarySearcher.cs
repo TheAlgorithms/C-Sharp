@@ -56,7 +56,10 @@ namespace Algorithms.Searches
         /// <returns>Index of item that equals to item searched for or -1 if none found.</returns>
         public int FindIndexRecursive(IList<T>? collection, T item)
         {
-            collection = collection ?? throw new ArgumentNullException(nameof(collection));
+            if (collection is null)
+            {
+                throw new ArgumentNullException(nameof(collection));
+            }
 
             var leftIndex = 0;
             var rightIndex = collection.Count - 1;
