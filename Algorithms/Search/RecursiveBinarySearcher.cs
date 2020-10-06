@@ -9,7 +9,7 @@ namespace Algorithms.Searches
     /// <typeparam name="T">Type of searcher target</typeparam>
     public class RecursiveBinarySearcher<T> where T : IComparable<T>
     {
-        public static readonly int NotFoundIndex = -1;
+        public const int NotFoundIndex = -1;
 
         /// <summary>
         /// Finds index of item in collection that equals to item searched for,
