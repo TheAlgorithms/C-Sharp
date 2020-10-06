@@ -13,28 +13,28 @@ namespace Algorithms.Tests.Search
         public static void FindIndex_ItemPresent_IndexCorrect([Random(1, 1000, 100)] int n)
         {
             // Arrange
-            var searcher = new RecursiveBinarySearcher<int>();
-            var random = Randomizer.CreateRandomizer();
-            var selectedIndex = random.Next(0, n);
-            var arrayToSearch = Enumerable.Range(0, n).Select(x => random.Next(0, 1000)).OrderBy(x => x).ToArray();
+            var subject = new RecursiveBinarySearcher<int>();
+            var randomizer = Randomizer.CreateRandomizer();
+            var selectedIndex = randomizer.Next(0, n);
+            var collection = Enumerable.Range(0, n).Select(x => randomizer.Next(0, 1000)).OrderBy(x => x).ToList();
 
             // Act
-            var actualIndex = searcher.FindIndex(arrayToSearch, arrayToSearch[selectedIndex]);
+            var actualIndex = subject.FindIndex(collection, collection[selectedIndex]);
 
             // Assert
-            Assert.AreEqual(arrayToSearch[selectedIndex], arrayToSearch[actualIndex]);
+            Assert.AreEqual(collection[selectedIndex], collection[actualIndex]);
         }
 
         [Test]
         public static void FindIndex_ItemMissing_MinusOneReturned([Random(0, 1000, 10)] int n, [Random(-100, 1100, 10)] int missingItem)
         {
             // Arrange
-            var searcher = new RecursiveBinarySearcher<int>();
+            var subject = new RecursiveBinarySearcher<int>();
             var random = Randomizer.CreateRandomizer();
-            var arrayToSearch = Enumerable.Range(0, n).Select(x => random.Next(0, 1000)).Where(x => x != missingItem).OrderBy(x => x).ToArray();
+            var collection = Enumerable.Range(0, n).Select(x => random.Next(0, 1000)).Where(x => x != missingItem).OrderBy(x => x).ToList();
 
             // Act
-            var actualIndex = searcher.FindIndex(arrayToSearch, missingItem);
+            var actualIndex = subject.FindIndex(collection, missingItem);
 
             // Assert
             Assert.AreEqual(-1, actualIndex);
@@ -44,11 +44,11 @@ namespace Algorithms.Tests.Search
         public static void FindIndex_ArrayEmpty_MinusOneReturned([Random(100)] int itemToSearch)
         {
             // Arrange
-            var searcher = new RecursiveBinarySearcher<int>();
-            var arrayToSearch = new int[0];
+            var subject = new RecursiveBinarySearcher<int>();
+            var collection = new int[0];
 
             // Act
-            var actualIndex = searcher.FindIndex(arrayToSearch, itemToSearch);
+            var actualIndex = subject.FindIndex(collection, itemToSearch);
 
             // Assert
             Assert.AreEqual(-1, actualIndex);
@@ -58,13 +58,13 @@ namespace Algorithms.Tests.Search
         public static void FindIndex_NullCollection_Throws()
         {
             // Arrange
-            var searcher = new RecursiveBinarySearcher<int>();
-            var arrayToSearch = (IList<int>?)null;
+            var subject = new RecursiveBinarySearcher<int>();
+            var collection = (IList<int>?)null;
 
             // Act
             TestDelegate actDelegate = () =>
             {
-                searcher.FindIndex(arrayToSearch, 42);
+                subject.FindIndex(collection, 42);
             };
 
             // Assert

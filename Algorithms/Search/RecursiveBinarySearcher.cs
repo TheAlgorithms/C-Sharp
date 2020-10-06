@@ -17,6 +17,7 @@ namespace Algorithms.Searches
         /// </summary>
         /// <param name="collection">Sorted collection to search in.</param>
         /// <param name="item">Item to search for.</param>
+        /// <exception cref="ArgumentNullException">Thrown if input collection is null.</exception>
         /// <returns>Index of item that equals to item searched for or -1 if none found.</returns>
         public int FindIndex(IList<T>? collection, T item)
         {
