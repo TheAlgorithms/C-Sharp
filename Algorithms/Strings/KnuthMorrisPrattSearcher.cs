@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using Utilities.Exceptions;
 
-namespace Algorithms.Search
+namespace Algorithms.Strings
 {
     /// <summary>
     /// An implementation of Knuth–Morris–Pratt Algorithm.
     /// Worst case time complexity: O(n).
     /// </summary>
-    public class KmpSearcher
+    public class KnuthMorrisPrattSearcher
     {
         /// <summary>
-        /// Enumerates each zero-based index of all occurrences of the string in this instance.
+        /// Return zero-based index of all occurrences of the string in this instance.
         /// throws ItemNotFoundException if the item couldn't be found.
         /// </summary>
         /// <param name="str">The string instance.</param>
@@ -20,16 +20,14 @@ namespace Algorithms.Search
         /// If <paramref name="pat"/> is empty, no indexes will be enumerated.
         /// </returns>
         /// <exception cref="ItemNotFoundException"><paramref name="str"/> or <paramref name="pat"/> is null.</exception>
-        public IEnumerable<int> FindIndexes(string str, string pat)
+        public List<int> FindIndexes(string str, string pat)
         {
             List<int> retVal = new List<int>();
             int m = pat.Length;
             int n = str.Length;
             int i = 0;
             int j = 0;
-            int[] lps = new int[m];
-
-            ComputeLpsArray(pat, m, lps);
+            int[] lps = LongestPrefixSuffixValues(pat);
 
             while (i < n)
             {
@@ -68,14 +66,23 @@ namespace Algorithms.Search
             return retVal;
         }
 
-        private void ComputeLpsArray(string pat, int m, int[] lps)
+        /// <summary>
+        /// Return the longest prefix suffix values for pattern.
+        /// </summary>
+        /// <param name="pat">pattern to seek.</param>
+        /// <returns>The longest prefix suffix values for <paramref name="pat"/>.</returns>
+        public int[] LongestPrefixSuffixValues(string pat)
         {
+            int n = pat.Length;
+
+            int[] lps = new int[n];
+
             int len = 0;
-            int i = 1;
 
             lps[0] = 0;
+            int i = 1;
 
-            while (i < m)
+            while (i < n)
             {
                 if (pat[i] == pat[len])
                 {
@@ -96,6 +103,8 @@ namespace Algorithms.Search
                     }
                 }
             }
+
+            return lps;
         }
     }
 }
