@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace Algorithms.Searches
 {
     /// <summary>
-    /// RecursiveBinarySearcher
+    /// RecursiveBinarySearcher.
     /// </summary>
-    /// <typeparam name="T">Type of searcher target</typeparam>
+    /// <typeparam name="T">Type of searcher target.</typeparam>
     public class RecursiveBinarySearcher<T> where T : IComparable<T>
     {
         /// <summary>
