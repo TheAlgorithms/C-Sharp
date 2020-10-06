@@ -89,7 +89,6 @@ namespace DataStructures
         /// <summary>
         /// Adds an item at the last position in the queue.
         /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown if the queue is full.</exception>
         public void Enqueue(T item) => input.Push(item);
     }
 }
