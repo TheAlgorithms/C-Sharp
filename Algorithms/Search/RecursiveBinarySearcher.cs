@@ -9,8 +9,6 @@ namespace Algorithms.Searches
     /// <typeparam name="T">Type of searcher target</typeparam>
     public class RecursiveBinarySearcher<T> where T : IComparable<T>
     {
-        public const int NotFoundIndex = -1;
-
         /// <summary>
         /// Finds index of item in collection that equals to item searched for,
         /// time complexity: O(log(n)),
@@ -48,7 +46,7 @@ namespace Algorithms.Searches
         {
             if (leftIndex > rightIndex)
             {
-                return NotFoundIndex;
+                return -1;
             }
 
             var middleIndex = leftIndex + (rightIndex - leftIndex) / 2;
@@ -59,7 +57,7 @@ namespace Algorithms.Searches
                 var r when r == 0 => middleIndex,
                 var r when r > 0 => FindIndex(collection, item, middleIndex + 1, rightIndex),
                 var r when r < 0 => FindIndex(collection, item, leftIndex, middleIndex - 1),
-                _ => NotFoundIndex
+                _ => -1
             };
         }
     }
