@@ -7,7 +7,6 @@ namespace Algorithms.Tests.Search.Substring
 {
     public class RabinKarpTest
     {
-
         [TestCase("HelloImATestcaseAndIWillPass", "Testcase", new [] {8})]
         [TestCase("HelloImATestcaseAndImCaseSensitiv", "TestCase", new int[] {})]
         [TestCase("HelloImATestcaseAndIHaveTwoOccurrencesOfTestcase", "Testcase", new [] {8, 40})]
