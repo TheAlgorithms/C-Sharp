@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace DataStructures.Tests
 {
-    public class ArrayBasedCircularQueueTests
+    public static class ArrayBasedCircularQueueTests
     {
         [Test]
         public static void ClearQualityTest()

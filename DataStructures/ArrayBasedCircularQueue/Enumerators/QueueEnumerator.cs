@@ -12,12 +12,12 @@ namespace DataStructures.ArrayBasedCircularQueue.Enumerators
     public class QueueEnumerator<T> : IEnumerator<T>
     {
         private readonly T[] queue;
-        private bool disposedValue = false;
-        private int front = 0;
-        private int rear = 0;
+        private readonly int front;
+        private readonly int rear;
+        private readonly Func<int, int> incrementer;
+        private readonly Func<int, int, bool> condition;
+        private bool disposedValue;
         private int position;
-        private Func<int, int> incrementer;
-        private Func<int, int, bool> condition;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="QueueEnumerator{T}"/> class.
@@ -67,32 +67,17 @@ namespace DataStructures.ArrayBasedCircularQueue.Enumerators
 
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
-
-            // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
         }
 
-        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~QueueEnumerator()
-        // {
-        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-        //   Dispose(false);
-        // }
-
-        // This code added to correctly implement the disposable pattern.
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects).
                 }
 
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
                 disposedValue = true;
             }
         }

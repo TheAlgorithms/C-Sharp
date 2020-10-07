@@ -20,8 +20,8 @@ namespace DataStructures.ArrayBasedCircularQueue
     public class CircularQueue<T> : IQueueOperations<T>
     {
         private readonly int size = 10;
-        private int front = -1;
-        private int rear = -1;
+        private int front;
+        private int rear;
         private T[] queue;
 
         /// <summary>
