@@ -66,6 +66,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 		* [Longest Consecutive Character](./Algorithms/Strings/GeneralStringAlgorithms.cs)
 		* [Naive String Search](./Algorithms/Strings/NaiveStringSearch.cs)
 		* [Palindrome Checker](./Algorithms/Strings/palindrome.cs)
+		* [Text Splitter](./Algorithms/Strings/GeneralStringAlgorithms.cs)
 	* [Other](./Algorithms/Other/)
 		* [Fermat Prime Checker](./Algorithms/Other/FermatPrimeChecker.cs)
 		* [Sieve of Eratosthenes](./Algorithms/Other/SieveOfEratosthenes.cs)
