@@ -9,7 +9,7 @@ namespace DataStructures.ArrayBasedCircularQueue.Enumerators
     /// Queue Enumerator to enumerate queue.
     /// </summary>
     /// <typeparam name="T">Generic Type.</typeparam>
-    public class QueueEnumerator<T> : IEnumerator<T>
+    public sealed class QueueEnumerator<T> : IEnumerator<T>
     {
         private readonly T[] queue;
         private readonly int front;
