@@ -64,8 +64,9 @@ namespace DataStructures.ArrayBasedCircularQueue.Enumerators
             this.position = this.front - 1;
         }
 
-        public void Dispose()
-        {
-        }
+        /// <summary>
+        /// Queue enumerator does't need to be disposed. There is nothing to be disposed, so leaving the implementation blank.
+        /// </summary>
+        public void Dispose() => throw new NotSupportedException("Queue enumerator does't need to be disposed. There is nothing to be disposed");
     }
 }
