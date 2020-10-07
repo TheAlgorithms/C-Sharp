@@ -20,5 +20,14 @@ namespace Algorithms.Tests.Strings
             Assert.AreEqual(expectedSymbol, symbol);
             Assert.AreEqual(expectedCount, count);
         }
+
+        [Test]
+        [TestCase("bluh", 4, new string[]{"b","l","u","h"})]
+        [TestCase("fox",2,new string[] {"fo","x" })]
+        public static void SplitTextIsObtained(string text, int parts, string[] expectedSplit)
+        {
+            string[] str = GeneralStringAlgorithms.SplitText(text, parts);
+            CollectionAssert.AreEqual(expectedSplit, str);
+        }
     }
 }
