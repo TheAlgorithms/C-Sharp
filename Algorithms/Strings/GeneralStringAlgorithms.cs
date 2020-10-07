@@ -47,13 +47,12 @@ namespace Algorithms.Strings
         /// <returns>an array with the parts of the string.</returns>
         public static string[] SplitText(string text, int parts)
         {
-
             // calculate the remaining part of the division
             int rem = text.Length % parts;
             int charsPerPart = text.Length / parts;
 
             string[] ret = new string[parts];
-            for(int i = 0;i<ret.Length;i++)
+            for (int i = 0; i < ret.Length; i++)
             {
                 int times = charsPerPart;
 
@@ -65,15 +64,14 @@ namespace Algorithms.Strings
                 }
 
                 // add the characters to a new string and remove from original
-                string part = text.Substring(0,times);
-                text.Remove(0,times);
-                
+                string part = text.Substring(0, times);
+                text = text.Remove(0, times);
+
                 // add the new string to the array
                 ret[i] = part;
-
             }
+
             return ret;
-            
         }
     }
 }
