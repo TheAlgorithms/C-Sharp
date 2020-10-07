@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Algorithms.Search.Substring;
+using Algorithms.Strings;
 using NUnit.Framework;
 
-namespace Algorithms.Tests.Search.Substring
+namespace Algorithms.Tests.Strings
 {
     public class RabinKarpTest
     {
@@ -15,7 +15,5 @@ namespace Algorithms.Tests.Search.Substring
             List<int> result = RabinKarp.FindAllOccurrences(t, p);
             Assert.AreEqual(result, new List<int>(expectedIndices));
         }
-        
     }
-    
 }

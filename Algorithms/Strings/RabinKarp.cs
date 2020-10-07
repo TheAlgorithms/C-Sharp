@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Algorithms.Search.Substring
+namespace Algorithms.Strings
 {
     /// <summary>
     /// The idea: You calculate the hash for the pattern <c>p</c> and the hash values for all the prefixes of the text <c>t</c>.
