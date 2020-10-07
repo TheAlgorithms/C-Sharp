@@ -22,8 +22,8 @@ namespace Algorithms.Tests.Strings
         }
 
         [Test]
-        [TestCase("bluh", 4, new string[]{"b","l","u","h"})]
-        [TestCase("fox",2,new string[] {"fo","x" })]
+        [TestCase("bluh", 4, new []{ "b", "l", "u", "h" })]
+        [TestCase("fox",2,new []{"fo","x" })]
         public static void SplitTextIsObtained(string text, int parts, string[] expectedSplit)
         {
             string[] str = GeneralStringAlgorithms.SplitText(text, parts);

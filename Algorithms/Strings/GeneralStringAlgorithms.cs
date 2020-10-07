@@ -47,38 +47,33 @@ namespace Algorithms.Strings
         /// <returns>an array with the parts of the string.</returns>
         public static string[] SplitText(string text, int parts)
         {
-            //calculate the remaining part of the division
+
+            // calculate the remaining part of the division
             int rem = text.Length % parts;
             int charsPerPart = text.Length / parts;
-            //a counter for current index at string
-            int cnt = 0;
-            //a counter for current itteration
-            int i = 0;
+
             string[] ret = new string[parts];
-            while (cnt < text.Length)
+            for(int i = 0;i<ret.Length;i++)
             {
                 int times = charsPerPart;
-                //if there is still a remainder add one from it to the current amount of chars for the part
+
+                // if there is still a remainder add one from it to the current amount of chars for the part
                 if (rem > 0)
                 {
                     rem--;
                     times++;
                 }
-                //add the characters to a new string
-                string part = string.Empty;
-                while (times != 0)
-                {
-                    part += text[cnt];
-                    cnt++;
-                    times--;
-                }
-                //add the new string to the array
-                ret[i] = part;
-                //increment the itteration
-                i++;
-            }
 
+                // add the characters to a new string and remove from original
+                string part = text.Substring(0,times);
+                text.Remove(0,times);
+                
+                // add the new string to the array
+                ret[i] = part;
+
+            }
             return ret;
+            
         }
     }
 }
