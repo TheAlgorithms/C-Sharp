@@ -16,7 +16,6 @@ namespace DataStructures.ArrayBasedCircularQueue.Enumerators
         private readonly int rear;
         private readonly Func<int, int> incrementer;
         private readonly Func<int, int, bool> condition;
-        private bool disposedValue;
         private int position;
 
         /// <summary>
@@ -67,19 +66,6 @@ namespace DataStructures.ArrayBasedCircularQueue.Enumerators
 
         public void Dispose()
         {
-            Dispose(true);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                }
-
-                disposedValue = true;
-            }
         }
     }
 }
