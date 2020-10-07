@@ -34,6 +34,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 	* [Searches](./Algorithms/Search/)
 		* [A-Star](./Algorithms/Search/AStar/)
 		* [Binary](./Algorithms/Search/BinarySearcher.cs)
+		* [Recursive Binary](./Algorithms/Search/RecursiveBinarySearcher.cs)
 		* [Linear](./Algorithms/Search/LinearSearcher.cs)
 		* [FastSearch](./Algorithms/Search/FastSearcher.cs)
 		* [Substring](./Algorithms/Search/Substring)
@@ -52,6 +53,8 @@ This repository contains algorithms and data structures implemented in C# for ed
 			* [Quick](./Algorithms/Sorters/Comparison/QuickSorter.cs)
 			* [Selection](./Algorithms/Sorters/Comparison/SelectionSorter.cs)
 			* [Shell](./Algorithms/Sorters/Comparison/ShellSorter.cs)
+		* [External](./Algorithms/Sorters/External)
+			* [Merge](./Algorithms/Sorters/External/ExternalMergeSorter.cs)
 		* [Integer](./Algorithms/Sorters/Integer)
 			* [Counting](./Algorithms/Sorters/Integer/CountingSorter.cs)
 			* [Bucket](./Algorithms/Sorters/Integer/BucketSorter.cs)
@@ -76,6 +79,9 @@ This repository contains algorithms and data structures implemented in C# for ed
 	* [Doubly Linked List](./DataStructures/DoublyLinkedList)
 	* [Min-Max Heap](./DataStructures/MinMaxHeap.cs)
 	* [Timeline](./DataStructures/Timeline.cs)
+	* [Array-based Queue](./DataStructures/ArrayBasedQueue.cs)
+	* [List-based Queue](./DataStructures/ListBasedQueue.cs)
+	* [Binary Search Tree](./DataStructures/BinarySearchTree)
 ---
 
 ## Contribution
