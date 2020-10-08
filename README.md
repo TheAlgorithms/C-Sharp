@@ -43,6 +43,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 			* [Bogo](./Algorithms/Sorters/Comparison/BogoSorter.cs)
 			* [Bubble](./Algorithms/Sorters/Comparison/BubbleSorter.cs)
 			* [Cocktail](./Algorithms/Sorters/Comparison/CocktailSorter.cs)
+			* [Comb](./Algorithms/Sorters/Comparison/CombSorter.cs)
 			* [Cycle](./Algorithms/Sorters/Comparison/CycleSorter.cs)
 			* [Heap](./Algorithms/Sorters/Comparison/HeapSorter.cs)
 			* [Insertion](./Algorithms/Sorters/Comparison/InsertionSorter.cs)
