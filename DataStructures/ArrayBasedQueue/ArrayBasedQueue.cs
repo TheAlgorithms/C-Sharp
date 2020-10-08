@@ -1,19 +1,21 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using DataStructures.ArrayBasedQueue.Abstractions;
+using DataStructures.ArrayBasedQueue.Enumerators;
 
-namespace DataStructures
+namespace DataStructures.ArrayBasedQueue
 {
     /// <summary>
     /// Implementation of an array based queue. FIFO style.
     /// </summary>
     /// <typeparam name="T">Generic Type.</typeparam>
-    public class ArrayBasedQueue<T>
+    public class ArrayBasedQueue<T> : IQueueOperations<T>
     {
         private readonly T[] queue;
         private readonly int capacity;
-        private int startIndex;
-        private int endIndex;
-        private bool isEmpty;
-        private bool isFull;
+        private int front;
+        private int rear;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ArrayBasedQueue{T}"/> class.
@@ -28,13 +30,7 @@ namespace DataStructures
         /// <summary>
         /// Clears the queue.
         /// </summary>
-        public void Clear()
-        {
-            startIndex = 0;
-            endIndex = 0;
-            isEmpty = true;
-            isFull = false;
-        }
+        public void Clear() => front = rear = 0;
 
         /// <summary>
         /// Returns the first item in the queue and removes it from the queue.
@@ -42,39 +38,33 @@ namespace DataStructures
         /// <exception cref="InvalidOperationException">Thrown if the queue is empty.</exception>
         public T Dequeue()
         {
+            T item;
             if (IsEmpty())
             {
                 throw new InvalidOperationException("There are no items in the queue.");
             }
-
-            var dequeueIndex = endIndex;
-            endIndex++;
-            if (endIndex >= queue.Length)
+            else if (rear - 1 == front)
             {
-                endIndex = 0;
+                item = this.queue[front];
+                rear = front = 0;
+            }
+            else
+            {
+                item = this.queue[front++];
             }
 
-            isFull = false;
-            isEmpty = startIndex == endIndex;
-
-            return queue[dequeueIndex];
+            return item;
         }
 
         /// <summary>
         /// Returns a boolean indicating whether the queue is empty.
         /// </summary>
-        public bool IsEmpty()
-        {
-            return isEmpty;
-        }
+        public bool IsEmpty() => rear == 0 && front == 0;
 
         /// <summary>
         /// Returns a boolean indicating whether the queue is full.
         /// </summary>
-        public bool IsFull()
-        {
-            return isFull;
-        }
+        public bool IsFull() => rear >= this.queue.Length;
 
         /// <summary>
         /// Returns the first item in the queue and keeps it in the queue.
@@ -87,7 +77,7 @@ namespace DataStructures
                 throw new InvalidOperationException("There are no items in the queue.");
             }
 
-            return queue[endIndex];
+            return queue[front];
         }
 
         /// <summary>
@@ -100,17 +90,23 @@ namespace DataStructures
             {
                 throw new InvalidOperationException("The queue has reached its capacity.");
             }
-
-            queue[startIndex] = item;
-
-            startIndex++;
-            if (startIndex >= queue.Length)
+            else
             {
-                startIndex = 0;
+                this.queue[rear++] = item;
             }
-
-            isEmpty = false;
-            isFull = startIndex == endIndex;
         }
+
+        /// <summary>
+        /// Returns Enumerator so that circular queue can be enumerable.
+        /// </summary>
+        public IEnumerator<T> GetEnumerator()
+        {
+            return new QueueEnumerator<T>(queue, front, rear, p => ++p, (p, r) => p < r);
+        }
+
+        /// <summary>
+        /// Returns Enumerator so that circular queue can be enumerable.
+        /// </summary>
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

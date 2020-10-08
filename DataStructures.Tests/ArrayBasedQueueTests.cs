@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
+using DataStructures.ArrayBasedQueue;
+using DataStructures.ArrayBasedQueue.Enumerators;
 using NUnit.Framework;
 
 namespace DataStructures.Tests
@@ -38,7 +41,7 @@ namespace DataStructures.Tests
             int peeked = 0;
 
             // Act
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 2; i++)
             {
                 peeked = q.Peek();
             }
@@ -127,6 +130,80 @@ namespace DataStructures.Tests
             // Assert
             Assert.IsTrue(q.IsEmpty(), "Queue is empty");
             Assert.IsFalse(q.IsFull(), "Queue is full");
+        }
+
+        [Test]
+        public static void GetEnumeratorTypeQualityTest()
+        {
+            var queue = new ArrayBasedQueue<int>(2);
+            queue.Enqueue(1);
+            queue.Enqueue(2);
+
+            var enumeratorActual = queue.GetEnumerator();
+
+            Assert.AreEqual(expected: typeof(QueueEnumerator<int>), actual: enumeratorActual?.GetType());
+        }
+
+        [Test]
+        public static void GetEnumeratorItemQualityTest()
+        {
+            var queue = new ArrayBasedQueue<int>(2);
+            queue.Enqueue(1);
+            queue.Enqueue(2);
+
+            var enumerator = queue.GetEnumerator();
+
+            int firstvalue = 0;
+
+            if (enumerator.MoveNext())
+            {
+                firstvalue = enumerator.Current;
+            }
+
+            Assert.AreEqual(expected: typeof(int), actual: firstvalue.GetType());
+            Assert.AreEqual(expected: 1, actual: firstvalue);
+        }
+
+        [Test]
+        public static void GetEnumeratorItemsListQualityTest()
+        {
+            var queue = new ArrayBasedQueue<int>(2);
+            queue.Enqueue(1);
+            queue.Enqueue(2);
+
+            var enumerator = queue.GetEnumerator();
+
+            int sumOfItems = 0;
+
+            while (enumerator.MoveNext())
+            {
+                sumOfItems += enumerator.Current;
+            }
+
+            Assert.AreEqual(expected: 3, actual: sumOfItems);
+        }
+
+        [Test]
+        public static void QueueEmptyQualityTest()
+        {
+            var queue = new ArrayBasedQueue<int>(2);
+            queue.Enqueue(1);
+            queue.Enqueue(2);
+
+            queue.Dequeue();
+            queue.Dequeue();
+
+            Assert.IsTrue(queue.IsEmpty(), "Queue is empty");
+        }
+
+        [Test]
+        public static void QueueFullQualityTest()
+        {
+            var queue = new ArrayBasedQueue<int>(2);
+            queue.Enqueue(1);
+            queue.Enqueue(2);
+
+            Assert.IsTrue(queue.IsFull(), "Queue is full");
         }
     }
 }

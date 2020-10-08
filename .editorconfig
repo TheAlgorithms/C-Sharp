@@ -195,3 +195,6 @@ dotnet_naming_style.начинается_с_i.required_prefix = I
 dotnet_naming_style.начинается_с_i.required_suffix = 
 dotnet_naming_style.начинается_с_i.word_separator = 
 dotnet_naming_style.начинается_с_i.capitalization = pascal_case
+
+# CS8603: Possible null reference return.
+dotnet_diagnostic.CS8603.severity = none
