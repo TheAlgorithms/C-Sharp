@@ -21,70 +21,60 @@ namespace Algorithms.Search
         /// <param name="item">Term to check against.</param>
         /// <returns>Index of first item that satisfies term.</returns>
         /// <exception cref="ItemNotFoundException"> Gets thrown when the given item couldn't be found in the array.</exception>
-        public int FindIndex(int[] array, int item) => FindIndex(array, item, 0);
-
-        private int FindIndex(int[] array, int item, int offset)
+        public int FindIndex(Span<int> array, int item)
         {
-            if (item < array[0] || item > array[array.Length - 1])
+            if (array.Length == 0)
             {
                 throw new ItemNotFoundException();
             }
 
-            if (array[0] == array[array.Length - 1])
+            if (item < array[0] || item > array[^1])
             {
-                return item == array[0] ? offset : throw new ItemNotFoundException();
+                throw new ItemNotFoundException();
             }
 
+            if (array[0] == array[^1])
+            {
+                return item == array[0] ? 0 : throw new ItemNotFoundException();
+            }
+
+            var (left, right) = ComputeIndices(array, item);
+            var (from, to) = SelectSegment(array, left, right, item);
+
+            return from + FindIndex(array.Slice(from, to - from + 1), item);
+        }
+
+        private (int left, int right) ComputeIndices(Span<int> array, int item)
+        {
             var indexBinary = array.Length / 2;
 
             int[] section =
             {
                 array.Length - 1,
                 item - array[0],
-                array[array.Length - 1] - array[0],
+                array[^1] - array[0],
             };
-
             var indexInterpolation = section[0] * section[1] / section[2];
 
-            var (i1, i2) = indexBinary > indexInterpolation
-                ? (indexInterpolation, indexBinary)
-                : (indexBinary, indexInterpolation);
+            // Left is min and right is max of the indices
+            return indexInterpolation > indexBinary
+                ? (indexBinary, indexInterpolation)
+                : (indexInterpolation, indexBinary);
+        }
 
-            int from, to;
-            if (item == array[i1])
+        private (int from, int to) SelectSegment(Span<int> array, int left, int right, int item)
+        {
+            if (item < array[left])
             {
-                return offset + i1;
-            }
-
-            if (item == array[i2])
-            {
-                return offset + i2;
+                return (0, left - 1);
             }
 
-            if (item < array[i1])
+            if (item < array[right])
             {
-                @from = 0;
-                to = i1 - 1;
-            }
-            else if (item < array[i2])
-            {
-                @from = i1 + 1;
-                to = i2 - 1;
-            }
-            else
-            {
-                @from = i2 + 1;
-                to = array.Length - 1;
+                return (left, right - 1);
             }
 
-            if (from >= to)
-            {
-                throw new ItemNotFoundException();
-            }
-
-            var segment = new int[to - from + 1];
-            Array.Copy(array, from, segment, 0, segment.Length);
-            return FindIndex(segment, item, offset + from);
+            return (right, array.Length - 1);
         }
     }
 }

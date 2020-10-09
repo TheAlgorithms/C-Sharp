@@ -4,6 +4,12 @@
     <Rule Id="SA1101" Action="None" />
     <Rule Id="SA1127" Action="None" />
     <Rule Id="SA1407" Action="None" />
+    <Rule Id="CS1573" Action="None" />
+    <Rule Id="CS1591" Action="None" />
+    <Rule Id="CS1723" Action="None" />
+    <Rule Id="SA1600" Action="None" />
+    <Rule Id="SA1611" Action="None" />
+    <Rule Id="SA1615" Action="None" />
     <Rule Id="SA1633" Action="None" />
   </Rules>
 </RuleSet>
