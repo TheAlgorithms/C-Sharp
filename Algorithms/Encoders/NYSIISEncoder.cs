@@ -4,12 +4,23 @@ using System.Collections.Generic;
 
 namespace Algorithms.Encoders
 {
+    /// <summary>
+    /// Class for NYSIIS encoding strings.
+    /// </summary>
     public class NYSIISEncoder
     {
         private static char[] Vowels = new char[] { 'A', 'E', 'I', 'O', 'U' };
 
+        /// <summary>
+        /// Creates a new instance of the NYSIISEncoder.
+        /// </summary>
         public NYSIISEncoder() {}
 
+        /// <summary>
+        /// Encodes a string using the NYSIIS Algorithm
+        /// </summary>
+        /// <param name="text">The string to encode</param>
+        /// <returns>The NYSIIS encoded string (all uppercase)</returns>
         public string Encode(string text)
         {
             text = text.ToUpper();
@@ -122,24 +133,58 @@ namespace Algorithms.Encoders
         }
     }
 
+    /// <summary>
+    /// Static class containing Extension Methods used by the NYSIIS algorithm.
+    /// </summary>
     public static class NYSIISExtensions
     {
+        /// <summary>
+        /// Replaces a number of characters starting at a given index with another set of characters.
+        /// </summary>
+        /// <param name="torep">The string in which to replace</param>
+        /// <param name="index">The index where the substring to replace starts</param>
+        /// <param name="repl">The characters with which to replace the substring</param>
+        /// <param name="len">The length of the substring to replace</param>
+        /// <returns>The given string where the given substring was replaced by the given characters</return>
         public static string ReplaceAt(this string torep, int index, string repl, int len) =>
             $"{torep.Substring(0,index)}{repl}{(index + len < torep.Length ? torep.Substring(index + len) : "")}";
 
+        /// <summary>
+        /// Replaces one character at a given index with another character.
+        /// </summary>
+        /// <param name="torep">The string in which to replace</param>
+        /// <param name="index">The index of the character to replace</param>
+        /// <param name="rep">The character with which to replace</param>
+        /// <returns>The given string where the given character was replaced</return>
         public static string ReplaceSingle(this string torep, int index, char rep) =>
             torep.ReplaceAt(index, $"{rep}", 1);
 
+        /// <summary>
+        /// Enumerates over an array using indices and values.
+        /// </summary>
+        /// <param name="arr">The array over which to enumerate</param>
+        /// <param name="consumer">The action to execute for each pair (element, index).</param>
         public static void Enumerate<T>(this T[] arr, Action<T, int> consumer)
         {
             for(int i = 0; i < arr.Length; i++) consumer(arr[i], i);
         }
 
+        /// <summary>
+        /// Enumerates over an IEnumerable.
+        /// </summary>
+        /// <param name="en">The IEnumerable over which to enumerate</param>
+        /// <param name="consumer">The action to execute for each element.</param>
         public static void ForEach<T>(this IEnumerable<T> en, Action<T> consumer)
         {
             foreach(T t in en) consumer(t);
         }
 
+        /// <summary>
+        /// Checks whether a given array contains a given value.
+        /// </summary>
+        /// <param name="arr">The array to check</param>
+        /// <param name="eq">The value to check against</param>
+        /// <returns>True if the array contains the value, otherwise false</returns>
         public static bool Contains<T>(this T[] arr, T eq)
         {
             foreach(T t in arr)
