@@ -1,10 +1,11 @@
 using System;
+using System.Linq;
 
 namespace Utilities.Extensions
 {
     public static class MatrixExtensions
     {
-        public static double[,] Multiply(this Array source, Array operand)
+        public static double[,] Multiply(this double[,] source, double[,] operand)
         {
             if ((source.Rank != 2) || (operand.Rank != 2))
             {
@@ -26,7 +27,7 @@ namespace Utilities.Extensions
 
                     for (var k = 0; k < source.GetLength(1); k++)
                     {
-                        elementProduct += (double)source.GetValue(i, k) * (double)operand.GetValue(k, j);
+                        elementProduct += source[i, k] * operand[k, j];
                     }
 
                     result[i, j] = elementProduct;
@@ -35,5 +36,7 @@ namespace Utilities.Extensions
 
             return result;
         }
+
+        public static double Norm(this double[] source) => Math.Sqrt(source.Sum(x => x * x));
     }
 }
