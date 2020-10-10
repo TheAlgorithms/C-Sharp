@@ -1,15 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Algorithms.Problems.StableMarriage
 {
     public class Accepter
     {
-        public Accepter(int value) => Value = value;
-
         public Proposer? EngagedTo { get; set; }
 
-        public int Value { get; }
+        public List<Proposer> PreferenceOrder { get; set; } = new List<Proposer>();
 
-        public bool PrefersOverCurrent(Proposer newProposer) => EngagedTo == null || Math.Abs(newProposer.Value - Value) < Math.Abs(EngagedTo.Value - Value);
+        public bool PrefersOverCurrent(Proposer newProposer) => EngagedTo == null || PreferenceOrder.IndexOf(newProposer) < PreferenceOrder.IndexOf(EngagedTo);
     }
 }

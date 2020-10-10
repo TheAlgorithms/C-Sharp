@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Algorithms.Problems.StableMarriage
@@ -30,30 +31,37 @@ namespace Algorithms.Problems.StableMarriage
                 accepter.EngagedTo = null;
             }
 
-            var matchingSession = proposers.Select(p => new { Proposer = p, Accepters = accepters.OrderBy(a => p.Score(a)).ToList() }).ToArray();
+            var matchingSession = proposers.Select(p => (Proposer: p, Accepters: accepters.OrderBy(a => p.Score(a)).ToList())).ToArray();
 
-            while (matchingSession.Any(m => m.Proposer.EngagedTo == null))
+            while (matchingSession.Any(m => !IsEngaged(m)))
             {
-                foreach (var session in matchingSession.Where(m => m.Proposer.EngagedTo == null))
-                {
-                    var accepter = session.Accepters.First();
-                    var newProposer = session.Proposer;
+                DoSingleMatchingRound(matchingSession.Where(m => !IsEngaged(m)));
+            }
+        }
 
-                    if (accepter.EngagedTo == null)
+        private static bool IsEngaged((Proposer Proposer, List<Accepter> Accepters) m) => m.Proposer.EngagedTo != null;
+
+        private static void DoSingleMatchingRound(IEnumerable<(Proposer Proposer, List<Accepter> Accepters)> matchingSession)
+        {
+            foreach (var session in matchingSession)
+            {
+                var accepter = session.Accepters.First();
+                var newProposer = session.Proposer;
+
+                if (accepter.EngagedTo == null)
+                {
+                    Engage(newProposer, accepter);
+                }
+                else
+                {
+                    if (accepter.PrefersOverCurrent(newProposer))
                     {
+                        Free(accepter.EngagedTo);
                         Engage(newProposer, accepter);
                     }
-                    else
-                    {
-                        if (accepter.PrefersOverCurrent(newProposer))
-                        {
-                            Free(accepter.EngagedTo);
-                            Engage(newProposer, accepter);
-                        }
-                    }
-
-                    session.Accepters.Remove(accepter);
                 }
+
+                session.Accepters.Remove(accepter);
             }
         }
 

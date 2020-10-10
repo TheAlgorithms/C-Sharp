@@ -1,15 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Algorithms.Problems.StableMarriage
 {
     public class Proposer
     {
-        public Proposer(int value) => Value = value;
-
         public Accepter? EngagedTo { get; set; }
 
-        public int Value { get; }
+        public List<Accepter> PreferenceOrder { get; set; } = new List<Accepter>();
 
-        public double Score(Accepter accepter) => Math.Abs(accepter.Value - Value);
+        public int Score(Accepter accepter) => PreferenceOrder.IndexOf(accepter);
     }
 }
