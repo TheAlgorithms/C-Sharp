@@ -38,5 +38,25 @@ namespace Utilities.Extensions
         }
 
         public static double Norm(this double[] source) => Math.Sqrt(source.Sum(x => x * x));
+
+        public static double[,] Transpose(this double[,] source)
+        {
+            if (source.Rank != 2)
+            {
+                throw new ArgumentException("Rank of both operands should be equal 2!");
+            }
+
+            var result = new double[source.GetLength(1), source.GetLength(0)];
+
+            for (var i = 0; i < result.GetLength(0); i++)
+            {
+                for (var j = 0; j < result.GetLength(1); j++)
+                {
+                    result[i, j] = source[j, i];
+                }
+            }
+
+            return result;
+        }
     }
 }
