@@ -6,7 +6,7 @@ namespace Algorithms.Numeric.Decomposition
     /// Singular Vector Decomposition decomposes any general matrix into its
     /// singular values and a set of orthonormal bases.
     /// </summary>
-    public static class SVD
+    public static class Svd
     {
         /// <summary>
         /// Makes a copy of a matrix. Changes to the copy should not affect the original.
