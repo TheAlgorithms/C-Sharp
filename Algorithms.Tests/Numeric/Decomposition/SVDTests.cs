@@ -76,9 +76,10 @@ namespace Algorithms.Tests.Numeric.Decomposition
         public void CheckSvd(double[,] testMatrix)
         {
             double epsilon = 1E-5;
-            double[,] u, v;
+            double[,] u;
+            double[,] v;
             double[] s;
-            (u, s, v) = Svd.Decompose(testMatrix, epsilon);
+            (u, s, v) = Svd.Decompose(testMatrix);
 
             for (int i = 0; i < u.GetLength(1); i++)
             {

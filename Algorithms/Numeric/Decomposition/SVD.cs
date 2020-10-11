@@ -207,10 +207,20 @@ namespace Algorithms.Numeric.Decomposition
         /// Returns the unit vector in the direction of a given vector.
         /// </summary>
         /// <param name="vector">The vector.</param>
+        /// <returns>The unit vector.</returns>
+        public static double[] Normalize(double[] vector)
+        {
+            return Normalize(vector, 1E-5);
+        }
+
+        /// <summary>
+        /// Returns the unit vector in the direction of a given vector.
+        /// </summary>
+        /// <param name="vector">The vector.</param>
         /// <param name="epsilon">Error margin, if vector magnitude is below this value
         /// then do not do anything to the vector, to prevent numerical errors.</param>
         /// <returns>The unit vector.</returns>
-        public static double[] Normalize(double[] vector, double epsilon = 1E-5)
+        public static double[] Normalize(double[] vector, double epsilon)
         {
             double magnitude = Magnitude(vector);
 
@@ -250,10 +260,20 @@ namespace Algorithms.Numeric.Decomposition
         /// Computes a single singular vector for the given matrix, corresponding to the largest singular value.
         /// </summary>
         /// <param name="matrix">The matrix.</param>
+        /// <returns>A singular vector, with dimension equal to number of columns of the matrix.</returns>
+        public static double[] Decompose1D(double[,] matrix)
+        {
+            return Decompose1D(matrix, 1E-5, 100);
+        }
+
+        /// <summary>
+        /// Computes a single singular vector for the given matrix, corresponding to the largest singular value.
+        /// </summary>
+        /// <param name="matrix">The matrix.</param>
         /// <param name="epsilon">The error margin.</param>
         /// <param name="max_iterations">The maximum number of iterations.</param>
         /// <returns>A singular vector, with dimension equal to number of columns of the matrix.</returns>
-        public static double[] Decompose1D(double[,] matrix, double epsilon = 1E-5, int max_iterations = 100)
+        public static double[] Decompose1D(double[,] matrix, double epsilon, int max_iterations)
         {
             int n = matrix.GetLength(1);
             int iterations = 0;
@@ -272,6 +292,11 @@ namespace Algorithms.Numeric.Decomposition
             return currIteration;
         }
 
+        public static (double[,] U, double[] S, double[,] V) Decompose(double[,] matrix)
+        {
+            return Decompose(matrix, 1E-5, 100);
+        }
+
         /// <summary>
         /// Computes the SVD for the given matrix, with singular values arranged from greatest to least.
         /// </summary>
@@ -279,7 +304,7 @@ namespace Algorithms.Numeric.Decomposition
         /// <param name="epsilon">The error margin.</param>
         /// <param name="max_iterations">The maximum number of iterations.</param>
         /// <returns>The SVD.</returns>
-        public static (double[,] U, double[] S, double[,] V) Decompose(double[,] matrix, double epsilon = 1E-5, int max_iterations = 100)
+        public static (double[,] U, double[] S, double[,] V) Decompose(double[,] matrix, double epsilon, int max_iterations)
         {
             int m = matrix.GetLength(0);
             int n = matrix.GetLength(1);
