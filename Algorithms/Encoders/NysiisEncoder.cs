@@ -138,10 +138,18 @@ namespace Algorithms.Encoders
     /// </summary>
     public static class NysiisExtensions
     {
-
+        /// <summary>
+        /// Gets the last character of a StringBuilder.
+        /// </summary>
+        /// <param name="b">The StringBuilder to query</param>
+        /// <returns>The last character in the given StringBuilder</returns>
         public static char Last(this StringBuilder b) =>
             b[b.Length - 1];
 
+            /// <summary>
+            /// Removes the last character of a StringBuilder.
+            /// </summary>
+            /// <param name="b">The StringBuilder to remove from</param>
         public static void RemoveLast(this StringBuilder b) =>
             b.Remove(b.Length - 1, 1);
 
@@ -152,7 +160,7 @@ namespace Algorithms.Encoders
         /// <param name="index">The index where the substring to replace starts</param>
         /// <param name="repl">The characters with which to replace the substring</param>
         /// <param name="len">The length of the substring to replace</param>
-        /// <returns>The given string where the given substring was replaced by the given characters</return>
+        /// <returns>The given string where the given substring was replaced by the given characters</returns>
         public static string ReplaceAt(this string torep, int index, string repl, int len) =>
             $"{torep.Substring(0,index)}{repl}{(index + len < torep.Length ? torep.Substring(index + len) : "")}";
 
@@ -162,7 +170,7 @@ namespace Algorithms.Encoders
         /// <param name="torep">The string in which to replace</param>
         /// <param name="index">The index of the character to replace</param>
         /// <param name="rep">The character with which to replace</param>
-        /// <returns>The given string where the given character was replaced</return>
+        /// <returns>The given string where the given character was replaced</returns>
         public static string ReplaceSingle(this string torep, int index, char rep) =>
             torep.ReplaceAt(index, $"{rep}", 1);
 
