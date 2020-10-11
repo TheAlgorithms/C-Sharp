@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 
 namespace Utilities.Extensions
 {
@@ -14,7 +13,7 @@ namespace Utilities.Extensions
 
             if (source.GetLength(1) != operand.GetLength(0))
             {
-                throw new InvalidOperationException("Width of a first operand should match height of a second!");
+                throw new InvalidOperationException("The width of a first operand should match the height of a second.");
             }
             
             double[,] result = new double[source.GetLength(0), operand.GetLength(1)];
@@ -36,31 +35,12 @@ namespace Utilities.Extensions
 
             return result;
         }
-
-        public static double Dot(this double[] source, double[] operand)
-        {
-            if (source.Length != operand.Length)
-            {
-                throw new InvalidOperationException("Width of a first operand should match height of a second!");
-            }
-
-            double dotProduct = 0;
-
-            for (var i = 0; i < source.Length; i++)
-            {
-                dotProduct += source[i] * operand[i];
-            }
-
-            return dotProduct;
-        }
-
-        public static double Norm(this double[] source) => Math.Sqrt(source.Dot(source));
-
+        
         public static double[,] Transpose(this double[,] source)
         {
             if (source.Rank != 2)
             {
-                throw new ArgumentException("Rank of both operands should be equal 2!");
+                throw new ArgumentException("The rank of both operands should be equal to 2.");
             }
 
             var result = new double[source.GetLength(1), source.GetLength(0)];
