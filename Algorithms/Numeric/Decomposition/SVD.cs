@@ -3,7 +3,7 @@ using System;
 namespace Algorithms.Numeric.Decomposition
 {
     /// <summary>
-    /// Singular Vector Decomposition decomposes any general matrix into its 
+    /// Singular Vector Decomposition decomposes any general matrix into its
     /// singular values and a set of orthonormal bases.
     /// </summary>
     public static class SVD
@@ -11,8 +11,8 @@ namespace Algorithms.Numeric.Decomposition
         /// <summary>
         /// Makes a copy of a matrix. Changes to the copy should not affect the original.
         /// </summary>
-        /// <param name="matrix">The matrix</param>
-        /// <returns>A copy of the matrix</returns>
+        /// <param name="matrix">The matrix.</param>
+        /// <returns>A copy of the matrix.</returns>
         public static double[,] MatrixCopy(double[,] matrix)
         {
             double[,] result = new double[matrix.GetLength(0), matrix.GetLength(1)];
@@ -30,8 +30,8 @@ namespace Algorithms.Numeric.Decomposition
         /// <summary>
         /// Makes a copy of a vector. Changes to the copy should not affect the original.
         /// </summary>
-        /// <param name="vector">The vector</param>
-        /// <returns>The copy</returns>
+        /// <param name="vector">The vector.</param>
+        /// <returns>The copy.</returns>
         public static double[] VectorCopy(double[] vector)
         {
             double[] result = new double[vector.Length];
@@ -46,8 +46,8 @@ namespace Algorithms.Numeric.Decomposition
         /// <summary>
         /// Transposes a matrix.
         /// </summary>
-        /// <param name="matrix">The matrix</param>
-        /// <returns>The transposed matrix</returns>
+        /// <param name="matrix">The matrix.</param>
+        /// <returns>The transposed matrix.</returns>
         public static double[,] MatrixTranspose(double[,] matrix)
         {
             double[,] result = new double[matrix.GetLength(1), matrix.GetLength(0)];
@@ -65,10 +65,10 @@ namespace Algorithms.Numeric.Decomposition
         /// <summary>
         /// Multiplies a matrix by a vector.
         /// </summary>
-        /// <param name="matrix">The matrix</param>
-        /// <param name="vector">The vector</param>
+        /// <param name="matrix">The matrix.</param>
+        /// <param name="vector">The vector.</param>
         /// <returns>The product of the matrix and the vector, which is a vector.</returns>
-        /// <exception cref="ArgumentException">Dimensions of matrix and vector do not match</exception>
+        /// <exception cref="ArgumentException">Dimensions of matrix and vector do not match.</exception>
         public static double[] MatrixTimesVector(double[,] matrix, double[] vector)
         {
             double[,] vectorReshaped = new double[vector.Length, 1];
@@ -90,10 +90,10 @@ namespace Algorithms.Numeric.Decomposition
         /// <summary>
         /// Performs matrix multiplication.
         /// </summary>
-        /// <param name="lhs">The LHS matrix</param>
-        /// <param name="rhs">The RHS matrix</param>
+        /// <param name="lhs">The LHS matrix.</param>
+        /// <param name="rhs">The RHS matrix.</param>
         /// <returns>The product of the two matrices.</returns>
-        /// <exception cref="ArgumentException">Dimensions of matrices do not match</exception>
+        /// <exception cref="ArgumentException">Dimensions of matrices do not match.</exception>
         public static double[,] MatrixMultiply(double[,] lhs, double[,] rhs)
         {
             if (lhs.GetLength(1) != rhs.GetLength(0))
@@ -119,10 +119,10 @@ namespace Algorithms.Numeric.Decomposition
         /// <summary>
         /// Performs matrix subtraction.
         /// </summary>
-        /// <param name="lhs">The LHS matrix</param>
-        /// <param name="rhs">The RHS matrix</param>
+        /// <param name="lhs">The LHS matrix.</param>
+        /// <param name="rhs">The RHS matrix.</param>
         /// <returns>The difference of the two matrices.</returns>
-        /// <exception cref="ArgumentException">Dimensions of matrices do not match</exception>
+        /// <exception cref="ArgumentException">Dimensions of matrices do not match.</exception>
         public static double[,] MatrixSubtract(double[,] lhs, double[,] rhs)
         {
             if (lhs.GetLength(0) != rhs.GetLength(0) ||
@@ -146,8 +146,8 @@ namespace Algorithms.Numeric.Decomposition
         /// <summary>
         /// Computes the outer product of two vectors.
         /// </summary>
-        /// <param name="lhs">The LHS vector</param>
-        /// <param name="rhs">The RHS vector</param>
+        /// <param name="lhs">The LHS vector.</param>
+        /// <param name="rhs">The RHS vector.</param>
         /// <returns>The outer product of the two vector.</returns>
         public static double[,] VectorOuterProduct(double[] lhs, double[] rhs)
         {
@@ -166,10 +166,10 @@ namespace Algorithms.Numeric.Decomposition
         /// <summary>
         /// Computes the dot product of two vectors.
         /// </summary>
-        /// <param name="lhs">The LHS vector</param>
-        /// <param name="rhs">The RHS vector</param>
+        /// <param name="lhs">The LHS vector.</param>
+        /// <param name="rhs">The RHS vector.</param>
         /// <returns>The dot product of the two vector.</returns>
-        /// <exception cref="ArgumentException">Dimensions of vectors do not match</exception>
+        /// <exception cref="ArgumentException">Dimensions of vectors do not match.</exception>
         public static double VectorDot(double[] lhs, double[] rhs)
         {
             if (lhs.Length != rhs.Length)
@@ -189,8 +189,8 @@ namespace Algorithms.Numeric.Decomposition
         /// <summary>
         /// Computes the magnitude of a vector.
         /// </summary>
-        /// <param name="vector">The vector</param>
-        /// <returns>The magnitude</returns>
+        /// <param name="vector">The vector.</param>
+        /// <returns>The magnitude.</returns>
         public static double Magnitude(double[] vector)
         {
             double magnitude = 0;
@@ -206,8 +206,8 @@ namespace Algorithms.Numeric.Decomposition
         /// <summary>
         /// Returns the unit vector in the direction of a given vector.
         /// </summary>
-        /// <param name="vector">The vector</param>
-        /// <param name="epsilon">Error margin, if vector magnitude is below this value 
+        /// <param name="vector">The vector.</param>
+        /// <param name="epsilon">Error margin, if vector magnitude is below this value
         /// then do not do anything to the vector, to prevent numerical errors.</param>
         /// <returns>The unit vector.</returns>
         public static double[] Normalize(double[] vector, double epsilon = 1E-5)
@@ -249,9 +249,9 @@ namespace Algorithms.Numeric.Decomposition
         /// <summary>
         /// Computes a single singular vector for the given matrix, corresponding to the largest singular value.
         /// </summary>
-        /// <param name="matrix">The matrix</param>
-        /// <param name="epsilon">The error margin</param>
-        /// <param name="max_iterations">The maximum number of iterations</param>
+        /// <param name="matrix">The matrix.</param>
+        /// <param name="epsilon">The error margin.</param>
+        /// <param name="max_iterations">The maximum number of iterations.</param>
         /// <returns>A singular vector, with dimension equal to number of columns of the matrix.</returns>
         public static double[] Decompose1D(double[,] matrix, double epsilon = 1E-5, int max_iterations = 100)
         {
@@ -275,10 +275,10 @@ namespace Algorithms.Numeric.Decomposition
         /// <summary>
         /// Computes the SVD for the given matrix, with singular values arranged from greatest to least.
         /// </summary>
-        /// <param name="matrix">The matrix</param>
-        /// <param name="epsilon">The error margin</param>
-        /// <param name="max_iterations">The maximum number of iterations</param>
-        /// <returns>The SVD</returns>
+        /// <param name="matrix">The matrix.</param>
+        /// <param name="epsilon">The error margin.</param>
+        /// <param name="max_iterations">The maximum number of iterations.</param>
+        /// <returns>The SVD.</returns>
         public static (double[,] U, double[] S, double[,] V) Decompose(double[,] matrix, double epsilon = 1E-5, int max_iterations = 100)
         {
             int m = matrix.GetLength(0);
@@ -299,10 +299,13 @@ namespace Algorithms.Numeric.Decomposition
                 // compute the v singular vector
                 double[] v = Decompose1D(remaining, epsilon, max_iterations);
                 double[] u = MatrixTimesVector(matrix, v);
+
                 // compute the contribution of this pair of singular vectors
                 double[,] contrib = VectorOuterProduct(u, v);
+
                 // extract the singular value
                 double s = Magnitude(u);
+
                 // v and u should be unit vectors
                 u = Normalize(u);
 
