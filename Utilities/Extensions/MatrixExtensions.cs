@@ -37,7 +37,24 @@ namespace Utilities.Extensions
             return result;
         }
 
-        public static double Norm(this double[] source) => Math.Sqrt(source.Sum(x => x * x));
+        public static double Dot(this double[] source, double[] operand)
+        {
+            if (source.Length != operand.Length)
+            {
+                throw new InvalidOperationException("Width of a first operand should match height of a second!");
+            }
+
+            double dotProduct = 0;
+
+            for (var i = 0; i < source.Length; i++)
+            {
+                dotProduct += source[i] * operand[i];
+            }
+
+            return dotProduct;
+        }
+
+        public static double Norm(this double[] source) => Math.Sqrt(source.Dot(source));
 
         public static double[,] Transpose(this double[,] source)
         {
