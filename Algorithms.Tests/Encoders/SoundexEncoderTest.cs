@@ -10,11 +10,11 @@ namespace Algorithms.Tests.Encoders
         [Test]
         public static void AttemptSoundex()
         {
-            string[] names = new string[] {
+            string[] names = {
                 "Robert", "Rupert", "Rubin", "Ashcraft", "Ashcroft",
                 "Tymczak", "Pfister", "Honeyman"
             };
-            string[] expected = new string[] {
+            string[] expected = {
                 "R163", "R163", "R150", "A261", "A261", "T522", "P236",
                 "H555"
             };

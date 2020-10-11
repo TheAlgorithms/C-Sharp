@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using System.Text;
+using System.Globalization;
 
 namespace Algorithms.Encoders
 {
@@ -20,7 +22,7 @@ namespace Algorithms.Encoders
         /// <returns>The Soundex encoded string (one uppercase character and three digits)</returns>
         public string Encode(string text)
         {
-            string soundex = $"{text.ToUpper()[0]}";
+            StringBuilder soundex = new StringBuilder($"{text.ToUpper(CultureInfo.CurrentCulture)[0]}");
             text = string.Join("", text.Select(ch => {
                 switch(char.ToLower(ch))
                 {
@@ -78,20 +80,17 @@ namespace Algorithms.Encoders
             //remove doubles, retain up to 4 chars (first letter + 3 digits)
             for(int i = 1; i < text.Length; i++)
             {
-                if(text[i] != text[i - 1] && text[i] != '0' && text[i] != '8')
-                {
-                    //exception to doubles: sep. by 'h' or 'w'  (8)
-                    if(!(i > 1 && text[i - 1] == '8' && text[i] == text[i - 2]))
-                        soundex += text[i];
-                }
+                if(text[i] != text[i - 1] && text[i] != '0' && text[i] != '8' &&
+                    !(i > 1 && text[i - 1] == '8' && text[i] == text[i - 2]))
+                        soundex.Append(text[i]);
 
                 if(soundex.Length == 4) break;
             }
 
             //append to 3 digits if shorter
-            while(soundex.Length < 4) soundex += '0';
+            while(soundex.Length < 4) soundex.Append('0');
 
-            return soundex;
+            return soundex.ToString();
         }
     }
 }

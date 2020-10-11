@@ -5,25 +5,25 @@ using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Encoders
 {
-    public static class NYSIISTests
+    public static class NysiisEncoderTest
     {
         [Test]
-        public static void AttemptNYSIIS()
+        public static void AttemptNysiis()
         {
-            string[] names = new string[] {
+            string[] names = {
                 "Jay", "John", "Jane", "Zayne", "Guerra",
                 "Iga", "Cowan", "Louisa", "Arnie", "Olsen",
                 "Corban", "Nava", "Cynthia Malone", "Amiee MacKee",
                 "MacGyver", "Yasmin Edge"
             };
-            string[] expected = new string[] {
+            string[] expected = {
                 "JY", "JAN", "JAN", "ZAYN", "GAR",
                 "IG", "CAN", "LAS", "ARNY", "OLSAN",
                 "CARBAN", "NAV", "CYNTANALAN", "ANANACY",
                 "MCGYVAR", "YASNANADG"
             };
 
-            NYSIISEncoder enc = new NYSIISEncoder();
+            NysiisEncoder enc = new NysiisEncoder();
             names.Enumerate((name, ind) => {
                 string nysiis = enc.Encode(name);
                 Assert.AreEqual(nysiis, expected[ind]);

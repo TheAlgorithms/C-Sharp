@@ -1,5 +1,7 @@
 using System;
+using System.Text;
 using System.Linq;
+using System.Globalization;
 using System.Collections.Generic;
 
 namespace Algorithms.Encoders
@@ -7,14 +9,9 @@ namespace Algorithms.Encoders
     /// <summary>
     /// Class for NYSIIS encoding strings.
     /// </summary>
-    public class NYSIISEncoder
+    public class NysiisEncoder
     {
-        private static char[] Vowels = new char[] { 'A', 'E', 'I', 'O', 'U' };
-
-        /// <summary>
-        /// Creates a new instance of the NYSIISEncoder.
-        /// </summary>
-        public NYSIISEncoder() {}
+        private static char[] Vowels = { 'A', 'E', 'I', 'O', 'U' };
 
         /// <summary>
         /// Encodes a string using the NYSIIS Algorithm
@@ -23,7 +20,7 @@ namespace Algorithms.Encoders
         /// <returns>The NYSIIS encoded string (all uppercase)</returns>
         public string Encode(string text)
         {
-            text = text.ToUpper();
+            text = text.ToUpper(CultureInfo.CurrentCulture);
             text = StartReplace(text, new (string, string)[] {
                 ("MAC", "MCC"), ("KN", "NN"), ("K", "C"),
                 ("PH", "FF"), ("PF", "FF"), ("SCH", "SSS")
@@ -34,7 +31,7 @@ namespace Algorithms.Encoders
                 ("ND", "Db")
             });
 
-            string nysiis = $"{text[0]}";
+            StringBuilder nysiis = new StringBuilder($"{text[0]}");
             for(int i = 1; i < text.Length; i++)
             {
                 if(Vowels.Contains(text[i]))
@@ -66,6 +63,7 @@ namespace Algorithms.Encoders
                         text = text.ReplaceSingle(i, text[i - 1]);
                     else if(i < text.Length - 1 && Vowels.Contains(text[i + 1]))
                         text = text.ReplaceSingle(i, text[i - 1]);
+                    else {/*do nothing, codacy complained...*/}
                 }
 
                 //[vowel]W -> [vowel]
@@ -73,20 +71,22 @@ namespace Algorithms.Encoders
                     text = text.ReplaceSingle(i, text[i - 1]);
 
                 if(nysiis.Last() != text[i] && text[i] != ' ' && char.IsUpper(text[i]))
-                    nysiis += text[i];
+                    nysiis.Append(text[i]);
             }
 
             //ends in S => remove
-            if(nysiis.Last() == 'S') nysiis = nysiis.Substring(0, nysiis.Length - 1);
+            if(nysiis.Last() == 'S') nysiis.RemoveLast();
             //ends in AY => replace with single Y
             if(nysiis.Last() == 'Y' && nysiis[nysiis.Length - 2] == 'A')
             {
-                nysiis = nysiis.ReplaceAt(nysiis.Length - 2, "Y", 2);
+                nysiis[nysiis.Length - 2] = 'Y';
+                nysiis.RemoveLast();
             }
             //ends in A => remove
-            if(nysiis.Last() == 'A') nysiis = nysiis.Substring(0, nysiis.Length - 1);
+            if(nysiis.Last() == 'A')
+                nysiis.RemoveLast();
 
-            return nysiis;
+            return nysiis.ToString();
         }
 
         private string RepWith(string start, int index, (char, char)[] opts)
@@ -136,8 +136,15 @@ namespace Algorithms.Encoders
     /// <summary>
     /// Static class containing Extension Methods used by the NYSIIS algorithm.
     /// </summary>
-    public static class NYSIISExtensions
+    public static class NysiisExtensions
     {
+
+        public static char Last(this StringBuilder b) =>
+            b[b.Length - 1];
+
+        public static void RemoveLast(this StringBuilder b) =>
+            b.Remove(b.Length - 1, 1);
+
         /// <summary>
         /// Replaces a number of characters starting at a given index with another set of characters.
         /// </summary>
