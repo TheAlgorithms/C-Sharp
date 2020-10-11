@@ -21,32 +21,19 @@ namespace Algorithms.Problems.StableMarriage
                 throw new ArgumentException("Collections must have equal count");
             }
 
-            foreach (var proposer in proposers)
+            while (proposers.Any(m => !IsEngaged(m)))
             {
-                proposer.EngagedTo = null;
-            }
-
-            foreach (var accepter in accepters)
-            {
-                accepter.EngagedTo = null;
-            }
-
-            var matchingSession = proposers.Select(p => (Proposer: p, Accepters: accepters.OrderBy(a => p.Score(a)).ToList())).ToArray();
-
-            while (matchingSession.Any(m => !IsEngaged(m)))
-            {
-                DoSingleMatchingRound(matchingSession.Where(m => !IsEngaged(m)));
+                DoSingleMatchingRound(proposers.Where(m => !IsEngaged(m)));
             }
         }
 
-        private static bool IsEngaged((Proposer Proposer, List<Accepter> Accepters) m) => m.Proposer.EngagedTo != null;
+        private static bool IsEngaged(Proposer proposer) => proposer.EngagedTo != null;
 
-        private static void DoSingleMatchingRound(IEnumerable<(Proposer Proposer, List<Accepter> Accepters)> matchingSession)
+        private static void DoSingleMatchingRound(IEnumerable<Proposer> proposers)
         {
-            foreach (var session in matchingSession)
+            foreach (var newProposer in proposers)
             {
-                var accepter = session.Accepters.First();
-                var newProposer = session.Proposer;
+                var accepter = newProposer.PreferenceOrder.First();
 
                 if (accepter.EngagedTo == null)
                 {
@@ -61,7 +48,7 @@ namespace Algorithms.Problems.StableMarriage
                     }
                 }
 
-                session.Accepters.Remove(accepter);
+                newProposer.PreferenceOrder.RemoveAt(0);
             }
         }
 
