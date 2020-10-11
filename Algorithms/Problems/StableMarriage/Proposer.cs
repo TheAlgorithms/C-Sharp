@@ -7,8 +7,6 @@ namespace Algorithms.Problems.StableMarriage
     {
         public Accepter? EngagedTo { get; set; }
 
-        public List<Accepter> PreferenceOrder { get; set; } = new List<Accepter>();
-
-        public int Score(Accepter accepter) => PreferenceOrder.IndexOf(accepter);
+        public LinkedList<Accepter> PreferenceOrder { get; set; } = new LinkedList<Accepter>();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using NUnit.Framework;
@@ -23,7 +24,7 @@ namespace Algorithms.Problems.StableMarriage
 
             foreach (var proposer in proposers)
             {
-                proposer.PreferenceOrder = accepters.OrderBy(x => random.Next()).ToList();
+                proposer.PreferenceOrder = new LinkedList<Accepter>(accepters.OrderBy(x => random.Next()));
             }
             foreach (var accepter in accepters)
             {
@@ -38,6 +39,8 @@ namespace Algorithms.Problems.StableMarriage
         }
 
         private static bool AreMatchesStable(Proposer[] proposers, Accepter[] accepters) =>
-            proposers.All(p => p.EngagedTo != null && p.Score(p.EngagedTo) <= accepters.Where(a => a.PrefersOverCurrent(p)).Min(a => p.Score(a)));
+            proposers.All(p => p.EngagedTo != null && Score(p, p.EngagedTo) <= accepters.Where(a => a.PrefersOverCurrent(p)).Min(a => Score(p, a)));
+
+        private static int Score(Proposer proposer, Accepter accepter) => proposer.PreferenceOrder.ToList().IndexOf(accepter);
     }
 }
