@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Utilities.Extensions;
 
@@ -54,9 +53,13 @@ namespace Algorithms.LinearAlgebra.Eigenvalue
                 eigenNorm = currentEigenVector.Norm();
                 currentEigenVector = currentEigenVector.Select(x => x / eigenNorm).ToArray();
             }
-            while (Math.Abs(currentEigenVector.Dot(previousEigenVector)) > 1 - error);
+            while (Math.Abs(currentEigenVector.Dot(previousEigenVector)) < 1.0 - error);
 
-            return (eigenvalue: eigenNorm, eigenvector: currentEigenVector);
+            var eigenvalue = source.Multiply(
+                    currentEigenVector.ToColumnVector())
+                .ToRowVector().Norm();
+
+            return (eigenvalue: eigenvalue, eigenvector: currentEigenVector);
         }
 
         /// <summary>

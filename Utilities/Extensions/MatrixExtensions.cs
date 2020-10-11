@@ -35,25 +35,5 @@ namespace Utilities.Extensions
 
             return result;
         }
-        
-        public static double[,] Transpose(this double[,] source)
-        {
-            if (source.Rank != 2)
-            {
-                throw new ArgumentException("The rank of both operands should be equal to 2.");
-            }
-
-            var result = new double[source.GetLength(1), source.GetLength(0)];
-
-            for (var i = 0; i < result.GetLength(0); i++)
-            {
-                for (var j = 0; j < result.GetLength(1); j++)
-                {
-                    result[i, j] = source[j, i];
-                }
-            }
-
-            return result;
-        }
     }
 }
