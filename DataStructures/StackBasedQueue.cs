@@ -6,6 +6,9 @@ namespace DataStructures
     /// <summary>
     /// Implementation of a stack based queue. FIFO style.
     /// </summary>
+    /// <remarks>
+    /// Enqueue is O(1) and Dequeue is amortized O(1).
+    /// </remarks>
     /// <typeparam name="T">Generic Type.</typeparam>
     public class StackBasedQueue<T>
     {
