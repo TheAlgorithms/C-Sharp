@@ -11,6 +11,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 ## Overview  
 * [Algorithms](./Algorithms/)
 	* [Data Compression](<./Algorithms/DataCompression>)
+		* [Burrows-Wheeler transform](<./Algorithms/DataCompression/BurrowsWheelerTransform.cs>)
 		* [Huffman Compressor](<./Algorithms/DataCompression/HuffmanCompressor.cs>)
 		* [Shannon-Fano Compressor](<./Algorithms/DataCompression/ShannonFanoCompressor.cs>)
 	* [Encoders](./Algorithms/Encoders/)
