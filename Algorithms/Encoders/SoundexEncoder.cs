@@ -11,11 +11,6 @@ namespace Algorithms.Encoders
     public class SoundexEncoder
     {
         /// <summary>
-        /// Creates a new instance of the SoundexEncoder.
-        /// </summary>
-        public SoundexEncoder() {}
-
-        /// <summary>
         /// Encodes a string using the Soundex Algorithm
         /// </summary>
         /// <param name="text">The string to encode</param>
