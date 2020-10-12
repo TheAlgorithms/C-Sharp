@@ -21,14 +21,13 @@ namespace Algorithms.DataCompression
                 return (string.Empty, 0);
             }
 
-            var sortedRotations = GetRotations(s)
-                .OrderBy(x => x)
-                .ToList();
-            var lastColumn = sortedRotations
+            var rotations = GetRotations(s);
+            Array.Sort(rotations, StringComparer.Ordinal);
+            var lastColumn = rotations
                 .Select(x => x[x.Length - 1])
                 .ToArray();
             var encoded = new string(lastColumn);
-            return (encoded, sortedRotations.IndexOf(s));
+            return (encoded, Array.IndexOf(rotations, s));
         }
 
         /// <summary>
@@ -52,7 +51,7 @@ namespace Algorithms.DataCompression
                     rotations[j] = s[j] + rotations[j];
                 }
 
-                Array.Sort(rotations);
+                Array.Sort(rotations, StringComparer.Ordinal);
             }
 
             return rotations[index];
