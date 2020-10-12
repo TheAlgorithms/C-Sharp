@@ -21,8 +21,10 @@ namespace Algorithms.Strings
         /// <returns>List of starting indices of the pattern in the text.</returns>
         public static List<int> FindAllOccurrences(string t, string p)
         {
+            Console.WriteLine(t);
+
             // Prime number
-            const ulong P = 101;
+            const ulong P = 65537;
 
             // Modulo coefficient
             const ulong M = (ulong)1e9 + 7;
@@ -38,17 +40,16 @@ namespace Algorithms.Strings
             // hash_t[i] is the sum of the previous hash values of the letters (t[0], t[1], ..., t[i-1]) and the hash value of t[i] itself (mod M).
             // The hash value of a letter t[i] is equal to the product of t[i] and p_pow[i] (mod M).
             ulong[] hash_t = new ulong[t.Length + 1];
-            Array.Fill<ulong>(hash_t, 0);
             for (int i = 0; i < t.Length; i++)
             {
-                hash_t[i + 1] = (hash_t[i] + ((ulong)(t[i] - 'A' + 1)) * p_pow[i]) % M;
+                hash_t[i + 1] = (hash_t[i] + (ulong)t[i] * p_pow[i]) % M;
             }
 
             // hash_s is equal to sum of the hash values of the pattern (mod M).
             ulong hash_s = 0;
             for (int i = 0; i < p.Length; i++)
             {
-                hash_s = (hash_s + ((ulong)(p[i] - 'A' + 1)) * p_pow[i]) % M;
+                hash_s = (hash_s + p[i] * p_pow[i]) % M;
             }
 
             // In the next step you iterate over the text with the pattern.
@@ -62,9 +63,23 @@ namespace Algorithms.Strings
                 // Now you can compare the hash value of the substring with the product of the hash value of the pattern and p_pow[i].
                 if (current_hash == hash_s * p_pow[i] % M)
                 {
-                    // If the hash values are identical, a substring was found that matches the pattern.
-                    // In this case you add the index i to the list of occurences.
-                    occurences.Add(i);
+                    // If the hash values are identical, do a double-check in case a hash collision occurs.
+                    bool doubleCheck = true;
+                    for (int j = 0; j < p.Length; ++j)
+                    {
+                        if (t[i + j] != p[j])
+                        {
+                            doubleCheck = false;
+                            break;
+                        }
+                    }
+
+                    if (doubleCheck)
+                    {
+                        // If the hash values are identical and the double-check passes, a substring was found that matches the pattern.
+                        // In this case you add the index i to the list of occurences.
+                        occurences.Add(i);
+                    }
                 }
             }
 
