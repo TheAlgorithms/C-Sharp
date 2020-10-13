@@ -83,6 +83,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 	* [Timeline](./DataStructures/Timeline.cs)
 	* [Array-based Queue](./DataStructures/ArrayBasedQueue.cs)
 	* [List-based Queue](./DataStructures/ListBasedQueue.cs)
+	* [Stack-based Queue](./DataStructures/StackBasedQueue.cs)
 	* [Binary Search Tree](./DataStructures/BinarySearchTree)
 ---
 
