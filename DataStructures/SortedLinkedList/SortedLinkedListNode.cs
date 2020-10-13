@@ -1,10 +1,12 @@
-﻿namespace DataStructures.SortedLinkedList
+﻿using System;
+
+namespace DataStructures.SortedLinkedList
 {
     /// <summary>
     /// TODO.
     /// </summary>
     /// <typeparam name="T">TODO. 2.</typeparam>
-    public class SortedLinkedListNode<T>
+    public class SortedLinkedListNode<T> where T : IComparable<T>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SortedLinkedListNode{T}"/> class.
