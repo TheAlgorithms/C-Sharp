@@ -21,8 +21,6 @@ namespace Algorithms.Strings
         /// <returns>List of starting indices of the pattern in the text.</returns>
         public static List<int> FindAllOccurrences(string t, string p)
         {
-            Console.WriteLine(t);
-
             // Prime number
             const ulong P = 65537;
 
@@ -64,17 +62,13 @@ namespace Algorithms.Strings
                 if (current_hash == hash_s * p_pow[i] % M)
                 {
                     // If the hash values are identical, do a double-check in case a hash collision occurs.
-                    bool doubleCheck = true;
-                    for (int j = 0; j < p.Length; ++j)
+                    int j = 0;
+                    while (j < p.Length && t[i + j] == p[j])
                     {
-                        if (t[i + j] != p[j])
-                        {
-                            doubleCheck = false;
-                            break;
-                        }
+                        ++j;
                     }
 
-                    if (doubleCheck)
+                    if (j == p.Length)
                     {
                         // If the hash values are identical and the double-check passes, a substring was found that matches the pattern.
                         // In this case you add the index i to the list of occurences.
