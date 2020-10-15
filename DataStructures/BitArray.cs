@@ -143,13 +143,8 @@ namespace DataStructures
                 field = new bool[0];
             }
 
-            field = new bool[n];
-
-            // fills up the field with zero-bits.
-            for (var i = 0; i < n; i++)
-            {
-                field[i] = false;
-            }
+            // Create zero-bits array.
+            field = Enumerable.Repeat(false, n).ToArray();
         }
 
         /// <summary>
