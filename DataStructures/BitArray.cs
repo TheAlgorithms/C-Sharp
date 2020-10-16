@@ -144,12 +144,6 @@ namespace DataStructures
             }
 
             field = new bool[n];
-
-            // fills up the field with zero-bits.
-            for (var i = 0; i < n; i++)
-            {
-                field[i] = false;
-            }
         }
 
         /// <summary>
@@ -256,8 +250,8 @@ namespace DataStructures
         {
             var sequence1 = one.ToString();
             var sequence2 = two.ToString();
-            var result = string.Empty;
-            var tmp = string.Empty;
+            var result = new StringBuilder();
+            var tmp = new StringBuilder();
 
             // for scaling of same length.
             if (one.Length != two.Length)
@@ -271,11 +265,11 @@ namespace DataStructures
                     // fills up with 0's
                     for (var i = 0; i < difference; i++)
                     {
-                        tmp += '0';
+                        tmp.Append('0');
                     }
 
-                    tmp += two.ToString();
-                    sequence2 = tmp;
+                    tmp.Append(two.ToString());
+                    sequence2 = tmp.ToString();
                 }
                 else
                 {
@@ -285,11 +279,11 @@ namespace DataStructures
                     // fills up with 0's
                     for (var i = 0; i < difference; i++)
                     {
-                        tmp += '0';
+                        tmp.Append('0');
                     }
 
-                    tmp += one.ToString();
-                    sequence1 = tmp;
+                    tmp.Append(one.ToString());
+                    sequence1 = tmp.ToString();
                 }
             } // end scaling
 
@@ -298,11 +292,10 @@ namespace DataStructures
 
             for (var i = 0; i < one.Length; i++)
             {
-                result += sequence1[i].Equals('1') && sequence2[i].Equals('1') ? '1' : '0';
+                result.Append(sequence1[i].Equals('1') && sequence2[i].Equals('1') ? '1' : '0');
             }
 
-            result = result.Trim();
-            ans.Compile(result);
+            ans.Compile(result.ToString().Trim());
 
             return ans;
         }

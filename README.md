@@ -68,10 +68,15 @@ This repository contains algorithms and data structures implemented in C# for ed
 	* [String](./Algorithms/Strings/)
 		* [Longest Consecutive Character](./Algorithms/Strings/GeneralStringAlgorithms.cs)
 		* [Naive String Search](./Algorithms/Strings/NaiveStringSearch.cs)
+		* [Rabin Karp](./Algorithms/Strings/RabinKarp.cs)
+		* [Boyer Moore](./Algorithms/Strings/BoyerMoore.cs)
 		* [Palindrome Checker](./Algorithms/Strings/palindrome.cs)
 	* [Other](./Algorithms/Other/)
 		* [Fermat Prime Checker](./Algorithms/Other/FermatPrimeChecker.cs)
 		* [Sieve of Eratosthenes](./Algorithms/Other/SieveOfEratosthenes.cs)
+	* [Problems](./Algorithms/Problems/)
+		* [Stable Marriage](./Algorithms/Problems/StableMarriage)
+			* [Gale-Shapley](./Algorithms/Problems/StableMarriage/GaleShapley.cs)
 
 * [Data Structures](./DataStructures/)
 	* [Bit Array](./DataStructures/BitArray.cs)
@@ -81,6 +86,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 	* [Timeline](./DataStructures/Timeline.cs)
 	* [Array-based Queue](./DataStructures/ArrayBasedQueue.cs)
 	* [List-based Queue](./DataStructures/ListBasedQueue.cs)
+	* [Stack-based Queue](./DataStructures/StackBasedQueue.cs)
 	* [Binary Search Tree](./DataStructures/BinarySearchTree)
 ---
 
