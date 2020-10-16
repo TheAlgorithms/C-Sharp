@@ -23,10 +23,7 @@ namespace DataStructures.SegmentTrees
             Tree = new int[2 * pow];
 
             // Transfers the input array into the last half of the segment tree array
-            for (int i = pow; i < 2 * pow; ++i)
-            {
-                Tree[i] = (i - pow < arr.Length) ? arr[i - pow] : 0;
-            }
+            Array.Copy(arr, 0, Tree, pow, arr.Length);
 
             // Calculates the first half
             for (int i = pow - 1; i > 0; --i)

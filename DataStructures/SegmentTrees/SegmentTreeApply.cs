@@ -15,20 +15,20 @@ namespace DataStructures.SegmentTrees
         public SegmentTreeApply(int[] arr)
         : base(arr)
         {
-            // Initilizes and fills "operation" array with neutral element (in this case 1, because value * 1 = value)
-            Operation = new int[Tree.Length];
-            Array.Fill<int>(Operation, 1);
+            // Initilizes and fills "operand" array with neutral element (in this case 1, because value * 1 = value)
+            Operand = new int[Tree.Length];
+            Array.Fill<int>(Operand, 1);
         }
 
         /// <summary>
-        /// Gets an array that stores for each node an operation,
+        /// Gets an array that stores for each node an operand,
         /// which must be applied to all direct and indirect child nodes of this node
         /// (but not to the node itself).
         /// </summary>
-        public int[] Operation { get; }
+        public int[] Operand { get; }
 
         /// <summary>
-        /// Applies a distributiv operation to a subarray definied by <c>l</c> and <c>r</c>
+        /// Applies a distributive operation to a subarray defined by <c>l</c> and <c>r</c>
         /// (in this case multiplication by <c>value</c>).
         /// Runtime complexity: O(logN) where N equals the initial array-length.
         /// </summary>
@@ -65,8 +65,8 @@ namespace DataStructures.SegmentTrees
 
             int m = (a + b) / 2;
 
-            // Application of the saved operation to the direct and indrect child nodes
-            return Operation[i] * (Query(l, r, a, m, Left(i)) + Query(l, r, m + 1, b, Right(i)));
+            // Application of the saved operand to the direct and indrect child nodes
+            return Operand[i] * (Query(l, r, a, m, Left(i)) + Query(l, r, m + 1, b, Right(i)));
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace DataStructures.SegmentTrees
             if (l <= a && b <= r)
             {
                 // Applies the operation to the current node and saves it for the direct and indirect child nodes
-                Operation[i] = value * Operation[i];
+                Operand[i] = value * Operand[i];
                 Tree[i] = value * Tree[i];
                 return;
             }
@@ -103,7 +103,7 @@ namespace DataStructures.SegmentTrees
             Apply(l, r, value, m + 1, b, Right(i));
 
             // Recalculates the value of this node by its (possibly new) children.
-            Tree[i] = Operation[i] * (Tree[Left(i)] + Tree[Right(i)]);
+            Tree[i] = Operand[i] * (Tree[Left(i)] + Tree[Right(i)]);
         }
     }
 }

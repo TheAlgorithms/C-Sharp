@@ -14,7 +14,7 @@ namespace DataStructures.Tests.SegmentTrees
         {
             Assert.AreEqual(22, testTree.Query(1, 4));
             testTree.Apply(0, 3, 2);
-            Assert.AreEqual(new [] {1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, testTree.Operation);
+            Assert.AreEqual(new [] {1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, testTree.Operand);
             Assert.AreEqual(36, testTree.Query(1, 4));            
         }
 
