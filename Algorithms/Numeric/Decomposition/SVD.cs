@@ -24,7 +24,8 @@ namespace Algorithms.Numeric.Decomposition
                 result[i] = 2 * random.NextDouble() - 1;
             }
 
-            result = V.Normalize(result);
+            double magnitude = V.Magnitude(result);
+            result = V.Scale(result, 1 / magnitude);
             return result;
         }
 
@@ -49,6 +50,7 @@ namespace Algorithms.Numeric.Decomposition
         {
             int n = matrix.GetLength(1);
             int iterations = 0;
+            double mag;
             double[] lastIteration;
             double[] currIteration = RandomUnitVector(n);
             double[,] b = M.MultiplyGeneral(M.Transpose(matrix), matrix);
@@ -56,7 +58,13 @@ namespace Algorithms.Numeric.Decomposition
             {
                 lastIteration = V.Copy(currIteration);
                 currIteration = M.MultiplyVector(b, lastIteration);
-                currIteration = V.Normalize(currIteration, epsilon);
+                currIteration = V.Scale(currIteration, 100);
+                mag = V.Magnitude(currIteration);
+                if (mag > epsilon)
+                {
+                    currIteration = V.Scale(currIteration, 1 / mag);
+                }
+
                 iterations++;
             }
             while (V.Dot(lastIteration, currIteration) < 1 - epsilon && iterations < max_iterations);
@@ -104,7 +112,15 @@ namespace Algorithms.Numeric.Decomposition
                 double s = V.Magnitude(u);
 
                 // v and u should be unit vectors
-                u = V.Normalize(u);
+                if (s < epsilon)
+                {
+                    u = V.Zero(m);
+                    v = V.Zero(n);
+                }
+                else
+                {
+                    u = V.Scale(u, 1 / s);
+                }
 
                 // save u, v and s into the result
                 for (int j = 0; j < u.Length; j++)

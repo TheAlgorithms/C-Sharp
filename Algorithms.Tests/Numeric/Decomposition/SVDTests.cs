@@ -62,7 +62,7 @@ namespace Algorithms.Tests.Numeric.Decomposition
             {
                 for (int j = 0; j < n; j++)
                 {
-                    result[i, j] = random.NextDouble() * 100 - 50;
+                    result[i, j] = random.NextDouble() - 0.5;
                 }
             }
             return result;
@@ -81,7 +81,7 @@ namespace Algorithms.Tests.Numeric.Decomposition
             double[,] u;
             double[,] v;
             double[] s;
-            (u, s, v) = Svd.Decompose(testMatrix);
+            (u, s, v) = Svd.Decompose(testMatrix, 1E-8, 1000);
 
             for (int i = 0; i < u.GetLength(1); i++)
             {

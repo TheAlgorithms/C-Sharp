@@ -5,6 +5,17 @@ namespace Utilities.Extensions
     public static class VectorExtensions
     {
         /// <summary>
+        /// Makes a vector of zeroes.
+        /// </summary>
+        /// <param name="dimensions">The number of dimensions of the vector.</param>
+        /// <returns>The vector.</returns>
+        public static double[] Zero(int dimensions)
+        {
+            double[] result = new double[dimensions];
+            return result;
+        }
+
+        /// <summary>
         /// Makes a copy of a vector. Changes to the copy should not affect the original.
         /// </summary>
         /// <param name="vector">The vector.</param>
@@ -70,46 +81,23 @@ namespace Utilities.Extensions
         /// <returns>The magnitude.</returns>
         public static double Magnitude(double[] vector)
         {
-            double magnitude = 0;
-            for (int i = 0; i < vector.Length; i++)
-            {
-                magnitude += vector[i] * vector[i];
-            }
-
+            double magnitude = Dot(vector, vector);
             magnitude = Math.Sqrt(magnitude);
             return magnitude;
         }
 
         /// <summary>
-        /// Returns the unit vector in the direction of a given vector.
+        /// Returns the scaled vector.
         /// </summary>
         /// <param name="vector">The vector.</param>
+        /// <param name="factor">Scale factor.</param>
         /// <returns>The unit vector.</returns>
-        public static double[] Normalize(double[] vector)
+        public static double[] Scale(double[] vector, double factor)
         {
-            return Normalize(vector, 1E-5);
-        }
-
-        /// <summary>
-        /// Returns the unit vector in the direction of a given vector.
-        /// </summary>
-        /// <param name="vector">The vector.</param>
-        /// <param name="epsilon">Error margin, if vector magnitude is below this value
-        /// then do not do anything to the vector, to prevent numerical errors.</param>
-        /// <returns>The unit vector.</returns>
-        public static double[] Normalize(double[] vector, double epsilon)
-        {
-            double magnitude = Magnitude(vector);
-
-            if (magnitude < epsilon)
-            {
-                return Copy(vector);
-            }
-
             double[] result = new double[vector.Length];
             for (int i = 0; i < vector.Length; i++)
             {
-                result[i] = vector[i] / magnitude;
+                result[i] = vector[i] * factor;
             }
 
             return result;
