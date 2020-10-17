@@ -11,6 +11,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 ## Overview  
 * [Algorithms](./Algorithms/)
 	* [Data Compression](<./Algorithms/DataCompression>)
+		* [Burrows-Wheeler transform](<./Algorithms/DataCompression/BurrowsWheelerTransform.cs>)
 		* [Huffman Compressor](<./Algorithms/DataCompression/HuffmanCompressor.cs>)
 		* [Shannon-Fano Compressor](<./Algorithms/DataCompression/ShannonFanoCompressor.cs>)
 	* [Encoders](./Algorithms/Encoders/)
@@ -44,6 +45,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 			* [Bogo](./Algorithms/Sorters/Comparison/BogoSorter.cs)
 			* [Bubble](./Algorithms/Sorters/Comparison/BubbleSorter.cs)
 			* [Cocktail](./Algorithms/Sorters/Comparison/CocktailSorter.cs)
+			* [Comb](./Algorithms/Sorters/Comparison/CombSorter.cs)
 			* [Cycle](./Algorithms/Sorters/Comparison/CycleSorter.cs)
 			* [Heap](./Algorithms/Sorters/Comparison/HeapSorter.cs)
 			* [Insertion](./Algorithms/Sorters/Comparison/InsertionSorter.cs)
@@ -67,10 +69,15 @@ This repository contains algorithms and data structures implemented in C# for ed
 	* [String](./Algorithms/Strings/)
 		* [Longest Consecutive Character](./Algorithms/Strings/GeneralStringAlgorithms.cs)
 		* [Naive String Search](./Algorithms/Strings/NaiveStringSearch.cs)
+		* [Rabin Karp](./Algorithms/Strings/RabinKarp.cs)
+		* [Boyer Moore](./Algorithms/Strings/BoyerMoore.cs)
 		* [Palindrome Checker](./Algorithms/Strings/palindrome.cs)
 	* [Other](./Algorithms/Other/)
 		* [Fermat Prime Checker](./Algorithms/Other/FermatPrimeChecker.cs)
 		* [Sieve of Eratosthenes](./Algorithms/Other/SieveOfEratosthenes.cs)
+	* [Problems](./Algorithms/Problems/)
+		* [Stable Marriage](./Algorithms/Problems/StableMarriage)
+			* [Gale-Shapley](./Algorithms/Problems/StableMarriage/GaleShapley.cs)
 
 * [Data Structures](./DataStructures/)
 	* [Bit Array](./DataStructures/BitArray.cs)
@@ -80,6 +87,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 	* [Timeline](./DataStructures/Timeline.cs)
 	* [Array-based Queue](./DataStructures/ArrayBasedQueue.cs)
 	* [List-based Queue](./DataStructures/ListBasedQueue.cs)
+	* [Stack-based Queue](./DataStructures/StackBasedQueue.cs)
 	* [Binary Search Tree](./DataStructures/BinarySearchTree)
 ---
 
