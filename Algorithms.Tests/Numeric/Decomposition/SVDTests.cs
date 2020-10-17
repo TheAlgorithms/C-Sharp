@@ -1,6 +1,8 @@
 using Algorithms.Numeric.Decomposition;
 using NUnit.Framework;
 using System;
+using M = Utilities.Extensions.MatrixExtensions;
+using V = Utilities.Extensions.VectorExtensions;
 
 namespace Algorithms.Tests.Numeric.Decomposition
 {
@@ -25,21 +27,21 @@ namespace Algorithms.Tests.Numeric.Decomposition
             double[,] lhs = new double[,] { { 1, 2 }, { 3, 4 }, { 5, 6 } };
             double[,] rhs = new double[,] { { 7, 8, 9 }, { 10, 11, 12 } };
             double[,] expected = new double[,] { { 27, 30, 33 }, { 61, 68, 75 }, { 95, 106, 117 } };
-            double[,] got = Svd.MatrixMultiply(lhs, rhs);
+            double[,] got = M.MultiplyGeneral(lhs, rhs);
             Assert.AreEqual(expected, got);
         }
 
         [Test]
         public void VectorMagnitude()
         {
-            Assert.AreEqual(Math.Sqrt(3), Svd.Magnitude(new double[] { 1, -1, 0, 1 }));
+            Assert.AreEqual(Math.Sqrt(3), V.Magnitude(new double[] { 1, -1, 0, 1 }));
         }
 
         [Test]
         public void RandomUnitVector()
         {
             double epsilon = 0.0001;
-            Assert.AreEqual(1, Svd.Magnitude(Svd.RandomUnitVector(10)), epsilon);
+            Assert.AreEqual(1, V.Magnitude(Svd.RandomUnitVector(10)), epsilon);
             Assert.AreEqual(1, Math.Abs(Svd.RandomUnitVector(1)[0]), epsilon);
             Assert.AreNotEqual(Svd.RandomUnitVector(10), Svd.RandomUnitVector(10));
         }
@@ -91,11 +93,11 @@ namespace Algorithms.Tests.Numeric.Decomposition
 
                 if (s[i] > epsilon)
                 {
-                    Assert.AreEqual(1, Svd.Magnitude(extracted), epsilon);
+                    Assert.AreEqual(1, V.Magnitude(extracted), epsilon);
                 }
                 else
                 {
-                    Assert.Less(Svd.Magnitude(extracted), 1);
+                    Assert.Less(V.Magnitude(extracted), 1);
                 }
             }
 
@@ -109,11 +111,11 @@ namespace Algorithms.Tests.Numeric.Decomposition
 
                 if (s[i] > epsilon)
                 {
-                    Assert.AreEqual(1, Svd.Magnitude(extracted), epsilon);
+                    Assert.AreEqual(1, V.Magnitude(extracted), epsilon);
                 }
                 else
                 {
-                    Assert.Less(Svd.Magnitude(extracted), 1);
+                    Assert.Less(V.Magnitude(extracted), 1);
                 }
             }
 
@@ -123,8 +125,11 @@ namespace Algorithms.Tests.Numeric.Decomposition
                 expanded[i, i] = s[i];
             }
 
-            AssertMatrixEqual(testMatrix, Svd.MatrixMultiply(Svd.MatrixMultiply(u, expanded), Svd.MatrixTranspose(v)), epsilon);
-            AssertMatrixEqual(testMatrix, Svd.MatrixMultiply(u, Svd.MatrixMultiply(expanded, Svd.MatrixTranspose(v))), epsilon);
+            AssertMatrixEqual(testMatrix,
+                M.MultiplyGeneral(M.MultiplyGeneral(u, expanded), M.Transpose(v)), epsilon);
+
+            AssertMatrixEqual(testMatrix,
+                M.MultiplyGeneral(u, M.MultiplyGeneral(expanded, M.Transpose(v))), epsilon);
         }
     }
 }
