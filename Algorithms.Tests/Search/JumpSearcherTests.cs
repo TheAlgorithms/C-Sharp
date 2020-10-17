@@ -50,5 +50,25 @@ namespace Algorithms.Tests.Search
             var index = searcher.FindIndex(arr.ToList<int>(), present, 100);
             Assert.AreEqual(present, arr[index]);
         }
+
+        [Test]
+        public static void FindIndex_ItemPresent_NoJumpStep_IndexCorrect()
+        {
+            var searcher = new JumpSearcher();
+            var arr = Helper.GetSortedArray(1000);
+            var present = Helper.GetItemIn(arr);
+            var index = searcher.FindIndex(arr.ToList<int>(), present);
+            Assert.AreEqual(present, arr[index]);
+        }
+
+        [Test]
+        public static void FindIndex_ItemNotFound_NoJumpStep()
+        {
+            var searcher = new JumpSearcher();
+            var arr = Helper.GetSortedArray(1000);
+            var present = arr[arr.Length - 1] + 1;
+            var index = searcher.FindIndex(arr.ToList<int>(), present);
+            Assert.AreEqual(present, arr[index]);
+        }
     }
 }
