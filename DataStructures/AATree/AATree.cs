@@ -386,6 +386,7 @@ namespace DataStructures.AATree
                 return;
             }
 
+            // Check level == 1 if node if a leaf node.
             if (node.Left == null && node.Right == null)
             {
                 if (node.Level != 1)
@@ -394,6 +395,7 @@ namespace DataStructures.AATree
                 }
             }
 
+            // Check level of left child is exactly one less than parent.
             if (node.Left != null)
             {
                 if (node.Level - node.Left.Level != 1)
@@ -402,6 +404,7 @@ namespace DataStructures.AATree
                 }
             }
 
+            // Check level of right child is equal or one less than parent.
             if (node.Right != null)
             {
                 if (node.Level - node.Right.Level != 1 && node.Level != node.Right.Level)
@@ -410,6 +413,7 @@ namespace DataStructures.AATree
                 }
             }
 
+            // Check right grandchild level is less than node.
             if (node.Right != null && node.Right.Right != null)
             {
                 if (node.Right.Level < node.Right.Right.Level)
@@ -418,6 +422,7 @@ namespace DataStructures.AATree
                 }
             }
 
+            // Check if node has two children if not leaf.
             if (node.Level > 1)
             {
                 if (node.Left == null || node.Right == null)

@@ -217,43 +217,5 @@ namespace DataStructures.Tests
             var tree = new AATree<int>();
             Assert.IsTrue(tree.GetKeysPostOrder().ToList().Count == 0);
         }
-
-        [Test]
-        public static void PerformanceTest()
-        {
-            var rng = new Random();
-            var numElements = 100000;
-            var elemList = Enumerable.Range(0, numElements).ToList();
-
-            for(int i = 0; i < numElements; i++)
-            {
-                var j = rng.Next(i);
-                var tmp = elemList[i];
-                elemList[i] = elemList[j];
-                elemList[j] = tmp;
-            }
-
-            var tree = new AATree<int>();
-            tree.AddRange(elemList);
-
-            var numElemsToRemove = rng.Next(numElements / 4, numElements / 2);
-            for(int i = 0; i < numElemsToRemove; i++)
-            {
-                var idx = rng.Next(numElements);
-
-                while(elemList[idx] == -1)
-                {
-                    idx = rng.Next(numElements);
-                }
-
-                tree.Remove(elemList[idx]);
-                elemList[idx] = -1;
-            }
-
-            for(int i = 0; i < numElements; i++)
-            {
-                tree.Contains(i);
-            }
-        }
     }
 }
