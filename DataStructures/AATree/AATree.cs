@@ -380,6 +380,7 @@ namespace DataStructures.AATree
         /// More information: https://en.wikipedia.org/wiki/AA_tree .
         /// </remarks>
         /// <param name="node">The node to check from.</param>
+        /// <returns>true if node passes all checks, false otherwise.</returns>
         private bool ValidateTree(AATreeNode<TKey>? node)
         {
             if (node == null)
@@ -388,43 +389,118 @@ namespace DataStructures.AATree
             }
 
             // Check level == 1 if node if a leaf node.
-            if (node.Left == null &&
-                node.Right == null &&
+            bool leafNodeCheck = CheckLeafNode(node);
+
+            // Check level of left child is exactly one less than parent.
+            bool leftCheck = CheckLeftSubtree(node);
+
+            // Check level of right child is equal or one less than parent.
+            bool rightCheck = CheckRightSubtree(node);
+
+            // Check right grandchild level is less than node.
+            bool grandchildCheck = CheckRightGrandChild(node);
+
+            // Check if node has two children if not leaf.
+            bool nonLeafChildrenCheck = CheckNonLeafChildren(node);
+
+            bool thisNodeResult = leafNodeCheck &&
+                leftCheck &&
+                rightCheck &&
+                grandchildCheck &&
+                nonLeafChildrenCheck;
+
+            return thisNodeResult && ValidateTree(node.Left) && ValidateTree(node.Right);
+        }
+
+        /// <summary>
+        /// Checks if node is a leaf, and if so if its level is 1.
+        /// </summary>
+        /// <param name="node">The node to check.</param>
+        /// <returns>true if node passes check, false otherwise.</returns>
+        private bool CheckLeafNode(AATreeNode<TKey> node)
+        {
+            if (node.Left == null && node.Right == null &&
                 node.Level != 1)
             {
                 return false;
             }
+            else
+            {
+                return true;
+            }
+        }
 
-            // Check level of left child is exactly one less than parent.
+        /// <summary>
+        /// Checks if left node's level is exactly one less than node's level.
+        /// </summary>
+        /// <param name="node">The node to check.</param>
+        /// <returns>true if node passes check, false otherwise.</returns>
+        private bool CheckLeftSubtree(AATreeNode<TKey> node)
+        {
             if (node.Left != null && node.Level - node.Left.Level != 1)
             {
                 return false;
             }
+            else
+            {
+                return true;
+            }
+        }
 
-            // Check level of right child is equal or one less than parent.
+        /// <summary>
+        /// Checks if right node's level is either equal to or one less than node's level.
+        /// </summary>
+        /// <param name="node">The node to check.</param>
+        /// <returns>true if node passes check, false otherwise.</returns>
+        private bool CheckRightSubtree(AATreeNode<TKey> node)
+        {
             if (node.Right != null &&
                 node.Level - node.Right.Level != 1 &&
                 node.Level != node.Right.Level)
             {
                 return false;
             }
+            else
+            {
+                return true;
+            }
+        }
 
-            // Check right grandchild level is less than node.
+        /// <summary>
+        /// Checks if right grandchild's (right node's right node) level is less than node.
+        /// </summary>
+        /// <param name="node">The node to check.</param>
+        /// <returns>true if node passes check, false otherwise.</returns>
+        private bool CheckRightGrandChild(AATreeNode<TKey> node)
+        {
             if (node.Right != null &&
                 node.Right.Right != null &&
                 node.Right.Level < node.Right.Right.Level)
             {
                 return false;
             }
+            else
+            {
+                return true;
+            }
+        }
 
-            // Check if node has two children if not leaf.
+        /// <summary>
+        /// Checks if node is not a leaf, and if so if it has two children.
+        /// </summary>
+        /// <param name="node">The node to check.</param>
+        /// <returns>true if node passes check, false otherwise.</returns>
+        private bool CheckNonLeafChildren(AATreeNode<TKey> node)
+        {
             if (node.Level > 1 &&
                 (node.Left == null || node.Right == null))
             {
                 return false;
             }
-
-            return ValidateTree(node.Left) && ValidateTree(node.Right);
+            else
+            {
+                return true;
+            }
         }
 
         /// <summary>
