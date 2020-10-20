@@ -403,11 +403,8 @@ namespace DataStructures.AATree
             // Check if node has two children if not leaf.
             bool nonLeafChildrenCheck = CheckNonLeafChildren(node);
 
-            bool thisNodeResult = leafNodeCheck &&
-                leftCheck &&
-                rightCheck &&
-                grandchildCheck &&
-                nonLeafChildrenCheck;
+            bool thisNodeResult = leafNodeCheck && leftCheck && rightCheck;
+            thisNodeResult = grandchildCheck && nonLeafChildrenCheck;
 
             return thisNodeResult && ValidateTree(node.Left) && ValidateTree(node.Right);
         }
@@ -419,15 +416,8 @@ namespace DataStructures.AATree
         /// <returns>true if node passes check, false otherwise.</returns>
         private bool CheckLeafNode(AATreeNode<TKey> node)
         {
-            if (node.Left == null && node.Right == null &&
-                node.Level != 1)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            bool condition = node.Left == null && node.Right == null && node.Level != 1;
+            return !condition;
         }
 
         /// <summary>
@@ -437,14 +427,8 @@ namespace DataStructures.AATree
         /// <returns>true if node passes check, false otherwise.</returns>
         private bool CheckLeftSubtree(AATreeNode<TKey> node)
         {
-            if (node.Left != null && node.Level - node.Left.Level != 1)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            bool condition = node.Left != null && node.Level - node.Left.Level != 1;
+            return !condition;
         }
 
         /// <summary>
@@ -454,16 +438,10 @@ namespace DataStructures.AATree
         /// <returns>true if node passes check, false otherwise.</returns>
         private bool CheckRightSubtree(AATreeNode<TKey> node)
         {
-            if (node.Right != null &&
+            bool condition = node.Right != null &&
                 node.Level - node.Right.Level != 1 &&
-                node.Level != node.Right.Level)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+                node.Level != node.Right.Level;
+            return !condition;
         }
 
         /// <summary>
@@ -473,16 +451,10 @@ namespace DataStructures.AATree
         /// <returns>true if node passes check, false otherwise.</returns>
         private bool CheckRightGrandChild(AATreeNode<TKey> node)
         {
-            if (node.Right != null &&
+            bool condition = node.Right != null &&
                 node.Right.Right != null &&
-                node.Right.Level < node.Right.Right.Level)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+                node.Right.Level < node.Right.Right.Level;
+            return !condition;
         }
 
         /// <summary>
@@ -492,15 +464,8 @@ namespace DataStructures.AATree
         /// <returns>true if node passes check, false otherwise.</returns>
         private bool CheckNonLeafChildren(AATreeNode<TKey> node)
         {
-            if (node.Level > 1 &&
-                (node.Left == null || node.Right == null))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            bool condition = node.Level > 1 && (node.Left == null || node.Right == null);
+            return !condition;
         }
 
         /// <summary>
