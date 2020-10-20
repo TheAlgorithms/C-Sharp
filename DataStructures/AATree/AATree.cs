@@ -17,14 +17,14 @@ namespace DataStructures.AATree
     public class AATree<TKey>
     {
         /// <summary>
+        /// The comparer function to use to compare the keys.
+        /// </summary>
+        private readonly Comparer<TKey> comparer;
+
+        /// <summary>
         /// The root of the tree; has the highest level.
         /// </summary>
         private AATreeNode<TKey>? root;
-
-        /// <summary>
-        /// The comparer function to use to compare the keys.
-        /// </summary>
-        private Comparer<TKey> comparer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AATree{TKey}"/> class.
@@ -213,9 +213,10 @@ namespace DataStructures.AATree
         /// <summary>
         /// Checks if the tree is a valid AA Tree.
         /// </summary>
-        public void Validate()
+        /// <returns>true if tree is a valid AA Tree, false otherwise.</returns>
+        public bool Validate()
         {
-            ValidateTree(root);
+            return ValidateTree(root);
         }
 
         /// <summary>
@@ -379,60 +380,51 @@ namespace DataStructures.AATree
         /// More information: https://en.wikipedia.org/wiki/AA_tree .
         /// </remarks>
         /// <param name="node">The node to check from.</param>
-        private void ValidateTree(AATreeNode<TKey>? node)
+        private bool ValidateTree(AATreeNode<TKey>? node)
         {
             if (node == null)
             {
-                return;
+                return true;
             }
 
             // Check level == 1 if node if a leaf node.
-            if (node.Left == null && node.Right == null)
+            if (node.Left == null &&
+                node.Right == null &&
+                node.Level != 1)
             {
-                if (node.Level != 1)
-                {
-                    throw new Exception($"Node {node.Key} - leaf: expected level of 1, found {node.Level} instead.");
-                }
+                return false;
             }
 
             // Check level of left child is exactly one less than parent.
-            if (node.Left != null)
+            if (node.Left != null && node.Level - node.Left.Level != 1)
             {
-                if (node.Level - node.Left.Level != 1)
-                {
-                    throw new Exception($"Node {node.Key} - left child: expected level of {node.Level - 1}, found {node.Left.Level} instead.");
-                }
+                return false;
             }
 
             // Check level of right child is equal or one less than parent.
-            if (node.Right != null)
+            if (node.Right != null &&
+                node.Level - node.Right.Level != 1 &&
+                node.Level != node.Right.Level)
             {
-                if (node.Level - node.Right.Level != 1 && node.Level != node.Right.Level)
-                {
-                    throw new Exception($"Node {node.Key} - right child: expected level of {node.Level - 1} or {node.Level}, found {node.Right.Level} instead.");
-                }
+                return false;
             }
 
             // Check right grandchild level is less than node.
-            if (node.Right != null && node.Right.Right != null)
+            if (node.Right != null &&
+                node.Right.Right != null &&
+                node.Right.Level < node.Right.Right.Level)
             {
-                if (node.Right.Level < node.Right.Right.Level)
-                {
-                    throw new Exception($"Node {node.Key} - right grandchild: right grandchild has level of {node.Right.Right.Level}, which is greater than node level of {node.Level}.");
-                }
+                return false;
             }
 
             // Check if node has two children if not leaf.
-            if (node.Level > 1)
+            if (node.Level > 1 &&
+                (node.Left == null || node.Right == null))
             {
-                if (node.Left == null || node.Right == null)
-                {
-                    throw new Exception($"Node {node.Key}: node level is greater than one but has less than two children.");
-                }
+                return false;
             }
 
-            ValidateTree(node.Left);
-            ValidateTree(node.Right);
+            return ValidateTree(node.Left) && ValidateTree(node.Right);
         }
 
         /// <summary>
