@@ -158,8 +158,8 @@ namespace DataStructures.Tests
                 heap.Push(i);
             }
 
-            heap.Remove(5);
-            Assert.IsFalse(heap.Contains(5));
+            heap.Remove(2);
+            Assert.IsFalse(heap.Contains(2));
             Assert.AreEqual(10, heap.Peek());
             Assert.AreEqual(9, heap.Count);
 
@@ -167,6 +167,11 @@ namespace DataStructures.Tests
             Assert.IsFalse(heap.Contains(8));
             Assert.AreEqual(10, heap.Peek());
             Assert.AreEqual(8, heap.Count);
+
+            heap.Remove(5);
+            Assert.IsFalse(heap.Contains(5));
+            Assert.AreEqual(10, heap.Peek());
+            Assert.AreEqual(7, heap.Count);
 
             Assert.Throws<ArgumentException>(() => heap.Remove(11));
         }
