@@ -19,14 +19,14 @@ namespace DataStructures.BinarySearchTree
     public class BinarySearchTree<TKey>
     {
         /// <summary>
+        /// Comparer to use when comparing node elements/keys.
+        /// </summary>
+        private readonly Comparer<TKey> comparer;
+
+        /// <summary>
         /// The root of the BST.
         /// </summary>
         private BinarySearchTreeNode<TKey>? root;
-
-        /// <summary>
-        /// Comparer to use when comparing node elements/keys.
-        /// </summary>
-        private Comparer<TKey> comparer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinarySearchTree{TKey}"/> class.
