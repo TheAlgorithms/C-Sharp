@@ -35,6 +35,10 @@ namespace DataStructures.BinarySearchTree
             comparer = Comparer<TKey>.Default;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BinarySearchTree{TKey}"/> class with a custom comparer.
+        /// </summary>
+        /// <param name="customComparer">Custom comparer function to use.</param>
         public BinarySearchTree(Comparer<TKey> customComparer)
         {
             root = null;
