@@ -404,7 +404,7 @@ namespace DataStructures.AATree
             bool nonLeafChildrenCheck = CheckNonLeafChildren(node);
 
             bool thisNodeResult = leafNodeCheck && leftCheck && rightCheck;
-            thisNodeResult = grandchildCheck && nonLeafChildrenCheck;
+            thisNodeResult = thisNodeResult && grandchildCheck && nonLeafChildrenCheck;
 
             return thisNodeResult && ValidateTree(node.Left) && ValidateTree(node.Right);
         }
