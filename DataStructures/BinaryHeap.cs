@@ -13,6 +13,7 @@ namespace DataStructures
     /// must be the largest/smallest node of all of its children.
     /// Although binary heaps are not very efficient, they are (probably) the simpliest heaps
     /// to understand and implement.
+    /// More information: https://en.wikipedia.org/wiki/Binary_heap .
     /// </remarks>
     /// <typeparam name="T">Type of elements in binary heap.</typeparam>
     public class BinaryHeap<T>
