@@ -241,11 +241,10 @@ namespace DataStructures
                 Swap(elemIdx, right);
                 HeapifyDown(right);
             }
-
-            // if left and right child values compare smaller than the current value, the heap property has been restored.
-            // no need to do anything else.
             else
             {
+                // if left and right child values compare smaller than the current value, the heap property has been restored.
+                // no need to do anything else.
             }
         }
     }
