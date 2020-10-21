@@ -30,7 +30,7 @@ namespace DataStructures.Tests
         public static void InsertItemIntoList()
         {
             //Arrange
-            List<int> list = new List<int>() { 100, 200, 300, 400, 500 };
+            List<int> list = new List<int>{ 100, 200, 300, 400, 500 };
             SortedList<int> sortedList = new SortedList<int>(list);
 
             bool actualflag = false;
@@ -47,7 +47,7 @@ namespace DataStructures.Tests
         public static void RemoveItemFromList()
         {
             //Arrange
-            List<int> list = new List<int>() { 100, 200, 300, 400, 500 };
+            List<int> list = new List<int>{ 100, 200, 300, 400, 500 };
             SortedList<int> sortedList = new SortedList<int>(list);
 
             bool actualflag = false;
