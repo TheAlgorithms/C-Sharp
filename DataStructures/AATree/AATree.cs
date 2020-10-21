@@ -106,7 +106,7 @@ namespace DataStructures.AATree
         /// Gets the largest element in the tree. (ie. the element in the right most node).
         /// </summary>
         /// <returns>The largest element in the tree according to the stored comparer.</returns>
-        /// <throws>InvalidOperationException if the tree is empty.</throws>
+        /// <exception cref="InvalidOperationException">Thrown if the tree is empty.</exception>
         public TKey GetMax()
         {
             if (root == null)
@@ -225,7 +225,7 @@ namespace DataStructures.AATree
         /// <param name="key">The element to add.</param>
         /// <param name="node">The node to search for a empty spot.</param>
         /// <returns>The node with the added element.</returns>
-        /// <throws>ArgumentException if element is already in the tree.</throws>
+        /// <exception cref="ArgumentException">Thrown if key is already in the tree.</exception>
         private AATreeNode<TKey> Add(TKey key, AATreeNode<TKey>? node)
         {
             if (node == null)
