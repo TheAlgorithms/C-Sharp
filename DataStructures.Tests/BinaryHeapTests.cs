@@ -92,7 +92,7 @@ namespace DataStructures.Tests
         }
 
         [Test]
-        public static void Peek_EmptyHeap_ThrowsCorrectExcception()
+        public static void Peek_EmptyHeap_ThrowsCorrectException()
         {
             var heap = new BinaryHeap<int>();
 
