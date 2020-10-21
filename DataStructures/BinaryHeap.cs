@@ -227,37 +227,19 @@ namespace DataStructures
             var left = (2 * elemIdx) + 1;
             var right = (2 * elemIdx) + 2;
 
-            bool leftLargerThanElem = left < Count ? comparer.Compare(data[elemIdx], data[left]) < 0 : false;
-            bool rightLargerThanElem = right < Count ? comparer.Compare(data[elemIdx], data[left]) < 0 : false;
+            var leftLargerThanElem = left < Count && comparer.Compare(data[elemIdx], data[left]) < 0;
+            var rightLargerThanElem = right < Count && comparer.Compare(data[elemIdx], data[right]) < 0;
+            var leftLargerThanRight = left < Count && right < Count && comparer.Compare(data[left], data[right]) > 0;
 
-            if (left < Count && right < Count)
-            {
-                bool leftLargerThanRight = comparer.Compare(data[left], data[right]) > 0;
-
-                if (leftLargerThanElem && leftLargerThanRight)
-                {
-                    Swap(elemIdx, left);
-                    HeapifyDown(left);
-                }
-                else
-                {
-                    Swap(elemIdx, right);
-                    HeapifyDown(right);
-                }
-            }
-            else if (left < Count && leftLargerThanElem)
+            if (leftLargerThanElem && leftLargerThanRight)
             {
                 Swap(elemIdx, left);
                 HeapifyDown(left);
             }
-            else if (right < Count && rightLargerThanElem)
+            else if (rightLargerThanElem && !leftLargerThanRight)
             {
                 Swap(elemIdx, right);
                 HeapifyDown(right);
-            }
-            else
-            {
-                return;
             }
         }
     }

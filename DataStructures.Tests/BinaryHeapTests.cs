@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace DataStructures.Tests
 {
-    class BinaryHeapTests
+    static class BinaryHeapTests
     {
         [Test]
         public static void Constructor_UseCustomComparer_BuildCorrectHeap()
