@@ -1,4 +1,6 @@
-﻿using DataStructures.Helpers;
+﻿using System.Collections.Generic;
+
+using DataStructures.Helpers;
 using DataStructures.SortedList;
 
 using NUnit.Framework;
@@ -22,6 +24,39 @@ namespace DataStructures.Tests
             //Assert
             Assert.AreEqual(testList, correctList);
 
+        }
+
+        [Test]
+        public static void InsertItemIntoList()
+        {
+            //Arrange
+            List<int> list = new List<int>() { 100, 200, 300, 400, 500 };
+            SortedList<int> sortedList = new SortedList<int>(list);
+
+            bool actualflag = false;
+            //Act
+            actualflag= sortedList.Insert(250);
+
+            bool expectedflag = true;
+            //Assert
+            Assert.AreEqual(expectedflag, actualflag);
+        }
+
+
+        [Test]
+        public static void RemoveItemFromList()
+        {
+            //Arrange
+            List<int> list = new List<int>() { 100, 200, 300, 400, 500 };
+            SortedList<int> sortedList = new SortedList<int>(list);
+
+            bool actualflag = false;
+            //Act
+            actualflag = sortedList.Remove(300);
+
+            bool expectedflag = true;
+            //Assert
+            Assert.AreEqual(expectedflag, actualflag);
         }
     }
 }
