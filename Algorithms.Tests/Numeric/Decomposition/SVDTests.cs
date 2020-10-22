@@ -21,39 +21,6 @@ namespace Algorithms.Tests.Numeric.Decomposition
             }
         }
 
-        [Test]
-        public void MatrixMultiply()
-        {
-            double[,] lhs = new double[,] { { 1, 2 }, { 3, 4 }, { 5, 6 } };
-            double[,] rhs = new double[,] { { 7, 8, 9 }, { 10, 11, 12 } };
-            double[,] expected = new double[,] { { 27, 30, 33 }, { 61, 68, 75 }, { 95, 106, 117 } };
-            double[,] got = M.MultiplyGeneral(lhs, rhs);
-            Assert.AreEqual(expected, got);
-        }
-
-        [Test]
-        public void VectorMagnitude()
-        {
-            Assert.AreEqual(Math.Sqrt(3), V.Magnitude(new double[] { 1, -1, 0, 1 }));
-        }
-
-        [Test]
-        public void RandomUnitVector()
-        {
-            double epsilon = 0.0001;
-            Assert.AreEqual(1, V.Magnitude(Svd.RandomUnitVector(10)), epsilon);
-            Assert.AreEqual(1, Math.Abs(Svd.RandomUnitVector(1)[0]), epsilon);
-            Assert.AreNotEqual(Svd.RandomUnitVector(10), Svd.RandomUnitVector(10));
-        }
-
-        [Test]
-        public void Svd_Decompose()
-        {
-            CheckSvd(new double[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } });
-            CheckSvd(new double[,] { { 1, 2, 3 }, { 4, 5, 6 } });
-            CheckSvd(new double[,] { { 1, 0, 0, 0, 2 }, { 0, 3, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 2, 0, 0, 0 } });
-        }
-
         public double[,] GenerateRandomMatrix(int m, int n)
         {
             double[,] result = new double[m, n];
@@ -66,6 +33,26 @@ namespace Algorithms.Tests.Numeric.Decomposition
                 }
             }
             return result;
+        }
+
+        [Test]
+        public void RandomUnitVector()
+        {
+            double epsilon = 0.0001;
+            // unit vector should have length 1
+            Assert.AreEqual(1, V.Magnitude(Svd.RandomUnitVector(10)), epsilon);
+            // unit vector with single element should be [-1] or [+1]
+            Assert.AreEqual(1, Math.Abs(Svd.RandomUnitVector(1)[0]), epsilon);
+            // two randomly generated unit vectors should not be equal 
+            Assert.AreNotEqual(Svd.RandomUnitVector(10), Svd.RandomUnitVector(10));
+        }
+
+        [Test]
+        public void Svd_Decompose()
+        {
+            CheckSvd(new double[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } });
+            CheckSvd(new double[,] { { 1, 2, 3 }, { 4, 5, 6 } });
+            CheckSvd(new double[,] { { 1, 0, 0, 0, 2 }, { 0, 3, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 2, 0, 0, 0 } });
         }
 
         [Test]
@@ -86,6 +73,7 @@ namespace Algorithms.Tests.Numeric.Decomposition
             for (int i = 0; i < u.GetLength(1); i++)
             {
                 double[] extracted = new double[u.GetLength(0)];
+                // extract a column of u
                 for (int j = 0; j < extracted.Length; j++)
                 {
                     extracted[j] = u[j, i];
@@ -93,17 +81,20 @@ namespace Algorithms.Tests.Numeric.Decomposition
 
                 if (s[i] > epsilon)
                 {
+                    // if the singular value is non-zero, then the basis vector in u should be a unit vector
                     Assert.AreEqual(1, V.Magnitude(extracted), epsilon);
                 }
                 else
                 {
-                    Assert.Less(V.Magnitude(extracted), 1);
+                    // if the singular value is zero, then the basis vector in u should be zeroed out
+                    Assert.AreEqual(0, V.Magnitude(extracted), epsilon);
                 }
             }
 
             for (int i = 0; i < v.GetLength(1); i++)
             {
                 double[] extracted = new double[v.GetLength(0)];
+                // extract column of v
                 for (int j = 0; j < extracted.Length; j++)
                 {
                     extracted[j] = v[j, i];
@@ -111,23 +102,27 @@ namespace Algorithms.Tests.Numeric.Decomposition
 
                 if (s[i] > epsilon)
                 {
+                    // if the singular value is non-zero, then the basis vector in v should be a unit vector
                     Assert.AreEqual(1, V.Magnitude(extracted), epsilon);
                 }
                 else
                 {
-                    Assert.Less(V.Magnitude(extracted), 1);
+                    // if the singular value is zero, then the basis vector in v should be zeroed out
+                    Assert.AreEqual(0, V.Magnitude(extracted), epsilon);
                 }
             }
 
+            // convert singular values to a diagonal matrix
             double[,] expanded = new double[s.Length, s.Length];
             for (int i = 0; i < s.Length; i++)
             {
                 expanded[i, i] = s[i];
             }
 
+
+            // matrix = U * S * V^t, definition of Singular Vector Decomposition
             AssertMatrixEqual(testMatrix,
                 M.MultiplyGeneral(M.MultiplyGeneral(u, expanded), M.Transpose(v)), epsilon);
-
             AssertMatrixEqual(testMatrix,
                 M.MultiplyGeneral(u, M.MultiplyGeneral(expanded, M.Transpose(v))), epsilon);
         }
