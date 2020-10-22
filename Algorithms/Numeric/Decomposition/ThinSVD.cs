@@ -8,7 +8,7 @@ namespace Algorithms.Numeric.Decomposition
     /// Singular Vector Decomposition decomposes any general matrix into its
     /// singular values and a set of orthonormal bases.
     /// </summary>
-    public static class Svd
+    public static class ThinSvd
     {
         /// <summary>
         /// Computes a random unit vector.

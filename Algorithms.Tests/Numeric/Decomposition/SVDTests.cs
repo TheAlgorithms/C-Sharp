@@ -40,11 +40,11 @@ namespace Algorithms.Tests.Numeric.Decomposition
         {
             double epsilon = 0.0001;
             // unit vector should have length 1
-            Assert.AreEqual(1, V.Magnitude(Svd.RandomUnitVector(10)), epsilon);
+            Assert.AreEqual(1, V.Magnitude(ThinSvd.RandomUnitVector(10)), epsilon);
             // unit vector with single element should be [-1] or [+1]
-            Assert.AreEqual(1, Math.Abs(Svd.RandomUnitVector(1)[0]), epsilon);
+            Assert.AreEqual(1, Math.Abs(ThinSvd.RandomUnitVector(1)[0]), epsilon);
             // two randomly generated unit vectors should not be equal 
-            Assert.AreNotEqual(Svd.RandomUnitVector(10), Svd.RandomUnitVector(10));
+            Assert.AreNotEqual(ThinSvd.RandomUnitVector(10), ThinSvd.RandomUnitVector(10));
         }
 
         [Test]
@@ -68,7 +68,13 @@ namespace Algorithms.Tests.Numeric.Decomposition
             double[,] u;
             double[,] v;
             double[] s;
-            (u, s, v) = Svd.Decompose(testMatrix, 1E-8, 1000);
+            (u, s, v) = ThinSvd.Decompose(testMatrix, 1E-8, 1000);
+
+            for (int i = 1; i < s.Length; i++)
+            {
+                // singular values should be arranged from greatest to smallest
+                Assert.GreaterOrEqual(s[i - 1], s[i]);
+            }
 
             for (int i = 0; i < u.GetLength(1); i++)
             {
