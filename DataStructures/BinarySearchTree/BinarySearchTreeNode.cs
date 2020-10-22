@@ -7,7 +7,7 @@ namespace DataStructures.BinarySearchTree
     /// Keys for each node are immutable.
     /// </summary>
     /// <typeparam name="TKey">Type of key for the node. Keys must implement IComparable.</typeparam>
-    public class BinarySearchTreeNode<TKey> where TKey : IComparable<TKey>
+    public class BinarySearchTreeNode<TKey>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BinarySearchTreeNode{TKey}"/> class.
