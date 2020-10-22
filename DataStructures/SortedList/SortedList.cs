@@ -81,7 +81,8 @@ namespace DataStructures.SortedList
         public bool Search(T item)
         {
             int binarysearchIndex = list.BinarySearch(item);
-            return binarysearchIndex > 0 ? true : false;
+            bool outcome = binarysearchIndex > 0;
+            return outcome;
         }
 
         /// <summary>
