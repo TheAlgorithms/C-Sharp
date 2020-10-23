@@ -16,10 +16,15 @@ namespace DataStructures.BinarySearchTree
     /// A BST will have an average complexity of O(log n) for insertion, removal, and lookup operations.
     /// </remarks>
     /// <typeparam name="TKey">Type of key for the BST. Keys must implement IComparable.</typeparam>
-    public class BinarySearchTree<TKey> where TKey : IComparable<TKey>
+    public class BinarySearchTree<TKey>
     {
         /// <summary>
-        /// Private class member to hold the root of the BST.
+        /// Comparer to use when comparing node elements/keys.
+        /// </summary>
+        private readonly Comparer<TKey> comparer;
+
+        /// <summary>
+        /// The root of the BST.
         /// </summary>
         private BinarySearchTreeNode<TKey>? root;
 
@@ -30,6 +35,18 @@ namespace DataStructures.BinarySearchTree
         {
             root = null;
             Count = 0;
+            comparer = Comparer<TKey>.Default;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BinarySearchTree{TKey}"/> class with a custom comparer.
+        /// </summary>
+        /// <param name="customComparer">Custom comparer function to use.</param>
+        public BinarySearchTree(Comparer<TKey> customComparer)
+        {
+            root = null;
+            Count = 0;
+            comparer = customComparer;
         }
 
         /// <summary>
@@ -162,7 +179,7 @@ namespace DataStructures.BinarySearchTree
         /// </exception>
         private void Add(BinarySearchTreeNode<TKey> node, TKey key)
         {
-            int compareResult = node.Key.CompareTo(key);
+            int compareResult = comparer.Compare(node.Key, key);
             if (compareResult > 0)
             {
                 if (node.Left != null)
@@ -226,7 +243,7 @@ namespace DataStructures.BinarySearchTree
                 return false;
             }
 
-            int compareResult = node.Key.CompareTo(key);
+            int compareResult = comparer.Compare(node.Key, key);
 
             if (compareResult > 0)
             {
@@ -378,7 +395,7 @@ namespace DataStructures.BinarySearchTree
                 return default;
             }
 
-            int compareResult = node.Key.CompareTo(key);
+            int compareResult = comparer.Compare(node.Key, key);
             if (compareResult > 0)
             {
                 return Search(node.Left, key);

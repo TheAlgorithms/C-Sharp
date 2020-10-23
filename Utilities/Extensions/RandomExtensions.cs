@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using static Utilities.Extensions.VectorExtensions;
 
 namespace Utilities.Extensions
 {
@@ -9,7 +10,7 @@ namespace Utilities.Extensions
         {
             var vector = Enumerable.Range(0, size)
                 .Select(_ => rand.NextDouble()).ToArray();
-            var norm = vector.Norm();
+            var norm = Magnitude(vector);
             return vector.Select(x => x / norm).ToArray();
         }
     }
