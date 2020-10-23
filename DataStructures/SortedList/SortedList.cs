@@ -49,6 +49,9 @@ namespace DataStructures.SortedList
             {
                 list.Insert(binarysearchIndex, item);
             }
+
+            var intComparer = new IntComparer();
+            list.Sort(0, list.Count, (IComparer<T>)intComparer);
         }
 
         /// <summary>
