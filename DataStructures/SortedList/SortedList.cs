@@ -68,7 +68,7 @@ namespace DataStructures.SortedList
             }
             else
             {
-                throw new Exception("Item is not present in the list");
+                throw new IndexOutOfRangeException("Item is not present in the list");
             }
         }
 
