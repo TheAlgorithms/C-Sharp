@@ -1,17 +1,19 @@
 ﻿using System;
+
 using Algorithms.Sorters.Comparison;
 using Algorithms.Tests.Helpers;
+
 using NUnit.Framework;
 
 namespace Algorithms.Tests.Sorters.Comparison
 {
-    public static class QuickSorterTests
+    public static class MiddlePointQuickSorterTests
     {
         [Test]
-        public static void ArraySorted([Random(0, 1000, 100, Distinct = true)]int n)
+        public static void ArraySorted([Random(0, 1000, 100, Distinct = true)] int n)
         {
             // Arrange
-            var sorter = new QuickSorter<int>();
+            var sorter = new MiddlePointQuickSorter<int>();
             var intComparer = new IntComparer();
             var (correctArray, testArray) = RandomHelper.GetArrays(n);
 
