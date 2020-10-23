@@ -103,6 +103,11 @@ namespace Utilities.Extensions
             return result;
         }
         
+        /// <summary>
+        /// Transpose 1d row vector to column vector.
+        /// </summary>
+        /// <param name="source">Input 1d vector.</param>
+        /// <returns>Column vector.</returns>
         public static double[,] ToColumnVector(this double[] source)
         {
             var columnVector = new double[source.Length, 1];
@@ -115,6 +120,12 @@ namespace Utilities.Extensions
             return columnVector;
         }
 
+        /// <summary>
+        /// Transpose column vector to 1d row vector.
+        /// </summary>
+        /// <param name="source">Input column vector.</param>
+        /// <returns>Row vector.</returns>
+        /// <exception cref="InvalidOperationException">The column vector should have only 1 element in width.</exception>
         public static double[] ToRowVector(this double[,] source)
         {
             if (source.GetLength(1) != 1)
