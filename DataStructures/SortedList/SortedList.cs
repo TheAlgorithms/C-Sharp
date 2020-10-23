@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
+using Utilities.Exceptions;
+
 namespace DataStructures.SortedList
 {
     /// <summary>
@@ -68,7 +70,7 @@ namespace DataStructures.SortedList
             }
             else
             {
-                throw new IndexOutOfRangeException("Item is not present in the list");
+                throw new ArgumentOutOfRangeException("Item is not present in the list");
             }
         }
 
