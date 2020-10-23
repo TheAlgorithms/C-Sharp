@@ -55,5 +55,18 @@ namespace DataStructures.Tests
             //Assert
             Assert.AreEqual(list,sortedList);
         }
+
+        [Test]
+        public static void IsItemOnTheList()
+        {
+            //Arrange
+            List<int> list = new List<int> { 100, 200, 300, 400, 500 };
+            SortedList<int> sortedList = new SortedList<int>(list);
+            //Act
+            int actual = sortedList.Search(500);
+            int expected = 4;
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

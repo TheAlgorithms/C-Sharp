@@ -73,12 +73,10 @@ namespace DataStructures.SortedList
         /// Find if item exists in a list or not.
         /// </summary>
         /// <param name="item">Item of Type T to be searched in the list.</param>
-        /// <returns>true or false.</returns>
-        public bool Search(T item)
+        /// <returns>index of item if found on the list else -1.</returns>
+        public int Search(T item)
         {
-            int binarysearchIndex = list.BinarySearch(item);
-            bool outcome = binarysearchIndex > 0;
-            return outcome;
+            return list.BinarySearch(item);
         }
 
         /// <summary>
