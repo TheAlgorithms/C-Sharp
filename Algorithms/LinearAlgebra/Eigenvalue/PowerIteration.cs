@@ -19,7 +19,8 @@ namespace Algorithms.LinearAlgebra.Eigenvalue
         /// <description>The algorithm will not converge if the start vector is orthogonal to the eigenvector.</description>
         /// </item>
         /// <item>
-        /// <description>The <paramref name="source"/> matrix should be square-shaped.</description>
+        /// <description>The <paramref name="source"/> matrix must be square-shaped.</description>
+
         /// </item>
         /// </list>
         /// <param name="source">Source square-shaped matrix.</param>
