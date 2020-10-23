@@ -16,7 +16,7 @@ namespace Utilities.Extensions
                 throw new InvalidOperationException("The width of a first operand should match the height of a second.");
             }
 
-            double[,] result = new double[source.GetLength(0), operand.GetLength(1)];
+            var result = new double[source.GetLength(0), operand.GetLength(1)];
 
             for (var i = 0; i < result.GetLength(0); i++)
             {
@@ -43,10 +43,10 @@ namespace Utilities.Extensions
         /// <returns>A copy of the matrix.</returns>
         public static double[,] Copy(double[,] matrix)
         {
-            double[,] result = new double[matrix.GetLength(0), matrix.GetLength(1)];
-            for (int i = 0; i < matrix.GetLength(0); i++)
+            var result = new double[matrix.GetLength(0), matrix.GetLength(1)];
+            for (var i = 0; i < matrix.GetLength(0); i++)
             {
-                for (int j = 0; j < matrix.GetLength(1); j++)
+                for (var j = 0; j < matrix.GetLength(1); j++)
                 {
                     result[i, j] = matrix[i, j];
                 }
@@ -62,10 +62,10 @@ namespace Utilities.Extensions
         /// <returns>The transposed matrix.</returns>
         public static double[,] Transpose(double[,] matrix)
         {
-            double[,] result = new double[matrix.GetLength(1), matrix.GetLength(0)];
-            for (int i = 0; i < matrix.GetLength(0); i++)
+            var result = new double[matrix.GetLength(1), matrix.GetLength(0)];
+            for (var i = 0; i < matrix.GetLength(0); i++)
             {
-                for (int j = 0; j < matrix.GetLength(1); j++)
+                for (var j = 0; j < matrix.GetLength(1); j++)
                 {
                     result[j, i] = matrix[i, j];
                 }
@@ -83,15 +83,15 @@ namespace Utilities.Extensions
         /// <exception cref="ArgumentException">Dimensions of matrix and vector do not match.</exception>
         public static double[] MultiplyVector(double[,] matrix, double[] vector)
         {
-            double[,] vectorReshaped = new double[vector.Length, 1];
-            for (int i = 0; i < vector.Length; i++)
+            var vectorReshaped = new double[vector.Length, 1];
+            for (var i = 0; i < vector.Length; i++)
             {
                 vectorReshaped[i, 0] = vector[i];
             }
 
-            double[,] resultMatrix = MultiplyGeneral(matrix, vectorReshaped);
-            double[] result = new double[resultMatrix.GetLength(0)];
-            for (int i = 0; i < result.Length; i++)
+            var resultMatrix = MultiplyGeneral(matrix, vectorReshaped);
+            var result = new double[resultMatrix.GetLength(0)];
+            for (var i = 0; i < result.Length; i++)
             {
                 result[i] = resultMatrix[i, 0];
             }
@@ -113,12 +113,12 @@ namespace Utilities.Extensions
                 throw new ArgumentException("Number of columns in LHS must be same as number of rows in RHS");
             }
 
-            double[,] result = new double[lhs.GetLength(0), rhs.GetLength(1)];
-            for (int i = 0; i < lhs.GetLength(0); i++)
+            var result = new double[lhs.GetLength(0), rhs.GetLength(1)];
+            for (var i = 0; i < lhs.GetLength(0); i++)
             {
-                for (int j = 0; j < rhs.GetLength(1); j++)
+                for (var j = 0; j < rhs.GetLength(1); j++)
                 {
-                    for (int k = 0; k < lhs.GetLength(1); k++)
+                    for (var k = 0; k < lhs.GetLength(1); k++)
                     {
                         result[i, j] += lhs[i, k] * rhs[k, j];
                     }
@@ -143,10 +143,10 @@ namespace Utilities.Extensions
                 throw new ArgumentException("Dimensions of matrices must be the same");
             }
 
-            double[,] result = new double[lhs.GetLength(0), lhs.GetLength(1)];
-            for (int i = 0; i < lhs.GetLength(0); i++)
+            var result = new double[lhs.GetLength(0), lhs.GetLength(1)];
+            for (var i = 0; i < lhs.GetLength(0); i++)
             {
-                for (int j = 0; j < lhs.GetLength(1); j++)
+                for (var j = 0; j < lhs.GetLength(1); j++)
                 {
                     result[i, j] = lhs[i, j] - rhs[i, j];
                 }
