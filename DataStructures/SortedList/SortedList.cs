@@ -61,7 +61,7 @@ namespace DataStructures.SortedList
             }
             else
             {
-                throw new ArgumentOutOfRangeException("Item is not present in the list");
+                throw new ArgumentOutOfRangeException(binarysearchIndex.ToString(), "Item index is not present in the list");
             }
         }
 
