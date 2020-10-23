@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-
 using Utilities.Exceptions;
 
 namespace DataStructures.SortedList
@@ -42,16 +41,8 @@ namespace DataStructures.SortedList
             // Use BinarySearch() method to determine if the item  exists in the list
             int binarysearchIndex = list.BinarySearch(item);
 
-            if (binarysearchIndex < 0)
-            {
-                // Bitwise complement on the returned negative integer, gives positive integer.
-                list.Insert(~binarysearchIndex, item);
-            }
-            else
-            {
-                list.Insert(binarysearchIndex, item);
-            }
-
+            // Bitwise complement on the returned negative integer, gives positive integer.
+            list.Insert(binarysearchIndex < 0 ? ~binarysearchIndex : binarysearchIndex, item);
             var intComparer = new IntComparer();
             list.Sort(0, list.Count, (IComparer<T>)intComparer);
         }
