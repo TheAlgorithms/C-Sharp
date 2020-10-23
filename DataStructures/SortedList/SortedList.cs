@@ -57,19 +57,17 @@ namespace DataStructures.SortedList
         /// Remove item from a sorted list.
         /// </summary>
         /// <param name="item">Item of Type T to be removed from the list.</param>
-        /// <returns>true or false.Item was inserted successfully or not.</returns>
-        public bool Remove(T item)
+        public void Remove(T item)
         {
             int binarysearchIndex = list.BinarySearch(item);
 
             if (binarysearchIndex > 0)
             {
                 list.RemoveAt(binarysearchIndex);
-                return true;
             }
             else
             {
-                return false;
+                throw new Exception("Item is not present in the list");
             }
         }
 

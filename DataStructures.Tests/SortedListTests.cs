@@ -48,15 +48,12 @@ namespace DataStructures.Tests
         {
             //Arrange
             List<int> list = new List<int>{ 100, 200, 300, 400, 500 };
-            SortedList<int> sortedList = new SortedList<int>(list);
-
-            bool actualflag = false;
+            SortedList<int> sortedList = new SortedList<int>(list);           
             //Act
-            actualflag = sortedList.Remove(300);
-
-            bool expectedflag = true;
+            sortedList.Remove(300);
+            list.Remove(300);
             //Assert
-            Assert.AreEqual(expectedflag, actualflag);
+            Assert.AreEqual(list,sortedList);
         }
     }
 }
