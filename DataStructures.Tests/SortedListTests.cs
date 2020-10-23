@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 using DataStructures.Helpers;
 using DataStructures.SortedList;
@@ -32,14 +33,13 @@ namespace DataStructures.Tests
             //Arrange
             List<int> list = new List<int>{ 100, 200, 300, 400, 500 };
             SortedList<int> sortedList = new SortedList<int>(list);
-
-            bool actualflag = false;
             //Act
-            actualflag= sortedList.Insert(250);
-
-            bool expectedflag = true;
+            sortedList.Insert(200);
+            sortedList.Insert(350);
+            list.Add(200);
+            list.Add(350);
             //Assert
-            Assert.AreEqual(expectedflag, actualflag);
+            Assert.AreEqual(sortedList.Count<int>(), list.Count<int>());
         }
 
 

@@ -35,8 +35,7 @@ namespace DataStructures.SortedList
         /// Insert item in a sorted list.
         /// </summary>
         /// <param name="item">Item of Type T to be inserted in the list.</param>
-        /// <returns>true or false.Item was inserted successfully or not.</returns>
-        public bool Insert(T item)
+        public void Insert(T item)
         {
             // Use BinarySearch() method to determine if the item  exists in the list
             int binarysearchIndex = list.BinarySearch(item);
@@ -45,11 +44,10 @@ namespace DataStructures.SortedList
             {
                 // Bitwise complement on the returned negative integer, gives positive integer.
                 list.Insert(~binarysearchIndex, item);
-                return true;
             }
             else
             {
-                return false;
+                list.Insert(binarysearchIndex, item);
             }
         }
 
