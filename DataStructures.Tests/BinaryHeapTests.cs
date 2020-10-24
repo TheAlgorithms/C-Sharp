@@ -7,10 +7,22 @@ namespace DataStructures.Tests
 {
     static class BinaryHeapTests
     {
+        private static BinaryHeap<int> BuildTestHeap()
+        {
+            var heap = new BinaryHeap<int>();
+            var elems = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            foreach (int i in elems)
+            {
+                heap.Push(i);
+            }
+
+            return heap;
+        }
+
         [Test]
         public static void Constructor_UseCustomComparer_BuildCorrectHeap()
         {
-            var revHeap = new BinaryHeap<int>(Comparer<int>.Create((x, y) => x.CompareTo(y) * -1));
+            var revHeap = new BinaryHeap<int>(Comparer<int>.Create((x, y) => y.CompareTo(x)));
             foreach (int i in new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
             {
                 revHeap.Push(i);
@@ -25,38 +37,15 @@ namespace DataStructures.Tests
         [Test]
         public static void Push_AddElements_BuildCorrectHeap()
         {
-            var heap = new BinaryHeap<int>();
-            var elems = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            foreach (int i in elems)
-            {
-                heap.Push(i);
-            }
+            var heap = BuildTestHeap();
 
             Assert.AreEqual(10, heap.Peek());
             Assert.AreEqual(10, heap.Count);
         }
 
-        [Test]
-        public static void Push_AddElementAlreadyInHeap_ThrowsCorrectException()
-        {
-            var heap = new BinaryHeap<int>();
-            var elems = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            foreach (int i in elems)
-            {
-                heap.Push(i);
-            }
-
-            Assert.Throws<ArgumentException>(() => heap.Push(1));
-        }
-
         public static void Pop_RemoveElements_HeapStillValid()
         {
-            var heap = new BinaryHeap<int>();
-            var elems = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            foreach (int i in elems)
-            {
-                heap.Push(i);
-            }
+            var heap = BuildTestHeap();
 
             Assert.AreEqual(10, heap.Peek());
             Assert.AreEqual(10, heap.Count);
@@ -81,12 +70,7 @@ namespace DataStructures.Tests
         [Test]
         public static void Peek_NonEmptyHeap_ReturnsCorrectAnswer()
         {
-            var heap = new BinaryHeap<int>();
-            var elems = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            foreach (int i in elems)
-            {
-                heap.Push(i);
-            }
+            var heap = BuildTestHeap();
 
             Assert.AreEqual(10, heap.Peek());
         }
@@ -110,12 +94,7 @@ namespace DataStructures.Tests
         [Test]
         public static void PushPop_NonEmptyHeap_ReturnsCorrectAnswer()
         {
-            var heap = new BinaryHeap<int>();
-            var elems = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            foreach (int i in elems)
-            {
-                heap.Push(i);
-            }
+            var heap = BuildTestHeap();
 
             Assert.AreEqual(20, heap.PushPop(20));
             Assert.AreEqual(10, heap.PushPop(-10));
@@ -124,12 +103,7 @@ namespace DataStructures.Tests
         [Test]
         public static void Contains_NonEmptyHeap_ReturnsCorrectAnswer()
         {
-            var heap = new BinaryHeap<int>();
-            var elems = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            foreach (int i in elems)
-            {
-                heap.Push(i);
-            }
+            var heap = BuildTestHeap();
 
             Assert.IsTrue(heap.Contains(1));
             Assert.IsTrue(heap.Contains(5));
@@ -151,12 +125,7 @@ namespace DataStructures.Tests
         [Test]
         public static void Remove_NonEmptyHeap_HeapStillValid()
         {
-            var heap = new BinaryHeap<int>();
-            var elems = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            foreach (int i in elems)
-            {
-                heap.Push(i);
-            }
+            var heap = BuildTestHeap();
 
             heap.Remove(2);
             Assert.IsFalse(heap.Contains(2));

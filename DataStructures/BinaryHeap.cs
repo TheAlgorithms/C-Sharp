@@ -8,7 +8,7 @@ namespace DataStructures
     /// </summary>
     /// <remarks>
     /// A binary heap is a complete binary tree that satisfies the heap property;
-    /// that is every node in the tree compares greater/less than its left and right
+    /// that is every node in the tree compares greater/less than or equal to its left and right
     /// child nodes. Note that this is different from a binary search tree, where every node
     /// must be the largest/smallest node of all of its children.
     /// Although binary heaps are not very efficient, they are (probably) the simpliest heaps
@@ -63,11 +63,6 @@ namespace DataStructures
         /// <exception cref="ArgumentException">Thrown if element is already in heap.</exception>
         public void Push(T element)
         {
-            if (data.Contains(element))
-            {
-                throw new ArgumentException($"{element} already in heap!");
-            }
-
             data.Add(element);
             HeapifyUp(data.Count - 1);
         }
@@ -75,6 +70,11 @@ namespace DataStructures
         /// <summary>
         /// Remove the top/root of the binary heap (ie: the largest/smallest element).
         /// </summary>
+        /// <remarks>
+        /// Removing from the heap is done by swapping the top/root with the last element in
+        /// the backing list, removing the last element, and pushing the new root down
+        /// until the heap property is restored.
+        /// </remarks>
         /// <returns>The top/root of the heap.</returns>
         /// <exception cref="InvalidOperationException">Thrown if heap is empty.</exception>
         public T Pop()
@@ -93,13 +93,8 @@ namespace DataStructures
         }
 
         /// <summary>
-        /// Return the top/root of the heap without remove it.
+        /// Return the top/root of the heap without removing it.
         /// </summary>
-        /// <remarks>
-        /// Removing from the heap is done by swapping the top/root with the last element in
-        /// the backing list, removing the last element, and pushing the new root down
-        /// until the heap property is restored.
-        /// </remarks>
         /// <returns>The top/root of the heap.</returns>
         /// <exception cref="InvalidOperationException">Thrown if heap is empty.</exception>
         public T Peek()
@@ -151,7 +146,7 @@ namespace DataStructures
         /// <remarks>
         /// In removing an element from anywhere in the heap, we only need to push down or up
         /// the replacement value depending on how the removed value compares to its
-        /// replacment value.
+        /// replacement value.
         /// </remarks>
         /// <param name="element">The element to remove from the heap.</param>
         /// <exception cref="ArgumentException">Thrown if element is not in heap.</exception>
@@ -163,22 +158,20 @@ namespace DataStructures
             {
                 throw new ArgumentException($"{element} not in heap!");
             }
-            else
-            {
-                Swap(idx, data.Count - 1);
-                T tmp = data[data.Count - 1];
-                data.RemoveAt(data.Count - 1);
 
-                if (idx < data.Count)
+            Swap(idx, data.Count - 1);
+            T tmp = data[data.Count - 1];
+            data.RemoveAt(data.Count - 1);
+
+            if (idx < data.Count)
+            {
+                if (comparer.Compare(tmp, data[idx]) > 0)
                 {
-                    if (comparer.Compare(tmp, data[idx]) > 0)
-                    {
-                        HeapifyDown(idx);
-                    }
-                    else
-                    {
-                        HeapifyUp(idx);
-                    }
+                    HeapifyDown(idx);
+                }
+                else
+                {
+                    HeapifyUp(idx);
                 }
             }
         }
