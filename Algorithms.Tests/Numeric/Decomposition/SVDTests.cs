@@ -1,6 +1,7 @@
 using Algorithms.Numeric.Decomposition;
 using NUnit.Framework;
 using System;
+using Utilities.Extensions;
 using M = Utilities.Extensions.MatrixExtensions;
 using V = Utilities.Extensions.VectorExtensions;
 
@@ -127,10 +128,8 @@ namespace Algorithms.Tests.Numeric.Decomposition
 
 
             // matrix = U * S * V^t, definition of Singular Vector Decomposition
-            AssertMatrixEqual(testMatrix,
-                M.MultiplyGeneral(M.MultiplyGeneral(u, expanded), M.Transpose(v)), epsilon);
-            AssertMatrixEqual(testMatrix,
-                M.MultiplyGeneral(u, M.MultiplyGeneral(expanded, M.Transpose(v))), epsilon);
+            AssertMatrixEqual(testMatrix, u.Multiply(expanded).Multiply(M.Transpose(v)), epsilon);
+            AssertMatrixEqual(testMatrix, u.Multiply(expanded.Multiply(M.Transpose(v))), epsilon);
         }
     }
 }

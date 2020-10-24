@@ -89,40 +89,11 @@ namespace Utilities.Extensions
                 vectorReshaped[i, 0] = vector[i];
             }
 
-            var resultMatrix = MultiplyGeneral(matrix, vectorReshaped);
+            var resultMatrix = matrix.Multiply(vectorReshaped);
             var result = new double[resultMatrix.GetLength(0)];
             for (var i = 0; i < result.Length; i++)
             {
                 result[i] = resultMatrix[i, 0];
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Performs matrix multiplication.
-        /// </summary>
-        /// <param name="lhs">The LHS matrix.</param>
-        /// <param name="rhs">The RHS matrix.</param>
-        /// <returns>The product of the two matrices.</returns>
-        /// <exception cref="ArgumentException">Dimensions of matrices do not match.</exception>
-        public static double[,] MultiplyGeneral(double[,] lhs, double[,] rhs)
-        {
-            if (lhs.GetLength(1) != rhs.GetLength(0))
-            {
-                throw new ArgumentException("Number of columns in LHS must be same as number of rows in RHS");
-            }
-
-            var result = new double[lhs.GetLength(0), rhs.GetLength(1)];
-            for (var i = 0; i < lhs.GetLength(0); i++)
-            {
-                for (var j = 0; j < rhs.GetLength(1); j++)
-                {
-                    for (var k = 0; k < lhs.GetLength(1); k++)
-                    {
-                        result[i, j] += lhs[i, k] * rhs[k, j];
-                    }
-                }
             }
 
             return result;

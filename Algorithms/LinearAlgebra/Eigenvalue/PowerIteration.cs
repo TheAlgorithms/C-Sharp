@@ -20,7 +20,6 @@ namespace Algorithms.LinearAlgebra.Eigenvalue
         /// </item>
         /// <item>
         /// <description>The <paramref name="source"/> matrix must be square-shaped.</description>
-
         /// </item>
         /// </list>
         /// <param name="source">Source square-shaped matrix.</param>

@@ -1,4 +1,5 @@
 using System;
+using Utilities.Extensions;
 using M = Utilities.Extensions.MatrixExtensions;
 using V = Utilities.Extensions.VectorExtensions;
 
@@ -53,7 +54,7 @@ namespace Algorithms.Numeric.Decomposition
             double mag;
             double[] lastIteration;
             double[] currIteration = RandomUnitVector(n);
-            double[,] b = M.MultiplyGeneral(M.Transpose(matrix), matrix);
+            double[,] b = M.Transpose(matrix).Multiply(matrix);
             do
             {
                 lastIteration = V.Copy(currIteration);
