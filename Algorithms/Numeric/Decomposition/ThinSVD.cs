@@ -97,7 +97,7 @@ namespace Algorithms.Numeric.Decomposition
             double[,] vs = new double[n, numValues];
 
             // keep track of progress
-            double[,] remaining = M.Copy(matrix);
+            double[,] remaining = matrix.Copy();
 
             // for each singular value
             for (int i = 0; i < numValues; i++)

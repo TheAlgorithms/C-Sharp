@@ -43,7 +43,7 @@ namespace Utilities.Extensions
         /// </summary>
         /// <param name="matrix">The matrix.</param>
         /// <returns>A copy of the matrix.</returns>
-        public static double[,] Copy(double[,] matrix)
+        public static double[,] Copy(this double[,] matrix)
         {
             var result = new double[matrix.GetLength(0), matrix.GetLength(1)];
             for (var i = 0; i < matrix.GetLength(0); i++)
@@ -62,7 +62,7 @@ namespace Utilities.Extensions
         /// </summary>
         /// <param name="matrix">The matrix.</param>
         /// <returns>The transposed matrix.</returns>
-        public static double[,] Transpose(double[,] matrix)
+        public static double[,] Transpose(this double[,] matrix)
         {
             var result = new double[matrix.GetLength(1), matrix.GetLength(0)];
             for (var i = 0; i < matrix.GetLength(0); i++)
@@ -83,7 +83,7 @@ namespace Utilities.Extensions
         /// <param name="vector">The vector.</param>
         /// <returns>The product of the matrix and the vector, which is a vector.</returns>
         /// <exception cref="ArgumentException">Dimensions of matrix and vector do not match.</exception>
-        public static double[] MultiplyVector(double[,] matrix, double[] vector)
+        public static double[] MultiplyVector(this double[,] matrix, double[] vector)
         {
             var vectorReshaped = new double[vector.Length, 1];
             for (var i = 0; i < vector.Length; i++)
@@ -108,7 +108,7 @@ namespace Utilities.Extensions
         /// <param name="rhs">The RHS matrix.</param>
         /// <returns>The difference of the two matrices.</returns>
         /// <exception cref="ArgumentException">Dimensions of matrices do not match.</exception>
-        public static double[,] Subtract(double[,] lhs, double[,] rhs)
+        public static double[,] Subtract(this double[,] lhs, double[,] rhs)
         {
             if (lhs.GetLength(0) != rhs.GetLength(0) ||
                 lhs.GetLength(1) != rhs.GetLength(1))
