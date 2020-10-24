@@ -6,7 +6,7 @@ namespace Algorithms.Sorters.Comparison
     /// Sorts arrays using quicksort.
     /// </summary>
     /// <typeparam name="T">Type of array element.</typeparam>
-    public class QuickSorter<T> : IComparisonSorter<T>
+    public abstract class QuickSorter<T> : IComparisonSorter<T>
     {
         /// <summary>
         /// Sorts array using Hoare partition scheme,
@@ -19,6 +19,8 @@ namespace Algorithms.Sorters.Comparison
         /// <param name="array">Array to sort.</param>
         /// <param name="comparer">Compares elements.</param>
         public void Sort(T[] array, IComparer<T> comparer) => Sort(array, comparer, 0, array.Length - 1);
+
+        protected abstract T SelectPivot(T[] array, IComparer<T> comparer, int left, int right);
 
         private void Sort(T[] array, IComparer<T> comparer, int left, int right)
         {
@@ -34,7 +36,7 @@ namespace Algorithms.Sorters.Comparison
 
         private int Partition(T[] array, IComparer<T> comparer, int left, int right)
         {
-            var pivot = array[left + (right - left) / 2];
+            var pivot = SelectPivot(array, comparer, left, right);
             var nleft = left;
             var nright = right;
             while (true)
