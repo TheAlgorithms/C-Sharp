@@ -1,0 +1,48 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        },
+        {
+            "name": ".NET Core Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "WARNING01": "*********************************************************************************",
+            "WARNING02": "The C# extension was unable to automatically decode projects in the current",
+            "WARNING03": "workspace to create a runnable launch.json file. A template launch.json file has",
+            "WARNING04": "been created as a placeholder.",
+            "WARNING05": "",
+            "WARNING06": "If OmniSharp is currently unable to load your project, you can attempt to resolve",
+            "WARNING07": "this by restoring any missing project dependencies (example: run 'dotnet restore')",
+            "WARNING08": "and by fixing any reported errors from building the projects in your workspace.",
+            "WARNING09": "If this allows OmniSharp to now load your project then --",
+            "WARNING10": "  * Delete this file",
+            "WARNING11": "  * Open the Visual Studio Code command palette (View->Command Palette)",
+            "WARNING12": "  * run the command: '.NET: Generate Assets for Build and Debug'.",
+            "WARNING13": "",
+            "WARNING14": "If your project requires a more complex launch configuration, you may wish to delete",
+            "WARNING15": "this configuration and pick a different template using the 'Add Configuration...'",
+            "WARNING16": "button at the bottom of this file.",
+            "WARNING17": "*********************************************************************************",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/bin/Debug/<insert-target-framework-here>/<insert-project-name-here>.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        }
+    ]
+}

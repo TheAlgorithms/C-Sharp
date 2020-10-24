@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace Algorithms.Searches
 {
     /// <summary>
-    /// TODO.
+    /// Class that implements jump search algorithm.
     /// </summary>
-    /// <typeparam name="T">TODO. 2.</typeparam>
+    /// <typeparam name="T">Type of array element.</typeparam>
     public class JumpSearcher<T> where T : IComparable<T>
     {
         /// <summary>
@@ -20,9 +20,9 @@ namespace Algorithms.Searches
         /// <returns>Index of item that equals to item searched for or -1 if none found.</returns>
         public int FindIndex(T[] sortedData, T item)
         {
-            var n = sortedData.Length;
-            var step = Math.Sqrt(n);
-            var prev = 0;
+            int n = sortedData.Length;
+            int step = Math.Sqrt(n);
+            int prev = 0;
 
             while (item.CompareTo(sortedData[Math.Min(step, n)-1]) > 0) 
             { 
