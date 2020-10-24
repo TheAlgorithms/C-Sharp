@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Algorithms.Problems.Fibonacci
 {
-    public class FibonacciMemo
+    public static class FibonacciMemo
     {
         /// <summary>
         /// The Fibonacci sequence is a sequence of numbers where
