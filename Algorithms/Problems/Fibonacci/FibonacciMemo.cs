@@ -9,8 +9,12 @@ namespace Algorithms.Problems.Fibonacci
     public class FibonacciMemo
     {
         /// <summary>
+        /// The Fibonacci sequence is a sequence of numbers where
+        /// a number is the addition of the last two numbers.
+        ///
         /// This is the memoized solution to the Fibonacci problem.
         /// This solution runs in O(N) time.
+        ///
         /// </summary>
         /// <param name="n">The nth Fibonacci number to find.</param>
         /// <returns>The nth Fibonacci number.</returns>

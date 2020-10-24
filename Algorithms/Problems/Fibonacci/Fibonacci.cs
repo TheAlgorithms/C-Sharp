@@ -8,12 +8,13 @@ namespace Algorithms.Problems.Fibonacci
     public class Fibonacci
     {
         /// <summary>
-        /// The Fibonacci sequence is defined as a N = (N -1) + (N - 2).
+        /// The Fibonacci sequence is a sequence of numbers where
+        /// a number is the addition of the last two numbers.
         /// Given a number n, this function returns that corresponding
-        /// Fibonacci number in 2 ^ n time.
+        /// Fibonacci number in O(2^n) time.
         ///
-        /// For example, if n = 5 this function will return the 4th
-        /// Fibonacci number which woud be 3 (0, 1, 1, 2, 3).
+        /// For example, if n = 6 this function will return the 5th
+        /// Fibonacci number which woud be 8 (0, 1, 1, 2, 3, 5, 8).
         ///
         /// </summary>
         /// <param name="n">The nth Fibonacci number to find.</param>
