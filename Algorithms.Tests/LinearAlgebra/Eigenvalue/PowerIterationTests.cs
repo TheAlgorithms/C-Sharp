@@ -39,7 +39,7 @@ namespace Algorithms.Tests.LinearAlgebra.Eigenvalue
                 .WithMessage("The length of the start vector doesn't equal the size of the source matrix.");
         }
 
-        [Test, TestCaseSource(nameof(_dominantVectorTestCases))]
+        [Test, TestCaseSource(nameof(DominantVectorTestCases))]
         public void Dominant_ShouldCalculateDominantEigenvalueAndEigenvector(
             double eigenvalue, double[] eigenvector, double[,] source)
         {
@@ -51,7 +51,7 @@ namespace Algorithms.Tests.LinearAlgebra.Eigenvalue
             Magnitude(actualEigVec).Should().BeApproximately(Magnitude(eigenvector), epsilon);
         }
 
-        static object[] _dominantVectorTestCases =
+        static readonly object[] DominantVectorTestCases =
         {
             new object[]
             {

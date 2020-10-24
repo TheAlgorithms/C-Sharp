@@ -4,13 +4,15 @@ namespace Utilities.Extensions
 {
     public static class MatrixExtensions
     {
+        /// <summary>
+        /// Performs immutable dot product multiplication on source matrix to operand.
+        /// </summary>
+        /// <param name="source">Source left matrix.</param>
+        /// <param name="operand">Operand right matrix.</param>
+        /// <returns>Dot product result.</returns>
+        /// <exception cref="InvalidOperationException">The width of a first operand should match the height of a second.</exception>
         public static double[,] Multiply(this double[,] source, double[,] operand)
         {
-            if ((source.Rank != 2) || (operand.Rank != 2))
-            {
-                throw new ArgumentException("Rank of both operands should be equal 2!");
-            }
-
             if (source.GetLength(1) != operand.GetLength(0))
             {
                 throw new InvalidOperationException("The width of a first operand should match the height of a second.");
