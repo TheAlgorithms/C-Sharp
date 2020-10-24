@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Algorithms.Problems.Fibonacci
 {
-    public static class Fibonacci
+    public class Fibonacci
     {
         /// <summary>
         /// The Fibonacci sequence is defined as a N = (N -1) + (N - 2).
@@ -20,6 +20,11 @@ namespace Algorithms.Problems.Fibonacci
         /// <returns>The nth Fibonacci number.</returns>
         public static BigInteger FibonacciNumberFinder(int n)
         {
+            if (n < 0)
+            {
+                throw new ArgumentException("n must be greater than 0.");
+            }
+
             if (n <= 1)
             {
                 return n;
