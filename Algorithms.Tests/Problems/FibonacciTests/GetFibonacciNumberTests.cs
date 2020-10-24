@@ -9,13 +9,13 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Problems.FibonacciTests
 {
-    public static class FibonacciNumberFinderTests
+    public static class GetFibonacciNumberTests
     {
 
         [TestCase(-1)]
         public static void NegativeNumberTest(int n)
         {
-            Assert.That(() => Fibonacci.FibonacciNumberFinder(n), Throws.TypeOf<ArgumentException>());
+            Assert.That(() => Fibonacci.GetFibonacciNumber(n), Throws.TypeOf<ArgumentException>());
         }
 
 
@@ -29,7 +29,7 @@ namespace Algorithms.Tests.Problems.FibonacciTests
         [TestCase(15, 610)]
         public static void NumberTests(int n, int expectedResult)
         {
-            Assert.AreEqual((BigInteger)expectedResult, Fibonacci.FibonacciNumberFinder(n));
+            Assert.AreEqual((BigInteger)expectedResult, Fibonacci.GetFibonacciNumber(n));
         }
     }
 }

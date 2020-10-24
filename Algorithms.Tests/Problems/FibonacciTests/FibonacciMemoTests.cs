@@ -14,7 +14,7 @@ namespace Algorithms.Tests.Problems.FibonacciTests
         [TestCase(-1)]
         public static void NegativeNumberTest(int n)
         {
-            Assert.That(() => FibonacciMemo.FibonacciNumberFinderMemo(n), Throws.TypeOf<ArgumentException>());
+            Assert.That(() => FibonacciMemo.GetFibonacciNumberMemo(n), Throws.TypeOf<ArgumentException>());
         }
 
 
@@ -28,7 +28,7 @@ namespace Algorithms.Tests.Problems.FibonacciTests
         [TestCase(15, 610)]
         public static void NumberTests(int n, int expectedResult)
         {
-            Assert.AreEqual((BigInteger)expectedResult, FibonacciMemo.FibonacciNumberFinderMemo(n));
+            Assert.AreEqual((BigInteger)expectedResult, FibonacciMemo.GetFibonacciNumberMemo(n));
         }
     }
 }

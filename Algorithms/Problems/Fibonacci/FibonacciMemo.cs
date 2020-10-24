@@ -14,7 +14,7 @@ namespace Algorithms.Problems.Fibonacci
         /// </summary>
         /// <param name="n">The nth Fibonacci number to find.</param>
         /// <returns>The nth Fibonacci number.</returns>
-        public static BigInteger FibonacciNumberFinderMemo(int n)
+        public static BigInteger GetFibonacciNumberMemo(int n)
         {
             if (n < 0)
             {

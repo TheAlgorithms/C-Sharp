@@ -18,7 +18,7 @@ namespace Algorithms.Problems.Fibonacci
         /// </summary>
         /// <param name="n">The nth Fibonacci number to find.</param>
         /// <returns>The nth Fibonacci number.</returns>
-        public static BigInteger FibonacciNumberFinder(int n)
+        public static BigInteger GetFibonacciNumber(int n)
         {
             if (n < 0)
             {
@@ -30,7 +30,7 @@ namespace Algorithms.Problems.Fibonacci
                 return n;
             }
 
-            return FibonacciNumberFinder(n - 1) + FibonacciNumberFinder(n - 2);
+            return GetFibonacciNumber(n - 1) + GetFibonacciNumber(n - 2);
         }
     }
 }
