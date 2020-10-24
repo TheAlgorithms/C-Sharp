@@ -96,6 +96,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 	* [List-based Queue](./DataStructures/ListBasedQueue.cs)
 	* [Stack-based Queue](./DataStructures/StackBasedQueue.cs)
 	* [Binary Search Tree](./DataStructures/BinarySearchTree)
+	* [Binary Heap](./DataStructures/BinaryHeap.cs)
 ---
 
 ## Contribution
