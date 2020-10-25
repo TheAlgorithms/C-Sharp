@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Algorithms.Other
 {
-    public class GeoLocation
+    public static class GeoLocation
     {
-        private static readonly double EarthRadius = 6371.01d;
+        private const double EarthRadius = 6371.01d;
 
         /// <summary>
         /// Calculate distance from 2 point of latitude, longitude from https://www.movable-type.co.uk/scripts/latlong.html.
@@ -22,7 +22,7 @@ namespace Algorithms.Other
 
             try
             {
-                if (lat1 == lat2 && lng1 == lng2)
+                if (Math.Abs(lat1 - lat2) == 0d && Math.Abs(lng1 - lng2) == 0)
                 {
                     return result;
                 }
