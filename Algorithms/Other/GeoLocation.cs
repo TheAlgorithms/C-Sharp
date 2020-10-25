@@ -18,15 +18,8 @@ namespace Algorithms.Other
         /// <returns>Distance between point A to point B.</returns>
         public static decimal CalculateDistanceFromLatLng(double lat1, double lng1, double lat2, double lng2)
         {
-            var result = 0m;
-
             try
             {
-                if (Math.Abs(lat1 - lat2) == 0d && Math.Abs(lng1 - lng2) == 0)
-                {
-                    return result;
-                }
-
                 var pi180 = Math.PI / 180d;
                 var newLat1 = lat1 * pi180;
                 var newLng1 = lng1 * pi180;
