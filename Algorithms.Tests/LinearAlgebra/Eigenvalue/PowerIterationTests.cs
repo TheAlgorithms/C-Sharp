@@ -3,7 +3,6 @@ using Algorithms.LinearAlgebra.Eigenvalue;
 using FluentAssertions;
 using Utilities.Extensions;
 using NUnit.Framework;
-using static Utilities.Extensions.VectorExtensions;
 
 namespace Algorithms.Tests.LinearAlgebra.Eigenvalue
 {
@@ -48,7 +47,7 @@ namespace Algorithms.Tests.LinearAlgebra.Eigenvalue
             
             // Assert
             actualEigVal.Should().BeApproximately(eigenvalue, epsilon);
-            Magnitude(actualEigVec).Should().BeApproximately(Magnitude(eigenvector), epsilon);
+            actualEigVec.Magnitude().Should().BeApproximately(eigenvector.Magnitude(), epsilon);
         }
 
         static readonly object[] DominantVectorTestCases =

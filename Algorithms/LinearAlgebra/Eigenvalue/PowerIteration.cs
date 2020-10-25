@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using Utilities.Extensions;
-using static Utilities.Extensions.VectorExtensions;
 
 namespace Algorithms.LinearAlgebra.Eigenvalue
 {
@@ -51,12 +50,12 @@ namespace Algorithms.LinearAlgebra.Eigenvalue
                     previousEigenVector.ToColumnVector())
                 .ToRowVector();
 
-                eigenNorm = Magnitude(currentEigenVector);
+                eigenNorm = currentEigenVector.Magnitude();
                 currentEigenVector = currentEigenVector.Select(x => x / eigenNorm).ToArray();
             }
-            while (Math.Abs(Dot(currentEigenVector, previousEigenVector)) < 1.0 - error);
+            while (Math.Abs(currentEigenVector.Dot(previousEigenVector)) < 1.0 - error);
 
-            var eigenvalue = Magnitude(source.Multiply(currentEigenVector.ToColumnVector()).ToRowVector());
+            var eigenvalue = source.Multiply(currentEigenVector.ToColumnVector()).ToRowVector().Magnitude();
 
             return (eigenvalue: eigenvalue, eigenvector: currentEigenVector);
         }

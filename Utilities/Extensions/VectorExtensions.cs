@@ -5,22 +5,11 @@ namespace Utilities.Extensions
     public static class VectorExtensions
     {
         /// <summary>
-        /// Makes a vector of zeroes.
-        /// </summary>
-        /// <param name="dimensions">The number of dimensions of the vector.</param>
-        /// <returns>The vector.</returns>
-        public static double[] Zero(int dimensions)
-        {
-            var result = new double[dimensions];
-            return result;
-        }
-
-        /// <summary>
         /// Makes a copy of a vector. Changes to the copy should not affect the original.
         /// </summary>
         /// <param name="vector">The vector.</param>
         /// <returns>The copy.</returns>
-        public static double[] Copy(double[] vector)
+        public static double[] Copy(this double[] vector)
         {
             var result = new double[vector.Length];
             for (var i = 0; i < vector.Length; i++)
@@ -37,7 +26,7 @@ namespace Utilities.Extensions
         /// <param name="lhs">The LHS vector.</param>
         /// <param name="rhs">The RHS vector.</param>
         /// <returns>The outer product of the two vector.</returns>
-        public static double[,] OuterProduct(double[] lhs, double[] rhs)
+        public static double[,] OuterProduct(this double[] lhs, double[] rhs)
         {
             var result = new double[lhs.Length, rhs.Length];
             for (var i = 0; i < lhs.Length; i++)
@@ -58,7 +47,7 @@ namespace Utilities.Extensions
         /// <param name="rhs">The RHS vector.</param>
         /// <returns>The dot product of the two vector.</returns>
         /// <exception cref="ArgumentException">Dimensions of vectors do not match.</exception>
-        public static double Dot(double[] lhs, double[] rhs)
+        public static double Dot(this double[] lhs, double[] rhs)
         {
             if (lhs.Length != rhs.Length)
             {
@@ -79,7 +68,7 @@ namespace Utilities.Extensions
         /// </summary>
         /// <param name="vector">The vector.</param>
         /// <returns>The magnitude.</returns>
-        public static double Magnitude(double[] vector)
+        public static double Magnitude(this double[] vector)
         {
             var magnitude = Dot(vector, vector);
             magnitude = Math.Sqrt(magnitude);
@@ -92,7 +81,7 @@ namespace Utilities.Extensions
         /// <param name="vector">The vector.</param>
         /// <param name="factor">Scale factor.</param>
         /// <returns>The unit vector.</returns>
-        public static double[] Scale(double[] vector, double factor)
+        public static double[] Scale(this double[] vector, double factor)
         {
             var result = new double[vector.Length];
             for (var i = 0; i < vector.Length; i++)
