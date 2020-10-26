@@ -1,4 +1,5 @@
 using System;
+using Utilities.Extensions;
 using M = Utilities.Extensions.MatrixExtensions;
 using V = Utilities.Extensions.VectorExtensions;
 
@@ -19,13 +20,13 @@ namespace Algorithms.Numeric.Decomposition
         {
             Random random = new Random();
             double[] result = new double[dimensions];
-            for (int i = 0; i < dimensions; i++)
+            for (var i = 0; i < dimensions; i++)
             {
                 result[i] = 2 * random.NextDouble() - 1;
             }
 
-            double magnitude = V.Magnitude(result);
-            result = V.Scale(result, 1 / magnitude);
+            var magnitude = result.Magnitude();
+            result = result.Scale(1 / magnitude);
             return result;
         }
 
@@ -34,10 +35,8 @@ namespace Algorithms.Numeric.Decomposition
         /// </summary>
         /// <param name="matrix">The matrix.</param>
         /// <returns>A singular vector, with dimension equal to number of columns of the matrix.</returns>
-        public static double[] Decompose1D(double[,] matrix)
-        {
-            return Decompose1D(matrix, 1E-5, 100);
-        }
+        public static double[] Decompose1D(double[,] matrix) =>
+            Decompose1D(matrix, 1E-5, 100);
 
         /// <summary>
         /// Computes a single singular vector for the given matrix, corresponding to the largest singular value.
@@ -53,29 +52,27 @@ namespace Algorithms.Numeric.Decomposition
             double mag;
             double[] lastIteration;
             double[] currIteration = RandomUnitVector(n);
-            double[,] b = M.MultiplyGeneral(M.Transpose(matrix), matrix);
+            double[,] b = matrix.Transpose().Multiply(matrix);
             do
             {
-                lastIteration = V.Copy(currIteration);
-                currIteration = M.MultiplyVector(b, lastIteration);
-                currIteration = V.Scale(currIteration, 100);
-                mag = V.Magnitude(currIteration);
+                lastIteration = currIteration.Copy();
+                currIteration = b.MultiplyVector(lastIteration);
+                currIteration = currIteration.Scale(100);
+                mag = currIteration.Magnitude();
                 if (mag > epsilon)
                 {
-                    currIteration = V.Scale(currIteration, 1 / mag);
+                    currIteration = currIteration.Scale(1 / mag);
                 }
 
                 iterations++;
             }
-            while (V.Dot(lastIteration, currIteration) < 1 - epsilon && iterations < max_iterations);
+            while (lastIteration.Dot(currIteration) < 1 - epsilon && iterations < max_iterations);
 
             return currIteration;
         }
 
-        public static (double[,] U, double[] S, double[,] V) Decompose(double[,] matrix)
-        {
-            return Decompose(matrix, 1E-5, 100);
-        }
+        public static (double[,] U, double[] S, double[,] V) Decompose(double[,] matrix) =>
+            Decompose(matrix, 1E-5, 100);
 
         /// <summary>
         /// Computes the SVD for the given matrix, with singular values arranged from greatest to least.
@@ -96,30 +93,30 @@ namespace Algorithms.Numeric.Decomposition
             double[,] vs = new double[n, numValues];
 
             // keep track of progress
-            double[,] remaining = M.Copy(matrix);
+            double[,] remaining = matrix.Copy();
 
             // for each singular value
             for (int i = 0; i < numValues; i++)
             {
                 // compute the v singular vector
                 double[] v = Decompose1D(remaining, epsilon, max_iterations);
-                double[] u = M.MultiplyVector(matrix, v);
+                double[] u = matrix.MultiplyVector(v);
 
                 // compute the contribution of this pair of singular vectors
-                double[,] contrib = V.OuterProduct(u, v);
+                double[,] contrib = u.OuterProduct(v);
 
                 // extract the singular value
-                double s = V.Magnitude(u);
+                var s = u.Magnitude();
 
                 // v and u should be unit vectors
                 if (s < epsilon)
                 {
-                    u = V.Zero(m);
-                    v = V.Zero(n);
+                    u = new double[m];
+                    v = new double[n];
                 }
                 else
                 {
-                    u = V.Scale(u, 1 / s);
+                    u = u.Scale(1 / s);
                 }
 
                 // save u, v and s into the result
@@ -136,7 +133,7 @@ namespace Algorithms.Numeric.Decomposition
                 sigmas[i] = s;
 
                 // remove the contribution of this pair and compute the rest
-                remaining = M.Subtract(remaining, contrib);
+                remaining = remaining.Subtract(contrib);
             }
 
             return (U: us, S: sigmas, V: vs);
