@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Algorithms.Other
 {
     /// <summary>
@@ -13,23 +15,23 @@ namespace Algorithms.Other
         public static string Int2Bin(ushort input)
         {
             ushort msb = ushort.MaxValue / 2 + 1;
-            var output = string.Empty;
+            var output = new StringBuilder();
             for (var i = 0; i < 16; i++)
             {
                 if (input >= msb)
                 {
-                    output += "1";
+                    output.Append("1");
                     input -= msb;
                     msb /= 2;
                 }
                 else
                 {
-                    output += "0";
+                    output.Append("0");
                     msb /= 2;
                 }
             }
 
-            return output;
+            return output.ToString();
         }
 
         /// <summary>
@@ -40,23 +42,23 @@ namespace Algorithms.Other
         public static string Int2Bin(uint input)
         {
             var msb = uint.MaxValue / 2 + 1;
-            var output = string.Empty;
+            var output = new StringBuilder();
             for (var i = 0; i < 32; i++)
             {
                 if (input >= msb)
                 {
-                    output += "1";
+                    output.Append("1");
                     input -= msb;
                     msb /= 2;
                 }
                 else
                 {
-                    output += "0";
+                    output.Append("0");
                     msb /= 2;
                 }
             }
 
-            return output;
+            return output.ToString();
         }
 
         /// <summary>
@@ -67,23 +69,23 @@ namespace Algorithms.Other
         public static string Int2Bin(ulong input)
         {
             var msb = ulong.MaxValue / 2 + 1;
-            var output = string.Empty;
+            var output = new StringBuilder();
             for (var i = 0; i < 64; i++)
             {
                 if (input >= msb)
                 {
-                    output += "1";
+                    output.Append("1");
                     input -= msb;
                     msb /= 2;
                 }
                 else
                 {
-                    output += "0";
+                    output.Append("0");
                     msb /= 2;
                 }
             }
 
-            return output;
+            return output.ToString();
         }
     }
 }
