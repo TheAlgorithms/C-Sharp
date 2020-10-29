@@ -1,35 +1,24 @@
 ﻿using System.Collections.Generic;
-using Utilities.Exceptions;
 
 namespace Algorithms.Strings
 {
-    /// <summary>
-    /// An implementation of Knuth–Morris–Pratt Algorithm.
-    /// Worst case time complexity: O(n).
-    /// </summary>
     public class KnuthMorrisPrattSearcher
     {
         /// <summary>
-        /// Return zero-based index of all occurrences of the string in this instance.
-        /// throws ItemNotFoundException if the item couldn't be found.
+        /// An implementation of Knuth–Morris–Pratt Algorithm.
+        /// Worst case time complexity: O(n + k)
+        /// where n - text length, k - pattern length.
         /// </summary>
-        /// <param name="str">The string instance.</param>
-        /// <param name="pat">The pattern to seek.</param>
+        /// <param name="str">The string to look in.</param>
+        /// <param name="pat">The pattern to look for.</param>
         /// <returns>
-        /// The zero-based index positions of value if one or more <paramref name="pat"/> are found.
-        /// If <paramref name="pat"/> is empty, no indexes will be enumerated.
+        /// The zero-based positions of all occurrences of <paramref name="pat"/> in <paramref name="str"/>.
         /// </returns>
-        /// <exception cref="ItemNotFoundException"><paramref name="str"/> or <paramref name="pat"/> is null.</exception>
-        public List<int> FindIndexes(string str, string pat)
+        public IEnumerable<int> FindIndexes(string str, string pat)
         {
-            List<int> retVal = new List<int>();
-            int m = pat.Length;
-            int n = str.Length;
-            int i = 0;
-            int j = 0;
-            int[] lps = LongestPrefixSuffixValues(pat);
+            var lps = FindLongestPrefixSuffixValues(pat);
 
-            while (i < n)
+            for (int i = 0, j = 0; i < str.Length;)
             {
                 if (pat[j] == str[i])
                 {
@@ -37,33 +26,25 @@ namespace Algorithms.Strings
                     i++;
                 }
 
-                if (j == m)
+                if (j == pat.Length)
                 {
-                    retVal.Add(i - j);
+                    yield return i - j;
                     j = lps[j - 1];
+                    continue;
                 }
-                else
+
+                if (i < str.Length && pat[j] != str[i])
                 {
-                    if (i < n && pat[j] != str[i])
+                    if (j != 0)
                     {
-                        if (j != 0)
-                        {
-                            j = lps[j - 1];
-                        }
-                        else
-                        {
-                            i = i + 1;
-                        }
+                        j = lps[j - 1];
+                    }
+                    else
+                    {
+                        i += 1;
                     }
                 }
             }
-
-            if (retVal.Count == 0)
-            {
-                throw new ItemNotFoundException();
-            }
-
-            return retVal;
         }
 
         /// <summary>
@@ -71,36 +52,27 @@ namespace Algorithms.Strings
         /// </summary>
         /// <param name="pat">pattern to seek.</param>
         /// <returns>The longest prefix suffix values for <paramref name="pat"/>.</returns>
-        public int[] LongestPrefixSuffixValues(string pat)
+        public int[] FindLongestPrefixSuffixValues(string pat)
         {
-            int n = pat.Length;
-
-            int[] lps = new int[n];
-
-            int len = 0;
-
-            lps[0] = 0;
-            int i = 1;
-
-            while (i < n)
+            var lps = new int[pat.Length];
+            for (int i = 1, len = 0; i < pat.Length;)
             {
                 if (pat[i] == pat[len])
                 {
                     len++;
                     lps[i] = len;
                     i++;
+                    continue;
+                }
+
+                if (len != 0)
+                {
+                    len = lps[len - 1];
                 }
                 else
                 {
-                    if (len != 0)
-                    {
-                        len = lps[len - 1];
-                    }
-                    else
-                    {
-                        lps[i] = 0;
-                        i++;
-                    }
+                    lps[i] = 0;
+                    i++;
                 }
             }
 
