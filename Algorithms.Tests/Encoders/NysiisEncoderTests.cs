@@ -1,0 +1,33 @@
+using System.Collections.Generic;
+using Algorithms.Encoders;
+using NUnit.Framework;
+using System.Linq;
+
+namespace Algorithms.Tests.Encoders
+{
+    public class NysiisEncoderTests
+    {
+        [TestCaseSource(nameof(testData))]
+        public void AttemptNysiis(string source, string encoded)
+        {
+            var enc = new NysiisEncoder();
+            var nysiis = enc.Encode(source);
+            Assert.AreEqual(nysiis, encoded);
+        }
+        
+        static IEnumerable<string[]> testData => names.Zip(expected, (l, r) => new[] { l, r });
+
+        static string[] names = {
+            "Jay", "John", "Jane", "Zayne", "Guerra",
+            "Iga", "Cowan", "Louisa", "Arnie", "Olsen",
+            "Corban", "Nava", "Cynthia Malone", "Amiee MacKee",
+            "MacGyver", "Yasmin Edge"
+        };
+        static string[] expected = {
+            "JY", "JAN", "JAN", "ZAYN", "GAR",
+            "IG", "CAN", "LAS", "ARNY", "OLSAN",
+            "CARBAN", "NAV", "CYNTANALAN", "ANANACY",
+            "MCGYVAR", "YASNANADG"
+        };
+    }
+}
