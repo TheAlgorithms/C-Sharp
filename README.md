@@ -42,6 +42,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 		* [Recursive Binary](./Algorithms/Search/RecursiveBinarySearcher.cs)
 		* [Linear](./Algorithms/Search/LinearSearcher.cs)
 		* [FastSearch](./Algorithms/Search/FastSearcher.cs)
+		* [Knuth–Morris–Pratt](./Algorithms/Search/KmpSearcher.cs)
 	* [Sorts](./Algorithms/Sorters/)
 		* [Comparison](./Algorithms/Sorters/Comparison)
 			* [Binary Insertion](./Algorithms/Sorters/Comparison/BinaryInsertionSorter.cs)
