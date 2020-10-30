@@ -78,7 +78,7 @@ namespace Algorithms.Encoders
 
         private int MapToNumber(char ch)
         {
-            switch (char.ToLower(ch))
+            switch (ch)
             {
                 case 'a':
                 case 'e':
