@@ -1,8 +1,7 @@
 using System;
-using System.Text;
-using System.Linq;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
 
 namespace Algorithms.Encoders
 {
@@ -11,7 +10,7 @@ namespace Algorithms.Encoders
     /// </summary>
     public class NysiisEncoder
     {
-        private static char[] Vowels = { 'A', 'E', 'I', 'O', 'U' };
+        private static readonly char[] Vowels = { 'A', 'E', 'I', 'O', 'U' };
 
         /// <summary>
         /// Encodes a string using the NYSIIS Algorithm
@@ -21,28 +20,36 @@ namespace Algorithms.Encoders
         public string Encode(string text)
         {
             text = text.ToUpper(CultureInfo.CurrentCulture);
-            text = StartReplace(text, new (string, string)[] {
-                ("MAC", "MCC"), ("KN", "NN"), ("K", "C"),
-                ("PH", "FF"), ("PF", "FF"), ("SCH", "SSS")
-            });
-            text = EndReplace(text, new (string, string)[] {
+            text = StartReplace(
+                text,
+                new[]
+                {
+                    ("MAC", "MCC"),
+                    ("KN", "NN"),
+                    ("K", "C"),
+                    ("PH", "FF"),
+                    ("PF", "FF"),
+                    ("SCH", "SSS"),
+                });
+            text = EndReplace(text, new[] {
                 ("EE", "Yb"), ("IE", "Yb"),
                 ("DT", "Db"), ("RT", "Db"), ("NT", "Db"),
                 ("ND", "Db")
             });
 
             StringBuilder nysiis = new StringBuilder($"{text[0]}");
-            for(int i = 1; i < text.Length; i++)
+            for (var i = 1; i < text.Length; i++)
             {
-                if(Vowels.Contains(text[i]))
+                if (Vowels.Contains(text[i]))
                 {
-                    //Vowel: EV -> AF, otherwise ? -> A
+                    // Vowel: EV -> AF, otherwise ? -> A
                     text = (i < text.Length - 1 && text[i] == 'E' && text[i + 1] == 'V') ?
                         text.ReplaceAt(i , "AF", 2) :
                         text.ReplaceAt(i, "A", 1);
                 }
-                text = RepWith(text, i, new (char, char)[] {
-                    ('Q', 'G'), ('Z', 'S'), ('M', 'N')
+
+                text = RepWith(text, i, new[] {
+                    ('Q', 'G'), ('Z', 'S'), ('M', 'N'),
                 });
 
                 if(text[i] == 'K')
@@ -52,30 +59,44 @@ namespace Algorithms.Encoders
                         (i < text.Length - 1 && text[i + 1] == 'N') ? 'N' : 'C');
                 }
 
-                text = RepArr(text, i, new (string, string)[] {
+                text = RepArr(text, i, new[] {
                     ("SCH", "SSS"), ("PH", "FF")
                 });
 
                 //H[vowel] or [vowel]H -> text[i-1]
-                if(text[i] == 'H')
+                if (text[i] == 'H')
                 {
-                    if(Vowels.Contains(text[i - 1]))
+                    if (Vowels.Contains(text[i - 1]))
+                    {
                         text = text.ReplaceSingle(i, text[i - 1]);
-                    else if(i < text.Length - 1 && Vowels.Contains(text[i + 1]))
+                    }
+                    else if (i < text.Length - 1 && Vowels.Contains(text[i + 1]))
+                    {
                         text = text.ReplaceSingle(i, text[i - 1]);
-                    else {/*do nothing, codacy complained...*/}
+                    }
+                    else
+                    {
+                    }
                 }
 
-                //[vowel]W -> [vowel]
-                if(text[i] == 'W' && Vowels.Contains(text[i - 1]))
+                // [vowel]W -> [vowel]
+                if (text[i] == 'W' && Vowels.Contains(text[i - 1]))
+                {
                     text = text.ReplaceSingle(i, text[i - 1]);
+                }
 
                 if(nysiis.Last() != text[i] && text[i] != ' ' && char.IsUpper(text[i]))
+                {
                     nysiis.Append(text[i]);
+                }
             }
 
             //ends in S => remove
-            if(nysiis.Last() == 'S') nysiis.RemoveLast();
+            if(nysiis.Last() == 'S')
+            {
+                nysiis.RemoveLast();
+            }
+
             //ends in AY => replace with single Y
             if(nysiis.Last() == 'Y' && nysiis[nysiis.Length - 2] == 'A')
             {
@@ -84,28 +105,35 @@ namespace Algorithms.Encoders
             }
             //ends in A => remove
             if(nysiis.Last() == 'A')
+            {
                 nysiis.RemoveLast();
+            }
 
             return nysiis.ToString();
         }
 
         private string RepWith(string start, int index, (char, char)[] opts)
         {
-            for(int i = 0; i < opts.Length; i++)
+            for(var i = 0; i < opts.Length; i++)
             {
-                if(start[index] == opts[i].Item1) return start.ReplaceSingle(index, opts[i].Item2);
+                if(start[index] == opts[i].Item1)
+                {
+                    return start.ReplaceSingle(index, opts[i].Item2);
+                }
             }
             return start;
         }
 
         private string RepArr(string start, int index, (string, string)[] opts)
         {
-            for(int i = 0; i < opts.Length; i++)
+            for(var i = 0; i < opts.Length; i++)
             {
-                string check = opts[i].Item1;
-                string repl = opts[i].Item2;
+                var check = opts[i].Item1;
+                var repl = opts[i].Item2;
                 if(start.Length >= index + check.Length && start.Substring(index, check.Length) == check)
+                {
                     return start.ReplaceAt(index, repl, check.Length);
+                }
             }
             return start;
         }
@@ -113,10 +141,12 @@ namespace Algorithms.Encoders
         private string StartReplace(string start, (string, string)[] checks)
         {
             checks.ForEach(tup => {
-                string pref = tup.Item1;
+                var pref = tup.Item1;
                 string rep = tup.Item2;
                 if(start.StartsWith(pref))
+                {
                     start = start.ReplaceAt(0, rep, pref.Length);
+                }
             });
             return start;
         }
@@ -124,10 +154,12 @@ namespace Algorithms.Encoders
         private string EndReplace(string end, (string, string)[] checks)
         {
             checks.ForEach(tup => {
-                string suff = tup.Item1;
+                var suff = tup.Item1;
                 string rep = tup.Item2;
                 if(end.EndsWith(suff))
+                {
                     end = end.ReplaceAt(end.Length - suff.Length, rep, suff.Length);
+                }
             });
             return end;
         }
