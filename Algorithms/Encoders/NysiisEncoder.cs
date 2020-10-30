@@ -22,7 +22,7 @@ namespace Algorithms.Encoders
             text = StartReplace(text);
             text = EndReplace(text);
 
-            StringBuilder nysiis = new StringBuilder($"{text[0]}");
+            var nysiis = new StringBuilder($"{text[0]}");
             for (var i = 1; i < text.Length; i++)
             {
                 if (Vowels.Contains(text[i]))
@@ -55,16 +55,17 @@ namespace Algorithms.Encoders
                 // H[vowel] or [vowel]H -> text[i-1]
                 if (text[i] == 'H')
                 {
-                    if (Vowels.Contains(text[i - 1]))
+                    if (!Vowels.Contains(text[i - 1]))
                     {
                         text = text.ReplaceSingle(i, text[i - 1]);
                     }
-                    else if (i < text.Length - 1 && Vowels.Contains(text[i + 1]))
+                    else if (i < text.Length - 1 && !Vowels.Contains(text[i + 1]))
                     {
                         text = text.ReplaceSingle(i, text[i - 1]);
                     }
                     else
                     {
+                        // do nothing
                     }
                 }
 

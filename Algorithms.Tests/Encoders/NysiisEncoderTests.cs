@@ -7,7 +7,7 @@ namespace Algorithms.Tests.Encoders
 {
     public class NysiisEncoderTests
     {
-        [TestCaseSource(nameof(testData))]
+        [TestCaseSource(nameof(TestData))]
         public void AttemptNysiis(string source, string encoded)
         {
             var enc = new NysiisEncoder();
@@ -15,7 +15,7 @@ namespace Algorithms.Tests.Encoders
             Assert.AreEqual(nysiis, encoded);
         }
         
-        static IEnumerable<string[]> testData => names.Zip(expected, (l, r) => new[] { l, r });
+        static IEnumerable<string[]> TestData => names.Zip(expected, (l, r) => new[] { l, r });
 
         static string[] names = {
             "Jay", "John", "Jane", "Zayne", "Guerra",

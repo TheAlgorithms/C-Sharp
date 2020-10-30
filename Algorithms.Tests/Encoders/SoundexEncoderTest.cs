@@ -7,16 +7,15 @@ namespace Algorithms.Tests.Encoders
 {
     public static class SoundexEncoderTest
     {
-        [TestCaseSource(nameof(testData))]
+        [TestCaseSource(nameof(TestData))]
         public static void AttemptSoundex(string source, string encoded)
         {
-
             SoundexEncoder enc = new SoundexEncoder();
-            string nysiis = enc.Encode(source);
+            var nysiis = enc.Encode(source);
             Assert.AreEqual(nysiis, encoded);
         }
 
-        static IEnumerable<string[]> testData => names.Zip(expected, (l, r) => new[] { l, r });
+        static IEnumerable<string[]> TestData => names.Zip(expected, (l, r) => new[] { l, r });
 
         static string[] names = {
             "Robert", "Rupert", "Rubin", "Ashcraft", "Ashcroft",
