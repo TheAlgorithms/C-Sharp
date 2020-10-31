@@ -182,7 +182,7 @@ namespace Algorithms.Encoders
 
         private string Replace(string text, int index, int length, string substitute)
         {
-            return text.Substring(0, index) + substitute + text.Substring(index + length);
+            return text[..index] + substitute + text[(index + length) ..];
         }
     }
 }
