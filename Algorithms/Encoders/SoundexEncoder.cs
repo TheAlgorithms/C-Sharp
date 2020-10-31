@@ -78,53 +78,37 @@ namespace Algorithms.Encoders
 
         private int MapToNumber(char ch)
         {
-            switch (ch)
+            var mapping = new Dictionary<char, int>
             {
-                case 'a':
-                case 'e':
-                case 'i':
-                case 'o':
-                case 'u':
-                case 'y':
-                    return 0;
+                ['a'] = 0,
+                ['e'] = 0,
+                ['i'] = 0,
+                ['o'] = 0,
+                ['u'] = 0,
+                ['y'] = 0,
+                ['h'] = 8,
+                ['w'] = 8,
+                ['b'] = 1,
+                ['f'] = 1,
+                ['p'] = 1,
+                ['v'] = 1,
+                ['c'] = 2,
+                ['g'] = 2,
+                ['j'] = 2,
+                ['k'] = 2,
+                ['q'] = 2,
+                ['s'] = 2,
+                ['x'] = 2,
+                ['z'] = 2,
+                ['d'] = 3,
+                ['t'] = 3,
+                ['l'] = 4,
+                ['m'] = 5,
+                ['n'] = 5,
+                ['r'] = 6,
+            };
 
-                case 'h':
-                case 'w':
-                    return 8;
-
-                case 'b':
-                case 'f':
-                case 'p':
-                case 'v':
-                    return 1;
-
-                case 'c':
-                case 'g':
-                case 'j':
-                case 'k':
-                case 'q':
-                case 's':
-                case 'x':
-                case 'z':
-                    return 2;
-
-                case 'd':
-                case 't':
-                    return 3;
-
-                case 'l':
-                    return 4;
-
-                case 'm':
-                case 'n':
-                    return 5;
-
-                case 'r':
-                    return 6;
-
-                default:
-                    throw new NotSupportedException($"Unsupported letter");
-            }
+            return mapping[ch];
         }
     }
 }
