@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Algorithms.Other
 {
@@ -38,8 +36,8 @@ namespace Algorithms.Other
         /// <returns>Missing digit.</returns>
         public static int GetLostNum(string number)
         {
-            int lostIndex = Reverse(number).IndexOf("x");
-            int lostNum = GetSum(number.Replace("x", "0")) * 9 % 10;
+            int lostIndex = Reverse(number).IndexOf("x", StringComparison.CurrentCultureIgnoreCase);
+            int lostNum = GetSum(number.Replace("x", "0", StringComparison.CurrentCultureIgnoreCase)) * 9 % 10;
 
             // Case 1: If the index of the lost digit is even.
             if (lostIndex % 2 == 0)
