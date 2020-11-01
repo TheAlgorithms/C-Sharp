@@ -49,16 +49,8 @@ namespace Algorithms.Other
                 int tempLostNum = lostNum / 2;
 
                 // Case 2: if the index of the lost digit isn`t even and that number <= 4.
-                if (Validate(number.Replace("x", tempLostNum.ToString())))
-                {
-                    return tempLostNum;
-                }
-
                 // Case 3: if the index of the lost digit isn`t even and that number > 4.
-                else
-                {
-                    return (lostNum + 9) / 2;
-                }
+                return Validate(number.Replace("x", tempLostNum.ToString())) ? tempLostNum : (lostNum + 9) / 2;
             }
         }
 
