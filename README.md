@@ -18,6 +18,8 @@ This repository contains algorithms and data structures implemented in C# for ed
 		* [Caesar](./Algorithms/Encoders/CaesarEncoder.cs)
 		* [Vigenere](./Algorithms/Encoders/VigenereEncoder.cs)
 		* [Hill](./Algorithms/Encoders/HillEncoder.cs)
+		* [NYSIIS](./Algorithms/Encoders/NYSIISEncoder.cs)
+		* [Soundex](./Algorithms/Encoders/SoundexEncoder.cs)
 	* [Knapsack problem](./Algorithms/Knapsack/)
 		* [Naive solver](./Algorithms/Knapsack/NaiveKnapsackSolver.cs)
 		* [Dynamic Programming solver](./Algorithms/Knapsack/DynamicProgrammingKnapsackSolver.cs)
