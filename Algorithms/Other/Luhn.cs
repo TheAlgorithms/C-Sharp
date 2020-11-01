@@ -31,6 +31,40 @@ namespace Algorithms.Other
         }
 
         /// <summary>
+        /// This algorithm only finds one number.
+        /// In place of the unknown digit, put "x".
+        /// </summary>
+        /// <param name="number">The number in which to find the missing digit.</param>
+        /// <returns>Missing digit.</returns>
+        public static int GetLostNum(string number)
+        {
+            int lostIndex = Reverse(number).IndexOf("x");
+            int lostNum = GetSum(number.Replace("x", "0")) * 9 % 10;
+
+            // Case 1: If the index of the lost digit is even.
+            if (lostIndex % 2 == 0)
+            {
+                return lostNum;
+            }
+            else
+            {
+                int tempLostNum = lostNum / 2;
+
+                // Case 2: if the index of the lost digit isn`t even and that number <= 4.
+                if (Validate(number.Replace("x", tempLostNum.ToString())))
+                {
+                    return tempLostNum;
+                }
+
+                // Case 3: if the index of the lost digit isn`t even and that number > 4.
+                else
+                {
+                    return (lostNum + 9) / 2;
+                }
+            }
+        }
+
+        /// <summary>
         /// The sum found by the algorithm.
         /// </summary>
         /// <param name="number">The number for which the amount will be found.</param>
