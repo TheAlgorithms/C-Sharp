@@ -4,13 +4,13 @@ using System.Collections.Generic;
 namespace DataStructures.AATree
 {
     /// <summary>
-    /// A simple self-balencing binary search tree.
+    /// A simple self-balancing binary search tree.
     /// </summary>
     /// <remarks>
-    /// AA Trees are a form of self-balencing binary search tree named after their inventor
-    /// Arne Andersson. AA Trees are designed to be simple to understand and implement.
+    /// AA Trees are a form of self-balancing binary search tree named after their inventor
+    /// Arne Anderson. AA Trees are designed to be simple to understand and implement.
     /// This is accomplished by limiting how nodes can be added to the tree.
-    /// This simplifies rebalencing operations.
+    /// This simplifies rebalancing operations.
     /// More information: https://en.wikipedia.org/wiki/AA_tree .
     /// </remarks>
     /// <typeparam name="TKey">The type of key for the AA tree.</typeparam>
@@ -22,30 +22,23 @@ namespace DataStructures.AATree
         private readonly Comparer<TKey> comparer;
 
         /// <summary>
-        /// The root of the tree; has the highest level.
-        /// </summary>
-        private AATreeNode<TKey>? root;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AATree{TKey}"/> class.
         /// </summary>
         public AATree()
+            : this(Comparer<TKey>.Default)
         {
-            root = null;
-            Count = 0;
-            comparer = Comparer<TKey>.Default;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AATree{TKey}"/> class with a custom comparer.
         /// </summary>
         /// <param name="customComparer">The custom comparer to use to compare keys.</param>
-        public AATree(Comparer<TKey> customComparer)
-        {
-            root = null;
-            Count = 0;
-            comparer = customComparer;
-        }
+        public AATree(Comparer<TKey> customComparer) => comparer = customComparer;
+
+        /// <summary>
+        /// Gets the root of the tree.
+        /// </summary>
+        public AATreeNode<TKey>? Root { get; private set; }
 
         /// <summary>
         /// Gets the number of elements in the tree.
@@ -58,7 +51,7 @@ namespace DataStructures.AATree
         /// <param name="key">The element to add to the tree.</param>
         public void Add(TKey key)
         {
-            root = Add(key, root);
+            Root = Add(key, Root);
             Count++;
         }
 
@@ -68,9 +61,9 @@ namespace DataStructures.AATree
         /// <param name="keys">The elements to add to the tree.</param>
         public void AddRange(IEnumerable<TKey> keys)
         {
-            foreach (TKey key in keys)
+            foreach (var key in keys)
             {
-                root = Add(key, root);
+                Root = Add(key, Root);
                 Count++;
             }
         }
@@ -79,17 +72,15 @@ namespace DataStructures.AATree
         /// Remove a single element from the tree.
         /// </summary>
         /// <param name="key">Element to remove.</param>
-        /// <returns>true if the element was successfully removed, false otherwise.</returns>
-        public bool Remove(TKey key)
+        public void Remove(TKey key)
         {
-            if (!Contains(key, root))
+            if (!Contains(key, Root))
             {
-                return false;
+                throw new InvalidOperationException($"{nameof(key)} is not in the tree");
             }
 
-            root = Remove(key, root);
+            Root = Remove(key, Root);
             Count--;
-            return true;
         }
 
         /// <summary>
@@ -97,10 +88,7 @@ namespace DataStructures.AATree
         /// </summary>
         /// <param name="key">The element to look for.</param>
         /// <returns>true if the element is in the tree, false otherwise.</returns>
-        public bool Contains(TKey key)
-        {
-            return Contains(key, root);
-        }
+        public bool Contains(TKey key) => Contains(key, Root);
 
         /// <summary>
         /// Gets the largest element in the tree. (ie. the element in the right most node).
@@ -109,12 +97,12 @@ namespace DataStructures.AATree
         /// <exception cref="InvalidOperationException">Thrown if the tree is empty.</exception>
         public TKey GetMax()
         {
-            if (root == null)
+            if (Root is null)
             {
                 throw new InvalidOperationException("Tree is empty!");
             }
 
-            return GetMax(root).Key;
+            return GetMax(Root).Key;
         }
 
         /// <summary>
@@ -124,12 +112,12 @@ namespace DataStructures.AATree
         /// <throws>InvalidOperationException if the tree is empty.</throws>
         public TKey GetMin()
         {
-            if (root == null)
+            if (Root is null)
             {
                 throw new InvalidOperationException("Tree is empty!");
             }
 
-            return GetMin(root).Key;
+            return GetMin(Root).Key;
         }
 
         /// <summary>
@@ -139,23 +127,20 @@ namespace DataStructures.AATree
         public IEnumerable<TKey> GetKeysInOrder()
         {
             var result = new List<TKey>();
+            InOrderWalk(Root);
+            return result;
 
-            Action<AATreeNode<TKey>?>? inOrderWalk = null;
-
-            inOrderWalk = (node) =>
+            void InOrderWalk(AATreeNode<TKey>? node)
             {
-                if (node == null)
+                if (node is null)
                 {
                     return;
                 }
 
-                inOrderWalk!(node.Left);
+                InOrderWalk(node.Left);
                 result.Add(node.Key);
-                inOrderWalk(node.Right);
-            };
-
-            inOrderWalk(root);
-            return result;
+                InOrderWalk(node.Right);
+            }
         }
 
         /// <summary>
@@ -165,23 +150,20 @@ namespace DataStructures.AATree
         public IEnumerable<TKey> GetKeysPreOrder()
         {
             var result = new List<TKey>();
+            PreOrderWalk(Root);
+            return result;
 
-            Action<AATreeNode<TKey>?>? preOrderWalk = null;
-
-            preOrderWalk = (node) =>
+            void PreOrderWalk(AATreeNode<TKey>? node)
             {
-                if (node == null)
+                if (node is null)
                 {
                     return;
                 }
 
                 result.Add(node.Key);
-                preOrderWalk!(node.Left);
-                preOrderWalk(node.Right);
-            };
-
-            preOrderWalk(root);
-            return result;
+                PreOrderWalk(node.Left);
+                PreOrderWalk(node.Right);
+            }
         }
 
         /// <summary>
@@ -191,32 +173,20 @@ namespace DataStructures.AATree
         public IEnumerable<TKey> GetKeysPostOrder()
         {
             var result = new List<TKey>();
+            PostOrderWalk(Root);
+            return result;
 
-            Action<AATreeNode<TKey>?>? postOrderWalk = null;
-
-            postOrderWalk = (node) =>
+            void PostOrderWalk(AATreeNode<TKey>? node)
             {
-                if (node == null)
+                if (node is null)
                 {
                     return;
                 }
 
-                postOrderWalk!(node.Left);
-                postOrderWalk(node.Right);
+                PostOrderWalk(node.Left);
+                PostOrderWalk(node.Right);
                 result.Add(node.Key);
-            };
-
-            postOrderWalk(root);
-            return result;
-        }
-
-        /// <summary>
-        /// Checks if the tree is a valid AA Tree.
-        /// </summary>
-        /// <returns>true if tree is a valid AA Tree, false otherwise.</returns>
-        public bool Validate()
-        {
-            return ValidateTree(root);
+            }
         }
 
         /// <summary>
@@ -232,7 +202,8 @@ namespace DataStructures.AATree
             {
                 return new AATreeNode<TKey>(key, 1);
             }
-            else if (comparer.Compare(key, node.Key) < 0)
+
+            if (comparer.Compare(key, node.Key) < 0)
             {
                 node.Left = Add(key, node.Left);
             }
@@ -256,11 +227,12 @@ namespace DataStructures.AATree
         /// <returns>The node with the specified element removed.</returns>
         private AATreeNode<TKey>? Remove(TKey key, AATreeNode<TKey>? node)
         {
-            if (node == null)
+            if (node is null)
             {
-                return node;
+                return null;
             }
-            else if (comparer.Compare(key, node.Key) < 0)
+
+            if (comparer.Compare(key, node.Key) < 0)
             {
                 node.Left = Remove(key, node.Left);
             }
@@ -272,9 +244,10 @@ namespace DataStructures.AATree
             {
                 if (node.Left == null && node.Right == null)
                 {
-                    return node.Right;
+                    return null;
                 }
-                else if (node.Left == null)
+
+                if (node.Left == null)
                 {
                     var successor = GetMin(node.Right!);
                     node.Right = Remove(successor.Key, node.Right);
@@ -308,26 +281,15 @@ namespace DataStructures.AATree
         /// <param name="key">The element to check for.</param>
         /// <param name="node">The node to search from.</param>
         /// <returns>true if the element exists in the tree, false otherwise.</returns>
-        private bool Contains(TKey key, AATreeNode<TKey>? node)
-        {
-            if (node == null)
+        private bool Contains(TKey key, AATreeNode<TKey>? node) =>
+            node is { }
+            && comparer.Compare(key, node.Key) is { } v
+            && v switch
             {
-                return false;
-            }
-
-            if (comparer.Compare(key, node.Key) < 0)
-            {
-                return Contains(key, node.Left);
-            }
-            else if (comparer.Compare(key, node.Key) > 0)
-            {
-                return Contains(key, node.Right);
-            }
-            else
-            {
-                return true;
-            }
-        }
+                { } when v > 0 => Contains(key, node.Right),
+                { } when v < 0 => Contains(key, node.Left),
+                _ => true,
+            };
 
         /// <summary>
         /// Recursive to find the maximum/right-most element.
@@ -336,13 +298,14 @@ namespace DataStructures.AATree
         /// <returns>The node with the maximum/right-most element.</returns>
         private AATreeNode<TKey> GetMax(AATreeNode<TKey> node)
         {
-            if (node.Right == null)
+            while (true)
             {
-                return node;
-            }
-            else
-            {
-                return GetMax(node.Right);
+                if (node.Right is null)
+                {
+                    return node;
+                }
+
+                node = node.Right;
             }
         }
 
@@ -353,200 +316,78 @@ namespace DataStructures.AATree
         /// <returns>The node with the minimum/left-most element.</returns>
         private AATreeNode<TKey> GetMin(AATreeNode<TKey> node)
         {
-            if (node.Left == null)
+            while (true)
             {
-                return node;
+                if (node.Left is null)
+                {
+                    return node;
+                }
+
+                node = node.Left;
             }
-            else
-            {
-                return GetMin(node.Left);
-            }
-        }
-
-        /// <summary>
-        /// Checks various properties to determine if the tree is a valid AA Tree.
-        /// Throws exceptions if properties are violated.
-        /// Useful for debugging.
-        /// </summary>
-        /// <remarks>
-        /// The properties that are checked are:
-        /// <list type="number">
-        /// <item>The level of every leaf node is one.</item>
-        /// <item>The level of every left child is exactly one less than that of its parent.</item>
-        /// <item>The level of every right child is equal to or one less than that of its parent.</item>
-        /// <item>The level of every right grandchild is strictly less than that of its grandparent.</item>
-        /// <item>Every node of level greater than one has two children.</item>
-        /// </list>
-        /// More information: https://en.wikipedia.org/wiki/AA_tree .
-        /// </remarks>
-        /// <param name="node">The node to check from.</param>
-        /// <returns>true if node passes all checks, false otherwise.</returns>
-        private bool ValidateTree(AATreeNode<TKey>? node)
-        {
-            if (node == null)
-            {
-                return true;
-            }
-
-            // Check level == 1 if node if a leaf node.
-            bool leafNodeCheck = CheckLeafNode(node);
-
-            // Check level of left child is exactly one less than parent.
-            bool leftCheck = CheckLeftSubtree(node);
-
-            // Check level of right child is equal or one less than parent.
-            bool rightCheck = CheckRightSubtree(node);
-
-            // Check right grandchild level is less than node.
-            bool grandchildCheck = CheckRightGrandChild(node);
-
-            // Check if node has two children if not leaf.
-            bool nonLeafChildrenCheck = CheckNonLeafChildren(node);
-
-            bool thisNodeResult = leafNodeCheck && leftCheck && rightCheck;
-            thisNodeResult = thisNodeResult && grandchildCheck && nonLeafChildrenCheck;
-
-            return thisNodeResult && ValidateTree(node.Left) && ValidateTree(node.Right);
-        }
-
-        /// <summary>
-        /// Checks if node is a leaf, and if so if its level is 1.
-        /// </summary>
-        /// <param name="node">The node to check.</param>
-        /// <returns>true if node passes check, false otherwise.</returns>
-        private bool CheckLeafNode(AATreeNode<TKey> node)
-        {
-            bool condition = node.Left == null && node.Right == null && node.Level != 1;
-            return !condition;
-        }
-
-        /// <summary>
-        /// Checks if left node's level is exactly one less than node's level.
-        /// </summary>
-        /// <param name="node">The node to check.</param>
-        /// <returns>true if node passes check, false otherwise.</returns>
-        private bool CheckLeftSubtree(AATreeNode<TKey> node)
-        {
-            bool condition = node.Left != null && node.Level - node.Left.Level != 1;
-            return !condition;
-        }
-
-        /// <summary>
-        /// Checks if right node's level is either equal to or one less than node's level.
-        /// </summary>
-        /// <param name="node">The node to check.</param>
-        /// <returns>true if node passes check, false otherwise.</returns>
-        private bool CheckRightSubtree(AATreeNode<TKey> node)
-        {
-            bool condition = node.Right != null &&
-                node.Level - node.Right.Level != 1 &&
-                node.Level != node.Right.Level;
-            return !condition;
-        }
-
-        /// <summary>
-        /// Checks if right grandchild's (right node's right node) level is less than node.
-        /// </summary>
-        /// <param name="node">The node to check.</param>
-        /// <returns>true if node passes check, false otherwise.</returns>
-        private bool CheckRightGrandChild(AATreeNode<TKey> node)
-        {
-            bool condition = node.Right != null &&
-                node.Right.Right != null &&
-                node.Right.Level < node.Right.Right.Level;
-            return !condition;
-        }
-
-        /// <summary>
-        /// Checks if node is not a leaf, and if so if it has two children.
-        /// </summary>
-        /// <param name="node">The node to check.</param>
-        /// <returns>true if node passes check, false otherwise.</returns>
-        private bool CheckNonLeafChildren(AATreeNode<TKey> node)
-        {
-            bool condition = node.Level > 1 && (node.Left == null || node.Right == null);
-            return !condition;
         }
 
         /// <summary>
         /// Remove right-horizontal links and replaces them with left-horizontal links.
-        /// Acccomplishes this by performing a right rotation.
+        /// Accomplishes this by performing a right rotation.
         /// </summary>
-        /// <param name="node">The node to rebalence from.</param>
-        /// <returns>The rebalenced node.</returns>
+        /// <param name="node">The node to rebalance from.</param>
+        /// <returns>The rebalanced node.</returns>
         private AATreeNode<TKey>? Skew(AATreeNode<TKey>? node)
         {
-            if (node == null)
-            {
-                return null;
-            }
-            else if (node.Left == null)
+            if (node?.Left is null || node.Left.Level != node.Level)
             {
                 return node;
             }
-            else if (node.Left.Level == node.Level)
-            {
-                var left = node.Left;
-                node.Left = left.Right;
-                left.Right = node;
-                return left;
-            }
-            else
-            {
-                return node;
-            }
+
+            var left = node.Left;
+            node.Left = left.Right;
+            left.Right = node;
+            return left;
         }
 
         /// <summary>
         /// Reduces the number of right-horizontal links.
-        /// Accomplishes this by performing a lefft rotation, and incrementing level.
+        /// Accomplishes this by performing a left rotation, and incrementing level.
         /// </summary>
-        /// <param name="node">The node to rebalence from.</param>
-        /// <returns>The rebalenced node.</returns>
+        /// <param name="node">The node to rebalance from.</param>
+        /// <returns>The rebalanced node.</returns>
         private AATreeNode<TKey>? Split(AATreeNode<TKey>? node)
         {
-            if (node == null)
-            {
-                return null;
-            }
-            else if (node.Right == null || node.Right.Right == null)
+            if (node?.Right?.Right is null || node.Level != node.Right.Right.Level)
             {
                 return node;
             }
-            else if (node.Level == node.Right.Right.Level)
-            {
-                var right = node.Right;
-                node.Right = right.Left;
-                right.Left = node;
-                right.Level++;
-                return right;
-            }
-            else
-            {
-                return node;
-            }
+
+            var right = node.Right;
+            node.Right = right.Left;
+            right.Left = node;
+            right.Level++;
+            return right;
         }
 
         /// <summary>
-        /// Decreases the level of node if nesscessary.
+        /// Decreases the level of node if necessary.
         /// </summary>
         /// <param name="node">The node to decrease level from.</param>
         /// <returns>The node with modified level.</returns>
         private AATreeNode<TKey> DecreaseLevel(AATreeNode<TKey> node)
         {
-            Func<AATreeNode<TKey>?, int> getLvl = (x) => x == null ? 0 : x.Level;
-            var newLevel = Math.Min(getLvl(node.Left), getLvl(node.Right)) + 1;
-            if (newLevel < node.Level)
+            var newLevel = Math.Min(GetLevel(node.Left), GetLevel(node.Right)) + 1;
+            if (newLevel >= node.Level)
             {
-                node.Level = newLevel;
+                return node;
+            }
 
-                if (node.Right != null && newLevel < node.Right.Level)
-                {
-                    node.Right.Level = newLevel;
-                }
+            node.Level = newLevel;
+            if (node.Right is { } && newLevel < node.Right.Level)
+            {
+                node.Right.Level = newLevel;
             }
 
             return node;
+
+            static int GetLevel(AATreeNode<TKey>? x) => x?.Level ?? 0;
         }
     }
 }
