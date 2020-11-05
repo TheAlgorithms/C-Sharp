@@ -13,7 +13,7 @@ namespace DataStructures.Tests
         [Test]
         public static void Constructor_UseCustomComparer_FormsCorrectTree()
         {
-            var tree = new AATree<int>(Comparer<int>.Create((x, y) => x.CompareTo(y) * -1));
+            var tree = new AATree<int>(Comparer<int>.Create((x, y) => y.CompareTo(x)));
             tree.AddRange(new [] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             Assert.AreEqual(1, tree.GetMax());
             Assert.AreEqual(10, tree.GetMin());
