@@ -11,6 +11,18 @@ namespace DataStructures.Tests
     public static class BinarySearchTreeTests
     {
         [Test]
+        public static void Constructor_UseCustomComparer_FormsCorrectTree()
+        {
+            var cmpFunc = Comparer<string>.Create((x, y) => x.Length - y.Length);
+            var tree = new BinarySearchTree<string>(cmpFunc);
+            var elems = new[] { "z", "yy", "vvv", "bbbb", "fffff", "pppppp" };
+            tree.AddRange(elems);
+
+            Assert.IsNotNull(tree.Search("vvv"));
+            Assert.AreEqual("bbbb", tree.Search("vvv")!.Right!.Key);
+        }
+
+        [Test]
         public static void Add_MultipleKeys_FormsCorrectBST()
         {
             var tree = new BinarySearchTree<int>();
