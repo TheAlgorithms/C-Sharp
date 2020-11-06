@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Algorithms.Other
 {
@@ -18,15 +19,7 @@ namespace Algorithms.Other
         /// <param name="number">The number that will be checked for validity.</param>
         /// <returns>True: Number is valid.
         /// False: Number isn`t valid.</returns>
-        public static bool Validate(string number)
-        {
-            if (GetSum(number) % 10 == 0)
-            {
-                return true;
-            }
-
-            return false;
-        }
+        public static bool Validate(string number) => GetSum(number) % 10 == 0;
 
         /// <summary>
         /// This algorithm only finds one number.
@@ -36,66 +29,45 @@ namespace Algorithms.Other
         /// <returns>Missing digit.</returns>
         public static int GetLostNum(string number)
         {
-            int lostIndex = Reverse(number).IndexOf("x", StringComparison.CurrentCultureIgnoreCase);
-            int lostNum = GetSum(number.Replace("x", "0", StringComparison.CurrentCultureIgnoreCase)) * 9 % 10;
+            var lostIndex = number.Length - 1 - number.LastIndexOf("x", StringComparison.CurrentCultureIgnoreCase);
+            var lostNum = GetSum(number.Replace("x", "0", StringComparison.CurrentCultureIgnoreCase)) * 9 % 10;
 
             // Case 1: If the index of the lost digit is even.
             if (lostIndex % 2 == 0)
             {
                 return lostNum;
             }
-            else
-            {
-                int tempLostNum = lostNum / 2;
 
-                // Case 2: if the index of the lost digit isn`t even and that number <= 4.
-                // Case 3: if the index of the lost digit isn`t even and that number > 4.
-                return Validate(number.Replace("x", tempLostNum.ToString())) ? tempLostNum : (lostNum + 9) / 2;
-            }
+            var tempLostNum = lostNum / 2;
+
+            // Case 2: if the index of the lost digit isn`t even and that number <= 4.
+            // Case 3: if the index of the lost digit isn`t even and that number > 4.
+            return Validate(number.Replace("x", tempLostNum.ToString())) ? tempLostNum : (lostNum + 9) / 2;
         }
 
         /// <summary>
-        /// The sum found by the algorithm.
+        /// Computes the sum found by the algorithm.
         /// </summary>
-        /// <param name="number">The number for which the amount will be found.</param>
+        /// <param name="number">The number for which the sum will be found.</param>
         /// <returns>Sum.</returns>
         private static int GetSum(string number)
         {
-            string reverseNumber = Reverse(number);
-            int sum = 0;
-            int temp;
-            for (int i = 0; i < reverseNumber.Length; i++)
+            var sum = 0;
+            for (var i = 0; i < number.Length; i++)
             {
-                temp = reverseNumber[i] - '0';
-                if (i % 2 != 0)
+                var d = number[i] - '0';
+                d = (i + number.Length) % 2 == 0
+                    ? 2 * d
+                    : d;
+                if (d > 9)
                 {
-                    temp *= 2;
-                    if (temp > 9)
-                    {
-                        temp -= 9;
-                    }
+                    d -= 9;
+                }
 
-                    sum += temp;
-                }
-                else
-                {
-                    sum += temp;
-                }
+                sum += d;
             }
 
             return sum;
-        }
-
-        /// <summary>
-        /// Reverses string.
-        /// </summary>
-        /// <param name="text">The text to be flipped.</param>
-        /// <returns>String in reverse order.</returns>
-        private static string Reverse(string text)
-        {
-            char[] tempCharArray = text.ToCharArray();
-            Array.Reverse(tempCharArray);
-            return new string(tempCharArray);
         }
     }
 }
