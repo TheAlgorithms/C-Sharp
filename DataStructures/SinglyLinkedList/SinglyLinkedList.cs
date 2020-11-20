@@ -10,7 +10,7 @@ namespace DataStructures.SinglyLinkedList
     public class SinglyLinkedList<T>
     {
         // points to the start of the list
-        SinglyLinkedListNode<T>? Head { get; set; }
+        SinglyLinkedListNode<T>? Head { get; set; } 
 
         /// <summary>
         /// Adds new node to the start of the list,
