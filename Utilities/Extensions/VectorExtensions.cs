@@ -131,5 +131,44 @@ namespace Utilities.Extensions
 
             return rowVector;
         }
+
+        /// <summary>
+        /// Calculates the reciprocal of every element in the vector.
+        /// </summary>
+        /// <param name="vector">The vector.</param>
+        /// <returns>The vector with calculated reciprocals of elements.</returns>
+        public static double[] Reciprocal(this double[] vector)
+        {
+            var len = vector.Length;
+
+            var result = new double[len];
+            for (var i = 0; i < len; i++)
+            {
+                result[i] = (Math.Abs(vector[i]) < 0.0001) ? 0 : 1 / vector[i];
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Generates a diagonal matrix from an specified vector.
+        /// </summary>
+        /// <param name="vector">The input vector.</param>
+        /// <returns>A Diagonal matrix</returns>
+        public static double[,] ToDiagonalMatrix(this double[] vector)
+        {
+            var len = vector.Length;
+            var result = new double[len, len];
+
+            for (var i = 0; i < len; i++)
+            {
+                for (var j = 0; j < len; j++)
+                {
+                    result[i, j] = i == j ? vector[i] : 0;
+                }
+            }
+
+            return result;
+        }
     }
 }

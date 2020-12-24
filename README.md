@@ -38,6 +38,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 		* [Series](./Algorithms/Numeric/Series/)
 			* [Maclaurin](./Algorithms/Numeric/Series/Maclaurin.cs)
 		* [Gauss-Jordan Elimination](./Algorithms/Numeric/GaussJordanElimination.cs)
+		* [Pseudo-Inverse](./Algorithms/Numeric/Pseudoinverse/PseudoInverse.cs)
 	* [Searches](./Algorithms/Search/)
 		* [A-Star](./Algorithms/Search/AStar/)
 		* [Binary](./Algorithms/Search/BinarySearcher.cs)

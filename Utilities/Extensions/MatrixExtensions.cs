@@ -128,5 +128,56 @@ namespace Utilities.Extensions
             return result;
         }
 
+        /// <summary>
+        /// Perfoms an element by element comparison on both matrices.
+        /// </summary>
+        /// <param name="source">Source left matrix.</param>
+        /// <param name="operand">Openrand right matrix.</param>
+        /// <returns>true: if all elements are the same; false otherwise.</returns>
+        public static bool IsEqual(this double[,] source, double[,] operand)
+        {
+            if (source.Length != operand.Length)
+            {
+                return false;
+            }
+
+            for (var i = 0; i <= source.GetUpperBound(0); i++)
+            {
+                for (var j = 0; j <= source.GetUpperBound(0); j++)
+                {
+                    if (Math.Abs(source[i, j] - operand[i, j]) < 0.0001)
+                    {
+                        continue;
+                    }
+
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Performs a round operation on every element of the input matrix up to the neareast integer.
+        /// </summary>
+        /// <param name="source">Input matrix.</param>
+        /// <returns>Matrix with rounded elements.</returns>
+        public static double[,] RoundToNextInt(this double[,] source)
+        {
+            var rows = source.GetUpperBound(0) + 1;
+            var cols = source.GetUpperBound(1) + 1;
+
+            var result = new double[rows, cols];
+
+            for (var i = 0; i < rows; i++)
+            {
+                for (var j = 0; j < cols; j++)
+                {
+                    result[i, j] = Math.Round(source[i, j]);
+                }
+            }
+
+            return result;
+        }
     }
 }
