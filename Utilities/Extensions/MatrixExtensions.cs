@@ -136,21 +136,21 @@ namespace Utilities.Extensions
         /// <returns>true: if all elements are the same; false otherwise.</returns>
         public static bool IsEqual(this double[,] source, double[,] operand)
         {
-            if (source.Length != operand.Length)
+            if (source.Length != operand.Length ||
+                source.GetLength(0) != operand.GetLength(0) ||
+                source.GetLength(1) != operand.GetLength(1))
             {
                 return false;
             }
 
-            for (var i = 0; i <= source.GetUpperBound(0); i++)
+            for (var i = 0; i < source.GetLength(0); i++)
             {
-                for (var j = 0; j <= source.GetUpperBound(0); j++)
+                for (var j = 0; j < source.GetLength(0); j++)
                 {
-                    if (Math.Abs(source[i, j] - operand[i, j]) < 0.0001)
+                    if (Math.Abs(source[i, j] - operand[i, j]) >= 0.0001)
                     {
-                        continue;
+                        return false;
                     }
-
-                    return false;
                 }
             }
 
@@ -164,8 +164,8 @@ namespace Utilities.Extensions
         /// <returns>Matrix with rounded elements.</returns>
         public static double[,] RoundToNextInt(this double[,] source)
         {
-            var rows = source.GetUpperBound(0) + 1;
-            var cols = source.GetUpperBound(1) + 1;
+            var rows = source.GetLength(0);
+            var cols = source.GetLength(1);
 
             var result = new double[rows, cols];
 

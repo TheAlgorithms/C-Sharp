@@ -1,4 +1,5 @@
-﻿using Algorithms.Numeric.Decomposition;
+﻿using System;
+using Algorithms.Numeric.Decomposition;
 using Utilities.Extensions;
 
 namespace Algorithms.Numeric
@@ -24,10 +25,16 @@ namespace Algorithms.Numeric
             var (u, s, v) = ThinSvd.Decompose(inMat);
 
             // To take the reciprocal of each non-zero element on the diagonal.
-            var calReciprocalSigma = s.Reciprocal();
+            var len = s.Length;
+
+            var sigma = new double[len];
+            for (var i = 0; i < len; i++)
+            {
+                sigma[i] = (Math.Abs(s[i]) < 0.0001) ? 0 : 1 / s[i];
+            }
 
             // To construct a diagonal matrix based on the vector result.
-            var diag = calReciprocalSigma.ToDiagonalMatrix();
+            var diag = sigma.ToDiagonalMatrix();
 
             // To construct the pseudo-inverse using the computed information above.
             var matinv = u.Multiply(diag).Multiply(v.Transpose());
