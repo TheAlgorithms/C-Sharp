@@ -11,12 +11,12 @@ namespace Utilities.Tests.Extensions
         public void Multiply_ShouldThrowInvalidOperationException_WhenOperandsAreNotCompatible()
         {
             // Arrange
-            var source = new double[,] {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}};
-            var operand = new double[,] {{1}, {1}};
-            
+            var source = new double[,] { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
+            var operand = new double[,] { { 1 }, { 1 } };
+
             // Act
             Action action = () => source.Multiply(operand);
-            
+
             // Assert
             action.Should().Throw<InvalidOperationException>()
                 .WithMessage("The width of a first operand should match the height of a second.");
@@ -31,7 +31,7 @@ namespace Utilities.Tests.Extensions
         public void Copy_ShouldReturnImmutableCopyOfMatrix()
         {
             // Arrange
-            var sutMatrix = new double[,] {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}};
+            var sutMatrix = new double[,] { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
 
             // Act
             var actualMatrix = sutMatrix.Copy();
@@ -40,19 +40,19 @@ namespace Utilities.Tests.Extensions
             actualMatrix.Should().NotBeSameAs(sutMatrix);
             actualMatrix.Should().BeEquivalentTo(sutMatrix);
         }
-        
+
         [Test, TestCaseSource(nameof(MatrixTransposeTestCases))]
         public void Transpose_ShouldReturnTransposedMatrix(
             double[,] source, double[,] target) =>
             source.Transpose().Should().BeEquivalentTo(target);
-        
+
         [Test]
         public void MultiplyVector_ShouldCalculateDotProductMultiplicationResult()
         {
             // Arrange
-            var source = new double[,] {{2, 2, -1}, {0, -2, -1}, {0, 0, 5}};
-            var operand = new double[] {2, 2, 3};
-            var result = new double[] {5, -7, 15};
+            var source = new double[,] { { 2, 2, -1 }, { 0, -2, -1 }, { 0, 0, 5 } };
+            var operand = new double[] { 2, 2, 3 };
+            var result = new double[] { 5, -7, 15 };
 
             // Act
             var actualMatrix = source.MultiplyVector(operand);
@@ -60,22 +60,64 @@ namespace Utilities.Tests.Extensions
             // Assert
             actualMatrix.Should().BeEquivalentTo(result);
         }
-        
+
         [Test]
         public void Subtract_ShouldThrowArgumentException_WhenOperandsAreNotCompatible()
         {
             // Arrange
-            var source = new double[,] {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}};
-            var operand = new double[,] {{1}, {1}};
-            
+            var source = new double[,] { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
+            var operand = new double[,] { { 1 }, { 1 } };
+
             // Act
             Action action = () => source.Subtract(operand);
-            
+
             // Assert
             action.Should().Throw<ArgumentException>()
                 .WithMessage("Dimensions of matrices must be the same");
         }
-        
+
+        [Test]
+        public static void EqualMatricesShouldReturnTrue()
+        {
+            // Arrange
+            var A = new double[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } };
+            var B = new double[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } };
+
+            // Act
+            var result = A.IsEqual(B);
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Test]
+        public static void NonEqualMatricesShouldReturnFalse()
+        {
+            // Arrange
+            var A = new double[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } };
+            var B = new double[,] { { 1, 2, 3 }, { 1, 2, 6 }, { 1, 2, 3 } };
+
+            // Act
+            var result = A.IsEqual(B);
+
+            // Assert
+            Assert.False(result);
+        }
+
+        [Test]
+        public static void DifferentSizeMatricesShouldReturnFalse()
+        {
+            // Arrange
+            var A = new double[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } };
+            var B = new double[,] { { 1, 2, 3 }, { 1, 2, 3 } };
+
+            // Act
+            var result = A.IsEqual(B);
+
+            // Assert
+            Assert.False(result);
+        }
+
         [Test, TestCaseSource(nameof(MatrixSubtractTestCases))]
         public void Subtract_ShouldCalculateSubtractionResult(
             double[,] source, double[,] operand, double[,] result) =>
@@ -96,7 +138,7 @@ namespace Utilities.Tests.Extensions
                 new double[,] {{11, -22, 29}, {9, -27, 32}, {13, -17, 26}}
             }
         };
-        
+
         private static readonly object[] MatrixTransposeTestCases =
         {
             new object[]
@@ -110,7 +152,7 @@ namespace Utilities.Tests.Extensions
                 new double[,] {{5, 6}, {8, 9}}
             }
         };
-        
+
         private static readonly object[] MatrixSubtractTestCases =
         {
             new object[]

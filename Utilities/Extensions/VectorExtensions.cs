@@ -91,7 +91,7 @@ namespace Utilities.Extensions
 
             return result;
         }
-        
+
         /// <summary>
         /// Transpose 1d row vector to column vector.
         /// </summary>
@@ -130,6 +130,24 @@ namespace Utilities.Extensions
             }
 
             return rowVector;
+        }
+
+        /// <summary>
+        /// Generates a diagonal matrix from an specified vector.
+        /// </summary>
+        /// <param name="vector">The input vector.</param>
+        /// <returns>A Diagonal matrix</returns>
+        public static double[,] ToDiagonalMatrix(this double[] vector)
+        {
+            var len = vector.Length;
+            var result = new double[len, len];
+
+            for (var i = 0; i < len; i++)
+            {
+                result[i, i] = vector[i];
+            }
+
+            return result;
         }
     }
 }
