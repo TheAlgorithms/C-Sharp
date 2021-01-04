@@ -31,10 +31,9 @@ namespace Algorithms.Tests.Problems
         public static void OutOfChessboardThrowsException(int n, int startCol)
         {
             // Arrange
-            var board = new int[n, n];
 
             // Act
-            void Act() => NQueenProblem.BacktrackSolve(board, n, startCol);
+            void Act() => NQueenProblem.BacktrackSolve(new int[n, n], n, startCol);
 
             // Assert
             _ = Assert.Throws<ArgumentException>(Act);
