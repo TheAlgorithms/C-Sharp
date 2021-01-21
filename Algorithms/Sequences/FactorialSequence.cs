@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 
 namespace Algorithms.Sequences
@@ -17,23 +16,18 @@ namespace Algorithms.Sequences
     /// </summary>
     public class FactorialSequence : ISequence
     {
-        private readonly long sequenceLength;
-
-        public FactorialSequence(long sequenceLength) => this.sequenceLength = sequenceLength;
-
         /// <summary>
-        /// Gets sequence of binomial coefficients.
+        /// Gets sequence of factorial numbers.
         /// </summary>
-        public IEnumerable<BigInteger> Sequence => GenerateFactorialSequence(sequenceLength);
+        public IEnumerable<BigInteger> Sequence => GenerateFactorialSequence();
 
-        private static IEnumerable<BigInteger> GenerateFactorialSequence(long size)
+        private static IEnumerable<BigInteger> GenerateFactorialSequence()
         {
             var k = 0;
 
-            while (k < size)
+            while (true)
             {
-                yield return Factorial(k);
-                k++;
+                yield return Factorial(k++);
             }
         }
 
