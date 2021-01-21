@@ -16,24 +16,24 @@ namespace Algorithms.Sequences
     /// </summary>
     public class BinomialSequence : ISequence
     {
-        private readonly long sequenceLength;
-
-        public BinomialSequence(long sequenceLength) => this.sequenceLength = sequenceLength;
-
         /// <summary>
         /// Gets sequence of binomial coefficients.
         /// </summary>
-        public IEnumerable<BigInteger> Sequence => GenerateBinomialSequence(sequenceLength);
+        public IEnumerable<BigInteger> Sequence => GenerateBinomialSequence();
 
-        private static IEnumerable<BigInteger> GenerateBinomialSequence(long rowNumbers)
+        private static IEnumerable<BigInteger> GenerateBinomialSequence()
         {
-            for (long i = 0; i < rowNumbers; i++)
+            var i = 0;
+
+            while (true)
             {
                 var row = GenerateRow(i);
                 foreach (var coefficient in row)
                 {
                     yield return coefficient;
                 }
+
+                i++;
             }
         }
 
