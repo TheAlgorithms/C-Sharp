@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Numerics;
+﻿using System.Numerics;
 using Algorithms.Sequences;
 using NUnit.Framework;
 
@@ -10,7 +9,7 @@ namespace Algorithms.Tests.Sequences
         [Test]
         public void First4RowsCorrect()
         {
-            var sequence = new BinomialSequence(4).Sequence.ToArray();
+            var sequence = new BinomialSequence(4).Sequence;
             Assert.AreEqual(new BigInteger[] { 1, 1, 1, 1, 2, 1, 1, 3, 3, 1 }, sequence);
         }
     }
