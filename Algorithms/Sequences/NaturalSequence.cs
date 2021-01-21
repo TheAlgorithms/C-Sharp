@@ -16,18 +16,23 @@ namespace Algorithms.Sequences
     /// </summary>
     public class NaturalSequence : ISequence
     {
+        private readonly long sequenceLength;
+
+        public NaturalSequence(long sequenceLength) => this.sequenceLength = sequenceLength;
+
         /// <summary>
         /// Gets sequence of natural numbers.
         /// </summary>
-        public IEnumerable<BigInteger> Sequence
+        public IEnumerable<BigInteger> Sequence => GenerateSequence(sequenceLength);
+
+        private static IEnumerable<BigInteger> GenerateSequence(long size)
         {
-            get
+            var current = new BigInteger(1);
+
+            while (current <= size)
             {
-                var n = new BigInteger(1);
-                while (true)
-                {
-                    yield return n++;
-                }
+                yield return current;
+                current++;
             }
         }
     }
