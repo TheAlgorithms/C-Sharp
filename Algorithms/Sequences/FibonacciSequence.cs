@@ -16,25 +16,26 @@ namespace Algorithms.Sequences
     /// </summary>
     public class FibonacciSequence : ISequence
     {
+        private readonly long sequenceLength;
+
+        public FibonacciSequence(long sequenceLength) => this.sequenceLength = sequenceLength;
+
         /// <summary>
         /// Gets Fibonacci sequence.
         /// </summary>
-        public IEnumerable<BigInteger> Sequence
+        public IEnumerable<BigInteger> Sequence => GenerateFibonacciSequence(sequenceLength);
+
+        private static IEnumerable<BigInteger> GenerateFibonacciSequence(long size)
         {
-            get
+            var seq = new BigInteger[size];
+            seq[1] = 1;
+
+            for (var i = 2; i < size; i++)
             {
-                yield return 0;
-                yield return 1;
-                BigInteger previous = 0;
-                BigInteger current = 1;
-                while (true)
-                {
-                    var next = previous + current;
-                    previous = current;
-                    current = next;
-                    yield return next;
-                }
+                seq[i] = seq[i - 1] + seq[i - 2];
             }
+
+            return seq;
         }
     }
 }
