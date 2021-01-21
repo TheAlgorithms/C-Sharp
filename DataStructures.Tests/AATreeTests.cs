@@ -15,13 +15,9 @@ namespace DataStructures.Tests
         {
             var tree = new AATree<int>(Comparer<int>.Create((x, y) => y.CompareTo(x)));
             tree.AddRange(new [] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
-            Assert.AreEqual(1, tree.GetMax());
-            Assert.AreEqual(10, tree.GetMin());
-
-            var expected = new [] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
-            var actual = tree.GetKeysInOrder();
-            Assert.IsTrue(expected.SequenceEqual(actual));
-
+            tree.GetMax().Should().Be(1);
+            tree.GetMin().Should().Be(10);
+            tree.GetKeysInOrder().SequenceEqual(new[] {10, 9, 8, 7, 6, 5, 4, 3, 2, 1}).Should().BeTrue();
             Validate(tree.Root);
         }
 
@@ -240,7 +236,7 @@ namespace DataStructures.Tests
         /// </remarks>
         /// <param name="node">The node to check from.</param>
         /// <returns>true if node passes all checks, false otherwise.</returns>
-        private bool Validate<T>(AATreeNode<T>? node)
+        private static bool Validate<T>(AATreeNode<T>? node)
         {
             if (node == null)
             {
@@ -273,7 +269,7 @@ namespace DataStructures.Tests
         /// </summary>
         /// <param name="node">The node to check.</param>
         /// <returns>true if node passes check, false otherwise.</returns>
-        private bool CheckLeafNode<T>(AATreeNode<T> node)
+        private static bool CheckLeafNode<T>(AATreeNode<T> node)
         {
             var condition = node.Left == null && node.Right == null && node.Level != 1;
             return !condition;
@@ -284,7 +280,7 @@ namespace DataStructures.Tests
         /// </summary>
         /// <param name="node">The node to check.</param>
         /// <returns>true if node passes check, false otherwise.</returns>
-        private bool CheckLeftSubtree<T>(AATreeNode<T> node)
+        private static bool CheckLeftSubtree<T>(AATreeNode<T> node)
         {
             var condition = node.Left != null && node.Level - node.Left.Level != 1;
             return !condition;
