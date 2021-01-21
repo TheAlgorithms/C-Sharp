@@ -29,18 +29,12 @@ namespace DataStructures.Tests
             foreach(var elem in new [] { 1, 2, 3, 4, 5, 6, 7, 8, 9 ,10 })
             {
                 tree.Add(elem);
-                Assert.AreEqual(elem, tree.Count);
-                Assert.IsTrue(tree.Contains(elem));
+                tree.Count.Should().Be(elem);
+                tree.Contains(elem).Should().BeTrue();
             }
-
-            var expected = new [] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            var actual = tree.GetKeysInOrder();
-            Assert.IsTrue(expected.SequenceEqual(actual));
-
-            expected = new [] { 1, 3, 2, 5, 7, 10, 9, 8, 6, 4 };
-            actual = tree.GetKeysPostOrder();
-            Assert.IsTrue(expected.SequenceEqual(actual));
-
+            
+            tree.GetKeysInOrder().SequenceEqual(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}).Should().BeTrue();
+            tree.GetKeysPostOrder().SequenceEqual(new[] {1, 3, 2, 5, 7, 10, 9, 8, 6, 4}).Should().BeTrue();
             Validate(tree.Root);
         }
 
