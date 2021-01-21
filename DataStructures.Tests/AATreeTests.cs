@@ -64,19 +64,19 @@ namespace DataStructures.Tests
             tree.AddRange(new [] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
 
             Remove(4).Should().NotThrow();
-            Assert.IsFalse(tree.Contains(4));
-            Assert.AreEqual(9, tree.Count);
+            tree.Contains(4).Should().BeFalse();
+            tree.Count.Should().Be(9);
 
             Remove(8).Should().NotThrow();
-            Assert.IsFalse(tree.Contains(8));
-            Assert.AreEqual(8, tree.Count);
+            tree.Contains(8).Should().BeFalse();
+            tree.Count.Should().Be(8);
 
             Remove(1).Should().NotThrow();
-            Assert.IsFalse(tree.Contains(1));
-            Assert.AreEqual(7, tree.Count);
+            tree.Contains(1).Should().BeFalse();
+            tree.Count.Should().Be(7);
 
             Validate(tree.Root);
-
+            
             Action Remove(int x) => () => tree.Remove(x);
         }
 
