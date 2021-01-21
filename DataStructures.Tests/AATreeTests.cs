@@ -43,7 +43,6 @@ namespace DataStructures.Tests
         {
             var tree = new AATree<int>();
             tree.AddRange(new [] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
-
             Assert.Throws<ArgumentException>(() => tree.Add(1));
         }
 
@@ -52,17 +51,9 @@ namespace DataStructures.Tests
         {
             var tree = new AATree<int>();
             tree.AddRange(new [] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
-
-            Assert.AreEqual(10, tree.Count);
-
-            var expected = new [] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            var actual = tree.GetKeysInOrder();
-            Assert.IsTrue(expected.SequenceEqual(actual));
-
-            expected = new [] { 1, 3, 2, 5, 7, 10, 9, 8, 6, 4 };
-            actual = tree.GetKeysPostOrder();
-            Assert.IsTrue(expected.SequenceEqual(actual));
-
+            tree.Count.Should().Be(10);
+            tree.GetKeysInOrder().SequenceEqual(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}).Should().BeTrue();
+            tree.GetKeysPostOrder().SequenceEqual(new[] {1, 3, 2, 5, 7, 10, 9, 8, 6, 4}).Should().BeTrue();
             Validate(tree.Root);
         }
 
