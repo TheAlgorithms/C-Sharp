@@ -17,31 +17,30 @@ namespace Algorithms.Sequences
     /// </summary>
     public class PrimesSequence : ISequence
     {
+        private readonly long sequenceLength;
+
+        public PrimesSequence(long sequenceLength) => this.sequenceLength = sequenceLength;
+
         /// <summary>
         /// Gets sequence of prime numbers.
         /// </summary>
-        public IEnumerable<BigInteger> Sequence
+        public IEnumerable<BigInteger> Sequence => GeneratePrimeSequence(sequenceLength);
+
+        private static IEnumerable<BigInteger> GeneratePrimeSequence(long limitValue)
         {
-            get
+            var list = new List<BigInteger> { 2 };
+
+            for (var i = 3; i < limitValue; i++)
             {
-                yield return 2;
-                var primes = new List<BigInteger>
-                {
-                    2,
-                };
-                var n = new BigInteger(3);
+                var current = new BigInteger(i);
 
-                while (true)
+                if (list.All(x => current % x != 0))
                 {
-                    if (primes.All(p => n % p != 0))
-                    {
-                        yield return n;
-                        primes.Add(n);
-                    }
-
-                    n += 2;
+                    list.Add(current);
                 }
             }
+
+            return list;
         }
     }
 }
