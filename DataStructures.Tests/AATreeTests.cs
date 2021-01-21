@@ -20,7 +20,7 @@ namespace DataStructures.Tests
 
             var expected = new [] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
             var actual = tree.GetKeysInOrder();
-            Assert.IsTrue(Enumerable.SequenceEqual(expected, actual));
+            Assert.IsTrue(expected.SequenceEqual(actual));
 
             Validate(tree.Root);
         }
@@ -30,7 +30,7 @@ namespace DataStructures.Tests
         {
             var tree = new AATree<int>();
 
-            foreach(int elem in new [] { 1, 2, 3, 4, 5, 6, 7, 8, 9 ,10 })
+            foreach(var elem in new [] { 1, 2, 3, 4, 5, 6, 7, 8, 9 ,10 })
             {
                 tree.Add(elem);
                 Assert.AreEqual(elem, tree.Count);
@@ -39,11 +39,11 @@ namespace DataStructures.Tests
 
             var expected = new [] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             var actual = tree.GetKeysInOrder();
-            Assert.IsTrue(Enumerable.SequenceEqual(expected, actual));
+            Assert.IsTrue(expected.SequenceEqual(actual));
 
             expected = new [] { 1, 3, 2, 5, 7, 10, 9, 8, 6, 4 };
             actual = tree.GetKeysPostOrder();
-            Assert.IsTrue(Enumerable.SequenceEqual(expected, actual));
+            Assert.IsTrue(expected.SequenceEqual(actual));
 
             Validate(tree.Root);
         }
@@ -67,11 +67,11 @@ namespace DataStructures.Tests
 
             var expected = new [] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             var actual = tree.GetKeysInOrder();
-            Assert.IsTrue(Enumerable.SequenceEqual(expected, actual));
+            Assert.IsTrue(expected.SequenceEqual(actual));
 
             expected = new [] { 1, 3, 2, 5, 7, 10, 9, 8, 6, 4 };
             actual = tree.GetKeysPostOrder();
-            Assert.IsTrue(Enumerable.SequenceEqual(expected, actual));
+            Assert.IsTrue(expected.SequenceEqual(actual));
 
             Validate(tree.Root);
         }
@@ -176,7 +176,7 @@ namespace DataStructures.Tests
 
             var expected = new [] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             var actual = tree.GetKeysInOrder();
-            Assert.IsTrue(Enumerable.SequenceEqual(expected, actual));
+            Assert.IsTrue(expected.SequenceEqual(actual));
         }
 
         [Test]
@@ -194,7 +194,7 @@ namespace DataStructures.Tests
 
             var expected = new [] { 4, 2, 1, 3, 6, 5, 8, 7, 9, 10 };
             var actual = tree.GetKeysPreOrder();
-            Assert.IsTrue(Enumerable.SequenceEqual(expected, actual));
+            Assert.IsTrue(expected.SequenceEqual(actual));
         }
 
         [Test]
@@ -212,7 +212,7 @@ namespace DataStructures.Tests
 
             var expected = new [] { 1, 3, 2, 5, 7, 10, 9, 8, 6, 4 };
             var actual = tree.GetKeysPostOrder();
-            Assert.IsTrue(Enumerable.SequenceEqual(expected, actual));
+            Assert.IsTrue(expected.SequenceEqual(actual));
         }
 
         [Test]
@@ -295,7 +295,7 @@ namespace DataStructures.Tests
         /// </summary>
         /// <param name="node">The node to check.</param>
         /// <returns>true if node passes check, false otherwise.</returns>
-        private bool CheckRightSubtree<T>(AATreeNode<T> node)
+        private static bool CheckRightSubtree<T>(AATreeNode<T> node)
         {
             var condition = node.Right != null &&
                             node.Level - node.Right.Level != 1 &&
@@ -308,11 +308,9 @@ namespace DataStructures.Tests
         /// </summary>
         /// <param name="node">The node to check.</param>
         /// <returns>true if node passes check, false otherwise.</returns>
-        private bool CheckRightGrandChild<T>(AATreeNode<T> node)
+        private static bool CheckRightGrandChild<T>(AATreeNode<T> node)
         {
-            var condition = node.Right != null &&
-                            node.Right.Right != null &&
-                            node.Right.Level < node.Right.Right.Level;
+            var condition = node.Right?.Right != null && node.Right.Level < node.Right.Right.Level;
             return !condition;
         }
 
@@ -321,7 +319,7 @@ namespace DataStructures.Tests
         /// </summary>
         /// <param name="node">The node to check.</param>
         /// <returns>true if node passes check, false otherwise.</returns>
-        private bool CheckNonLeafChildren<T>(AATreeNode<T> node)
+        private static bool CheckNonLeafChildren<T>(AATreeNode<T> node)
         {
             var condition = node.Level > 1 && (node.Left == null || node.Right == null);
             return !condition;
