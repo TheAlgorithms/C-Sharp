@@ -20,26 +20,27 @@ namespace Algorithms.Sequences
         /// <summary>
         /// Gets sequence of prime numbers.
         /// </summary>
-        public IEnumerable<BigInteger> Sequence => GeneratePrimeSequence();
-
-        private static IEnumerable<BigInteger> GeneratePrimeSequence()
+        public IEnumerable<BigInteger> Sequence
         {
-            var primeSequence = new List<BigInteger> { 2 };
-            yield return 2;
-
-            var k = 3;
-
-            while (true)
+            get
             {
-                var current = new BigInteger(k);
-
-                if (primeSequence.All(x => current % x != 0))
+                yield return 2;
+                var primes = new List<BigInteger>
                 {
-                    primeSequence.Add(current);
-                    yield return current;
-                }
+                    2,
+                };
+                var n = new BigInteger(3);
 
-                k += 2;
+                while (true)
+                {
+                    if (primes.All(p => n % p != 0))
+                    {
+                        yield return n;
+                        primes.Add(n);
+                    }
+
+                    n += 2;
+                }
             }
         }
     }
