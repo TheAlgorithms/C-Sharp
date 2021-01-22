@@ -19,26 +19,19 @@ namespace Algorithms.Sequences
         /// <summary>
         /// Gets sequence of factorial numbers.
         /// </summary>
-        public IEnumerable<BigInteger> Sequence => GenerateFactorialSequence();
-
-        private static IEnumerable<BigInteger> GenerateFactorialSequence()
+        public IEnumerable<BigInteger> Sequence
         {
-            var k = 0;
-
-            while (true)
+            get
             {
-                yield return Factorial(k++);
+                var n = 0;
+                var factorial = new BigInteger(1);
+                while (true)
+                {
+                    yield return factorial;
+                    n++;
+                    factorial *= n;
+                }
             }
-        }
-
-        private static BigInteger Factorial(long n)
-        {
-            if (n == 0)
-            {
-                return 1;
-            }
-
-            return n * Factorial(n - 1);
         }
     }
 }
