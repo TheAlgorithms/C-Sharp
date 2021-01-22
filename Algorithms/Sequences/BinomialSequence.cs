@@ -19,21 +19,22 @@ namespace Algorithms.Sequences
         /// <summary>
         /// Gets sequence of binomial coefficients.
         /// </summary>
-        public IEnumerable<BigInteger> Sequence => GenerateBinomialSequence();
-
-        private static IEnumerable<BigInteger> GenerateBinomialSequence()
+        public IEnumerable<BigInteger> Sequence
         {
-            var i = 0;
-
-            while (true)
+            get
             {
-                var row = GenerateRow(i);
-                foreach (var coefficient in row)
-                {
-                    yield return coefficient;
-                }
+                var i = 0;
 
-                i++;
+                while (true)
+                {
+                    var row = GenerateRow(i);
+                    foreach (var coefficient in row)
+                    {
+                        yield return coefficient;
+                    }
+
+                    i++;
+                }
             }
         }
 
