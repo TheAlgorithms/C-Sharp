@@ -19,16 +19,15 @@ namespace Algorithms.Sequences
         /// <summary>
         /// Gets sequence of natural numbers.
         /// </summary>
-        public IEnumerable<BigInteger> Sequence => GenerateSequence();
-
-        private static IEnumerable<BigInteger> GenerateSequence()
+        public IEnumerable<BigInteger> Sequence
         {
-            var current = new BigInteger(1);
-
-            while (true)
+            get
             {
-                yield return current;
-                current++;
+                var n = new BigInteger(1);
+                while (true)
+                {
+                    yield return n++;
+                }
             }
         }
     }
