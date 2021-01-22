@@ -19,31 +19,22 @@ namespace Algorithms.Sequences
         /// <summary>
         /// Gets Fibonacci sequence.
         /// </summary>
-        public IEnumerable<BigInteger> Sequence => GenerateFibonacciSequence();
-
-        private static IEnumerable<BigInteger> GenerateFibonacciSequence()
+        public IEnumerable<BigInteger> Sequence
         {
-            long k = 0;
-
-            while (true)
+            get
             {
-                yield return Fibonacci(k++);
+                yield return 0;
+                yield return 1;
+                BigInteger previous = 0;
+                BigInteger current = 1;
+                while (true)
+                {
+                    var next = previous + current;
+                    previous = current;
+                    current = next;
+                    yield return next;
+                }
             }
-        }
-
-        private static BigInteger Fibonacci(long n)
-        {
-            if (n == 0)
-            {
-                return new BigInteger(0);
-            }
-
-            if (n == 1)
-            {
-                return new BigInteger(1);
-            }
-
-            return Fibonacci(n - 1) + Fibonacci(n - 2);
         }
     }
 }
