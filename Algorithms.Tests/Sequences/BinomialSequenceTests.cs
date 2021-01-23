@@ -6,13 +6,13 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Sequences
 {
-    public class PrimesSequenceTests
+    public class BinomialSequenceTests
     {
         [Test]
-        public void First10ElementsCorrect()
+        public void First4RowsCorrect()
         {
-            var sequence = new PrimesSequence().Sequence.Take(10);
-            sequence.SequenceEqual(new BigInteger[] {2, 3, 5, 7, 11, 13, 17, 19, 23, 29})
+            var sequence = new BinomialSequence().Sequence.Take(10);
+            sequence.SequenceEqual(new BigInteger[] {1, 1, 1, 1, 2, 1, 1, 3, 3, 1})
                 .Should().BeTrue();
         }
     }
