@@ -89,7 +89,8 @@ This repository contains algorithms and data structures implemented in C# for ed
 	* [Problems](./Algorithms/Problems/)
 		* [Stable Marriage](./Algorithms/Problems/StableMarriage)
 			* [Gale-Shapley](./Algorithms/Problems/StableMarriage/GaleShapley.cs)
-		* [N-Queens Problem](./Algorithms/Problems/NQueenProblem/NQueenProblem.cs)
+		* [N-Queens](./Algorithms/Problems/NQueens)
+			* [Backtracking](./Algorithms/Problems/NQueens/BacktrackingNQueensSolver.cs)
 
 * [Data Structures](./DataStructures/)
 	* [Bit Array](./DataStructures/BitArray.cs)
