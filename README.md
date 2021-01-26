@@ -76,6 +76,8 @@ This repository contains algorithms and data structures implemented in C# for ed
 		* [A000027 Natural](./Algorithms/Sequences/NaturalSequence.cs)
 		* [A000040 Primes](./Algorithms/Sequences/PrimesSequence.cs)
 		* [A000045 Fibonacci](./Algorithms/Sequences/FibonacciSequence.cs)
+		* [A000142 Factorial](./Algorithms/Sequences/FactorialSequence.cs)
+		* [A007318 Binomial](./Algorithms/Sequences/BinomialSequence.cs)
 	* [String](./Algorithms/Strings/)
 		* [Longest Consecutive Character](./Algorithms/Strings/GeneralStringAlgorithms.cs)
 		* [Naive String Search](./Algorithms/Strings/NaiveStringSearch.cs)
