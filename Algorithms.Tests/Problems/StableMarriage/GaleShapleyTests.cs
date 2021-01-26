@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Algorithms.Problems.StableMarriage;
+
 using NUnit.Framework;
 
-namespace Algorithms.Problems.StableMarriage
+namespace Algorithms.Tests.Problems.StableMarriage
 {
     /// <summary>
     /// The stable marriage problem (also stable matching problem or SMP)

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Algorithms.Problems.NQueens;
 
 using FluentAssertions;
@@ -39,6 +40,17 @@ namespace Algorithms.Tests.Problems.NQueens
                 ValidateOneQueenPerBottomLeftTopRightDiagonalLine(solution);
             }
         }
+
+        [Test]
+        public static void NCannotBeNegative()
+        {
+            var n = -1;
+
+            Action act = () => new BacktrackingNQueensSolver().BacktrackSolve(n);
+
+            act.Should().Throw<ArgumentException>();
+        }
+        
         private static void ValidateOneQueenPerRow(bool[,] solution)
         {
             for (var i = 0; i < solution.GetLength(1); i++)
