@@ -1,4 +1,6 @@
-﻿using DataStructures.ArrayBasedStack;
+﻿using System;
+
+using DataStructures.ArrayBasedStack;
 
 using NUnit.Framework;
 
@@ -6,11 +8,13 @@ namespace DataStructures.Tests
 {
     public static class ArrayBasedStackTests
     {
+        const string StackEmptyErrorMessage = "Stack is empty";
+
         [Test]
         public static void CountTest()
         {
             var stack = new ArrayBasedStack<int>(new[] { 0, 1, 2, 3, 4 });
-            Assert.IsTrue(stack.Count == 5);
+            Assert.IsTrue(stack.Top == 4);
         }
 
         [Test]
@@ -18,7 +22,7 @@ namespace DataStructures.Tests
         {
             var stack = new ArrayBasedStack<int>(new[] { 0, 1, 2, 3, 4 });
             stack.Clear();
-            Assert.IsTrue(stack.Count == 0);
+            Assert.IsTrue(stack.Top == -1);
         }
 
         [Test]
@@ -80,5 +84,22 @@ namespace DataStructures.Tests
             stack.Push(4);
             Assert.IsTrue(stack.Capacity > 2);
         }
+
+        [Test]
+        public static void ShouldThrowStackEmptyExceptionOnEmptyPopTest()
+        {
+            var stack = new ArrayBasedStack<int>();
+
+            Assert.Catch(() => stack.Pop(), StackEmptyErrorMessage);
+        }
+
+        [Test]
+        public static void ShouldThrowStackEmptyExceptionOnEmptyPeekTest()
+        {
+            var stack = new ArrayBasedStack<int>();
+
+            Assert.Catch(() => stack.Peek(), StackEmptyErrorMessage);
+        }
+
     }
 }
