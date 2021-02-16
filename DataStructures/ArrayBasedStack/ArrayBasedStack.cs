@@ -96,7 +96,7 @@ namespace DataStructures.ArrayBasedStack
         {
             if (top == -1)
             {
-                throw new Exception(StackEmptyErrorMessage);
+                throw new ApplicationException(StackEmptyErrorMessage);
             }
 
             return stack[top];
@@ -110,7 +110,7 @@ namespace DataStructures.ArrayBasedStack
         {
             if (top == -1)
             {
-                throw new Exception(StackEmptyErrorMessage);
+                throw new ApplicationException(StackEmptyErrorMessage);
             }
 
             return stack[top--];
