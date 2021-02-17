@@ -1,16 +1,18 @@
-﻿using Algorithms.Numerics;
+﻿using Algorithms.Numeric;
 using NUnit.Framework;
 
-namespace Algorithms.Test.Numerics
+namespace Algorithms.Tests.Numeric
 {
     public static class PerfectCubeTests
     {
         [Test]
-        [TestCase(8)]
-        [TestCase(27)]
-        [TestCase(64)]
-        [TestCase(216)]
-        public static void PerfectCubeWork(int number)
+        [TestCase(8, ExpectedResult = true)]
+        [TestCase(10, ExpectedResult = false)]
+        [TestCase(27, ExpectedResult = true)]
+        [TestCase(32, ExpectedResult = false)]
+        [TestCase(64, ExpectedResult = true)]
+        [TestCase(216, ExpectedResult = true)]
+        public static bool PerfectCubeWork(int number)
         {
             // Arrange
 
@@ -18,7 +20,7 @@ namespace Algorithms.Test.Numerics
             var result = PerfectCube.IsPerfectCube(number);
             
             // Assert
-            Assert.IsTrue(result);
+            return result;
         }
     }
 }

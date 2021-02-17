@@ -1,16 +1,19 @@
-﻿using Algorithms.Numerics;
+﻿using Algorithms.Numeric;
 using NUnit.Framework;
 
-namespace Algorithms.Test.Numerics
+namespace Algorithms.Tests.Numeric
 {
     public static class PerfectSquareTests
     {
         [Test]
-        [TestCase(4)]
-        [TestCase(9)]
-        [TestCase(16)]
-        [TestCase(81)]
-        public static void PerfectSquareWork(int number)
+        [TestCase(-4, ExpectedResult = false)]
+        [TestCase(4, ExpectedResult = true)]
+        [TestCase(9, ExpectedResult = true)]
+        [TestCase(10, ExpectedResult = false)]
+        [TestCase(16, ExpectedResult = true)]
+        [TestCase(70, ExpectedResult = false)]
+        [TestCase(81, ExpectedResult = true)]
+        public static bool PerfectSquareWork(int number)
         {
             // Arrange
 
@@ -18,7 +21,7 @@ namespace Algorithms.Test.Numerics
             var result = PerfectSquare.IsPerfectSquare(number);
 
             // Assert
-            Assert.IsTrue(result);
+            return result;
         }
     }
 }

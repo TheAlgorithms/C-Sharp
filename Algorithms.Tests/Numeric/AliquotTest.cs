@@ -1,7 +1,7 @@
-﻿using Algorithms.Numerics;
+﻿using Algorithms.Numeric;
 using NUnit.Framework;
 
-namespace Algorithms.Test.Numerics
+namespace Algorithms.Tests.Numeric
 {
     public static class AliquotTest
     {

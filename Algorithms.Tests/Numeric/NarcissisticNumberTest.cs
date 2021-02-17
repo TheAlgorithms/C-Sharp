@@ -1,16 +1,18 @@
-﻿using Algorithms.Numerics;
+﻿using Algorithms.Numeric;
 using NUnit.Framework;
 
-namespace Algorithms.Test.Numerics
+namespace Algorithms.Tests.Numeric
 {
     public static class NarcissisticNumberTest
     {
         [Test]
-        [TestCase(2)]
-        [TestCase(3)]
-        [TestCase(153)]
-        [TestCase(371)]
-        public static void NarcissisticNumberWork(int number)
+        [TestCase(2, ExpectedResult = true)]
+        [TestCase(3, ExpectedResult = true)]
+        [TestCase(28, ExpectedResult = false)]
+        [TestCase(153, ExpectedResult = true)]
+        [TestCase(170, ExpectedResult = false)]
+        [TestCase(371, ExpectedResult = true)]
+        public static bool NarcissisticNumberWork(int number)
         {
             // Arrange
 
@@ -18,7 +20,7 @@ namespace Algorithms.Test.Numerics
             var result = NarcissisticNumber.IsNarcissistic(number);
 
             // Assert
-            Assert.IsTrue(result);
+            return result;
         }
     }
 }
