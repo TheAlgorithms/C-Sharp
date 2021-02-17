@@ -23,6 +23,7 @@
     * Eigenvalue
       * [Poweriterationtests](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms.Tests/LinearAlgebra/Eigenvalue/PowerIterationTests.cs)
   * Numeric
+    * [Aliquottest](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms.Tests/Numeric/AliquotTest.cs)
     * [Binomialcoefficienttests](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms.Tests/Numeric/BinomialCoefficientTests.cs)
     * Decomposition
       * [Lutests](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms.Tests/Numeric/Decomposition/LUTests.cs)
@@ -35,6 +36,9 @@
     * Greatestcommondivisor
       * [Binarygreatestcommondivisorfindertests](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms.Tests/Numeric/GreatestCommonDivisor/BinaryGreatestCommonDivisorFinderTests.cs)
       * [Euclideangreatestcommondivisorfindertests](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms.Tests/Numeric/GreatestCommonDivisor/EuclideanGreatestCommonDivisorFinderTests.cs)
+    * [Narcissisticnumbertest](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms.Tests/Numeric/NarcissisticNumberTest.cs)
+    * [Perfectnumbertest](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms.Tests/Numeric/PerfectNumberTest.cs)
+    * [Perfectsquaretest](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms.Tests/Numeric/PerfectSquareTest.cs)
     * Pseudoinverse
       * [Pseudoinversetests](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms.Tests/Numeric/PseudoInverse/PseudoInverseTests.cs)
   * Other
@@ -115,6 +119,7 @@
     * Eigenvalue
       * [Poweriteration](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/LinearAlgebra/Eigenvalue/PowerIteration.cs)
   * Numeric
+    * [Aliquot](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Aliquot.cs)
     * [Binomialcoefficient](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/BinomialCoefficient.cs)
     * Decomposition
       * [Lu](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Decomposition/LU.cs)
@@ -128,6 +133,9 @@
       * [Binarygreatestcommondivisorfinder](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/GreatestCommonDivisor/BinaryGreatestCommonDivisorFinder.cs)
       * [Euclideangreatestcommondivisorfinder](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/GreatestCommonDivisor/EuclideanGreatestCommonDivisorFinder.cs)
       * [Igreatestcommondivisorfinder](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/GreatestCommonDivisor/IGreatestCommonDivisorFinder.cs)
+    * [Narcissisticnumber](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/NarcissisticNumber.cs)
+    * [Perfectnumber](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/PerfectNumber.cs)
+    * [Perfectsquare](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/PerfectSquare.cs)
     * Pseudoinverse
       * [Pseudoinverse](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Pseudoinverse/PseudoInverse.cs)
     * Series
