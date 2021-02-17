@@ -11,7 +11,8 @@ namespace Algorithms.Numerics
         /// <summary>
         /// Checks if a number is a Narcissistic number or not.
         /// </summary>
-        /// <param name="number">Number too check.</param>
+        /// <param name="number">Number to check.</param>
+
         /// <returns>True if is a Narcissistic number; False otherwise.</returns>
         public static bool IsNarcissistic(int number)
         {
