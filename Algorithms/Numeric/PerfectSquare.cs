@@ -14,6 +14,11 @@ namespace Algorithms.Numeric
         /// <returns>True if is a perfect square; False otherwise.</returns>
         public static bool IsPerfectSquare(int number)
         {
+            if (number < 0)
+            {
+                return false;
+            }
+
             int sqrt = (int)Math.Sqrt(number);
             return sqrt * sqrt == number;
         }
