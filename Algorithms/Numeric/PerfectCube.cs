@@ -10,7 +10,8 @@ namespace Algorithms.Numerics
         /// <summary>
         /// Checks if a number is a perfect cube or not.
         /// </summary>
-        /// <param name="number">Number too check.</param>
+        /// <param name="number">Number to check.</param>
+
         /// <returns>True if is a perfect cube; False otherwise.</returns>
         /// <exception cref="ArgumentException">Error number is not on interval (0.0; int.MaxValue).</exception>
         public static bool IsPerfectCube(int number)
