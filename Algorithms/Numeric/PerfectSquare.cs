@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Algorithms.Numerics
+namespace Algorithms.Numeric
 {
     /// <summary>
     /// A perfect square is an element of algebraic structure that is equal to the square of another element.
@@ -12,14 +12,8 @@ namespace Algorithms.Numerics
         /// </summary>
         /// <param name="number">Number too check.</param>
         /// <returns>True if is a perfect square; False otherwise.</returns>
-        /// <exception cref="ArgumentException">Error number is not on interval (0.0; int.MaxValue).</exception>
         public static bool IsPerfectSquare(int number)
         {
-            if (number < 0)
-            {
-                throw new ArgumentException(string.Format("Error number is not on interval (0.0; {0}).", int.MaxValue));
-            }
-
             int sqrt = (int)Math.Sqrt(number);
             return sqrt * sqrt == number;
         }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Algorithms.Numerics
+namespace Algorithms.Numeric
 {
     /// <summary>
     /// A Narcissistic number is equal to the sum of the cubes of its digits. For example, 370 is a
@@ -12,7 +12,6 @@ namespace Algorithms.Numerics
         /// Checks if a number is a Narcissistic number or not.
         /// </summary>
         /// <param name="number">Number to check.</param>
-
         /// <returns>True if is a Narcissistic number; False otherwise.</returns>
         public static bool IsNarcissistic(int number)
         {

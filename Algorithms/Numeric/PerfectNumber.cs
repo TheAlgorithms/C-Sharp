@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Algorithms.Numerics
+namespace Algorithms.Numeric
 {
     /// <summary>
     /// In number theory, a perfect number is a positive integer that is equal to the sum of its positive
@@ -12,14 +12,14 @@ namespace Algorithms.Numerics
         /// <summary>
         /// Checks if a number is a perfect number or not.
         /// </summary>
-        /// <param name="number">Number too check.</param>
+        /// <param name="number">Number to check.</param>
         /// <returns>True if is a perfect number; False otherwise.</returns>
         /// <exception cref="ArgumentException">Error number is not on interval (0.0; int.MaxValue).</exception>
         public static bool IsPerfectNumber(int number)
         {
             if (number < 0)
             {
-                throw new ArgumentException(string.Format("Error number is not on interval (0.0; {0}).", int.MaxValue));
+                throw new ArgumentException($"{nameof(number)} cannot be negative");
             }
 
             int sum = 0; /* sum of its positive divisors */
