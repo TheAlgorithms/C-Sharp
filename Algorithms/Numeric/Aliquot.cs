@@ -21,7 +21,6 @@ namespace Algorithms.Numeric
             if (number < 0)
             {
                 throw new ArgumentException($"{nameof(number)} cannot be negative");
-
             }
 
             int sum = 0;
