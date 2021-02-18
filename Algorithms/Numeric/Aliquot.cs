@@ -20,7 +20,8 @@ namespace Algorithms.Numeric
         {
             if (number < 0)
             {
-                throw new ArgumentException(string.Format("Error number is not on interval (0.0; {0}).", int.MaxValue));
+                throw new ArgumentException($"{nameof(number)} cannot be negative");
+
             }
 
             int sum = 0;
