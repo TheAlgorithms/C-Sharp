@@ -28,10 +28,7 @@ namespace Algorithms.Numeric
             while (number > 0)
             {
                 int remainder = number % 10;
-                int power = 1;
-                for (int i = 1; i <= numberOfDigits; power *= remainder, ++i)
-                {
-                }
+                int power = (int)Math.Pow(remainder, numberOfDigits);
 
                 sum += power;
                 number /= 10;
