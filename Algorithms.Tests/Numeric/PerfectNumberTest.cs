@@ -24,7 +24,7 @@ namespace Algorithms.Tests.Numeric
 
         [Test]
         [TestCase(-2)]
-        public static void AliquotSumShouldThrowEx(int number)
+        public static void PerfectNumberShouldThrowEx(int number)
         {
             // Arrange
 
