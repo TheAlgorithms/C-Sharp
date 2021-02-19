@@ -1,4 +1,5 @@
-﻿using Algorithms.Numeric;
+﻿using System;
+using Algorithms.Numeric;
 using NUnit.Framework;
 
 namespace Algorithms.Tests.Numeric
@@ -19,6 +20,16 @@ namespace Algorithms.Tests.Numeric
 
             // Assert
             Assert.IsTrue(result);
+        }
+
+        [Test]
+        [TestCase(-2)]
+        public static void AliquotSumShouldThrowEx(int number)
+        {
+            // Arrange
+
+            // Assert
+            Assert.Throws<ArgumentException>(() => Aliquot.AliquotSum(number));
         }
     }
 }
