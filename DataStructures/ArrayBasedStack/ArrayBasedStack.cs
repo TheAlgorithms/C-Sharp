@@ -10,6 +10,7 @@ namespace DataStructures.ArrayBasedStack
     public class ArrayBasedStack<T>
     {
         private const int DefaultCapacity = 10;
+        private const string StackEmptyErrorMessage = "Stack is empty";
 
         /// <summary>
         /// <see cref="Array"/> based stack.
@@ -19,12 +20,16 @@ namespace DataStructures.ArrayBasedStack
         /// <summary>
         /// How many items are in the stack right now.
         /// </summary>
-        private int count;
+        private int top;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ArrayBasedStack{T}"/> class.
         /// </summary>
-        public ArrayBasedStack() => stack = new T[DefaultCapacity];
+        public ArrayBasedStack()
+        {
+            stack = new T[DefaultCapacity];
+            top = -1;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ArrayBasedStack{T}"/> class.
@@ -49,7 +54,7 @@ namespace DataStructures.ArrayBasedStack
         /// <summary>
         /// Gets the number of elements on the <see cref="ArrayBasedStack{T}"/>.
         /// </summary>
-        public int Count => count;
+        public int Top => top;
 
         /// <summary>
         /// Gets or sets the Capacity of the <see cref="ArrayBasedStack{T}"/>.
@@ -70,20 +75,32 @@ namespace DataStructures.ArrayBasedStack
         /// <summary>
         /// Removes all items from the <see cref="ArrayBasedStack{T}"/>.
         /// </summary>
-        public void Clear() => count = 0;
+        public void Clear()
+        {
+            top = -1;
+            Capacity = DefaultCapacity;
+        }
 
         /// <summary>
         /// Determines whether an element is in the <see cref="ArrayBasedStack{T}"/>.
         /// </summary>
         /// <param name="item">The item to locate in the <see cref="ArrayBasedStack{T}"/>.</param>
         /// <returns>True, if the item is in the stack.</returns>
-        public bool Contains(T item) => Array.IndexOf(stack, item, 0, count) > -1;
+        public bool Contains(T item) => Array.IndexOf(stack, item, 0, top + 1) > -1;
 
         /// <summary>
         /// Returns the item at the top of the <see cref="ArrayBasedStack{T}"/> without removing it.
         /// </summary>
         /// <returns>The item at the top of the <see cref="ArrayBasedStack{T}"/>.</returns>
-        public T Peek() => stack[count - 1];
+        public T Peek()
+        {
+            if (top == -1)
+            {
+                throw new InvalidOperationException(StackEmptyErrorMessage);
+            }
+
+            return stack[top];
+        }
 
         /// <summary>
         /// Removes and returns the item at the top of the <see cref="ArrayBasedStack{T}"/>.
@@ -91,9 +108,12 @@ namespace DataStructures.ArrayBasedStack
         /// <returns>The item removed from the top of the <see cref="ArrayBasedStack{T}"/>.</returns>
         public T Pop()
         {
-            var item = stack[count - 1];
-            count = count - 1;
-            return item;
+            if (top == -1)
+            {
+                throw new InvalidOperationException(StackEmptyErrorMessage);
+            }
+
+            return stack[top--];
         }
 
         /// <summary>
@@ -102,13 +122,12 @@ namespace DataStructures.ArrayBasedStack
         /// <param name="item">The item to push onto the <see cref="ArrayBasedStack{T}"/>.</param>
         public void Push(T item)
         {
-            if (count == Capacity)
+            if (top == Capacity - 1)
             {
-                Capacity = Capacity * 2;
+                Capacity *= 2;
             }
 
-            stack[count] = item;
-            count = count + 1;
+            stack[++top] = item;
         }
     }
 }
