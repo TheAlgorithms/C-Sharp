@@ -100,7 +100,7 @@ namespace DataStructures.BinarySearchTree
         /// </summary>
         /// <param name="key">The key to search for.</param>
         /// <returns>true if the key is in the BST, false otherwise.</returns>
-        public bool Contains(TKey key) => Search(root, key) != null;
+        public bool Contains(TKey key) => Search(root, key) is not null;
 
         /// <summary>
         /// Removes a node with a key that matches <paramref name="key"/>.
@@ -182,7 +182,7 @@ namespace DataStructures.BinarySearchTree
             int compareResult = comparer.Compare(node.Key, key);
             if (compareResult > 0)
             {
-                if (node.Left != null)
+                if (node.Left is not null)
                 {
                     Add(node.Left, key);
                 }
@@ -194,7 +194,7 @@ namespace DataStructures.BinarySearchTree
             }
             else if (compareResult < 0)
             {
-                if (node.Right != null)
+                if (node.Right is not null)
                 {
                     Add(node.Right, key);
                 }
@@ -259,7 +259,7 @@ namespace DataStructures.BinarySearchTree
 
                 // Case 0: Node has no children.
                 // Case 1: Node has one child.
-                if (node.Left == null || node.Right == null)
+                if (node.Left is null || node.Right is null)
                 {
                     replacementNode = node.Left ?? node.Right;
                 }

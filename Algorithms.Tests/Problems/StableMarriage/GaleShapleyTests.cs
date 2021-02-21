@@ -35,13 +35,13 @@ namespace Algorithms.Tests.Problems.StableMarriage
 
             GaleShapley.Match(proposers, accepters);
 
-            Assert.IsTrue(accepters.All(x => x.EngagedTo != null));
-            Assert.IsTrue(proposers.All(x => x.EngagedTo != null));
+            Assert.IsTrue(accepters.All(x => x.EngagedTo is not null));
+            Assert.IsTrue(proposers.All(x => x.EngagedTo is not null));
             Assert.IsTrue(AreMatchesStable(proposers, accepters));
         }
 
         private static bool AreMatchesStable(Proposer[] proposers, Accepter[] accepters) =>
-            proposers.All(p => p.EngagedTo != null && Score(p, p.EngagedTo) <= accepters.Where(a => a.PrefersOverCurrent(p)).Min(a => Score(p, a)));
+            proposers.All(p => p.EngagedTo is not null && Score(p, p.EngagedTo) <= accepters.Where(a => a.PrefersOverCurrent(p)).Min(a => Score(p, a)));
 
         private static int Score(Proposer proposer, Accepter accepter) => proposer.PreferenceOrder.ToList().IndexOf(accepter);
     }

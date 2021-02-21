@@ -198,7 +198,7 @@ namespace DataStructures.AATree
         /// <exception cref="ArgumentException">Thrown if key is already in the tree.</exception>
         private AATreeNode<TKey> Add(TKey key, AATreeNode<TKey>? node)
         {
-            if (node == null)
+            if (node is null)
             {
                 return new AATreeNode<TKey>(key, 1);
             }
@@ -242,12 +242,12 @@ namespace DataStructures.AATree
             }
             else
             {
-                if (node.Left == null && node.Right == null)
+                if (node.Left is null && node.Right is null)
                 {
                     return null;
                 }
 
-                if (node.Left == null)
+                if (node.Left is null)
                 {
                     var successor = GetMin(node.Right!);
                     node.Right = Remove(successor.Key, node.Right);
@@ -265,7 +265,7 @@ namespace DataStructures.AATree
             node = Skew(node);
             node!.Right = Skew(node.Right);
 
-            if (node.Right != null)
+            if (node.Right is not null)
             {
                 node.Right.Right = Skew(node.Right.Right);
             }

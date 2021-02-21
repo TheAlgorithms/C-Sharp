@@ -87,14 +87,14 @@ namespace Algorithms.DataCompression
                 return (compressionKeys, decompressionKeys);
             }
 
-            if (tree.LeftChild != null)
+            if (tree.LeftChild is not null)
             {
                 var (lsck, lsdk) = GetKeys(tree.LeftChild);
                 compressionKeys.AddMany(lsck.Select(kvp => (kvp.Key, "0" + kvp.Value)));
                 decompressionKeys.AddMany(lsdk.Select(kvp => ("0" + kvp.Key, kvp.Value)));
             }
 
-            if (tree.RightChild != null)
+            if (tree.RightChild is not null)
             {
                 var (rsck, rsdk) = GetKeys(tree.RightChild);
                 compressionKeys.AddMany(rsck.Select(kvp => (kvp.Key, "1" + kvp.Value)));

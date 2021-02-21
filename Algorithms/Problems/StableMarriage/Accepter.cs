@@ -9,6 +9,6 @@ namespace Algorithms.Problems.StableMarriage
 
         public List<Proposer> PreferenceOrder { get; set; } = new List<Proposer>();
 
-        public bool PrefersOverCurrent(Proposer newProposer) => EngagedTo == null || PreferenceOrder.IndexOf(newProposer) < PreferenceOrder.IndexOf(EngagedTo);
+        public bool PrefersOverCurrent(Proposer newProposer) => EngagedTo is null || PreferenceOrder.IndexOf(newProposer) < PreferenceOrder.IndexOf(EngagedTo);
     }
 }

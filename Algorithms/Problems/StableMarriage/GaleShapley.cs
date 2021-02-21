@@ -27,7 +27,7 @@ namespace Algorithms.Problems.StableMarriage
             }
         }
 
-        private static bool IsEngaged(Proposer proposer) => proposer.EngagedTo != null;
+        private static bool IsEngaged(Proposer proposer) => proposer.EngagedTo is not null;
 
         private static void DoSingleMatchingRound(IEnumerable<Proposer> proposers)
         {
@@ -35,7 +35,7 @@ namespace Algorithms.Problems.StableMarriage
             {
                 var accepter = newProposer.PreferenceOrder.First.Value;
 
-                if (accepter.EngagedTo == null)
+                if (accepter.EngagedTo is null)
                 {
                     Engage(newProposer, accepter);
                 }

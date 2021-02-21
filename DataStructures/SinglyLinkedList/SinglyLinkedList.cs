@@ -53,7 +53,7 @@ namespace DataStructures.SinglyLinkedList
             var tempElement = Head;
 
             // iterates through all elements
-            while (tempElement.Next != null)
+            while (tempElement.Next is not null)
             {
                 tempElement = tempElement.Next;
             }
@@ -77,7 +77,7 @@ namespace DataStructures.SinglyLinkedList
 
             var tempElement = Head;
 
-            for (var i = 0; tempElement != null && i < index; i++)
+            for (var i = 0; tempElement is not null && i < index; i++)
             {
                 tempElement = tempElement.Next;
             }
@@ -105,7 +105,7 @@ namespace DataStructures.SinglyLinkedList
             var tempElement = Head;
             var length = 1;
 
-            while (tempElement.Next != null)
+            while (tempElement.Next is not null)
             {
                 tempElement = tempElement.Next;
                 length++;
@@ -124,7 +124,7 @@ namespace DataStructures.SinglyLinkedList
             SinglyLinkedListNode<T>? tempElement = Head;
 
             // all elements where a next attribute exists
-            while (tempElement != null)
+            while (tempElement is not null)
             {
                 yield return tempElement.Data;
                 tempElement = tempElement.Next;
@@ -142,10 +142,10 @@ namespace DataStructures.SinglyLinkedList
             SinglyLinkedListNode<T>? previousElement = null;
 
             // iterates through all elements
-            while (currentElement != null)
+            while (currentElement is not null)
             {
                 // checks if the element, which should get deleted is in this list element
-                if ((currentElement.Data is null && element is null) || (currentElement.Data != null && currentElement.Data.Equals(element)))
+                if ((currentElement.Data is null && element is null) || (currentElement.Data is not null && currentElement.Data.Equals(element)))
                 {
                     // if element is head just take the next one as head
                     if (currentElement.Equals(Head))
@@ -155,7 +155,7 @@ namespace DataStructures.SinglyLinkedList
                     }
 
                     // else take the prev one and overwrite the next with the one behind the deleted
-                    if (previousElement != null)
+                    if (previousElement is not null)
                     {
                         previousElement.Next = currentElement.Next;
                         return true;
