@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DataStructures
+namespace DataStructures.Queue
 {
     /// <summary>
     /// Implementation of a list based queue. FIFO style.

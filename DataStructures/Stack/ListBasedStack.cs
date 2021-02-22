@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DataStructures.ListBasedStack
+namespace DataStructures.Stack
 {
     /// <summary>
     /// Implementation of a list based stack. FILO style.

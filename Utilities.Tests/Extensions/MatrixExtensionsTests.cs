@@ -80,11 +80,11 @@ namespace Utilities.Tests.Extensions
         public static void EqualMatricesShouldReturnTrue()
         {
             // Arrange
-            var A = new double[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } };
-            var B = new double[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } };
+            var a = new double[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } };
+            var b = new double[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } };
 
             // Act
-            var result = A.IsEqual(B);
+            var result = a.IsEqual(b);
 
             // Assert
             Assert.True(result);
@@ -94,11 +94,11 @@ namespace Utilities.Tests.Extensions
         public static void NonEqualMatricesShouldReturnFalse()
         {
             // Arrange
-            var A = new double[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } };
-            var B = new double[,] { { 1, 2, 3 }, { 1, 2, 6 }, { 1, 2, 3 } };
+            var a = new double[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } };
+            var b = new double[,] { { 1, 2, 3 }, { 1, 2, 6 }, { 1, 2, 3 } };
 
             // Act
-            var result = A.IsEqual(B);
+            var result = a.IsEqual(b);
 
             // Assert
             Assert.False(result);
@@ -108,11 +108,11 @@ namespace Utilities.Tests.Extensions
         public static void DifferentSizeMatricesShouldReturnFalse()
         {
             // Arrange
-            var A = new double[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } };
-            var B = new double[,] { { 1, 2, 3 }, { 1, 2, 3 } };
+            var a = new double[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } };
+            var b = new double[,] { { 1, 2, 3 }, { 1, 2, 3 } };
 
             // Act
-            var result = A.IsEqual(B);
+            var result = a.IsEqual(b);
 
             // Assert
             Assert.False(result);

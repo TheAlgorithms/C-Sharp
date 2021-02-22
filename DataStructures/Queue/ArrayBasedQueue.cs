@@ -1,6 +1,6 @@
 using System;
 
-namespace DataStructures
+namespace DataStructures.Queue
 {
     /// <summary>
     /// Implementation of an array based queue. FIFO style.

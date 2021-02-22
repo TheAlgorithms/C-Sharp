@@ -3,24 +3,18 @@ using System;
 namespace Algorithms.Numeric.GreatestCommonDivisor
 {
     /// <summary>
-    /// TODO.
+    /// Finds greatest common divisor for numbers u and v
+    /// using binary algorithm.
+    /// Wiki: https://en.wikipedia.org/wiki/Binary_GCD_algorithm.
     /// </summary>
     public class BinaryGreatestCommonDivisorFinder : IGreatestCommonDivisorFinder
     {
-        /// <summary>
-        /// Finds greatest common divisor for numbers u and v
-        /// using binary algorithm.
-        /// Wiki: https://en.wikipedia.org/wiki/Binary_GCD_algorithm.
-        /// </summary>
-        /// <param name="u">TODO.</param>
-        /// <param name="v">TODO. 2.</param>
-        /// <returns>Greatest common divisor.</returns>
-        public int Find(int u, int v)
+        public int FindGcd(int u, int v)
         {
             // GCD(0, 0) = 0
             if (u == 0 && v == 0)
             {
-                return int.MaxValue;
+                return 0;
             }
 
             // GCD(0, v) = v; GCD(u, 0) = u

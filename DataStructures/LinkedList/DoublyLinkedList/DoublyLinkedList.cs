@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Utilities.Exceptions;
 
-namespace DataStructures.DoublyLinkedList
+namespace DataStructures.LinkedList.DoublyLinkedList
 {
     /// <summary>
     /// Similar to a Singly Linked List but each node contains a refenrence to the previous node in the list.
@@ -156,7 +156,7 @@ namespace DataStructures.DoublyLinkedList
         /// </summary>
         public void Reverse()
         {
-            DoublyLinkedListNode<T>? current = Head;
+            var current = Head;
             DoublyLinkedListNode<T>? temp = null;
 
             while (current is not null)

@@ -19,14 +19,14 @@ namespace DataStructures.SegmentTrees
         public SegmentTree(int[] arr)
         {
             // Calculates next power of two
-            int pow = (int)Math.Pow(2, Math.Ceiling(Math.Log(arr.Length, 2)));
+            var pow = (int)Math.Pow(2, Math.Ceiling(Math.Log(arr.Length, 2)));
             Tree = new int[2 * pow];
 
             // Transfers the input array into the last half of the segment tree array
             Array.Copy(arr, 0, Tree, pow, arr.Length);
 
             // Calculates the first half
-            for (int i = pow - 1; i > 0; --i)
+            for (var i = pow - 1; i > 0; --i)
             {
                 Tree[i] = Tree[Left(i)] + Tree[Right(i)];
             }
@@ -105,7 +105,7 @@ namespace DataStructures.SegmentTrees
             }
 
             // Calculates index m of the node that cuts the current subarray in half
-            int m = (a + b) / 2;
+            var m = (a + b) / 2;
 
             // Start query of new two subarrays a:m and m+1:b
             // The right and left child cover this intervals

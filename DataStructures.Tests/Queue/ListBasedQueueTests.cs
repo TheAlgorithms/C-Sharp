@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Text;
+
+using DataStructures.Queue;
+
 using NUnit.Framework;
 
-namespace DataStructures.Tests
+namespace DataStructures.Tests.Queue
 {
     public static class ListBasedQueueTests
     {
@@ -17,7 +20,7 @@ namespace DataStructures.Tests
             var result = new StringBuilder();
 
             // Act
-            for (int i = 0; i < 3; i++)
+            for (var i = 0; i < 3; i++)
             {
                 result.Append(q.Dequeue());
             }
@@ -35,10 +38,10 @@ namespace DataStructures.Tests
             var q = new ListBasedQueue<int>();
             q.Enqueue(1);
             q.Enqueue(2);
-            int peeked = 0;
+            var peeked = 0;
 
             // Act
-            for (int i = 0; i < 3; i++)
+            for (var i = 0; i < 3; i++)
             {
                 peeked = q.Peek();
             }

@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using Algorithms.Searches;
+
+using Algorithms.Search;
+
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 

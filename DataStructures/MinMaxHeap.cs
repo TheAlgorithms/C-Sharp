@@ -27,7 +27,7 @@ namespace DataStructures
             collection ??= Enumerable.Empty<T>();
 
             heap = collection.ToList();
-            for (int i = Count / 2 - 1; i >= 0; --i)
+            for (var i = Count / 2 - 1; i >= 0; --i)
             {
                 PushDown(i);
             }
@@ -65,7 +65,7 @@ namespace DataStructures
                 throw new InvalidOperationException("Heap is empty");
             }
 
-            T max = GetMax();
+            var max = GetMax();
             RemoveNode(GetMaxNodeIndex());
             return max;
         }
@@ -82,7 +82,7 @@ namespace DataStructures
                 throw new InvalidOperationException("Heap is empty");
             }
 
-            T min = GetMin();
+            var min = GetMin();
             RemoveNode(0);
             return min;
         }
@@ -125,8 +125,8 @@ namespace DataStructures
         private int IndexOfMaxChildOrGrandchild(int index)
         {
             var descendants = new[] { 2 * index + 1, 2 * index + 2, 4 * index + 3, 4 * index + 4, 4 * index + 5, 4 * index + 6 };
-            int resIndex = descendants[0];
-            foreach (int descendant in descendants)
+            var resIndex = descendants[0];
+            foreach (var descendant in descendants)
             {
                 if (descendant >= Count)
                 {
@@ -150,8 +150,8 @@ namespace DataStructures
         private int IndexOfMinChildOrGrandchild(int index)
         {
             var descendants = new[] { 2 * index + 1, 2 * index + 2, 4 * index + 3, 4 * index + 4, 4 * index + 5, 4 * index + 6 };
-            int resIndex = descendants[0];
-            foreach (int descendant in descendants)
+            var resIndex = descendants[0];
+            foreach (var descendant in descendants)
             {
                 if (descendant >= Count)
                 {
@@ -225,7 +225,7 @@ namespace DataStructures
                 return;
             }
 
-            int maxIndex = IndexOfMaxChildOrGrandchild(index);
+            var maxIndex = IndexOfMaxChildOrGrandchild(index);
 
             // If smaller element are put at min level (as result of swaping), it doesn't affect sub-tree validity.
             // If smaller element are put at max level, PushDownMax() should be called for that node.
@@ -258,7 +258,7 @@ namespace DataStructures
                 return;
             }
 
-            int minIndex = IndexOfMinChildOrGrandchild(index);
+            var minIndex = IndexOfMinChildOrGrandchild(index);
 
             // If bigger element are put at max level (as result of swaping), it doesn't affect sub-tree validity.
             // If bigger element are put at min level, PushDownMin() should be called for that node.
@@ -299,7 +299,7 @@ namespace DataStructures
                 return;
             }
 
-            int parent = Parent(index);
+            var parent = Parent(index);
 
             if (IsMinLevelIndex(index))
             {
@@ -331,7 +331,7 @@ namespace DataStructures
         {
             if (index > 2)
             {
-                int grandparent = Grandparent(index);
+                var grandparent = Grandparent(index);
                 if (Comparer.Compare(heap[index], heap[grandparent]) > 0)
                 {
                     SwapNodes(index, grandparent);
@@ -344,7 +344,7 @@ namespace DataStructures
         {
             if (index > 2)
             {
-                int grandparent = Grandparent(index);
+                var grandparent = Grandparent(index);
                 if (Comparer.Compare(heap[index], heap[grandparent]) < 0)
                 {
                     SwapNodes(index, grandparent);
@@ -365,7 +365,7 @@ namespace DataStructures
 
         private void SwapNodes(int i, int j)
         {
-            T temp = heap[i];
+            var temp = heap[i];
             heap[i] = heap[j];
             heap[j] = temp;
         }

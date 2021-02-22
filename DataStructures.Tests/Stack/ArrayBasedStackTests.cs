@@ -1,10 +1,8 @@
-﻿using System;
-
-using DataStructures.ArrayBasedStack;
+﻿using DataStructures.Stack;
 
 using NUnit.Framework;
 
-namespace DataStructures.Tests
+namespace DataStructures.Tests.Stack
 {
     public static class ArrayBasedStackTests
     {

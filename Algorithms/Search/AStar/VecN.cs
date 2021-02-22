@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AStar
+namespace Algorithms.Search.AStar
 {
     /// <summary>
     /// Vector Struct with N Dimensions.

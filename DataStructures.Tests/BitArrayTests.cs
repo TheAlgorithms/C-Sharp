@@ -543,7 +543,7 @@ namespace DataStructures.Tests
             var counterOnes = 0;
             var counterZeros = 0;
 
-            foreach (bool bit in testObj1)
+            foreach (var bit in testObj1)
             {
                 if (bit)
                 {

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AStar
+// todo: extract to data structures
+namespace Algorithms.Search.AStar
 {
     /// <summary>
     /// Generic Priority Queue.
@@ -17,42 +18,18 @@ namespace AStar
 
         private readonly bool isDescending;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PriorityQueue{T}"/> class.
-        /// </summary>
-        public PriorityQueue() => list = new List<T>();
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PriorityQueue{T}"/> class.
-        /// </summary>
-        /// <param name="isDescending">Should Reverse Sort order? Default: false.</param>
-        public PriorityQueue(bool isDescending)
-            : this() => this.isDescending = isDescending;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PriorityQueue{T}"/> class.
-        /// </summary>
-        /// <param name="capacity">Initial Capacity.</param>
-        public PriorityQueue(int capacity)
-            : this(capacity, false)
+        public PriorityQueue(bool isDescending = false)
         {
+            this.isDescending = isDescending;
+            list = new List<T>();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PriorityQueue{T}"/> class.
         /// </summary>
-        /// <param name="collection">Internal Data.</param>
-        public PriorityQueue(IEnumerable<T> collection)
-            : this(collection, false)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PriorityQueue{T}"/> class.
-        /// </summary>
-        /// <param name="capacity">Initial Capacity.</param>
+        /// <param name="capacity">Initial capacity.</param>
         /// <param name="isDescending">Should Reverse Sort order? Default: false.</param>
-        public PriorityQueue(int capacity, bool isDescending)
+        public PriorityQueue(int capacity, bool isDescending = false)
         {
             list = new List<T>(capacity);
             this.isDescending = isDescending;
@@ -61,9 +38,9 @@ namespace AStar
         /// <summary>
         /// Initializes a new instance of the <see cref="PriorityQueue{T}"/> class.
         /// </summary>
-        /// <param name="collection">Internal Data.</param>
+        /// <param name="collection">Internal data.</param>
         /// <param name="isDescending">Should Reverse Sort order? Default: false.</param>
-        public PriorityQueue(IEnumerable<T> collection, bool isDescending)
+        public PriorityQueue(IEnumerable<T> collection, bool isDescending = false)
             : this()
         {
             this.isDescending = isDescending;
@@ -140,7 +117,7 @@ namespace AStar
         }
 
         /// <summary>
-        /// Returns the next element in the queue without dequeueing.
+        /// Returns the next element in the queue without dequeuing.
         /// </summary>
         /// <returns>The next element of the queue.</returns>
         public T Peek()

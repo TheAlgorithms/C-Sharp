@@ -13,12 +13,12 @@ namespace Algorithms.Tests.Numeric
         [TestCase(16, ExpectedResult = true)]
         [TestCase(70, ExpectedResult = false)]
         [TestCase(81, ExpectedResult = true)]
-        public static bool PerfectSquareWork(int number)
+        public static bool IsPerfectSquare_ResultIsCorrect(int number)
         {
             // Arrange
 
             // Act
-            var result = PerfectSquare.IsPerfectSquare(number);
+            var result = PerfectSquareChecker.IsPerfectSquare(number);
 
             // Assert
             return result;

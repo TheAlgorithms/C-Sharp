@@ -152,32 +152,25 @@ namespace DataStructures
         ///
         /// purpose: Setups the array with the input sequence.
         /// assumes: sequence must been greater or equal to 1.
-        /// the sequence may only be allowed contains onese or zeros.
+        /// the sequence may only contain ones or zeros.
         /// </summary>
         /// <param name="sequence">A string sequence of 0's and 1's.</param>
         public BitArray(string sequence)
         {
             // precondition I
-            if (sequence.Length > 0)
+            if (sequence.Length <= 0)
             {
-                // precondition II
-                if (Match(sequence))
-                {
-                    field = new bool[sequence.Length];
-                    Compile(sequence);
-                }
-                else
-                {
-                    // error case II
-                    throw new Exception("BitArray: the sequence may only " +
-                                        "be allowed contains onese or zeros.");
-                }
-            }
-            else
-            {
-                // error case I
                 throw new Exception("BitArray: sequence must been greater or equal as 1");
             }
+
+            // precondition II
+            if (!Match(sequence))
+            {
+                throw new Exception("BitArray: the sequence may only contain ones or zeros.");
+            }
+
+            field = new bool[sequence.Length];
+            Compile(sequence);
         }
 
         /// <summary>

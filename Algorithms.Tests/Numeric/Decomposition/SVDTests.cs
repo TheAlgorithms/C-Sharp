@@ -13,9 +13,9 @@ namespace Algorithms.Tests.Numeric.Decomposition
         {
             Assert.AreEqual(matrix1.GetLength(0), matrix2.GetLength(0));
             Assert.AreEqual(matrix1.GetLength(1), matrix2.GetLength(1));
-            for (int i = 0; i < matrix1.GetLength(0); i++)
+            for (var i = 0; i < matrix1.GetLength(0); i++)
             {
-                for (int j = 0; j < matrix1.GetLength(1); j++)
+                for (var j = 0; j < matrix1.GetLength(1); j++)
                 {
                     Assert.AreEqual(matrix1[i, j], matrix2[i, j], epsilon, $"At index ({i}, {j})");
                 }
@@ -25,10 +25,10 @@ namespace Algorithms.Tests.Numeric.Decomposition
         public double[,] GenerateRandomMatrix(int m, int n)
         {
             double[,] result = new double[m, n];
-            Random random = new Random();
-            for (int i = 0; i < m; i++)
+            Random random = new();
+            for (var i = 0; i < m; i++)
             {
-                for (int j = 0; j < n; j++)
+                for (var j = 0; j < n; j++)
                 {
                     result[i, j] = random.NextDouble() - 0.5;
                 }
@@ -39,7 +39,7 @@ namespace Algorithms.Tests.Numeric.Decomposition
         [Test]
         public void RandomUnitVector()
         {
-            double epsilon = 0.0001;
+            var epsilon = 0.0001;
             // unit vector should have length 1
             Assert.AreEqual(1, V.Magnitude(ThinSvd.RandomUnitVector(10)), epsilon);
             // unit vector with single element should be [-1] or [+1]
@@ -65,23 +65,23 @@ namespace Algorithms.Tests.Numeric.Decomposition
 
         public void CheckSvd(double[,] testMatrix)
         {
-            double epsilon = 1E-5;
+            var epsilon = 1E-5;
             double[,] u;
             double[,] v;
             double[] s;
             (u, s, v) = ThinSvd.Decompose(testMatrix, 1E-8, 1000);
 
-            for (int i = 1; i < s.Length; i++)
+            for (var i = 1; i < s.Length; i++)
             {
                 // singular values should be arranged from greatest to smallest
                 Assert.GreaterOrEqual(s[i - 1], s[i]);
             }
 
-            for (int i = 0; i < u.GetLength(1); i++)
+            for (var i = 0; i < u.GetLength(1); i++)
             {
                 double[] extracted = new double[u.GetLength(0)];
                 // extract a column of u
-                for (int j = 0; j < extracted.Length; j++)
+                for (var j = 0; j < extracted.Length; j++)
                 {
                     extracted[j] = u[j, i];
                 }
@@ -98,11 +98,11 @@ namespace Algorithms.Tests.Numeric.Decomposition
                 }
             }
 
-            for (int i = 0; i < v.GetLength(1); i++)
+            for (var i = 0; i < v.GetLength(1); i++)
             {
                 double[] extracted = new double[v.GetLength(0)];
                 // extract column of v
-                for (int j = 0; j < extracted.Length; j++)
+                for (var j = 0; j < extracted.Length; j++)
                 {
                     extracted[j] = v[j, i];
                 }
@@ -121,7 +121,7 @@ namespace Algorithms.Tests.Numeric.Decomposition
 
             // convert singular values to a diagonal matrix
             double[,] expanded = new double[s.Length, s.Length];
-            for (int i = 0; i < s.Length; i++)
+            for (var i = 0; i < s.Length; i++)
             {
                 expanded[i, i] = s[i];
             }

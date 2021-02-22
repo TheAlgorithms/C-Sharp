@@ -1,6 +1,5 @@
 ﻿using Algorithms.Strings;
 using NUnit.Framework;
-using Utilities.Exceptions;
 
 namespace Algorithms.Tests.Strings
 {

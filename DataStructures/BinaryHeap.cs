@@ -84,7 +84,7 @@ namespace DataStructures
                 throw new InvalidOperationException("Heap is empty!");
             }
 
-            T elem = data[0];
+            var elem = data[0];
             data[0] = data[data.Count - 1];
             data.RemoveAt(data.Count - 1);
             HeapifyDown(0);
@@ -122,7 +122,7 @@ namespace DataStructures
 
             if (comparer.Compare(element, data[0]) < 0)
             {
-                T tmp = data[0];
+                var tmp = data[0];
                 data[0] = element;
                 HeapifyDown(0);
                 return tmp;
@@ -160,7 +160,7 @@ namespace DataStructures
             }
 
             Swap(idx, data.Count - 1);
-            T tmp = data[data.Count - 1];
+            var tmp = data[data.Count - 1];
             data.RemoveAt(data.Count - 1);
 
             if (idx < data.Count)
@@ -183,7 +183,7 @@ namespace DataStructures
         /// <param name="idx2">Second index.</param>
         private void Swap(int idx1, int idx2)
         {
-            T tmp = data[idx1];
+            var tmp = data[idx1];
             data[idx1] = data[idx2];
             data[idx2] = tmp;
         }

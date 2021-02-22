@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataStructures.SinglyLinkedList
+namespace DataStructures.LinkedList.SinglyLinkedList
 {
-    /// <summary>
-    /// TODO.
-    /// </summary>
-    /// <typeparam name="T">TODO. 2.</typeparam>
     public class SinglyLinkedList<T>
     {
         // points to the start of the list
@@ -90,10 +86,6 @@ namespace DataStructures.SinglyLinkedList
             return tempElement.Data;
         }
 
-        /// <summary>
-        /// TODO.
-        /// </summary>
-        /// <returns>TODO. 2.</returns>
         public int Length()
         {
             // checks if there is a head
@@ -114,14 +106,10 @@ namespace DataStructures.SinglyLinkedList
             return length;
         }
 
-        /// <summary>
-        /// TODO. get the whole list.
-        /// </summary>
-        /// <returns>TODO.</returns>
         public IEnumerable<T> GetListData()
         {
             // temp ListElement to avoid overwriting the original
-            SinglyLinkedListNode<T>? tempElement = Head;
+            var tempElement = Head;
 
             // all elements where a next attribute exists
             while (tempElement is not null)
@@ -131,11 +119,6 @@ namespace DataStructures.SinglyLinkedList
             }
         }
 
-        /// <summary>
-        /// TODO. delete a element.
-        /// </summary>
-        /// <param name="element">TODO. 2.</param>
-        /// <returns>TODO. 3.</returns>
         public bool DeleteElement(T element)
         {
             var currentElement = Head;

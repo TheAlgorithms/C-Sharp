@@ -11,7 +11,7 @@ namespace DataStructures.Tests
         {
             var heap = new BinaryHeap<int>();
             var elems = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            foreach (int i in elems)
+            foreach (var i in elems)
             {
                 heap.Push(i);
             }
@@ -23,7 +23,7 @@ namespace DataStructures.Tests
         public static void Constructor_UseCustomComparer_BuildCorrectHeap()
         {
             var revHeap = new BinaryHeap<int>(Comparer<int>.Create((x, y) => y.CompareTo(x)));
-            foreach (int i in new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
+            foreach (var i in new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
             {
                 revHeap.Push(i);
             }
