@@ -503,7 +503,7 @@ namespace DataStructures
 
         public override bool Equals(object? obj) => obj is Timeline<TValue> timeline && this == timeline;
 
-        public override int GetHashCode() => base.GetHashCode();
+        public override int GetHashCode() => timeline.GetHashCode();
 
         void ICollection<(DateTime Time, TValue Value)>.Add((DateTime Time, TValue Value) item) => Add(item.Time, item.Value);
 

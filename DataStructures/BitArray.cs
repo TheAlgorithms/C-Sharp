@@ -840,18 +840,18 @@ namespace DataStructures
         /// Checks if bit-array are equal.
         /// Assumes the input bit-arrays must have same length.
         /// </summary>
-        /// <param name="other">Bit-array object.</param>
+        /// <param name="obj">Bit-array object.</param>
         /// <returns>Returns true if there inputs are equal otherwise false.</returns>
-        public override bool Equals(object? other)
+        public override bool Equals(object? obj)
         {
-            if (other is null)
+            if (obj is null)
             {
                 return false;
             }
 
             var status = true;
 
-            var otherBitArray = (BitArray)other;
+            var otherBitArray = (BitArray)obj;
 
             if (Length == otherBitArray?.Length)
             {
