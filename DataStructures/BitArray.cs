@@ -842,8 +842,13 @@ namespace DataStructures
         /// </summary>
         /// <param name="other">Bit-array object.</param>
         /// <returns>Returns true if there inputs are equal otherwise false.</returns>
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
+            if (other is null)
+            {
+                return false;
+            }
+
             var status = true;
 
             var otherBitArray = (BitArray)other;

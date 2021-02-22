@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <AdditionalFiles Include="..\stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="1.1.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -17,12 +21,6 @@
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="..\stylecop.json">
-      <Link>stylecop.json</Link>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>

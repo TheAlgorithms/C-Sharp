@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DataStructures.Stack
 {
@@ -59,7 +60,15 @@ namespace DataStructures.Stack
         /// Returns the item at the top of the <see cref="ListBasedStack{T}"/> without removing it.
         /// </summary>
         /// <returns>The item at the top of the <see cref="ListBasedStack{T}"/>.</returns>
-        public T Peek() => stack.First.Value;
+        public T Peek()
+        {
+            if (stack.First is null)
+            {
+                throw new InvalidOperationException("Stack is empty");
+            }
+
+            return stack.First.Value;
+        }
 
         /// <summary>
         /// Removes and returns the item at the top of the <see cref="ListBasedStack{T}"/>.
@@ -67,6 +76,11 @@ namespace DataStructures.Stack
         /// <returns>The item removed from the top of the <see cref="ListBasedStack{T}"/>.</returns>
         public T Pop()
         {
+            if (stack.First is null)
+            {
+                throw new InvalidOperationException("Stack is empty");
+            }
+
             var item = stack.First.Value;
             stack.RemoveFirst();
             return item;

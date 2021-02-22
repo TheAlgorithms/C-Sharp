@@ -113,7 +113,7 @@ namespace DataStructures
 
         public static bool operator !=(Timeline<TValue> left, Timeline<TValue> right) => !(left == right);
 
-        public bool Equals(Timeline<TValue> other) => this == other;
+        public bool Equals(Timeline<TValue>? other) => other is not null && this == other;
 
         public void Clear() => timeline.Clear();
 
@@ -501,47 +501,18 @@ namespace DataStructures
             return dictionary;
         }
 
-        /// <summary>
-        /// Returns true if <paramref name="obj"/> is equal to this timeline.
-        /// </summary>
-        /// <param name="obj">A <see cref="Timeline{TValue}"/> instance.</param>
-        public override bool Equals(object obj)
-        {
-            return obj is Timeline<TValue> timeline && this == timeline;
-        }
+        public override bool Equals(object? obj) => obj is Timeline<TValue> timeline && this == timeline;
 
-        /// <summary>
-        /// Gets hash code.
-        /// </summary>
-        /// <returns>Hash code.</returns>
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
+        public override int GetHashCode() => base.GetHashCode();
 
-        void ICollection<(DateTime Time, TValue Value)>.Add((DateTime Time, TValue Value) item)
-        {
-            Add(item.Time, item.Value);
-        }
+        void ICollection<(DateTime Time, TValue Value)>.Add((DateTime Time, TValue Value) item) => Add(item.Time, item.Value);
 
-        bool ICollection<(DateTime Time, TValue Value)>.Contains((DateTime Time, TValue Value) item)
-        {
-            return Contains(item.Time, item.Value);
-        }
+        bool ICollection<(DateTime Time, TValue Value)>.Contains((DateTime Time, TValue Value) item) => Contains(item.Time, item.Value);
 
-        bool ICollection<(DateTime Time, TValue Value)>.Remove((DateTime Time, TValue Value) item)
-        {
-            return Remove(item.Time, item.Value);
-        }
+        bool ICollection<(DateTime Time, TValue Value)>.Remove((DateTime Time, TValue Value) item) => Remove(item.Time, item.Value);
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return timeline.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => timeline.GetEnumerator();
 
-        IEnumerator<(DateTime Time, TValue Value)> IEnumerable<(DateTime Time, TValue Value)>.GetEnumerator()
-        {
-            return timeline.GetEnumerator();
-        }
+        IEnumerator<(DateTime Time, TValue Value)> IEnumerable<(DateTime Time, TValue Value)>.GetEnumerator() => timeline.GetEnumerator();
     }
 }

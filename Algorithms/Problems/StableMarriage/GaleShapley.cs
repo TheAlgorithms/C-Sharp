@@ -33,7 +33,7 @@ namespace Algorithms.Problems.StableMarriage
         {
             foreach (var newProposer in proposers)
             {
-                var accepter = newProposer.PreferenceOrder.First.Value;
+                var accepter = newProposer.PreferenceOrder.First!.Value;
 
                 if (accepter.EngagedTo is null)
                 {

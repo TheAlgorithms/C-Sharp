@@ -81,16 +81,16 @@ namespace Algorithms.Search.AStar
         /// </summary>
         /// <param name="other">The other node.</param>
         /// <returns>A comparison between the costs.</returns>
-        public int CompareTo(Node other) => TotalCost.CompareTo(other.TotalCost);
+        public int CompareTo(Node? other) => TotalCost.CompareTo(other?.TotalCost ?? 0);
 
-        public override bool Equals(object obj) => (obj is Node other) && Equals(other);
+        public override bool Equals(object? obj) => (obj is Node other) && Equals(other);
 
         public override int GetHashCode() =>
             Position.GetHashCode()
             + Traversable.GetHashCode()
             + TraversalCostMultiplier.GetHashCode();
 
-        public bool Equals(Node other) => CompareTo(other) == 0;
+        public bool Equals(Node? other) => CompareTo(other) == 0;
 
         /// <summary>
         /// Returns the distance to the other node.

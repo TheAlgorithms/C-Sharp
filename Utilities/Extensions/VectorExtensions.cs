@@ -136,7 +136,7 @@ namespace Utilities.Extensions
         /// Generates a diagonal matrix from an specified vector.
         /// </summary>
         /// <param name="vector">The input vector.</param>
-        /// <returns>A Diagonal matrix</returns>
+        /// <returns>A Diagonal matrix.</returns>
         public static double[,] ToDiagonalMatrix(this double[] vector)
         {
             var len = vector.Length;
