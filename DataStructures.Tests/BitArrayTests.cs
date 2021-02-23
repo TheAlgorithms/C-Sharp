@@ -39,7 +39,7 @@ namespace DataStructures.Tests
             void Act() => testObj.Compile(sequence);
 
             // Assert
-            var ex = Assert.Throws<ArgumentException>(Act);
+            Assert.Throws<ArgumentException>(Act);
         }
 
         [TestCase(15, "01111")]
@@ -524,6 +524,14 @@ namespace DataStructures.Tests
                 b.Should().Be(arr[current]);
                 current++;
             }
+        }
+
+        [Test]
+        public static void Equals_NullIsNotEqualToNotNull()
+        {
+            var arr1 = new BitArray("010101010101010101");
+            BitArray? arr2 = null;
+            (arr1.Equals(arr2)).Should().BeFalse();
         }
     }
 }
