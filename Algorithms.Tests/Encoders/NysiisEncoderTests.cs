@@ -15,15 +15,15 @@ namespace Algorithms.Tests.Encoders
             Assert.AreEqual(expected, nysiis);
         }
         
-        static IEnumerable<string[]> TestData => names.Zip(expected, (l, r) => new[] { l, r });
+        static IEnumerable<string[]> TestData => _names.Zip(_expected, (l, r) => new[] { l, r });
 
-        static string[] names = {
+        static string[] _names = {
             "Jay", "John", "Jane", "Zayne", "Guerra",
             "Iga", "Cowan", "Louisa", "Arnie", "Olsen",
             "Corban", "Nava", "Cynthia Malone", "Amiee MacKee",
             "MacGyver", "Yasmin Edge"
         };
-        static string[] expected = {
+        static string[] _expected = {
             "JY", "JAN", "JAN", "ZAYN", "GAR",
             "IG", "CAN", "LAS", "ARNY", "OLSAN",
             "CARBAN", "NAV", "CYNTANALAN", "ANANACY",

@@ -1,4 +1,3 @@
-using System;
 using DataStructures.SegmentTrees;
 using NUnit.Framework;
 
@@ -7,7 +6,7 @@ namespace DataStructures.Tests.SegmentTrees
     [TestFixture]
     public class SegmentTreeUpdateTests
     {
-        private SegmentTreeUpdate testTree = new SegmentTreeUpdate(new [] {8, 9, 1, 4, 8, 7, 2});
+        private SegmentTreeUpdate testTree = new(new [] {8, 9, 1, 4, 8, 7, 2});
 
         [SetUp]
         public void Init()

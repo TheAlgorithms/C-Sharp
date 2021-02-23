@@ -21,7 +21,7 @@ namespace Algorithms.Tests.Numeric.GreatestCommonDivisor
             var gcdFinder = new EuclideanGreatestCommonDivisorFinder();
 
             // Act
-            var actualGcd = gcdFinder.Find(a, b);
+            var actualGcd = gcdFinder.FindGcd(a, b);
 
             // Assert
             Assert.AreEqual(expectedGcd, actualGcd);

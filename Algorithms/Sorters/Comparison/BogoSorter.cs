@@ -9,7 +9,7 @@ namespace Algorithms.Sorters.Comparison
     /// <typeparam name="T">Type of array element.</typeparam>
     public class BogoSorter<T> : IComparisonSorter<T>
     {
-        private readonly Random random = new Random();
+        private readonly Random random = new ();
 
         /// <summary>
         /// TODO.

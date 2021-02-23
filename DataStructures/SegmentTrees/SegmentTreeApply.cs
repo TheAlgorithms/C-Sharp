@@ -63,7 +63,7 @@ namespace DataStructures.SegmentTrees
                 return 0;
             }
 
-            int m = (a + b) / 2;
+            var m = (a + b) / 2;
 
             // Application of the saved operand to the direct and indrect child nodes
             return Operand[i] * (Query(l, r, a, m, Left(i)) + Query(l, r, m + 1, b, Right(i)));
@@ -96,7 +96,7 @@ namespace DataStructures.SegmentTrees
             }
 
             // Calculates index m of the node that cuts the current subarray in half
-            int m = (a + b) / 2;
+            var m = (a + b) / 2;
 
             // Applies the operation to both halfes
             Apply(l, r, value, a, m, Left(i));

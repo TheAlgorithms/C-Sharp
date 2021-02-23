@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 // Implements the traditional naive string matching algorithm in C# for TheAlgorithms/C-Sharp.
@@ -18,10 +17,10 @@ namespace Algorithms.Strings
       /// <returns>Array containing each index of Content in which Pattern appears.</returns>
       public static int[] NaiveSearch(string content, string pattern)
       {
-         int m = pattern.Length;
-         int n = content.Length;
-         List<int> indices = new List<int>();
-         for (int e = 0; e <= (n - m); e++)
+         var m = pattern.Length;
+         var n = content.Length;
+         List<int> indices = new ();
+         for (var e = 0; e <= (n - m); e++)
          {
             int j;
             for (j = 0; j < m; j++)

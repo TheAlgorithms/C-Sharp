@@ -15,11 +15,6 @@ namespace Algorithms.DataCompression
         private readonly IComparisonSorter<ListNode> sorter;
         private readonly Translator translator;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HuffmanCompressor"/> class.
-        /// </summary>
-        /// <param name="sorter">Sorter to use for compression.</param>
-        /// <param name="translator">Translator.</param>
         public HuffmanCompressor(IComparisonSorter<ListNode> sorter, Translator translator)
         {
             this.sorter = sorter;
@@ -28,7 +23,7 @@ namespace Algorithms.DataCompression
 
         /// <summary>
         /// Given an input string, returns a new compressed string
-        /// using huffman enconding.
+        /// using huffman encoding.
         /// </summary>
         /// <param name="uncompressedText">Text message to compress.</param>
         /// <returns>Compressed string and keys to decompress it.</returns>
@@ -87,14 +82,14 @@ namespace Algorithms.DataCompression
                 return (compressionKeys, decompressionKeys);
             }
 
-            if (tree.LeftChild != null)
+            if (tree.LeftChild is not null)
             {
                 var (lsck, lsdk) = GetKeys(tree.LeftChild);
                 compressionKeys.AddMany(lsck.Select(kvp => (kvp.Key, "0" + kvp.Value)));
                 decompressionKeys.AddMany(lsdk.Select(kvp => ("0" + kvp.Key, kvp.Value)));
             }
 
-            if (tree.RightChild != null)
+            if (tree.RightChild is not null)
             {
                 var (rsck, rsdk) = GetKeys(tree.RightChild);
                 compressionKeys.AddMany(rsck.Select(kvp => (kvp.Key, "1" + kvp.Value)));
@@ -130,12 +125,6 @@ namespace Algorithms.DataCompression
         /// </summary>
         public class ListNode
         {
-            /// <summary>
-            /// Initializes a new instance of the <see cref="ListNode"/> class.
-            /// TODO.
-            /// </summary>
-            /// <param name="data">TODO.</param>
-            /// <param name="frequency">TODO. 2.</param>
             public ListNode(char data, double frequency)
             {
                 HasData = true;
@@ -143,12 +132,6 @@ namespace Algorithms.DataCompression
                 Frequency = frequency;
             }
 
-            /// <summary>
-            /// Initializes a new instance of the <see cref="ListNode"/> class.
-            /// TODO.
-            /// </summary>
-            /// <param name="leftChild">TODO.</param>
-            /// <param name="rightChild">TODO. 2.</param>
             public ListNode(ListNode leftChild, ListNode rightChild)
             {
                 LeftChild = leftChild;
@@ -156,35 +139,28 @@ namespace Algorithms.DataCompression
                 Frequency = leftChild.Frequency + rightChild.Frequency;
             }
 
-            /// <summary>
-            /// Gets TODO.
-            /// </summary>
             public char Data { get; }
 
-            /// <summary>
-            /// Gets a value indicating whether TODO.
-            /// </summary>
             public bool HasData { get; }
 
-            /// <summary>
-            /// Gets tODO. TODO.
-            /// </summary>
             public double Frequency { get; }
 
-            /// <summary>
-            /// Gets tODO. TODO.
-            /// </summary>
             public ListNode? RightChild { get; }
 
-            /// <summary>
-            /// Gets tODO. TODO.
-            /// </summary>
             public ListNode? LeftChild { get; }
         }
 
-        private class ListNodeComparer : IComparer<ListNode>
+        public class ListNodeComparer : IComparer<ListNode>
         {
-            public int Compare(ListNode x, ListNode y) => x.Frequency.CompareTo(y.Frequency);
+            public int Compare(ListNode? x, ListNode? y)
+            {
+                if (x is null || y is null)
+                {
+                    return 0;
+                }
+
+                return x.Frequency.CompareTo(y.Frequency);
+            }
         }
     }
 }

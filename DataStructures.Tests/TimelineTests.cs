@@ -129,7 +129,7 @@ namespace DataStructures.Tests
             var array = new (DateTime Time, string Value)[timeline.Count];
             timeline.CopyTo(array, 0);
             Assert.IsTrue(timeline.Count == array.Length);
-            int i = 0;
+            var i = 0;
             foreach (var (time, value) in timeline)
             {
                 Assert.IsTrue(time == array[i].Time && value == array[i].Value);
@@ -149,7 +149,7 @@ namespace DataStructures.Tests
                 { new DateTime(2015, 1, 1), "TestTime5" }
             };
             var times = timeline.GetAllTimes();
-            int i = 0;
+            var i = 0;
             foreach (var (time, value) in timeline)
             {
                 Assert.IsTrue(time == times[i]);
@@ -218,7 +218,7 @@ namespace DataStructures.Tests
                 { new DateTime(2015, 1, 1), "TestTime5" }
             };
             var values = timeline.GetAllValues();
-            int i = 0;
+            var i = 0;
             foreach (var (time, value) in timeline)
             {
                 Assert.IsTrue(value == values[i]);
@@ -622,7 +622,7 @@ namespace DataStructures.Tests
             };
             var array = timeline.ToArray();
             Assert.IsTrue(timeline.Count == array.Length);
-            int i = 0;
+            var i = 0;
             foreach (var (time, value) in timeline)
             {
                 Assert.IsTrue(time == array[i].Time && value == array[i].Value);
@@ -643,7 +643,7 @@ namespace DataStructures.Tests
             };
             var list = timeline.ToList();
             Assert.IsTrue(timeline.Count == list.Count);
-            int i = 0;
+            var i = 0;
             foreach (var (time, value) in timeline)
             {
                 Assert.IsTrue(time == list[i].Time && value == list[i].Value);
@@ -678,7 +678,7 @@ namespace DataStructures.Tests
             timelineList.OrderBy(pair => pair.Time);
             dictionaryList.OrderBy(pair => pair.Time);
             Assert.IsTrue(timelineList.Count == dictionaryList.Count);
-            for (int i = 0; i < timelineList.Count; i++)
+            for (var i = 0; i < timelineList.Count; i++)
             {
                 Assert.IsTrue(timelineList[i].Time == dictionaryList[i].Time && timelineList[i].Value == dictionaryList[i].Value);
             }

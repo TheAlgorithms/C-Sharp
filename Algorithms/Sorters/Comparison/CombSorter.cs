@@ -9,10 +9,6 @@ namespace Algorithms.Sorters.Comparison
     /// <typeparam name="T">Type of array element.</typeparam>
     public class CombSorter<T> : IComparisonSorter<T>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CombSorter{T}"/> class.
-        /// </summary>
-        /// <param name="shrinkFactor">Shrink factor used for decreasing the gap.</param>
         public CombSorter(double shrinkFactor = 1.3) => ShrinkFactor = shrinkFactor;
 
         private double ShrinkFactor { get; }

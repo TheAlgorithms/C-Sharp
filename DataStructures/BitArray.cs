@@ -152,32 +152,22 @@ namespace DataStructures
         ///
         /// purpose: Setups the array with the input sequence.
         /// assumes: sequence must been greater or equal to 1.
-        /// the sequence may only be allowed contains onese or zeros.
+        /// the sequence may only contain ones or zeros.
         /// </summary>
         /// <param name="sequence">A string sequence of 0's and 1's.</param>
         public BitArray(string sequence)
         {
             // precondition I
-            if (sequence.Length > 0)
+            if (sequence.Length <= 0)
             {
-                // precondition II
-                if (Match(sequence))
-                {
-                    field = new bool[sequence.Length];
-                    Compile(sequence);
-                }
-                else
-                {
-                    // error case II
-                    throw new Exception("BitArray: the sequence may only " +
-                                        "be allowed contains onese or zeros.");
-                }
+                throw new ArgumentException("Sequence must been greater than or equal to 1");
             }
-            else
-            {
-                // error case I
-                throw new Exception("BitArray: sequence must been greater or equal as 1");
-            }
+
+            // precondition II
+            ThrowIfSequenceIsInvalid(sequence);
+
+            field = new bool[sequence.Length];
+            Compile(sequence);
         }
 
         /// <summary>
@@ -190,38 +180,12 @@ namespace DataStructures
         /// <summary>
         /// Gets a value indicating whether the current bit of the array is set.
         /// </summary>
-        public bool Current
-        {
-            get
-            {
-                try
-                {
-                    return field[position];
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    throw new InvalidOperationException();
-                }
-            }
-        }
+        public bool Current => field[position];
 
         /// <summary>
         /// Gets a value indicating whether the current bit of the array is set.
         /// </summary>
-        object IEnumerator.Current
-        {
-            get
-            {
-                try
-                {
-                    return field[position];
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    throw new InvalidOperationException();
-                }
-            }
-        }
+        object IEnumerator.Current => field[position];
 
         /// <summary>
         /// Gets the length of the current bit array.
@@ -509,11 +473,6 @@ namespace DataStructures
                 return true;
             }
 
-            if (one is null || two is null)
-            {
-                return false;
-            }
-
             if (one.Length != two.Length)
             {
                 return false;
@@ -593,52 +552,39 @@ namespace DataStructures
         /// <summary>
         /// Compiles the binary sequence into the inner data structure.
         /// The sequence must have the same length, as the bit-array.
-        /// The sequence may only be allowed contains onese or zeros.
+        /// The sequence may only be allowed contains ones or zeros.
         /// </summary>
         /// <param name="sequence">A string sequence of 0's and 1's.</param>
         public void Compile(string sequence)
         {
-            var tmp = string.Empty;
-
-            sequence = sequence.Trim();
-
             // precondition I
-            if (sequence.Length <= field.Length)
+            if (sequence.Length > field.Length)
             {
-                // precondition II
-                if (Match(sequence))
-                {
-                    // for appropriate scaling
-                    if (sequence.Length < field.Length)
-                    {
-                        var difference = field.Length - sequence.Length;
-
-                        for (var i = 0; i < difference; i++)
-                        {
-                            tmp += '0';
-                        }
-
-                        tmp += sequence;
-                        sequence = tmp;
-                    }
-
-                    // actual compile procedure.
-                    for (var i = 0; i < sequence.Length; i++)
-                    {
-                        field[i] = sequence[i] == '1';
-                    }
-                }
-                else
-                {
-                    // error case II
-                    throw new Exception("Compile: the sequence may only " +
-                                        "be allowed contains onese or zeros.");
-                }
+                throw new ArgumentException($"{nameof(sequence)} must be not longer than the bit array length");
             }
-            else
+
+            // precondition II
+            ThrowIfSequenceIsInvalid(sequence);
+
+            // for appropriate scaling
+            var tmp = string.Empty;
+            if (sequence.Length < field.Length)
             {
-                // error case I
-                throw new Exception("Compile: not equal length!");
+                var difference = field.Length - sequence.Length;
+
+                for (var i = 0; i < difference; i++)
+                {
+                    tmp += '0';
+                }
+
+                tmp += sequence;
+                sequence = tmp;
+            }
+
+            // actual compile procedure.
+            for (var i = 0; i < sequence.Length; i++)
+            {
+                field[i] = sequence[i] == '1';
             }
         }
 
@@ -652,44 +598,38 @@ namespace DataStructures
             var tmp = string.Empty;
 
             // precondition I
-            if (number > 0)
+            if (number <= 0)
             {
-                // converts to binary representation
-                var binaryNumber = Convert.ToString(number, 2);
-
-                // precondition II
-                if (binaryNumber.Length <= field.Length)
-                {
-                    // for appropriate scaling
-                    if (binaryNumber.Length < field.Length)
-                    {
-                        var difference = field.Length - binaryNumber.Length;
-
-                        for (var i = 0; i < difference; i++)
-                        {
-                            tmp += '0';
-                        }
-
-                        tmp += binaryNumber;
-                        binaryNumber = tmp;
-                    }
-
-                    // actual compile procedure.
-                    for (var i = 0; i < binaryNumber.Length; i++)
-                    {
-                        field[i] = binaryNumber[i] == '1';
-                    }
-                }
-                else
-                {
-                    // error case II
-                    throw new Exception("Compile: not apt length!");
-                }
+                throw new ArgumentException($"{nameof(number)} must be positive");
             }
-            else
+
+            // converts to binary representation
+            var binaryNumber = Convert.ToString(number, 2);
+
+            // precondition II
+            if (binaryNumber.Length > field.Length)
             {
-                // error case I
-                throw new Exception("Compile: only positive numbers > 0");
+                throw new ArgumentException("Provided number is too big");
+            }
+
+            // for appropriate scaling
+            if (binaryNumber.Length < field.Length)
+            {
+                var difference = field.Length - binaryNumber.Length;
+
+                for (var i = 0; i < difference; i++)
+                {
+                    tmp += '0';
+                }
+
+                tmp += binaryNumber;
+                binaryNumber = tmp;
+            }
+
+            // actual compile procedure.
+            for (var i = 0; i < binaryNumber.Length; i++)
+            {
+                field[i] = binaryNumber[i] == '1';
             }
         }
 
@@ -703,44 +643,38 @@ namespace DataStructures
             var tmp = string.Empty;
 
             // precondition I
-            if (number > 0)
+            if (number <= 0)
             {
-                // converts to binary representation
-                var binaryNumber = Convert.ToString(number, 2);
-
-                // precondition II
-                if (binaryNumber.Length <= field.Length)
-                {
-                    // for appropriate scaling
-                    if (binaryNumber.Length < field.Length)
-                    {
-                        var difference = field.Length - binaryNumber.Length;
-
-                        for (var i = 0; i < difference; i++)
-                        {
-                            tmp += '0';
-                        }
-
-                        tmp += binaryNumber;
-                        binaryNumber = tmp;
-                    }
-
-                    // actual compile procedure.
-                    for (var i = 0; i < binaryNumber.Length; i++)
-                    {
-                        field[i] = binaryNumber[i] == '1';
-                    }
-                }
-                else
-                {
-                    // error case II
-                    throw new Exception("Compile: not apt length!");
-                }
+                throw new ArgumentException($"{nameof(number)} must be positive");
             }
-            else
+
+            // converts to binary representation
+            var binaryNumber = Convert.ToString(number, 2);
+
+            // precondition II
+            if (binaryNumber.Length > field.Length)
             {
-                // error case I
-                throw new Exception("Compile: only positive numbers > 0");
+                throw new ArgumentException("Provided number is too big");
+            }
+
+            // for appropriate scaling
+            if (binaryNumber.Length < field.Length)
+            {
+                var difference = field.Length - binaryNumber.Length;
+
+                for (var i = 0; i < difference; i++)
+                {
+                    tmp += '0';
+                }
+
+                tmp += binaryNumber;
+                binaryNumber = tmp;
+            }
+
+            // actual compile procedure.
+            for (var i = 0; i < binaryNumber.Length; i++)
+            {
+                field[i] = binaryNumber[i] == '1';
             }
         }
 
@@ -796,7 +730,7 @@ namespace DataStructures
             // Precondition
             if (field.Length > 64)
             {
-                throw new Exception("ToInt: field is too long.");
+                throw new InvalidOperationException("Value is too big to fit into Int64");
             }
 
             var sequence = ToString();
@@ -813,7 +747,7 @@ namespace DataStructures
             // Precondition
             if (field.Length > 32)
             {
-                throw new Exception("ToInt: field is too long.");
+                throw new InvalidOperationException("Value is too big to fit into Int32");
             }
 
             var sequence = ToString();
@@ -847,35 +781,36 @@ namespace DataStructures
         /// Checks if bit-array are equal.
         /// Assumes the input bit-arrays must have same length.
         /// </summary>
-        /// <param name="other">Bit-array object.</param>
+        /// <param name="obj">Bit-array object.</param>
         /// <returns>Returns true if there inputs are equal otherwise false.</returns>
-        public override bool Equals(object other)
+        public override bool Equals(object? obj)
         {
-            var status = true;
-
-            var otherBitArray = (BitArray)other;
-
-            if (Length == otherBitArray?.Length)
+            if (obj is null)
             {
-                for (var i = 0; i < Length; i++)
+                return false;
+            }
+
+            var otherBitArray = (BitArray)obj;
+
+            if (Length != otherBitArray.Length)
+            {
+                return false;
+            }
+
+            for (var i = 0; i < Length; i++)
+            {
+                if (field[i] != otherBitArray[i])
                 {
-                    if (field[i] != otherBitArray[i])
-                    {
-                        status = false;
-                    }
+                    return false;
                 }
             }
-            else
-            {
-                throw new Exception("== : inputs haven't same length!");
-            }
 
-            return status;
+            return true;
         }
 
         /// <summary>
         /// Gets has-code of bit-array.
-        /// Assumes bit-array lentgh must been smaller or equal to 32.
+        /// Assumes bit-array length must been smaller or equal to 32.
         /// </summary>
         /// <returns>hash-code for this BitArray instance.</returns>
         public override int GetHashCode() => ToInt32();
@@ -888,6 +823,14 @@ namespace DataStructures
             // Done
         }
 
+        private static void ThrowIfSequenceIsInvalid(string sequence)
+        {
+            if (!Match(sequence))
+            {
+                throw new ArgumentException("The sequence may only contain ones or zeros");
+            }
+        }
+
         /// <summary>
         /// Utility method foir checking a given sequence contains only zeros and ones.
         /// This method will used in Constructor (sequence : string) and Compile(sequence : string).
@@ -896,17 +839,15 @@ namespace DataStructures
         /// <returns>returns True if sequence contains only zeros and ones; False otherwise.</returns>
         private static bool Match(string sequence)
         {
-            var status = true;
-
             foreach (var ch in sequence)
             {
                 if (ch != '0' && ch != '1')
                 {
-                    status = false;
+                    return false;
                 }
             }
 
-            return status;
+            return true;
         }
     }
 }

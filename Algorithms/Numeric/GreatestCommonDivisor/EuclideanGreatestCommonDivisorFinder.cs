@@ -12,7 +12,7 @@ namespace Algorithms.Numeric.GreatestCommonDivisor
         /// <param name="a">TODO.</param>
         /// <param name="b">TODO. 2.</param>
         /// <returns>Greatest common divisor.</returns>
-        public int Find(int a, int b)
+        public int FindGcd(int a, int b)
         {
             if (a == 0 && b == 0)
             {

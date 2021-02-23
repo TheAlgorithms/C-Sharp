@@ -13,7 +13,7 @@ namespace Algorithms.Tests.Numeric.GreatestCommonDivisor
         [TestCase(17, 0, 17)]
         [TestCase(17, 17, 17)]
         [TestCase(2 * 17, 17, 17)]
-        [TestCase(0, 0, int.MaxValue)]
+        [TestCase(0, 0, 0)]
         [TestCase(2 * 13 * 17, 4 * 9 * 13, 2 * 13)]
         public static void GreatestCommonDivisorCorrect(int a, int b, int expectedGcd)
         {
@@ -21,7 +21,7 @@ namespace Algorithms.Tests.Numeric.GreatestCommonDivisor
             var gcdFinder = new BinaryGreatestCommonDivisorFinder();
 
             // Act
-            var actualGcd = gcdFinder.Find(a, b);
+            var actualGcd = gcdFinder.FindGcd(a, b);
 
             // Assert
             Assert.AreEqual(expectedGcd, actualGcd);

@@ -1,5 +1,8 @@
 ﻿using Algorithms.DataCompression;
 using Algorithms.Sorters.Comparison;
+
+using FluentAssertions;
+
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 
@@ -44,6 +47,17 @@ namespace Algorithms.Tests.Compressors
 
             //Assert
             Assert.AreEqual(text, decompressedText);
+        }
+
+        [Test]
+        public static void ListNodeComparer_NullIsUnordered()
+        {
+            var comparer = new HuffmanCompressor.ListNodeComparer();
+            var node = new HuffmanCompressor.ListNode('a', 0.1);
+
+            comparer.Compare(node, null).Should().Be(0);
+            comparer.Compare(null, node).Should().Be(0);
+            comparer.Compare(null, null).Should().Be(0);
         }
     }
 }

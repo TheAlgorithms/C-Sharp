@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataStructures
+namespace DataStructures.Queue
 {
     /// <summary>
     /// Implementation of a stack based queue. FIFO style.

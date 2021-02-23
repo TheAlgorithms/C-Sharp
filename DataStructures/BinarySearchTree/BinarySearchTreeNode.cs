@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DataStructures.BinarySearchTree
+﻿namespace DataStructures.BinarySearchTree
 {
     /// <summary>
     /// Generic node class for BinarySearchTree.

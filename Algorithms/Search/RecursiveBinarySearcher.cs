@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Algorithms.Searches
+namespace Algorithms.Search
 {
     /// <summary>
     /// RecursiveBinarySearcher.

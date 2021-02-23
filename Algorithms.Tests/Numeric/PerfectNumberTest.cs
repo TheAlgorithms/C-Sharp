@@ -16,7 +16,7 @@ namespace Algorithms.Tests.Numeric
             // Arrange
 
             // Act
-            var result = PerfectNumber.IsPerfectNumber(number);
+            var result = PerfectNumberChecker.IsPerfectNumber(number);
 
             // Assert
             Assert.IsTrue(result);
@@ -29,7 +29,7 @@ namespace Algorithms.Tests.Numeric
             // Arrange
 
             // Assert
-            Assert.Throws<ArgumentException>(() => Aliquot.AliquotSum(number));
+            Assert.Throws<ArgumentException>(() => PerfectNumberChecker.IsPerfectNumber(number));
         }
     }
 }

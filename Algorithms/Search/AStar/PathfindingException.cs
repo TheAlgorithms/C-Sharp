@@ -7,10 +7,6 @@ namespace Algorithms.Search.AStar
     /// </summary>
     public class PathfindingException : ApplicationException
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PathfindingException"/> class.
-        /// </summary>
-        /// <param name="message">The error message.</param>
         public PathfindingException(string message)
             : base(message)
         {

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
-using DataStructures.SinglyLinkedList;
+
+using DataStructures.LinkedList.SinglyLinkedList;
+
 using NUnit.Framework;
 
-namespace DataStructures.Tests
+namespace DataStructures.Tests.LinkedList
 {
     public static class LinkedListTests
     {

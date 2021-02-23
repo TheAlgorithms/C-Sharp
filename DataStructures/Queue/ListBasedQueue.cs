@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DataStructures
+namespace DataStructures.Queue
 {
     /// <summary>
     /// Implementation of a list based queue. FIFO style.
@@ -31,7 +31,7 @@ namespace DataStructures
         /// <exception cref="InvalidOperationException">Thrown if the queue is empty.</exception>
         public T Dequeue()
         {
-            if (queue.Count == 0)
+            if (queue.First is null)
             {
                 throw new InvalidOperationException("There are no items in the queue.");
             }
@@ -63,7 +63,7 @@ namespace DataStructures
         /// <exception cref="InvalidOperationException">Thrown if the queue is empty.</exception>
         public T Peek()
         {
-            if (queue.Count == 0)
+            if (queue.First is null)
             {
                 throw new InvalidOperationException("There are no items in the queue.");
             }

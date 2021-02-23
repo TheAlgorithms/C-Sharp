@@ -1,6 +1,4 @@
-using System;
-
-namespace DataStructures.DoublyLinkedList
+namespace DataStructures.LinkedList.DoublyLinkedList
 {
     /// <summary>
     /// Generic node class for Doubly Linked List.

@@ -13,12 +13,6 @@ namespace Algorithms.DataCompression
         private readonly IHeuristicKnapsackSolver<(char symbol, double frequency)> splitter;
         private readonly Translator translator;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ShannonFanoCompressor"/> class.
-        /// TODO.
-        /// </summary>
-        /// <param name="splitter">TODO. 2.</param>
-        /// <param name="translator">TODO. 3.</param>
         public ShannonFanoCompressor(IHeuristicKnapsackSolver<(char symbol, double frequency)> splitter, Translator translator)
         {
             this.splitter = splitter;
@@ -27,7 +21,7 @@ namespace Algorithms.DataCompression
 
         /// <summary>
         /// Given an input string, returns a new compressed string
-        /// using Shannon-Fano enconding.
+        /// using Shannon-Fano encoding.
         /// </summary>
         /// <param name="uncompressedText">Text message to compress.</param>
         /// <returns>Compressed string and keys to decompress it.</returns>
@@ -65,14 +59,14 @@ namespace Algorithms.DataCompression
                 return (compressionKeys, decompressionKeys);
             }
 
-            if (tree.LeftChild != null)
+            if (tree.LeftChild is not null)
             {
                 var (lsck, lsdk) = GetKeys(tree.LeftChild);
                 compressionKeys.AddMany(lsck.Select(kvp => (kvp.Key, "0" + kvp.Value)));
                 decompressionKeys.AddMany(lsdk.Select(kvp => ("0" + kvp.Key, kvp.Value)));
             }
 
-            if (tree.RightChild != null)
+            if (tree.RightChild is not null)
             {
                 var (rsck, rsdk) = GetKeys(tree.RightChild);
                 compressionKeys.AddMany(rsck.Select(kvp => (kvp.Key, "1" + kvp.Value)));
@@ -125,25 +119,12 @@ namespace Algorithms.DataCompression
         /// </summary>
         public class ListNode
         {
-            /// <summary>
-            /// Initializes a new instance of the <see cref="ListNode"/> class. TODO.
-            /// </summary>
-            /// <param name="data">TODO.</param>
             public ListNode((char symbol, double frequency)[] data) => Data = data;
 
-            /// <summary>
-            /// Gets tODO. TODO.
-            /// </summary>
             public (char symbol, double frequency)[] Data { get; }
 
-            /// <summary>
-            /// Gets or sets tODO. TODO.
-            /// </summary>
             public ListNode? RightChild { get; set; }
 
-            /// <summary>
-            /// Gets or sets tODO. TODO.
-            /// </summary>
             public ListNode? LeftChild { get; set; }
         }
     }

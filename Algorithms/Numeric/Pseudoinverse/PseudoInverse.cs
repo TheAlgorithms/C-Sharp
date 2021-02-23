@@ -2,7 +2,7 @@
 using Algorithms.Numeric.Decomposition;
 using Utilities.Extensions;
 
-namespace Algorithms.Numeric
+namespace Algorithms.Numeric.Pseudoinverse
 {
     /// <summary>
     /// The Moore–Penrose pseudo-inverse A+ of a matrix A,

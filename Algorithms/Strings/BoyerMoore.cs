@@ -1,7 +1,6 @@
 using System;
-using System.Collections.Generic;
 
-namespace Algorithms.Search.Substring
+namespace Algorithms.Strings
 {
     /// <summary>
     /// The idea:   You compare the pattern with the text from right to left.
@@ -29,10 +28,10 @@ namespace Algorithms.Search.Substring
         public static int FindFirstOccurrence(string t, string p)
         {
             // Pattern length
-            int m = p.Length;
+            var m = p.Length;
 
             // Text length
-            int n = t.Length;
+            var n = t.Length;
 
             // For each symbol of the alphabet, the position of its rightmost occurrence in the pattern,
             // or -1 if the symbol does not occur in the pattern.
@@ -43,7 +42,7 @@ namespace Algorithms.Search.Substring
             int[] goodSuffix = GoodSuffixRule(p, m);
 
             // Index in text
-            int i = 0;
+            var i = 0;
 
             // Index in pattern
             int j;
@@ -88,7 +87,7 @@ namespace Algorithms.Search.Substring
             Array.Fill<int>(badChar, -1);
 
             // Iterate from left to right over the pattern
-            for (int j = 0; j < m; j++)
+            for (var j = 0; j < m; j++)
             {
                 badChar[p[j]] = j;
             }
@@ -120,10 +119,10 @@ namespace Algorithms.Search.Substring
 
             // Start of suffix including border of the pattern
             // (hint: https://www.inf.hs-flensburg.de/lang/algorithmen/pattern/kmpen.htm#section2)
-            int i = m;
+            var i = m;
 
             // Start of suffix of the pattern
-            int j = m + 1;
+            var j = m + 1;
 
             while (i > 0)
             {

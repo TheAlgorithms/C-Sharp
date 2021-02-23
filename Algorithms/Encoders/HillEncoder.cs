@@ -13,18 +13,8 @@ namespace Algorithms.Encoders
     {
         private readonly GaussJordanElimination linearEquationSolver;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HillEncoder"/> class.
-        /// TODO.
-        /// </summary>
         public HillEncoder() => linearEquationSolver = new GaussJordanElimination(); // TODO: add DI
 
-        /// <summary>
-        /// TODO.
-        /// </summary>
-        /// <param name="text">TODO. 2.</param>
-        /// <param name="key">TODO. 3.</param>
-        /// <returns>TODO. 4.</returns>
         public string Encode(string text, double[,] key)
         {
             var preparedText = FillGaps(text);
@@ -46,23 +36,17 @@ namespace Algorithms.Encoders
             return BuildStringFromArray(merged);
         }
 
-        /// <summary>
-        /// TODO.
-        /// </summary>
-        /// <param name="text">TODO. 1.</param>
-        /// <param name="key">TODO. 2.</param>
-        /// <returns>TODO. 3.</returns>
         public string Decode(string text, double[,] key)
         {
             var chunked = ChunkTextToArray(text);
-            var splitted = SplitToCharArray(chunked);
+            var split = SplitToCharArray(chunked);
 
             var deciphered = new double[chunked.Length][];
 
             for (var i = 0; i < chunked.Length; i++)
             {
                 var vector = new double[3];
-                Array.Copy(splitted, i * 3, vector, 0, 3);
+                Array.Copy(split, i * 3, vector, 0, 3);
                 var product = MatrixDeCipher(vector, key);
                 deciphered[i] = product;
             }
@@ -78,7 +62,7 @@ namespace Algorithms.Encoders
         /// </summary>
         /// <param name="arr">array of vectors.</param>
         /// <returns>Message.</returns>
-        private static string BuildStringFromArray(double[] arr) => new string(arr.Select(c => (char)c).ToArray());
+        private static string BuildStringFromArray(double[] arr) => new (arr.Select(c => (char)c).ToArray());
 
         /// <summary>
         /// Multiplies the key for the given scalar.

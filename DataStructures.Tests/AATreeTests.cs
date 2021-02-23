@@ -211,7 +211,7 @@ namespace DataStructures.Tests
         /// <returns>true if node passes all checks, false otherwise.</returns>
         private static bool Validate<T>(AATreeNode<T>? node)
         {
-            if (node == null)
+            if (node is null)
             {
                 return true;
             }
@@ -244,7 +244,7 @@ namespace DataStructures.Tests
         /// <returns>true if node passes check, false otherwise.</returns>
         private static bool CheckLeafNode<T>(AATreeNode<T> node)
         {
-            var condition = node.Left == null && node.Right == null && node.Level != 1;
+            var condition = node.Left is null && node.Right is null && node.Level != 1;
             return !condition;
         }
 
@@ -255,7 +255,7 @@ namespace DataStructures.Tests
         /// <returns>true if node passes check, false otherwise.</returns>
         private static bool CheckLeftSubtree<T>(AATreeNode<T> node)
         {
-            var condition = node.Left != null && node.Level - node.Left.Level != 1;
+            var condition = node.Left is not null && node.Level - node.Left.Level != 1;
             return !condition;
         }
 
@@ -266,7 +266,7 @@ namespace DataStructures.Tests
         /// <returns>true if node passes check, false otherwise.</returns>
         private static bool CheckRightSubtree<T>(AATreeNode<T> node)
         {
-            var condition = node.Right != null &&
+            var condition = node.Right is not null &&
                             node.Level - node.Right.Level != 1 &&
                             node.Level != node.Right.Level;
             return !condition;
@@ -279,7 +279,7 @@ namespace DataStructures.Tests
         /// <returns>true if node passes check, false otherwise.</returns>
         private static bool CheckRightGrandChild<T>(AATreeNode<T> node)
         {
-            var condition = node.Right?.Right != null && node.Right.Level < node.Right.Right.Level;
+            var condition = node.Right?.Right is not null && node.Right.Level < node.Right.Right.Level;
             return !condition;
         }
 
@@ -290,7 +290,7 @@ namespace DataStructures.Tests
         /// <returns>true if node passes check, false otherwise.</returns>
         private static bool CheckNonLeafChildren<T>(AATreeNode<T> node)
         {
-            var condition = node.Level > 1 && (node.Left == null || node.Right == null);
+            var condition = node.Level > 1 && (node.Left is null || node.Right is null);
             return !condition;
         }
     }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Utilities.Exceptions;
 
-namespace DataStructures.DoublyLinkedList
+namespace DataStructures.LinkedList.DoublyLinkedList
 {
     /// <summary>
     /// Similar to a Singly Linked List but each node contains a refenrence to the previous node in the list.
@@ -114,7 +114,7 @@ namespace DataStructures.DoublyLinkedList
             node.Previous = existingNode;
             existingNode.Next = node;
 
-            if (existingNode.Next != null)
+            if (existingNode.Next is not null)
             {
                 existingNode.Next.Previous = node;
             }
@@ -130,7 +130,7 @@ namespace DataStructures.DoublyLinkedList
         public IEnumerable<T> GetData()
         {
             var current = Head;
-            while (current != null)
+            while (current is not null)
             {
                 yield return current.Data;
                 current = current.Next;
@@ -144,7 +144,7 @@ namespace DataStructures.DoublyLinkedList
         public IEnumerable<T> GetDataReversed()
         {
             var current = Tail;
-            while (current != null)
+            while (current is not null)
             {
                 yield return current.Data;
                 current = current.Previous;
@@ -156,10 +156,10 @@ namespace DataStructures.DoublyLinkedList
         /// </summary>
         public void Reverse()
         {
-            DoublyLinkedListNode<T>? current = Head;
+            var current = Head;
             DoublyLinkedListNode<T>? temp = null;
 
-            while (current != null)
+            while (current is not null)
             {
                 temp = current.Previous;
                 current.Previous = current.Next;
@@ -170,7 +170,7 @@ namespace DataStructures.DoublyLinkedList
             Tail = Head;
 
             // temp can be null on empty list
-            if (temp != null)
+            if (temp is not null)
             {
                 Head = temp.Previous;
             }
@@ -184,9 +184,9 @@ namespace DataStructures.DoublyLinkedList
         public DoublyLinkedListNode<T> Find(T data)
         {
             var current = Head;
-            while (current != null)
+            while (current is not null)
             {
-                if ((current.Data is null && data is null) || (current.Data != null && current.Data.Equals(data)))
+                if ((current.Data is null && data is null) || (current.Data is not null && current.Data.Equals(data)))
                 {
                     return current;
                 }
@@ -310,9 +310,9 @@ namespace DataStructures.DoublyLinkedList
         {
             var current = Head;
             var index = 0;
-            while (current != null)
+            while (current is not null)
             {
-                if ((current.Data is null && data is null) || (current.Data != null && current.Data.Equals(data)))
+                if ((current.Data is null && data is null) || (current.Data is not null && current.Data.Equals(data)))
                 {
                     return index;
                 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataStructures.ArrayBasedStack
+namespace DataStructures.Stack
 {
     /// <summary>
     /// Implementation of an array based stack. FIFO style.

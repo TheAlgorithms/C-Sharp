@@ -1,4 +1,5 @@
 ﻿using Algorithms.Numeric;
+
 using NUnit.Framework;
 
 namespace Algorithms.Tests.Numeric
@@ -17,7 +18,7 @@ namespace Algorithms.Tests.Numeric
             // Arrange
 
             // Act
-            var result = NarcissisticNumber.IsNarcissistic(number);
+            var result = NarcissisticNumberChecker.IsNarcissistic(number);
 
             // Assert
             return result;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DataStructures;
+
 using NUnit.Framework;
 
 namespace DataStructures.Tests
@@ -9,7 +9,7 @@ namespace DataStructures.Tests
     [TestFixture]
     public static class MinMaxHeapTests
     {
-        private static readonly object[] collectionsSource = new object[] {
+        private static readonly object[] CollectionsSource = new object[] {
             new [] { 5, 10, -2, 0, 3, 13, 5, -8, 41, -5, -7, -60, -12 },
             new [] {'e', '4', 'x', 'D', '!', '$', '-', '_', '2', ')', 'Z', 'q'},
             new [] { "abc", "abc", "xyz", "bcd", "klm", "opq", "ijk" }
@@ -34,7 +34,7 @@ namespace DataStructures.Tests
         }
 
         [Test]
-        [TestCaseSource("collectionsSource")]
+        [TestCaseSource("CollectionsSource")]
         public static void AddTest<T>(IEnumerable<T> collection)
         {
             var mmh = new MinMaxHeap<T>();
@@ -42,8 +42,8 @@ namespace DataStructures.Tests
             {
                 mmh.Add(item);
             }
-            T minValue = mmh.GetMin();
-            T maxValue = mmh.GetMax();
+            var minValue = mmh.GetMin();
+            var maxValue = mmh.GetMax();
 
             Assert.AreEqual(collection.Min(), minValue);
             Assert.AreEqual(collection.Max(), maxValue);
@@ -51,15 +51,15 @@ namespace DataStructures.Tests
         }
 
         [Test]
-        [TestCaseSource("collectionsSource")]
+        [TestCaseSource("CollectionsSource")]
         public static void ExtractMaxTest<T>(IEnumerable<T> collection)
         {
             var ordered = collection.OrderByDescending(x => x);
             var mmh = new MinMaxHeap<T>(collection);
             var emptyHeap = new MinMaxHeap<T>();
 
-            T first = mmh.ExtractMax();
-            T second = mmh.GetMax();
+            var first = mmh.ExtractMax();
+            var second = mmh.GetMax();
 
             Assert.Throws<InvalidOperationException>(() => emptyHeap.ExtractMax());
             Assert.AreEqual(ordered.ElementAt(0), first);
@@ -68,15 +68,15 @@ namespace DataStructures.Tests
         }
 
         [Test]
-        [TestCaseSource("collectionsSource")]
+        [TestCaseSource("CollectionsSource")]
         public static void ExtractMinTest<T>(IEnumerable<T> collection)
         {
             var ordered = collection.OrderBy(x => x);
             var mmh = new MinMaxHeap<T>(collection);
             var emptyHeap = new MinMaxHeap<T>();
 
-            T first = mmh.ExtractMin();
-            T second = mmh.GetMin();
+            var first = mmh.ExtractMin();
+            var second = mmh.GetMin();
 
             Assert.Throws<InvalidOperationException>(() => emptyHeap.ExtractMin());
             Assert.AreEqual(ordered.ElementAt(0), first);
@@ -86,33 +86,33 @@ namespace DataStructures.Tests
 
 
         [Test]
-        [TestCaseSource("collectionsSource")]
+        [TestCaseSource("CollectionsSource")]
         public static void GetMaxTest<T>(IEnumerable<T> collection)
         {
             var emptyHeap = new MinMaxHeap<int>();
             var mmh = new MinMaxHeap<T>(collection);
 
-            T maxValue = mmh.GetMax();
+            var maxValue = mmh.GetMax();
 
             Assert.Throws<InvalidOperationException>(() => emptyHeap.GetMax());
             Assert.AreEqual(collection.Max(), maxValue);
         }
 
         [Test]
-        [TestCaseSource("collectionsSource")]
+        [TestCaseSource("CollectionsSource")]
         public static void GetMinTest<T>(IEnumerable<T> collection)
         {
             var emptyHeap = new MinMaxHeap<int>();
             var mmh = new MinMaxHeap<T>(collection);
 
-            T minValue = mmh.GetMin();
+            var minValue = mmh.GetMin();
 
             Assert.Throws<InvalidOperationException>(() => emptyHeap.GetMin());
             Assert.AreEqual(collection.Min(), minValue);
         }
 
         [Test]
-        public static void HeapSortUsingGet<T>([ValueSource("collectionsSource")]IEnumerable<T> collection, [Values]bool ascending)
+        public static void HeapSortUsingGet<T>([ValueSource("CollectionsSource")]IEnumerable<T> collection, [Values]bool ascending)
         {
             var ordered = ascending ? collection.OrderBy(x => x) : collection.OrderByDescending(x => x);
             var mmh = new MinMaxHeap<T>(collection);
@@ -138,7 +138,7 @@ namespace DataStructures.Tests
         }
 
         [Test]
-        public static void HeapSortUsingExtract<T>([ValueSource("collectionsSource")]IEnumerable<T> collection, [Values]bool ascending)
+        public static void HeapSortUsingExtract<T>([ValueSource("CollectionsSource")]IEnumerable<T> collection, [Values]bool ascending)
         {
             var ordered = ascending ? collection.OrderBy(x => x) : collection.OrderByDescending(x => x);
             var mmh = new MinMaxHeap<T>(collection);
@@ -146,7 +146,7 @@ namespace DataStructures.Tests
 
             while (mmh.Count > 0)
             {
-                T value = ascending ? mmh.ExtractMin() : mmh.ExtractMax();
+                var value = ascending ? mmh.ExtractMin() : mmh.ExtractMax();
                 extracted.Add(value);
             }
 

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Algorithms.Search.AStar;
 
-namespace AStar
+namespace Algorithms.Search.AStar
 {
     /// <summary>
     /// Contains the code for A* Pathfinding.
@@ -19,7 +18,7 @@ namespace AStar
                 node.CurrentCost = 0;
                 node.EstimatedCost = 0;
                 node.Parent = null;
-                node.State = NodeState.UNCONSIDERED;
+                node.State = NodeState.Unconsidered;
             }
         }
 
@@ -31,7 +30,7 @@ namespace AStar
         public static List<Node> GeneratePath(Node target)
         {
             var ret = new List<Node>();
-            Node? current = target;
+            var current = target;
             while (!(current is null))
             {
                 ret.Add(current);
@@ -84,7 +83,7 @@ namespace AStar
                 // Add it to the done list
                 done.Add(current);
 
-                current.State = NodeState.CLOSED;
+                current.State = NodeState.Closed;
 
                 // EndCondition( Path was found )
                 if (current == to)
@@ -108,18 +107,18 @@ namespace AStar
             foreach (var connected in current.ConnectedNodes)
             {
                 if (!connected.Traversable ||
-                    connected.State == NodeState.CLOSED)
+                    connected.State == NodeState.Closed)
                 {
                     continue; // Do ignore already checked and not traversable nodes.
                 }
 
                 // Adds a previously not "seen" node into the Queue
-                if (connected.State == NodeState.UNCONSIDERED)
+                if (connected.State == NodeState.Unconsidered)
                 {
                     connected.Parent = current;
                     connected.CurrentCost = current.CurrentCost + current.DistanceTo(connected) * connected.TraversalCostMultiplier;
                     connected.EstimatedCost = connected.CurrentCost + connected.DistanceTo(to);
-                    connected.State = NodeState.OPEN;
+                    connected.State = NodeState.Open;
                     queue.Enqueue(connected);
                 }
                 else if (current != connected)

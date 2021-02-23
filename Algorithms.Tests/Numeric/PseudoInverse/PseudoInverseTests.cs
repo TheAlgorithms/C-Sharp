@@ -1,8 +1,8 @@
-﻿using Algorithms.Numeric;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+
 using Utilities.Extensions;
 
-namespace Algorithms.Tests.Numeric
+namespace Algorithms.Tests.Numeric.PseudoInverse
 {
     public static class PseudoInverseTests
     {
@@ -15,7 +15,7 @@ namespace Algorithms.Tests.Numeric
 
             // Act
             // using AA+A = A
-            var result = PseudoInverse.PInv(inMat);
+            var result = Algorithms.Numeric.Pseudoinverse.PseudoInverse.PInv(inMat);
             var aainva = inMatCopy.Multiply(result).Multiply(inMatCopy);
 
             var rounded = aainva.RoundToNextInt();
@@ -33,8 +33,8 @@ namespace Algorithms.Tests.Numeric
 
             // Act
             // using (A+)+ = A
-            var result = PseudoInverse.PInv(inMat);
-            var result2 = PseudoInverse.PInv(result);
+            var result = Algorithms.Numeric.Pseudoinverse.PseudoInverse.PInv(inMat);
+            var result2 = Algorithms.Numeric.Pseudoinverse.PseudoInverse.PInv(result);
 
             var rounded = result2.RoundToNextInt();
 

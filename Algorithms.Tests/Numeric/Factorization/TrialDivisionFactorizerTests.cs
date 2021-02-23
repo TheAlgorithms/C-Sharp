@@ -1,7 +1,8 @@
 ﻿using Algorithms.Numeric.Factorization;
+
 using NUnit.Framework;
 
-namespace Algorithms.Tests.Numeric
+namespace Algorithms.Tests.Numeric.Factorization
 {
     public static class TrialDivisionFactorizerTests
     {

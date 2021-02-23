@@ -1,9 +1,11 @@
 using System;
 using System.Linq;
-using DataStructures.DoublyLinkedList;
+
+using DataStructures.LinkedList.DoublyLinkedList;
+
 using NUnit.Framework;
 
-namespace DataStructures.Tests
+namespace DataStructures.Tests.LinkedList
 {
     public static class DoublyLinkedListTests
     {

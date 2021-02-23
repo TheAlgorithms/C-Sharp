@@ -10,18 +10,18 @@ namespace Algorithms.Tests.Encoders
         [TestCaseSource(nameof(TestData))]
         public static void AttemptSoundex(string source, string encoded)
         {
-            SoundexEncoder enc = new SoundexEncoder();
+            SoundexEncoder enc = new();
             var nysiis = enc.Encode(source);
             Assert.AreEqual(nysiis, encoded);
         }
 
-        static IEnumerable<string[]> TestData => names.Zip(expected, (l, r) => new[] { l, r });
+        static IEnumerable<string[]> TestData => _names.Zip(_expected, (l, r) => new[] { l, r });
 
-        static string[] names = {
+        static readonly string[] _names = {
             "Robert", "Rupert", "Rubin", "Ashcraft", "Ashcroft",
             "Tymczak", "Pfister", "Honeyman"
         };
-        static string[] expected = {
+        static readonly string[] _expected = {
             "R163", "R163", "R150", "A261", "A261", "T522", "P236",
             "H555"
         };

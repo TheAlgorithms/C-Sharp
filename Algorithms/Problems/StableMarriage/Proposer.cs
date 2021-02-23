@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Algorithms.Problems.StableMarriage
 {
@@ -7,6 +6,6 @@ namespace Algorithms.Problems.StableMarriage
     {
         public Accepter? EngagedTo { get; set; }
 
-        public LinkedList<Accepter> PreferenceOrder { get; set; } = new LinkedList<Accepter>();
+        public LinkedList<Accepter> PreferenceOrder { get; set; } = new ();
     }
 }

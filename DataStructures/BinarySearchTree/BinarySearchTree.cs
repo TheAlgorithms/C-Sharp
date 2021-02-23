@@ -28,9 +28,6 @@ namespace DataStructures.BinarySearchTree
         /// </summary>
         private BinarySearchTreeNode<TKey>? root;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BinarySearchTree{TKey}"/> class.
-        /// </summary>
         public BinarySearchTree()
         {
             root = null;
@@ -38,10 +35,6 @@ namespace DataStructures.BinarySearchTree
             comparer = Comparer<TKey>.Default;
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BinarySearchTree{TKey}"/> class with a custom comparer.
-        /// </summary>
-        /// <param name="customComparer">Custom comparer function to use.</param>
         public BinarySearchTree(Comparer<TKey> customComparer)
         {
             root = null;
@@ -82,7 +75,7 @@ namespace DataStructures.BinarySearchTree
         /// <param name="keys">Sequence of keys to insert.</param>
         public void AddRange(IEnumerable<TKey> keys)
         {
-            foreach (TKey key in keys)
+            foreach (var key in keys)
             {
                 Add(key);
             }
@@ -100,7 +93,7 @@ namespace DataStructures.BinarySearchTree
         /// </summary>
         /// <param name="key">The key to search for.</param>
         /// <returns>true if the key is in the BST, false otherwise.</returns>
-        public bool Contains(TKey key) => Search(root, key) != null;
+        public bool Contains(TKey key) => Search(root, key) is not null;
 
         /// <summary>
         /// Removes a node with a key that matches <paramref name="key"/>.
@@ -114,7 +107,7 @@ namespace DataStructures.BinarySearchTree
                 return false;
             }
 
-            bool result = Remove(root, root, key);
+            var result = Remove(root, root, key);
             if (result)
             {
                 Count--;
@@ -179,10 +172,10 @@ namespace DataStructures.BinarySearchTree
         /// </exception>
         private void Add(BinarySearchTreeNode<TKey> node, TKey key)
         {
-            int compareResult = comparer.Compare(node.Key, key);
+            var compareResult = comparer.Compare(node.Key, key);
             if (compareResult > 0)
             {
-                if (node.Left != null)
+                if (node.Left is not null)
                 {
                     Add(node.Left, key);
                 }
@@ -194,7 +187,7 @@ namespace DataStructures.BinarySearchTree
             }
             else if (compareResult < 0)
             {
-                if (node.Right != null)
+                if (node.Right is not null)
                 {
                     Add(node.Right, key);
                 }
@@ -243,7 +236,7 @@ namespace DataStructures.BinarySearchTree
                 return false;
             }
 
-            int compareResult = comparer.Compare(node.Key, key);
+            var compareResult = comparer.Compare(node.Key, key);
 
             if (compareResult > 0)
             {
@@ -259,7 +252,7 @@ namespace DataStructures.BinarySearchTree
 
                 // Case 0: Node has no children.
                 // Case 1: Node has one child.
-                if (node.Left == null || node.Right == null)
+                if (node.Left is null || node.Right is null)
                 {
                     replacementNode = node.Left ?? node.Right;
                 }
@@ -395,7 +388,7 @@ namespace DataStructures.BinarySearchTree
                 return default;
             }
 
-            int compareResult = comparer.Compare(node.Key, key);
+            var compareResult = comparer.Compare(node.Key, key);
             if (compareResult > 0)
             {
                 return Search(node.Left, key);

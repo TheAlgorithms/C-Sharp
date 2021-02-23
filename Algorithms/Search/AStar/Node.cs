@@ -1,29 +1,18 @@
 ﻿using System;
 
-namespace AStar
+namespace Algorithms.Search.AStar
 {
     /// <summary>
-    /// A Node(former Location)
     /// Contains Positional and other information about a single node.
     /// </summary>
     public class Node : IComparable<Node>, IEquatable<Node>
     {
-        // Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Node"/> class.
-        /// </summary>
-        /// <param name="position">Position of the node.</param>
-        /// <param name="traversable">Flag if the node is traversable.</param>
-        /// <param name="traverseMultiplier">Multiplier for traversal costs.</param>
         public Node(VecN position, bool traversable, double traverseMultiplier)
         {
             Traversable = traversable;
             Position = position;
             TraversalCostMultiplier = traverseMultiplier;
         }
-
-        // Properties
 
         /// <summary>
         /// Gets the Total cost of the Node.
@@ -72,52 +61,16 @@ namespace AStar
         /// </summary>
         public VecN Position { get; }
 
-        /// <summary>
-        /// TODO.
-        /// </summary>
-        /// <param name="left">TODO 2.</param>
-        /// <param name="right">TODO 3.</param>
-        /// <returns>TODO 4.</returns>
         public static bool operator ==(Node left, Node right) => left?.Equals(right) != false;
 
-        /// <summary>
-        /// TODO.
-        /// </summary>
-        /// <param name="left">TODO 2.</param>
-        /// <param name="right">TODO 3.</param>
-        /// <returns>TODO 4.</returns>
         public static bool operator >(Node left, Node right) => left.CompareTo(right) > 0;
 
-        /// <summary>
-        /// TODO.
-        /// </summary>
-        /// <param name="left">TODO 2.</param>
-        /// <param name="right">TODO 3.</param>
-        /// <returns>TODO 4.</returns>
         public static bool operator <(Node left, Node right) => left.CompareTo(right) < 0;
 
-        /// <summary>
-        /// TODO.
-        /// </summary>
-        /// <param name="left">TODO 2.</param>
-        /// <param name="right">TODO 3.</param>
-        /// <returns>TODO 4.</returns>
         public static bool operator !=(Node left, Node right) => !(left == right);
 
-        /// <summary>
-        /// TODO.
-        /// </summary>
-        /// <param name="left">TODO 2.</param>
-        /// <param name="right">TODO 3.</param>
-        /// <returns>TODO 4.</returns>
         public static bool operator <=(Node left, Node right) => left.CompareTo(right) <= 0;
 
-        /// <summary>
-        /// TODO.
-        /// </summary>
-        /// <param name="left">TODO 2.</param>
-        /// <param name="right">TODO 3.</param>
-        /// <returns>TODO 4.</returns>
         public static bool operator >=(Node left, Node right) => left.CompareTo(right) >= 0;
 
         /// <summary>
@@ -128,27 +81,16 @@ namespace AStar
         /// </summary>
         /// <param name="other">The other node.</param>
         /// <returns>A comparison between the costs.</returns>
-        public int CompareTo(Node other) => TotalCost.CompareTo(other.TotalCost);
+        public int CompareTo(Node? other) => TotalCost.CompareTo(other?.TotalCost ?? 0);
 
-        /// <summary>
-        /// Equals Override.
-        /// </summary>
-        /// <param name="obj">The object to be checked against.</param>
-        /// <returns>True if Equal, False if Not Equal.</returns>
-        public override bool Equals(object obj) => (obj is Node other) && Equals(other);
+        public override bool Equals(object? obj) => (obj is Node other) && Equals(other);
 
-        /// <summary>
-        /// Useless override to shut up the automated testing.
-        /// </summary>
-        /// <returns>the default hash value.</returns>
-        public override int GetHashCode() => base.GetHashCode();
+        public override int GetHashCode() =>
+            Position.GetHashCode()
+            + Traversable.GetHashCode()
+            + TraversalCostMultiplier.GetHashCode();
 
-        /// <summary>
-        /// Override for IEquatable.
-        /// </summary>
-        /// <param name="other">The object to be checked against.</param>
-        /// <returns>True if Equal, False if not Equal.</returns>
-        public bool Equals(Node other) => CompareTo(other) == 0;
+        public bool Equals(Node? other) => CompareTo(other) == 0;
 
         /// <summary>
         /// Returns the distance to the other node.

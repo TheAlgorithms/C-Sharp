@@ -1,4 +1,7 @@
 ﻿using System;
+
+using FluentAssertions;
+
 using NUnit.Framework;
 
 namespace DataStructures.Tests
@@ -10,7 +13,6 @@ namespace DataStructures.Tests
     {
         #region COMPILE TESTS
 
-        [Test]
         [TestCase("00100", "00100")]
         [TestCase("01101", "01101")]
         [TestCase("100", "00100")]
@@ -26,7 +28,6 @@ namespace DataStructures.Tests
             Assert.AreEqual(expectedSequence, testObj.ToString());
         }
 
-        [Test]
         [TestCase("klgml", 5)]
         [TestCase("klgml", 3)]
         public static void TestCompileToStringThorwsException(string sequence, int arrLen)
@@ -38,14 +39,9 @@ namespace DataStructures.Tests
             void Act() => testObj.Compile(sequence);
 
             // Assert
-            var ex = Assert.Throws<Exception>(Act);
-            if (sequence.Length > arrLen || sequence.Length < arrLen)
-            {
-                Assert.AreEqual("Compile: not equal length!", ex.Message);
-            }
+            Assert.Throws<ArgumentException>(Act);
         }
 
-        [Test]
         [TestCase(15, "01111")]
         [TestCase(17, "10001")]
         [TestCase(4, "00100")]
@@ -61,7 +57,6 @@ namespace DataStructures.Tests
             Assert.AreEqual(expected, testObj.ToString());
         }
 
-        [Test]
         [TestCase(46, 3)]
         [TestCase(-46, 5)]
         public static void TestCompileLongThrowsException(int number, int arrLen)
@@ -73,14 +68,9 @@ namespace DataStructures.Tests
             void Act() => testObj.Compile((long)number);
 
             // Assert
-            var ex = Assert.Throws<Exception>(Act);
-
-            Assert.AreEqual(number < 0 ?
-                "Compile: only positive numbers > 0" :
-                "Compile: not apt length!", ex.Message);
+            Assert.Throws<ArgumentException>(Act);
         }
 
-        [Test]
         [TestCase(17, "10001")]
         [TestCase(25, "11001")]
         [TestCase(4, "00100")]
@@ -96,10 +86,9 @@ namespace DataStructures.Tests
             Assert.AreEqual(expected, testObj.ToString());
         }
 
-        [Test]
-        [TestCase(-8, "Compile: only positive numbers > 0", 5)]
-        [TestCase(18, "Compile: not apt length!", 3)]
-        public static void TestCompileIntegerThrowsException(int number, string expectedErrorMsg, int arrayLength)
+        [TestCase(-8, 5)]
+        [TestCase(18, 3)]
+        public static void TestCompileIntegerThrowsException(int number, int arrayLength)
         {
             // Arrange
             var testObj = new BitArray(arrayLength);
@@ -108,15 +97,13 @@ namespace DataStructures.Tests
             void Act() => testObj.Compile(number);
 
             // Assert
-            var ex = Assert.Throws<Exception>(Act);
-            Assert.AreEqual(expectedErrorMsg, ex.Message);
+            Assert.Throws<ArgumentException>(Act);
         }
 
         #endregion COMPILE TESTS
 
         #region CONSTRUCTOR TESTS
 
-        [Test]
         [TestCase("00100", 4)]
         public static void TestConstructor(string sequence, int expected)
         {
@@ -129,7 +116,6 @@ namespace DataStructures.Tests
             Assert.AreEqual(expected, testObj1.ToInt64());
         }
 
-        [Test]
         [TestCase(new[] { true, false, true }, 5)]
         public static void TestConstructorBoolArray(bool[] sequence, int expected)
         {
@@ -142,41 +128,23 @@ namespace DataStructures.Tests
             Assert.AreEqual(expected, testObj3.ToInt64());
         }
 
-        [Test]
         [TestCase("000120")]
         [TestCase("")]
         public static void TestConstructorThrowsException(string sequence)
         {
             // Arrange
-            void CodeTest() => _ = new BitArray(sequence);
 
             // Act
-            var ex = Assert.Throws<Exception>(CodeTest);
+            Action act = () => new BitArray(sequence);
 
             // Assert
-            if (string.IsNullOrEmpty(sequence))
-            {
-                Assert.AreEqual("BitArray: sequence must been greater or equal as 1", ex.Message);
-            }
-        }
-
-        [Test]
-        public static void TestConstructorThrowsErrorOnInvalidOperation()
-        {
-            // Arrange
-            var testObj = new BitArray(0);
-
-            // Act
-
-            // Assert
-            _ = Assert.Throws<InvalidOperationException>(() => _ = testObj.Current);
+            act.Should().Throw<ArgumentException>();
         }
 
         #endregion CONSTRUCTOR TESTS
 
         #region OPERATOR TESTS
 
-        [Test]
         [TestCase(17, 17, "10001")]
         [TestCase(25, 31, "11001")]
         public static void TestOperatorAnd(int tObj1, int tObj2, string expected)
@@ -195,7 +163,6 @@ namespace DataStructures.Tests
             Assert.AreEqual(expected, result.ToString());
         }
 
-        [Test]
         [TestCase(1, 1, 1, 1, "0")]
         [TestCase(5, 3, 8, 4, "1101")]
         [TestCase(9, 4, 4, 3, "1101")]
@@ -214,7 +181,6 @@ namespace DataStructures.Tests
             Assert.AreEqual(expected, result.ToString());
         }
 
-        [Test]
         [TestCase(9, 4, 4, 3, "1101")]
         [TestCase(1, 1, 1, 1, "1")]
         [TestCase(5, 3, 8, 4, "1101")]
@@ -233,7 +199,6 @@ namespace DataStructures.Tests
             Assert.AreEqual(expected, result.ToString());
         }
 
-        [Test]
         [TestCase(1, 1, 1, 1, "1")]
         [TestCase(5, 3, 8, 4, "0000")]
         [TestCase(9, 4, 4, 3, "0000")]
@@ -252,7 +217,6 @@ namespace DataStructures.Tests
             Assert.AreEqual(expected, result.ToString());
         }
 
-        [Test]
         [TestCase(25, 30, "11111")]
         public static void TestOperatorOr(int tObj1, int tObj2, string expected)
         {
@@ -270,7 +234,6 @@ namespace DataStructures.Tests
             Assert.AreEqual(expected, result.ToString());
         }
 
-        [Test]
         [TestCase(16, "01111")]
         public static void TestOperatorNot(int number, string expected)
         {
@@ -285,7 +248,6 @@ namespace DataStructures.Tests
             Assert.AreEqual(expected, testObj.ToString());
         }
 
-        [Test]
         [TestCase(25, 30, 7)]
         public static void TestOperatorXor(int testNum, int testNum2, int expected)
         {
@@ -303,7 +265,6 @@ namespace DataStructures.Tests
             Assert.AreEqual(expected, result.ToInt32());
         }
 
-        [Test]
         [TestCase(16, "10000000")]
         public static void TestOperatorShiftLeft(int number, string expected)
         {
@@ -318,7 +279,6 @@ namespace DataStructures.Tests
             Assert.AreEqual(expected, testObj.ToString());
         }
 
-        [Test]
         [TestCase(24, "110")]
         public static void TestOperatorShiftRight(int number, string expected)
         {
@@ -396,7 +356,6 @@ namespace DataStructures.Tests
             Assert.IsFalse(testObj[3]);
         }
 
-        [Test]
         [TestCase(19, 3)]
         public static void TestNumberOfOneBits(int number, int expected)
         {
@@ -410,7 +369,6 @@ namespace DataStructures.Tests
             Assert.AreEqual(expected, testObj.NumberOfOneBits());
         }
 
-        [Test]
         [TestCase(26, 2)]
         public static void TestNumberOfZeroBits(int number, int expected)
         {
@@ -424,7 +382,6 @@ namespace DataStructures.Tests
             Assert.AreEqual(expected, testObj.NumberOfZeroBits());
         }
 
-        [Test]
         [TestCase(33, 33)]
         public static void TestToInt64(int number, int expected)
         {
@@ -447,7 +404,7 @@ namespace DataStructures.Tests
             // Act
 
             // Assert
-            _ = Assert.Throws<Exception>(() => testObj.ToInt32());
+            _ = Assert.Throws<InvalidOperationException>(() => testObj.ToInt32());
         }
 
         [Test]
@@ -459,10 +416,9 @@ namespace DataStructures.Tests
             // Act
 
             // Assert
-            _ = Assert.Throws<Exception>(() => testObj.ToInt64());
+            _ = Assert.Throws<InvalidOperationException>(() => testObj.ToInt64());
         }
 
-        [Test]
         [TestCase("110")]
         public static void TestResetField(string sequence)
         {
@@ -476,7 +432,6 @@ namespace DataStructures.Tests
             Assert.AreEqual(0, testObj.ToInt64());
         }
 
-        [Test]
         [TestCase("101001", 63)]
         public static void TestSetAll(string sequence, int expected)
         {
@@ -515,8 +470,8 @@ namespace DataStructures.Tests
             testObj3.Reset();
 
             // Assert
-            _ = Assert.Throws<Exception>(() => _ = testObj1.Equals(testObj2));
-            Assert.IsFalse(testObj1.Equals(testObj3));
+            testObj1.Equals(testObj2).Should().BeFalse();
+            testObj1.Equals(testObj3).Should().BeFalse();
         }
 
         [Test]
@@ -543,7 +498,7 @@ namespace DataStructures.Tests
             var counterOnes = 0;
             var counterZeros = 0;
 
-            foreach (bool bit in testObj1)
+            foreach (var bit in testObj1)
             {
                 if (bit)
                 {
@@ -560,16 +515,23 @@ namespace DataStructures.Tests
         }
 
         [Test]
-        public static void CurrentThrowsException()
+        public static void IEnumerable_IterationWorks()
         {
-            // Arragne
-            var testObj = new BitArray(5);
+            var arr = new BitArray("010101010101010101");
+            var current = 0;
+            foreach (var b in arr)
+            {
+                b.Should().Be(arr[current]);
+                current++;
+            }
+        }
 
-            // Act
-            testObj.Compile(16);
-
-            // Assert
-            _ = Assert.Throws<InvalidOperationException>(() => _ = testObj.Current);
+        [Test]
+        public static void Equals_NullIsNotEqualToNotNull()
+        {
+            var arr1 = new BitArray("010101010101010101");
+            BitArray? arr2 = null;
+            (arr1.Equals(arr2)).Should().BeFalse();
         }
     }
 }
