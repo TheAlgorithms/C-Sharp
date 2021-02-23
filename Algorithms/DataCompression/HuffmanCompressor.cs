@@ -150,7 +150,7 @@ namespace Algorithms.DataCompression
             public ListNode? LeftChild { get; }
         }
 
-        private class ListNodeComparer : IComparer<ListNode>
+        public class ListNodeComparer : IComparer<ListNode>
         {
             public int Compare(ListNode? x, ListNode? y)
             {

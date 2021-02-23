@@ -97,7 +97,7 @@ namespace DataStructures.Tests
             void Act() => testObj.Compile(number);
 
             // Assert
-            var ex = Assert.Throws<ArgumentException>(Act);
+            Assert.Throws<ArgumentException>(Act);
         }
 
         #endregion COMPILE TESTS
