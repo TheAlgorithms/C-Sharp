@@ -513,18 +513,5 @@ namespace DataStructures.Tests
             Assert.AreEqual(counterOnes, 5);
             Assert.AreEqual(counterZeros, 2);
         }
-
-        [Test]
-        public static void CurrentThrowsException()
-        {
-            // Arragne
-            var testObj = new BitArray(5);
-
-            // Act
-            testObj.Compile(16);
-
-            // Assert
-            _ = Assert.Throws<IndexOutOfRangeException>(() => _ = testObj.Current);
-        }
     }
 }
