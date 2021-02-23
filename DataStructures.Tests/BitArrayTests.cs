@@ -513,5 +513,17 @@ namespace DataStructures.Tests
             Assert.AreEqual(counterOnes, 5);
             Assert.AreEqual(counterZeros, 2);
         }
+
+        [Test]
+        public static void IEnumerable_IterationWorks()
+        {
+            var arr = new BitArray("010101010101010101");
+            var current = 0;
+            foreach (var b in arr)
+            {
+                b.Should().Be(arr[current]);
+                current++;
+            }
+        }
     }
 }
