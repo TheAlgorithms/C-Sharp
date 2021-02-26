@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DataStructures
+namespace DataStructures.Heap
 {
     /// <summary>
     /// This class implements min-max heap.

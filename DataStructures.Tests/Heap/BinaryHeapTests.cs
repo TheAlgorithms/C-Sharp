@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 using NUnit.Framework;
 
-namespace DataStructures.Tests
+using DataStructures.Heap;
+
+namespace DataStructures.Tests.Heap
 {
     static class BinaryHeapTests
     {

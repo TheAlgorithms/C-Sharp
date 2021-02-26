@@ -1,23 +1,30 @@
 using System;
 using System.Collections.Generic;
 
-namespace DataStructures
+namespace DataStructures.Heap
 {
     /// <summary>
-    /// A generic implementation of a binary heap.
+    /// A generic implementation of a Fibonacci heap.
     /// </summary>
     /// <remarks>
-    /// A binary heap is a complete binary tree that satisfies the heap property;
-    /// that is every node in the tree compares greater/less than or equal to its left and right
-    /// child nodes. Note that this is different from a binary search tree, where every node
-    /// must be the largest/smallest node of all of its children.
-    /// Although binary heaps are not very efficient, they are (probably) the simpliest heaps
-    /// to understand and implement.
-    /// More information: https://en.wikipedia.org/wiki/Binary_heap .
+    /// A Fibonacci heap is similar to a standard binary heap 
+    /// <see cref="DataStructures.Heap.BinaryHeap{T}"/>, however it uses concepts
+    /// of amortized analysis to provide theoretical speedups on common operations like
+    /// insert, union, and decrease-key while maintaining the same speed on all other 
+    /// operations.
+    /// 
+    /// In practice, Fibonacci heaps are more complicated than binary heaps and require
+    /// a large input problems before the benifits of the theoretical speed up 
+    /// begin to show. 
+    /// 
     /// </remarks>
     /// <typeparam name="T">Type of elements in binary heap.</typeparam>
     public class FibonacciHeap<T> where T : IComparable, IEquatable<T>
     {
+
+        /// <summary>
+        /// These FHeapNodes are the most of the data structure
+        /// </summary>
         public class FHeapNode
         {
             public T Key { get; set; }
@@ -115,7 +122,6 @@ namespace DataStructures
         }
 
 
-
         /// <summary>
         /// Add item <c>x</c> to this Fibonacci heap.
         /// </summary>
@@ -159,7 +165,7 @@ namespace DataStructures
         /// by concatenating the root lists together. 
         /// 
         /// For more details on how two circularly linked lists are concatenated, see
-        /// <see cref="DataStructures.FibonacciHeap{T}.FHeapNode.ConcatenateRight(DataStructures.FibonacciHeap{T}.FHeapNode)"/>
+        /// <see cref="DataStructures.Heap.FibonacciHeap{T}.FHeapNode.ConcatenateRight(DataStructures.Heap.FibonacciHeap{T}.FHeapNode)"/>
         /// 
         /// Finally, check to see which of <c>this.MinItem</c> and <c>other.MinItem</c>
         /// is smaller, and set <c>this.MinItem</c> accordingly

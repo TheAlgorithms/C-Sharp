@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataStructures
+namespace DataStructures.Heap
 {
     /// <summary>
     /// A generic implementation of a binary heap.

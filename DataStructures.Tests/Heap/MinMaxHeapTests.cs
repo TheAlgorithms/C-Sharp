@@ -4,7 +4,9 @@ using System.Linq;
 
 using NUnit.Framework;
 
-namespace DataStructures.Tests
+using DataStructures.Heap;
+
+namespace DataStructures.Tests.Heap
 {
     [TestFixture]
     public static class MinMaxHeapTests
