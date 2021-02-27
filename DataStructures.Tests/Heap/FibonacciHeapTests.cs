@@ -53,6 +53,29 @@ namespace DataStructures.Tests.Heap
         }
 
         [Test]
+        public static void Pop_NonEmptyHeap_ReturnsInSortedOrder()
+        {
+            var heap = new FibonacciHeap<int>();
+
+            var rand = new Random();
+            for (int i = 0; i < 100; i++)
+            {
+                heap.Push(rand.Next(1000));
+            }
+
+            var element = heap.Pop();
+
+            for (int i = 0; i < 99; i++)
+            {
+                var newElement = heap.Pop();
+                Assert.LessOrEqual(element, newElement);
+                element = newElement;
+            }
+
+            Assert.Zero(heap.Count);
+        }
+
+        [Test]
         public static void Peek_NonEmptyHeap_ReturnsCorrectAnswer()
         {
             var heap = BuildTestHeap();

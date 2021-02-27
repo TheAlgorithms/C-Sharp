@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DataStructures.Heap
 {
@@ -210,11 +211,26 @@ namespace DataStructures.Heap
         }
 
         /// <summary>
+        /// A method to see what's on top of the heap without changing its structure.
+        /// </summary>
+        /// <returns>Returns the top element without popping it from the structure of
+        /// the heap.</returns>
+        public T Peek()
+        {
+            if (MinItem == null)
+            {
+                throw new InvalidOperationException("The heap is Empty");
+            }
+
+            return MinItem.Key;
+        }
+
+        /// <summary>
         /// <para>
         /// Consolidate is analogous to Heapify in <see cref="DataStructures.Heap.BinaryHeap{T}"/>.
         /// </para>
         /// <para>
-        /// First, an array <c>A</c> of length D(H.n) is created where H.n is the number
+        /// First, an array <c>A</c> [0...D(H.n)] is created where H.n is the number
         /// of items in this heap, and D(x) is the max degree any node can have in a
         /// Fibonacci heap with x nodes.
         /// </para>
@@ -234,16 +250,6 @@ namespace DataStructures.Heap
         /// which is smallest.
         /// </para>
         /// </summary>
-        public T Peek()
-        {
-            if (MinItem == null)
-            {
-                throw new InvalidOperationException("The heap is Empty");
-            }
-
-            return MinItem.Key;
-        }
-
         protected void Consolidate()
         {
             if (MinItem == null)
@@ -257,11 +263,12 @@ namespace DataStructures.Heap
             // the golden ratio, defined in equation 3.24 as phi = (1 + sqrt(5))/2"
             //
             // For a proof, see [1]
-            var maxDegree = (int)Math.Log(Count, (1 + Math.Sqrt(5)) / 2);
+            var maxDegree = 1 + (int)Math.Log(Count, (1 + Math.Sqrt(5)) / 2);
 
             // Create slots for every possible node degree of x
             var a = new FHeapNode?[maxDegree];
-            foreach (var w in SiblingIterator(MinItem))
+            var siblings = SiblingIterator(MinItem).ToList();
+            foreach (var w in siblings)
             {
                 var x = w;
                 var d = x.Degree;
@@ -306,20 +313,14 @@ namespace DataStructures.Heap
 
             for (int i = 0; i < a.Length; i++)
             {
-                if (a[i] != null)
+                var r = a[i];
+                if (r != null)
                 {
                     if (MinItem == null)
                     {
                         // If the root list is completely empty, make this the new
                         // MinItem
-                        MinItem = a[i];
-
-                        // Similarly to up above, this lets C# know MinItem won't be
-                        // null below
-                        if (MinItem == null)
-                        {
-                            throw new NullReferenceException("MinItem is null");
-                        }
+                        MinItem = r;
 
                         // Make a new root list with just this item. Make sure to make
                         // it its own list.
@@ -328,15 +329,6 @@ namespace DataStructures.Heap
                     }
                     else
                     {
-                        var r = a[i];
-
-                        // Similarly to up above, this lets C# know A[i] won't be
-                        // null below
-                        if (r == null)
-                        {
-                            throw new NullReferenceException("a[i] is null");
-                        }
-
                         // Add A[i] to the root list
                         MinItem.AddRight(r);
 
@@ -359,6 +351,7 @@ namespace DataStructures.Heap
         {
             y.Remove();
             x.AddChild(y);
+            y.Mark = false;
         }
 
         /// <summary>
