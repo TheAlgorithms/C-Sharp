@@ -28,7 +28,7 @@ namespace DataStructures.Heap
     /// </para>
     /// </remarks>
     /// <typeparam name="T">Type of elements in binary heap.</typeparam>
-    public class FibonacciHeap<T> where T : IComparable, IEquatable<T>
+    public class FibonacciHeap<T> where T : IComparable
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DataStructures.Heap.FibonacciHeap{T}"/> class.
