@@ -226,6 +226,100 @@ namespace DataStructures.Heap
         }
 
         /// <summary>
+        /// Reduce the key of x to be k.
+        /// </summary>
+        /// <remarks>
+        /// k must be less than x.Key, increasing the key of an item is not supported.
+        /// </remarks>
+        /// <param name="x">The item you want to reduce in value.</param>
+        /// <param name="k">The new value for the item.</param>
+        public void DecreaseKey(FHeapNode x, T k)
+        {
+            if (MinItem == null)
+            {
+                throw new InvalidOperationException("Heap malformed");
+            }
+
+            if (x.Key == null)
+            {
+                throw new InvalidOperationException("x has no value");
+            }
+
+            if (k.CompareTo(x.Key) > 0)
+            {
+                throw new InvalidOperationException("Value cannot be increased");
+            }
+
+            if (k.CompareTo(x.Key) < 0)
+            {
+                x.Key = k;
+                var y = x.Parent;
+                if (y != null && x.Key.CompareTo(y.Key) < 0)
+                {
+                    Cut(x, y);
+                    CascadingCut(y);
+                }
+
+                if (x.Key.CompareTo(MinItem.Key) < 0)
+                {
+                    MinItem = x;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Remove x from the child list of y.
+        /// </summary>
+        /// <param name="x">A child of y we just decreased the value of.</param>
+        /// <param name="y">The now former parent of x.</param>
+        protected void Cut(FHeapNode x, FHeapNode y)
+        {
+            if (MinItem == null)
+            {
+                throw new InvalidOperationException("Heap malformed");
+            }
+
+            if (y.Degree == 1)
+            {
+                y.Child = null;
+                MinItem.AddRight(x);
+            }
+            else if (y.Degree > 1)
+            {
+                x.Remove();
+            }
+            else
+            {
+                throw new InvalidOperationException("Heap malformed");
+            }
+
+            y.Degree--;
+            x.Mark = false;
+            x.Parent = null;
+        }
+
+        /// <summary>
+        /// Rebalances the heap after the decrease operation takes place.
+        /// </summary>
+        /// <param name="y">An item that may no longer obey the heap property.</param>
+        protected void CascadingCut(FHeapNode y)
+        {
+            var z = y.Parent;
+            if (z != null)
+            {
+                if (y.Mark == false)
+                {
+                    y.Mark = true;
+                }
+                else
+                {
+                    Cut(y, z);
+                    CascadingCut(z);
+                }
+            }
+        }
+
+        /// <summary>
         /// <para>
         /// Consolidate is analogous to Heapify in <see cref="DataStructures.Heap.BinaryHeap{T}"/>.
         /// </para>

@@ -58,14 +58,16 @@ namespace DataStructures.Tests.Heap
             var heap = new FibonacciHeap<int>();
 
             var rand = new Random();
-            for (int i = 0; i < 100; i++)
+            var heapSize = 100;
+
+            for (int i = 0; i < heapSize; i++)
             {
                 heap.Push(rand.Next(1000));
             }
 
             var element = heap.Pop();
 
-            for (int i = 0; i < 99; i++)
+            for (int i = 0; i < heapSize - 1; i++)
             {
                 var newElement = heap.Pop();
                 Assert.LessOrEqual(element, newElement);
@@ -91,12 +93,23 @@ namespace DataStructures.Tests.Heap
             Assert.Throws<InvalidOperationException>(() => heap.Peek());
         }
 
-        // [Test]
-        // public static void Remove_EmptyHeap_ThrowsCorrectException()
-        // {
-        //     var heap = new BinaryHeap<int>();
+        [Test]
+        public static void DecreaseKey_NonEmptyHeap_ReturnsCorrectAnswer()
+        {
+            var heap = BuildTestHeap();
 
-        //     Assert.Throws<ArgumentException>(() => heap.Remove(1));
-        // }
+            var node = heap.Push(11);
+            heap.DecreaseKey(node, -1);
+
+            Assert.AreEqual(heap.Pop(), -1);
+            Assert.AreEqual(heap.Pop(), 1);
+
+            node = heap.Push(5);
+            heap.DecreaseKey(node, 1);
+            Assert.AreEqual(heap.Pop(), 1);
+
+            Assert.AreEqual(heap.Pop(), 2);
+            Assert.AreEqual(heap.Pop(), 3);
+        }
     }
 }
