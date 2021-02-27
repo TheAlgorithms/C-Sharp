@@ -16,13 +16,13 @@ namespace DataStructures.Heap
     /// </para>
     /// <para>
     /// In practice, Fibonacci heaps are more complicated than binary heaps and require
-    /// a large input problems before the benifits of the theoretical speed up 
-    /// begin to show. 
+    /// a large input problems before the benifits of the theoretical speed up
+    /// begin to show.
     /// </para>
     /// <para>
     /// References:
-    /// [1] Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, 
-    /// and Clifford Stein. 2009. Introduction to Algorithms, Third Edition (3rd. ed.). 
+    /// [1] Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest,
+    /// and Clifford Stein. 2009. Introduction to Algorithms, Third Edition (3rd. ed.).
     /// The MIT Press.
     /// </para>
     /// </remarks>
@@ -43,8 +43,8 @@ namespace DataStructures.Heap
         public int Count { get; set; } = 0;
 
         /// <summary>
-        /// Gets or sets a reference to the MinItem. The MinItem and all of its siblings 
-        /// comprise the root list, a list of trees that satisfy the heap property and 
+        /// Gets or sets a reference to the MinItem. The MinItem and all of its siblings
+        /// comprise the root list, a list of trees that satisfy the heap property and
         /// are joined in a circularly doubly linked list.
         /// </summary>
         protected FHeapNode? MinItem { get; set; }
@@ -53,13 +53,13 @@ namespace DataStructures.Heap
         /// Add item <c>x</c> to this Fibonacci heap.
         /// </summary>
         /// <remarks>
-        /// To add an item to a Fibonacci heap, we simply add it to the "root list", 
-        /// a circularly doubly linked list where our minimum item sits. Since adding 
-        /// items to a linked list takes O(1) time, the overall time to perform this 
+        /// To add an item to a Fibonacci heap, we simply add it to the "root list",
+        /// a circularly doubly linked list where our minimum item sits. Since adding
+        /// items to a linked list takes O(1) time, the overall time to perform this
         /// operation is O(1).
         /// </remarks>
         /// <param name="x">An item to push onto the heap.</param>
-        /// <returns>A reference to the item as it is in the heap. This is used for 
+        /// <returns>A reference to the item as it is in the heap. This is used for
         /// operations like decresing key.</returns>
         public FHeapNode Push(T x)
         {
@@ -90,14 +90,14 @@ namespace DataStructures.Heap
         /// <remarks>
         /// To union two Fibonacci heaps is a single fibonacci heap is a single heap
         /// that contains all the elements of both heaps. This can be done in O(1) time
-        /// by concatenating the root lists together. 
-        /// 
+        /// by concatenating the root lists together.
+        ///
         /// For more details on how two circularly linked lists are concatenated, see
         /// <see cref="DataStructures.Heap.FibonacciHeap{T}.FHeapNode.ConcatenateRight(DataStructures.Heap.FibonacciHeap{T}.FHeapNode)"/>
-        /// 
+        ///
         /// Finally, check to see which of <c>this.MinItem</c> and <c>other.MinItem</c>
         /// is smaller, and set <c>this.MinItem</c> accordingly
-        /// 
+        ///
         /// This operation destroys <c>other</c>.
         /// </remarks>
         /// <param name="other">Another heap whose elements we wish to add to this heap.
@@ -143,11 +143,11 @@ namespace DataStructures.Heap
         /// Return the MinItem and remove it from the heap.
         /// </summary>
         /// <remarks>
-        /// This function (with all of its helper functions) is the most complicated 
+        /// This function (with all of its helper functions) is the most complicated
         /// part of the Fibonacci Heap. However, it can be broken down into a few steps.
         /// <list type="number">
         /// <item>
-        /// Add the children of MinItem to the root list. Either one of these children, 
+        /// Add the children of MinItem to the root list. Either one of these children,
         /// or another of the items in the root list is a candidate to become the new
         /// MinItem.
         /// </item>
@@ -155,8 +155,8 @@ namespace DataStructures.Heap
         /// Remove the MinItem from the root list and appoint a new MinItem temporarily.
         /// </item>
         /// <item>
-        /// <see cref="DataStructures.Heap.FibonacciHeap{T}.Consolidate"/> what's left 
-        /// of the heap
+        /// <see cref="DataStructures.Heap.FibonacciHeap{T}.Consolidate"/> what's left
+        /// of the heap.
         /// </item>
         /// </list>
         /// </remarks>
@@ -187,7 +187,7 @@ namespace DataStructures.Heap
                 }
                 else
                 {
-                    // Temporarily reassign MinItem to an arbitrary item in the root 
+                    // Temporarily reassign MinItem to an arbitrary item in the root
                     // list
                     MinItem = MinItem.Right;
 
@@ -214,24 +214,24 @@ namespace DataStructures.Heap
         /// Consolidate is analogous to Heapify in <see cref="DataStructures.Heap.BinaryHeap{T}"/>.
         /// </para>
         /// <para>
-        /// First, an array <c>A</c> of length D(H.n) is created where H.n is the number of items
-        /// in this heap, and D(x) is the max degree any node can have in a Fibonacci 
-        /// heap with x nodes.
+        /// First, an array <c>A</c> of length D(H.n) is created where H.n is the number
+        /// of items in this heap, and D(x) is the max degree any node can have in a
+        /// Fibonacci heap with x nodes.
         /// </para>
         /// <para>
-        /// For each node <c>x</c> in the root list, try to add it to <c>A[d]</c> where 
+        /// For each node <c>x</c> in the root list, try to add it to <c>A[d]</c> where
         /// d is the degree of <c>x</c>.
-        /// If there is already a node in <c>A[d]</c>, call it <c>y</c>, and make 
-        /// <c>y</c> a child of <c>x</c>. (Swap <c>x</c> and <c>y</c> beforehand if 
-        /// <c>x</c> is greater than <c>y</c>). Now that <c>x</c> has one more child, 
-        /// remove if from <c>A[d]</c> and add it to <c>A[d+1]</c> to reflect that it's 
-        /// degree is one more. Loop this behavior until we find an empty spot to put 
+        /// If there is already a node in <c>A[d]</c>, call it <c>y</c>, and make
+        /// <c>y</c> a child of <c>x</c>. (Swap <c>x</c> and <c>y</c> beforehand if
+        /// <c>x</c> is greater than <c>y</c>). Now that <c>x</c> has one more child,
+        /// remove if from <c>A[d]</c> and add it to <c>A[d+1]</c> to reflect that its
+        /// degree is one more. Loop this behavior until we find an empty spot to put
         /// <c>x</c>.
         /// </para>
         /// <para>
         /// With <c>A</c> all filled, empty the root list of the heap. And add each item
         /// from <c>A</c> into the root list, one by one, making sure to keep track of
-        /// which is smallest. 
+        /// which is smallest.
         /// </para>
         /// </summary>
         public T Peek()
@@ -251,27 +251,27 @@ namespace DataStructures.Heap
                 return;
             }
 
-            // There's a fact in Intro to Algorithms: 
-            // "the max degree of any node in an n-node fibonacci heap is O(lg(n)). 
-            // In particular, we shall show that D(n) <= floor(log_phi(n)) where phi is 
+            // There's a fact in Intro to Algorithms:
+            // "the max degree of any node in an n-node fibonacci heap is O(lg(n)).
+            // In particular, we shall show that D(n) <= floor(log_phi(n)) where phi is
             // the golden ratio, defined in equation 3.24 as phi = (1 + sqrt(5))/2"
             //
             // For a proof, see [1]
             var maxDegree = (int)Math.Log(Count, (1 + Math.Sqrt(5)) / 2);
 
             // Create slots for every possible node degree of x
-            var A = new FHeapNode?[maxDegree];
+            var a = new FHeapNode?[maxDegree];
             foreach (var w in SiblingIterator(MinItem))
             {
                 var x = w;
                 var d = x.Degree;
 
                 // While A[d] is not empty, we can't blindly put x here
-                while (A[d] != null)
+                while (a[d] != null)
                 {
-                    var y = A[d];
+                    var y = a[d];
 
-                    // This is just here to satisfy C#, otherwise it complains that y 
+                    // This is just here to satisfy C#, otherwise it complains that y
                     // might be null further below.
                     if (y == null)
                     {
@@ -291,28 +291,28 @@ namespace DataStructures.Heap
                     FibHeapLink(y, x);
 
                     // Empty out this spot since x now has a higher degree
-                    A[d] = null;
+                    a[d] = null;
 
                     // Add 1 to x's degree before going back into the loop
                     d++;
                 }
 
                 // Now that there's an empty spot for x, place it there
-                A[d] = x;
+                a[d] = x;
             }
 
             // Once all items are in A, empty out the root list
             MinItem = null;
 
-            for (int i = 0; i < A.Length; i++)
+            for (int i = 0; i < a.Length; i++)
             {
-                if (A[i] != null)
+                if (a[i] != null)
                 {
                     if (MinItem == null)
                     {
-                        // If the root list is completely empty, make this the new 
+                        // If the root list is completely empty, make this the new
                         // MinItem
-                        MinItem = A[i];
+                        MinItem = a[i];
 
                         // Similarly to up above, this lets C# know MinItem won't be
                         // null below
@@ -326,10 +326,9 @@ namespace DataStructures.Heap
                         MinItem.SetSiblings(MinItem, MinItem);
                         MinItem.Parent = null;
                     }
-
                     else
                     {
-                        var r = A[i];
+                        var r = a[i];
 
                         // Similarly to up above, this lets C# know A[i] won't be
                         // null below
@@ -344,7 +343,7 @@ namespace DataStructures.Heap
                         // If this item is smaller, make it the new min item
                         if (MinItem.Key.CompareTo(r.Key) > 0)
                         {
-                            MinItem = A[i];
+                            MinItem = a[i];
                         }
                     }
                 }
@@ -389,14 +388,14 @@ namespace DataStructures.Heap
         public class FHeapNode
         {
             /// <summary>
-            /// Initializes a new instance of the <see cref="FHeapNode"/>.
+            /// Initializes a new instance of the <see cref="FHeapNode"/> class.
             /// </summary>
             /// <param name="key">An item in the Fibonacci heap.</param>
             public FHeapNode(T key)
             {
                 Key = key;
 
-                // Since even a single node must form a circularly doubly linked list, 
+                // Since even a single node must form a circularly doubly linked list,
                 // initialize it as such
                 Left = Right = this;
                 Parent = Child = null;
@@ -423,20 +422,20 @@ namespace DataStructures.Heap
             public FHeapNode Right { get; set; }
 
             /// <summary>
-            /// Gets or sets a reference to one of the children, there may be more that 
-            /// are siblings the this child, however this structure only maintains a 
+            /// Gets or sets a reference to one of the children, there may be more that
+            /// are siblings the this child, however this structure only maintains a
             /// reference to one of them.
             /// </summary>
             public FHeapNode? Child { get; set; }
 
             /// <summary>
-            /// Gets or sets a value indicating whether this node has been marked, 
+            /// Gets or sets a value indicating whether this node has been marked,
             /// used in some operations.
             /// </summary>
             public bool Mark { get; set; } = false;
 
             /// <summary>
-            /// Gets or sets the number of nodes in the child linked list. 
+            /// Gets or sets the number of nodes in the child linked list.
             /// </summary>
             public int Degree { get; set; } = 0;
 
@@ -448,9 +447,9 @@ namespace DataStructures.Heap
 
             /// <summary>
             /// A helper function to add a node to the right of this one in the current
-            /// circularly doubly linked list
+            /// circularly doubly linked list.
             /// </summary>
-            /// <param name="node">A node to go in the linked list</param>
+            /// <param name="node">A node to go in the linked list.</param>
             public void AddRight(FHeapNode node)
             {
                 Right.Left = node;
@@ -460,9 +459,9 @@ namespace DataStructures.Heap
             }
 
             /// <summary>
-            /// Similar to AddRight, but adds the node as a sibling to the child node
+            /// Similar to AddRight, but adds the node as a sibling to the child node.
             /// </summary>
-            /// <param name="node"></param>
+            /// <param name="node">A node to add to the child list of this node.</param>
             public void AddChild(FHeapNode node)
             {
                 Degree++;
@@ -480,7 +479,7 @@ namespace DataStructures.Heap
             }
 
             /// <summary>
-            /// Remove this item from the linked list it's in
+            /// Remove this item from the linked list it's in.
             /// </summary>
             public void Remove()
             {
@@ -490,11 +489,12 @@ namespace DataStructures.Heap
 
             /// <summary>
             /// Combine the linked list that <c>otherList</c> sits inside, with the
-            /// linked list this is in. Do this by cutting the link between this node, 
-            /// and the node to the right of this, and inserting the contents of the 
-            /// otherList in between
+            /// linked list this is in. Do this by cutting the link between this node,
+            /// and the node to the right of this, and inserting the contents of the
+            /// otherList in between.
             /// </summary>
-            /// <param name="otherList"></param>
+            /// <param name="otherList">A node from another list whose elements we want
+            /// to concatenate to this list.</param>
             public void ConcatenateRight(FHeapNode otherList)
             {
                 Right.Left = otherList.Left;
