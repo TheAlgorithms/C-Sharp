@@ -1,7 +1,7 @@
 # List of all files
 
 ## Data Compression
-  * [Burrows-Wheeler transfrm](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/DataCompression/BurrowsWheelerTransform.cs)
+  * [Burrows-Wheeler transform](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/DataCompression/BurrowsWheelerTransform.cs)
   * [Huffman Compressor](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/DataCompression/HuffmanCompressor.cs)
   * [Shannon-Fano Compressor](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/DataCompression/ShannonFanoCompressor.cs)
 ## Encoders
