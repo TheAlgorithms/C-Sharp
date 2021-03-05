@@ -1,155 +1,109 @@
 # List of all files
 
-## DataStructures
-  * AATree
-    * [AATree](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/AATree/AATree.cs)
-  * [BinaryHeap](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/BinaryHeap.cs)
-  * BinarySearchTree
-    * [BinarySearchTree](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/BinarySearchTree/BinarySearchTree.cs)
-    * [BinarySearchTreeNode](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/BinarySearchTree/BinarySearchTreeNode.cs)
-  * [BitArray](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/BitArray.cs)
-  * LinkedList
-    * DoublyLinkedList
-      * [DoublyLinkedList](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/LinkedList/DoublyLinkedList/DoublyLinkedList.cs)
-      * [DoublyLinkedListNode](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/LinkedList/DoublyLinkedList/DoublyLinkedListNode.cs)
-    * SinglyLinkedList
-      * [SinglyLinkedList](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/LinkedList/SinglyLinkedList/SinglyLinkedList.cs)
-      * [SinglyLinkedListNode](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/LinkedList/SinglyLinkedList/SinglyLinkedListNode.cs)
-  * [MinMaxHeap](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/MinMaxHeap.cs)
-  * Queue
-    * [ArrayBasedQueue](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Queue/ArrayBasedQueue.cs)
-    * [ListBasedQueue](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Queue/ListBasedQueue.cs)
-    * [StackBasedQueue](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Queue/StackBasedQueue.cs)
-  * SegmentTrees
-    * [SegmentTree](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/SegmentTrees/SegmentTree.cs)
-    * [SegmentTreeApply](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/SegmentTrees/SegmentTreeApply.cs)
-    * [SegmentTreeUpdate](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/SegmentTrees/SegmentTreeUpdate.cs)
-  * Stack
-    * [ArrayBasedStack](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Stack/ArrayBasedStack.cs)
-    * [ListBasedStack](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Stack/ListBasedStack.cs)
-  * [Timeline](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Timeline.cs)
-
-## DataCompression
-  * [BurrowsWheelerTransform](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/DataCompression/BurrowsWheelerTransform.cs)
-  * [HuffmanCompressor](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/DataCompression/HuffmanCompressor.cs)
-  * [ShannonFanoCompressor](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/DataCompression/ShannonFanoCompressor.cs)
-  * [Translator](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/DataCompression/Translator.cs)
-
+## Data Compression
+  * [Burrows-Wheeler transform](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/DataCompression/BurrowsWheelerTransform.cs)
+  * [Huffman Compressor](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/DataCompression/HuffmanCompressor.cs)
+  * [Shannon-Fano Compressor](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/DataCompression/ShannonFanoCompressor.cs)
 ## Encoders
-  * [CaesarEncoder](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/CaesarEncoder.cs)
-  * [HillEncoder](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/HillEncoder.cs)
-  * [IEncoder](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/IEncoder.cs)
-  * [NysiisEncoder](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/NysiisEncoder.cs)
-  * [SoundexEncoder](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/SoundexEncoder.cs)
-  * [VigenereEncoder](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/VigenereEncoder.cs)
-
-## Knapsack
-  * [DynamicProgrammingKnapsackSolver](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Knapsack/DynamicProgrammingKnapsackSolver.cs)
-  * [IHeuristicKnapsackSolver](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Knapsack/IHeuristicKnapsackSolver.cs)
-  * [IKnapsackSolver](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Knapsack/IKnapsackSolver.cs)
-  * [NaiveKnapsackSolver](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Knapsack/NaiveKnapsackSolver.cs)
-
-## LinearAlgebra
+  * [Caesar](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/CaesarEncoder.cs)
+  * [Vigenere](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/VigenereEncoder.cs)
+  * [Hill](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/HillEncoder.cs)
+  * [NYSIIS](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/NYSIISEncoder.cs)
+  * [Soundex](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/SoundexEncoder.cs)
+## Knapsack problem
+  * [Naive solver](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Knapsack/NaiveKnapsackSolver.cs)
+  * [Dynamic Programming solver](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Knapsack/DynamicProgrammingKnapsackSolver.cs)
+## Linear Algebra
   * Eigenvalue
-    * [PowerIteration](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/LinearAlgebra/Eigenvalue/PowerIteration.cs)
-
+    * [Power Iteration](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/LinearAlgebra/Eigenvalue/PowerIteration.cs)
 ## Numeric
-  * [AliquotSumCalculator](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/AliquotSumCalculator.cs)
-  * [BinomialCoefficient](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/BinomialCoefficient.cs)
+  * [Aliquot Sum Calculator](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/AliquotSumCalculator.cs)
   * Decomposition
-    * [LU](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Decomposition/LU.cs)
-    * [ThinSVD](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Decomposition/ThinSVD.cs)
-  * [Factorial](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Factorial.cs)
+    * [LU Decomposition](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Decomposition/LU.cs)
+    * [Singular Vector Decomposition](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Decomposition/SVD.cs)
+  * Greatest Common Divisor
+    * [Euclidean GCD](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/GreatestCommonDivisor/EuclideanGreatestCommonDivisorFinder.cs)
+    * [Binary GCD](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/GreatestCommonDivisor/BinaryGreatestCommonDivisorFinder.cs)
   * Factorization
-    * [IFactorizer](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Factorization/IFactorizer.cs)
-    * [TrialDivisionFactorizer](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Factorization/TrialDivisionFactorizer.cs)
-  * [GaussJordanElimination](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/GaussJordanElimination.cs)
-  * GreatestCommonDivisor
-    * [BinaryGreatestCommonDivisorFinder](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/GreatestCommonDivisor/BinaryGreatestCommonDivisorFinder.cs)
-    * [EuclideanGreatestCommonDivisorFinder](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/GreatestCommonDivisor/EuclideanGreatestCommonDivisorFinder.cs)
-    * [IGreatestCommonDivisorFinder](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/GreatestCommonDivisor/IGreatestCommonDivisorFinder.cs)
-  * [NarcissisticNumberChecker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/NarcissisticNumberChecker.cs)
-  * [PerfectNumberChecker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/PerfectNumberChecker.cs)
-  * [PerfectSquareChecker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/PerfectSquareChecker.cs)
-  * Pseudoinverse
-    * [PseudoInverse](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Pseudoinverse/PseudoInverse.cs)
+    * [Trial division Factorization](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Factorization/TrialDivisionFactorizer.cs)
   * Series
-    * [Maclaurin](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Series/Maclaurin.cs)
-
-## Other
-  * [FermatPrimeChecker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/FermatPrimeChecker.cs)
-  * [GeoLocation](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/GeoLocation.cs)
-  * [Int2Binary](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/Int2Binary.cs)
-  * [Luhn](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/Luhn.cs)
-  * [SieveOfEratosthenes](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/SieveOfEratosthenes.cs)
-
-## Problems
-  * NQueens
-    * [BacktrackingNQueensSolver](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Problems/NQueens/BacktrackingNQueensSolver.cs)
-  * StableMarriage
-    * [Accepter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Problems/StableMarriage/Accepter.cs)
-    * [GaleShapley](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Problems/StableMarriage/GaleShapley.cs)
-    * [Proposer](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Problems/StableMarriage/Proposer.cs)
-
-## Search
-  * AStar
-    * [AStar](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/AStar/AStar.cs)
-    * [Node](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/AStar/Node.cs)
-    * [NodeState](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/AStar/NodeState.cs)
-    * [PathfindingException](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/AStar/PathfindingException.cs)
-    * [PriorityQueue](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/AStar/PriorityQueue.cs)
-    * [VecN](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/AStar/VecN.cs)
-  * [BinarySearcher](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/BinarySearcher.cs)
-  * [FastSearcher](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/FastSearcher.cs)
-  * [LinearSearcher](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/LinearSearcher.cs)
-  * [RecursiveBinarySearcher](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/RecursiveBinarySearcher.cs)
-
-## Sequences
-  * [BinomialSequence](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sequences/BinomialSequence.cs)
-  * [FactorialSequence](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sequences/FactorialSequence.cs)
-  * [FibonacciSequence](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sequences/FibonacciSequence.cs)
-  * [ISequence](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sequences/ISequence.cs)
-  * [NaturalSequence](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sequences/NaturalSequence.cs)
-  * [PrimesSequence](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sequences/PrimesSequence.cs)
-
-## Sorters
+    * [Maclaurin Series](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Series/Maclaurin.cs)
+  * [Gauss-Jordan Elimination](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/GaussJordanElimination.cs)
+  * [Pseudo-Inverse](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Pseudoinverse/PseudoInverse.cs)
+  * [Narcissistic Number Checker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/NarcissisticNumberChecker.cs)
+  * [Perfect Number Checker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/PerfectNumberChecker.cs)
+  * [Perfect Square Checker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/PerfectSquareChecker.cs)
+## Searches
+  * [A-Star](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/AStar/)
+  * [Binary Search](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/BinarySearcher.cs)
+  * [Recursive Binary Search](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/RecursiveBinarySearcher.cs)
+  * [Linear Search](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/LinearSearcher.cs)
+  * [Fast Search](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/FastSearcher.cs)
+  * [Knuth–Morris–Pratt](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/KmpSearcher.cs)
+## Sorts
   * Comparison
-    * [BinaryInsertionSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/BinaryInsertionSorter.cs)
-    * [BogoSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/BogoSorter.cs)
-    * [BubbleSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/BubbleSorter.cs)
-    * [CocktailSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/CocktailSorter.cs)
-    * [CombSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/CombSorter.cs)
-    * [CycleSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/CycleSorter.cs)
-    * [HeapSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/HeapSorter.cs)
-    * [IComparisonSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/IComparisonSorter.cs)
-    * [InsertionSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/InsertionSorter.cs)
-    * [MedianOfThreeQuickSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/MedianOfThreeQuickSorter.cs)
-    * [MergeSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/MergeSorter.cs)
-    * [MiddlePointQuickSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/MiddlePointQuickSorter.cs)
-    * [PancakeSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/PancakeSorter.cs)
-    * [QuickSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/QuickSorter.cs)
-    * [RandomPivotQuickSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/RandomPivotQuickSorter.cs)
-    * [SelectionSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/SelectionSorter.cs)
-    * [ShellSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/ShellSorter.cs)
+    * [Binary Insertion Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/BinaryInsertionSorter.cs)
+    * [Bogo Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/BogoSorter.cs)
+    * [Bubble Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/BubbleSorter.cs)
+    * [Cocktail Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/CocktailSorter.cs)
+    * [Comb Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/CombSorter.cs)
+    * [Cycle Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/CycleSorter.cs)
+    * [Heap Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/HeapSorter.cs)
+    * [Insertion Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/InsertionSorter.cs)
+    * [Merge Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/MergeSorter.cs)
+    * [Pancake Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/PancakeSorter.cs)
+    * [Quick Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/QuickSorter.cs)
+      * [Median of three pivot](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/MedianOfThreeQuickSorter.cs)
+      * [Middle point pivot](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/MiddlePointQuickSorter.cs)
+      * [Random pivot](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/RandomPivotQuickSorter.cs)
+    * [Selection](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/SelectionSorter.cs)
+    * [Shell](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/ShellSorter.cs)
   * External
-    * [ExternalMergeSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/External/ExternalMergeSorter.cs)
-    * [IExternalSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/External/IExternalSorter.cs)
-    * [ISequentialStorage](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/External/ISequentialStorage.cs)
-    * [ISequentialStorageReader](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/External/ISequentialStorageReader.cs)
-    * [ISequentialStorageWriter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/External/ISequentialStorageWriter.cs)
+    * [Merge Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/External/ExternalMergeSorter.cs)
   * Integer
-    * [BucketSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Integer/BucketSorter.cs)
-    * [CountingSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Integer/CountingSorter.cs)
-    * [IIntegerSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Integer/IIntegerSorter.cs)
-    * [RadixSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Integer/RadixSorter.cs)
+    * [Counting Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Integer/CountingSorter.cs)
+    * [Bucket Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Integer/BucketSorter.cs)
+    * [Radix Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Integer/RadixSorter.cs)
   * String
-    * [IStringSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/String/IStringSorter.cs)
-    * [MsdRadixStringSorter](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/String/MsdRadixStringSorter.cs)
+    * [MSD Radix Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/String/MsdRadixStringSorter.cs)
+## Sequences
+  * [A000027 Natural](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sequences/NaturalSequence.cs)
+  * [A000040 Primes](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sequences/PrimesSequence.cs)
+  * [A000045 Fibonacci](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sequences/FibonacciSequence.cs)
+  * [A000142 Factorial](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sequences/FactorialSequence.cs)
+  * [A007318 Binomial](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sequences/BinomialSequence.cs)
+## String
+  * [Longest Consecutive Character](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Strings/GeneralStringAlgorithms.cs)
+  * [Naive String Search](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Strings/NaiveStringSearch.cs)
+  * [Rabin Karp](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Strings/RabinKarp.cs)
+  * [Boyer Moore](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Strings/BoyerMoore.cs)
+  * [Palindrome Checker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Strings/palindrome.cs)
+## Other
+  * [Fermat Prime Checker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/FermatPrimeChecker.cs)
+  * [Sieve of Eratosthenes](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/SieveOfEratosthenes.cs)
+  * [Luhn](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/Luhn.cs)
+## Problems
+  * [Stable Marriage](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Problems/StableMarriage/GaleShapley.cs)
+  * [N-Queens](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Problems/NQueens/BacktrackingNQueensSolver.cs)
 
-## Strings
-  * [BoyerMoore](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Strings/BoyerMoore.cs)
-  * [GeneralStringAlgorithms](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Strings/GeneralStringAlgorithms.cs)
-  * [KnuthMorrisPrattSearcher](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Strings/KnuthMorrisPrattSearcher.cs)
-  * [NaiveStringSearch](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Strings/NaiveStringSearch.cs)
-  * [palindrome](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Strings/palindrome.cs)
-  * [RabinKarp](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Strings/RabinKarp.cs)
+## Data Structures
+  * [Bit Array](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/BitArray.cs)
+  * [Min-Max Heap](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/MinMaxHeap.cs)
+  * [Timeline](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Timeline.cs)
+  * Segment Trees
+    * [Segment Tree](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/SegmentTrees/SegmentTree.cs)
+    * [Segment Tree Multiplication](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/SegmentTrees/SegmentTreeApply.cs)
+    * [Segment Tree Update](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/SegmentTrees/SegmentTreeUpdate.cs)  
+  * [Binary Search Tree](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/BinarySearchTree)
+  * [AA Tree](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/AATree)
+  * [Binary Heap](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/BinaryHeap.cs)
+  * Stack
+    * [Array-based Stack](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Stack/ArrayBasedStack.cs)
+    * [List-based Stack](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Stack/ListBasedStack.cs)
+  * Queue
+    * [Array-based Queue](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Queue/ArrayBasedQueue.cs)
+    * [List-based Queue](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Queue/ListBasedQueue.cs)
+    * [Stack-based Queue](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Queue/StackBasedQueue.cs)
+  * Linked List
+    * [Singly Linked List](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/LinkedList/SinglyLinkedList/SinglyLinkedList.cs)
+    * [Doubly Linked List](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/LinkedList/DoublyLinkedList/DoublyLinkedList.cs)
