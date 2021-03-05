@@ -2,6 +2,8 @@ name: directory_md
 on: 
   push:
     branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   MainSequence:
