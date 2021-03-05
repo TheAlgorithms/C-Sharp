@@ -70,7 +70,6 @@ jobs:
           with open("DIRECTORY.md", "w") as out_file:
               out_file.write(build_directory_md(".") + "\n")
       - name: Commit DIRECTORY.md
-        run: |
-          git commit -m "updating DIRECTORY.md" DIRECTORY.md ||  true
-          git diff DIRECTORY.md
-          git push --force origin HEAD:$GITHUB_REF || true
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: updating DIRECTORY.md
