@@ -1,9 +1,9 @@
 name: directory_md
-on: 
+on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   MainSequence:
@@ -24,13 +24,14 @@ jobs:
           from typing import Iterator
           URL_BASE = "https://github.com/TheAlgorithms/C-Sharp/blob/master"
           g_output = []
+          exclude = ["AATreeNode.cs", "IntFileStorage.cs", "IntInMemoryStorage.cs"]
 
           def good_filepaths(top_dir: str = ".") -> Iterator[str]:
               fs_exts = tuple(".cs".split())
               for dirpath, dirnames, filenames in os.walk(top_dir):
                   dirnames[:] = [d for d in dirnames if d[0] not in "._"]
                   for filename in filenames:
-                      if os.path.splitext(filename)[1].lower() in fs_exts:
+                      if (filename not in exclude) and (os.path.splitext(filename)[1].lower() in fs_exts):
                           yield os.path.join(dirpath, filename).lstrip("./")
 
           def md_prefix(i):
@@ -54,9 +55,8 @@ jobs:
                       old_path = print_path(old_path, filepath)
                   indent = (filepath.count(os.sep) + 1) if filepath else 0
                   url = "/".join((URL_BASE, filepath, filename)).replace(" ", "%20")
-                  filename = os.path.splitext(filename.replace("_", " ").title())[0]
+                  filename = os.path.splitext(filename.replace("_", " "))[0]
                   g_output.append(f"{md_prefix(indent)} [{filename}]({url})")
-
 
           def build_directory_md(top_dir: str = ".") -> str:
               global g_output, URL_BASE
