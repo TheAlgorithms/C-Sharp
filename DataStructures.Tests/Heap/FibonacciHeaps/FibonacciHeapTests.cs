@@ -78,14 +78,6 @@ namespace DataStructures.Tests.Heap
         }
 
         [Test]
-        public static void Peek_NonEmptyHeap_ReturnsCorrectAnswer()
-        {
-            var heap = BuildTestHeap();
-
-            Assert.AreEqual(1, heap.Peek());
-        }
-
-        [Test]
         public static void Peek_EmptyHeap_ThrowsCorrectException()
         {
             var heap = new FibonacciHeap<int>();
@@ -110,6 +102,36 @@ namespace DataStructures.Tests.Heap
 
             Assert.AreEqual(heap.Pop(), 2);
             Assert.AreEqual(heap.Pop(), 3);
+        }
+
+        [Test]
+        public static void Union_NonEmptyHeap_ReturnsSortedOrder()
+        {
+            var oddHeap = new FibonacciHeap<int>();
+
+            for (int i = 1; i < 10; i += 2)
+            {
+                oddHeap.Push(i);
+            }
+
+            var evenHeap = new FibonacciHeap<int>();
+
+            for (int i = 0; i < 10; i += 2)
+            {
+                evenHeap.Push(i);
+            }
+
+            oddHeap.Union(evenHeap);
+
+            var result = new List<int>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                Assert.AreEqual(i, oddHeap.Pop());
+            }
+
+            Assert.Zero(oddHeap.Count);
+            Assert.Zero(evenHeap.Count);
         }
     }
 }

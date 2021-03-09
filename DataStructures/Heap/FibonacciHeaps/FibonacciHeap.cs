@@ -48,7 +48,7 @@ namespace DataStructures.Heap
         /// comprise the root list, a list of trees that satisfy the heap property and
         /// are joined in a circularly doubly linked list.
         /// </summary>
-        protected FHeapNode? MinItem { get; set; }
+        protected FHeapNode<T>? MinItem { get; set; }
 
         /// <summary>
         /// Add item <c>x</c> to this Fibonacci heap.
@@ -62,11 +62,11 @@ namespace DataStructures.Heap
         /// <param name="x">An item to push onto the heap.</param>
         /// <returns>A reference to the item as it is in the heap. This is used for
         /// operations like decresing key.</returns>
-        public FHeapNode Push(T x)
+        public FHeapNode<T> Push(T x)
         {
             Count++;
 
-            var newItem = new FHeapNode(x);
+            var newItem = new FHeapNode<T>(x);
 
             if (MinItem == null)
             {
@@ -94,7 +94,7 @@ namespace DataStructures.Heap
         /// by concatenating the root lists together.
         ///
         /// For more details on how two circularly linked lists are concatenated, see
-        /// <see cref="DataStructures.Heap.FibonacciHeap{T}.FHeapNode.ConcatenateRight(DataStructures.Heap.FibonacciHeap{T}.FHeapNode)"/>
+        /// <see cref="DataStructures.Heap.FHeapNode{T}.ConcatenateRight(DataStructures.Heap.FHeapNode{T})"/>
         ///
         /// Finally, check to see which of <c>this.MinItem</c> and <c>other.MinItem</c>
         /// is smaller, and set <c>this.MinItem</c> accordingly
@@ -164,48 +164,44 @@ namespace DataStructures.Heap
         /// <returns>The minimum item from the heap.</returns>
         public T Pop()
         {
-            FHeapNode? z = null;
-
-            if (MinItem != null)
-            {
-                z = MinItem;
-
-                // Since z is leaving the heap, add its children to the root list
-                if (z.Child != null)
-                {
-                    foreach (var x in SiblingIterator(z.Child))
-                    {
-                        x.Parent = null;
-                    }
-
-                    // This effectively adds each child x to the root list
-                    z.ConcatenateRight(z.Child);
-                }
-
-                if (Count == 1)
-                {
-                    MinItem = null;
-                }
-                else
-                {
-                    // Temporarily reassign MinItem to an arbitrary item in the root
-                    // list
-                    MinItem = MinItem.Right;
-
-                    // Remove the old MinItem from the root list altogether
-                    z.Remove();
-
-                    // Consolidate the heap
-                    Consolidate();
-                }
-
-                Count -= 1;
-            }
-
-            if (z == null)
+            FHeapNode<T>? z = null;
+            if (MinItem == null)
             {
                 throw new InvalidOperationException("Heap is empty!");
             }
+
+            z = MinItem;
+
+            // Since z is leaving the heap, add its children to the root list
+            if (z.Child != null)
+            {
+                foreach (var x in SiblingIterator(z.Child))
+                {
+                    x.Parent = null;
+                }
+
+                // This effectively adds each child x to the root list
+                z.ConcatenateRight(z.Child);
+            }
+
+            if (Count == 1)
+            {
+                MinItem = null;
+                Count = 0;
+                return z.Key;
+            }
+
+            // Temporarily reassign MinItem to an arbitrary item in the root
+            // list
+            MinItem = MinItem.Right;
+
+            // Remove the old MinItem from the root list altogether
+            z.Remove();
+
+            // Consolidate the heap
+            Consolidate();
+
+            Count -= 1;
 
             return z.Key;
         }
@@ -219,7 +215,7 @@ namespace DataStructures.Heap
         {
             if (MinItem == null)
             {
-                throw new InvalidOperationException("The heap is Empty");
+                throw new InvalidOperationException("The heap is empty");
             }
 
             return MinItem.Key;
@@ -233,16 +229,16 @@ namespace DataStructures.Heap
         /// </remarks>
         /// <param name="x">The item you want to reduce in value.</param>
         /// <param name="k">The new value for the item.</param>
-        public void DecreaseKey(FHeapNode x, T k)
+        public void DecreaseKey(FHeapNode<T> x, T k)
         {
             if (MinItem == null)
             {
-                throw new InvalidOperationException("Heap malformed");
+                throw new ArgumentException($"{nameof(x)} is not from the heap");
             }
 
             if (x.Key == null)
             {
-                throw new InvalidOperationException("x has no value");
+                throw new ArgumentException("x has no value");
             }
 
             if (k.CompareTo(x.Key) > 0)
@@ -250,20 +246,17 @@ namespace DataStructures.Heap
                 throw new InvalidOperationException("Value cannot be increased");
             }
 
-            if (k.CompareTo(x.Key) < 0)
+            x.Key = k;
+            var y = x.Parent;
+            if (y != null && x.Key.CompareTo(y.Key) < 0)
             {
-                x.Key = k;
-                var y = x.Parent;
-                if (y != null && x.Key.CompareTo(y.Key) < 0)
-                {
-                    Cut(x, y);
-                    CascadingCut(y);
-                }
+                Cut(x, y);
+                CascadingCut(y);
+            }
 
-                if (x.Key.CompareTo(MinItem.Key) < 0)
-                {
-                    MinItem = x;
-                }
+            if (x.Key.CompareTo(MinItem.Key) < 0)
+            {
+                MinItem = x;
             }
         }
 
@@ -272,7 +265,7 @@ namespace DataStructures.Heap
         /// </summary>
         /// <param name="x">A child of y we just decreased the value of.</param>
         /// <param name="y">The now former parent of x.</param>
-        protected void Cut(FHeapNode x, FHeapNode y)
+        protected void Cut(FHeapNode<T> x, FHeapNode<T> y)
         {
             if (MinItem == null)
             {
@@ -302,12 +295,12 @@ namespace DataStructures.Heap
         /// Rebalances the heap after the decrease operation takes place.
         /// </summary>
         /// <param name="y">An item that may no longer obey the heap property.</param>
-        protected void CascadingCut(FHeapNode y)
+        protected void CascadingCut(FHeapNode<T> y)
         {
             var z = y.Parent;
             if (z != null)
             {
-                if (y.Mark == false)
+                if (!y.Mark)
                 {
                     y.Mark = true;
                 }
@@ -360,25 +353,18 @@ namespace DataStructures.Heap
             var maxDegree = 1 + (int)Math.Log(Count, (1 + Math.Sqrt(5)) / 2);
 
             // Create slots for every possible node degree of x
-            var a = new FHeapNode?[maxDegree];
+            var a = new FHeapNode<T>?[maxDegree];
             var siblings = SiblingIterator(MinItem).ToList();
             foreach (var w in siblings)
             {
                 var x = w;
                 var d = x.Degree;
 
+                var y = a[d];
+
                 // While A[d] is not empty, we can't blindly put x here
-                while (a[d] != null)
+                while (y != null)
                 {
-                    var y = a[d];
-
-                    // This is just here to satisfy C#, otherwise it complains that y
-                    // might be null further below.
-                    if (y == null)
-                    {
-                        throw new NullReferenceException("y is null");
-                    }
-
                     // if (x.Key > y.Key) {Exchange x with y}
                     if (x.Key.CompareTo(y.Key) > 0)
                     {
@@ -396,6 +382,8 @@ namespace DataStructures.Heap
 
                     // Add 1 to x's degree before going back into the loop
                     d++;
+
+                    y = a[d];
                 }
 
                 // Now that there's an empty spot for x, place it there
@@ -441,7 +429,7 @@ namespace DataStructures.Heap
         /// </summary>
         /// <param name="y">A node to become the child of x.</param>
         /// <param name="x">A node to become the parent of y.</param>
-        protected void FibHeapLink(FHeapNode y, FHeapNode x)
+        protected void FibHeapLink(FHeapNode<T> y, FHeapNode<T> x)
         {
             y.Remove();
             x.AddChild(y);
@@ -454,7 +442,7 @@ namespace DataStructures.Heap
         /// </summary>
         /// <param name="node">A node we want the siblings of.</param>
         /// <returns>An iterator over all of the siblings.</returns>
-        protected IEnumerable<FHeapNode> SiblingIterator(FHeapNode node)
+        protected IEnumerable<FHeapNode<T>> SiblingIterator(FHeapNode<T> node)
         {
             var currentNode = node;
             yield return currentNode;
@@ -464,131 +452,6 @@ namespace DataStructures.Heap
             {
                 yield return currentNode;
                 currentNode = currentNode.Right;
-            }
-        }
-
-        /// <summary>
-        /// These FHeapNodes are the bulk of the data structure. The have pointers to
-        /// their parent, a left and right sibling, and to a child. A node and its
-        /// siblings comprise a circularly doubly linked list.
-        /// </summary>
-        public class FHeapNode
-        {
-            /// <summary>
-            /// Initializes a new instance of the <see cref="FHeapNode"/> class.
-            /// </summary>
-            /// <param name="key">An item in the Fibonacci heap.</param>
-            public FHeapNode(T key)
-            {
-                Key = key;
-
-                // Since even a single node must form a circularly doubly linked list,
-                // initialize it as such
-                Left = Right = this;
-                Parent = Child = null;
-            }
-
-            /// <summary>
-            /// Gets or sets the data of this node.
-            /// </summary>
-            public T Key { get; set; }
-
-            /// <summary>
-            /// Gets or sets a reference to the parent.
-            /// </summary>
-            public FHeapNode? Parent { get; set; }
-
-            /// <summary>
-            /// Gets or sets a reference to the left sibling.
-            /// </summary>
-            public FHeapNode Left { get; set; }
-
-            /// <summary>
-            /// Gets or sets a reference to the right sibling.
-            /// </summary>
-            public FHeapNode Right { get; set; }
-
-            /// <summary>
-            /// Gets or sets a reference to one of the children, there may be more that
-            /// are siblings the this child, however this structure only maintains a
-            /// reference to one of them.
-            /// </summary>
-            public FHeapNode? Child { get; set; }
-
-            /// <summary>
-            /// Gets or sets a value indicating whether this node has been marked,
-            /// used in some operations.
-            /// </summary>
-            public bool Mark { get; set; } = false;
-
-            /// <summary>
-            /// Gets or sets the number of nodes in the child linked list.
-            /// </summary>
-            public int Degree { get; set; } = 0;
-
-            public void SetSiblings(FHeapNode left, FHeapNode right)
-            {
-                Left = left;
-                Right = right;
-            }
-
-            /// <summary>
-            /// A helper function to add a node to the right of this one in the current
-            /// circularly doubly linked list.
-            /// </summary>
-            /// <param name="node">A node to go in the linked list.</param>
-            public void AddRight(FHeapNode node)
-            {
-                Right.Left = node;
-                node.Right = Right;
-                node.Left = this;
-                Right = node;
-            }
-
-            /// <summary>
-            /// Similar to AddRight, but adds the node as a sibling to the child node.
-            /// </summary>
-            /// <param name="node">A node to add to the child list of this node.</param>
-            public void AddChild(FHeapNode node)
-            {
-                Degree++;
-
-                if (Child == null)
-                {
-                    Child = node;
-                    Child.Parent = this;
-                    Child.Left = Child.Right = Child;
-
-                    return;
-                }
-
-                Child.AddRight(node);
-            }
-
-            /// <summary>
-            /// Remove this item from the linked list it's in.
-            /// </summary>
-            public void Remove()
-            {
-                Left.Right = Right;
-                Right.Left = Left;
-            }
-
-            /// <summary>
-            /// Combine the linked list that <c>otherList</c> sits inside, with the
-            /// linked list this is in. Do this by cutting the link between this node,
-            /// and the node to the right of this, and inserting the contents of the
-            /// otherList in between.
-            /// </summary>
-            /// <param name="otherList">A node from another list whose elements we want
-            /// to concatenate to this list.</param>
-            public void ConcatenateRight(FHeapNode otherList)
-            {
-                Right.Left = otherList.Left;
-                otherList.Left.Right = Right;
-
-                Right = otherList;
-                otherList.Left = this;
             }
         }
     }
