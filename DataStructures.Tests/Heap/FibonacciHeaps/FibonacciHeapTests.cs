@@ -123,8 +123,6 @@ namespace DataStructures.Tests.Heap
 
             oddHeap.Union(evenHeap);
 
-            var result = new List<int>();
-
             for (int i = 0; i < 10; i++)
             {
                 Assert.AreEqual(i, oddHeap.Pop());
@@ -132,6 +130,41 @@ namespace DataStructures.Tests.Heap
 
             Assert.Zero(oddHeap.Count);
             Assert.Zero(evenHeap.Count);
+        }
+
+        [Test]
+        public static void Union_EmptyHeap_BecomesOtherHeap()
+        {
+            var thisHeap = new FibonacciHeap<int>();
+            var otherHeap = BuildTestHeap();
+
+            var minNode = otherHeap.Peek();
+            var otherCount = otherHeap.Count;
+
+            Assert.Zero(thisHeap.Count);
+
+            thisHeap.Union(otherHeap);
+
+            Assert.Zero(otherHeap.Count);
+            Assert.AreEqual(thisHeap.Peek(), minNode);
+            Assert.Throws<InvalidOperationException>(() => otherHeap.Peek());
+
+            Assert.AreEqual(otherCount, thisHeap.Count);
+        }
+
+        [Test]
+        public static void Union_FullHeapWithEmptyHeap_Unchanged()
+        {
+            var thisHeap = BuildTestHeap();
+            var otherHeap = new FibonacciHeap<int>();
+
+            var previousCount = thisHeap.Count;
+            var previousMin = thisHeap.Peek();
+
+            thisHeap.Union(otherHeap);
+
+            Assert.AreEqual(thisHeap.Count, previousCount);
+            Assert.AreEqual(thisHeap.Peek(), previousMin);
         }
     }
 }

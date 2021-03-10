@@ -55,12 +55,12 @@ namespace DataStructures.Heap
         /// Gets or sets a value indicating whether this node has been marked,
         /// used in some operations.
         /// </summary>
-        public bool Mark { get; set; } = false;
+        public bool Mark { get; set; }
 
         /// <summary>
         /// Gets or sets the number of nodes in the child linked list.
         /// </summary>
-        public int Degree { get; set; } = 0;
+        public int Degree { get; set; }
 
         public void SetSiblings(FHeapNode<T> left, FHeapNode<T> right)
         {

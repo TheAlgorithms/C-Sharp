@@ -41,7 +41,7 @@ namespace DataStructures.Heap
         /// <summary>
         /// Gets or sets the count of the number of nodes in the Fibonacci heap.
         /// </summary>
-        public int Count { get; set; } = 0;
+        public int Count { get; set; }
 
         /// <summary>
         /// Gets or sets a reference to the MinItem. The MinItem and all of its siblings
@@ -365,7 +365,6 @@ namespace DataStructures.Heap
                 // While A[d] is not empty, we can't blindly put x here
                 while (y != null)
                 {
-                    // if (x.Key > y.Key) {Exchange x with y}
                     if (x.Key.CompareTo(y.Key) > 0)
                     {
                         // Exchange x and y
@@ -390,35 +389,46 @@ namespace DataStructures.Heap
                 a[d] = x;
             }
 
+            ReconstructHeap(a);
+        }
+
+        /// <summary>
+        /// Reconstructs the heap based on the array of node degrees created by the consolidate step.
+        /// </summary>
+        /// <param name="a">An array of FHeapNodes where a[i] represents a node of degree i.</param>
+        protected void ReconstructHeap(FHeapNode<T>?[] a)
+        {
             // Once all items are in A, empty out the root list
             MinItem = null;
 
             for (int i = 0; i < a.Length; i++)
             {
                 var r = a[i];
-                if (r != null)
+                if (r == null)
                 {
-                    if (MinItem == null)
-                    {
-                        // If the root list is completely empty, make this the new
-                        // MinItem
-                        MinItem = r;
+                    continue;
+                }
 
-                        // Make a new root list with just this item. Make sure to make
-                        // it its own list.
-                        MinItem.SetSiblings(MinItem, MinItem);
-                        MinItem.Parent = null;
-                    }
-                    else
-                    {
-                        // Add A[i] to the root list
-                        MinItem.AddRight(r);
+                if (MinItem == null)
+                {
+                    // If the root list is completely empty, make this the new
+                    // MinItem
+                    MinItem = r;
 
-                        // If this item is smaller, make it the new min item
-                        if (MinItem.Key.CompareTo(r.Key) > 0)
-                        {
-                            MinItem = a[i];
-                        }
+                    // Make a new root list with just this item. Make sure to make
+                    // it its own list.
+                    MinItem.SetSiblings(MinItem, MinItem);
+                    MinItem.Parent = null;
+                }
+                else
+                {
+                    // Add A[i] to the root list
+                    MinItem.AddRight(r);
+
+                    // If this item is smaller, make it the new min item
+                    if (MinItem.Key.CompareTo(r.Key) > 0)
+                    {
+                        MinItem = a[i];
                     }
                 }
             }

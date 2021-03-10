@@ -18,10 +18,14 @@ namespace DataStructures.Tests.Heap
         }
 
         [Test]
-        public static void Key_Set()
+        public static void SetSiblings_SingleNode()
         {
+            var node_1 = new FHeapNode<int>(1);
+            var node_2 = new FHeapNode<int>(2);
+            var node_3 = new FHeapNode<int>(3);
 
+            node_1.SetSiblings(node_3, node_2);
+            
         }
-
     }
 }
