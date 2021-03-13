@@ -32,9 +32,9 @@ namespace Algorithms.Numeric
         {
             if (stepSize <= 0)
             {
-              throw new ArgumentOutOfRangeException ("stepSize", "stepSize should be greater than zero");
+              throw new ArgumentOutOfRangeException("stepSize", "stepSize should be greater than zero");
             }
-            
+
             double yNext = yCurrent + stepSize * differentialEquation(xCurrent, yCurrent);
             return yNext;
         }
@@ -63,11 +63,11 @@ namespace Algorithms.Numeric
 
             if (stepSize <= 0)
             {
-              throw new ArgumentOutOfRangeException ("stepSize", "stepSize should be greater than zero");
+              throw new ArgumentOutOfRangeException("stepSize", "stepSize should be greater than zero");
             }
-            
+
             List<double[]> points = new List<double[]>();
-            double[] firstPoint = {xStart, yStart };
+            double[] firstPoint = { xStart, yStart };
             points.Add(firstPoint);
             double yCurrent = yStart;
             double xCurrent = xStart;
@@ -76,7 +76,7 @@ namespace Algorithms.Numeric
             {
                 yCurrent = EulerStep(xCurrent, stepSize, yCurrent, differentialEquation);
                 xCurrent += stepSize;
-                double[] point = {xCurrent, yCurrent };
+                double[] point = { xCurrent, yCurrent };
                 points.Add(point);
             }
 
