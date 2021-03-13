@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Algorithms.Tests.Numeric
 {
-    public class EulerMethodTest
+    public static class EulerMethodTest
     {
         [Test]
         public static void Test1()
@@ -34,6 +34,15 @@ namespace Algorithms.Tests.Numeric
             List<double[]> points =  Algorithms.Numeric.EulerMethod.EulerFull(0, 0.1, 0.025, 1, exampleEquation3);
             double yEnd = points[points.Count - 1][1];
             Assert.AreEqual(yEnd, 1.1116729841674804);
+        }
+        
+        [Test]
+        public static void TestExceptions()
+        {
+            Func<double, double, double> exampleEquation = (x, y) => x;
+            Assert.Throws<ArgumentOutOfRangeException>(() => Algorithms.Numeric.EulerMethod.EulerFull(0, 4, 0, 0, exampleEquation));
+            Assert.Throws<ArgumentOutOfRangeException>(() => Algorithms.Numeric.EulerMethod.EulerFull(0, -4, 0.1, 0, exampleEquation));
+            Assert.Throws<ArgumentOutOfRangeException>(() => Algorithms.Numeric.EulerMethod.EulerStep(0, -1, 0, exampleEquation));
         }
     }
 }
