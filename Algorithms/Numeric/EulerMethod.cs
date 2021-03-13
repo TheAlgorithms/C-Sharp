@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 
 namespace Algorithms.Numeric
 {
@@ -12,34 +12,36 @@ namespace Algorithms.Numeric
     /// multiplying the result with the step-size and adding it to the last y-value:
     /// y_n+1 = y_n + stepSize * f(x_n, y_n).
     /// (description adapted from https://en.wikipedia.org/wiki/Euler_method )
-    /// (see also: https://www.geeksforgeeks.org/euler-method-solving-differential-equation/ )
+    /// (see also: https://www.geeksforgeeks.org/euler-method-solving-differential-equation/ ).
     /// </summary>
-    public class EulerMethod
+    public static class EulerMethod
     {
         /// <summary>
-        /// calculates the next y-value based on the current value of x, y and the stepSize
+        /// Calculates the next y-value based on the current value of x, y and the stepSize.
         /// </summary>
         /// <param name="xCurrent">Current x-value.</param>
         /// <param name="stepSize">Step-size on the x-axis.</param>
         /// <param name="yCurrent">Current y-value.</param>
         /// <param name="differentialEquation">The differential equation to be solved.</param>
         /// <returns>The next y-value.</returns>
-        public static double eulerStep(
+        public static double EulerStep(
                 double xCurrent,
                 double stepSize,
                 double yCurrent,
                 Func<double, double, double> differentialEquation)
         {
-            if (stepSize <= 0) {
-              throw new ArgumentOutOfRangeException ("stepSize should be greater than zero");
+            if (stepSize <= 0)
+            {
+              throw new ArgumentOutOfRangeException ("stepSize", "stepSize should be greater than zero");
             }
+            
             double yNext = yCurrent + stepSize * differentialEquation(xCurrent, yCurrent);
             return yNext;
         }
 
         /// <summary>
-        /// loops through all the steps until xEnd is reached, adds a point for each step and then
-        /// returns all the points
+        /// Loops through all the steps until xEnd is reached, adds a point for each step and then
+        /// returns all the points.
         /// </summary>
         /// <param name="xStart">First x-value.</param>
         /// <param name="xEnd">Last x-value.</param>
@@ -47,31 +49,34 @@ namespace Algorithms.Numeric
         /// <param name="yStart">First y-value.</param>
         /// <param name="differentialEquation">The differential equation to be solved.</param>
         /// <returns>The points constituting the solution of the differential equation.</returns>
-        public static List<double[]> eulerFull(
+        public static List<double[]> EulerFull(
                 double xStart,
                 double xEnd,
                 double stepSize,
                 double yStart,
                 Func<double, double, double> differentialEquation)
         {
-            if (xStart >= xEnd) {
-              throw new ArgumentOutOfRangeException("xEnd should be greater than xStart");
+            if (xStart >= xEnd)
+            {
+              throw new ArgumentOutOfRangeException("xEnd", "xEnd should be greater than xStart");
             }
-            if (stepSize <= 0) {
-              throw new ArgumentOutOfRangeException("stepSize should be greater than zero");
+
+            if (stepSize <= 0)
+            {
+              throw new ArgumentOutOfRangeException ("stepSize", "stepSize should be greater than zero");
             }
             
             List<double[]> points = new List<double[]>();
-            double[] firstPoint = {xStart, yStart};
+            double[] firstPoint = {xStart, yStart };
             points.Add(firstPoint);
             double yCurrent = yStart;
             double xCurrent = xStart;
 
             while (xCurrent < xEnd)
             {
-                yCurrent = eulerStep(xCurrent, stepSize, yCurrent, differentialEquation);
+                yCurrent = EulerStep(xCurrent, stepSize, yCurrent, differentialEquation);
                 xCurrent += stepSize;
-                double[] point = {xCurrent, yCurrent};
+                double[] point = {xCurrent, yCurrent };
                 points.Add(point);
             }
 
