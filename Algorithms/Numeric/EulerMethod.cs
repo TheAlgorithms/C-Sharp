@@ -59,7 +59,7 @@ namespace Algorithms.Numeric
 
             return points;
         }
-        
+
         /// <summary>
         /// Calculates the next y-value based on the current value of x, y and the stepSize.
         /// </summary>
