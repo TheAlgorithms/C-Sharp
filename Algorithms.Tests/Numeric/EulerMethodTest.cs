@@ -8,7 +8,7 @@ namespace Algorithms.Tests.Numeric
     public static class EulerMethodTest
     {
         [Test]
-        public static void Test1()
+        public static void TestLinearEquation()
         {
             Func<double, double, double> exampleEquation1 = (x, y) => x;
             List<double[]> points =  Algorithms.Numeric.EulerMethod.EulerFull(0, 4, 0.1, 0, exampleEquation1);
@@ -17,7 +17,7 @@ namespace Algorithms.Tests.Numeric
         }
         
         [Test]
-        public static void Test2()
+        public static void TestExampleWikipedia()
         {
             // example from https://en.wikipedia.org/wiki/Euler_method
             Func<double, double, double> exampleEquation2 = (x, y) => y;
@@ -27,7 +27,7 @@ namespace Algorithms.Tests.Numeric
         }
         
         [Test]
-        public static void Test3()
+        public static void TestExampleGeeksForGeeks()
         {
             // example from https://www.geeksforgeeks.org/euler-method-solving-differential-equation/
             Func<double, double, double> exampleEquation3 = (x, y) => x + y + x * y;
@@ -42,7 +42,6 @@ namespace Algorithms.Tests.Numeric
             Func<double, double, double> exampleEquation = (x, y) => x;
             Assert.Throws<ArgumentOutOfRangeException>(() => Algorithms.Numeric.EulerMethod.EulerFull(0, 4, 0, 0, exampleEquation));
             Assert.Throws<ArgumentOutOfRangeException>(() => Algorithms.Numeric.EulerMethod.EulerFull(0, -4, 0.1, 0, exampleEquation));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Algorithms.Numeric.EulerMethod.EulerStep(0, -1, 0, exampleEquation));
         }
     }
 }
