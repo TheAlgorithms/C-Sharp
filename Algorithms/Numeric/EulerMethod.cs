@@ -24,14 +24,14 @@ namespace Algorithms.Numeric
         /// <param name="xEnd">Last x-value.</param>
         /// <param name="stepSize">Step-size on the x-axis.</param>
         /// <param name="yStart">Initial conditions y-value.</param>
-        /// <param name="differentialEquation">The right hand side of the differential equation.</param>
+        /// <param name="yDerivative">The right hand side of the differential equation.</param>
         /// <returns>The solution of the Cauchy problem.</returns>
         public static List<double[]> EulerFull(
                 double xStart,
                 double xEnd,
                 double stepSize,
                 double yStart,
-                Func<double, double, double> differentialEquation)
+                Func<double, double, double> yDerivative)
         {
             if (xStart >= xEnd)
             {
@@ -51,7 +51,7 @@ namespace Algorithms.Numeric
 
             while (xCurrent < xEnd)
             {
-                yCurrent = EulerStep(xCurrent, stepSize, yCurrent, differentialEquation);
+                yCurrent = EulerStep(xCurrent, stepSize, yCurrent, yDerivative);
                 xCurrent += stepSize;
                 double[] point = { xCurrent, yCurrent };
                 points.Add(point);
@@ -66,20 +66,15 @@ namespace Algorithms.Numeric
         /// <param name="xCurrent">Current x-value.</param>
         /// <param name="stepSize">Step-size on the x-axis.</param>
         /// <param name="yCurrent">Current y-value.</param>
-        /// <param name="differentialEquation">The differential equation to be solved.</param>
+        /// <param name="yDerivative">The right hand side of the differential equation.</param>
         /// <returns>The next y-value.</returns>
         private static double EulerStep(
                 double xCurrent,
                 double stepSize,
                 double yCurrent,
-                Func<double, double, double> differentialEquation)
+                Func<double, double, double> yDerivative)
         {
-            if (stepSize <= 0)
-            {
-              throw new ArgumentOutOfRangeException(nameof(stepSize), $"{nameof(stepSize)} should be greater than zero");
-            }
-
-            double yNext = yCurrent + stepSize * differentialEquation(xCurrent, yCurrent);
+            double yNext = yCurrent + stepSize * yDerivative(xCurrent, yCurrent);
             return yNext;
         }
     }
