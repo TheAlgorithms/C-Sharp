@@ -238,7 +238,7 @@ namespace DataStructures.Heap
 
             if (x.Key == null)
             {
-                throw new NullReferenceException("x has no value");
+                throw new ArgumentException("x has no value");
             }
 
             if (k.CompareTo(x.Key) > 0)
@@ -265,7 +265,7 @@ namespace DataStructures.Heap
         /// </summary>
         /// <param name="x">A child of y we just decreased the value of.</param>
         /// <param name="y">The now former parent of x.</param>
-        private void Cut(FHeapNode<T> x, FHeapNode<T> y)
+        protected void Cut(FHeapNode<T> x, FHeapNode<T> y)
         {
             if (MinItem == null)
             {
@@ -295,7 +295,7 @@ namespace DataStructures.Heap
         /// Rebalances the heap after the decrease operation takes place.
         /// </summary>
         /// <param name="y">An item that may no longer obey the heap property.</param>
-        private void CascadingCut(FHeapNode<T> y)
+        protected void CascadingCut(FHeapNode<T> y)
         {
             var z = y.Parent;
             if (z != null)
@@ -337,7 +337,7 @@ namespace DataStructures.Heap
         /// which is smallest.
         /// </para>
         /// </summary>
-        private void Consolidate()
+        protected void Consolidate()
         {
             if (MinItem == null)
             {
@@ -396,7 +396,7 @@ namespace DataStructures.Heap
         /// Reconstructs the heap based on the array of node degrees created by the consolidate step.
         /// </summary>
         /// <param name="a">An array of FHeapNodes where a[i] represents a node of degree i.</param>
-        private void ReconstructHeap(FHeapNode<T>?[] a)
+        protected void ReconstructHeap(FHeapNode<T>?[] a)
         {
             // Once all items are in A, empty out the root list
             MinItem = null;
@@ -439,7 +439,7 @@ namespace DataStructures.Heap
         /// </summary>
         /// <param name="y">A node to become the child of x.</param>
         /// <param name="x">A node to become the parent of y.</param>
-        private void FibHeapLink(FHeapNode<T> y, FHeapNode<T> x)
+        protected void FibHeapLink(FHeapNode<T> y, FHeapNode<T> x)
         {
             y.Remove();
             x.AddChild(y);
@@ -452,7 +452,7 @@ namespace DataStructures.Heap
         /// </summary>
         /// <param name="node">A node we want the siblings of.</param>
         /// <returns>An iterator over all of the siblings.</returns>
-        private IEnumerable<FHeapNode<T>> SiblingIterator(FHeapNode<T> node)
+        protected IEnumerable<FHeapNode<T>> SiblingIterator(FHeapNode<T> node)
         {
             var currentNode = node;
             yield return currentNode;
