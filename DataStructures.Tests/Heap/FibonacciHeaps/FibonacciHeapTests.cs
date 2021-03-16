@@ -166,5 +166,53 @@ namespace DataStructures.Tests.Heap
             Assert.AreEqual(thisHeap.Count, previousCount);
             Assert.AreEqual(thisHeap.Peek(), previousMin);
         }
+
+        [Test]
+        public static void DecreaseKey_EmptyHeap_ThrowsCorrectException()
+        {
+            var heap = new FibonacciHeap<int>();
+            var item = new FHeapNode<int>(1);
+
+            Assert.Throws<ArgumentException>(() => heap.DecreaseKey(item, 0));
+        }
+
+        [Test]
+        public static void DecreaseKey_TryIncreaseKey_ThrowsCorrectException()
+        {
+            var heap = new FibonacciHeap<int>();
+            var item = heap.Push(1);
+
+            Assert.Throws<InvalidOperationException>(() => heap.DecreaseKey(item, 2));
+        }
+
+        [Test]
+        public static void DecreaseKey_NonEmptyHeap_PreservesHeapStructure()
+        {
+            var heap = new FibonacciHeap<int>();
+
+            for (int i = 11; i < 20; i++)
+            {
+                heap.Push(i);
+            }
+
+            var item = heap.Push(10);
+
+            for (int i = 0; i < 10; i++)
+            {
+                heap.Push(i);
+            }
+
+            heap.DecreaseKey(item, -1);
+            Assert.AreEqual(heap.Pop(), -1);
+
+            var currentVal = -1;
+            for (int i = 0; i < 19; i++)
+            {
+                var newVal = heap.Pop();
+                Assert.True(currentVal < newVal);
+
+                currentVal = newVal;
+            }
+        }
     }
 }
