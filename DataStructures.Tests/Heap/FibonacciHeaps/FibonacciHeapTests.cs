@@ -202,11 +202,25 @@ namespace DataStructures.Tests.Heap
                 heap.Push(i);
             }
 
+            var bigItem = heap.Push(20);
+
             heap.DecreaseKey(item, -1);
             Assert.AreEqual(heap.Pop(), -1);
 
             var currentVal = -1;
-            for (int i = 0; i < 19; i++)
+            for (int i = 0; i < 10; i++)
+            {
+                var newVal = heap.Pop();
+                Assert.True(currentVal < newVal);
+
+                currentVal = newVal;
+            }
+
+            heap.DecreaseKey(bigItem, -1);
+            Assert.AreEqual(heap.Pop(), -1);
+
+            currentVal = -1;
+            for (int i = 0; i < 9; i++)
             {
                 var newVal = heap.Pop();
                 Assert.True(currentVal < newVal);
