@@ -7,6 +7,24 @@ using NUnit.Framework;
 
 namespace DataStructures.Tests.Heap
 {
+    class TestFHeap : FibonacciHeap<int>
+    {
+        public void RawCut(FHeapNode<int> x, FHeapNode<int> y)
+        {
+            Cut(x, y);
+        }
+
+        public void RawCascadingCut(FHeapNode<int> y)
+        {
+            CascadingCut(y);
+        }
+
+        public void RawConsolidate()
+        {
+            Consolidate();
+        }
+    }
+
     static class FibonacciHeapTests
     {
         private static FibonacciHeap<int> BuildTestHeap()
@@ -227,6 +245,37 @@ namespace DataStructures.Tests.Heap
 
                 currentVal = newVal;
             }
+        }
+
+        [Test]
+        public static void Cut_EmptyHeap_ThrowsCorrectExcpetion()
+        {
+            var heap = new TestFHeap();
+            var item1 = new FHeapNode<int>(1);
+            var item2 = new FHeapNode<int>(2);
+
+            Assert.Throws<InvalidOperationException>(() => heap.RawCut(item1, item2));
+        }
+
+        [Test]
+        public static void Cut_FilledHeap_AlteredItem()
+        {
+            var heap = new TestFHeap();
+            var item1 = heap.Push(1);
+            var item2 = heap.Push(2);
+
+            item2.Degree = -1;
+
+            Assert.Throws<InvalidOperationException>(() => heap.RawCut(item1, item2));
+        }
+
+        [Test]
+        public static void Consolidate_EmptyHeap_DoesNothing()
+        {
+            var heap = new TestFHeap();
+            heap.RawConsolidate();
+
+            Assert.Throws<InvalidOperationException>(() => heap.Peek());
         }
     }
 }
