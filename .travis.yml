@@ -4,6 +4,8 @@ mono: none
 dist: xenial
 dotnet: 5.0
 script:
+ - sudo apt update
+ - sudo apt install -y libgdiplus
  - dotnet build
  - travis_wait 60 dotnet test --collect:"XPlat Code Coverage"
  - bash <(curl -s https://codecov.io/bash)

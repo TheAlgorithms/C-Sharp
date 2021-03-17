@@ -93,6 +93,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 		* [Fermat Prime Checker](./Algorithms/Other/FermatPrimeChecker.cs)
 		* [Sieve of Eratosthenes](./Algorithms/Other/SieveOfEratosthenes.cs)
 		* [Luhn](./Algorithms/Other/Luhn.cs)
+		* [Mandelbrot](./Algorithms/Other/Mandelbrot.cs)
 	* [Problems](./Algorithms/Problems/)
 		* [Stable Marriage](./Algorithms/Problems/StableMarriage)
 			* [Gale-Shapley](./Algorithms/Problems/StableMarriage/GaleShapley.cs)
