@@ -1,6 +1,5 @@
 using System;
 using System.Drawing;
-using System.Drawing.Common;
 
 namespace Algorithms.Other
 {
