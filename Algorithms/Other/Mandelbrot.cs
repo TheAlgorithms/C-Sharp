@@ -1,5 +1,6 @@
-using System.Drawing;
 using System;
+using System.Drawing;
+using System.Drawing.Common;
 
 namespace Algorithms.Other
 {
@@ -28,7 +29,7 @@ namespace Algorithms.Other
         /// that refer to the complex numbers inside and outside the Mandelbrot set. The
         /// figure-coordinates in the arguments of this method determine which section
         /// of the Mandelbrot set is viewed. The main area of the Mandelbrot set is
-        /// roughly between "-1.5 < x < 0.5" and "-1 < y < 1" in the figure-coordinates.
+        /// roughly between "-1.5 &lt; x &lt; 0.5" and "-1 &lt; y &lt; 1" in the figure-coordinates.
         /// To save the bitmap the command 'GetBitmap().Save("Mandelbrot.png")' can be used.
         /// </summary>
         /// <param name="bitmapWidth">The width of the rendered bitmap.</param>
@@ -37,7 +38,7 @@ namespace Algorithms.Other
         /// <param name="figureCenterY">The y-coordinate of the center of the figure.</param>
         /// <param name="figureWidth">The width of the figure.</param>
         /// <param name="maxStep">Maximum number of steps to check for divergent behavior.</param>
-        /// <param name="useDistanceColorCoding">Render in color or black&white.</param>
+        /// <param name="useDistanceColorCoding">Render in color or black and white.</param>
         /// <returns>The bitmap of the rendered Mandelbrot set.</returns>
         public static Bitmap GetBitmap(
             int bitmapWidth = 800,
@@ -94,14 +95,14 @@ namespace Algorithms.Other
         }
 
         /// <summary>
-        /// Black&white color-coding that ignores the relative distance. The Mandelbrot
+        /// Black and white color-coding that ignores the relative distance. The Mandelbrot
         /// set is black, everything else is white.
         /// </summary>
         /// <param name="distance">Distance until divergence threshold.</param>
         /// <returns></returns>
         private static Color BlackAndWhiteColorMap(double distance)
         {
-            if(distance == 1)
+            if(distance >= 1)
             {
                 return Color.FromArgb(255, 0, 0, 0);
             }
@@ -119,7 +120,7 @@ namespace Algorithms.Other
         /// <returns></returns>
         private static Color ColorCodedColorMap(double distance)
         {
-            if(distance == 1)
+            if(distance >= 1)
             {
                 return Color.FromArgb(255, 0, 0, 0);
             }
