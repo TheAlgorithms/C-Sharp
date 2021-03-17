@@ -17,8 +17,8 @@ namespace Algorithms.Other
     /// complicated boundary that reveals progressively ever-finer recursive detail
     /// at increasing magnifications, making the boundary of the Mandelbrot set a
     /// fractal curve.
-    /// (description adapted from https://en.wikipedia.org/wiki/Mandelbrot_set )
-    /// (see also https://en.wikipedia.org/wiki/Plotting_algorithms_for_the_Mandelbrot_set )
+    /// (description adapted from https://en.wikipedia.org/wiki/Mandelbrot_set)
+    /// (see also https://en.wikipedia.org/wiki/Plotting_algorithms_for_the_Mandelbrot_set).
     /// </summary>
     public static class Mandelbrot
     {
@@ -63,30 +63,25 @@ namespace Algorithms.Other
                 throw new ArgumentOutOfRangeException(nameof(maxStep), $"{nameof(maxStep)} should be greater than zero");
             }
 
-            Bitmap bitmap = new Bitmap(bitmapWidth, bitmapHeight);
-            double figureHeight = figureWidth / bitmapWidth * bitmapHeight;
+            var bitmap = new Bitmap(bitmapWidth, bitmapHeight);
+            var figureHeight = figureWidth / bitmapWidth * bitmapHeight;
 
             // loop through the bitmap-coordinates
-            for(int bitmapX = 0; bitmapX < bitmapWidth; bitmapX++)
+            for (var bitmapX = 0; bitmapX < bitmapWidth; bitmapX++)
             {
-                for(int bitmapY = 0; bitmapY < bitmapHeight; bitmapY++)
+                for (var bitmapY = 0; bitmapY < bitmapHeight; bitmapY++)
                 {
                     // determine the figure-coordinates based on the bitmap-coordinates
-                    double figureX = figureCenterX + ((double)bitmapX / bitmapWidth - 0.5) * figureWidth;
-                    double figureY = figureCenterY + ((double)bitmapY / bitmapHeight - 0.5) * figureHeight;
+                    var figureX = figureCenterX + ((double)bitmapX / bitmapWidth - 0.5) * figureWidth;
+                    var figureY = figureCenterY + ((double)bitmapY / bitmapHeight - 0.5) * figureHeight;
 
-                    double distance = GetDistance(figureX, figureY, maxStep);
+                    var distance = GetDistance(figureX, figureY, maxStep);
 
                     // color the corresponding pixel based on the selected coloring-function
-                    if (useDistanceColorCoding)
-                    {
-                        bitmap.SetPixel(bitmapX, bitmapY, ColorCodedColorMap(distance));
-                    }
-
-                    else
-                    {
-                        bitmap.SetPixel(bitmapX, bitmapY, BlackAndWhiteColorMap(distance));
-                    }
+                    bitmap.SetPixel(
+                        bitmapX,
+                        bitmapY,
+                        useDistanceColorCoding ? ColorCodedColorMap(distance) : BlackAndWhiteColorMap(distance));
                 }
             }
 
@@ -98,17 +93,12 @@ namespace Algorithms.Other
         /// set is black, everything else is white.
         /// </summary>
         /// <param name="distance">Distance until divergence threshold.</param>
-        /// <returns></returns>
+        /// <returns>What?.</returns>
         private static Color BlackAndWhiteColorMap(double distance)
         {
-            if(distance >= 1)
-            {
-                return Color.FromArgb(255, 0, 0, 0);
-            }
-            else
-            {
-                return Color.FromArgb(255, 255, 255, 255);
-            }
+            return distance >= 1
+                ? Color.FromArgb(255, 0, 0, 0)
+                : Color.FromArgb(255, 255, 255, 255);
         }
 
         /// <summary>
@@ -116,39 +106,36 @@ namespace Algorithms.Other
         /// is black.
         /// </summary>
         /// <param name="distance">Distance until divergence threshold.</param>
-        /// <returns></returns>
+        /// <returns>What?.</returns>
         private static Color ColorCodedColorMap(double distance)
         {
-            if(distance >= 1)
+            if (distance >= 1)
             {
                 return Color.FromArgb(255, 0, 0, 0);
             }
-            else
+
+            // simplified transformation of HSV to RGB
+            // distance determines hue
+            var hue = 360 * distance;
+            double saturation = 1;
+            double val = 255;
+            var hi = (int)Math.Floor(hue / 60) % 6;
+            var f = hue / 60 - Math.Floor(hue / 60);
+
+            var v = (int)val;
+            var p = 0;
+            var q = (int)(val * (1 - f * saturation));
+            var t = (int)(val * (1 - (1 - f) * saturation));
+
+            switch (hi)
             {
-                // simplified transformation of HSV to RGB
-                // distance determines hue
-                double hue = 360 * distance;
-                double saturation = 1;
-                double val = 255;
-                int hi = (int)(Math.Floor(hue / 60)) % 6;
-                double f = hue / 60 - Math.Floor(hue / 60);
-
-                int v = (int)val;
-                int p = 0;
-                int q = (int)(val * (1 - f * saturation));
-                int t = (int)(val * (1 - (1 - f) * saturation));
-
-                switch (hi)
-                {
-                    case 0: return Color.FromArgb(255, v, t, p);
-                    case 1: return Color.FromArgb(255, q, v, p);
-                    case 2: return Color.FromArgb(255, p, v, t);
-                    case 3: return Color.FromArgb(255, p, q, v);
-                    case 4: return Color.FromArgb(255, t, p, v);
-                    default: return Color.FromArgb(255, v, p, q);
-                }
+                case 0: return Color.FromArgb(255, v, t, p);
+                case 1: return Color.FromArgb(255, q, v, p);
+                case 2: return Color.FromArgb(255, p, v, t);
+                case 3: return Color.FromArgb(255, p, q, v);
+                case 4: return Color.FromArgb(255, t, p, v);
+                default: return Color.FromArgb(255, v, p, q);
             }
-
         }
 
         /// <summary>
@@ -157,28 +144,29 @@ namespace Algorithms.Other
         /// diverge so their distance is 1.
         /// </summary>
         /// <param name="figureX">The x-coordinate within the figure.</param>
-        /// <param name="figureX">The y-coordinate within the figure.</param>
+        /// <param name="figureY">The y-coordinate within the figure.</param>
         /// <param name="maxStep">Maximum number of steps to check for divergent behavior.</param>
         /// <returns>The relative distance as the ratio of steps taken to maxStep.</returns>
         private static double GetDistance(double figureX, double figureY, int maxStep)
         {
-            double a = figureX;
-            double b = figureY;
-            int currentStep = 0;
-            for(int step = 0; step < maxStep; step++)
+            var a = figureX;
+            var b = figureY;
+            var currentStep = 0;
+            for (var step = 0; step < maxStep; step++)
             {
                 currentStep = step;
-                double a_new = a * a - b * b + figureX;
+                var aNew = a * a - b * b + figureX;
                 b = 2 * a * b + figureY;
-                a = a_new;
+                a = aNew;
 
                 // divergence happens for all complex number with an absolute value
                 // greater than 4 (= divergence threshold)
-                if(a * a + b * b > 4)
+                if (a * a + b * b > 4)
                 {
                     break;
                 }
             }
+
             return (double)currentStep / (maxStep - 1);
         }
     }
