@@ -31,6 +31,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 		* [Decomposition](./Algorithms/Numeric/Decomposition)
 			* [LU](./Algorithms/Numeric/Decomposition/LU.cs)
 			* [Singular Vector Decomposition](./Algorithms/Numeric/Decomposition/SVD.cs)
+		* [Euler Method](./Algorithms/Numeric/EulerMethod.cs)
 		* [Greatest Common Divisor](./Algorithms/Numeric/GreatestCommonDivisor)
 			* [Euclidean GCD](./Algorithms/Numeric/GreatestCommonDivisor/EuclideanGreatestCommonDivisorFinder.cs)
 			* [Binary GCD](./Algorithms/Numeric/GreatestCommonDivisor/BinaryGreatestCommonDivisorFinder.cs)
