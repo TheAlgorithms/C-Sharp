@@ -19,3 +19,6 @@ We use the [NUnit-library](https://nunit.org/) for testing. Instructions for the
 One of the automatic checks we use is [codecov](https://about.codecov.io/). It checks whether each conditional branch is covered by a test. So if a method contains an if-else-branch then there should be one test covering the if-branch and another test covering the else-branch (unless both branches can be covered in one run).
 
 The coding style follows the default code formatter of Visual Studio.
+
+## Comments
+Please use the [XML documentation features](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/how-to-use-the-xml-documentation-features) for comments. The comments should include a summary of the class/method and an explanation of the different parameters and of the return value. Including a link to Wikipedia or to another source of information on the algorithm is encouraged.
