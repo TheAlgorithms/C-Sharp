@@ -93,7 +93,7 @@ namespace Algorithms.Other
         /// set is black, everything else is white.
         /// </summary>
         /// <param name="distance">Distance until divergence threshold.</param>
-        /// <returns>What?.</returns>
+        /// <returns>The color corresponding to the distance.</returns>
         private static Color BlackAndWhiteColorMap(double distance)
         {
             return distance >= 1
@@ -106,7 +106,7 @@ namespace Algorithms.Other
         /// is black.
         /// </summary>
         /// <param name="distance">Distance until divergence threshold.</param>
-        /// <returns>What?.</returns>
+        /// <returns>The color corresponding to the distance.</returns>
         private static Color ColorCodedColorMap(double distance)
         {
             if (distance >= 1)
