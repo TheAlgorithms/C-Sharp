@@ -70,7 +70,7 @@ namespace Algorithms.Other
             // Set the background white
             using (Graphics graph = Graphics.FromImage(bitmap))
             {
-                Rectangle imageSize = new Rectangle(0, 0, bitmapWidth,bitmapHeight);
+                Rectangle imageSize = new Rectangle(0, 0, bitmapWidth, bitmapHeight);
                 graph.FillRectangle(Brushes.White, imageSize);
             }
 
@@ -102,7 +102,7 @@ namespace Algorithms.Other
         {
             Vector2 vector1 = new Vector2(50, 150);
             Vector2 vector2 = new Vector2(300, (float)Math.Sin(Math.PI / 3) * 500 + 150);
-            Vector2 vector3 = new Vector2(550, 150) ;
+            Vector2 vector3 = new Vector2(550, 150);
             List<Vector2> initialVectors = new List<Vector2> { vector1, vector2, vector3, vector1 };
             List<Vector2> vectors = Iterate(initialVectors);
             return GetBitmap(vectors);
@@ -130,7 +130,7 @@ namespace Algorithms.Other
                 newVectors.Add(startVector + differenceVector / 3 + Rotate(differenceVector / 3, 60));
                 newVectors.Add(startVector + differenceVector * 2 / 3);
             }
-            
+
             newVectors.Add(vectors[vectors.Count - 1]);
             return newVectors;
         }
