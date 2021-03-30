@@ -49,7 +49,6 @@ namespace Algorithms.Other
         /// <param name="vectors">The vectors defining the edges to be rendered.</param>
         /// <param name="bitmapWidth">The width of the rendered bitmap.</param>
         /// <param name="bitmapHeight">The height of the rendered bitmap.</param>
-        /// <param name="bitmapHeight">The height of the rendered bitmap.</param>
         /// <returns>The bitmap of the rendered edges.</returns>
         public static Bitmap GetBitmap(
             List<Vector2> vectors,
@@ -71,29 +70,29 @@ namespace Algorithms.Other
             // Set the background white
             using (Graphics graph = Graphics.FromImage(bitmap))
             {
-                Rectangle ImageSize = new Rectangle(0, 0, bitmapWidth,bitmapHeight);
-                graph.FillRectangle(Brushes.White, ImageSize);
+                Rectangle imageSize = new Rectangle(0, 0, bitmapWidth,bitmapHeight);
+                graph.FillRectangle(Brushes.White, imageSize);
             }
 
             // Draw the edges
-            for (int i = 0; i < vectors.Count-1; i++)
+            for (int i = 0; i < vectors.Count - 1; i++)
             {
                 Pen blackPen = new Pen(Color.Black, 1);
 
                 float x1 = vectors[i].X;
                 float y1 = vectors[i].Y;
-                float x2 = vectors[i+1].X;
-                float y2 = vectors[i+1].Y;
-                
+                float x2 = vectors[i + 1].X;
+                float y2 = vectors[i + 1].Y;
+
                 using (var graphics = Graphics.FromImage(bitmap))
                 {
                    graphics.DrawLine(blackPen, x1, y1, x2, y2);
                 }
             }
-            
+
             return bitmap;
         }
-        
+
         /// <summary>
         /// Example-method to render the Koch snowflake to a bitmap. To save the
         /// bitmap the command 'GetKochSnowflake().Save("KochSnowflake.png")' can be used.
@@ -102,9 +101,9 @@ namespace Algorithms.Other
         public static Bitmap GetKochSnowflake()
         {
             Vector2 vector1 = new Vector2(50, 150);
-            Vector2 vector2 = new Vector2(300, (float)Math.Sin(Math.PI/3)*500 + 150);
-            Vector2 vector3 = new Vector2(550, 150);
-            List<Vector2> initialVectors = new List<Vector2>{ vector1, vector2, vector3, vector1 };
+            Vector2 vector2 = new Vector2(300, (float)Math.Sin(Math.PI / 3) * 500 + 150);
+            Vector2 vector3 = new Vector2(550, 150) ;
+            List<Vector2> initialVectors = new List<Vector2> { vector1, vector2, vector3, vector1 };
             List<Vector2> vectors = Iterate(initialVectors);
             return GetBitmap(vectors);
         }
@@ -131,7 +130,8 @@ namespace Algorithms.Other
                 newVectors.Add(startVector + differenceVector / 3 + Rotate(differenceVector / 3, 60));
                 newVectors.Add(startVector + differenceVector * 2 / 3);
             }
-            newVectors.Add(vectors[vectors.Count-1]);
+            
+            newVectors.Add(vectors[vectors.Count - 1]);
             return newVectors;
         }
 
@@ -144,10 +144,10 @@ namespace Algorithms.Other
         /// <returns>The rotated vector.</returns>
         private static Vector2 Rotate(Vector2 vector, float angleInDegrees)
         {
-            float radians = angleInDegrees * (float)Math.PI/180;
+            float radians = angleInDegrees * (float)Math.PI / 180;
             float ca = (float)Math.Cos(radians);
             float sa = (float)Math.Sin(radians);
-            return new Vector2(ca*vector.X - sa*vector.Y, sa*vector.X + ca*vector.Y);
+            return new Vector2(ca * vector.X - sa * vector.Y, sa * vector.X + ca * vector.Y);
         }
     }
 }
