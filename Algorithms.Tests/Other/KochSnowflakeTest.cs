@@ -36,7 +36,7 @@ namespace Algorithms.Tests.Other
         public static void TestKochSnowflakeExample()
         {
             int bitmapWidth = 600;
-            float offsetX = bitmapWidth / 10;
+            float offsetX = bitmapWidth / 10f;
             float offsetY = bitmapWidth / 3.7f;
             
             Bitmap bitmap = Algorithms.Other.KochSnowflake.GetKochSnowflake(bitmapWidth: 600);
