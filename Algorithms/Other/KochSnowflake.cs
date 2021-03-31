@@ -54,6 +54,11 @@ namespace Algorithms.Other
             int bitmapWidth = 600,
             int steps = 5)
         {
+            if (bitmapWidth <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(bitmapWidth), $"{nameof(bitmapWidth)} should be greater than zero");
+            }
+
             float offsetX = bitmapWidth / 10f;
             float offsetY = bitmapWidth / 3.7f;
             Vector2 vector1 = new Vector2(offsetX, offsetY);
@@ -118,16 +123,6 @@ namespace Algorithms.Other
             int bitmapWidth,
             int bitmapHeight)
         {
-            if (bitmapWidth <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(bitmapWidth), $"{nameof(bitmapWidth)} should be greater than zero");
-            }
-
-            if (bitmapHeight <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(bitmapHeight), $"{nameof(bitmapHeight)} should be greater than zero");
-            }
-
             Bitmap bitmap = new Bitmap(bitmapWidth, bitmapHeight);
 
             using (Graphics graphics = Graphics.FromImage(bitmap))
