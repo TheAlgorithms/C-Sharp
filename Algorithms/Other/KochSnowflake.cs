@@ -44,68 +44,24 @@ namespace Algorithms.Other
         }
 
         /// <summary>
-        /// Utility-method to render the Koch snowflake to a bitmap.
-        /// </summary>
-        /// <param name="vectors">The vectors defining the edges to be rendered.</param>
-        /// <param name="bitmapWidth">The width of the rendered bitmap.</param>
-        /// <param name="bitmapHeight">The height of the rendered bitmap.</param>
-        /// <returns>The bitmap of the rendered edges.</returns>
-        public static Bitmap GetBitmap(
-            List<Vector2> vectors,
-            int bitmapWidth = 600,
-            int bitmapHeight = 600)
-        {
-            if (bitmapWidth <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(bitmapWidth), $"{nameof(bitmapWidth)} should be greater than zero");
-            }
-
-            if (bitmapHeight <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(bitmapHeight), $"{nameof(bitmapHeight)} should be greater than zero");
-            }
-
-            Bitmap bitmap = new Bitmap(bitmapWidth, bitmapHeight);
-
-            // Set the background white
-            using (Graphics graph = Graphics.FromImage(bitmap))
-            {
-                Rectangle imageSize = new Rectangle(0, 0, bitmapWidth, bitmapHeight);
-                graph.FillRectangle(Brushes.White, imageSize);
-            }
-
-            // Draw the edges
-            for (int i = 0; i < vectors.Count - 1; i++)
-            {
-                Pen blackPen = new Pen(Color.Black, 1);
-
-                float x1 = vectors[i].X;
-                float y1 = vectors[i].Y;
-                float x2 = vectors[i + 1].X;
-                float y2 = vectors[i + 1].Y;
-
-                using (var graphics = Graphics.FromImage(bitmap))
-                {
-                   graphics.DrawLine(blackPen, x1, y1, x2, y2);
-                }
-            }
-
-            return bitmap;
-        }
-
-        /// <summary>
-        /// Example-method to render the Koch snowflake to a bitmap. To save the
+        /// Method to render the Koch snowflake to a bitmap. To save the
         /// bitmap the command 'GetKochSnowflake().Save("KochSnowflake.png")' can be used.
         /// </summary>
+        /// <param name="bitmapWidth">The width of the rendered bitmap.</param>
+        /// <param name="steps">The number of iterations.</param>
         /// <returns>The bitmap of the rendered Koch snowflake.</returns>
-        public static Bitmap GetKochSnowflake()
+        public static Bitmap GetKochSnowflake(
+            int bitmapWidth = 600,
+            int steps = 5)
         {
-            Vector2 vector1 = new Vector2(50, 150);
-            Vector2 vector2 = new Vector2(300, (float)Math.Sin(Math.PI / 3) * 500 + 150);
-            Vector2 vector3 = new Vector2(550, 150);
+            float offsetX = bitmapWidth / 10;
+            float offsetY = bitmapWidth / 3.7f;
+            Vector2 vector1 = new Vector2(offsetX, offsetY);
+            Vector2 vector2 = new Vector2(bitmapWidth/2, (float)Math.Sin(Math.PI / 3) * bitmapWidth * 0.8f + offsetY);
+            Vector2 vector3 = new Vector2(bitmapWidth - offsetX, offsetY);
             List<Vector2> initialVectors = new List<Vector2> { vector1, vector2, vector3, vector1 };
-            List<Vector2> vectors = Iterate(initialVectors);
-            return GetBitmap(vectors);
+            List<Vector2> vectors = Iterate(initialVectors, steps);
+            return GetBitmap(vectors, bitmapWidth, bitmapWidth);
         }
 
         /// <summary>
@@ -148,6 +104,53 @@ namespace Algorithms.Other
             float ca = (float)Math.Cos(radians);
             float sa = (float)Math.Sin(radians);
             return new Vector2(ca * vector.X - sa * vector.Y, sa * vector.X + ca * vector.Y);
+        }
+
+        /// <summary>
+        /// Utility-method to render the Koch snowflake to a bitmap.
+        /// </summary>
+        /// <param name="vectors">The vectors defining the edges to be rendered.</param>
+        /// <param name="bitmapWidth">The width of the rendered bitmap.</param>
+        /// <param name="bitmapHeight">The height of the rendered bitmap.</param>
+        /// <returns>The bitmap of the rendered edges.</returns>
+        private static Bitmap GetBitmap(
+            List<Vector2> vectors,
+            int bitmapWidth,
+            int bitmapHeight)
+        {
+            if (bitmapWidth <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(bitmapWidth), $"{nameof(bitmapWidth)} should be greater than zero");
+            }
+
+            if (bitmapHeight <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(bitmapHeight), $"{nameof(bitmapHeight)} should be greater than zero");
+            }
+
+            Bitmap bitmap = new Bitmap(bitmapWidth, bitmapHeight);
+
+            using (Graphics graphics = Graphics.FromImage(bitmap))
+            {
+                // Set the background white
+                Rectangle imageSize = new Rectangle(0, 0, bitmapWidth, bitmapHeight);
+                graphics.FillRectangle(Brushes.White, imageSize);
+
+                // Draw the edges
+                for (int i = 0; i < vectors.Count - 1; i++)
+                {
+                    Pen blackPen = new Pen(Color.Black, 1);
+
+                    float x1 = vectors[i].X;
+                    float y1 = vectors[i].Y;
+                    float x2 = vectors[i + 1].X;
+                    float y2 = vectors[i + 1].Y;
+
+                    graphics.DrawLine(blackPen, x1, y1, x2, y2);
+                }
+            }
+
+            return bitmap;
         }
     }
 }
