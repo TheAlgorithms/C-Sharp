@@ -54,7 +54,7 @@ namespace Algorithms.Other
             int bitmapWidth = 600,
             int steps = 5)
         {
-            float offsetX = bitmapWidth / 10;
+            float offsetX = bitmapWidth / 10f;
             float offsetY = bitmapWidth / 3.7f;
             Vector2 vector1 = new Vector2(offsetX, offsetY);
             Vector2 vector2 = new Vector2(bitmapWidth / 2, (float)Math.Sin(Math.PI / 3) * bitmapWidth * 0.8f + offsetY);
