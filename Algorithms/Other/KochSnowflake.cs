@@ -57,7 +57,7 @@ namespace Algorithms.Other
             float offsetX = bitmapWidth / 10;
             float offsetY = bitmapWidth / 3.7f;
             Vector2 vector1 = new Vector2(offsetX, offsetY);
-            Vector2 vector2 = new Vector2(bitmapWidth/2, (float)Math.Sin(Math.PI / 3) * bitmapWidth * 0.8f + offsetY);
+            Vector2 vector2 = new Vector2(bitmapWidth / 2, (float)Math.Sin(Math.PI / 3) * bitmapWidth * 0.8f + offsetY);
             Vector2 vector3 = new Vector2(bitmapWidth - offsetX, offsetY);
             List<Vector2> initialVectors = new List<Vector2> { vector1, vector2, vector3, vector1 };
             List<Vector2> vectors = Iterate(initialVectors, steps);
