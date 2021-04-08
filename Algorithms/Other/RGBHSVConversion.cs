@@ -47,7 +47,7 @@ namespace Algorithms.Other
             double secondLargestComponent = chroma * (1 - Math.Abs(hueSection % 2 - 1));
             double matchValue = value - chroma;
 
-            return GetRgbBySection(hueSection, chroma, matchValue, secondLargestComponent)
+            return GetRgbBySection(hueSection, chroma, matchValue, secondLargestComponent);
         }
 
         /// <summary>
