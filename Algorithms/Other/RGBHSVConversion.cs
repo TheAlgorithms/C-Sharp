@@ -4,12 +4,12 @@ using System.Drawing;
 namespace Algorithms.Other
 {
     /// <summary>
-    /// The RGB color model is an additive color model in which red, green, and 
-    /// blue light are added together in various ways to reproduce a broad array of 
-    /// colors. The name of the model comes from the initials of the three additive 
-    /// primary colors, red, green, and blue. Meanwhile, the HSV representation 
-    /// models how colors appear under light. In it, colors are represented using 
-    /// three components: hue, saturation and (brightness-)value. This class 
+    /// The RGB color model is an additive color model in which red, green, and
+    /// blue light are added together in various ways to reproduce a broad array of
+    /// colors. The name of the model comes from the initials of the three additive
+    /// primary colors, red, green, and blue. Meanwhile, the HSV representation
+    /// models how colors appear under light. In it, colors are represented using
+    /// three components: hue, saturation and (brightness-)value. This class
     /// provides methods for converting colors from one representation to the other.
     /// (description adapted from https://en.wikipedia.org/wiki/RGB_color_model and https://en.wikipedia.org/wiki/HSL_and_HSV).
     /// </summary>
