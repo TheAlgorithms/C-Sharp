@@ -34,6 +34,8 @@ namespace Algorithms.Other
         [TestCase(0, 1, 1, 255, 0, 0)]
         [TestCase(60, 1, 1, 255, 255, 0)]
         [TestCase(120, 1, 1, 0, 255, 0)]
+        [TestCase(240, 1, 1, 0, 0, 255)]
+        [TestCase(300, 1, 1, 255, 0, 255)]
         [TestCase(180, 0.5, 0.5, 64, 128, 128)]
         [TestCase(234, 0.14, 0.88, 193, 196, 224)]
         public static void TestRgbOutput(
@@ -44,7 +46,7 @@ namespace Algorithms.Other
             byte exptectedGreen,
             byte exptectedBlue)
         {
-            Tuple <byte, byte, byte> rgb = Algorithms.Other.RgbHsvConversion.HsvToRgb(hue, saturation, value);
+            Tuple<byte, byte, byte> rgb = Algorithms.Other.RgbHsvConversion.HsvToRgb(hue, saturation, value);
             rgb.Item1.Should().Be(expectedRed);
             rgb.Item2.Should().Be(exptectedGreen);
             rgb.Item3.Should().Be(exptectedBlue);
@@ -57,6 +59,8 @@ namespace Algorithms.Other
         [TestCase(255, 0, 0, 0, 1, 1)]
         [TestCase(255, 255, 0, 60, 1, 1)]
         [TestCase(0, 255, 0, 120, 1, 1)]
+        [TestCase(0, 0, 255, 240, 1, 1)]
+        [TestCase(255, 0, 255, 300, 1, 1)]
         [TestCase(64, 128, 128, 180, 0.5, 0.5)]
         [TestCase(193, 196, 224, 234, 0.14, 0.88)]
         public static void TestHsvOutput(
@@ -67,7 +71,7 @@ namespace Algorithms.Other
             double expectedSaturation,
             double expectedValue)
         {
-            Tuple <double, double, double> hsv = Algorithms.Other.RgbHsvConversion.RgbToHsv(red, green, blue);
+            Tuple<double, double, double> hsv = Algorithms.Other.RgbHsvConversion.RgbToHsv(red, green, blue);
 
             // approximate-assertions needed because of small deviations due to converting between byte-values and double-values.
             hsv.Item1.Should().BeApproximately(expectedHue, 0.2);
