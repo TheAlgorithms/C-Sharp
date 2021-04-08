@@ -4,7 +4,13 @@ using System.Drawing;
 namespace Algorithms.Other
 {
     /// <summary>
-    /// The RGB color model is an additive color model in which red, green, and blue light are added together in various ways to reproduce a broad array of colors. The name of the model comes from the initials of the three additive primary colors, red, green, and blue. Meanwhile, the HSV representation models how colors appear under light. In it, colors are represented using three components: hue, saturation and (brightness-)value. This class provides methods for converting colors from one representation to the other.
+    /// The RGB color model is an additive color model in which red, green, and 
+    /// blue light are added together in various ways to reproduce a broad array of 
+    /// colors. The name of the model comes from the initials of the three additive 
+    /// primary colors, red, green, and blue. Meanwhile, the HSV representation 
+    /// models how colors appear under light. In it, colors are represented using 
+    /// three components: hue, saturation and (brightness-)value. This class 
+    /// provides methods for converting colors from one representation to the other.
     /// (description adapted from https://en.wikipedia.org/wiki/RGB_color_model and https://en.wikipedia.org/wiki/HSL_and_HSV).
     /// </summary>
     public static class RgbHsvConversion
@@ -40,7 +46,55 @@ namespace Algorithms.Other
             double hueSection = hue / 60;
             double secondLargestComponent = chroma * (1 - Math.Abs(hueSection % 2 - 1));
             double matchValue = value - chroma;
-            byte red, green, blue;
+
+            return GetRgbBySection(hueSection, chroma, matchValue, secondLargestComponent)
+        }
+
+        /// <summary>
+        /// Conversion from the RGB-representation to the HSV-representation.
+        /// </summary>
+        /// <param name="red">Red-component of the color.</param>
+        /// <param name="green">Green-component of the color.</param>
+        /// <param name="blue">Blue-component of the color.</param>
+        /// <returns>The tuple of HSV-components.</returns>
+        public static Tuple<double, double, double> RgbToHsv(
+            byte red,
+            byte green,
+            byte blue)
+        {
+            double dRed = (double)red / 255;
+            double dGreen = (double)green / 255;
+            double dBlue = (double)blue / 255;
+            double value = Math.Max(Math.Max(dRed, dGreen), dBlue);
+            double chroma = value - Math.Min(Math.Min(dRed, dGreen), dBlue);
+            double saturation = value == 0 ? 0 : chroma / value;
+            double hue;
+
+            if (chroma.Equals(0))
+            {
+                hue = 0;
+            }
+            else if (value.Equals(dRed))
+            {
+                hue = 60 * (0 + (dGreen - dBlue) / chroma);
+            }
+            else if (value.Equals(dGreen))
+            {
+                hue = 60 * (2 + (dBlue - dRed) / chroma);
+            }
+            else
+            {
+                hue = 60 * (4 + (dRed - dGreen) / chroma);
+            }
+
+            return new Tuple<double, double, double>(hue, saturation, value);
+        }
+        
+        private static Tuple<byte, byte, byte> GetRgbBySection(double hueSection, double chroma, double matchValue, double secondLargestComponent)
+        {
+            byte red;
+            byte green;
+            byte blue;
 
             if (hueSection >= 0 && hueSection <= 1)
             {
@@ -80,46 +134,6 @@ namespace Algorithms.Other
             }
 
             return new Tuple<byte, byte, byte>(red, green, blue);
-        }
-
-        /// <summary>
-        /// Conversion from the RGB-representation to the HSV-representation.
-        /// </summary>
-        /// <param name="red">Red-component of the color.</param>
-        /// <param name="green">Green-component of the color.</param>
-        /// <param name="blue">Blue-component of the color.</param>
-        /// <returns>The tuple of HSV-components.</returns>
-        public static Tuple<double, double, double> RgbToHsv(
-            byte red,
-            byte green,
-            byte blue)
-        {
-            double dRed = (double)red / 255;
-            double dGreen = (double)green / 255;
-            double dBlue = (double)blue / 255;
-            double value = Math.Max(Math.Max(dRed, dGreen), dBlue);
-            double chroma = value - Math.Min(Math.Min(dRed, dGreen), dBlue);
-            double saturation = value == 0 ? 0 : chroma / value;
-            double hue;
-
-            if (chroma.Equals(0))
-            {
-                hue = 0;
-            }
-            else if (value == dRed)
-            {
-                hue = 60 * (0 + (dGreen - dBlue) / chroma);
-            }
-            else if (value == dGreen)
-            {
-                hue = 60 * (2 + (dBlue - dRed) / chroma);
-            }
-            else
-            {
-                hue = 60 * (4 + (dRed - dGreen) / chroma);
-            }
-
-            return new Tuple<double, double, double>(hue, saturation, value);
         }
     }
 }
