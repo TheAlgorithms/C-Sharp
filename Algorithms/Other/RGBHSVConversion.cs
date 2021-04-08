@@ -89,7 +89,7 @@ namespace Algorithms.Other
 
             return new Tuple<double, double, double>(hue, saturation, value);
         }
-        
+
         private static Tuple<byte, byte, byte> GetRgbBySection(double hueSection, double chroma, double matchValue, double secondLargestComponent)
         {
             byte red;
