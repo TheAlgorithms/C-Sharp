@@ -36,7 +36,7 @@ namespace Algorithms.Other
         [TestCase(120, 1, 1, 0, 255, 0)]
         [TestCase(180, 0.5, 0.5, 64, 128, 128)]
         [TestCase(234, 0.14, 0.88, 193, 196, 224)]
-        public static void TestRGBOutput(
+        public static void TestRgbOutput(
             double hue,
             double saturation,
             double value,
@@ -59,7 +59,7 @@ namespace Algorithms.Other
         [TestCase(0, 255, 0, 120, 1, 1)]
         [TestCase(64, 128, 128, 180, 0.5, 0.5)]
         [TestCase(193, 196, 224, 234, 0.14, 0.88)]
-        public static void TestHSVOutput(
+        public static void TestHsvOutput(
             byte red,
             byte green,
             byte blue,
