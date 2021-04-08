@@ -67,7 +67,7 @@ namespace Algorithms.Other
             double dBlue = (double)blue / 255;
             double value = Math.Max(Math.Max(dRed, dGreen), dBlue);
             double chroma = value - Math.Min(Math.Min(dRed, dGreen), dBlue);
-            double saturation = value == 0 ? 0 : chroma / value;
+            double saturation = value.Equals(0) ? 0 : chroma / value;
             double hue;
 
             if (chroma.Equals(0))
