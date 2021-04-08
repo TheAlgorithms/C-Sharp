@@ -87,6 +87,8 @@ namespace Algorithms.Other
                 hue = 60 * (4 + (dRed - dGreen) / chroma);
             }
 
+            hue = hue < 0 ? hue + 360 : hue;
+
             return new Tuple<double, double, double>(hue, saturation, value);
         }
 
