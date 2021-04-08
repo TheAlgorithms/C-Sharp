@@ -78,7 +78,7 @@ namespace Algorithms.Other
                 green = (byte)Math.Round(255 * matchValue);
                 blue = (byte)Math.Round(255 * (secondLargestComponent + matchValue));
             }
-            
+
             return new Tuple<byte, byte, byte>(red, green, blue);
         }
 
@@ -101,7 +101,7 @@ namespace Algorithms.Other
             double chroma = value - Math.Min(Math.Min(dRed, dGreen), dBlue);
             double saturation = value == 0 ? 0 : chroma / value;
             double hue;
-            
+
             if (chroma.Equals(0))
             {
                 hue = 0;
@@ -118,7 +118,7 @@ namespace Algorithms.Other
             {
                 hue = 60 * (4 + (dRed - dGreen) / chroma);
             }
-            
+
             return new Tuple<double, double, double>(hue, saturation, value);
         }
     }
