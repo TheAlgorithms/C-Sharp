@@ -38,6 +38,7 @@ namespace Algorithms.Other
         [TestCase(300, 1, 1, 255, 0, 255)]
         [TestCase(180, 0.5, 0.5, 64, 128, 128)]
         [TestCase(234, 0.14, 0.88, 193, 196, 224)]
+        [TestCase(330, 0.75, 0.5, 128, 32, 80)]
         public static void TestRgbOutput(
             double hue,
             double saturation,
@@ -63,13 +64,14 @@ namespace Algorithms.Other
         [TestCase(255, 0, 255, 300, 1, 1)]
         [TestCase(64, 128, 128, 180, 0.5, 0.5)]
         [TestCase(193, 196, 224, 234, 0.14, 0.88)]
+        [TestCase(128, 32, 80, 330, 0.75, 0.5)]
         public static void TestHsvOutput(
-            byte red,
-            byte green,
-            byte blue,
-            double expectedHue,
-            double expectedSaturation,
-            double expectedValue)
+                byte red,
+                byte green,
+                byte blue,
+                double expectedHue,
+                double expectedSaturation,
+                double expectedValue)
         {
             Tuple<double, double, double> hsv = Algorithms.Other.RgbHsvConversion.RgbToHsv(red, green, blue);
 
