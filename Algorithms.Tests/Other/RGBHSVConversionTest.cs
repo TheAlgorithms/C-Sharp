@@ -47,7 +47,7 @@ namespace Algorithms.Other
             byte exptectedGreen,
             byte exptectedBlue)
         {
-            Tuple<byte, byte, byte> rgb = Algorithms.Other.RgbHsvConversion.HsvToRgb(hue, saturation, value);
+            var rgb = Algorithms.Other.RgbHsvConversion.HsvToRgb(hue, saturation, value);
             rgb.Item1.Should().Be(expectedRed);
             rgb.Item2.Should().Be(exptectedGreen);
             rgb.Item3.Should().Be(exptectedBlue);
@@ -73,7 +73,7 @@ namespace Algorithms.Other
                 double expectedSaturation,
                 double expectedValue)
         {
-            Tuple<double, double, double> hsv = Algorithms.Other.RgbHsvConversion.RgbToHsv(red, green, blue);
+            var hsv = Algorithms.Other.RgbHsvConversion.RgbToHsv(red, green, blue);
 
             // approximate-assertions needed because of small deviations due to converting between byte-values and double-values.
             hsv.Item1.Should().BeApproximately(expectedHue, 0.2);
