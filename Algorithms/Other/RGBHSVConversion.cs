@@ -22,7 +22,7 @@ namespace Algorithms.Other
         /// <param name="saturation">Saturation of the color.</param>
         /// <param name="value">Brightness-value of the color.</param>
         /// <returns>The tuple of RGB-components.</returns>
-        public static Tuple<byte, byte, byte> HsvToRgb(
+        public static ValueTuple<byte, byte, byte> HsvToRgb(
             double hue,
             double saturation,
             double value)
@@ -57,7 +57,7 @@ namespace Algorithms.Other
         /// <param name="green">Green-component of the color.</param>
         /// <param name="blue">Blue-component of the color.</param>
         /// <returns>The tuple of HSV-components.</returns>
-        public static Tuple<double, double, double> RgbToHsv(
+        public static ValueTuple<double, double, double> RgbToHsv(
             byte red,
             byte green,
             byte blue)
@@ -67,18 +67,18 @@ namespace Algorithms.Other
             double dBlue = (double)blue / 255;
             double value = Math.Max(Math.Max(dRed, dGreen), dBlue);
             double chroma = value - Math.Min(Math.Min(dRed, dGreen), dBlue);
-            double saturation = value == 0 ? 0 : chroma / value;
+            double saturation = value.Equals(0) ? 0 : chroma / value;
             double hue;
 
-            if (chroma == 0)
+            if (chroma.Equals(0))
             {
                 hue = 0;
             }
-            else if (value == dRed)
+            else if (value.Equals(dRed))
             {
                 hue = 60 * (0 + (dGreen - dBlue) / chroma);
             }
-            else if (value == dGreen)
+            else if (value.Equals(dGreen))
             {
                 hue = 60 * (2 + (dBlue - dRed) / chroma);
             }
@@ -89,10 +89,10 @@ namespace Algorithms.Other
 
             hue = (hue + 360) % 360;
 
-            return Tuple.Create(hue, saturation, value);
+            return (hue, saturation, value);
         }
 
-        private static Tuple<byte, byte, byte> GetRgbBySection(double hueSection, double chroma, double matchValue, double secondLargestComponent)
+        private static ValueTuple<byte, byte, byte> GetRgbBySection(double hueSection, double chroma, double matchValue, double secondLargestComponent)
         {
             byte red;
             byte green;
@@ -135,7 +135,7 @@ namespace Algorithms.Other
                 blue = ConvertToByte(secondLargestComponent + matchValue);
             }
 
-            return Tuple.Create(red, green, blue);
+            return (red, green, blue);
         }
 
         private static byte ConvertToByte(double input)
