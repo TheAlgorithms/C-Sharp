@@ -82,9 +82,9 @@
   * [Fermat Prime Checker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/FermatPrimeChecker.cs)
   * [Sieve of Eratosthenes](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/SieveOfEratosthenes.cs)
   * [Luhn](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/Luhn.cs)
-  * [Mandelbrot](./Algorithms/Other/Mandelbrot.cs)
-  * [Koch Snowflake](./Algorithms/Other/KochSnowflake.cs)
-  * [RGB-HSV Conversion](./Algorithms/Other/RGBHSVConversion.cs)
+  * [Mandelbrot](https://github.com/TheAlgorithms/C-Sharp/blob/master//Algorithms/Other/Mandelbrot.cs)
+  * [Koch Snowflake](https://github.com/TheAlgorithms/C-Sharp/blob/master//Algorithms/Other/KochSnowflake.cs)
+  * [RGB-HSV Conversion](https://github.com/TheAlgorithms/C-Sharp/blob/master//Algorithms/Other/RGBHSVConversion.cs)
 ## Problems
   * [Stable Marriage](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Problems/StableMarriage/GaleShapley.cs)
   * [N-Queens](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Problems/NQueens/BacktrackingNQueensSolver.cs)
