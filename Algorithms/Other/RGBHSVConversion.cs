@@ -100,42 +100,47 @@ namespace Algorithms.Other
 
             if (hueSection >= 0 && hueSection <= 1)
             {
-                red = (byte)Math.Round(255 * (chroma + matchValue));
-                green = (byte)Math.Round(255 * (secondLargestComponent + matchValue));
-                blue = (byte)Math.Round(255 * matchValue);
+                red = ConvertToByte(chroma + matchValue);
+                green = ConvertToByte(secondLargestComponent + matchValue);
+                blue = ConvertToByte(matchValue);
             }
             else if (hueSection > 1 && hueSection <= 2)
             {
-                red = (byte)Math.Round(255 * (secondLargestComponent + matchValue));
-                green = (byte)Math.Round(255 * (chroma + matchValue));
-                blue = (byte)Math.Round(255 * matchValue);
+                red = ConvertToByte(secondLargestComponent + matchValue);
+                green = ConvertToByte(chroma + matchValue);
+                blue = ConvertToByte(matchValue);
             }
             else if (hueSection > 2 && hueSection <= 3)
             {
-                red = (byte)Math.Round(255 * matchValue);
-                green = (byte)Math.Round(255 * (chroma + matchValue));
-                blue = (byte)Math.Round(255 * (secondLargestComponent + matchValue));
+                red = ConvertToByte(matchValue);
+                green = ConvertToByte(chroma + matchValue);
+                blue = ConvertToByte(secondLargestComponent + matchValue);
             }
             else if (hueSection > 3 && hueSection <= 4)
             {
-                red = (byte)Math.Round(255 * matchValue);
-                green = (byte)Math.Round(255 * (secondLargestComponent + matchValue));
-                blue = (byte)Math.Round(255 * (chroma + matchValue));
+                red = ConvertToByte(matchValue);
+                green = ConvertToByte(secondLargestComponent + matchValue);
+                blue = ConvertToByte(chroma + matchValue);
             }
             else if (hueSection > 4 && hueSection <= 5)
             {
-                red = (byte)Math.Round(255 * (secondLargestComponent + matchValue));
-                green = (byte)Math.Round(255 * matchValue);
-                blue = (byte)Math.Round(255 * (chroma + matchValue));
+                red = ConvertToByte(secondLargestComponent + matchValue);
+                green = ConvertToByte(matchValue);
+                blue = ConvertToByte(chroma + matchValue);
             }
             else
             {
-                red = (byte)Math.Round(255 * (chroma + matchValue));
-                green = (byte)Math.Round(255 * matchValue);
-                blue = (byte)Math.Round(255 * (secondLargestComponent + matchValue));
+                red = ConvertToByte(chroma + matchValue);
+                green = ConvertToByte(matchValue);
+                blue = ConvertToByte(secondLargestComponent + matchValue);
             }
 
             return Tuple.Create(red, green, blue);
+        }
+
+        private static byte ConvertToByte(double input)
+        {
+            return (byte)Math.Round(255 * input);
         }
     }
 }
