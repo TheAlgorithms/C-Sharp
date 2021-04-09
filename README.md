@@ -95,6 +95,7 @@ This repository contains algorithms and data structures implemented in C# for ed
 		* [Luhn](./Algorithms/Other/Luhn.cs)
 		* [Mandelbrot](./Algorithms/Other/Mandelbrot.cs)
 		* [Koch Snowflake](./Algorithms/Other/KochSnowflake.cs)
+		* [RGB-HSV Conversion](./Algorithms/Other/RGBHSVConversion.cs)
 	* [Problems](./Algorithms/Problems/)
 		* [Stable Marriage](./Algorithms/Problems/StableMarriage)
 			* [Gale-Shapley](./Algorithms/Problems/StableMarriage/GaleShapley.cs)
