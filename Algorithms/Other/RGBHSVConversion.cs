@@ -23,7 +23,6 @@ namespace Algorithms.Other
         /// <param name="value">Brightness-value of the color.</param>
         /// <returns>The tuple of RGB-components.</returns>
         public static (byte red, byte green, byte blue) HsvToRgb(
-
             double hue,
             double saturation,
             double value)
@@ -59,7 +58,6 @@ namespace Algorithms.Other
         /// <param name="blue">Blue-component of the color.</param>
         /// <returns>The tuple of HSV-components.</returns>
         public static (double hue, double saturation, double value) RgbToHsv(
-
             byte red,
             byte green,
             byte blue)
@@ -95,7 +93,6 @@ namespace Algorithms.Other
         }
 
         private static (byte red, byte green, byte blue) GetRgbBySection(double hueSection, double chroma, double matchValue, double secondLargestComponent)
-
         {
             byte red;
             byte green;
