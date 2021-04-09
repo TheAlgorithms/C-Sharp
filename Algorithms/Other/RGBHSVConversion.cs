@@ -67,18 +67,18 @@ namespace Algorithms.Other
             double dBlue = (double)blue / 255;
             double value = Math.Max(Math.Max(dRed, dGreen), dBlue);
             double chroma = value - Math.Min(Math.Min(dRed, dGreen), dBlue);
-            double saturation = value.Equals(0) ? 0 : chroma / value;
+            double saturation = value == 0 ? 0 : chroma / value;
             double hue;
 
-            if (chroma.Equals(0))
+            if (chroma == 0)
             {
                 hue = 0;
             }
-            else if (value.Equals(dRed))
+            else if (value == dRed)
             {
                 hue = 60 * (0 + (dGreen - dBlue) / chroma);
             }
-            else if (value.Equals(dGreen))
+            else if (value == dGreen)
             {
                 hue = 60 * (2 + (dBlue - dRed) / chroma);
             }
@@ -87,9 +87,9 @@ namespace Algorithms.Other
                 hue = 60 * (4 + (dRed - dGreen) / chroma);
             }
 
-            hue = hue < 0 ? hue + 360 : hue;
+            hue = (hue + 360) % 360;
 
-            return new Tuple<double, double, double>(hue, saturation, value);
+            return Tuple.Create(hue, saturation, value);
         }
 
         private static Tuple<byte, byte, byte> GetRgbBySection(double hueSection, double chroma, double matchValue, double secondLargestComponent)
@@ -135,7 +135,7 @@ namespace Algorithms.Other
                 blue = (byte)Math.Round(255 * (secondLargestComponent + matchValue));
             }
 
-            return new Tuple<byte, byte, byte>(red, green, blue);
+            return Tuple.Create(red, green, blue);
         }
     }
 }
