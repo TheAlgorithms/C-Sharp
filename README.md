@@ -6,8 +6,6 @@
 
 This repository contains algorithms and data structures implemented in C# for eductional purposes.  
 
----
-
 ## Overview  
 * [Algorithms](./Algorithms/)
 	* [Data Compression](<./Algorithms/DataCompression>)
@@ -125,8 +123,10 @@ This repository contains algorithms and data structures implemented in C# for ed
 	* [Linked List](./DataStructures/LinkedList)
 		* [Singly Linked List](./DataStructures/LinkedList/SinglyLinkedList/SinglyLinkedList.cs)
 		* [Doubly Linked List](./DataStructures/LinkedList/DoublyLinkedList/DoublyLinkedList.cs)
----
 
-## Contribution
+## Contributing
 
-You can contribute with pleasure to this repository. Please orient on the directory structure and overall code style of this repository. If you want to ask a question or suggest something, please open an issue.
+You can contribute with pleasure to this repository.
+Please orient on the directory structure and overall code style of this repository
+and refer to [our contributing guidelines](./CONTRIBUTING.md) for more detail.
+If you want to ask a question or suggest something, please open an issue.
