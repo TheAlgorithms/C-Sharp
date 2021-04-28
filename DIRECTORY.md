@@ -56,8 +56,8 @@
       * [Median of three pivot](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/MedianOfThreeQuickSorter.cs)
       * [Middle point pivot](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/MiddlePointQuickSorter.cs)
       * [Random pivot](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/RandomPivotQuickSorter.cs)
-    * [Selection](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/SelectionSorter.cs)
-    * [Shell](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/ShellSorter.cs)
+    * [Selection Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/SelectionSorter.cs)
+    * [Shell Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/ShellSorter.cs)
   * External
     * [Merge Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/External/ExternalMergeSorter.cs)
   * Integer
