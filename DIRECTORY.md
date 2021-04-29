@@ -8,7 +8,7 @@
   * [Caesar](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/CaesarEncoder.cs)
   * [Vigenere](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/VigenereEncoder.cs)
   * [Hill](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/HillEncoder.cs)
-  * [NYSIIS](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/NYSIISEncoder.cs)
+  * [NYSIIS](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/NysiisEncoder.cs)
   * [Soundex](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Encoders/SoundexEncoder.cs)
 ## Knapsack problem
   * [Naive solver](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Knapsack/NaiveKnapsackSolver.cs)
@@ -20,7 +20,7 @@
   * [Aliquot Sum Calculator](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/AliquotSumCalculator.cs)
   * Decomposition
     * [LU Decomposition](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Decomposition/LU.cs)
-    * [Singular Vector Decomposition](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Decomposition/SVD.cs)
+    * [Thin Singular Vector Decomposition](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/Decomposition/ThinSVD.cs)
   * Greatest Common Divisor
     * [Euclidean GCD](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/GreatestCommonDivisor/EuclideanGreatestCommonDivisorFinder.cs)
     * [Binary GCD](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/GreatestCommonDivisor/BinaryGreatestCommonDivisorFinder.cs)
@@ -81,16 +81,16 @@
   * [Fermat Prime Checker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/FermatPrimeChecker.cs)
   * [Sieve of Eratosthenes](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/SieveOfEratosthenes.cs)
   * [Luhn](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/Luhn.cs)
-  * [Mandelbrot](https://github.com/TheAlgorithms/C-Sharp/blob/master//Algorithms/Other/Mandelbrot.cs)
-  * [Koch Snowflake](https://github.com/TheAlgorithms/C-Sharp/blob/master//Algorithms/Other/KochSnowflake.cs)
-  * [RGB-HSV Conversion](https://github.com/TheAlgorithms/C-Sharp/blob/master//Algorithms/Other/RGBHSVConversion.cs)
+  * [Mandelbrot](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/Mandelbrot.cs)
+  * [Koch Snowflake](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/KochSnowflake.cs)
+  * [RGB-HSV Conversion](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/RGBHSVConversion.cs)
 ## Problems
   * [Stable Marriage](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Problems/StableMarriage/GaleShapley.cs)
   * [N-Queens](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Problems/NQueens/BacktrackingNQueensSolver.cs)
 
 ## Data Structures
   * [Bit Array](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/BitArray.cs)
-  * [Min-Max Heap](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/MinMaxHeap.cs)
+  * [Min-Max Heap](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Heap/MinMaxHeap.cs)
   * [Timeline](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Timeline.cs)
   * Segment Trees
     * [Segment Tree](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/SegmentTrees/SegmentTree.cs)
@@ -98,7 +98,7 @@
     * [Segment Tree Update](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/SegmentTrees/SegmentTreeUpdate.cs)  
   * [Binary Search Tree](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/BinarySearchTree)
   * [AA Tree](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/AATree)
-  * [Binary Heap](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/BinaryHeap.cs)
+  * [Binary Heap](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Heap/BinaryHeap.cs)
   * Stack
     * [Array-based Stack](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Stack/ArrayBasedStack.cs)
     * [List-based Stack](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Stack/ListBasedStack.cs)
