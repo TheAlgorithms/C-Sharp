@@ -8,48 +8,48 @@ This repository contains algorithms and data structures implemented in C# for ed
 
 ## Overview  
 
-* Data Compression
+* [Data Compression](./Algorithms/DataCompression)
   * [Burrows-Wheeler transform](./Algorithms/DataCompression/BurrowsWheelerTransform.cs)
   * [Huffman Compressor](./Algorithms/DataCompression/HuffmanCompressor.cs)
   * [Shannon-Fano Compressor](./Algorithms/DataCompression/ShannonFanoCompressor.cs)
-* Encoders
+* [Encoders](./Algorithms/Encoders)
   * [Caesar](./Algorithms/Encoders/CaesarEncoder.cs)
   * [Vigenere](./Algorithms/Encoders/VigenereEncoder.cs)
   * [Hill](./Algorithms/Encoders/HillEncoder.cs)
   * [NYSIIS](./Algorithms/Encoders/NysiisEncoder.cs)
   * [Soundex](./Algorithms/Encoders/SoundexEncoder.cs)
-* Knapsack problem
+* [Knapsack problem](./Algorithms/Knapsack)
   * [Naive solver](./Algorithms/Knapsack/NaiveKnapsackSolver.cs)
   * [Dynamic Programming solver](./Algorithms/Knapsack/DynamicProgrammingKnapsackSolver.cs)
-* Linear Algebra
-  * Eigenvalue
+* [Linear Algebra](./Algorithms/LinearAlgebra)
+  * [Eigenvalue](./Algorithms/LinearAlgebra/Eigenvalue)
     * [Power Iteration](./Algorithms/LinearAlgebra/Eigenvalue/PowerIteration.cs)
-* Numeric
+* [Numeric](./Algorithms/Numeric)
   * [Aliquot Sum Calculator](./Algorithms/Numeric/AliquotSumCalculator.cs)
-  * Decomposition
+  * [Decomposition](./Algorithms/Numeric/Decomposition)
     * [LU Decomposition](./Algorithms/Numeric/Decomposition/LU.cs)
     * [Thin Singular Vector Decomposition](./Algorithms/Numeric/Decomposition/ThinSVD.cs)
-  * Greatest Common Divisor
+  * [Greatest Common Divisor](./Algorithms/Numeric/GreatestCommonDivisor)
     * [Euclidean GCD](./Algorithms/Numeric/GreatestCommonDivisor/EuclideanGreatestCommonDivisorFinder.cs)
     * [Binary GCD](./Algorithms/Numeric/GreatestCommonDivisor/BinaryGreatestCommonDivisorFinder.cs)
-  * Factorization
+  * [Factorization](./Algorithms/Numeric/Factorization)
     * [Trial division Factorization](./Algorithms/Numeric/Factorization/TrialDivisionFactorizer.cs)
-  * Series
+  * [Series](./Algorithms/Numeric/Series)
     * [Maclaurin Series](./Algorithms/Numeric/Series/Maclaurin.cs)
   * [Gauss-Jordan Elimination](./Algorithms/Numeric/GaussJordanElimination.cs)
   * [Pseudo-Inverse](./Algorithms/Numeric/Pseudoinverse/PseudoInverse.cs)
   * [Narcissistic Number Checker](./Algorithms/Numeric/NarcissisticNumberChecker.cs)
   * [Perfect Number Checker](./Algorithms/Numeric/PerfectNumberChecker.cs)
   * [Perfect Square Checker](./Algorithms/Numeric/PerfectSquareChecker.cs)
-* Searches
+* [Searches](./Algorithms/Search)
   * [A-Star](./Algorithms/Search/AStar/)
   * [Binary Search](./Algorithms/Search/BinarySearcher.cs)
   * [Recursive Binary Search](./Algorithms/Search/RecursiveBinarySearcher.cs)
   * [Linear Search](./Algorithms/Search/LinearSearcher.cs)
   * [Fast Search](./Algorithms/Search/FastSearcher.cs)
   * [Knuth–Morris–Pratt](./Algorithms/Strings/KnuthMorrisPrattSearcher.cs)
-* Sorts
-  * Comparison
+* [Sorts](./Algorithms/Sorters)
+  * [Comparison](./Algorithms/Sorters/Comparison)
     * [Binary Insertion Sort](./Algorithms/Sorters/Comparison/BinaryInsertionSorter.cs)
     * [Bogo Sort](./Algorithms/Sorters/Comparison/BogoSorter.cs)
     * [Bubble Sort](./Algorithms/Sorters/Comparison/BubbleSorter.cs)
@@ -66,56 +66,58 @@ This repository contains algorithms and data structures implemented in C# for ed
       * [Random pivot](./Algorithms/Sorters/Comparison/RandomPivotQuickSorter.cs)
     * [Selection Sort](./Algorithms/Sorters/Comparison/SelectionSorter.cs)
     * [Shell Sort](./Algorithms/Sorters/Comparison/ShellSorter.cs)
-  * External
+  * [External](./Algorithms/Sorters/External)
     * [Merge Sort](./Algorithms/Sorters/External/ExternalMergeSorter.cs)
-  * Integer
+  * [Integer](./Algorithms/Sorters/Integer)
     * [Counting Sort](./Algorithms/Sorters/Integer/CountingSorter.cs)
     * [Bucket Sort](./Algorithms/Sorters/Integer/BucketSorter.cs)
     * [Radix Sort](./Algorithms/Sorters/Integer/RadixSorter.cs)
-  * String
+  * [String](./Algorithms/Sorters/String)
     * [MSD Radix Sort](./Algorithms/Sorters/String/MsdRadixStringSorter.cs)
-* Sequences
+* [Sequences](./Algorithms/Sequences)
   * [A000027 Natural](./Algorithms/Sequences/NaturalSequence.cs)
   * [A000040 Primes](./Algorithms/Sequences/PrimesSequence.cs)
   * [A000045 Fibonacci](./Algorithms/Sequences/FibonacciSequence.cs)
   * [A000142 Factorial](./Algorithms/Sequences/FactorialSequence.cs)
   * [A007318 Binomial](./Algorithms/Sequences/BinomialSequence.cs)
-* String
+* [String](./Algorithms/Strings)
   * [Longest Consecutive Character](./Algorithms/Strings/GeneralStringAlgorithms.cs)
   * [Naive String Search](./Algorithms/Strings/NaiveStringSearch.cs)
   * [Rabin Karp](./Algorithms/Strings/RabinKarp.cs)
   * [Boyer Moore](./Algorithms/Strings/BoyerMoore.cs)
   * [Palindrome Checker](./Algorithms/Strings/palindrome.cs)
-* Other
+* [Other](./Algorithms/Other)
   * [Fermat Prime Checker](./Algorithms/Other/FermatPrimeChecker.cs)
   * [Sieve of Eratosthenes](./Algorithms/Other/SieveOfEratosthenes.cs)
   * [Luhn](./Algorithms/Other/Luhn.cs)
   * [Mandelbrot](./Algorithms/Other/Mandelbrot.cs)
   * [Koch Snowflake](./Algorithms/Other/KochSnowflake.cs)
   * [RGB-HSV Conversion](./Algorithms/Other/RGBHSVConversion.cs)
-* Problems
+* [Problems](./Algorithms/Problems)
   * [Stable Marriage](./Algorithms/Problems/StableMarriage/GaleShapley.cs)
   * [N-Queens](./Algorithms/Problems/NQueens/BacktrackingNQueensSolver.cs)
 
-* Data Structures
+* [Data Structures](./DataStructures)
   * [Bit Array](./DataStructures/BitArray.cs)
-  * [Min-Max Heap](./DataStructures/Heap/MinMaxHeap.cs)
   * [Timeline](./DataStructures/Timeline.cs)
-  * Segment Trees
+  * [Segment Trees](./DataStructures/SegmentTrees)
     * [Segment Tree](./DataStructures/SegmentTrees/SegmentTree.cs)
     * [Segment Tree Multiplication](./DataStructures/SegmentTrees/SegmentTreeApply.cs)
     * [Segment Tree Update](./DataStructures/SegmentTrees/SegmentTreeUpdate.cs)  
   * [Binary Search Tree](./DataStructures/BinarySearchTree)
   * [AA Tree](./DataStructures/AATree)
-  * [Binary Heap](./DataStructures/Heap/BinaryHeap.cs)
-  * Stack
+  * [Stack](./DataStructures/Stack)
     * [Array-based Stack](./DataStructures/Stack/ArrayBasedStack.cs)
     * [List-based Stack](./DataStructures/Stack/ListBasedStack.cs)
-  * Queue
+  * [Heap](./DataStructures/Heap)
+    * [Min-Max Heap](./DataStructures/Heap/MinMaxHeap.cs)
+    * [Binary Heap](./DataStructures/Heap/BinaryHeap.cs)
+    * [Fibonacci Heap](./DataStructures/Heap/FibonacciHeaps/FibonacciHeap.cs)
+  * [Queue](./DataStructures/Queue)
     * [Array-based Queue](./DataStructures/Queue/ArrayBasedQueue.cs)
     * [List-based Queue](./DataStructures/Queue/ListBasedQueue.cs)
     * [Stack-based Queue](./DataStructures/Queue/StackBasedQueue.cs)
-  * Linked List
+  * [Linked List](./DataStructures/LinkedList)
     * [Singly Linked List](./DataStructures/LinkedList/SinglyLinkedList/SinglyLinkedList.cs)
     * [Doubly Linked List](./DataStructures/LinkedList/DoublyLinkedList/DoublyLinkedList.cs)
 
