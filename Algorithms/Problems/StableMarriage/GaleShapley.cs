@@ -7,12 +7,12 @@ namespace Algorithms.Problems.StableMarriage
     public static class GaleShapley
     {
         /// <summary>
-        /// Finds a stable matching between two equal sets of elements (fills EngagedTo properties).
-        /// time complexity: O(n^2), where n - array size.
-        /// Guarantees:
-        /// - Everyone is matched
-        /// - Matches are stable (there is no better accepter, for any given proposer, which would accept a new match).
-        /// Presented and proven by David Gale and Lloyd Shapley in 1962.
+        ///     Finds a stable matching between two equal sets of elements (fills EngagedTo properties).
+        ///     time complexity: O(n^2), where n - array size.
+        ///     Guarantees:
+        ///     - Everyone is matched
+        ///     - Matches are stable (there is no better accepter, for any given proposer, which would accept a new match).
+        ///     Presented and proven by David Gale and Lloyd Shapley in 1962.
         /// </summary>
         public static void Match(Proposer[] proposers, Accepter[] accepters)
         {

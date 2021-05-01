@@ -4,15 +4,15 @@ using System.Collections.Generic;
 namespace Algorithms.Sorters.Comparison
 {
     /// <summary>
-    /// Class that implements bogo sort algorithm.
+    ///     Class that implements bogo sort algorithm.
     /// </summary>
     /// <typeparam name="T">Type of array element.</typeparam>
     public class BogoSorter<T> : IComparisonSorter<T>
     {
-        private readonly Random random = new ();
+        private readonly Random random = new();
 
         /// <summary>
-        /// TODO.
+        ///     TODO.
         /// </summary>
         /// <param name="array">TODO. 2.</param>
         /// <param name="comparer">TODO. 3.</param>

@@ -5,55 +5,57 @@ using System.Linq;
 namespace DataStructures.Heap.FibonacciHeap
 {
     /// <summary>
-    /// A generic implementation of a Fibonacci heap.
+    ///     A generic implementation of a Fibonacci heap.
     /// </summary>
     /// <remarks>
-    /// <para>
-    /// A Fibonacci heap is similar to a standard binary heap
-    /// <see cref="DataStructures.Heap.BinaryHeap{T}"/>, however it uses concepts
-    /// of amortized analysis to provide theoretical speedups on common operations like
-    /// insert, union, and decrease-key while maintaining the same speed on all other
-    /// operations.
-    /// </para>
-    /// <para>
-    /// In practice, Fibonacci heaps are more complicated than binary heaps and require
-    /// a large input problems before the benifits of the theoretical speed up
-    /// begin to show.
-    /// </para>
-    /// <para>
-    /// References:
-    /// [1] Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest,
-    /// and Clifford Stein. 2009. Introduction to Algorithms, Third Edition (3rd. ed.).
-    /// The MIT Press.
-    /// </para>
+    ///     <para>
+    ///         A Fibonacci heap is similar to a standard binary heap
+    ///         <see cref="DataStructures.Heap.BinaryHeap{T}" />, however it uses concepts
+    ///         of amortized analysis to provide theoretical speedups on common operations like
+    ///         insert, union, and decrease-key while maintaining the same speed on all other
+    ///         operations.
+    ///     </para>
+    ///     <para>
+    ///         In practice, Fibonacci heaps are more complicated than binary heaps and require
+    ///         a large input problems before the benifits of the theoretical speed up
+    ///         begin to show.
+    ///     </para>
+    ///     <para>
+    ///         References:
+    ///         [1] Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest,
+    ///         and Clifford Stein. 2009. Introduction to Algorithms, Third Edition (3rd. ed.).
+    ///         The MIT Press.
+    ///     </para>
     /// </remarks>
     /// <typeparam name="T">Type of elements in binary heap.</typeparam>
     public class FibonacciHeap<T> where T : IComparable
     {
         /// <summary>
-        /// Gets or sets the count of the number of nodes in the Fibonacci heap.
+        ///     Gets or sets the count of the number of nodes in the Fibonacci heap.
         /// </summary>
         public int Count { get; set; }
 
         /// <summary>
-        /// Gets or sets a reference to the MinItem. The MinItem and all of its siblings
-        /// comprise the root list, a list of trees that satisfy the heap property and
-        /// are joined in a circularly doubly linked list.
+        ///     Gets or sets a reference to the MinItem. The MinItem and all of its siblings
+        ///     comprise the root list, a list of trees that satisfy the heap property and
+        ///     are joined in a circularly doubly linked list.
         /// </summary>
         private FHeapNode<T>? MinItem { get; set; }
 
         /// <summary>
-        /// Add item <c>x</c> to this Fibonacci heap.
+        ///     Add item <c>x</c> to this Fibonacci heap.
         /// </summary>
         /// <remarks>
-        /// To add an item to a Fibonacci heap, we simply add it to the "root list",
-        /// a circularly doubly linked list where our minimum item sits. Since adding
-        /// items to a linked list takes O(1) time, the overall time to perform this
-        /// operation is O(1).
+        ///     To add an item to a Fibonacci heap, we simply add it to the "root list",
+        ///     a circularly doubly linked list where our minimum item sits. Since adding
+        ///     items to a linked list takes O(1) time, the overall time to perform this
+        ///     operation is O(1).
         /// </remarks>
         /// <param name="x">An item to push onto the heap.</param>
-        /// <returns>A reference to the item as it is in the heap. This is used for
-        /// operations like decresing key.</returns>
+        /// <returns>
+        ///     A reference to the item as it is in the heap. This is used for
+        ///     operations like decresing key.
+        /// </returns>
         public FHeapNode<T> Push(T x)
         {
             Count++;
@@ -78,23 +80,22 @@ namespace DataStructures.Heap.FibonacciHeap
         }
 
         /// <summary>
-        /// Combines all the elements of two fibonacci heaps.
+        ///     Combines all the elements of two fibonacci heaps.
         /// </summary>
         /// <remarks>
-        /// To union two Fibonacci heaps is a single fibonacci heap is a single heap
-        /// that contains all the elements of both heaps. This can be done in O(1) time
-        /// by concatenating the root lists together.
-        ///
-        /// For more details on how two circularly linked lists are concatenated, see
-        /// <see cref="FHeapNode{T}.ConcatenateRight"/>
-        ///
-        /// Finally, check to see which of <c>this.MinItem</c> and <c>other.MinItem</c>
-        /// is smaller, and set <c>this.MinItem</c> accordingly
-        ///
-        /// This operation destroys <c>other</c>.
+        ///     To union two Fibonacci heaps is a single fibonacci heap is a single heap
+        ///     that contains all the elements of both heaps. This can be done in O(1) time
+        ///     by concatenating the root lists together.
+        ///     For more details on how two circularly linked lists are concatenated, see
+        ///     <see cref="FHeapNode{T}.ConcatenateRight" />
+        ///     Finally, check to see which of <c>this.MinItem</c> and <c>other.MinItem</c>
+        ///     is smaller, and set <c>this.MinItem</c> accordingly
+        ///     This operation destroys <c>other</c>.
         /// </remarks>
-        /// <param name="other">Another heap whose elements we wish to add to this heap.
-        /// The other heap will be destroyed as a result.</param>
+        /// <param name="other">
+        ///     Another heap whose elements we wish to add to this heap.
+        ///     The other heap will be destroyed as a result.
+        /// </param>
         public void Union(FibonacciHeap<T> other)
         {
             // If there are no items in the other heap, then there is nothing to do.
@@ -133,25 +134,25 @@ namespace DataStructures.Heap.FibonacciHeap
         }
 
         /// <summary>
-        /// Return the MinItem and remove it from the heap.
+        ///     Return the MinItem and remove it from the heap.
         /// </summary>
         /// <remarks>
-        /// This function (with all of its helper functions) is the most complicated
-        /// part of the Fibonacci Heap. However, it can be broken down into a few steps.
-        /// <list type="number">
-        /// <item>
-        /// Add the children of MinItem to the root list. Either one of these children,
-        /// or another of the items in the root list is a candidate to become the new
-        /// MinItem.
-        /// </item>
-        /// <item>
-        /// Remove the MinItem from the root list and appoint a new MinItem temporarily.
-        /// </item>
-        /// <item>
-        /// <see cref="Consolidate"/> what's left
-        /// of the heap.
-        /// </item>
-        /// </list>
+        ///     This function (with all of its helper functions) is the most complicated
+        ///     part of the Fibonacci Heap. However, it can be broken down into a few steps.
+        ///     <list type="number">
+        ///         <item>
+        ///             Add the children of MinItem to the root list. Either one of these children,
+        ///             or another of the items in the root list is a candidate to become the new
+        ///             MinItem.
+        ///         </item>
+        ///         <item>
+        ///             Remove the MinItem from the root list and appoint a new MinItem temporarily.
+        ///         </item>
+        ///         <item>
+        ///             <see cref="Consolidate" /> what's left
+        ///             of the heap.
+        ///         </item>
+        ///     </list>
         /// </remarks>
         /// <returns>The minimum item from the heap.</returns>
         public T Pop()
@@ -199,10 +200,12 @@ namespace DataStructures.Heap.FibonacciHeap
         }
 
         /// <summary>
-        /// A method to see what's on top of the heap without changing its structure.
+        ///     A method to see what's on top of the heap without changing its structure.
         /// </summary>
-        /// <returns>Returns the top element without popping it from the structure of
-        /// the heap.</returns>
+        /// <returns>
+        ///     Returns the top element without popping it from the structure of
+        ///     the heap.
+        /// </returns>
         public T Peek()
         {
             if (MinItem == null)
@@ -214,10 +217,10 @@ namespace DataStructures.Heap.FibonacciHeap
         }
 
         /// <summary>
-        /// Reduce the key of x to be k.
+        ///     Reduce the key of x to be k.
         /// </summary>
         /// <remarks>
-        /// k must be less than x.Key, increasing the key of an item is not supported.
+        ///     k must be less than x.Key, increasing the key of an item is not supported.
         /// </remarks>
         /// <param name="x">The item you want to reduce in value.</param>
         /// <param name="k">The new value for the item.</param>
@@ -253,7 +256,7 @@ namespace DataStructures.Heap.FibonacciHeap
         }
 
         /// <summary>
-        /// Remove x from the child list of y.
+        ///     Remove x from the child list of y.
         /// </summary>
         /// <param name="x">A child of y we just decreased the value of.</param>
         /// <param name="y">The now former parent of x.</param>
@@ -284,7 +287,7 @@ namespace DataStructures.Heap.FibonacciHeap
         }
 
         /// <summary>
-        /// Rebalances the heap after the decrease operation takes place.
+        ///     Rebalances the heap after the decrease operation takes place.
         /// </summary>
         /// <param name="y">An item that may no longer obey the heap property.</param>
         protected void CascadingCut(FHeapNode<T> y)
@@ -305,29 +308,29 @@ namespace DataStructures.Heap.FibonacciHeap
         }
 
         /// <summary>
-        /// <para>
-        /// Consolidate is analogous to Heapify in <see cref="DataStructures.Heap.BinaryHeap{T}"/>.
-        /// </para>
-        /// <para>
-        /// First, an array <c>A</c> [0...D(H.n)] is created where H.n is the number
-        /// of items in this heap, and D(x) is the max degree any node can have in a
-        /// Fibonacci heap with x nodes.
-        /// </para>
-        /// <para>
-        /// For each node <c>x</c> in the root list, try to add it to <c>A[d]</c> where
-        /// d is the degree of <c>x</c>.
-        /// If there is already a node in <c>A[d]</c>, call it <c>y</c>, and make
-        /// <c>y</c> a child of <c>x</c>. (Swap <c>x</c> and <c>y</c> beforehand if
-        /// <c>x</c> is greater than <c>y</c>). Now that <c>x</c> has one more child,
-        /// remove if from <c>A[d]</c> and add it to <c>A[d+1]</c> to reflect that its
-        /// degree is one more. Loop this behavior until we find an empty spot to put
-        /// <c>x</c>.
-        /// </para>
-        /// <para>
-        /// With <c>A</c> all filled, empty the root list of the heap. And add each item
-        /// from <c>A</c> into the root list, one by one, making sure to keep track of
-        /// which is smallest.
-        /// </para>
+        ///     <para>
+        ///         Consolidate is analogous to Heapify in <see cref="DataStructures.Heap.BinaryHeap{T}" />.
+        ///     </para>
+        ///     <para>
+        ///         First, an array <c>A</c> [0...D(H.n)] is created where H.n is the number
+        ///         of items in this heap, and D(x) is the max degree any node can have in a
+        ///         Fibonacci heap with x nodes.
+        ///     </para>
+        ///     <para>
+        ///         For each node <c>x</c> in the root list, try to add it to <c>A[d]</c> where
+        ///         d is the degree of <c>x</c>.
+        ///         If there is already a node in <c>A[d]</c>, call it <c>y</c>, and make
+        ///         <c>y</c> a child of <c>x</c>. (Swap <c>x</c> and <c>y</c> beforehand if
+        ///         <c>x</c> is greater than <c>y</c>). Now that <c>x</c> has one more child,
+        ///         remove if from <c>A[d]</c> and add it to <c>A[d+1]</c> to reflect that its
+        ///         degree is one more. Loop this behavior until we find an empty spot to put
+        ///         <c>x</c>.
+        ///     </para>
+        ///     <para>
+        ///         With <c>A</c> all filled, empty the root list of the heap. And add each item
+        ///         from <c>A</c> into the root list, one by one, making sure to keep track of
+        ///         which is smallest.
+        ///     </para>
         /// </summary>
         protected void Consolidate()
         {
@@ -385,7 +388,7 @@ namespace DataStructures.Heap.FibonacciHeap
         }
 
         /// <summary>
-        /// Reconstructs the heap based on the array of node degrees created by the consolidate step.
+        ///     Reconstructs the heap based on the array of node degrees created by the consolidate step.
         /// </summary>
         /// <param name="a">An array of FHeapNodes where a[i] represents a node of degree i.</param>
         private void ReconstructHeap(FHeapNode<T>?[] a)
@@ -427,7 +430,7 @@ namespace DataStructures.Heap.FibonacciHeap
         }
 
         /// <summary>
-        /// Make y a child of x.
+        ///     Make y a child of x.
         /// </summary>
         /// <param name="y">A node to become the child of x.</param>
         /// <param name="x">A node to become the parent of y.</param>
@@ -439,8 +442,8 @@ namespace DataStructures.Heap.FibonacciHeap
         }
 
         /// <summary>
-        /// A helper function to iterate through all the siblings of this node in the
-        /// circularly doubly linked list.
+        ///     A helper function to iterate through all the siblings of this node in the
+        ///     circularly doubly linked list.
         /// </summary>
         /// <param name="node">A node we want the siblings of.</param>
         /// <returns>An iterator over all of the siblings.</returns>

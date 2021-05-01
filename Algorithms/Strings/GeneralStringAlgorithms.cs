@@ -3,12 +3,12 @@ using System;
 namespace Algorithms.Strings
 {
     /// <summary>
-    /// Implements simple algorithms on strings.
+    ///     Implements simple algorithms on strings.
     /// </summary>
     public static class GeneralStringAlgorithms
     {
         /// <summary>
-        /// Finds character that creates longest consecutive substring with single character.
+        ///     Finds character that creates longest consecutive substring with single character.
         /// </summary>
         /// <param name="input">String to find in.</param>
         /// <returns>Tuple containing char and number of times it appeared in a row.</returns>

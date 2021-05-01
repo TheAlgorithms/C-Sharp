@@ -8,7 +8,8 @@ namespace Algorithms.Tests.Sorters.Integer
     public static class BucketSorterTests
     {
         [Test]
-        public static void ArraySorted([Random(0, 1000, 1000, Distinct = true)]int n)
+        public static void ArraySorted(
+            [Random(0, 1000, 1000, Distinct = true)] int n)
         {
             // Arrange
             var sorter = new BucketSorter();

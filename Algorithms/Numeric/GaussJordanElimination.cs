@@ -3,18 +3,20 @@
 namespace Algorithms.Numeric
 {
     /// <summary>
-    /// TODO.
+    ///     TODO.
     /// </summary>
     public class GaussJordanElimination
     {
         private int RowCount { get; set; }
 
         /// <summary>
-        ///  Method to find a linear equation system using gaussian elimination.
+        ///     Method to find a linear equation system using gaussian elimination.
         /// </summary>
         /// <param name="matrix">The key matrix to solve via algorithm.</param>
-        /// <returns>whether the input matrix has a unique solution or not.
-        /// and solves on the given matrix. </returns>
+        /// <returns>
+        ///     whether the input matrix has a unique solution or not.
+        ///     and solves on the given matrix.
+        /// </returns>
         public bool Solve(double[,] matrix)
         {
             RowCount = matrix.GetUpperBound(0) + 1;
@@ -36,15 +38,17 @@ namespace Algorithms.Numeric
         }
 
         /// <summary>
-        /// To make simple validation of the matrix to be used.
+        ///     To make simple validation of the matrix to be used.
         /// </summary>
         /// <param name="matrix">Multidimensional array matrix.</param>
-        /// <returns>True: if algorithm can be use for given matrix;
-        /// False: Otherwise. </returns>
+        /// <returns>
+        ///     True: if algorithm can be use for given matrix;
+        ///     False: Otherwise.
+        /// </returns>
         private bool CanMatrixBeUsed(double[,] matrix) => matrix?.Length == RowCount * (RowCount + 1) && RowCount > 1;
 
         /// <summary>
-        /// To prepare given matrix by pivoting rows.
+        ///     To prepare given matrix by pivoting rows.
         /// </summary>
         /// <param name="matrix">Input matrix.</param>
         /// <returns>Matrix.</returns>
@@ -96,7 +100,7 @@ namespace Algorithms.Numeric
         }
 
         /// <summary>
-        /// Applies REF.
+        ///     Applies REF.
         /// </summary>
         /// <param name="matrix">Input matrix.</param>
         private void Elimination(ref double[,] matrix)
@@ -117,7 +121,7 @@ namespace Algorithms.Numeric
         }
 
         /// <summary>
-        /// To continue reducing the matrix using RREF.
+        ///     To continue reducing the matrix using RREF.
         /// </summary>
         /// <param name="matrix">Input matrix.</param>
         /// <returns>True if it has a unique solution; false otherwise.</returns>

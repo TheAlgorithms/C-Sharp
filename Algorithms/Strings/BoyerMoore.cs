@@ -3,24 +3,24 @@ using System;
 namespace Algorithms.Strings
 {
     /// <summary>
-    /// The idea:   You compare the pattern with the text from right to left.
-    ///             If the text symbol that is compared with the rightmost pattern symbol
-    ///             does not occur in the pattern at all, then the pattern can be shifted
-    ///             by m positions behind this text symbol.
-    /// Complexity:
+    ///     The idea:   You compare the pattern with the text from right to left.
+    ///     If the text symbol that is compared with the rightmost pattern symbol
+    ///     does not occur in the pattern at all, then the pattern can be shifted
+    ///     by m positions behind this text symbol.
+    ///     Complexity:
     ///     Time:   Preprocessing: O(m²)
-    ///             Comparison: O(mn)
+    ///     Comparison: O(mn)
     ///     Space:  O(m + a)
     ///     where   m - pattern length
-    ///             n - text length
-    ///             a - alphabet length.
-    /// Source:     https://www.inf.hs-flensburg.de/lang/algorithmen/pattern/bmen.htm
-    ///             https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string-search_algorithm.
+    ///     n - text length
+    ///     a - alphabet length.
+    ///     Source:     https://www.inf.hs-flensburg.de/lang/algorithmen/pattern/bmen.htm
+    ///     https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string-search_algorithm.
     /// </summary>
     public static class BoyerMoore
     {
         /// <summary>
-        /// Finds the index of the first occurrence of the pattern <c>p</c> in <c>t</c>.
+        ///     Finds the index of the first occurrence of the pattern <c>p</c> in <c>t</c>.
         /// </summary>
         /// <param name="t">Input text.</param>
         /// <param name="p">Search pattern.</param>
@@ -74,8 +74,8 @@ namespace Algorithms.Strings
         }
 
         /// <summary>
-        /// Finds out the position of its rightmost occurrence in the pattern for each symbol of the alphabet,
-        /// or -1 if the symbol does not occur in the pattern.
+        ///     Finds out the position of its rightmost occurrence in the pattern for each symbol of the alphabet,
+        ///     or -1 if the symbol does not occur in the pattern.
         /// </summary>
         /// <param name="p">Search pattern.</param>
         /// <param name="m">Length of the pattern.</param>
@@ -84,7 +84,7 @@ namespace Algorithms.Strings
         {
             // For each character (note that there are more than 256 characters)
             int[] badChar = new int[256];
-            Array.Fill<int>(badChar, -1);
+            Array.Fill(badChar, -1);
 
             // Iterate from left to right over the pattern
             for (var j = 0; j < m; j++)
@@ -96,8 +96,8 @@ namespace Algorithms.Strings
         }
 
         /// <summary>
-        /// Finds out the shift distance of the pattern if a mismatch at position i – 1 occurs
-        /// for each character of the pattern, i.e. if the suffix of the pattern starting at position i has matched.
+        ///     Finds out the shift distance of the pattern if a mismatch at position i – 1 occurs
+        ///     for each character of the pattern, i.e. if the suffix of the pattern starting at position i has matched.
         /// </summary>
         /// <param name="p">Search pattern.</param>
         /// <param name="m">Length of the pattern.</param>

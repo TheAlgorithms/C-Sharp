@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace DataStructures.Tests.Heap.FibonacciHeaps
 {
-    class TestFHeap : FibonacciHeap<int>
+    internal class TestFHeap : FibonacciHeap<int>
     {
         public void RawCut(FHeapNode<int> x, FHeapNode<int> y)
         {
@@ -22,7 +22,7 @@ namespace DataStructures.Tests.Heap.FibonacciHeaps
         }
     }
 
-    static class FibonacciHeapTests
+    internal static class FibonacciHeapTests
     {
         private static FibonacciHeap<int> BuildTestHeap()
         {

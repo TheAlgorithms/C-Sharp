@@ -4,20 +4,20 @@ using System.Numerics;
 namespace Algorithms.Sequences
 {
     /// <summary>
-    /// <para>
-    ///     Sequence of binomial coefficients.
-    /// </para>
-    /// <para>
-    ///     Wikipedia: https://en.wikipedia.org/wiki/Binomial_coefficient.
-    /// </para>
-    /// <para>
-    ///     OEIS: http://oeis.org/A007318.
-    /// </para>
+    ///     <para>
+    ///         Sequence of binomial coefficients.
+    ///     </para>
+    ///     <para>
+    ///         Wikipedia: https://en.wikipedia.org/wiki/Binomial_coefficient.
+    ///     </para>
+    ///     <para>
+    ///         OEIS: http://oeis.org/A007318.
+    ///     </para>
     /// </summary>
     public class BinomialSequence : ISequence
     {
         /// <summary>
-        /// Gets sequence of binomial coefficients.
+        ///     Gets sequence of binomial coefficients.
         /// </summary>
         public IEnumerable<BigInteger> Sequence
         {
