@@ -3,14 +3,14 @@
 namespace Algorithms.Numeric
 {
     /// <summary>
-    /// In number theory, a perfect number is a positive integer that is equal to the sum of its positive
-    /// divisors, excluding the number itself.For instance, 6 has divisors 1, 2 and 3 (excluding
-    /// itself), and 1 + 2 + 3 = 6, so 6 is a perfect number.
+    ///     In number theory, a perfect number is a positive integer that is equal to the sum of its positive
+    ///     divisors, excluding the number itself.For instance, 6 has divisors 1, 2 and 3 (excluding
+    ///     itself), and 1 + 2 + 3 = 6, so 6 is a perfect number.
     /// </summary>
     public static class PerfectNumberChecker
     {
         /// <summary>
-        /// Checks if a number is a perfect number or not.
+        ///     Checks if a number is a perfect number or not.
         /// </summary>
         /// <param name="number">Number to check.</param>
         /// <returns>True if is a perfect number; False otherwise.</returns>

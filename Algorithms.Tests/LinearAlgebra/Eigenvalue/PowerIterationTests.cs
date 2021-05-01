@@ -14,14 +14,14 @@ namespace Algorithms.Tests.LinearAlgebra.Eigenvalue
             {
                 3.0,
                 new[] { 0.7071039, 0.70710966 },
-                new[,] { { 2.0, 1.0 }, { 1.0, 2.0 } }
+                new[,] { { 2.0, 1.0 }, { 1.0, 2.0 } },
             },
             new object[]
             {
                 4.235889,
                 new[] { 0.91287093, 0.40824829 },
-                new[,] { { 2.0, 5.0 }, { 1.0, 2.0 } }
-            }
+                new[,] { { 2.0, 5.0 }, { 1.0, 2.0 } },
+            },
         };
 
         private readonly double epsilon = Math.Pow(10, -5);
@@ -56,19 +56,19 @@ namespace Algorithms.Tests.LinearAlgebra.Eigenvalue
 
         [TestCaseSource(nameof(DominantVectorTestCases))]
         public void Dominant_ShouldCalculateDominantEigenvalueAndEigenvector(
-            double eigenvalue, double[] eigenvector, double[,] source)
+            double eigenvalue,
+            double[] eigenvector,
+            double[,] source)
         {
             // Act
-            var (actualEigVal, actualEigVec) = PowerIteration.Dominant(source, StartVector(source.GetLength(0)), epsilon);
+            var (actualEigVal, actualEigVec) =
+                PowerIteration.Dominant(source, StartVector(source.GetLength(0)), epsilon);
 
             // Assert
             actualEigVal.Should().BeApproximately(eigenvalue, epsilon);
             actualEigVec.Magnitude().Should().BeApproximately(eigenvector.Magnitude(), epsilon);
         }
 
-        private double[] StartVector(int length)
-        {
-            return new Random(111111).NextVector(length);
-        }
+        private double[] StartVector(int length) => new Random(111111).NextVector(length);
     }
 }

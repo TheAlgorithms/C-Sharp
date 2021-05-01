@@ -4,15 +4,15 @@ using Utilities.Exceptions;
 namespace Algorithms.Search
 {
     /// <summary>
-    /// Class that implements linear search algorithm.
+    ///     Class that implements linear search algorithm.
     /// </summary>
     /// <typeparam name="T">Type of array element.</typeparam>
     public class LinearSearcher<T>
     {
         /// <summary>
-        /// Finds first item in array that satisfies specified term
-        /// Time complexity: O(n)
-        /// Space complexity: O(1).
+        ///     Finds first item in array that satisfies specified term
+        ///     Time complexity: O(n)
+        ///     Space complexity: O(1).
         /// </summary>
         /// <param name="data">Array to search in.</param>
         /// <param name="term">Term to check against.</param>
@@ -31,9 +31,9 @@ namespace Algorithms.Search
         }
 
         /// <summary>
-        /// Finds index of first item in array that satisfies specified term
-        /// Time complexity: O(n)
-        /// Space complexity: O(1).
+        ///     Finds index of first item in array that satisfies specified term
+        ///     Time complexity: O(n)
+        ///     Space complexity: O(1).
         /// </summary>
         /// <param name="data">Array to search in.</param>
         /// <param name="term">Term to check against.</param>

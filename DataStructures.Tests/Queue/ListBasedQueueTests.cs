@@ -24,7 +24,7 @@ namespace DataStructures.Tests.Queue
             }
 
             // Assert
-            Assert.AreEqual(expected: "ABC", actual: result.ToString());
+            Assert.AreEqual("ABC", result.ToString());
             Assert.IsTrue(q.IsEmpty(), "Queue is empty");
             Assert.IsFalse(q.IsFull(), "Queue is full");
         }
@@ -45,7 +45,7 @@ namespace DataStructures.Tests.Queue
             }
 
             // Assert
-            Assert.AreEqual(expected: 1, actual: peeked);
+            Assert.AreEqual(1, peeked);
             Assert.IsFalse(q.IsEmpty(), "Queue is empty");
             Assert.IsFalse(q.IsFull(), "Queue is full");
         }
@@ -68,7 +68,7 @@ namespace DataStructures.Tests.Queue
             }
 
             // Assert
-            Assert.AreEqual(expected: typeof(InvalidOperationException), actual: exception?.GetType());
+            Assert.AreEqual(typeof(InvalidOperationException), exception?.GetType());
         }
 
         [Test]
@@ -89,7 +89,7 @@ namespace DataStructures.Tests.Queue
             }
 
             // Assert
-            Assert.AreEqual(expected: typeof(InvalidOperationException), actual: exception?.GetType());
+            Assert.AreEqual(typeof(InvalidOperationException), exception?.GetType());
         }
 
         [Test]

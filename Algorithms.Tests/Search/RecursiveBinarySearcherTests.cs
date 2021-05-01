@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Algorithms.Search;
-
+using FluentAssertions;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 
@@ -28,12 +27,17 @@ namespace Algorithms.Tests.Search
         }
 
         [Test]
-        public static void FindIndex_ItemMissing_MinusOneReturned([Random(0, 1000, 10)] int n, [Random(-100, 1100, 10)] int missingItem)
+        public static void FindIndex_ItemMissing_MinusOneReturned(
+            [Random(0, 1000, 10)] int n,
+            [Random(-100, 1100, 10)] int missingItem)
         {
             // Arrange
             var subject = new RecursiveBinarySearcher<int>();
             var random = Randomizer.CreateRandomizer();
-            var collection = Enumerable.Range(0, n).Select(x => random.Next(0, 1000)).Where(x => x != missingItem).OrderBy(x => x).ToList();
+            var collection = Enumerable.Range(0, n)
+                .Select(x => random.Next(0, 1000))
+                .Where(x => x != missingItem)
+                .OrderBy(x => x).ToList();
 
             // Act
             var actualIndex = subject.FindIndex(collection, missingItem);
@@ -64,13 +68,10 @@ namespace Algorithms.Tests.Search
             var collection = (IList<int>?)null;
 
             // Act
-            TestDelegate actDelegate = () =>
-            {
-                subject.FindIndex(collection, 42);
-            };
+            Action act = () => subject.FindIndex(collection, 42);
 
             // Assert
-            Assert.Throws<ArgumentNullException>(actDelegate, "collection");
+            act.Should().Throw<ArgumentNullException>();
         }
     }
 }

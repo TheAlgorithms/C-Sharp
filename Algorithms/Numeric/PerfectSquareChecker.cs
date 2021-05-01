@@ -3,12 +3,12 @@
 namespace Algorithms.Numeric
 {
     /// <summary>
-    /// A perfect square is an element of algebraic structure that is equal to the square of another element.
+    ///     A perfect square is an element of algebraic structure that is equal to the square of another element.
     /// </summary>
     public static class PerfectSquareChecker
     {
         /// <summary>
-        /// Checks if a number is a perfect square or not.
+        ///     Checks if a number is a perfect square or not.
         /// </summary>
         /// <param name="number">Number too check.</param>
         /// <returns>True if is a perfect square; False otherwise.</returns>

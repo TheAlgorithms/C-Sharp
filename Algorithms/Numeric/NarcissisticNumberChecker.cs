@@ -3,13 +3,13 @@
 namespace Algorithms.Numeric
 {
     /// <summary>
-    /// A Narcissistic number is equal to the sum of the cubes of its digits. For example, 370 is a
-    /// Narcissistic number because 3*3*3 + 7*7*7 + 0*0*0 = 370.
+    ///     A Narcissistic number is equal to the sum of the cubes of its digits. For example, 370 is a
+    ///     Narcissistic number because 3*3*3 + 7*7*7 + 0*0*0 = 370.
     /// </summary>
     public static class NarcissisticNumberChecker
     {
         /// <summary>
-        /// Checks if a number is a Narcissistic number or not.
+        ///     Checks if a number is a Narcissistic number or not.
         /// </summary>
         /// <param name="number">Number to check.</param>
         /// <returns>True if is a Narcissistic number; False otherwise.</returns>

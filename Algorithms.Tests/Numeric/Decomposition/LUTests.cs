@@ -109,7 +109,10 @@ namespace Algorithms.Tests.Numeric.Decomposition
             // Arrange
             var source = new[,]
             {
-                { 1.0, 2.0, -3.0, -1.0 }, { 0.0, -3.0, 2.0, 6.0 }, { 0.0, 5.0, -6.0, -2.0 }, { 0.0, -1.0, 8.0, 1.0 }
+                { 1.0, 2.0, -3.0, -1.0 },
+                { 0.0, -3.0, 2.0, 6.0 },
+                { 0.0, 5.0, -6.0, -2.0 },
+                { 0.0, -1.0, 8.0, 1.0 },
             };
             var coefficients = new[] { 0.0, -8.0, 0.0, -8.0 };
             var expectedSolution = new[] { -1.0, -2.0, -1.0, -2.0 };
@@ -137,7 +140,7 @@ namespace Algorithms.Tests.Numeric.Decomposition
 
         private bool VectorMembersAreEqual(double[] expected, double[] actual) =>
             expected
-            .Zip(actual, (e, a) => new {Expected = e, Actual = a})
-            .All(pair => Math.Abs(pair.Expected - pair.Actual) < epsilon);
+                .Zip(actual, (e, a) => new { Expected = e, Actual = a })
+                .All(pair => Math.Abs(pair.Expected - pair.Actual) < epsilon);
     }
 }

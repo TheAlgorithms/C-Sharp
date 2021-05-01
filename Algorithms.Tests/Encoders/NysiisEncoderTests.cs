@@ -10,13 +10,13 @@ namespace Algorithms.Tests.Encoders
         private static readonly string[] _names =
         {
             "Jay", "John", "Jane", "Zayne", "Guerra", "Iga", "Cowan", "Louisa", "Arnie", "Olsen", "Corban", "Nava",
-            "Cynthia Malone", "Amiee MacKee", "MacGyver", "Yasmin Edge"
+            "Cynthia Malone", "Amiee MacKee", "MacGyver", "Yasmin Edge",
         };
 
         private static readonly string[] _expected =
         {
             "JY", "JAN", "JAN", "ZAYN", "GAR", "IG", "CAN", "LAS", "ARNY", "OLSAN", "CARBAN", "NAV", "CYNTANALAN",
-            "ANANACY", "MCGYVAR", "YASNANADG"
+            "ANANACY", "MCGYVAR", "YASNANADG",
         };
 
         private static IEnumerable<string[]> TestData => _names.Zip(_expected, (l, r) => new[] { l, r });

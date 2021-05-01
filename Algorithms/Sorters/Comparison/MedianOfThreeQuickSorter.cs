@@ -3,7 +3,7 @@
 namespace Algorithms.Sorters.Comparison
 {
     /// <summary>
-    /// Sorts arrays using quicksort (selecting median of three as a pivot).
+    ///     Sorts arrays using quicksort (selecting median of three as a pivot).
     /// </summary>
     /// <typeparam name="T">Type of array element.</typeparam>
     public sealed class MedianOfThreeQuickSorter<T> : QuickSorter<T>

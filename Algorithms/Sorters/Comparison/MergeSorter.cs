@@ -4,23 +4,23 @@ using System.Linq;
 namespace Algorithms.Sorters.Comparison
 {
     /// <summary>
-    /// Divide and Conquer algorithm, which splits
-    /// array in two halves, calls itself for the two
-    /// halves and then merges the two sorted halves.
+    ///     Divide and Conquer algorithm, which splits
+    ///     array in two halves, calls itself for the two
+    ///     halves and then merges the two sorted halves.
     /// </summary>
     /// <typeparam name="T">Type of array elements.</typeparam>
     public class MergeSorter<T> : IComparisonSorter<T>
     {
         /// <summary>
-        /// Sorts array using merge sort algorithm,
-        /// originally designed as external sorting algorithm,
-        /// internal, stable,
-        /// time complexity: O(n log(n)),
-        /// space complexity: O(n),
-        /// where n - array length.
+        ///     Sorts array using merge sort algorithm,
+        ///     originally designed as external sorting algorithm,
+        ///     internal, stable,
+        ///     time complexity: O(n log(n)),
+        ///     space complexity: O(n),
+        ///     where n - array length.
         /// </summary>
         /// <param name="array">Array to sort.</param>
-        /// <param name="comparer">Comparer to compare elements of <paramref name="array"/>.</param>
+        /// <param name="comparer">Comparer to compare elements of <paramref name="array" />.</param>
         public void Sort(T[] array, IComparer<T> comparer)
         {
             if (array.Length <= 1)

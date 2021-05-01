@@ -3,12 +3,12 @@ using System.Text;
 namespace Algorithms.Other
 {
     /// <summary>
-    /// Manually converts an integer of certain size to a string of the binary representation.
+    ///     Manually converts an integer of certain size to a string of the binary representation.
     /// </summary>
     public static class Int2Binary
     {
         /// <summary>
-        /// Returns string of the binary representation of given Int.
+        ///     Returns string of the binary representation of given Int.
         /// </summary>
         /// <param name="input">Number to be converted.</param>
         /// <returns>Binary representation of input.</returns>
@@ -35,7 +35,7 @@ namespace Algorithms.Other
         }
 
         /// <summary>
-        /// Returns string of the binary representation of given Int.
+        ///     Returns string of the binary representation of given Int.
         /// </summary>
         /// <param name="input">Number to be converted.</param>
         /// <returns>Binary representation of input.</returns>
@@ -62,7 +62,7 @@ namespace Algorithms.Other
         }
 
         /// <summary>
-        /// Returns string of the binary representation of given Int.
+        ///     Returns string of the binary representation of given Int.
         /// </summary>
         /// <param name="input">Number to be converted.</param>
         /// <returns>Binary representation of input.</returns>

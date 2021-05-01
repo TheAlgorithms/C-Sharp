@@ -4,12 +4,12 @@ using System.Linq;
 namespace Algorithms.Encoders
 {
     /// <summary>
-    /// Class for Soundex encoding strings.
+    ///     Class for Soundex encoding strings.
     /// </summary>
     public class SoundexEncoder
     {
         /// <summary>
-        /// Encodes a string using the Soundex Algorithm.
+        ///     Encodes a string using the Soundex Algorithm.
         /// </summary>
         /// <param name="text">The string to encode.</param>
         /// <returns>The Soundex encoded string (one uppercase character and three digits).</returns>

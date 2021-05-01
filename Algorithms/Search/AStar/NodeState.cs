@@ -6,17 +6,17 @@
     public enum NodeState
     {
         /// <summary>
-        /// TODO.
+        ///     TODO.
         /// </summary>
         Unconsidered = 0,
 
         /// <summary>
-        /// TODO.
+        ///     TODO.
         /// </summary>
         Open = 1,
 
         /// <summary>
-        /// TODO.
+        ///     TODO.
         /// </summary>
         Closed = 2,
     }

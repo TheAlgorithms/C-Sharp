@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
 using DataStructures.Heap;
+using NUnit.Framework;
 
 namespace DataStructures.Tests.Heap
 {
     [TestFixture]
     public static class MinMaxHeapTests
     {
-        private static readonly object[] CollectionsSource = new object[]
+        private static readonly object[] CollectionsSource =
         {
             new[] { 5, 10, -2, 0, 3, 13, 5, -8, 41, -5, -7, -60, -12 },
             new[] { 'e', '4', 'x', 'D', '!', '$', '-', '_', '2', ')', 'Z', 'q' },
-            new[] { "abc", "abc", "xyz", "bcd", "klm", "opq", "ijk" }
+            new[] { "abc", "abc", "xyz", "bcd", "klm", "opq", "ijk" },
         };
 
 
@@ -114,7 +114,9 @@ namespace DataStructures.Tests.Heap
         }
 
         [Test]
-        public static void HeapSortUsingGet<T>([ValueSource("CollectionsSource")]IEnumerable<T> collection, [Values]bool ascending)
+        public static void HeapSortUsingGet<T>(
+            [ValueSource("CollectionsSource")] IEnumerable<T> collection,
+            [Values] bool ascending)
         {
             var ordered = ascending ? collection.OrderBy(x => x) : collection.OrderByDescending(x => x);
             var mmh = new MinMaxHeap<T>(collection);
@@ -141,7 +143,9 @@ namespace DataStructures.Tests.Heap
         }
 
         [Test]
-        public static void HeapSortUsingExtract<T>([ValueSource("CollectionsSource")]IEnumerable<T> collection, [Values]bool ascending)
+        public static void HeapSortUsingExtract<T>(
+            [ValueSource("CollectionsSource")] IEnumerable<T> collection,
+            [Values] bool ascending)
         {
             var ordered = ascending ? collection.OrderBy(x => x) : collection.OrderByDescending(x => x);
             var mmh = new MinMaxHeap<T>(collection);

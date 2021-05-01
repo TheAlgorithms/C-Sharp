@@ -3,26 +3,28 @@
 namespace Algorithms.Other
 {
     /// <summary>
-    /// Luhn algorithm is a simple
-    /// checksum formula used to validate
-    /// a variety of identification numbers,
-    /// such as credit card numbers.
-    /// More information on the link:
-    /// https://en.wikipedia.org/wiki/Luhn_algorithm.
+    ///     Luhn algorithm is a simple
+    ///     checksum formula used to validate
+    ///     a variety of identification numbers,
+    ///     such as credit card numbers.
+    ///     More information on the link:
+    ///     https://en.wikipedia.org/wiki/Luhn_algorithm.
     /// </summary>
     public static class Luhn
     {
         /// <summary>
-        /// Checking the validity of a sequence of numbers.
+        ///     Checking the validity of a sequence of numbers.
         /// </summary>
         /// <param name="number">The number that will be checked for validity.</param>
-        /// <returns>True: Number is valid.
-        /// False: Number isn`t valid.</returns>
+        /// <returns>
+        ///     True: Number is valid.
+        ///     False: Number isn`t valid.
+        /// </returns>
         public static bool Validate(string number) => GetSum(number) % 10 == 0;
 
         /// <summary>
-        /// This algorithm only finds one number.
-        /// In place of the unknown digit, put "x".
+        ///     This algorithm only finds one number.
+        ///     In place of the unknown digit, put "x".
         /// </summary>
         /// <param name="number">The number in which to find the missing digit.</param>
         /// <returns>Missing digit.</returns>
@@ -45,7 +47,7 @@ namespace Algorithms.Other
         }
 
         /// <summary>
-        /// Computes the sum found by the algorithm.
+        ///     Computes the sum found by the algorithm.
         /// </summary>
         /// <param name="number">The number for which the sum will be found.</param>
         /// <returns>Sum.</returns>
