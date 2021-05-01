@@ -10,10 +10,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
         ///     Initializes a new instance of the <see cref="DoublyLinkedListNode{T}" /> class.
         /// </summary>
         /// <param name="data">Data to be stored in this node.</param>
-        public DoublyLinkedListNode(T data)
-        {
-            Data = data;
-        }
+        public DoublyLinkedListNode(T data) => Data = data;
 
         /// <summary>
         ///     Gets the data stored on this node.

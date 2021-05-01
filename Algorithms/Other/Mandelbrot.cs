@@ -4,32 +4,32 @@ using System.Drawing;
 namespace Algorithms.Other
 {
     /// <summary>
-    /// The Mandelbrot set is the set of complex numbers "c" for which the series
-    /// "z_(n+1) = z_n * z_n + c" does not diverge, i.e. remains bounded. Thus, a
-    /// complex number "c" is a member of the Mandelbrot set if, when starting with
-    /// "z_0 = 0" and applying the iteration repeatedly, the absolute value of
-    /// "z_n" remains bounded for all "n > 0". Complex numbers can be written as
-    /// "a + b*i": "a" is the real component, usually drawn on the x-axis, and "b*i"
-    /// is the imaginary component, usually drawn on the y-axis. Most visualizations
-    /// of the Mandelbrot set use a color-coding to indicate after how many steps in
-    /// the series the numbers outside the set cross the divergence threshold.
-    /// Images of the Mandelbrot set exhibit an elaborate and infinitely
-    /// complicated boundary that reveals progressively ever-finer recursive detail
-    /// at increasing magnifications, making the boundary of the Mandelbrot set a
-    /// fractal curve.
-    /// (description adapted from https://en.wikipedia.org/wiki/Mandelbrot_set)
-    /// (see also https://en.wikipedia.org/wiki/Plotting_algorithms_for_the_Mandelbrot_set).
+    ///     The Mandelbrot set is the set of complex numbers "c" for which the series
+    ///     "z_(n+1) = z_n * z_n + c" does not diverge, i.e. remains bounded. Thus, a
+    ///     complex number "c" is a member of the Mandelbrot set if, when starting with
+    ///     "z_0 = 0" and applying the iteration repeatedly, the absolute value of
+    ///     "z_n" remains bounded for all "n > 0". Complex numbers can be written as
+    ///     "a + b*i": "a" is the real component, usually drawn on the x-axis, and "b*i"
+    ///     is the imaginary component, usually drawn on the y-axis. Most visualizations
+    ///     of the Mandelbrot set use a color-coding to indicate after how many steps in
+    ///     the series the numbers outside the set cross the divergence threshold.
+    ///     Images of the Mandelbrot set exhibit an elaborate and infinitely
+    ///     complicated boundary that reveals progressively ever-finer recursive detail
+    ///     at increasing magnifications, making the boundary of the Mandelbrot set a
+    ///     fractal curve.
+    ///     (description adapted from https://en.wikipedia.org/wiki/Mandelbrot_set)
+    ///     (see also https://en.wikipedia.org/wiki/Plotting_algorithms_for_the_Mandelbrot_set).
     /// </summary>
     public static class Mandelbrot
     {
         /// <summary>
-        /// Method to generate the bitmap of the Mandelbrot set. Two types of coordinates
-        /// are used: bitmap-coordinates that refer to the pixels and figure-coordinates
-        /// that refer to the complex numbers inside and outside the Mandelbrot set. The
-        /// figure-coordinates in the arguments of this method determine which section
-        /// of the Mandelbrot set is viewed. The main area of the Mandelbrot set is
-        /// roughly between "-1.5 &lt; x &lt; 0.5" and "-1 &lt; y &lt; 1" in the figure-coordinates.
-        /// To save the bitmap the command 'GetBitmap().Save("Mandelbrot.png")' can be used.
+        ///     Method to generate the bitmap of the Mandelbrot set. Two types of coordinates
+        ///     are used: bitmap-coordinates that refer to the pixels and figure-coordinates
+        ///     that refer to the complex numbers inside and outside the Mandelbrot set. The
+        ///     figure-coordinates in the arguments of this method determine which section
+        ///     of the Mandelbrot set is viewed. The main area of the Mandelbrot set is
+        ///     roughly between "-1.5 &lt; x &lt; 0.5" and "-1 &lt; y &lt; 1" in the figure-coordinates.
+        ///     To save the bitmap the command 'GetBitmap().Save("Mandelbrot.png")' can be used.
         /// </summary>
         /// <param name="bitmapWidth">The width of the rendered bitmap.</param>
         /// <param name="bitmapHeight">The height of the rendered bitmap.</param>
@@ -50,17 +50,23 @@ namespace Algorithms.Other
         {
             if (bitmapWidth <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(bitmapWidth), $"{nameof(bitmapWidth)} should be greater than zero");
+                throw new ArgumentOutOfRangeException(
+                    nameof(bitmapWidth),
+                    $"{nameof(bitmapWidth)} should be greater than zero");
             }
 
             if (bitmapHeight <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(bitmapHeight), $"{nameof(bitmapHeight)} should be greater than zero");
+                throw new ArgumentOutOfRangeException(
+                    nameof(bitmapHeight),
+                    $"{nameof(bitmapHeight)} should be greater than zero");
             }
 
             if (maxStep <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(maxStep), $"{nameof(maxStep)} should be greater than zero");
+                throw new ArgumentOutOfRangeException(
+                    nameof(maxStep),
+                    $"{nameof(maxStep)} should be greater than zero");
             }
 
             var bitmap = new Bitmap(bitmapWidth, bitmapHeight);
@@ -89,21 +95,19 @@ namespace Algorithms.Other
         }
 
         /// <summary>
-        /// Black and white color-coding that ignores the relative distance. The Mandelbrot
-        /// set is black, everything else is white.
+        ///     Black and white color-coding that ignores the relative distance. The Mandelbrot
+        ///     set is black, everything else is white.
         /// </summary>
         /// <param name="distance">Distance until divergence threshold.</param>
         /// <returns>The color corresponding to the distance.</returns>
-        private static Color BlackAndWhiteColorMap(double distance)
-        {
-            return distance >= 1
+        private static Color BlackAndWhiteColorMap(double distance) =>
+            distance >= 1
                 ? Color.FromArgb(255, 0, 0, 0)
                 : Color.FromArgb(255, 255, 255, 255);
-        }
 
         /// <summary>
-        /// Color-coding taking the relative distance into account. The Mandelbrot set
-        /// is black.
+        ///     Color-coding taking the relative distance into account. The Mandelbrot set
+        ///     is black.
         /// </summary>
         /// <param name="distance">Distance until divergence threshold.</param>
         /// <returns>The color corresponding to the distance.</returns>
@@ -139,9 +143,9 @@ namespace Algorithms.Other
         }
 
         /// <summary>
-        /// Return the relative distance (ratio of steps taken to maxStep) after which the complex number
-        /// constituted by this x-y-pair diverges. Members of the Mandelbrot set do not
-        /// diverge so their distance is 1.
+        ///     Return the relative distance (ratio of steps taken to maxStep) after which the complex number
+        ///     constituted by this x-y-pair diverges. Members of the Mandelbrot set do not
+        ///     diverge so their distance is 1.
         /// </summary>
         /// <param name="figureX">The x-coordinate within the figure.</param>
         /// <param name="figureY">The y-coordinate within the figure.</param>

@@ -7,7 +7,7 @@ using Utilities.Extensions;
 namespace Algorithms.DataCompression
 {
     /// <summary>
-    /// Greedy lossless compression algorithm.
+    ///     Greedy lossless compression algorithm.
     /// </summary>
     public class HuffmanCompressor
     {
@@ -22,8 +22,8 @@ namespace Algorithms.DataCompression
         }
 
         /// <summary>
-        /// Given an input string, returns a new compressed string
-        /// using huffman encoding.
+        ///     Given an input string, returns a new compressed string
+        ///     using huffman encoding.
         /// </summary>
         /// <param name="uncompressedText">Text message to compress.</param>
         /// <returns>Compressed string and keys to decompress it.</returns>
@@ -50,7 +50,7 @@ namespace Algorithms.DataCompression
         }
 
         /// <summary>
-        /// Finds frequency for each character in the text.
+        ///     Finds frequency for each character in the text.
         /// </summary>
         /// <returns>Symbol-frequency array.</returns>
         private static ListNode[] GetListNodesFromText(string text)
@@ -70,7 +70,8 @@ namespace Algorithms.DataCompression
             return occurenceCounts.Select(kvp => new ListNode(kvp.Key, 1d * kvp.Value / text.Length)).ToArray();
         }
 
-        private (Dictionary<string, string> compressionKeys, Dictionary<string, string> decompressionKeys) GetKeys(ListNode tree)
+        private (Dictionary<string, string> compressionKeys, Dictionary<string, string> decompressionKeys) GetKeys(
+            ListNode tree)
         {
             var compressionKeys = new Dictionary<string, string>();
             var decompressionKeys = new Dictionary<string, string>();
@@ -121,7 +122,7 @@ namespace Algorithms.DataCompression
         }
 
         /// <summary>
-        /// Represents tree structure for the algorithm.
+        ///     Represents tree structure for the algorithm.
         /// </summary>
         public class ListNode
         {

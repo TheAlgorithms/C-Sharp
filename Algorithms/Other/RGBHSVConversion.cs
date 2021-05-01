@@ -3,19 +3,20 @@
 namespace Algorithms.Other
 {
     /// <summary>
-    /// The RGB color model is an additive color model in which red, green, and
-    /// blue light are added together in various ways to reproduce a broad array of
-    /// colors. The name of the model comes from the initials of the three additive
-    /// primary colors, red, green, and blue. Meanwhile, the HSV representation
-    /// models how colors appear under light. In it, colors are represented using
-    /// three components: hue, saturation and (brightness-)value. This class
-    /// provides methods for converting colors from one representation to the other.
-    /// (description adapted from https://en.wikipedia.org/wiki/RGB_color_model and https://en.wikipedia.org/wiki/HSL_and_HSV).
+    ///     The RGB color model is an additive color model in which red, green, and
+    ///     blue light are added together in various ways to reproduce a broad array of
+    ///     colors. The name of the model comes from the initials of the three additive
+    ///     primary colors, red, green, and blue. Meanwhile, the HSV representation
+    ///     models how colors appear under light. In it, colors are represented using
+    ///     three components: hue, saturation and (brightness-)value. This class
+    ///     provides methods for converting colors from one representation to the other.
+    ///     (description adapted from https://en.wikipedia.org/wiki/RGB_color_model and
+    ///     https://en.wikipedia.org/wiki/HSL_and_HSV).
     /// </summary>
     public static class RgbHsvConversion
     {
         /// <summary>
-        /// Conversion from the HSV-representation to the RGB-representation.
+        ///     Conversion from the HSV-representation to the RGB-representation.
         /// </summary>
         /// <param name="hue">Hue of the color.</param>
         /// <param name="saturation">Saturation of the color.</param>
@@ -33,7 +34,9 @@ namespace Algorithms.Other
 
             if (saturation < 0 || saturation > 1)
             {
-                throw new ArgumentOutOfRangeException(nameof(saturation), $"{nameof(saturation)} should be between 0 and 1");
+                throw new ArgumentOutOfRangeException(
+                    nameof(saturation),
+                    $"{nameof(saturation)} should be between 0 and 1");
             }
 
             if (value < 0 || value > 1)
@@ -50,7 +53,7 @@ namespace Algorithms.Other
         }
 
         /// <summary>
-        /// Conversion from the RGB-representation to the HSV-representation.
+        ///     Conversion from the RGB-representation to the HSV-representation.
         /// </summary>
         /// <param name="red">Red-component of the color.</param>
         /// <param name="green">Green-component of the color.</param>
@@ -91,7 +94,11 @@ namespace Algorithms.Other
             return (hue, saturation, value);
         }
 
-        private static (byte red, byte green, byte blue) GetRgbBySection(double hueSection, double chroma, double matchValue, double secondLargestComponent)
+        private static (byte red, byte green, byte blue) GetRgbBySection(
+            double hueSection,
+            double chroma,
+            double matchValue,
+            double secondLargestComponent)
         {
             byte red;
             byte green;
@@ -137,9 +144,6 @@ namespace Algorithms.Other
             return (red, green, blue);
         }
 
-        private static byte ConvertToByte(double input)
-        {
-            return (byte)Math.Round(255 * input);
-        }
+        private static byte ConvertToByte(double input) => (byte)Math.Round(255 * input);
     }
 }

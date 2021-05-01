@@ -114,7 +114,8 @@ namespace Algorithms.Search.AStar
                 if (connected.State == NodeState.Unconsidered)
                 {
                     connected.Parent = current;
-                    connected.CurrentCost = current.CurrentCost + current.DistanceTo(connected) * connected.TraversalCostMultiplier;
+                    connected.CurrentCost =
+                        current.CurrentCost + current.DistanceTo(connected) * connected.TraversalCostMultiplier;
                     connected.EstimatedCost = connected.CurrentCost + connected.DistanceTo(to);
                     connected.State = NodeState.Open;
                     queue.Enqueue(connected);
@@ -133,7 +134,8 @@ namespace Algorithms.Search.AStar
                 else
                 {
                     // Codacy made me do it.
-                    throw new PathfindingException("Detected the same node twice. Confusion how this could ever happen");
+                    throw new PathfindingException(
+                        "Detected the same node twice. Confusion how this could ever happen");
                 }
             }
         }

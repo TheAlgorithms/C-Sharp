@@ -5,7 +5,7 @@ namespace Utilities.Extensions
     public static class MatrixExtensions
     {
         /// <summary>
-        /// Performs immutable dot product multiplication on source matrix to operand.
+        ///     Performs immutable dot product multiplication on source matrix to operand.
         /// </summary>
         /// <param name="source">Source left matrix.</param>
         /// <param name="operand">Operand right matrix.</param>
@@ -15,7 +15,8 @@ namespace Utilities.Extensions
         {
             if (source.GetLength(1) != operand.GetLength(0))
             {
-                throw new InvalidOperationException("The width of a first operand should match the height of a second.");
+                throw new InvalidOperationException(
+                    "The width of a first operand should match the height of a second.");
             }
 
             var result = new double[source.GetLength(0), operand.GetLength(1)];
@@ -39,7 +40,7 @@ namespace Utilities.Extensions
         }
 
         /// <summary>
-        /// Makes a copy of a matrix. Changes to the copy should not affect the original.
+        ///     Makes a copy of a matrix. Changes to the copy should not affect the original.
         /// </summary>
         /// <param name="matrix">The matrix.</param>
         /// <returns>A copy of the matrix.</returns>
@@ -58,7 +59,7 @@ namespace Utilities.Extensions
         }
 
         /// <summary>
-        /// Transposes a matrix.
+        ///     Transposes a matrix.
         /// </summary>
         /// <param name="matrix">The matrix.</param>
         /// <returns>The transposed matrix.</returns>
@@ -77,7 +78,7 @@ namespace Utilities.Extensions
         }
 
         /// <summary>
-        /// Multiplies a matrix by a vector.
+        ///     Multiplies a matrix by a vector.
         /// </summary>
         /// <param name="matrix">The matrix.</param>
         /// <param name="vector">The vector.</param>
@@ -102,7 +103,7 @@ namespace Utilities.Extensions
         }
 
         /// <summary>
-        /// Performs matrix subtraction.
+        ///     Performs matrix subtraction.
         /// </summary>
         /// <param name="lhs">The LHS matrix.</param>
         /// <param name="rhs">The RHS matrix.</param>
@@ -129,7 +130,7 @@ namespace Utilities.Extensions
         }
 
         /// <summary>
-        /// Perfoms an element by element comparison on both matrices.
+        ///     Performs an element by element comparison on both matrices.
         /// </summary>
         /// <param name="source">Source left matrix.</param>
         /// <param name="operand">Openrand right matrix.</param>
@@ -158,7 +159,7 @@ namespace Utilities.Extensions
         }
 
         /// <summary>
-        /// Performs a round operation on every element of the input matrix up to the neareast integer.
+        ///     Performs a round operation on every element of the input matrix up to the neareast integer.
         /// </summary>
         /// <param name="source">Input matrix.</param>
         /// <returns>Matrix with rounded elements.</returns>

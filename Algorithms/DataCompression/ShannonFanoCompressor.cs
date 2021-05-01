@@ -6,22 +6,24 @@ using Utilities.Extensions;
 namespace Algorithms.DataCompression
 {
     /// <summary>
-    /// Greedy lossless compression algorithm.
+    ///     Greedy lossless compression algorithm.
     /// </summary>
     public class ShannonFanoCompressor
     {
         private readonly IHeuristicKnapsackSolver<(char symbol, double frequency)> splitter;
         private readonly Translator translator;
 
-        public ShannonFanoCompressor(IHeuristicKnapsackSolver<(char symbol, double frequency)> splitter, Translator translator)
+        public ShannonFanoCompressor(
+            IHeuristicKnapsackSolver<(char symbol, double frequency)> splitter,
+            Translator translator)
         {
             this.splitter = splitter;
             this.translator = translator;
         }
 
         /// <summary>
-        /// Given an input string, returns a new compressed string
-        /// using Shannon-Fano encoding.
+        ///     Given an input string, returns a new compressed string
+        ///     using Shannon-Fano encoding.
         /// </summary>
         /// <param name="uncompressedText">Text message to compress.</param>
         /// <returns>Compressed string and keys to decompress it.</returns>
@@ -47,7 +49,8 @@ namespace Algorithms.DataCompression
             return (translator.Translate(uncompressedText, compressionKeys), decompressionKeys);
         }
 
-        private (Dictionary<string, string> compressionKeys, Dictionary<string, string> decompressionKeys) GetKeys(ListNode tree)
+        private (Dictionary<string, string> compressionKeys, Dictionary<string, string> decompressionKeys) GetKeys(
+            ListNode tree)
         {
             var compressionKeys = new Dictionary<string, string>();
             var decompressionKeys = new Dictionary<string, string>();
@@ -93,7 +96,7 @@ namespace Algorithms.DataCompression
         }
 
         /// <summary>
-        /// Finds frequency for each character in the text.
+        ///     Finds frequency for each character in the text.
         /// </summary>
         /// <returns>Symbol-frequency array.</returns>
         private ListNode GetListNodeFromText(string text)
@@ -115,7 +118,7 @@ namespace Algorithms.DataCompression
         }
 
         /// <summary>
-        /// Represents tree structure for the algorithm.
+        ///     Represents tree structure for the algorithm.
         /// </summary>
         public class ListNode
         {
