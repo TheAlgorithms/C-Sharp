@@ -4,25 +4,25 @@ using System.Collections.Generic;
 namespace DataStructures.AATree
 {
     /// <summary>
-    /// A simple self-balancing binary search tree.
+    ///     A simple self-balancing binary search tree.
     /// </summary>
     /// <remarks>
-    /// AA Trees are a form of self-balancing binary search tree named after their inventor
-    /// Arne Anderson. AA Trees are designed to be simple to understand and implement.
-    /// This is accomplished by limiting how nodes can be added to the tree.
-    /// This simplifies rebalancing operations.
-    /// More information: https://en.wikipedia.org/wiki/AA_tree .
+    ///     AA Trees are a form of self-balancing binary search tree named after their inventor
+    ///     Arne Anderson. AA Trees are designed to be simple to understand and implement.
+    ///     This is accomplished by limiting how nodes can be added to the tree.
+    ///     This simplifies rebalancing operations.
+    ///     More information: https://en.wikipedia.org/wiki/AA_tree .
     /// </remarks>
     /// <typeparam name="TKey">The type of key for the AA tree.</typeparam>
     public class AATree<TKey>
     {
         /// <summary>
-        /// The comparer function to use to compare the keys.
+        ///     The comparer function to use to compare the keys.
         /// </summary>
         private readonly Comparer<TKey> comparer;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AATree{TKey}"/> class.
+        ///     Initializes a new instance of the <see cref="AATree{TKey}" /> class.
         /// </summary>
         public AATree()
             : this(Comparer<TKey>.Default)
@@ -30,23 +30,23 @@ namespace DataStructures.AATree
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AATree{TKey}"/> class with a custom comparer.
+        ///     Initializes a new instance of the <see cref="AATree{TKey}" /> class with a custom comparer.
         /// </summary>
         /// <param name="customComparer">The custom comparer to use to compare keys.</param>
         public AATree(Comparer<TKey> customComparer) => comparer = customComparer;
 
         /// <summary>
-        /// Gets the root of the tree.
+        ///     Gets the root of the tree.
         /// </summary>
         public AATreeNode<TKey>? Root { get; private set; }
 
         /// <summary>
-        /// Gets the number of elements in the tree.
+        ///     Gets the number of elements in the tree.
         /// </summary>
         public int Count { get; private set; }
 
         /// <summary>
-        /// Add a single element to the tree.
+        ///     Add a single element to the tree.
         /// </summary>
         /// <param name="key">The element to add to the tree.</param>
         public void Add(TKey key)
@@ -56,7 +56,7 @@ namespace DataStructures.AATree
         }
 
         /// <summary>
-        /// Add multiple elements to the tree.
+        ///     Add multiple elements to the tree.
         /// </summary>
         /// <param name="keys">The elements to add to the tree.</param>
         public void AddRange(IEnumerable<TKey> keys)
@@ -69,7 +69,7 @@ namespace DataStructures.AATree
         }
 
         /// <summary>
-        /// Remove a single element from the tree.
+        ///     Remove a single element from the tree.
         /// </summary>
         /// <param name="key">Element to remove.</param>
         public void Remove(TKey key)
@@ -84,14 +84,14 @@ namespace DataStructures.AATree
         }
 
         /// <summary>
-        /// Checks if the specified element is in the tree.
+        ///     Checks if the specified element is in the tree.
         /// </summary>
         /// <param name="key">The element to look for.</param>
         /// <returns>true if the element is in the tree, false otherwise.</returns>
         public bool Contains(TKey key) => Contains(key, Root);
 
         /// <summary>
-        /// Gets the largest element in the tree. (ie. the element in the right most node).
+        ///     Gets the largest element in the tree. (ie. the element in the right most node).
         /// </summary>
         /// <returns>The largest element in the tree according to the stored comparer.</returns>
         /// <exception cref="InvalidOperationException">Thrown if the tree is empty.</exception>
@@ -106,7 +106,7 @@ namespace DataStructures.AATree
         }
 
         /// <summary>
-        /// Gets the smallest element in the tree. (ie. the element in the left most node).
+        ///     Gets the smallest element in the tree. (ie. the element in the left most node).
         /// </summary>
         /// <returns>The smallest element in the tree according to the stored comparer.</returns>
         /// <throws>InvalidOperationException if the tree is empty.</throws>
@@ -121,7 +121,7 @@ namespace DataStructures.AATree
         }
 
         /// <summary>
-        /// Gets all the elements in the tree in in-order order.
+        ///     Gets all the elements in the tree in in-order order.
         /// </summary>
         /// <returns>Sequence of elements in in-order order.</returns>
         public IEnumerable<TKey> GetKeysInOrder()
@@ -144,7 +144,7 @@ namespace DataStructures.AATree
         }
 
         /// <summary>
-        /// Gets all the elements in the tree in pre-order order.
+        ///     Gets all the elements in the tree in pre-order order.
         /// </summary>
         /// <returns>Sequence of elements in pre-order order.</returns>
         public IEnumerable<TKey> GetKeysPreOrder()
@@ -167,7 +167,7 @@ namespace DataStructures.AATree
         }
 
         /// <summary>
-        /// Gets all the elements in the tree in post-order order.
+        ///     Gets all the elements in the tree in post-order order.
         /// </summary>
         /// <returns>Sequence of elements in post-order order.</returns>
         public IEnumerable<TKey> GetKeysPostOrder()
@@ -190,7 +190,7 @@ namespace DataStructures.AATree
         }
 
         /// <summary>
-        /// Recursive function to add an element to the tree.
+        ///     Recursive function to add an element to the tree.
         /// </summary>
         /// <param name="key">The element to add.</param>
         /// <param name="node">The node to search for a empty spot.</param>
@@ -220,7 +220,7 @@ namespace DataStructures.AATree
         }
 
         /// <summary>
-        /// Recursive function to remove an element from the tree.
+        ///     Recursive function to remove an element from the tree.
         /// </summary>
         /// <param name="key">The element to remove.</param>
         /// <param name="node">The node to search from.</param>
@@ -276,7 +276,7 @@ namespace DataStructures.AATree
         }
 
         /// <summary>
-        /// Recursive function to check if the element exists in the tree.
+        ///     Recursive function to check if the element exists in the tree.
         /// </summary>
         /// <param name="key">The element to check for.</param>
         /// <param name="node">The node to search from.</param>
@@ -292,7 +292,7 @@ namespace DataStructures.AATree
             };
 
         /// <summary>
-        /// Recursive to find the maximum/right-most element.
+        ///     Recursive to find the maximum/right-most element.
         /// </summary>
         /// <param name="node">The node to traverse from.</param>
         /// <returns>The node with the maximum/right-most element.</returns>
@@ -310,7 +310,7 @@ namespace DataStructures.AATree
         }
 
         /// <summary>
-        /// Recursive to find the minimum/left-most element.
+        ///     Recursive to find the minimum/left-most element.
         /// </summary>
         /// <param name="node">The node to traverse from.</param>
         /// <returns>The node with the minimum/left-most element.</returns>
@@ -328,8 +328,8 @@ namespace DataStructures.AATree
         }
 
         /// <summary>
-        /// Remove right-horizontal links and replaces them with left-horizontal links.
-        /// Accomplishes this by performing a right rotation.
+        ///     Remove right-horizontal links and replaces them with left-horizontal links.
+        ///     Accomplishes this by performing a right rotation.
         /// </summary>
         /// <param name="node">The node to rebalance from.</param>
         /// <returns>The rebalanced node.</returns>
@@ -347,8 +347,8 @@ namespace DataStructures.AATree
         }
 
         /// <summary>
-        /// Reduces the number of right-horizontal links.
-        /// Accomplishes this by performing a left rotation, and incrementing level.
+        ///     Reduces the number of right-horizontal links.
+        ///     Accomplishes this by performing a left rotation, and incrementing level.
         /// </summary>
         /// <param name="node">The node to rebalance from.</param>
         /// <returns>The rebalanced node.</returns>
@@ -367,7 +367,7 @@ namespace DataStructures.AATree
         }
 
         /// <summary>
-        /// Decreases the level of node if necessary.
+        ///     Decreases the level of node if necessary.
         /// </summary>
         /// <param name="node">The node to decrease level from.</param>
         /// <returns>The node with modified level.</returns>

@@ -3,12 +3,12 @@
 namespace Algorithms.Search.AStar
 {
     /// <summary>
-    /// Contains the code for A* Pathfinding.
+    ///     Contains the code for A* Pathfinding.
     /// </summary>
     public static class AStar
     {
         /// <summary>
-        /// Resets the Nodes in the list.
+        ///     Resets the Nodes in the list.
         /// </summary>
         /// <param name="nodes">Resets the nodes to be used again.</param>
         public static void ResetNodes(List<Node> nodes)
@@ -23,7 +23,7 @@ namespace Algorithms.Search.AStar
         }
 
         /// <summary>
-        /// Generates the Path from an (solved) node graph, before it gets reset.
+        ///     Generates the Path from an (solved) node graph, before it gets reset.
         /// </summary>
         /// <param name="target">The node where we want to go.</param>
         /// <returns>The Path to the target node.</returns>
@@ -42,7 +42,7 @@ namespace Algorithms.Search.AStar
         }
 
         /// <summary>
-        /// Computes the path from => to.
+        ///     Computes the path from => to.
         /// </summary>
         /// <param name="from">Start node.</param>
         /// <param name="to">end node.</param>
@@ -95,10 +95,8 @@ namespace Algorithms.Search.AStar
                     ResetNodes(open.GetData());
                     return ret;
                 }
-                else
-                {
-                    AddOrUpdateConnected(current, to, open);
-                }
+
+                AddOrUpdateConnected(current, to, open);
             }
         }
 

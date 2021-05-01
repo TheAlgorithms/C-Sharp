@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace DataStructures.Tests
 {
-    class AATreeTests
+    internal class AATreeTests
     {
         [Test]
         public void Constructor_UseCustomComparer_FormsCorrectTree()
@@ -192,20 +192,20 @@ namespace DataStructures.Tests
         }
 
         /// <summary>
-        /// Checks various properties to determine if the tree is a valid AA Tree.
-        /// Throws exceptions if properties are violated.
-        /// Useful for debugging.
+        ///     Checks various properties to determine if the tree is a valid AA Tree.
+        ///     Throws exceptions if properties are violated.
+        ///     Useful for debugging.
         /// </summary>
         /// <remarks>
-        /// The properties that are checked are:
-        /// <list type="number">
-        /// <item>The level of every leaf node is one.</item>
-        /// <item>The level of every left child is exactly one less than that of its parent.</item>
-        /// <item>The level of every right child is equal to or one less than that of its parent.</item>
-        /// <item>The level of every right grandchild is strictly less than that of its grandparent.</item>
-        /// <item>Every node of level greater than one has two children.</item>
-        /// </list>
-        /// More information: https://en.wikipedia.org/wiki/AA_tree .
+        ///     The properties that are checked are:
+        ///     <list type="number">
+        ///         <item>The level of every leaf node is one.</item>
+        ///         <item>The level of every left child is exactly one less than that of its parent.</item>
+        ///         <item>The level of every right child is equal to or one less than that of its parent.</item>
+        ///         <item>The level of every right grandchild is strictly less than that of its grandparent.</item>
+        ///         <item>Every node of level greater than one has two children.</item>
+        ///     </list>
+        ///     More information: https://en.wikipedia.org/wiki/AA_tree .
         /// </remarks>
         /// <param name="node">The node to check from.</param>
         /// <returns>true if node passes all checks, false otherwise.</returns>
@@ -238,7 +238,7 @@ namespace DataStructures.Tests
         }
 
         /// <summary>
-        /// Checks if node is a leaf, and if so if its level is 1.
+        ///     Checks if node is a leaf, and if so if its level is 1.
         /// </summary>
         /// <param name="node">The node to check.</param>
         /// <returns>true if node passes check, false otherwise.</returns>
@@ -249,7 +249,7 @@ namespace DataStructures.Tests
         }
 
         /// <summary>
-        /// Checks if left node's level is exactly one less than node's level.
+        ///     Checks if left node's level is exactly one less than node's level.
         /// </summary>
         /// <param name="node">The node to check.</param>
         /// <returns>true if node passes check, false otherwise.</returns>
@@ -260,7 +260,7 @@ namespace DataStructures.Tests
         }
 
         /// <summary>
-        /// Checks if right node's level is either equal to or one less than node's level.
+        ///     Checks if right node's level is either equal to or one less than node's level.
         /// </summary>
         /// <param name="node">The node to check.</param>
         /// <returns>true if node passes check, false otherwise.</returns>
@@ -273,7 +273,7 @@ namespace DataStructures.Tests
         }
 
         /// <summary>
-        /// Checks if right grandchild's (right node's right node) level is less than node.
+        ///     Checks if right grandchild's (right node's right node) level is less than node.
         /// </summary>
         /// <param name="node">The node to check.</param>
         /// <returns>true if node passes check, false otherwise.</returns>
@@ -284,7 +284,7 @@ namespace DataStructures.Tests
         }
 
         /// <summary>
-        /// Checks if node is not a leaf, and if so if it has two children.
+        ///     Checks if node is not a leaf, and if so if it has two children.
         /// </summary>
         /// <param name="node">The node to check.</param>
         /// <returns>true if node passes check, false otherwise.</returns>

@@ -3,9 +3,9 @@ using System;
 namespace Algorithms.Numeric.GreatestCommonDivisor
 {
     /// <summary>
-    /// Finds greatest common divisor for numbers u and v
-    /// using binary algorithm.
-    /// Wiki: https://en.wikipedia.org/wiki/Binary_GCD_algorithm.
+    ///     Finds greatest common divisor for numbers u and v
+    ///     using binary algorithm.
+    ///     Wiki: https://en.wikipedia.org/wiki/Binary_GCD_algorithm.
     /// </summary>
     public class BinaryGreatestCommonDivisorFinder : IGreatestCommonDivisorFinder
     {

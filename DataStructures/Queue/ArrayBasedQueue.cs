@@ -3,30 +3,28 @@ using System;
 namespace DataStructures.Queue
 {
     /// <summary>
-    /// Implementation of an array based queue. FIFO style.
+    ///     Implementation of an array based queue. FIFO style.
     /// </summary>
     /// <typeparam name="T">Generic Type.</typeparam>
     public class ArrayBasedQueue<T>
     {
         private readonly T[] queue;
-        private readonly int capacity;
-        private int startIndex;
         private int endIndex;
         private bool isEmpty;
         private bool isFull;
+        private int startIndex;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArrayBasedQueue{T}"/> class.
+        ///     Initializes a new instance of the <see cref="ArrayBasedQueue{T}" /> class.
         /// </summary>
         public ArrayBasedQueue(int capacity)
         {
-            this.capacity = capacity;
             queue = new T[capacity];
             Clear();
         }
 
         /// <summary>
-        /// Clears the queue.
+        ///     Clears the queue.
         /// </summary>
         public void Clear()
         {
@@ -37,7 +35,7 @@ namespace DataStructures.Queue
         }
 
         /// <summary>
-        /// Returns the first item in the queue and removes it from the queue.
+        ///     Returns the first item in the queue and removes it from the queue.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown if the queue is empty.</exception>
         public T Dequeue()
@@ -61,23 +59,17 @@ namespace DataStructures.Queue
         }
 
         /// <summary>
-        /// Returns a boolean indicating whether the queue is empty.
+        ///     Returns a boolean indicating whether the queue is empty.
         /// </summary>
-        public bool IsEmpty()
-        {
-            return isEmpty;
-        }
+        public bool IsEmpty() => isEmpty;
 
         /// <summary>
-        /// Returns a boolean indicating whether the queue is full.
+        ///     Returns a boolean indicating whether the queue is full.
         /// </summary>
-        public bool IsFull()
-        {
-            return isFull;
-        }
+        public bool IsFull() => isFull;
 
         /// <summary>
-        /// Returns the first item in the queue and keeps it in the queue.
+        ///     Returns the first item in the queue and keeps it in the queue.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown if the queue is empty.</exception>
         public T Peek()
@@ -91,7 +83,7 @@ namespace DataStructures.Queue
         }
 
         /// <summary>
-        /// Adds an item at the last position in the queue.
+        ///     Adds an item at the last position in the queue.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown if the queue is full.</exception>
         public void Enqueue(T item)

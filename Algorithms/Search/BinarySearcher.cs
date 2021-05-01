@@ -3,16 +3,16 @@
 namespace Algorithms.Search
 {
     /// <summary>
-    /// TODO.
+    ///     TODO.
     /// </summary>
     /// <typeparam name="T">TODO. 2.</typeparam>
     public class BinarySearcher<T> where T : IComparable<T>
     {
         /// <summary>
-        /// Finds index of item in array that equals to item searched for,
-        /// time complexity: O(log(n)),
-        /// space complexity: O(1),
-        /// where n - array size.
+        ///     Finds index of item in array that equals to item searched for,
+        ///     time complexity: O(log(n)),
+        ///     space complexity: O(1),
+        ///     where n - array size.
         /// </summary>
         /// <param name="sortedData">Sorted array to search in.</param>
         /// <param name="item">Item to search for.</param>

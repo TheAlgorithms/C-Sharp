@@ -115,7 +115,7 @@ namespace Algorithms.Tests.Problems.NQueens
             }
         }
 
-        static bool ValidateCell(bool foundQueen, bool currentCell)
+        private static bool ValidateCell(bool foundQueen, bool currentCell)
         {
             if (foundQueen)
             {
