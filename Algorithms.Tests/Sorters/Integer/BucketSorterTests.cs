@@ -1,7 +1,6 @@
 ﻿using System;
 using Algorithms.Sorters.Integer;
 using Algorithms.Tests.Helpers;
-
 using NUnit.Framework;
 
 namespace Algorithms.Tests.Sorters.Integer

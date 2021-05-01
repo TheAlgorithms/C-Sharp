@@ -4,12 +4,12 @@ using System.Text;
 namespace Algorithms.DataCompression
 {
     /// <summary>
-    /// TODO.
+    ///     TODO.
     /// </summary>
     public class Translator
     {
         /// <summary>
-        /// TODO.
+        ///     TODO.
         /// </summary>
         /// <param name="text">TODO. 2.</param>
         /// <param name="translationKeys">TODO. 3.</param>

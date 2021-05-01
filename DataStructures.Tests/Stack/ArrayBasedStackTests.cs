@@ -5,7 +5,7 @@ namespace DataStructures.Tests.Stack
 {
     public static class ArrayBasedStackTests
     {
-        const string StackEmptyErrorMessage = "Stack is empty";
+        private const string StackEmptyErrorMessage = "Stack is empty";
 
         [Test]
         public static void CountTest()
