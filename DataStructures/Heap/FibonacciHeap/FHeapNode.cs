@@ -1,6 +1,6 @@
 using System;
 
-namespace DataStructures.Heap
+namespace DataStructures.Heap.FibonacciHeap
 {
     /// <summary>
     /// These FHeapNodes are the bulk of the data structure. The have pointers to
@@ -11,7 +11,7 @@ namespace DataStructures.Heap
     public class FHeapNode<T> where T : IComparable
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataStructures.Heap.FHeapNode{T}"/> class.
+        /// Initializes a new instance of the <see cref="FHeapNode{T}"/> class.
         /// </summary>
         /// <param name="key">An item in the Fibonacci heap.</param>
         public FHeapNode(T key)

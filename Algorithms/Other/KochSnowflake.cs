@@ -35,7 +35,7 @@ namespace Algorithms.Other
         public static List<Vector2> Iterate(List<Vector2> initialVectors, int steps = 5)
         {
             List<Vector2> vectors = initialVectors;
-            for (int i = 0; i < steps; i++)
+            for (var i = 0; i < steps; i++)
             {
                 vectors = IterationStep(vectors);
             }
@@ -59,11 +59,11 @@ namespace Algorithms.Other
                 throw new ArgumentOutOfRangeException(nameof(bitmapWidth), $"{nameof(bitmapWidth)} should be greater than zero");
             }
 
-            float offsetX = bitmapWidth / 10f;
-            float offsetY = bitmapWidth / 3.7f;
-            Vector2 vector1 = new Vector2(offsetX, offsetY);
-            Vector2 vector2 = new Vector2(bitmapWidth / 2, (float)Math.Sin(Math.PI / 3) * bitmapWidth * 0.8f + offsetY);
-            Vector2 vector3 = new Vector2(bitmapWidth - offsetX, offsetY);
+            var offsetX = bitmapWidth / 10f;
+            var offsetY = bitmapWidth / 3.7f;
+            var vector1 = new Vector2(offsetX, offsetY);
+            var vector2 = new Vector2(bitmapWidth / 2, (float)Math.Sin(Math.PI / 3) * bitmapWidth * 0.8f + offsetY);
+            var vector3 = new Vector2(bitmapWidth - offsetX, offsetY);
             List<Vector2> initialVectors = new List<Vector2> { vector1, vector2, vector3, vector1 };
             List<Vector2> vectors = Iterate(initialVectors, steps);
             return GetBitmap(vectors, bitmapWidth, bitmapWidth);
@@ -81,18 +81,18 @@ namespace Algorithms.Other
         private static List<Vector2> IterationStep(List<Vector2> vectors)
         {
             List<Vector2> newVectors = new List<Vector2>();
-            for (int i = 0; i < vectors.Count - 1; i++)
+            for (var i = 0; i < vectors.Count - 1; i++)
             {
-                Vector2 startVector = vectors[i];
-                Vector2 endVector = vectors[i + 1];
+                var startVector = vectors[i];
+                var endVector = vectors[i + 1];
                 newVectors.Add(startVector);
-                Vector2 differenceVector = endVector - startVector;
+                var differenceVector = endVector - startVector;
                 newVectors.Add(startVector + differenceVector / 3);
                 newVectors.Add(startVector + differenceVector / 3 + Rotate(differenceVector / 3, 60));
                 newVectors.Add(startVector + differenceVector * 2 / 3);
             }
 
-            newVectors.Add(vectors[vectors.Count - 1]);
+            newVectors.Add(vectors[^1]);
             return newVectors;
         }
 
@@ -105,9 +105,9 @@ namespace Algorithms.Other
         /// <returns>The rotated vector.</returns>
         private static Vector2 Rotate(Vector2 vector, float angleInDegrees)
         {
-            float radians = angleInDegrees * (float)Math.PI / 180;
-            float ca = (float)Math.Cos(radians);
-            float sa = (float)Math.Sin(radians);
+            var radians = angleInDegrees * (float)Math.PI / 180;
+            var ca = (float)Math.Cos(radians);
+            var sa = (float)Math.Sin(radians);
             return new Vector2(ca * vector.X - sa * vector.Y, sa * vector.X + ca * vector.Y);
         }
 
@@ -128,18 +128,18 @@ namespace Algorithms.Other
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
                 // Set the background white
-                Rectangle imageSize = new Rectangle(0, 0, bitmapWidth, bitmapHeight);
+                var imageSize = new Rectangle(0, 0, bitmapWidth, bitmapHeight);
                 graphics.FillRectangle(Brushes.White, imageSize);
 
                 // Draw the edges
-                for (int i = 0; i < vectors.Count - 1; i++)
+                for (var i = 0; i < vectors.Count - 1; i++)
                 {
                     Pen blackPen = new Pen(Color.Black, 1);
 
-                    float x1 = vectors[i].X;
-                    float y1 = vectors[i].Y;
-                    float x2 = vectors[i + 1].X;
-                    float y2 = vectors[i + 1].Y;
+                    var x1 = vectors[i].X;
+                    var y1 = vectors[i].Y;
+                    var x2 = vectors[i + 1].X;
+                    var y2 = vectors[i + 1].Y;
 
                     graphics.DrawLine(blackPen, x1, y1, x2, y2);
                 }

@@ -46,8 +46,8 @@ namespace Algorithms.Numeric
             List<double[]> points = new List<double[]>();
             double[] firstPoint = { xStart, yStart };
             points.Add(firstPoint);
-            double yCurrent = yStart;
-            double xCurrent = xStart;
+            var yCurrent = yStart;
+            var xCurrent = xStart;
 
             while (xCurrent < xEnd)
             {
@@ -74,7 +74,7 @@ namespace Algorithms.Numeric
                 double yCurrent,
                 Func<double, double, double> yDerivative)
         {
-            double yNext = yCurrent + stepSize * yDerivative(xCurrent, yCurrent);
+            var yNext = yCurrent + stepSize * yDerivative(xCurrent, yCurrent);
             return yNext;
         }
     }

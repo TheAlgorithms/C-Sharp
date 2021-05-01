@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 
 namespace Algorithms.Other
 {
@@ -42,10 +41,10 @@ namespace Algorithms.Other
                 throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(value)} should be between 0 and 1");
             }
 
-            double chroma = value * saturation;
-            double hueSection = hue / 60;
-            double secondLargestComponent = chroma * (1 - Math.Abs(hueSection % 2 - 1));
-            double matchValue = value - chroma;
+            var chroma = value * saturation;
+            var hueSection = hue / 60;
+            var secondLargestComponent = chroma * (1 - Math.Abs(hueSection % 2 - 1));
+            var matchValue = value - chroma;
 
             return GetRgbBySection(hueSection, chroma, matchValue, secondLargestComponent);
         }
@@ -62,12 +61,12 @@ namespace Algorithms.Other
             byte green,
             byte blue)
         {
-            double dRed = (double)red / 255;
-            double dGreen = (double)green / 255;
-            double dBlue = (double)blue / 255;
-            double value = Math.Max(Math.Max(dRed, dGreen), dBlue);
-            double chroma = value - Math.Min(Math.Min(dRed, dGreen), dBlue);
-            double saturation = value.Equals(0) ? 0 : chroma / value;
+            var dRed = (double)red / 255;
+            var dGreen = (double)green / 255;
+            var dBlue = (double)blue / 255;
+            var value = Math.Max(Math.Max(dRed, dGreen), dBlue);
+            var chroma = value - Math.Min(Math.Min(dRed, dGreen), dBlue);
+            var saturation = value.Equals(0) ? 0 : chroma / value;
             double hue;
 
             if (chroma.Equals(0))

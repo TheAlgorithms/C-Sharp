@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DataStructures.Heap
+namespace DataStructures.Heap.FibonacciHeap
 {
     /// <summary>
     /// A generic implementation of a Fibonacci heap.
@@ -31,14 +31,6 @@ namespace DataStructures.Heap
     public class FibonacciHeap<T> where T : IComparable
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataStructures.Heap.FibonacciHeap{T}"/> class.
-        /// </summary>
-        public FibonacciHeap()
-        {
-            MinItem = null;
-        }
-
-        /// <summary>
         /// Gets or sets the count of the number of nodes in the Fibonacci heap.
         /// </summary>
         public int Count { get; set; }
@@ -48,7 +40,7 @@ namespace DataStructures.Heap
         /// comprise the root list, a list of trees that satisfy the heap property and
         /// are joined in a circularly doubly linked list.
         /// </summary>
-        protected FHeapNode<T>? MinItem { get; set; }
+        private FHeapNode<T>? MinItem { get; set; }
 
         /// <summary>
         /// Add item <c>x</c> to this Fibonacci heap.
@@ -94,7 +86,7 @@ namespace DataStructures.Heap
         /// by concatenating the root lists together.
         ///
         /// For more details on how two circularly linked lists are concatenated, see
-        /// <see cref="DataStructures.Heap.FHeapNode{T}.ConcatenateRight(DataStructures.Heap.FHeapNode{T})"/>
+        /// <see cref="FHeapNode{T}.ConcatenateRight"/>
         ///
         /// Finally, check to see which of <c>this.MinItem</c> and <c>other.MinItem</c>
         /// is smaller, and set <c>this.MinItem</c> accordingly
@@ -156,7 +148,7 @@ namespace DataStructures.Heap
         /// Remove the MinItem from the root list and appoint a new MinItem temporarily.
         /// </item>
         /// <item>
-        /// <see cref="DataStructures.Heap.FibonacciHeap{T}.Consolidate"/> what's left
+        /// <see cref="Consolidate"/> what's left
         /// of the heap.
         /// </item>
         /// </list>
@@ -396,12 +388,12 @@ namespace DataStructures.Heap
         /// Reconstructs the heap based on the array of node degrees created by the consolidate step.
         /// </summary>
         /// <param name="a">An array of FHeapNodes where a[i] represents a node of degree i.</param>
-        protected void ReconstructHeap(FHeapNode<T>?[] a)
+        private void ReconstructHeap(FHeapNode<T>?[] a)
         {
             // Once all items are in A, empty out the root list
             MinItem = null;
 
-            for (int i = 0; i < a.Length; i++)
+            for (var i = 0; i < a.Length; i++)
             {
                 var r = a[i];
                 if (r == null)
@@ -439,7 +431,7 @@ namespace DataStructures.Heap
         /// </summary>
         /// <param name="y">A node to become the child of x.</param>
         /// <param name="x">A node to become the parent of y.</param>
-        protected void FibHeapLink(FHeapNode<T> y, FHeapNode<T> x)
+        private void FibHeapLink(FHeapNode<T> y, FHeapNode<T> x)
         {
             y.Remove();
             x.AddChild(y);
@@ -452,7 +444,7 @@ namespace DataStructures.Heap
         /// </summary>
         /// <param name="node">A node we want the siblings of.</param>
         /// <returns>An iterator over all of the siblings.</returns>
-        protected IEnumerable<FHeapNode<T>> SiblingIterator(FHeapNode<T> node)
+        private IEnumerable<FHeapNode<T>> SiblingIterator(FHeapNode<T> node)
         {
             var currentNode = node;
             yield return currentNode;

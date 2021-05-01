@@ -35,9 +35,9 @@ namespace Algorithms.Tests.Other
         [Test]
         public static void TestKochSnowflakeExample()
         {
-            int bitmapWidth = 600;
-            float offsetX = bitmapWidth / 10f;
-            float offsetY = bitmapWidth / 3.7f;
+            var bitmapWidth = 600;
+            var offsetX = bitmapWidth / 10f;
+            var offsetY = bitmapWidth / 3.7f;
             
             Bitmap bitmap = Algorithms.Other.KochSnowflake.GetKochSnowflake(bitmapWidth: 600);
             bitmap.GetPixel(0, 0).Should().Be(Color.FromArgb(255, 255, 255, 255), "because the background should be white");

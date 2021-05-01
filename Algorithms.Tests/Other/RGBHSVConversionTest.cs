@@ -1,8 +1,8 @@
 using System;
-using NUnit.Framework;
 using FluentAssertions;
+using NUnit.Framework;
 
-namespace Algorithms.Other
+namespace Algorithms.Tests.Other
 {
     public static class RgbHsvConversionTest
     {

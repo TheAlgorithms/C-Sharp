@@ -24,7 +24,7 @@ namespace Algorithms.DataCompression
             var rotations = GetRotations(s);
             Array.Sort(rotations, StringComparer.Ordinal);
             var lastColumn = rotations
-                .Select(x => x[x.Length - 1])
+                .Select(x => x[^1])
                 .ToArray();
             var encoded = new string(lastColumn);
             return (encoded, Array.IndexOf(rotations, s));

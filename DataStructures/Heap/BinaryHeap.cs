@@ -85,7 +85,7 @@ namespace DataStructures.Heap
             }
 
             var elem = data[0];
-            data[0] = data[data.Count - 1];
+            data[0] = data[^1];
             data.RemoveAt(data.Count - 1);
             HeapifyDown(0);
 
@@ -160,7 +160,7 @@ namespace DataStructures.Heap
             }
 
             Swap(idx, data.Count - 1);
-            var tmp = data[data.Count - 1];
+            var tmp = data[^1];
             data.RemoveAt(data.Count - 1);
 
             if (idx < data.Count)
