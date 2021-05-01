@@ -125,7 +125,14 @@ namespace DataStructures.Heap
         private int IndexOfMaxChildOrGrandchild(int index)
         {
             var descendants = new[]
-                { 2 * index + 1, 2 * index + 2, 4 * index + 3, 4 * index + 4, 4 * index + 5, 4 * index + 6 };
+            {
+                2 * index + 1,
+                2 * index + 2,
+                4 * index + 3,
+                4 * index + 4,
+                4 * index + 5,
+                4 * index + 6,
+            };
             var resIndex = descendants[0];
             foreach (var descendant in descendants)
             {

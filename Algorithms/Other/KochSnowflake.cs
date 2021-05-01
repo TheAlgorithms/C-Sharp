@@ -58,7 +58,8 @@ namespace Algorithms.Other
         {
             if (bitmapWidth <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(bitmapWidth),
+                throw new ArgumentOutOfRangeException(
+                    nameof(bitmapWidth),
                     $"{nameof(bitmapWidth)} should be greater than zero");
             }
 

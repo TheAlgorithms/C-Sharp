@@ -42,9 +42,9 @@ namespace DataStructures.SegmentTrees
         /// <param name="l">Left border of the query.</param>
         /// <param name="r">Right border of the query.</param>
         /// <returns>Sum of the subarray between <c>l</c> and <c>r</c> (including <c>l</c> and <c>r</c>).</returns>
+        // Editing of query start at node with 1.
+        // Node with index 1 includes the whole input subarray.
         public int Query(int l, int r) =>
-            // Editing of query start at node with 1.
-            // Node with index 1 includes the whole input subarray.
             Query(++l, ++r, 1, Tree.Length / 2, 1);
 
         /// <summary>
