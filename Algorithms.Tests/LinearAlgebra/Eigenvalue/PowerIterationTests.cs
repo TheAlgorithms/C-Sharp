@@ -14,25 +14,25 @@ namespace Algorithms.Tests.LinearAlgebra.Eigenvalue
         public void Dominant_ShouldThrowArgumentException_WhenSourceMatrixIsNotSquareShaped()
         {
             // Arrange
-            var source = new double[,] {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}, {0, 0, 0}};
-            
+            var source = new double[,] { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 1 }, { 0, 0, 0 } };
+
             // Act
             Action action = () => PowerIteration.Dominant(source, StartVector(source.GetLength(0)), epsilon);
-            
+
             // Assert
             action.Should().Throw<ArgumentException>().WithMessage("The source matrix is not square-shaped.");
         }
-        
+
         [Test]
         public void Dominant_ShouldThrowArgumentException_WhenStartVectorIsNotSameSizeAsMatrix()
         {
             // Arrange
-            var source = new double[,] {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
-            var startVector = new double[] {1, 0, 0, 0};
-            
+            var source = new double[,] { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 1 } };
+            var startVector = new double[] { 1, 0, 0, 0 };
+
             // Act
             Action action = () => PowerIteration.Dominant(source, startVector, epsilon);
-            
+
             // Assert
             action.Should().Throw<ArgumentException>()
                 .WithMessage("The length of the start vector doesn't equal the size of the source matrix.");

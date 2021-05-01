@@ -97,7 +97,9 @@ namespace Algorithms.Search.AStar
             {
                 var a = i * 2 + 1; // Every second entry starting by 1
                 var b = i * 2 + 2; // Every second entries neighbour
-                var c = b < Count && (isDescending ? -1 : 1) * list[b].CompareTo(list[a]) < 0 ? b : a; // Wether B(B is in range && B is smaller than A) or A
+                var c = b < Count && (isDescending ? -1 : 1) * list[b].CompareTo(list[a]) < 0
+                    ? b
+                    : a; // Whether B(B is in range && B is smaller than A) or A
 
                 if ((isDescending ? -1 : 1) * list[c].CompareTo(root) >= 0)
                 {

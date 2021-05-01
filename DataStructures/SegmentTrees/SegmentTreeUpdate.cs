@@ -11,7 +11,7 @@ namespace DataStructures.SegmentTrees
         /// </summary>
         /// <param name="arr">Array on which the queries should be made.</param>
         public SegmentTreeUpdate(int[] arr)
-        : base(arr)
+            : base(arr)
         {
         }
 

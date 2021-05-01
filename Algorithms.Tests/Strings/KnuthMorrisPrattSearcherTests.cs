@@ -14,7 +14,7 @@ namespace Algorithms.Tests.Strings
             var pat = "ABA";
 
             // Act
-            var expectedItem = new[]{0,2,8};
+            var expectedItem = new[] { 0, 2, 8 };
             var actualItem = searcher.FindIndexes(str, pat);
 
             // Assert
@@ -44,7 +44,7 @@ namespace Algorithms.Tests.Strings
             var s = "ABA";
 
             // Act
-            var expectedItem = new[] { 0,0,1 };
+            var expectedItem = new[] { 0, 0, 1 };
             var actualItem = searcher.FindLongestPrefixSuffixValues(s);
 
             // Assert
@@ -80,6 +80,5 @@ namespace Algorithms.Tests.Strings
             // Assert
             CollectionAssert.AreEqual(expectedItem, actualItem);
         }
-
     }
 }

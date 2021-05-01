@@ -1,13 +1,8 @@
 using System;
-
 using Algorithms.Numeric.Decomposition;
-
 using FluentAssertions;
-
 using NUnit.Framework;
-
 using Utilities.Extensions;
-
 using M = Utilities.Extensions.MatrixExtensions;
 using V = Utilities.Extensions.VectorExtensions;
 
@@ -66,6 +61,7 @@ namespace Algorithms.Tests.Numeric.Decomposition
                     result[i, j] = random.NextDouble() - 0.5;
                 }
             }
+
             return result;
         }
 

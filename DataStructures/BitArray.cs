@@ -113,6 +113,7 @@
 // != not-equal operator : bool
 // returns true if there inputs aren't equal otherwise false.
 // assumes: the input bit-arrays must have same length.
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -446,7 +447,7 @@ namespace DataStructures
         /// <param name="other">Bit-array.</param>
         /// <param name="n">Number of bits.</param>
         /// <returns>Bitwise shifted BitArray.</returns>
-        public static BitArray operator >>(BitArray other, int n)
+        public static BitArray operator >> (BitArray other, int n)
         {
             var ans = new BitArray(other.Length - n);
 
@@ -837,17 +838,6 @@ namespace DataStructures
         /// </summary>
         /// <param name="sequence">String sequence.</param>
         /// <returns>returns True if sequence contains only zeros and ones; False otherwise.</returns>
-        private static bool Match(string sequence)
-        {
-            foreach (var ch in sequence)
-            {
-                if (ch != '0' && ch != '1')
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
+        private static bool Match(string sequence) => sequence.All(ch => ch == '0' || ch == '1');
     }
 }

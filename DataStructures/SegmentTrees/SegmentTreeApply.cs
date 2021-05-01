@@ -13,7 +13,7 @@ namespace DataStructures.SegmentTrees
         /// </summary>
         /// <param name="arr">Array on which the operations should be made.</param>
         public SegmentTreeApply(int[] arr)
-        : base(arr)
+            : base(arr)
         {
             // Initilizes and fills "operand" array with neutral element (in this case 1, because value * 1 = value)
             Operand = new int[Tree.Length];

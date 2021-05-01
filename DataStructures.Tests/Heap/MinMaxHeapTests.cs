@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using NUnit.Framework;
-
 using DataStructures.Heap;
 
 namespace DataStructures.Tests.Heap
@@ -11,17 +9,18 @@ namespace DataStructures.Tests.Heap
     [TestFixture]
     public static class MinMaxHeapTests
     {
-        private static readonly object[] CollectionsSource = new object[] {
-            new [] { 5, 10, -2, 0, 3, 13, 5, -8, 41, -5, -7, -60, -12 },
-            new [] {'e', '4', 'x', 'D', '!', '$', '-', '_', '2', ')', 'Z', 'q'},
-            new [] { "abc", "abc", "xyz", "bcd", "klm", "opq", "ijk" }
+        private static readonly object[] CollectionsSource = new object[]
+        {
+            new[] { 5, 10, -2, 0, 3, 13, 5, -8, 41, -5, -7, -60, -12 },
+            new[] { 'e', '4', 'x', 'D', '!', '$', '-', '_', '2', ')', 'Z', 'q' },
+            new[] { "abc", "abc", "xyz", "bcd", "klm", "opq", "ijk" }
         };
 
 
         [Test]
         public static void CustomComparerTest()
         {
-            var arr = new [] { "aaaa", "c", "dd", "bbb" };
+            var arr = new[] { "aaaa", "c", "dd", "bbb" };
             var comparer = Comparer<string>.Create((a, b) => Comparer<int>.Default.Compare(a.Length, b.Length));
 
             var mmh = new MinMaxHeap<string>(comparer: comparer);
@@ -44,6 +43,7 @@ namespace DataStructures.Tests.Heap
             {
                 mmh.Add(item);
             }
+
             var minValue = mmh.GetMin();
             var maxValue = mmh.GetMax();
 
@@ -133,6 +133,7 @@ namespace DataStructures.Tests.Heap
                     value = mmh.GetMax();
                     _ = mmh.ExtractMax();
                 }
+
                 extracted.Add(value);
             }
 

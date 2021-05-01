@@ -28,7 +28,7 @@ namespace Algorithms.Tests.Compressors
         }
 
         [Test]
-        public static void DecompressedTextTheSameAsOriginal([Random(0, 1000, 100)]int length)
+        public static void DecompressedTextTheSameAsOriginal([Random(0, 1000, 100)] int length)
         {
             //Arrange
             var solver = new NaiveKnapsackSolver<(char, double)>();

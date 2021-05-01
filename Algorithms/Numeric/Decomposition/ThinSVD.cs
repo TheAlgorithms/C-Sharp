@@ -18,7 +18,7 @@ namespace Algorithms.Numeric.Decomposition
         /// <returns>The unit vector.</returns>
         public static double[] RandomUnitVector(int dimensions)
         {
-            Random random = new ();
+            Random random = new();
             double[] result = new double[dimensions];
             for (var i = 0; i < dimensions; i++)
             {
@@ -65,8 +65,7 @@ namespace Algorithms.Numeric.Decomposition
                 }
 
                 iterations++;
-            }
-            while (lastIteration.Dot(currIteration) < 1 - epsilon && iterations < maxIterations);
+            } while (lastIteration.Dot(currIteration) < 1 - epsilon && iterations < maxIterations);
 
             return currIteration;
         }
@@ -81,7 +80,8 @@ namespace Algorithms.Numeric.Decomposition
         /// <param name="epsilon">The error margin.</param>
         /// <param name="maxIterations">The maximum number of iterations.</param>
         /// <returns>The SVD.</returns>
-        public static (double[,] U, double[] S, double[,] V) Decompose(double[,] matrix, double epsilon, int maxIterations)
+        public static (double[,] U, double[] S, double[,] V) Decompose(double[,] matrix, double epsilon,
+            int maxIterations)
         {
             var m = matrix.GetLength(0);
             var n = matrix.GetLength(1);

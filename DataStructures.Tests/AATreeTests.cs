@@ -13,10 +13,10 @@ namespace DataStructures.Tests
         public void Constructor_UseCustomComparer_FormsCorrectTree()
         {
             var tree = new AATree<int>(Comparer<int>.Create((x, y) => y.CompareTo(x)));
-            tree.AddRange(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+            tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.GetMax().Should().Be(1);
             tree.GetMin().Should().Be(10);
-            tree.GetKeysInOrder().SequenceEqual(new[] {10, 9, 8, 7, 6, 5, 4, 3, 2, 1}).Should().BeTrue();
+            tree.GetKeysInOrder().SequenceEqual(new[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 }).Should().BeTrue();
             Validate(tree.Root);
         }
 
@@ -25,15 +25,15 @@ namespace DataStructures.Tests
         {
             var tree = new AATree<int>();
 
-            foreach (var elem in new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
+            foreach (var elem in new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
             {
                 tree.Add(elem);
                 tree.Count.Should().Be(elem);
                 tree.Contains(elem).Should().BeTrue();
             }
 
-            tree.GetKeysInOrder().SequenceEqual(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}).Should().BeTrue();
-            tree.GetKeysPostOrder().SequenceEqual(new[] {1, 3, 2, 5, 7, 10, 9, 8, 6, 4}).Should().BeTrue();
+            tree.GetKeysInOrder().SequenceEqual(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }).Should().BeTrue();
+            tree.GetKeysPostOrder().SequenceEqual(new[] { 1, 3, 2, 5, 7, 10, 9, 8, 6, 4 }).Should().BeTrue();
             Validate(tree.Root);
         }
 
@@ -41,7 +41,7 @@ namespace DataStructures.Tests
         public void Add_KeyAlreadyInTree_ThrowsException()
         {
             var tree = new AATree<int>();
-            tree.AddRange(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+            tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             Assert.Throws<ArgumentException>(() => tree.Add(1));
         }
 
@@ -49,10 +49,10 @@ namespace DataStructures.Tests
         public void AddRange_MultipleKeys_FormsCorrectTree()
         {
             var tree = new AATree<int>();
-            tree.AddRange(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+            tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.Count.Should().Be(10);
-            tree.GetKeysInOrder().SequenceEqual(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}).Should().BeTrue();
-            tree.GetKeysPostOrder().SequenceEqual(new[] {1, 3, 2, 5, 7, 10, 9, 8, 6, 4}).Should().BeTrue();
+            tree.GetKeysInOrder().SequenceEqual(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }).Should().BeTrue();
+            tree.GetKeysPostOrder().SequenceEqual(new[] { 1, 3, 2, 5, 7, 10, 9, 8, 6, 4 }).Should().BeTrue();
             Validate(tree.Root);
         }
 
@@ -60,7 +60,7 @@ namespace DataStructures.Tests
         public void Remove_MultipleKeys_TreeStillValid()
         {
             var tree = new AATree<int>();
-            tree.AddRange(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+            tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
 
             Remove(4).Should().NotThrow();
             tree.Contains(4).Should().BeFalse();
@@ -83,7 +83,7 @@ namespace DataStructures.Tests
         public void Remove_KeyNotInTree_Throws()
         {
             var tree = new AATree<int>();
-            tree.AddRange(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+            tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
 
             Action act = () => tree.Remove(999);
             act.Should().Throw<InvalidOperationException>();
@@ -102,7 +102,7 @@ namespace DataStructures.Tests
         public void Contains_NonEmptyTree_ReturnsCorrectAnswer()
         {
             var tree = new AATree<int>();
-            tree.AddRange(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+            tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.Contains(6).Should().BeTrue();
             tree.Contains(999).Should().BeFalse();
         }
@@ -118,7 +118,7 @@ namespace DataStructures.Tests
         public void GetMax_NonEmptyTree_ReturnsCorrectAnswer()
         {
             var tree = new AATree<int>();
-            tree.AddRange(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+            tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.GetMax().Should().Be(10);
         }
 
@@ -133,7 +133,7 @@ namespace DataStructures.Tests
         public void GetMin_NonEmptyTree_ReturnsCorrectAnswer()
         {
             var tree = new AATree<int>();
-            tree.AddRange(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+            tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.GetMin().Should().Be(1);
         }
 
@@ -148,8 +148,8 @@ namespace DataStructures.Tests
         public void GetKeysInOrder_NonEmptyTree_ReturnsCorrectAnswer()
         {
             var tree = new AATree<int>();
-            tree.AddRange(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
-            tree.GetKeysInOrder().SequenceEqual(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}).Should().BeTrue();
+            tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+            tree.GetKeysInOrder().SequenceEqual(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }).Should().BeTrue();
         }
 
         [Test]
@@ -163,8 +163,8 @@ namespace DataStructures.Tests
         public void GetKeysPreOrder_NonEmptyTree_ReturnsCorrectAnswer()
         {
             var tree = new AATree<int>();
-            tree.AddRange(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
-            tree.GetKeysPreOrder().SequenceEqual(new[] {4, 2, 1, 3, 6, 5, 8, 7, 9, 10})
+            tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+            tree.GetKeysPreOrder().SequenceEqual(new[] { 4, 2, 1, 3, 6, 5, 8, 7, 9, 10 })
                 .Should().BeTrue();
         }
 
@@ -179,8 +179,8 @@ namespace DataStructures.Tests
         public void GetKeysPostOrder_NonEmptyTree_ReturnsCorrectAnswer()
         {
             var tree = new AATree<int>();
-            tree.AddRange(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
-            tree.GetKeysPostOrder().SequenceEqual(new[] {1, 3, 2, 5, 7, 10, 9, 8, 6, 4})
+            tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+            tree.GetKeysPostOrder().SequenceEqual(new[] { 1, 3, 2, 5, 7, 10, 9, 8, 6, 4 })
                 .Should().BeTrue();
         }
 

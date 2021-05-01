@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Text;
-
 using DataStructures.Queue;
-
 using NUnit.Framework;
 
 namespace DataStructures.Tests.Queue

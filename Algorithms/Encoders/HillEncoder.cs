@@ -62,7 +62,7 @@ namespace Algorithms.Encoders
         /// </summary>
         /// <param name="arr">array of vectors.</param>
         /// <returns>Message.</returns>
-        private static string BuildStringFromArray(double[] arr) => new (arr.Select(c => (char)c).ToArray());
+        private static string BuildStringFromArray(double[] arr) => new(arr.Select(c => (char)c).ToArray());
 
         /// <summary>
         /// Multiplies the key for the given scalar.

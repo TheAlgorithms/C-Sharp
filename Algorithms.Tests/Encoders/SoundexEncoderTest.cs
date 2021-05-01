@@ -17,13 +17,11 @@ namespace Algorithms.Tests.Encoders
 
         static IEnumerable<string[]> TestData => _names.Zip(_expected, (l, r) => new[] { l, r });
 
-        static readonly string[] _names = {
-            "Robert", "Rupert", "Rubin", "Ashcraft", "Ashcroft",
-            "Tymczak", "Pfister", "Honeyman"
+        static readonly string[] _names =
+        {
+            "Robert", "Rupert", "Rubin", "Ashcraft", "Ashcroft", "Tymczak", "Pfister", "Honeyman"
         };
-        static readonly string[] _expected = {
-            "R163", "R163", "R150", "A261", "A261", "T522", "P236",
-            "H555"
-        };
+
+        static readonly string[] _expected = { "R163", "R163", "R150", "A261", "A261", "T522", "P236", "H555" };
     }
 }

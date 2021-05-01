@@ -1,5 +1,4 @@
 ﻿using Algorithms.Numeric.Factorization;
-
 using NUnit.Framework;
 
 namespace Algorithms.Tests.Numeric.Factorization

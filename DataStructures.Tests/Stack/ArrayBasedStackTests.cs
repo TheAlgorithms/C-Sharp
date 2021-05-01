@@ -1,5 +1,4 @@
 ﻿using DataStructures.Stack;
-
 using NUnit.Framework;
 
 namespace DataStructures.Tests.Stack
@@ -98,6 +97,5 @@ namespace DataStructures.Tests.Stack
 
             Assert.Catch(() => stack.Peek(), StackEmptyErrorMessage);
         }
-
     }
 }
