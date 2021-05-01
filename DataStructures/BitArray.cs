@@ -447,7 +447,7 @@ namespace DataStructures
         /// <param name="other">Bit-array.</param>
         /// <param name="n">Number of bits.</param>
         /// <returns>Bitwise shifted BitArray.</returns>
-        public static BitArray operator >> (BitArray other, int n)
+        public static BitArray operator >>(BitArray other, int n)
         {
             var ans = new BitArray(other.Length - n);
 
