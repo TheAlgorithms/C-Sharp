@@ -11,7 +11,9 @@ namespace Algorithms.Tests.Sorters.Comparison
     public static class MergeSorterTests
     {
         [Test]
-        public static void TestOnMergeSorter([Random(0, 1000, 100, Distinct = true)] int n)
+        public static void TestOnMergeSorter(
+            [Random(0, 1000, 100, Distinct = true)]
+            int n)
         {
             // Arrange
             var sorter = new MergeSorter<int>();
