@@ -128,8 +128,8 @@ namespace DataStructures.LinkedList.SinglyLinkedList
             while (currentElement is not null)
             {
                 // checks if the element, which should get deleted is in this list element
-                if ((currentElement.Data is null && element is null) ||
-                    (currentElement.Data is not null && currentElement.Data.Equals(element)))
+                if (currentElement.Data is null && element is null ||
+                    currentElement.Data is not null && currentElement.Data.Equals(element))
                 {
                     // if element is head just take the next one as head
                     if (currentElement.Equals(Head))

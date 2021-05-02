@@ -185,7 +185,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
             var current = Head;
             while (current is not null)
             {
-                if ((current.Data is null && data is null) || (current.Data is not null && current.Data.Equals(data)))
+                if (current.Data is null && data is null || current.Data is not null && current.Data.Equals(data))
                 {
                     return current;
                 }
@@ -312,7 +312,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
             var index = 0;
             while (current is not null)
             {
-                if ((current.Data is null && data is null) || (current.Data is not null && current.Data.Equals(data)))
+                if (current.Data is null && data is null || current.Data is not null && current.Data.Equals(data))
                 {
                     return index;
                 }
