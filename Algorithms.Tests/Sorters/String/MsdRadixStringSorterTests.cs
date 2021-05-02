@@ -11,8 +11,7 @@ namespace Algorithms.Tests.Sorters.String
     public static class MsdRadixStringSorterTests
     {
         [Test]
-        public static void ArraySorted(
-            [Random(2, 1000, 100, Distinct = true)] int n)
+        public static void ArraySorted([Random(2, 1000, 100, Distinct = true)] int n)
         {
             // Arrange
             var sorter = new MsdRadixStringSorter();
