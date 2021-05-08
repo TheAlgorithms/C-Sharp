@@ -3,8 +3,8 @@ using System;
 namespace DataStructures.SegmentTrees
 {
     /// <summary>
-    ///     This is an extension of a segment tree, which allows to apply distributive operations to a subarray (in this case
-    ///     muliplication).
+    ///     This is an extension of a segment tree, which allows applying distributive operations to a subarray
+    ///     (in this case multiplication).
     /// </summary>
     public class SegmentTreeApply : SegmentTree
     {
