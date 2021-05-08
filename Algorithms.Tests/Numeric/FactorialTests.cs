@@ -25,7 +25,9 @@ namespace Algorithms.Tests.Numeric
         }
 
         [Test]
-        public static void GetsFactorialExceptionForNonPositiveNumbers([Random(-1000, -1, 10, Distinct = true)]int input)
+        public static void GetsFactorialExceptionForNonPositiveNumbers(
+            [Random(-1000, -1, 10, Distinct = true)]
+            int input)
         {
             // Arrange
 

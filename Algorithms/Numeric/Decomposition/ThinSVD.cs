@@ -6,19 +6,19 @@ using V = Utilities.Extensions.VectorExtensions;
 namespace Algorithms.Numeric.Decomposition
 {
     /// <summary>
-    /// Singular Vector Decomposition decomposes any general matrix into its
-    /// singular values and a set of orthonormal bases.
+    ///     Singular Vector Decomposition decomposes any general matrix into its
+    ///     singular values and a set of orthonormal bases.
     /// </summary>
     public static class ThinSvd
     {
         /// <summary>
-        /// Computes a random unit vector.
+        ///     Computes a random unit vector.
         /// </summary>
         /// <param name="dimensions">The dimensions of the required vector.</param>
         /// <returns>The unit vector.</returns>
         public static double[] RandomUnitVector(int dimensions)
         {
-            Random random = new ();
+            Random random = new();
             double[] result = new double[dimensions];
             for (var i = 0; i < dimensions; i++)
             {
@@ -31,7 +31,7 @@ namespace Algorithms.Numeric.Decomposition
         }
 
         /// <summary>
-        /// Computes a single singular vector for the given matrix, corresponding to the largest singular value.
+        ///     Computes a single singular vector for the given matrix, corresponding to the largest singular value.
         /// </summary>
         /// <param name="matrix">The matrix.</param>
         /// <returns>A singular vector, with dimension equal to number of columns of the matrix.</returns>
@@ -39,7 +39,7 @@ namespace Algorithms.Numeric.Decomposition
             Decompose1D(matrix, 1E-5, 100);
 
         /// <summary>
-        /// Computes a single singular vector for the given matrix, corresponding to the largest singular value.
+        ///     Computes a single singular vector for the given matrix, corresponding to the largest singular value.
         /// </summary>
         /// <param name="matrix">The matrix.</param>
         /// <param name="epsilon">The error margin.</param>
@@ -75,13 +75,16 @@ namespace Algorithms.Numeric.Decomposition
             Decompose(matrix, 1E-5, 100);
 
         /// <summary>
-        /// Computes the SVD for the given matrix, with singular values arranged from greatest to least.
+        ///     Computes the SVD for the given matrix, with singular values arranged from greatest to least.
         /// </summary>
         /// <param name="matrix">The matrix.</param>
         /// <param name="epsilon">The error margin.</param>
         /// <param name="maxIterations">The maximum number of iterations.</param>
         /// <returns>The SVD.</returns>
-        public static (double[,] U, double[] S, double[,] V) Decompose(double[,] matrix, double epsilon, int maxIterations)
+        public static (double[,] U, double[] S, double[,] V) Decompose(
+            double[,] matrix,
+            double epsilon,
+            int maxIterations)
         {
             var m = matrix.GetLength(0);
             var n = matrix.GetLength(1);

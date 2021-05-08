@@ -4,10 +4,10 @@ using System.Collections.Generic;
 namespace DataStructures.Queue
 {
     /// <summary>
-    /// Implementation of a stack based queue. FIFO style.
+    ///     Implementation of a stack based queue. FIFO style.
     /// </summary>
     /// <remarks>
-    /// Enqueue is O(1) and Dequeue is amortized O(1).
+    ///     Enqueue is O(1) and Dequeue is amortized O(1).
     /// </remarks>
     /// <typeparam name="T">Generic Type.</typeparam>
     public class StackBasedQueue<T>
@@ -16,7 +16,7 @@ namespace DataStructures.Queue
         private readonly Stack<T> output;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StackBasedQueue{T}"/> class.
+        ///     Initializes a new instance of the <see cref="StackBasedQueue{T}" /> class.
         /// </summary>
         public StackBasedQueue()
         {
@@ -25,7 +25,7 @@ namespace DataStructures.Queue
         }
 
         /// <summary>
-        /// Clears the queue.
+        ///     Clears the queue.
         /// </summary>
         public void Clear()
         {
@@ -34,7 +34,7 @@ namespace DataStructures.Queue
         }
 
         /// <summary>
-        /// Returns the first item in the queue and removes it from the queue.
+        ///     Returns the first item in the queue and removes it from the queue.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown if the queue is empty.</exception>
         public T Dequeue()
@@ -57,17 +57,17 @@ namespace DataStructures.Queue
         }
 
         /// <summary>
-        /// Returns a boolean indicating whether the queue is empty.
+        ///     Returns a boolean indicating whether the queue is empty.
         /// </summary>
         public bool IsEmpty() => input.Count == 0 && output.Count == 0;
 
         /// <summary>
-        /// Returns a boolean indicating whether the queue is full.
+        ///     Returns a boolean indicating whether the queue is full.
         /// </summary>
         public bool IsFull() => false;
 
         /// <summary>
-        /// Returns the first item in the queue and keeps it in the queue.
+        ///     Returns the first item in the queue and keeps it in the queue.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown if the queue is empty.</exception>
         public T Peek()
@@ -90,7 +90,7 @@ namespace DataStructures.Queue
         }
 
         /// <summary>
-        /// Adds an item at the last position in the queue.
+        ///     Adds an item at the last position in the queue.
         /// </summary>
         public void Enqueue(T item) => input.Push(item);
     }

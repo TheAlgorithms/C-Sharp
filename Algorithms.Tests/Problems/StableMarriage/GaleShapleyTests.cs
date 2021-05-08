@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Algorithms.Problems.StableMarriage;
-
 using NUnit.Framework;
 
 namespace Algorithms.Tests.Problems.StableMarriage
 {
     /// <summary>
-    /// The stable marriage problem (also stable matching problem or SMP)
-    /// is the problem of finding a stable matching between two equally sized sets of elements given an ordering of preferences for each element.    
+    ///     The stable marriage problem (also stable matching problem or SMP)
+    ///     is the problem of finding a stable matching between two equally sized sets of elements given an ordering of
+    ///     preferences for each element.
     /// </summary>
     public static class GaleShapleyTests
     {
         /// <summary>
-        /// Checks that all parties are engaged and stable.
+        ///     Checks that all parties are engaged and stable.
         /// </summary>
         [Test]
         public static void MatchingIsSuccessful()
@@ -28,6 +27,7 @@ namespace Algorithms.Tests.Problems.StableMarriage
             {
                 proposer.PreferenceOrder = new LinkedList<Accepter>(accepters.OrderBy(x => random.Next()));
             }
+
             foreach (var accepter in accepters)
             {
                 accepter.PreferenceOrder = proposers.OrderBy(x => random.Next()).ToList();
@@ -41,8 +41,13 @@ namespace Algorithms.Tests.Problems.StableMarriage
         }
 
         private static bool AreMatchesStable(Proposer[] proposers, Accepter[] accepters) =>
-            proposers.All(p => p.EngagedTo is not null && Score(p, p.EngagedTo) <= accepters.Where(a => a.PrefersOverCurrent(p)).Min(a => Score(p, a)));
+            proposers.All(p =>
+                p.EngagedTo is not null
+                && Score(p, p.EngagedTo) <= accepters
+                    .Where(a => a.PrefersOverCurrent(p))
+                    .Min(a => Score(p, a)));
 
-        private static int Score(Proposer proposer, Accepter accepter) => proposer.PreferenceOrder.ToList().IndexOf(accepter);
+        private static int Score(Proposer proposer, Accepter accepter) =>
+            proposer.PreferenceOrder.ToList().IndexOf(accepter);
     }
 }

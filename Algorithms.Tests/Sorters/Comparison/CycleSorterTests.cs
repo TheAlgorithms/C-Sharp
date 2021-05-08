@@ -8,7 +8,9 @@ namespace Algorithms.Tests.Sorters.Comparison
     public static class CycleSorterTests
     {
         [Test]
-        public static void ArraySorted([Random(0, 1000, 100, Distinct = true)]int n)
+        public static void ArraySorted(
+            [Random(0, 1000, 100, Distinct = true)]
+            int n)
         {
             // Arrange
             var sorter = new CycleSorter<int>();

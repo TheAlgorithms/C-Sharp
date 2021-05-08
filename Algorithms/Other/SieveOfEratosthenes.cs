@@ -5,12 +5,12 @@ using System.Numerics;
 namespace Algorithms.Other
 {
     /// <summary>
-    /// TODO.
+    ///     TODO.
     /// </summary>
     public static class SieveOfEratosthenes
     {
         /// <summary>
-        /// TODO.
+        ///     TODO.
         /// </summary>
         /// <param name="count">TODO. 2.</param>
         /// <returns>TODO. 3.</returns>

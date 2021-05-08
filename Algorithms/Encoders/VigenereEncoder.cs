@@ -4,17 +4,17 @@ using System.Text;
 namespace Algorithms.Encoders
 {
     /// <summary>
-    /// Encodes using vigenere cypher.
+    ///     Encodes using vigenere cypher.
     /// </summary>
     public class VigenereEncoder : IEncoder<string>
     {
-        private readonly CaesarEncoder caesarEncoder = new ();
+        private readonly CaesarEncoder caesarEncoder = new();
 
         /// <summary>
-        /// Encodes text using specified key,
-        /// time complexity: O(n),
-        /// space complexity: O(n),
-        /// where n - text length.
+        ///     Encodes text using specified key,
+        ///     time complexity: O(n),
+        ///     space complexity: O(n),
+        ///     where n - text length.
         /// </summary>
         /// <param name="text">Text to be encoded.</param>
         /// <param name="key">Key that will be used to encode the text.</param>
@@ -22,10 +22,10 @@ namespace Algorithms.Encoders
         public string Encode(string text, string key) => Cipher(text, key, caesarEncoder.Encode);
 
         /// <summary>
-        /// Decodes text that was encoded using specified key,
-        /// time complexity: O(n),
-        /// space complexity: O(n),
-        /// where n - text length.
+        ///     Decodes text that was encoded using specified key,
+        ///     time complexity: O(n),
+        ///     space complexity: O(n),
+        ///     where n - text length.
         /// </summary>
         /// <param name="text">Text to be decoded.</param>
         /// <param name="key">Key that was used to encode the text.</param>

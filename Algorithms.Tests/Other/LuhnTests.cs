@@ -1,10 +1,10 @@
-﻿using NUnit.Framework;
-using Algorithms.Other;
+﻿using Algorithms.Other;
+using NUnit.Framework;
 
 namespace Algorithms.Tests.Other
 {
     /// <summary>
-    /// A class for testing the Luhn algorithm.
+    ///     A class for testing the Luhn algorithm.
     /// </summary>
     public class LuhnTests
     {

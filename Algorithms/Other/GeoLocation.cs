@@ -7,7 +7,8 @@ namespace Algorithms.Other
         private const double EarthRadiusKm = 6371.01d;
 
         /// <summary>
-        /// Calculates spherical distance between 2 points given their latitude, longitude coordinates. https://www.movable-type.co.uk/scripts/latlong.html.
+        ///     Calculates spherical distance between 2 points given their latitude, longitude coordinates.
+        ///     https://www.movable-type.co.uk/scripts/latlong.html.
         /// </summary>
         /// <param name="lat1">Latitude of point A.</param>
         /// <param name="lng1">Longitude of point A.</param>
@@ -25,7 +26,9 @@ namespace Algorithms.Other
             var diffLat = lat2Radian - lat1Radian;
             var diffLng = lng2Radian - lng1Radian;
 
-            var haversine = Math.Sin(diffLat / 2) * Math.Sin(diffLat / 2) + Math.Cos(lat1Radian) * Math.Cos(lat2Radian) * Math.Sin(diffLng / 2) * Math.Sin(diffLng / 2);
+            var haversine =
+                Math.Sin(diffLat / 2) * Math.Sin(diffLat / 2)
+                + Math.Cos(lat1Radian) * Math.Cos(lat2Radian) * Math.Sin(diffLng / 2) * Math.Sin(diffLng / 2);
             var distance = EarthRadiusKm * (2d * Math.Atan2(Math.Sqrt(haversine), Math.Sqrt(1 - haversine)));
 
             return distance * 1000; // Convert from km -> m

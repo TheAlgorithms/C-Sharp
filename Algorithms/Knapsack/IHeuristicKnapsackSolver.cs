@@ -3,17 +3,17 @@
 namespace Algorithms.Knapsack
 {
     /// <summary>
-    /// Solves knapsack problem using some heuristics
-    /// Sum of values of taken items -> max
-    /// Sum of weights of taken items. &lt;= capacity.
+    ///     Solves knapsack problem using some heuristics
+    ///     Sum of values of taken items -> max
+    ///     Sum of weights of taken items. &lt;= capacity.
     /// </summary>
     /// <typeparam name="T">Type of items in knapsack.</typeparam>
     public interface IHeuristicKnapsackSolver<T>
     {
         /// <summary>
-        /// Solves knapsack problem using some heuristics
-        /// Sum of values of taken items -> max
-        /// Sum of weights of taken items. &lt;= capacity.
+        ///     Solves knapsack problem using some heuristics
+        ///     Sum of values of taken items -> max
+        ///     Sum of weights of taken items. &lt;= capacity.
         /// </summary>
         /// <param name="items">All items to choose from.</param>
         /// <param name="capacity">How much weight we can take.</param>

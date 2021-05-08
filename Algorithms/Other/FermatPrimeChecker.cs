@@ -4,12 +4,12 @@ using System.Numerics;
 namespace Algorithms.Other
 {
     /// <summary>
-    /// Fermat's prime tester https://en.wikipedia.org/wiki/Fermat_primality_test.
+    ///     Fermat's prime tester https://en.wikipedia.org/wiki/Fermat_primality_test.
     /// </summary>
     public static class FermatPrimeChecker
     {
         /// <summary>
-        /// Checks if input number is a probable prime.
+        ///     Checks if input number is a probable prime.
         /// </summary>
         /// <param name="numberToTest">Input number.</param>
         /// <param name="timesToCheck">Number of times to check.</param>

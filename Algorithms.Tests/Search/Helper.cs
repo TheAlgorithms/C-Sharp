@@ -5,8 +5,12 @@ namespace Algorithms.Tests.Search
 {
     public static class Helper
     {
-        public static int[] GetSortedArray(int length) => Enumerable.Range(0, length).Select(x => TestContext.CurrentContext.Random.Next(1_000_000)).OrderBy(x => x).ToArray();
-        
+        public static int[] GetSortedArray(int length) =>
+            Enumerable.Range(0, length)
+                .Select(x => TestContext.CurrentContext.Random.Next(1_000_000))
+                .OrderBy(x => x)
+                .ToArray();
+
         public static int GetItemIn(int[] arr) => arr[TestContext.CurrentContext.Random.Next(arr.Length)];
 
         public static int GetItemNotIn(int[] arr)
@@ -15,7 +19,8 @@ namespace Algorithms.Tests.Search
             do
             {
                 item = TestContext.CurrentContext.Random.Next(arr.Min(), arr.Max() + 1);
-            } while (arr.Contains(item));
+            }
+            while (arr.Contains(item));
 
             return item;
         }

@@ -1,8 +1,6 @@
 using System;
 using System.Linq;
-
 using DataStructures.LinkedList.DoublyLinkedList;
-
 using NUnit.Framework;
 
 namespace DataStructures.Tests.LinkedList
@@ -12,17 +10,17 @@ namespace DataStructures.Tests.LinkedList
         [Test]
         public static void TestGetData()
         {
-            var dll = new DoublyLinkedList<int>(new [] { 0, 1, 2, 3, 4 });
+            var dll = new DoublyLinkedList<int>(new[] { 0, 1, 2, 3, 4 });
             var arr = dll.GetData().ToArray();
 
             Assert.AreEqual(dll.Count, 5);
-            Assert.AreEqual(new [] { 0, 1, 2, 3, 4 }, arr);
+            Assert.AreEqual(new[] { 0, 1, 2, 3, 4 }, arr);
         }
 
         [Test]
         public static void TestGetAt()
         {
-            var dll = new DoublyLinkedList<int>(new [] { 0, 1, 2, 3, 4 });
+            var dll = new DoublyLinkedList<int>(new[] { 0, 1, 2, 3, 4 });
 
             var one = dll.GetAt(1);
             var three = dll.GetAt(3);
@@ -50,13 +48,13 @@ namespace DataStructures.Tests.LinkedList
             var arr = dll.GetData().ToArray();
 
             Assert.AreEqual(dll.Count, 5);
-            Assert.AreEqual(new [] { 0, 1, 2, 3, 4 }, arr);
+            Assert.AreEqual(new[] { 0, 1, 2, 3, 4 }, arr);
         }
 
         [Test]
         public static void TestRemove()
         {
-            var dll = new DoublyLinkedList<int>(new [] { 0, 1, 2, 3, 4 });
+            var dll = new DoublyLinkedList<int>(new[] { 0, 1, 2, 3, 4 });
 
             dll.RemoveNode(dll.Find(2));
             dll.RemoveHead();
@@ -65,13 +63,13 @@ namespace DataStructures.Tests.LinkedList
             var arr = dll.GetData().ToArray();
 
             Assert.AreEqual(dll.Count, 2);
-            Assert.AreEqual(new [] { 1, 3 }, arr);
+            Assert.AreEqual(new[] { 1, 3 }, arr);
         }
 
         [Test]
         public static void TestFind()
         {
-            var dll = new DoublyLinkedList<int>(new [] { 0, 1, 2, 3, 4 });
+            var dll = new DoublyLinkedList<int>(new[] { 0, 1, 2, 3, 4 });
 
             var one = dll.Find(1);
             var three = dll.Find(3);
@@ -83,7 +81,7 @@ namespace DataStructures.Tests.LinkedList
         [Test]
         public static void TestIndexOf()
         {
-            var dll = new DoublyLinkedList<int>(new [] { 0, 1, 2, 3, 4 });
+            var dll = new DoublyLinkedList<int>(new[] { 0, 1, 2, 3, 4 });
 
             var one = dll.IndexOf(1);
             var three = dll.IndexOf(3);
@@ -95,7 +93,7 @@ namespace DataStructures.Tests.LinkedList
         [Test]
         public static void TestContains()
         {
-            var dll = new DoublyLinkedList<int>(new [] { 0, 1, 2, 3, 4 });
+            var dll = new DoublyLinkedList<int>(new[] { 0, 1, 2, 3, 4 });
 
             var one = dll.Contains(1);
             var six = dll.Contains(6);
@@ -107,27 +105,27 @@ namespace DataStructures.Tests.LinkedList
         [Test]
         public static void TestReverse()
         {
-            var dll = new DoublyLinkedList<int>(new [] { 0, 1, 2, 3, 4 });
+            var dll = new DoublyLinkedList<int>(new[] { 0, 1, 2, 3, 4 });
             dll.Reverse();
             var arr = dll.GetData().ToArray();
 
-            var empty = new DoublyLinkedList<int>(new int[] {});
+            var empty = new DoublyLinkedList<int>(new int[] { });
             empty.Reverse();
             var emptyArr = empty.GetData().ToArray();
 
-            Assert.AreEqual(arr, new [] { 4, 3, 2, 1, 0 });
-            Assert.AreEqual(emptyArr, new int[] {});
+            Assert.AreEqual(arr, new[] { 4, 3, 2, 1, 0 });
+            Assert.AreEqual(emptyArr, new int[] { });
         }
 
         [Test]
         public static void TestGetDataReversed()
         {
-            var dll = new DoublyLinkedList<int>(new [] { 0, 1, 2, 3, 4 });
+            var dll = new DoublyLinkedList<int>(new[] { 0, 1, 2, 3, 4 });
             var arr = dll.GetData().ToArray();
             var reversedArr = dll.GetDataReversed().ToArray();
 
-            Assert.AreEqual(arr, new [] { 0, 1, 2, 3, 4 });
-            Assert.AreEqual(reversedArr, new [] { 4, 3, 2, 1, 0 });
+            Assert.AreEqual(arr, new[] { 0, 1, 2, 3, 4 });
+            Assert.AreEqual(reversedArr, new[] { 4, 3, 2, 1, 0 });
         }
     }
 }

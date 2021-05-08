@@ -5,14 +5,14 @@ using System.Text;
 namespace Algorithms.Encoders
 {
     /// <summary>
-    /// Class for NYSIIS encoding strings.
+    ///     Class for NYSIIS encoding strings.
     /// </summary>
     public class NysiisEncoder
     {
         private static readonly char[] Vowels = { 'A', 'E', 'I', 'O', 'U' };
 
         /// <summary>
-        /// Encodes a string using the NYSIIS Algorithm.
+        ///     Encodes a string using the NYSIIS Algorithm.
         /// </summary>
         /// <param name="text">The string to encode.</param>
         /// <returns>The NYSIIS encoded string (all uppercase).</returns>
@@ -32,10 +32,7 @@ namespace Algorithms.Encoders
             return TrimEnd(text);
         }
 
-        private string TrimSpaces(string text)
-        {
-            return text.Replace(" ", string.Empty);
-        }
+        private string TrimSpaces(string text) => text.Replace(" ", string.Empty);
 
         private string RemoveDuplicates(string text)
         {
@@ -115,10 +112,7 @@ namespace Algorithms.Encoders
 
             return text;
 
-            string ReplaceWithPrevious()
-            {
-                return Replace(text, i, 1, text[i - 1].ToString());
-            }
+            string ReplaceWithPrevious() => Replace(text, i, 1, text[i - 1].ToString());
         }
 
         private bool TryReplace(string text, int index, (string, string)[] opts, out string result)
@@ -180,9 +174,7 @@ namespace Algorithms.Encoders
             return end;
         }
 
-        private string Replace(string text, int index, int length, string substitute)
-        {
-            return text[..index] + substitute + text[(index + length) ..];
-        }
+        private string Replace(string text, int index, int length, string substitute) =>
+            text[..index] + substitute + text[(index + length) ..];
     }
 }

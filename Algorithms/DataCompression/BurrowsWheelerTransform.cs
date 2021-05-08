@@ -4,14 +4,16 @@ using System.Linq;
 namespace Algorithms.DataCompression
 {
     /// <summary>
-    /// The Burrows–Wheeler transform (BWT) rearranges a character string into runs of similar characters.
-    /// This is useful for compression, since it tends to be easy to compress a string that has runs of repeated characters.
-    /// See <a href="https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform">here</a> for more info.
+    ///     The Burrows–Wheeler transform (BWT) rearranges a character string into runs of similar characters.
+    ///     This is useful for compression, since it tends to be easy to compress a string that has runs of repeated
+    ///     characters.
+    ///     See <a href="https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform">here</a> for more info.
     /// </summary>
     public class BurrowsWheelerTransform
     {
         /// <summary>
-        /// Encodes the input string using BWT and returns encoded string and the index of original string in the sorted rotation matrix.
+        ///     Encodes the input string using BWT and returns encoded string and the index of original string in the sorted
+        ///     rotation matrix.
         /// </summary>
         /// <param name="s">Input string.</param>
         public (string encoded, int index) Encode(string s)
@@ -24,14 +26,14 @@ namespace Algorithms.DataCompression
             var rotations = GetRotations(s);
             Array.Sort(rotations, StringComparer.Ordinal);
             var lastColumn = rotations
-                .Select(x => x[x.Length - 1])
+                .Select(x => x[^1])
                 .ToArray();
             var encoded = new string(lastColumn);
             return (encoded, Array.IndexOf(rotations, s));
         }
 
         /// <summary>
-        /// Decodes the input string and returns original string.
+        ///     Decodes the input string and returns original string.
         /// </summary>
         /// <param name="s">Encoded string.</param>
         /// <param name="index">Index  of original string in the sorted rotation matrix.</param>

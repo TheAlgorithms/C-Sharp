@@ -85,7 +85,9 @@ namespace Algorithms.Tests.Knapsack
 
 
         [Test]
-        public static void TakesHalf([Random(0, 1000, 100, Distinct = true)]int length)
+        public static void TakesHalf(
+            [Random(0, 1000, 100, Distinct = true)]
+            int length)
         {
             //Arrange
             var solver = new DynamicProgrammingKnapsackSolver<int>();

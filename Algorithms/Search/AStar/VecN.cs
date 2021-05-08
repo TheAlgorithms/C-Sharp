@@ -3,25 +3,25 @@
 namespace Algorithms.Search.AStar
 {
     /// <summary>
-    /// Vector Struct with N Dimensions.
+    ///     Vector Struct with N Dimensions.
     /// </summary>
     public struct VecN : IEquatable<VecN>
     {
         private readonly double[] data;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="VecN"/> struct.
+        ///     Initializes a new instance of the <see cref="VecN" /> struct.
         /// </summary>
         /// <param name="vals">Vector components as array.</param>
         public VecN(params double[] vals) => data = vals;
 
         /// <summary>
-        /// Gets the dimension count of this vector.
+        ///     Gets the dimension count of this vector.
         /// </summary>
         public int N => data.Length;
 
         /// <summary>
-        /// Returns the Length squared.
+        ///     Returns the Length squared.
         /// </summary>
         /// <returns>The squared length of the vector.</returns>
         public double SqrLength()
@@ -36,13 +36,13 @@ namespace Algorithms.Search.AStar
         }
 
         /// <summary>
-        /// Returns the Length of the vector.
+        ///     Returns the Length of the vector.
         /// </summary>
         /// <returns>Length of the Vector.</returns>
         public double Length() => Math.Sqrt(SqrLength());
 
         /// <summary>
-        /// Returns the Distance between this and other.
+        ///     Returns the Distance between this and other.
         /// </summary>
         /// <param name="other">Other vector.</param>
         /// <returns>The distance between this and other.</returns>
@@ -53,7 +53,7 @@ namespace Algorithms.Search.AStar
         }
 
         /// <summary>
-        /// Returns the squared Distance between this and other.
+        ///     Returns the squared Distance between this and other.
         /// </summary>
         /// <param name="other">Other vector.</param>
         /// <returns>The squared distance between this and other.</returns>
@@ -64,7 +64,7 @@ namespace Algorithms.Search.AStar
         }
 
         /// <summary>
-        /// Substracts other from this vector.
+        ///     Substracts other from this vector.
         /// </summary>
         /// <param name="other">Other vector.</param>
         /// <returns>The new vector.</returns>
@@ -91,7 +91,7 @@ namespace Algorithms.Search.AStar
         }
 
         /// <summary>
-        /// Is used to compare Vectors with each other.
+        ///     Is used to compare Vectors with each other.
         /// </summary>
         /// <param name="other">The vector to be compared.</param>
         /// <returns>A value indicating if other has the same values as this.</returns>

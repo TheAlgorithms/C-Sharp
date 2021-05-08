@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
-
 using DataStructures.LinkedList.SinglyLinkedList;
-
 using NUnit.Framework;
 
 namespace DataStructures.Tests.LinkedList
@@ -10,7 +8,7 @@ namespace DataStructures.Tests.LinkedList
     public static class LinkedListTests
     {
         [Test]
-        public static void LengthWorksCorrectly([Random(0, 1000, 100)]int quantity)
+        public static void LengthWorksCorrectly([Random(0, 1000, 100)] int quantity)
         {
             // Arrange
             var a = new SinglyLinkedList<int>();

@@ -3,17 +3,17 @@
 namespace Algorithms.Sorters.Comparison
 {
     /// <summary>
-    /// Cycle sort is an in-place, unstable sorting algorithm,
-    /// a comparison sort that is theoretically optimal in terms of the total
-    /// number of writes to the original array.
-    /// It is based on the idea that the permutation to be sorted can be factored
-    /// into cycles, which can individually be rotated to give a sorted result.
+    ///     Cycle sort is an in-place, unstable sorting algorithm,
+    ///     a comparison sort that is theoretically optimal in terms of the total
+    ///     number of writes to the original array.
+    ///     It is based on the idea that the permutation to be sorted can be factored
+    ///     into cycles, which can individually be rotated to give a sorted result.
     /// </summary>
     /// <typeparam name="T">Type array input.</typeparam>
     public class CycleSorter<T> : IComparisonSorter<T>
     {
         /// <summary>
-        /// Sorts input array using Cycle sort.
+        ///     Sorts input array using Cycle sort.
         /// </summary>
         /// <param name="array">Input array.</param>
         /// <param name="comparer">Integer comparer.</param>

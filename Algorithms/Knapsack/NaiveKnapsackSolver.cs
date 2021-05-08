@@ -4,13 +4,13 @@ using System.Collections.Generic;
 namespace Algorithms.Knapsack
 {
     /// <summary>
-    /// Greedy heurictic solver.
+    ///     Greedy heurictic solver.
     /// </summary>
     /// <typeparam name="T">Type of items in knapsack.</typeparam>
     public class NaiveKnapsackSolver<T> : IHeuristicKnapsackSolver<T>
     {
         /// <summary>
-        /// TODO.
+        ///     TODO.
         /// </summary>
         /// <param name="items">TODO. 2.</param>
         /// <param name="capacity">TODO. 3.</param>

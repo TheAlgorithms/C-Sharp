@@ -3,14 +3,14 @@
 namespace Algorithms.Sorters.Comparison
 {
     /// <summary>
-    /// Heap sort is a comparison based sorting technique
-    /// based on Binary Heap data structure.
+    ///     Heap sort is a comparison based sorting technique
+    ///     based on Binary Heap data structure.
     /// </summary>
     /// <typeparam name="T">Input array type.</typeparam>
     public class HeapSorter<T> : IComparisonSorter<T>
     {
         /// <summary>
-        /// Sorts input array using heap sort algorithm.
+        ///     Sorts input array using heap sort algorithm.
         /// </summary>
         /// <param name="array">Input array.</param>
         /// <param name="comparer">Comparer type for elements.</param>

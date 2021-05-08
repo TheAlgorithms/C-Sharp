@@ -1,16 +1,207 @@
 ﻿using System;
-
 using FluentAssertions;
-
 using NUnit.Framework;
 
 namespace DataStructures.Tests
 {
     /// <summary>
-    /// This class contains some tests for the class BitArray.
+    ///     This class contains some tests for the class BitArray.
     /// </summary>
     public static class BitArrayTests
     {
+        [Test]
+        public static void TestIndexer()
+        {
+            // Arrange
+            var testObj = new BitArray(5);
+
+            // Act
+            testObj.Compile(24);
+
+            // Assert
+            Assert.IsTrue(testObj[0]);
+            Assert.IsTrue(testObj[1]);
+            Assert.IsFalse(testObj[3]);
+        }
+
+        [TestCase(19, 3)]
+        public static void TestNumberOfOneBits(int number, int expected)
+        {
+            // Arrange
+            var testObj = new BitArray(5);
+
+            // Act
+            testObj.Compile(number);
+
+            // Assert
+            Assert.AreEqual(expected, testObj.NumberOfOneBits());
+        }
+
+        [TestCase(26, 2)]
+        public static void TestNumberOfZeroBits(int number, int expected)
+        {
+            // Arrange
+            var testObj = new BitArray(5);
+
+            // Act
+            testObj.Compile(number);
+
+            // Assert
+            Assert.AreEqual(expected, testObj.NumberOfZeroBits());
+        }
+
+        [TestCase(33, 33)]
+        public static void TestToInt64(int number, int expected)
+        {
+            // Arrange
+            var testObj = new BitArray(6);
+
+            // Act
+            testObj.Compile(number);
+
+            // Assert
+            Assert.AreEqual(expected, testObj.ToInt64());
+        }
+
+        [Test]
+        public static void TestToInt32MaxValue()
+        {
+            // Arrange
+            var testObj = new BitArray(33);
+
+            // Act
+
+            // Assert
+            _ = Assert.Throws<InvalidOperationException>(() => testObj.ToInt32());
+        }
+
+        [Test]
+        public static void TestToInt64MaxValue()
+        {
+            // Arrange
+            var testObj = new BitArray(65);
+
+            // Act
+
+            // Assert
+            _ = Assert.Throws<InvalidOperationException>(() => testObj.ToInt64());
+        }
+
+        [TestCase("110")]
+        public static void TestResetField(string sequence)
+        {
+            // Arrange
+            var testObj = new BitArray(sequence);
+
+            // Act
+            testObj.ResetField();
+
+            // Assert
+            Assert.AreEqual(0, testObj.ToInt64());
+        }
+
+        [TestCase("101001", 63)]
+        public static void TestSetAll(string sequence, int expected)
+        {
+            // Arrange
+            var testObj = new BitArray(sequence);
+
+            // Act
+            testObj.SetAll(true);
+
+            // Assert
+            Assert.AreEqual(expected, testObj.ToInt64());
+        }
+
+        [Test]
+        public static void TestCloneEquals()
+        {
+            // Arrange
+            var testObj1 = new BitArray("110");
+
+            // Act
+            var testObj2 = (BitArray)testObj1.Clone();
+
+            // Assert
+            Assert.IsTrue(testObj1.Equals(testObj2));
+        }
+
+        [Test]
+        public static void TestCloneNotEquals()
+        {
+            // Arrange
+            var testObj1 = new BitArray("101");
+            var testObj2 = new BitArray(15);
+            var testObj3 = new BitArray(3);
+
+            // Act
+            testObj3.Reset();
+
+            // Assert
+            testObj1.Equals(testObj2).Should().BeFalse();
+            testObj1.Equals(testObj3).Should().BeFalse();
+        }
+
+        [Test]
+        public static void TestHasCode()
+        {
+            // Arrange
+            const int num = 5;
+            var testObj = new BitArray(3);
+
+            // Act
+            testObj.Compile(num);
+            var result = testObj.GetHashCode();
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.AreEqual(5, result);
+        }
+
+        [Test]
+        public static void TestMoveNextCurrent()
+        {
+            var testObj1 = new BitArray("1111010");
+
+            var counterOnes = 0;
+            var counterZeros = 0;
+
+            foreach (var bit in testObj1)
+            {
+                if (bit)
+                {
+                    counterOnes++;
+                }
+                else
+                {
+                    counterZeros++;
+                }
+            }
+
+            Assert.AreEqual(counterOnes, 5);
+            Assert.AreEqual(counterZeros, 2);
+        }
+
+        [Test]
+        public static void IEnumerable_IterationWorks()
+        {
+            var arr = new BitArray("010101010101010101");
+            var current = 0;
+            foreach (var b in arr)
+            {
+                b.Should().Be(arr[current]);
+                current++;
+            }
+        }
+
+        [Test]
+        public static void Equals_NullIsNotEqualToNotNull()
+        {
+            var arr1 = new BitArray("010101010101010101");
+            BitArray? arr2 = null;
+            arr1.Equals(arr2).Should().BeFalse();
+        }
+
         #region COMPILE TESTS
 
         [TestCase("00100", "00100")]
@@ -340,198 +531,5 @@ namespace DataStructures.Tests
         }
 
         #endregion COMPARE TESTS
-
-        [Test]
-        public static void TestIndexer()
-        {
-            // Arrange
-            var testObj = new BitArray(5);
-
-            // Act
-            testObj.Compile(24);
-
-            // Assert
-            Assert.IsTrue(testObj[0]);
-            Assert.IsTrue(testObj[1]);
-            Assert.IsFalse(testObj[3]);
-        }
-
-        [TestCase(19, 3)]
-        public static void TestNumberOfOneBits(int number, int expected)
-        {
-            // Arrange
-            var testObj = new BitArray(5);
-
-            // Act
-            testObj.Compile(number);
-
-            // Assert
-            Assert.AreEqual(expected, testObj.NumberOfOneBits());
-        }
-
-        [TestCase(26, 2)]
-        public static void TestNumberOfZeroBits(int number, int expected)
-        {
-            // Arrange
-            var testObj = new BitArray(5);
-
-            // Act
-            testObj.Compile(number);
-
-            // Assert
-            Assert.AreEqual(expected, testObj.NumberOfZeroBits());
-        }
-
-        [TestCase(33, 33)]
-        public static void TestToInt64(int number, int expected)
-        {
-            // Arrange
-            var testObj = new BitArray(6);
-
-            // Act
-            testObj.Compile(number);
-
-            // Assert
-            Assert.AreEqual(expected, testObj.ToInt64());
-        }
-
-        [Test]
-        public static void TestToInt32MaxValue()
-        {
-            // Arrange
-            var testObj = new BitArray(33);
-
-            // Act
-
-            // Assert
-            _ = Assert.Throws<InvalidOperationException>(() => testObj.ToInt32());
-        }
-
-        [Test]
-        public static void TestToInt64MaxValue()
-        {
-            // Arrange
-            var testObj = new BitArray(65);
-
-            // Act
-
-            // Assert
-            _ = Assert.Throws<InvalidOperationException>(() => testObj.ToInt64());
-        }
-
-        [TestCase("110")]
-        public static void TestResetField(string sequence)
-        {
-            // Arrange
-            var testObj = new BitArray(sequence);
-
-            // Act
-            testObj.ResetField();
-
-            // Assert
-            Assert.AreEqual(0, testObj.ToInt64());
-        }
-
-        [TestCase("101001", 63)]
-        public static void TestSetAll(string sequence, int expected)
-        {
-            // Arrange
-            var testObj = new BitArray(sequence);
-
-            // Act
-            testObj.SetAll(true);
-
-            // Assert
-            Assert.AreEqual(expected, testObj.ToInt64());
-        }
-
-        [Test]
-        public static void TestCloneEquals()
-        {
-            // Arrange
-            var testObj1 = new BitArray("110");
-
-            // Act
-            var testObj2 = (BitArray)testObj1.Clone();
-
-            // Assert
-            Assert.IsTrue(testObj1.Equals(testObj2));
-        }
-
-        [Test]
-        public static void TestCloneNotEquals()
-        {
-            // Arrange
-            var testObj1 = new BitArray("101");
-            var testObj2 = new BitArray(15);
-            var testObj3 = new BitArray(3);
-
-            // Act
-            testObj3.Reset();
-
-            // Assert
-            testObj1.Equals(testObj2).Should().BeFalse();
-            testObj1.Equals(testObj3).Should().BeFalse();
-        }
-
-        [Test]
-        public static void TestHasCode()
-        {
-            // Arrange
-            const int num = 5;
-            var testObj = new BitArray(3);
-
-            // Act
-            testObj.Compile(num);
-            var result = testObj.GetHashCode();
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.AreEqual(5, result);
-        }
-
-        [Test]
-        public static void TestMoveNextCurrent()
-        {
-            var testObj1 = new BitArray("1111010");
-
-            var counterOnes = 0;
-            var counterZeros = 0;
-
-            foreach (var bit in testObj1)
-            {
-                if (bit)
-                {
-                    counterOnes++;
-                }
-                else
-                {
-                    counterZeros++;
-                }
-            }
-
-            Assert.AreEqual(counterOnes, 5);
-            Assert.AreEqual(counterZeros, 2);
-        }
-
-        [Test]
-        public static void IEnumerable_IterationWorks()
-        {
-            var arr = new BitArray("010101010101010101");
-            var current = 0;
-            foreach (var b in arr)
-            {
-                b.Should().Be(arr[current]);
-                current++;
-            }
-        }
-
-        [Test]
-        public static void Equals_NullIsNotEqualToNotNull()
-        {
-            var arr1 = new BitArray("010101010101010101");
-            BitArray? arr2 = null;
-            (arr1.Equals(arr2)).Should().BeFalse();
-        }
     }
 }

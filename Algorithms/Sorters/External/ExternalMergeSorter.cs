@@ -36,7 +36,13 @@ namespace Algorithms.Sorters.External
                         right.Read();
                     }
 
-                    Merge(left, right, output, stripLength, Math.Min(stripLength, totalLength - rightStripStart), comparer);
+                    Merge(
+                        left,
+                        right,
+                        output,
+                        stripLength,
+                        Math.Min(stripLength, totalLength - rightStripStart),
+                        comparer);
                 }
 
                 for (var i = 0L; i < totalLength + stripLength - rightStripStart; i++)

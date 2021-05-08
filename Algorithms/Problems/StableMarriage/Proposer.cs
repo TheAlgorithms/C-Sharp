@@ -6,6 +6,6 @@ namespace Algorithms.Problems.StableMarriage
     {
         public Accepter? EngagedTo { get; set; }
 
-        public LinkedList<Accepter> PreferenceOrder { get; set; } = new ();
+        public LinkedList<Accepter> PreferenceOrder { get; set; } = new();
     }
 }

@@ -1,12 +1,11 @@
 ﻿using DataStructures.Stack;
-
 using NUnit.Framework;
 
 namespace DataStructures.Tests.Stack
 {
     public static class ArrayBasedStackTests
     {
-        const string StackEmptyErrorMessage = "Stack is empty";
+        private const string StackEmptyErrorMessage = "Stack is empty";
 
         [Test]
         public static void CountTest()
@@ -98,6 +97,5 @@ namespace DataStructures.Tests.Stack
 
             Assert.Catch(() => stack.Peek(), StackEmptyErrorMessage);
         }
-
     }
 }

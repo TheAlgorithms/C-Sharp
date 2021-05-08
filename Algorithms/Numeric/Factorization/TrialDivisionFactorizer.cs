@@ -4,16 +4,16 @@ using System.Linq;
 namespace Algorithms.Numeric.Factorization
 {
     /// <summary>
-    /// Factors number using trial division algorithm.
+    ///     Factors number using trial division algorithm.
     /// </summary>
     public class TrialDivisionFactorizer : IFactorizer
     {
         /// <summary>
-        /// Finds a factor of a given number or returns false if it's prime.
+        ///     Finds a factor of a given number or returns false if it's prime.
         /// </summary>
-        /// <param name="n">Integer to factor.</param>s
+        /// <param name="n">Integer to factor.</param>
         /// <param name="factor">Found factor.</param>
-        /// <returns><see langword="true"/> if factor is found, <see langword="false"/> if <paramref name="n"/> is prime.</returns>
+        /// <returns><see langword="true" /> if factor is found, <see langword="false" /> if <paramref name="n" /> is prime.</returns>
         public bool TryFactor(int n, out int factor)
         {
             n = Math.Abs(n);

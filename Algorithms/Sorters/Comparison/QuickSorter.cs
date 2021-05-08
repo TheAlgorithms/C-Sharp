@@ -3,18 +3,18 @@
 namespace Algorithms.Sorters.Comparison
 {
     /// <summary>
-    /// Sorts arrays using quicksort.
+    ///     Sorts arrays using quicksort.
     /// </summary>
     /// <typeparam name="T">Type of array element.</typeparam>
     public abstract class QuickSorter<T> : IComparisonSorter<T>
     {
         /// <summary>
-        /// Sorts array using Hoare partition scheme,
-        /// internal, in-place,
-        /// time complexity average: O(n log(n)),
-        /// time complexity worst: O(n^2),
-        /// space complexity: O(log(n)),
-        /// where n - array length.
+        ///     Sorts array using Hoare partition scheme,
+        ///     internal, in-place,
+        ///     time complexity average: O(n log(n)),
+        ///     time complexity worst: O(n^2),
+        ///     space complexity: O(log(n)),
+        ///     where n - array length.
         /// </summary>
         /// <param name="array">Array to sort.</param>
         /// <param name="comparer">Compares elements.</param>

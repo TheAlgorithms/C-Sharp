@@ -3,18 +3,18 @@
 namespace Algorithms.Sorters.Comparison
 {
     /// <summary>
-    /// TODO.
+    ///     TODO.
     /// </summary>
     /// <typeparam name="T">TODO. 2.</typeparam>
     public class ShellSorter<T> : IComparisonSorter<T>
     {
         /// <summary>
-        /// Sorts array using specified comparer,
-        /// based on bubble sort,
-        /// internal, in-place, unstable,
-        /// worst-case time complexity: O(n^2),
-        /// space complexity: O(1),
-        /// where n - array length.
+        ///     Sorts array using specified comparer,
+        ///     based on bubble sort,
+        ///     internal, in-place, unstable,
+        ///     worst-case time complexity: O(n^2),
+        ///     space complexity: O(1),
+        ///     where n - array length.
         /// </summary>
         /// <param name="array">Array to sort.</param>
         /// <param name="comparer">Compares elements.</param>

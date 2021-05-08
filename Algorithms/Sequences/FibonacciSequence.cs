@@ -4,20 +4,20 @@ using System.Numerics;
 namespace Algorithms.Sequences
 {
     /// <summary>
-    /// <para>
-    ///     Fibonacci sequence.
-    /// </para>
-    /// <para>
-    ///     Wikipedia: https://wikipedia.org/wiki/Fibonacci_number.
-    /// </para>
-    /// <para>
-    ///     OEIS: https://oeis.org/A000045.
-    /// </para>
+    ///     <para>
+    ///         Fibonacci sequence.
+    ///     </para>
+    ///     <para>
+    ///         Wikipedia: https://wikipedia.org/wiki/Fibonacci_number.
+    ///     </para>
+    ///     <para>
+    ///         OEIS: https://oeis.org/A000045.
+    ///     </para>
     /// </summary>
     public class FibonacciSequence : ISequence
     {
         /// <summary>
-        /// Gets Fibonacci sequence.
+        ///     Gets Fibonacci sequence.
         /// </summary>
         public IEnumerable<BigInteger> Sequence
         {

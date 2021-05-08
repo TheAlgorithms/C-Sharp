@@ -3,15 +3,15 @@ using System;
 namespace Algorithms.Numeric.Decomposition
 {
     /// <summary>
-    /// LU-decomposition factors the "source" matrix as the product of lower triangular matrix
-    /// and upper triangular matrix.
+    ///     LU-decomposition factors the "source" matrix as the product of lower triangular matrix
+    ///     and upper triangular matrix.
     /// </summary>
     public static class LU
     {
         /// <summary>
-        /// Performs LU-decomposition on "source" matrix.
-        /// Lower and upper matrices have same shapes as source matrix.
-        /// Note: Decomposition can be applied only to square matrices.
+        ///     Performs LU-decomposition on "source" matrix.
+        ///     Lower and upper matrices have same shapes as source matrix.
+        ///     Note: Decomposition can be applied only to square matrices.
         /// </summary>
         /// <param name="source">Square matrix to decompose.</param>
         /// <returns>Tuple of lower and upper matrix.</returns>
@@ -65,8 +65,8 @@ namespace Algorithms.Numeric.Decomposition
         }
 
         /// <summary>
-        /// Eliminates linear equations system represented as A*x=b, using LU-decomposition,
-        /// where A - matrix of equation coefficients, b - vector of absolute terms of equations.
+        ///     Eliminates linear equations system represented as A*x=b, using LU-decomposition,
+        ///     where A - matrix of equation coefficients, b - vector of absolute terms of equations.
         /// </summary>
         /// <param name="matrix">Matrix of equation coefficients.</param>
         /// <param name="coefficients">Vector of absolute terms of equations.</param>
@@ -82,7 +82,7 @@ namespace Algorithms.Numeric.Decomposition
             var pivot = matrix.GetLength(0);
             var upperTransform = new double[pivot, 1]; // U * upperTransform = coefficients
             var solution = new double[pivot]; // L * solution = upperTransform
-            (double[,] l, double[,] u) = LU.Decompose(matrix);
+            (double[,] l, double[,] u) = Decompose(matrix);
 
             for (var i = 0; i < pivot; i++)
             {

@@ -8,7 +8,9 @@ namespace Algorithms.Tests.Sorters.Integer
     public static class CountingSorterTests
     {
         [Test]
-        public static void SortsNonEmptyArray([Random(1, 10000, 100, Distinct = true)]int n)
+        public static void SortsNonEmptyArray(
+            [Random(1, 10000, 100, Distinct = true)]
+            int n)
         {
             // Arrange
             var sorter = new CountingSorter();

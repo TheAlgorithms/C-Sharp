@@ -1,22 +1,22 @@
 ﻿using System;
-using System.Drawing;
 
 namespace Algorithms.Other
 {
     /// <summary>
-    /// The RGB color model is an additive color model in which red, green, and
-    /// blue light are added together in various ways to reproduce a broad array of
-    /// colors. The name of the model comes from the initials of the three additive
-    /// primary colors, red, green, and blue. Meanwhile, the HSV representation
-    /// models how colors appear under light. In it, colors are represented using
-    /// three components: hue, saturation and (brightness-)value. This class
-    /// provides methods for converting colors from one representation to the other.
-    /// (description adapted from https://en.wikipedia.org/wiki/RGB_color_model and https://en.wikipedia.org/wiki/HSL_and_HSV).
+    ///     The RGB color model is an additive color model in which red, green, and
+    ///     blue light are added together in various ways to reproduce a broad array of
+    ///     colors. The name of the model comes from the initials of the three additive
+    ///     primary colors, red, green, and blue. Meanwhile, the HSV representation
+    ///     models how colors appear under light. In it, colors are represented using
+    ///     three components: hue, saturation and (brightness-)value. This class
+    ///     provides methods for converting colors from one representation to the other.
+    ///     (description adapted from https://en.wikipedia.org/wiki/RGB_color_model and
+    ///     https://en.wikipedia.org/wiki/HSL_and_HSV).
     /// </summary>
     public static class RgbHsvConversion
     {
         /// <summary>
-        /// Conversion from the HSV-representation to the RGB-representation.
+        ///     Conversion from the HSV-representation to the RGB-representation.
         /// </summary>
         /// <param name="hue">Hue of the color.</param>
         /// <param name="saturation">Saturation of the color.</param>
@@ -34,7 +34,9 @@ namespace Algorithms.Other
 
             if (saturation < 0 || saturation > 1)
             {
-                throw new ArgumentOutOfRangeException(nameof(saturation), $"{nameof(saturation)} should be between 0 and 1");
+                throw new ArgumentOutOfRangeException(
+                    nameof(saturation),
+                    $"{nameof(saturation)} should be between 0 and 1");
             }
 
             if (value < 0 || value > 1)
@@ -42,16 +44,16 @@ namespace Algorithms.Other
                 throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(value)} should be between 0 and 1");
             }
 
-            double chroma = value * saturation;
-            double hueSection = hue / 60;
-            double secondLargestComponent = chroma * (1 - Math.Abs(hueSection % 2 - 1));
-            double matchValue = value - chroma;
+            var chroma = value * saturation;
+            var hueSection = hue / 60;
+            var secondLargestComponent = chroma * (1 - Math.Abs(hueSection % 2 - 1));
+            var matchValue = value - chroma;
 
             return GetRgbBySection(hueSection, chroma, matchValue, secondLargestComponent);
         }
 
         /// <summary>
-        /// Conversion from the RGB-representation to the HSV-representation.
+        ///     Conversion from the RGB-representation to the HSV-representation.
         /// </summary>
         /// <param name="red">Red-component of the color.</param>
         /// <param name="green">Green-component of the color.</param>
@@ -62,12 +64,12 @@ namespace Algorithms.Other
             byte green,
             byte blue)
         {
-            double dRed = (double)red / 255;
-            double dGreen = (double)green / 255;
-            double dBlue = (double)blue / 255;
-            double value = Math.Max(Math.Max(dRed, dGreen), dBlue);
-            double chroma = value - Math.Min(Math.Min(dRed, dGreen), dBlue);
-            double saturation = value.Equals(0) ? 0 : chroma / value;
+            var dRed = (double)red / 255;
+            var dGreen = (double)green / 255;
+            var dBlue = (double)blue / 255;
+            var value = Math.Max(Math.Max(dRed, dGreen), dBlue);
+            var chroma = value - Math.Min(Math.Min(dRed, dGreen), dBlue);
+            var saturation = value.Equals(0) ? 0 : chroma / value;
             double hue;
 
             if (chroma.Equals(0))
@@ -92,7 +94,11 @@ namespace Algorithms.Other
             return (hue, saturation, value);
         }
 
-        private static (byte red, byte green, byte blue) GetRgbBySection(double hueSection, double chroma, double matchValue, double secondLargestComponent)
+        private static (byte red, byte green, byte blue) GetRgbBySection(
+            double hueSection,
+            double chroma,
+            double matchValue,
+            double secondLargestComponent)
         {
             byte red;
             byte green;
@@ -138,9 +144,6 @@ namespace Algorithms.Other
             return (red, green, blue);
         }
 
-        private static byte ConvertToByte(double input)
-        {
-            return (byte)Math.Round(255 * input);
-        }
+        private static byte ConvertToByte(double input) => (byte)Math.Round(255 * input);
     }
 }

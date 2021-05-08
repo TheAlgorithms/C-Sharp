@@ -10,7 +10,9 @@ namespace Algorithms.Tests.Sorters.External
     public static class ExternalMergeSorterTests
     {
         [Test]
-        public static void ArraySorted([Random(0, 1000, 100, Distinct = true)]int n)
+        public static void ArraySorted(
+            [Random(0, 1000, 100, Distinct = true)]
+            int n)
         {
             // Arrange
             var sorter = new ExternalMergeSorter<int>();
@@ -28,7 +30,9 @@ namespace Algorithms.Tests.Sorters.External
         }
 
         [Test]
-        public static void ArraySorted_OnDisk([Random(0, 1000, 100, Distinct = true)]int n)
+        public static void ArraySorted_OnDisk(
+            [Random(0, 1000, 100, Distinct = true)]
+            int n)
         {
             // Arrange
             var sorter = new ExternalMergeSorter<int>();
@@ -43,6 +47,7 @@ namespace Algorithms.Tests.Sorters.External
             {
                 writer.Write(correctArray[i]);
             }
+
             writer.Dispose();
 
             // Act
@@ -55,7 +60,7 @@ namespace Algorithms.Tests.Sorters.External
             {
                 testArray[i] = reader.Read();
             }
-            
+
             Assert.AreEqual(testArray, correctArray);
         }
     }

@@ -9,9 +9,9 @@ namespace DataStructures.LinkedList.SinglyLinkedList
         private SinglyLinkedListNode<T>? Head { get; set; }
 
         /// <summary>
-        /// Adds new node to the start of the list,
-        /// time complexity: O(1),
-        /// space complexity: O(1).
+        ///     Adds new node to the start of the list,
+        ///     time complexity: O(1),
+        ///     space complexity: O(1).
         /// </summary>
         /// <param name="data">Contents of newly added node.</param>
         /// <returns>Added list node.</returns>
@@ -27,10 +27,10 @@ namespace DataStructures.LinkedList.SinglyLinkedList
         }
 
         /// <summary>
-        /// Adds new node to the end of the list,
-        /// time complexity: O(n),
-        /// space complexity: O(1),
-        /// where n - number of nodes in the list.
+        ///     Adds new node to the end of the list,
+        ///     time complexity: O(n),
+        ///     space complexity: O(1),
+        ///     where n - number of nodes in the list.
         /// </summary>
         /// <param name="data">Contents of newly added node.</param>
         /// <returns>Added list node.</returns>
@@ -60,10 +60,10 @@ namespace DataStructures.LinkedList.SinglyLinkedList
         }
 
         /// <summary>
-        /// Returns element at index <paramref name="index"/> in the list.
+        ///     Returns element at index <paramref name="index" /> in the list.
         /// </summary>
         /// <param name="index">Index of an element to be returned.</param>
-        /// <returns>Element at index <paramref name="index"/>.</returns>
+        /// <returns>Element at index <paramref name="index" />.</returns>
         public T GetElementByIndex(int index)
         {
             if (index < 0)
@@ -128,7 +128,8 @@ namespace DataStructures.LinkedList.SinglyLinkedList
             while (currentElement is not null)
             {
                 // checks if the element, which should get deleted is in this list element
-                if ((currentElement.Data is null && element is null) || (currentElement.Data is not null && currentElement.Data.Equals(element)))
+                if (currentElement.Data is null && element is null ||
+                    currentElement.Data is not null && currentElement.Data.Equals(element))
                 {
                     // if element is head just take the next one as head
                     if (currentElement.Equals(Head))

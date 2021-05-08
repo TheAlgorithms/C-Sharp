@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Algorithms.Problems.NQueens;
-
 using FluentAssertions;
-
 using NUnit.Framework;
 
 namespace Algorithms.Tests.Problems.NQueens
@@ -50,7 +48,7 @@ namespace Algorithms.Tests.Problems.NQueens
 
             act.Should().Throw<ArgumentException>();
         }
-        
+
         private static void ValidateOneQueenPerRow(bool[,] solution)
         {
             for (var i = 0; i < solution.GetLength(1); i++)
@@ -85,7 +83,7 @@ namespace Algorithms.Tests.Problems.NQueens
                     foundQueen = ValidateCell(foundQueen, solution[i + j, i]);
                 }
             }
-            
+
             for (var i = 0; i < solution.GetLength(1); i++)
             {
                 var foundQueen = false;
@@ -106,7 +104,7 @@ namespace Algorithms.Tests.Problems.NQueens
                     foundQueen = ValidateCell(foundQueen, solution[i - j, i]);
                 }
             }
-            
+
             for (var i = 0; i < solution.GetLength(1); i++)
             {
                 var foundQueen = false;
@@ -117,7 +115,7 @@ namespace Algorithms.Tests.Problems.NQueens
             }
         }
 
-        static bool ValidateCell(bool foundQueen, bool currentCell)
+        private static bool ValidateCell(bool foundQueen, bool currentCell)
         {
             if (foundQueen)
             {

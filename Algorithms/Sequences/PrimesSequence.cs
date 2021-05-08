@@ -5,20 +5,20 @@ using System.Numerics;
 namespace Algorithms.Sequences
 {
     /// <summary>
-    /// <para>
-    ///     Sequence of prime numbers.
-    /// </para>
-    /// <para>
-    ///     Wikipedia: https://wikipedia.org/wiki/Prime_number.
-    /// </para>
-    /// <para>
-    ///     OEIS: https://oeis.org/A000040.
-    /// </para>
+    ///     <para>
+    ///         Sequence of prime numbers.
+    ///     </para>
+    ///     <para>
+    ///         Wikipedia: https://wikipedia.org/wiki/Prime_number.
+    ///     </para>
+    ///     <para>
+    ///         OEIS: https://oeis.org/A000040.
+    ///     </para>
     /// </summary>
     public class PrimesSequence : ISequence
     {
         /// <summary>
-        /// Gets sequence of prime numbers.
+        ///     Gets sequence of prime numbers.
         /// </summary>
         public IEnumerable<BigInteger> Sequence
         {

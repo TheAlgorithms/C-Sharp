@@ -5,17 +5,16 @@ using Utilities.Exceptions;
 namespace DataStructures.LinkedList.DoublyLinkedList
 {
     /// <summary>
-    /// Similar to a Singly Linked List but each node contains a refenrence to the previous node in the list.
-    /// <see cref="System.Collections.Generic.LinkedList{T}"/> is a doubly linked list.
-    ///
-    /// Compared to singly linked lists it can be traversed forwards and backwards.
-    /// Adding a node to a doubly linked list is simpler because ever node contains a reference to the previous node.
+    ///     Similar to a Singly Linked List but each node contains a refenrence to the previous node in the list.
+    ///     <see cref="System.Collections.Generic.LinkedList{T}" /> is a doubly linked list.
+    ///     Compared to singly linked lists it can be traversed forwards and backwards.
+    ///     Adding a node to a doubly linked list is simpler because ever node contains a reference to the previous node.
     /// </summary>
     /// <typeparam name="T">Generic type.</typeparam>
     public class DoublyLinkedList<T>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DoublyLinkedList{T}"/> class.
+        ///     Initializes a new instance of the <see cref="DoublyLinkedList{T}" /> class.
         /// </summary>
         /// <param name="data"> Data of the original head of the list.</param>
         public DoublyLinkedList(T data)
@@ -26,7 +25,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DoublyLinkedList{T}"/> class from an enumerable.
+        ///     Initializes a new instance of the <see cref="DoublyLinkedList{T}" /> class from an enumerable.
         /// </summary>
         /// <param name="data"> Enumerable of data to be stored in the list.</param>
         public DoublyLinkedList(IEnumerable<T> data)
@@ -38,22 +37,22 @@ namespace DataStructures.LinkedList.DoublyLinkedList
         }
 
         /// <summary>
-        /// Gets the amount of nodes in the list.
+        ///     Gets the amount of nodes in the list.
         /// </summary>
         public int Count { get; private set; }
 
         /// <summary>
-        /// Gets or sets the first node of the list.
+        ///     Gets or sets the first node of the list.
         /// </summary>
         private DoublyLinkedListNode<T>? Head { get; set; }
 
         /// <summary>
-        /// Gets or sets the last node of the list.
+        ///     Gets or sets the last node of the list.
         /// </summary>
         private DoublyLinkedListNode<T>? Tail { get; set; }
 
         /// <summary>
-        /// Replaces the Head of the list with the new value.
+        ///     Replaces the Head of the list with the new value.
         /// </summary>
         /// <param name="data"> Value for the new Head of the list.</param>
         /// <returns>The new Head node.</returns>
@@ -77,7 +76,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
         }
 
         /// <summary>
-        /// Adds a new value at the end of the list.
+        ///     Adds a new value at the end of the list.
         /// </summary>
         /// <param name="data"> New value to be added to the list.</param>
         /// <returns>The new node created based on the new value.</returns>
@@ -97,7 +96,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
         }
 
         /// <summary>
-        /// Adds a new value after an existing node.
+        ///     Adds a new value after an existing node.
         /// </summary>
         /// <param name="data"> New value to be added to the list.</param>
         /// <param name="existingNode"> An existing node in the list.</param>
@@ -124,7 +123,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
         }
 
         /// <summary>
-        /// Gets an enumerable based on the data in the list.
+        ///     Gets an enumerable based on the data in the list.
         /// </summary>
         /// <returns>The data in the list in an IEnumerable. It can used to create a list or an array with LINQ.</returns>
         public IEnumerable<T> GetData()
@@ -138,7 +137,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
         }
 
         /// <summary>
-        /// Gets an enumerable based on the data in the list reversed.
+        ///     Gets an enumerable based on the data in the list reversed.
         /// </summary>
         /// <returns>The data in the list in an IEnumerable. It can used to create a list or an array with LINQ.</returns>
         public IEnumerable<T> GetDataReversed()
@@ -152,7 +151,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
         }
 
         /// <summary>
-        /// Reverses the list. Because of how doubly linked list are structured this is not a complex action.
+        ///     Reverses the list. Because of how doubly linked list are structured this is not a complex action.
         /// </summary>
         public void Reverse()
         {
@@ -177,7 +176,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
         }
 
         /// <summary>
-        /// Looks for a node in the list that contains the value of the parameter.
+        ///     Looks for a node in the list that contains the value of the parameter.
         /// </summary>
         /// <param name="data"> Value to be looked for in a node.</param>
         /// <returns>The node in the list the has the paramater as a value or null if not found.</returns>
@@ -186,7 +185,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
             var current = Head;
             while (current is not null)
             {
-                if ((current.Data is null && data is null) || (current.Data is not null && current.Data.Equals(data)))
+                if (current.Data is null && data is null || current.Data is not null && current.Data.Equals(data))
                 {
                     return current;
                 }
@@ -198,7 +197,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
         }
 
         /// <summary>
-        /// Looks for a node in the list that contains the value of the parameter.
+        ///     Looks for a node in the list that contains the value of the parameter.
         /// </summary>
         /// <param name="position"> Position in the list.</param>
         /// <returns>The node in the list the has the paramater as a value or null if not found.</returns>
@@ -220,7 +219,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
         }
 
         /// <summary>
-        /// Removes the Head and replaces it with the second node in the list.
+        ///     Removes the Head and replaces it with the second node in the list.
         /// </summary>
         public void RemoveHead()
         {
@@ -242,7 +241,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
         }
 
         /// <summary>
-        /// Removes the last node in the list.
+        ///     Removes the last node in the list.
         /// </summary>
         public void Remove()
         {
@@ -264,7 +263,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
         }
 
         /// <summary>
-        /// Removes specific node.
+        ///     Removes specific node.
         /// </summary>
         /// <param name="node"> Node to be removed.</param>
         public void RemoveNode(DoublyLinkedListNode<T> node)
@@ -283,7 +282,8 @@ namespace DataStructures.LinkedList.DoublyLinkedList
 
             if (node.Previous is null || node.Next is null)
             {
-                throw new ArgumentException($"{nameof(node)} cannot have Previous or Next null if it's an internal node");
+                throw new ArgumentException(
+                    $"{nameof(node)} cannot have Previous or Next null if it's an internal node");
             }
 
             node.Previous.Next = node.Next;
@@ -292,7 +292,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
         }
 
         /// <summary>
-        /// Removes a node that contains the data from the parameter.
+        ///     Removes a node that contains the data from the parameter.
         /// </summary>
         /// <param name="data"> Data to be removed form the list.</param>
         public void Remove(T data)
@@ -302,7 +302,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
         }
 
         /// <summary>
-        /// Looks for the index of the node with the parameter as data.
+        ///     Looks for the index of the node with the parameter as data.
         /// </summary>
         /// <param name="data"> Data to look for.</param>
         /// <returns>Returns the index of the node if it is found or -1 if the node is not found.</returns>
@@ -312,7 +312,7 @@ namespace DataStructures.LinkedList.DoublyLinkedList
             var index = 0;
             while (current is not null)
             {
-                if ((current.Data is null && data is null) || (current.Data is not null && current.Data.Equals(data)))
+                if (current.Data is null && data is null || current.Data is not null && current.Data.Equals(data))
                 {
                     return index;
                 }
@@ -325,13 +325,10 @@ namespace DataStructures.LinkedList.DoublyLinkedList
         }
 
         /// <summary>
-        /// List contains a node that has the parameter as data.
+        ///     List contains a node that has the parameter as data.
         /// </summary>
         /// <param name="data"> Node to be removed.</param>
         /// <returns>True if the node is found. False if it isn't.</returns>
-        public bool Contains(T data)
-        {
-            return IndexOf(data) != -1;
-        }
+        public bool Contains(T data) => IndexOf(data) != -1;
     }
 }

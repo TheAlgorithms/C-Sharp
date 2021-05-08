@@ -1,29 +1,30 @@
 using System;
-using NUnit.Framework;
+using Algorithms.Other;
 using FluentAssertions;
+using NUnit.Framework;
 
-namespace Algorithms.Other
+namespace Algorithms.Tests.Other
 {
     public static class RgbHsvConversionTest
     {
         [Test]
         public static void HueOutOfRange_ThrowsArgumentOutOfRangeException()
         {
-            Action act = () => Algorithms.Other.RgbHsvConversion.HsvToRgb(400, 0, 0);
+            Action act = () => RgbHsvConversion.HsvToRgb(400, 0, 0);
             act.Should().Throw<ArgumentOutOfRangeException>();
         }
 
         [Test]
         public static void SaturationOutOfRange_ThrowsArgumentOutOfRangeException()
         {
-            Action act = () => Algorithms.Other.RgbHsvConversion.HsvToRgb(0, 2, 0);
+            Action act = () => RgbHsvConversion.HsvToRgb(0, 2, 0);
             act.Should().Throw<ArgumentOutOfRangeException>();
         }
 
         [Test]
         public static void ValueOutOfRange_ThrowsArgumentOutOfRangeException()
         {
-            Action act = () => Algorithms.Other.RgbHsvConversion.HsvToRgb(0, 0, 2);
+            Action act = () => RgbHsvConversion.HsvToRgb(0, 0, 2);
             act.Should().Throw<ArgumentOutOfRangeException>();
         }
 
@@ -47,7 +48,7 @@ namespace Algorithms.Other
             byte exptectedGreen,
             byte exptectedBlue)
         {
-            var rgb = Algorithms.Other.RgbHsvConversion.HsvToRgb(hue, saturation, value);
+            var rgb = RgbHsvConversion.HsvToRgb(hue, saturation, value);
             rgb.Item1.Should().Be(expectedRed);
             rgb.Item2.Should().Be(exptectedGreen);
             rgb.Item3.Should().Be(exptectedBlue);
@@ -66,14 +67,14 @@ namespace Algorithms.Other
         [TestCase(193, 196, 224, 234, 0.14, 0.88)]
         [TestCase(128, 32, 80, 330, 0.75, 0.5)]
         public static void TestHsvOutput(
-                byte red,
-                byte green,
-                byte blue,
-                double expectedHue,
-                double expectedSaturation,
-                double expectedValue)
+            byte red,
+            byte green,
+            byte blue,
+            double expectedHue,
+            double expectedSaturation,
+            double expectedValue)
         {
-            var hsv = Algorithms.Other.RgbHsvConversion.RgbToHsv(red, green, blue);
+            var hsv = RgbHsvConversion.RgbToHsv(red, green, blue);
 
             // approximate-assertions needed because of small deviations due to converting between byte-values and double-values.
             hsv.Item1.Should().BeApproximately(expectedHue, 0.2);

@@ -8,7 +8,7 @@ namespace Algorithms.Tests.Sorters.Comparison
     public static class BogoSorterTests
     {
         [Test]
-        public static void ArraySorted([Random(0, 10, 10, Distinct = true)]int n)
+        public static void ArraySorted([Random(0, 10, 10, Distinct = true)] int n)
         {
             // Arrange
             var sorter = new BogoSorter<int>();

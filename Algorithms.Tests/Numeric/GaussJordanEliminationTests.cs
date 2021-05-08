@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Algorithms.Tests.Numeric
 {
     /// <summary>
-    /// Class for testing Gauss-Jordan Elimination Algorithm.
+    ///     Class for testing Gauss-Jordan Elimination Algorithm.
     /// </summary>
     public static class GaussJordanEliminationTests
     {

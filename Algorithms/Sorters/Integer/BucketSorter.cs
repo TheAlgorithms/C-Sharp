@@ -5,14 +5,14 @@ using System.Linq;
 namespace Algorithms.Sorters.Integer
 {
     /// <summary>
-    /// Class that implements bucket sort algorithm.
+    ///     Class that implements bucket sort algorithm.
     /// </summary>
     public class BucketSorter : IIntegerSorter
     {
         private const int NumOfDigitsInBase10 = 10;
 
         /// <summary>
-        /// Sorts array elements using BucketSort Algorithm.
+        ///     Sorts array elements using BucketSort Algorithm.
         /// </summary>
         /// <param name="array">Array to sort.</param>
         public void Sort(int[] array)
@@ -43,14 +43,14 @@ namespace Algorithms.Sorters.Integer
         }
 
         /// <summary>
-        /// Determines the number of digits in the largest number.
+        ///     Determines the number of digits in the largest number.
         /// </summary>
         /// <param name="array">Input array.</param>
         /// <returns>Number of digits.</returns>
         private static int NumberOfDigits(IEnumerable<int> array) => (int)Math.Floor(Math.Log10(array.Max()) + 1);
 
         /// <summary>
-        /// To distribute elements into buckets based on specified digit.
+        ///     To distribute elements into buckets based on specified digit.
         /// </summary>
         /// <param name="data">Input array.</param>
         /// <param name="buckets">Array of buckets.</param>
@@ -64,7 +64,7 @@ namespace Algorithms.Sorters.Integer
             {
                 // bucketNumber example for hundreds digit:
                 // ( 1234 % 1000 ) / 100 --> 2
-                var bucketNumber = NumOfDigitsInBase10 * (element % divisor) / divisor; // number of bucket to place element
+                var bucketNumber = NumOfDigitsInBase10 * (element % divisor) / divisor;
 
                 // retrieve value in pail[ bucketNumber , 0 ] to
                 // determine the location in row to store element
@@ -74,7 +74,7 @@ namespace Algorithms.Sorters.Integer
         }
 
         /// <summary>
-        /// Return elements to original array.
+        ///     Return elements to original array.
         /// </summary>
         /// <param name="data">Input array.</param>
         /// <param name="buckets">Array of buckets.</param>
@@ -94,7 +94,7 @@ namespace Algorithms.Sorters.Integer
         }
 
         /// <summary>
-        /// Sets size of all buckets to zero.
+        ///     Sets size of all buckets to zero.
         /// </summary>
         /// <param name="buckets">Array of buckets.</param>
         private static void EmptyBucket(int[,] buckets)

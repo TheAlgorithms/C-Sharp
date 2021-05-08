@@ -33,6 +33,7 @@
   * [Narcissistic Number Checker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/NarcissisticNumberChecker.cs)
   * [Perfect Number Checker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/PerfectNumberChecker.cs)
   * [Perfect Square Checker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/PerfectSquareChecker.cs)
+  * [Euler Method](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/EulerMethod.cs)
 ## Searches
   * [A-Star](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/AStar/)
   * [Binary Search](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/BinarySearcher.cs)

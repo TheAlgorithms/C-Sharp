@@ -19,7 +19,10 @@ namespace Algorithms.Tests.Helpers
             return (correctArray, testArr);
         }
 
-        public static (string[] correctArray, string[] testArray) GetStringArrays(int n, int maxLength, bool equalLength)
+        public static (string[] correctArray, string[] testArray) GetStringArrays(
+            int n,
+            int maxLength,
+            bool equalLength)
         {
             var testArr = new string[n];
             var correctArray = new string[n];

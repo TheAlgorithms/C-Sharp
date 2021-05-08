@@ -5,10 +5,10 @@ using System.Linq;
 namespace DataStructures.Heap
 {
     /// <summary>
-    /// This class implements min-max heap.
-    /// It provides functionality of both min-heap and max-heap with the same time complexity.
-    /// Therefore it provides constant time retrieval and logarithmic time removal
-    /// of both the minimum and maximum elements in it.
+    ///     This class implements min-max heap.
+    ///     It provides functionality of both min-heap and max-heap with the same time complexity.
+    ///     Therefore it provides constant time retrieval and logarithmic time removal
+    ///     of both the minimum and maximum elements in it.
     /// </summary>
     /// <typeparam name="T">Generic type.</typeparam>
     public class MinMaxHeap<T>
@@ -16,8 +16,8 @@ namespace DataStructures.Heap
         private readonly List<T> heap;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MinMaxHeap{T}"/> class that contains
-        /// elements copied from a specified enumerable collection and that uses a specified comparer.
+        ///     Initializes a new instance of the <see cref="MinMaxHeap{T}" /> class that contains
+        ///     elements copied from a specified enumerable collection and that uses a specified comparer.
         /// </summary>
         /// <param name="collection">The enumerable collection to be copied.</param>
         /// <param name="comparer">The default comparer to use for comparing objects.</param>
@@ -34,17 +34,17 @@ namespace DataStructures.Heap
         }
 
         /// <summary>
-        /// Gets the  <see cref="IComparer{T}"/>. object that is used to order the values in the <see cref="MinMaxHeap{T}"/>.
+        ///     Gets the  <see cref="IComparer{T}" />. object that is used to order the values in the <see cref="MinMaxHeap{T}" />.
         /// </summary>
         public IComparer<T> Comparer { get; }
 
         /// <summary>
-        /// Gets the number of elements in the <see cref="MinMaxHeap{T}"/>.
+        ///     Gets the number of elements in the <see cref="MinMaxHeap{T}" />.
         /// </summary>
         public int Count => heap.Count;
 
         /// <summary>
-        /// Adds an element to the heap.
+        ///     Adds an element to the heap.
         /// </summary>
         /// <param name="item">The element to add to the heap.</param>
         public void Add(T item)
@@ -54,7 +54,7 @@ namespace DataStructures.Heap
         }
 
         /// <summary>
-        /// Removes the maximum node from the heap and returns its value.
+        ///     Removes the maximum node from the heap and returns its value.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown if heap is empty.</exception>
         /// <returns>Value of the removed maximum node.</returns>
@@ -71,7 +71,7 @@ namespace DataStructures.Heap
         }
 
         /// <summary>
-        /// Removes the minimum node from the heap and returns its value.
+        ///     Removes the minimum node from the heap and returns its value.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown if heap is empty.</exception>
         /// <returns>Value of the removed minimum node.</returns>
@@ -88,7 +88,7 @@ namespace DataStructures.Heap
         }
 
         /// <summary>
-        /// Gets the maximum value in the heap, as defined by the comparer.
+        ///     Gets the maximum value in the heap, as defined by the comparer.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown if heap is empty.</exception>
         /// <returns>The maximum value in the heap.</returns>
@@ -103,7 +103,7 @@ namespace DataStructures.Heap
         }
 
         /// <summary>
-        /// Gets the minimum value in the heap, as defined by the comparer.
+        ///     Gets the minimum value in the heap, as defined by the comparer.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown if heap is empty.</exception>
         /// <returns>The minimum value in the heap.</returns>
@@ -118,13 +118,21 @@ namespace DataStructures.Heap
         }
 
         /// <summary>
-        /// Finds maximum value among children and grandchildren of the specified node.
+        ///     Finds maximum value among children and grandchildren of the specified node.
         /// </summary>
         /// <param name="index">Index of the node in the Heap array.</param>
         /// <returns>Index of the maximum descendant.</returns>
         private int IndexOfMaxChildOrGrandchild(int index)
         {
-            var descendants = new[] { 2 * index + 1, 2 * index + 2, 4 * index + 3, 4 * index + 4, 4 * index + 5, 4 * index + 6 };
+            var descendants = new[]
+            {
+                2 * index + 1,
+                2 * index + 2,
+                4 * index + 3,
+                4 * index + 4,
+                4 * index + 5,
+                4 * index + 6,
+            };
             var resIndex = descendants[0];
             foreach (var descendant in descendants)
             {
@@ -143,7 +151,7 @@ namespace DataStructures.Heap
         }
 
         /// <summary>
-        /// Finds minumum value among children and grandchildren of the specified node.
+        ///     Finds minumum value among children and grandchildren of the specified node.
         /// </summary>
         /// <param name="index">Index of the node in the Heap array.</param>
         /// <returns>Index of the minimum descendant.</returns>
@@ -174,18 +182,18 @@ namespace DataStructures.Heap
                 0 => throw new InvalidOperationException("Heap is empty"),
                 1 => 0,
                 2 => 1,
-                _ => Comparer.Compare(heap[1], heap[2]) > 0 ? 1 : 2
+                _ => Comparer.Compare(heap[1], heap[2]) > 0 ? 1 : 2,
             };
         }
 
-        private bool HasChild(int index) => (index * 2 + 1) < Count;
+        private bool HasChild(int index) => index * 2 + 1 < Count;
 
         private bool IsGrandchild(int node, int grandchild) => grandchild > 2 && Grandparent(grandchild) == node;
 
         /// <summary>
-        /// Checks if node at index belongs to Min or Max level of the heap.
-        /// Root node belongs to Min level, its children - Max level,
-        /// its grandchildren - Min level, and so on.
+        ///     Checks if node at index belongs to Min or Max level of the heap.
+        ///     Root node belongs to Min level, its children - Max level,
+        ///     its grandchildren - Min level, and so on.
         /// </summary>
         /// <param name="index">Index to check.</param>
         /// <returns>true if index is at Min level; false if it is at Max Level.</returns>
@@ -202,8 +210,8 @@ namespace DataStructures.Heap
         private int Grandparent(int index) => ((index - 1) / 2 - 1) / 2;
 
         /// <summary>
-        /// Assuming that children sub-trees are valid heaps, pushes node to lower levels
-        /// to make heap valid.
+        ///     Assuming that children sub-trees are valid heaps, pushes node to lower levels
+        ///     to make heap valid.
         /// </summary>
         /// <param name="index">Node index.</param>
         private void PushDown(int index)
@@ -285,11 +293,11 @@ namespace DataStructures.Heap
         }
 
         /// <summary>
-        /// Having a new node in the heap, swaps this node with its ancestors to make heap valid.
-        /// For node at min level. If new node is less than its parent, then it is surely less then
-        /// all other nodes on max levels on path to the root of the heap. So node are pushed up, by
-        /// swaping with its grandparent, until they are ordered correctly.
-        /// For node at max level algorithm is analogical.
+        ///     Having a new node in the heap, swaps this node with its ancestors to make heap valid.
+        ///     For node at min level. If new node is less than its parent, then it is surely less then
+        ///     all other nodes on max levels on path to the root of the heap. So node are pushed up, by
+        ///     swaping with its grandparent, until they are ordered correctly.
+        ///     For node at max level algorithm is analogical.
         /// </summary>
         /// <param name="index">Index of the new node.</param>
         private void PushUp(int index)

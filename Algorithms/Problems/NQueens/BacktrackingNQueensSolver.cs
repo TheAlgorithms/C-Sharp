@@ -6,8 +6,8 @@ namespace Algorithms.Problems.NQueens
     public class BacktrackingNQueensSolver
     {
         /// <summary>
-        /// Solves N-Queen Problem given a n dimension chessboard and using backtracking with recursion algorithm.
-        /// If we find a dead-end within or current solution we go back and try another position for queen.
+        ///     Solves N-Queen Problem given a n dimension chessboard and using backtracking with recursion algorithm.
+        ///     If we find a dead-end within or current solution we go back and try another position for queen.
         /// </summary>
         /// <param name="n">Number of rows.</param>
         /// <returns>All solutions.</returns>
@@ -65,8 +65,8 @@ namespace Algorithms.Problems.NQueens
         }
 
         /// <summary>
-        /// Checks whether current queen can be placed in current position,
-        /// outside attacking range of another queen.
+        ///     Checks whether current queen can be placed in current position,
+        ///     outside attacking range of another queen.
         /// </summary>
         /// <param name="board">Source board.</param>
         /// <param name="row">Row coordinate.</param>

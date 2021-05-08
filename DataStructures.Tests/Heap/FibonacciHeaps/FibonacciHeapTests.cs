@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-
-using DataStructures.Heap;
-
+using DataStructures.Heap.FibonacciHeap;
 using NUnit.Framework;
 
-namespace DataStructures.Tests.Heap
+namespace DataStructures.Tests.Heap.FibonacciHeaps
 {
-    class TestFHeap : FibonacciHeap<int>
+    internal class TestFHeap : FibonacciHeap<int>
     {
         public void RawCut(FHeapNode<int> x, FHeapNode<int> y)
         {
@@ -25,7 +22,7 @@ namespace DataStructures.Tests.Heap
         }
     }
 
-    static class FibonacciHeapTests
+    internal static class FibonacciHeapTests
     {
         private static FibonacciHeap<int> BuildTestHeap()
         {
@@ -78,14 +75,14 @@ namespace DataStructures.Tests.Heap
             var rand = new Random();
             var heapSize = 100;
 
-            for (int i = 0; i < heapSize; i++)
+            for (var i = 0; i < heapSize; i++)
             {
                 heap.Push(rand.Next(1000));
             }
 
             var element = heap.Pop();
 
-            for (int i = 0; i < heapSize - 1; i++)
+            for (var i = 0; i < heapSize - 1; i++)
             {
                 var newElement = heap.Pop();
                 Assert.LessOrEqual(element, newElement);
@@ -127,21 +124,21 @@ namespace DataStructures.Tests.Heap
         {
             var oddHeap = new FibonacciHeap<int>();
 
-            for (int i = 1; i < 10; i += 2)
+            for (var i = 1; i < 10; i += 2)
             {
                 oddHeap.Push(i);
             }
 
             var evenHeap = new FibonacciHeap<int>();
 
-            for (int i = 0; i < 10; i += 2)
+            for (var i = 0; i < 10; i += 2)
             {
                 evenHeap.Push(i);
             }
 
             oddHeap.Union(evenHeap);
 
-            for (int i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
                 Assert.AreEqual(i, oddHeap.Pop());
             }
@@ -208,14 +205,14 @@ namespace DataStructures.Tests.Heap
         {
             var heap = new FibonacciHeap<int>();
 
-            for (int i = 11; i < 20; i++)
+            for (var i = 11; i < 20; i++)
             {
                 heap.Push(i);
             }
 
             var item = heap.Push(10);
 
-            for (int i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
                 heap.Push(i);
             }
@@ -226,7 +223,7 @@ namespace DataStructures.Tests.Heap
             Assert.AreEqual(heap.Pop(), -1);
 
             var currentVal = -1;
-            for (int i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
                 var newVal = heap.Pop();
                 Assert.True(currentVal < newVal);
@@ -238,7 +235,7 @@ namespace DataStructures.Tests.Heap
             Assert.AreEqual(heap.Pop(), -1);
 
             currentVal = -1;
-            for (int i = 0; i < 9; i++)
+            for (var i = 0; i < 9; i++)
             {
                 var newVal = heap.Pop();
                 Assert.True(currentVal < newVal);

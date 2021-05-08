@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-
-using NUnit.Framework;
-
 using DataStructures.Heap;
+using NUnit.Framework;
 
 namespace DataStructures.Tests.Heap
 {
-    static class BinaryHeapTests
+    internal static class BinaryHeapTests
     {
         private static BinaryHeap<int> BuildTestHeap()
         {

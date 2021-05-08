@@ -3,14 +3,14 @@
 namespace Algorithms.Sorters.Comparison
 {
     /// <summary>
-    /// Cocktail Sort is a variation of Bubble sort, where Cocktail
-    /// Sort traverses through a given array in both directions alternatively.
+    ///     Cocktail Sort is a variation of Bubble sort, where Cocktail
+    ///     Sort traverses through a given array in both directions alternatively.
     /// </summary>
     /// <typeparam name="T">Array input type.</typeparam>
     public class CocktailSorter<T> : IComparisonSorter<T>
     {
         /// <summary>
-        /// Sorts array using Cocktail sort algorithm.
+        ///     Sorts array using Cocktail sort algorithm.
         /// </summary>
         /// <param name="array">Input array.</param>
         /// <param name="comparer">Type of comparer for array elements.</param>

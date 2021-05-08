@@ -6,14 +6,16 @@ using NUnit.Framework;
 namespace Algorithms.Tests.Sorters.String
 {
     /// <summary>
-    /// Class for testing MSD radix sorter algorithm.
+    ///     Class for testing MSD radix sorter algorithm.
     /// </summary>
     public static class MsdRadixStringSorterTests
     {
         [Test]
-        public static void ArraySorted([Random(2, 1000, 100, Distinct = true)]int n)
+        public static void ArraySorted(
+            [Random(2, 1000, 100, Distinct = true)]
+            int n)
         {
-            // Arrange 
+            // Arrange
             var sorter = new MsdRadixStringSorter();
             var (correctArray, testArray) = RandomHelper.GetStringArrays(n, 100, false);
 

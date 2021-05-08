@@ -1,17 +1,17 @@
 using System;
 
-namespace DataStructures.Heap
+namespace DataStructures.Heap.FibonacciHeap
 {
     /// <summary>
-    /// These FHeapNodes are the bulk of the data structure. The have pointers to
-    /// their parent, a left and right sibling, and to a child. A node and its
-    /// siblings comprise a circularly doubly linked list.
+    ///     These FHeapNodes are the bulk of the data structure. The have pointers to
+    ///     their parent, a left and right sibling, and to a child. A node and its
+    ///     siblings comprise a circularly doubly linked list.
     /// </summary>
     /// <typeparam name="T">A type that can be compared.</typeparam>
     public class FHeapNode<T> where T : IComparable
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataStructures.Heap.FHeapNode{T}"/> class.
+        ///     Initializes a new instance of the <see cref="FHeapNode{T}" /> class.
         /// </summary>
         /// <param name="key">An item in the Fibonacci heap.</param>
         public FHeapNode(T key)
@@ -25,40 +25,40 @@ namespace DataStructures.Heap
         }
 
         /// <summary>
-        /// Gets or sets the data of this node.
+        ///     Gets or sets the data of this node.
         /// </summary>
         public T Key { get; set; }
 
         /// <summary>
-        /// Gets or sets a reference to the parent.
+        ///     Gets or sets a reference to the parent.
         /// </summary>
         public FHeapNode<T>? Parent { get; set; }
 
         /// <summary>
-        /// Gets or sets a reference to the left sibling.
+        ///     Gets or sets a reference to the left sibling.
         /// </summary>
         public FHeapNode<T> Left { get; set; }
 
         /// <summary>
-        /// Gets or sets a reference to the right sibling.
+        ///     Gets or sets a reference to the right sibling.
         /// </summary>
         public FHeapNode<T> Right { get; set; }
 
         /// <summary>
-        /// Gets or sets a reference to one of the children, there may be more that
-        /// are siblings the this child, however this structure only maintains a
-        /// reference to one of them.
+        ///     Gets or sets a reference to one of the children, there may be more that
+        ///     are siblings the this child, however this structure only maintains a
+        ///     reference to one of them.
         /// </summary>
         public FHeapNode<T>? Child { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this node has been marked,
-        /// used in some operations.
+        ///     Gets or sets a value indicating whether this node has been marked,
+        ///     used in some operations.
         /// </summary>
         public bool Mark { get; set; }
 
         /// <summary>
-        /// Gets or sets the number of nodes in the child linked list.
+        ///     Gets or sets the number of nodes in the child linked list.
         /// </summary>
         public int Degree { get; set; }
 
@@ -69,8 +69,8 @@ namespace DataStructures.Heap
         }
 
         /// <summary>
-        /// A helper function to add a node to the right of this one in the current
-        /// circularly doubly linked list.
+        ///     A helper function to add a node to the right of this one in the current
+        ///     circularly doubly linked list.
         /// </summary>
         /// <param name="node">A node to go in the linked list.</param>
         public void AddRight(FHeapNode<T> node)
@@ -82,7 +82,7 @@ namespace DataStructures.Heap
         }
 
         /// <summary>
-        /// Similar to AddRight, but adds the node as a sibling to the child node.
+        ///     Similar to AddRight, but adds the node as a sibling to the child node.
         /// </summary>
         /// <param name="node">A node to add to the child list of this node.</param>
         public void AddChild(FHeapNode<T> node)
@@ -102,7 +102,7 @@ namespace DataStructures.Heap
         }
 
         /// <summary>
-        /// Remove this item from the linked list it's in.
+        ///     Remove this item from the linked list it's in.
         /// </summary>
         public void Remove()
         {
@@ -111,13 +111,15 @@ namespace DataStructures.Heap
         }
 
         /// <summary>
-        /// Combine the linked list that <c>otherList</c> sits inside, with the
-        /// linked list this is in. Do this by cutting the link between this node,
-        /// and the node to the right of this, and inserting the contents of the
-        /// otherList in between.
+        ///     Combine the linked list that <c>otherList</c> sits inside, with the
+        ///     linked list this is in. Do this by cutting the link between this node,
+        ///     and the node to the right of this, and inserting the contents of the
+        ///     otherList in between.
         /// </summary>
-        /// <param name="otherList">A node from another list whose elements we want
-        /// to concatenate to this list.</param>
+        /// <param name="otherList">
+        ///     A node from another list whose elements we want
+        ///     to concatenate to this list.
+        /// </param>
         public void ConcatenateRight(FHeapNode<T> otherList)
         {
             Right.Left = otherList.Left;
