@@ -105,7 +105,7 @@
   * Heap
     * [Min-Max Heap](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Heap/MinMaxHeap.cs)
     * [Binary Heap](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Heap/BinaryHeap.cs)
-    * [Fibonacci Heap](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Heap/FibonacciHeaps/FibonacciHeap.cs)
+    * [Fibonacci Heap](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Heap/FibonacciHeap/FibonacciHeap.cs)
   * Queue
     * [Array-based Queue](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Queue/ArrayBasedQueue.cs)
     * [List-based Queue](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Queue/ListBasedQueue.cs)
