@@ -97,15 +97,15 @@
     * [Segment Tree](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/SegmentTrees/SegmentTree.cs)
     * [Segment Tree Multiplication](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/SegmentTrees/SegmentTreeApply.cs)
     * [Segment Tree Update](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/SegmentTrees/SegmentTreeUpdate.cs)  
-  * [Binary Search Tree](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/BinarySearchTree)
-  * [AA Tree](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/AATree)
+  * [Binary Search Tree](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/BinarySearchTree/BinarySearchTree.cs)
+  * [AA Tree](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/AATree/AATree.cs)
   * Stack
     * [Array-based Stack](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Stack/ArrayBasedStack.cs)
     * [List-based Stack](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Stack/ListBasedStack.cs)
   * Heap
     * [Min-Max Heap](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Heap/MinMaxHeap.cs)
     * [Binary Heap](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Heap/BinaryHeap.cs)
-    * [Fibonacci Heap](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Heap/FibonacciHeaps/FibonacciHeap.cs)
+    * [Fibonacci Heap](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Heap/FibonacciHeap/FibonacciHeap.cs)
   * Queue
     * [Array-based Queue](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Queue/ArrayBasedQueue.cs)
     * [List-based Queue](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/Queue/ListBasedQueue.cs)
