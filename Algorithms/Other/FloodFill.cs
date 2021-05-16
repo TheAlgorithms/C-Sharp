@@ -1,14 +1,17 @@
 ﻿using System;
-using System.Drawing;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Numerics;
 
 namespace Algorithms.Other
 {
     /// <summary>
-    /// Flood fill, also called seed fill, is an algorithm that determines and alters the area connected to a given node in a multi-dimensional array with some matching attribute. It is used in the "bucket" fill tool of paint programs to fill connected, similarly-colored areas with a different color.
-    /// (description adapted from https://en.wikipedia.org/wiki/Flood_fill).
-    /// (see also: https://www.techiedelight.com/flood-fill-algorithm/)
+    /// Flood fill, also called seed fill, is an algorithm that determines and 
+    /// alters the area connected to a given node in a multi-dimensional array with 
+    /// some matching attribute. It is used in the "bucket" fill tool of paint 
+    /// programs to fill connected, similarly-colored areas with a different color.
+    /// (description adapted from https://en.wikipedia.org/wiki/Flood_fill)
+    /// (see also: https://www.techiedelight.com/flood-fill-algorithm/).
     /// </summary>
     public static class FloodFill
     {
@@ -33,23 +36,7 @@ namespace Algorithms.Other
 
             while (queue.Count > 0)
             {
-                ValueTuple<int, int> currentLocation = queue[0];
-                queue.RemoveAt(0);
-
-                if (bitmap.GetPixel(currentLocation.Item1, currentLocation.Item2) == targetColor)
-                {
-                    bitmap.SetPixel(currentLocation.Item1, currentLocation.Item2, replacementColor);
-
-                    for (int i = 0; i < neighbors.Count; i++)
-                    {
-                        int x = currentLocation.Item1 + neighbors[i].Item1;
-                        int y = currentLocation.Item2 + neighbors[i].Item2;
-                        if (x >= 0 && x < bitmap.Width && y >= 0 && y < bitmap.Height)
-                        {
-                            queue.Add((x, y));
-                        }
-                    }
-                }
+                BreadthFirstFill(bitmap, location, targetColor, replacementColor, queue);
             }
         }
 
@@ -68,6 +55,27 @@ namespace Algorithms.Other
             }
 
             DepthFirstFill(bitmap, location, targetColor, replacementColor);
+        }
+
+        private static void BreadthFirstFill(Bitmap bitmap, ValueTuple<int, int> location, Color targetColor, Color replacementColor, List<ValueTuple<int, int>> queue)
+        {
+            ValueTuple<int, int> currentLocation = queue[0];
+            queue.RemoveAt(0);
+
+            if (bitmap.GetPixel(currentLocation.Item1, currentLocation.Item2) == targetColor)
+            {
+                bitmap.SetPixel(currentLocation.Item1, currentLocation.Item2, replacementColor);
+
+                for (int i = 0; i < neighbors.Count; i++)
+                {
+                    int x = currentLocation.Item1 + neighbors[i].Item1;
+                    int y = currentLocation.Item2 + neighbors[i].Item2;
+                    if (x >= 0 && x < bitmap.Width && y >= 0 && y < bitmap.Height)
+                    {
+                        queue.Add((x, y));
+                    }
+                }
+            }
         }
 
         private static void DepthFirstFill(Bitmap bitmap, ValueTuple<int, int> location, Color targetColor, Color replacementColor)
