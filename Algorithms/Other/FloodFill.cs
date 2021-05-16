@@ -6,9 +6,9 @@ using System.Numerics;
 namespace Algorithms.Other
 {
     /// <summary>
-    /// Flood fill, also called seed fill, is an algorithm that determines and 
-    /// alters the area connected to a given node in a multi-dimensional array with 
-    /// some matching attribute. It is used in the "bucket" fill tool of paint 
+    /// Flood fill, also called seed fill, is an algorithm that determines and
+    /// alters the area connected to a given node in a multi-dimensional array with
+    /// some matching attribute. It is used in the "bucket" fill tool of paint
     /// programs to fill connected, similarly-colored areas with a different color.
     /// (description adapted from https://en.wikipedia.org/wiki/Flood_fill)
     /// (see also: https://www.techiedelight.com/flood-fill-algorithm/).
