@@ -15,7 +15,7 @@ namespace Algorithms.Other
     /// </summary>
     public static class FloodFill
     {
-        private static List<ValueTuple<int, int>> neighbors = new List<ValueTuple<int, int>> { (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1) };
+        private static List<(int xOffset, int yOffset)> neighbors = new List<(int xOffset, int yOffset)> { (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1) };
 
         /// <summary>
         /// Implements the flood fill algorithm through a breadth-first approach using a queue.
@@ -24,14 +24,14 @@ namespace Algorithms.Other
         /// <param name="location">The start location on the bitmap.</param>
         /// <param name="targetColor">The old color to be replaced.</param>
         /// <param name="replacementColor">The new color to replace the old one.</param>
-        public static void BreadthFirstSearch(Bitmap bitmap, ValueTuple<int, int> location, Color targetColor, Color replacementColor)
+        public static void BreadthFirstSearch(Bitmap bitmap, (int x, int y) location, Color targetColor, Color replacementColor)
         {
-            if (location.Item1 < 0 || location.Item1 >= bitmap.Width || location.Item2 < 0 || location.Item2 >= bitmap.Height)
+            if (location.x < 0 || location.x >= bitmap.Width || location.y < 0 || location.y >= bitmap.Height)
             {
                 throw new ArgumentOutOfRangeException(nameof(location), $"{nameof(location)} should point to a pixel within the bitmap");
             }
 
-            List<ValueTuple<int, int>> queue = new List<ValueTuple<int, int>>();
+            var queue = new List<(int x, int y)>();
             queue.Add(location);
 
             while (queue.Count > 0)
@@ -47,9 +47,9 @@ namespace Algorithms.Other
         /// <param name="location">The start location on the bitmap.</param>
         /// <param name="targetColor">The old color to be replaced.</param>
         /// <param name="replacementColor">The new color to replace the old one.</param>
-        public static void DepthFirstSearch(Bitmap bitmap, ValueTuple<int, int> location, Color targetColor, Color replacementColor)
+        public static void DepthFirstSearch(Bitmap bitmap, (int x, int y) location, Color targetColor, Color replacementColor)
         {
-            if (location.Item1 < 0 || location.Item1 >= bitmap.Width || location.Item2 < 0 || location.Item2 >= bitmap.Height)
+            if (location.x < 0 || location.x >= bitmap.Width || location.y < 0 || location.y >= bitmap.Height)
             {
                 throw new ArgumentOutOfRangeException(nameof(location), $"{nameof(location)} should point to a pixel within the bitmap");
             }
@@ -57,19 +57,19 @@ namespace Algorithms.Other
             DepthFirstFill(bitmap, location, targetColor, replacementColor);
         }
 
-        private static void BreadthFirstFill(Bitmap bitmap, ValueTuple<int, int> location, Color targetColor, Color replacementColor, List<ValueTuple<int, int>> queue)
+        private static void BreadthFirstFill(Bitmap bitmap, (int x, int y) location, Color targetColor, Color replacementColor, List<(int x, int y)> queue)
         {
-            ValueTuple<int, int> currentLocation = queue[0];
+            (int x, int y) currentLocation = queue[0];
             queue.RemoveAt(0);
 
-            if (bitmap.GetPixel(currentLocation.Item1, currentLocation.Item2) == targetColor)
+            if (bitmap.GetPixel(currentLocation.x, currentLocation.y) == targetColor)
             {
-                bitmap.SetPixel(currentLocation.Item1, currentLocation.Item2, replacementColor);
+                bitmap.SetPixel(currentLocation.x, currentLocation.y, replacementColor);
 
                 for (int i = 0; i < neighbors.Count; i++)
                 {
-                    int x = currentLocation.Item1 + neighbors[i].Item1;
-                    int y = currentLocation.Item2 + neighbors[i].Item2;
+                    int x = currentLocation.x + neighbors[i].xOffset;
+                    int y = currentLocation.y + neighbors[i].yOffset;
                     if (x >= 0 && x < bitmap.Width && y >= 0 && y < bitmap.Height)
                     {
                         queue.Add((x, y));
@@ -78,16 +78,16 @@ namespace Algorithms.Other
             }
         }
 
-        private static void DepthFirstFill(Bitmap bitmap, ValueTuple<int, int> location, Color targetColor, Color replacementColor)
+        private static void DepthFirstFill(Bitmap bitmap, (int x, int y) location, Color targetColor, Color replacementColor)
         {
-            if (bitmap.GetPixel(location.Item1, location.Item2) == targetColor)
+            if (bitmap.GetPixel(location.x, location.y) == targetColor)
             {
-                bitmap.SetPixel(location.Item1, location.Item2, replacementColor);
+                bitmap.SetPixel(location.x, location.y, replacementColor);
 
                 for (int i = 0; i < neighbors.Count; i++)
                 {
-                    int x = location.Item1 + neighbors[i].Item1;
-                    int y = location.Item2 + neighbors[i].Item2;
+                    int x = location.x + neighbors[i].xOffset;
+                    int y = location.y + neighbors[i].yOffset;
                     if (x >= 0 && x < bitmap.Width && y >= 0 && y < bitmap.Height)
                     {
                         DepthFirstFill(bitmap, (x, y), targetColor, replacementColor);
