@@ -35,7 +35,7 @@
   * [Perfect Square Checker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/PerfectSquareChecker.cs)
   * [Euler Method](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Numeric/EulerMethod.cs)
 ## Searches
-  * [A-Star](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/AStar/)
+  * [A-Star](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/AStar/AStar.cs)
   * [Binary Search](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/BinarySearcher.cs)
   * [Recursive Binary Search](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/RecursiveBinarySearcher.cs)
   * [Linear Search](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/LinearSearcher.cs)
