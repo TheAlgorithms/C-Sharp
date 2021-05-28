@@ -42,12 +42,6 @@ namespace FloodFillTest
         [Test]
         public static void BreadthFirstSearch_Test3()
         {
-            TestAlgorithm(Algorithms.Other.FloodFill.BreadthFirstSearch, (1, 1), green, orange, (0, 1), violet);
-        }
-
-        [Test]
-        public static void BreadthFirstSearch_Test4()
-        {
             TestAlgorithm(Algorithms.Other.FloodFill.BreadthFirstSearch, (1, 1), green, orange, (6, 4), white);
         }
 
@@ -65,12 +59,6 @@ namespace FloodFillTest
 
         [Test]
         public static void DepthFirstSearch_Test3()
-        {
-            TestAlgorithm(Algorithms.Other.FloodFill.DepthFirstSearch, (1, 1), green, orange, (0, 1), violet);
-        }
-
-        [Test]
-        public static void DepthFirstSearch_Test4()
         {
             TestAlgorithm(Algorithms.Other.FloodFill.DepthFirstSearch, (1, 1), green, orange, (6, 4), white);
         }
