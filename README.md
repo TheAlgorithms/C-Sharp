@@ -1,4 +1,4 @@
-# The Algorithms - C#
+# 基础算法【Algorithms】 C#版本
 [![Build Status](https://travis-ci.com/TheAlgorithms/C-Sharp.svg?branch=master)](https://travis-ci.com/TheAlgorithms/C-Sharp)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6f6c4c370fc04857914dd04b91c5d675)](https://www.codacy.com/app/siriak/C-Sharp?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TheAlgorithms/C-Sharp&amp;utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/TheAlgorithms/C-Sharp/branch/master/graph/badge.svg)](https://codecov.io/gh/TheAlgorithms/C-Sharp)
@@ -127,9 +127,4 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Doubly Linked List](./DataStructures/LinkedList/DoublyLinkedList/DoublyLinkedList.cs)
 
 
-## Contributing
 
-You can contribute with pleasure to this repository.
-Please orient on the directory structure and overall code style of this repository
-and refer to [our contributing guidelines](./CONTRIBUTING.md) for more detail.
-If you want to ask a question or suggest something, please open an issue.
