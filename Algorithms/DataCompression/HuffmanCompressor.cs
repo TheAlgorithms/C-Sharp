@@ -7,7 +7,7 @@ using Utilities.Extensions;
 namespace Algorithms.DataCompression
 {
     /// <summary>
-    ///     Greedy lossless compression algorithm.
+    /// Greedy lossless compression algorithm.[贪婪无损压缩算法].
     /// </summary>
     public class HuffmanCompressor
     {
