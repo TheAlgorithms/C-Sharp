@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace DataStructures.Stack
 {
     /// <summary>
-    ///     Implementation of an array based stack. FIFO style.
+    ///     Implementation of an array-based stack. LIFO style.
     /// </summary>
     /// <typeparam name="T">Generic Type.</typeparam>
     public class ArrayBasedStack<T>
