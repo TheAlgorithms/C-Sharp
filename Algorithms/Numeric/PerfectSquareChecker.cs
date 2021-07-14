@@ -22,5 +22,48 @@ namespace Algorithms.Numeric
             var sqrt = (int)Math.Sqrt(number);
             return sqrt * sqrt == number;
         }
+
+        /// <summary>Checks if a number is square or not. This method only uses integer operations.</summary>
+        /// <param name="number">The number to check.</param>
+        /// <param name="root">The squareroot, if the number is indeed a perfect square.</param>
+        /// <returns>True if the number is a perfect square; False otherwise.</returns>
+        public static bool IsPerfectSquare(int number, out int root)
+        {
+            if (number < 0)
+            {
+                root = 0;
+                return false;
+            }
+            else if (number < 2)
+            {
+                root = number;
+                return true;
+            }
+            else
+            {
+                root = 0;
+                int lb = 2, ub = number >> 1, mid, sq;
+                while (lb <= ub)
+                {
+                    mid = lb / 2 + ub / 2;
+                    sq = mid * mid;
+                    if (sq == number)
+                    {
+                        root = mid;
+                        return true;
+                    }
+                    else if (sq < number)
+                    {
+                        lb = mid + 1;
+                    }
+                    else
+                    {
+                        ub = mid - 1;
+                    }
+                }
+
+                return false;
+            }
+        }
     }
 }

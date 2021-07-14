@@ -23,5 +23,23 @@ namespace Algorithms.Tests.Numeric
             // Assert
             return result;
         }
+        [Test]
+        [TestCase(-4, ExpectedResult = false)]
+        [TestCase(4, ExpectedResult = true)]
+        [TestCase(9, ExpectedResult = true)]
+        [TestCase(10, ExpectedResult = false)]
+        [TestCase(16, ExpectedResult = true)]
+        [TestCase(70, ExpectedResult = false)]
+        [TestCase(81, ExpectedResult = true)]
+        public static bool IsPerfectSquareInt_ResultIsCorrect(int number)
+        {
+            // Arrange
+
+            // Act
+            var result = PerfectSquareChecker.IsPerfectSquare(number, out var _);
+
+            // Assert
+            return result;
+        }
     }
 }
