@@ -7,6 +7,9 @@ namespace Algorithms.Tests.Numeric
     {
         [Test]
         [TestCase(-4, ExpectedResult = false)]
+        [TestCase(0, ExpectedResult = true)]
+        [TestCase(1, ExpectedResult = true)]
+        [TestCase(2, ExpectedResult = false)]
         [TestCase(4, ExpectedResult = true)]
         [TestCase(9, ExpectedResult = true)]
         [TestCase(10, ExpectedResult = false)]
@@ -25,6 +28,9 @@ namespace Algorithms.Tests.Numeric
         }
         [Test]
         [TestCase(-4, ExpectedResult = false)]
+        [TestCase(0, ExpectedResult = true)]
+        [TestCase(1, ExpectedResult = true)]
+        [TestCase(2, ExpectedResult = false)]
         [TestCase(4, ExpectedResult = true)]
         [TestCase(9, ExpectedResult = true)]
         [TestCase(10, ExpectedResult = false)]
