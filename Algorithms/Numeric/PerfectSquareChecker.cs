@@ -30,17 +30,17 @@ namespace Algorithms.Numeric
         public static bool IsPerfectSquare(int number, out int root)
         {
             if (number < 0)
-            {
+            {// A square number must be positive
                 root = 0;
                 return false;
             }
             else if (number < 2)
-            {
+            {// For positive numbers that are less than 2, i.e {0, 1}, they are squareroots of themselves
                 root = number;
                 return true;
             }
             else
-            {
+            {// Implementing a binary search for the number
                 root = 0;
                 int lb = 2, ub = number >> 1, mid, sq;
                 while (lb <= ub)
