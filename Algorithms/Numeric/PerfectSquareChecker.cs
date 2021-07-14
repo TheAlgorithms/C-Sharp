@@ -25,32 +25,28 @@ namespace Algorithms.Numeric
 
         /// <summary>Checks if a number is square or not. This method only uses integer operations.</summary>
         /// <param name="number">The number to check.</param>
-        /// <param name="root">The squareroot, if the number is indeed a perfect square.</param>
-        /// <returns>True if the number is a perfect square; False otherwise.</returns>
-        public static bool IsPerfectSquare(int number, out int root)
+        /// <returns>Tuple (True, squareroot) if the number is a perfect square; (False, 0) otherwise.</returns>
+        public static (bool IsPerfectSquare, int Root) IsPerfectSquareIntOp(int number)
         {
             if (number < 0)
             {// A square number must be positive
-                root = 0;
-                return false;
+                return (false, 0);
             }
             else if (number < 2)
             {// For positive numbers that are less than 2, i.e {0, 1}, they are squareroots of themselves
-                root = number;
-                return true;
+                return (true, number);
             }
             else
             {// Implementing a binary search for the number
-                root = 0;
-                int lb = 2, ub = number >> 1, mid, sq;
+                var lb = 2;
+                var ub = number >> 1;
                 while (lb <= ub)
                 {
-                    mid = lb / 2 + ub / 2;
-                    sq = mid * mid;
+                    var mid = lb / 2 + ub / 2;
+                    var sq = mid * mid;
                     if (sq == number)
                     {
-                        root = mid;
-                        return true;
+                        return (true, mid);
                     }
                     else if (sq < number)
                     {
@@ -62,7 +58,7 @@ namespace Algorithms.Numeric
                     }
                 }
 
-                return false;
+                return (false, 0);
             }
         }
     }

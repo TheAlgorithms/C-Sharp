@@ -42,10 +42,10 @@ namespace Algorithms.Tests.Numeric
             // Arrange
 
             // Act
-            var result = PerfectSquareChecker.IsPerfectSquare(number, out var _);
+            var (IsPerfectSquare, _) = PerfectSquareChecker.IsPerfectSquareIntOp(number);
 
             // Assert
-            return result;
+            return IsPerfectSquare;
         }
     }
 }
