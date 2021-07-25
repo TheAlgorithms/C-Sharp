@@ -79,6 +79,7 @@
   * [Rabin Karp](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Strings/RabinKarp.cs)
   * [Boyer Moore](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Strings/BoyerMoore.cs)
   * [Palindrome Checker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Strings/palindrome.cs)
+  * [Reverse String](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Strings/ReverseString.cs)
 ## Other
   * [Fermat Prime Checker](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/FermatPrimeChecker.cs)
   * [Sieve of Eratosthenes](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Other/SieveOfEratosthenes.cs)
