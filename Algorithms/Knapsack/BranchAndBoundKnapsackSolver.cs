@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Algorithms.Knapsack
@@ -114,7 +113,12 @@ namespace Algorithms.Knapsack
                 }
             }
 
-            // determine items taken based on the path that gives maximum value
+            return getOptimalItems(items, lastNodeOfOptimalPath);
+        }
+
+        // determine items taken based on the path that gives maximum value
+        private static T[] getOptimalItems(T[] items, BranchAndBoundNode lastNodeOfOptimalPath)
+        {
             List<T> takenItems = new List<T>();
 
             while (lastNodeOfOptimalPath.GetLevel() >= 0)
@@ -129,7 +133,7 @@ namespace Algorithms.Knapsack
                 lastNodeOfOptimalPath = lastNodeOfOptimalPath.GetParent();
             }
 
-            return (T[])takenItems.ToArray();
+            return takenItems.ToArray();
         }
 
         /// <summary>
@@ -164,7 +168,7 @@ namespace Algorithms.Knapsack
                 }
                 else
                 {
-                    upperBound += (double)(valueSelector(items[nextLevel]) / weightSelector(items[nextLevel]) * availableWeight);
+                    upperBound += valueSelector(items[nextLevel]) / weightSelector(items[nextLevel]) * availableWeight;
                     availableWeight = 0;
                 }
 
