@@ -113,11 +113,11 @@ namespace Algorithms.Knapsack
                 }
             }
 
-            return getOptimalItems(items, lastNodeOfOptimalPath);
+            return GetOptimalItems(items, lastNodeOfOptimalPath);
         }
 
         // determine items taken based on the path that gives maximum value
-        private static T[] getOptimalItems(T[] items, BranchAndBoundNode lastNodeOfOptimalPath)
+        private static T[] GetOptimalItems(T[] items, BranchAndBoundNode lastNodeOfOptimalPath)
         {
             List<T> takenItems = new List<T>();
 
