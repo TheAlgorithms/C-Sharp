@@ -3,7 +3,7 @@ using System;
 namespace Algorithms.Search
 {
     /// <summary>
-    ///     Jump Search checks fewer elements by jumping ahead by fixed steps. 
+    ///     Jump Search checks fewer elements by jumping ahead by fixed steps.
     ///     The optimal steps to jump is √n, where n refers to the number of elements in the array.
     ///     Time Complexity: O(√n)
     ///     Note: The array has to be sorted beforehand.
@@ -23,8 +23,8 @@ namespace Algorithms.Search
             {
                 throw new ArgumentNullException();
             }
-            
-            int jumpStep = (int) Math.Floor(Math.Sqrt(sortedArray.Length));
+
+            int jumpStep = (int)Math.Floor(Math.Sqrt(sortedArray.Length));
             int currentIndex = 0;
             int nextIndex = jumpStep;
 
