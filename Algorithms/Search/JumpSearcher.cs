@@ -19,9 +19,14 @@ namespace Algorithms.Search
         /// <returns>If item is found, return index. If array is empty or item not found, return -1.</returns>
         public int FindIndex(T[] sortedArray, T searchItem)
         {
-            if (sortedArray is null || searchItem is null)
+            if (sortedArray is null)
             {
-                throw new ArgumentNullException("The sorted array and search item should not be null!");
+                throw new ArgumentNullException("sortedArray");
+            }
+
+            if (searchItem is null)
+            {
+                throw new ArgumentNullException("searchItem");
             }
 
             int jumpStep = (int)Math.Floor(Math.Sqrt(sortedArray.Length));
