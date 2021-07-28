@@ -37,16 +37,31 @@ namespace Algorithms.Tests.Search
             Assert.AreEqual(expectedIndex, actualIndex);
         }
 
-        [TestCase(new String[] { }, "abc")]
+        [Test]
+        public void FindIndex_ArrayEmpty_MinusOneReturned([Random(-100, 1100, 10)] int missingItem)
+        {
+            // Arrange
+            var searcher = new JumpSearcher<int>();
+            var sortedArray = Array.Empty<int>();
+            var expectedIndex = -1;
+
+            // Act
+            var actualIndex = searcher.FindIndex(sortedArray, missingItem);
+
+            // Assert
+            Assert.AreEqual(expectedIndex, actualIndex);
+        }
+
         [TestCase(null, "abc")]
-        [TestCase(new String[] { "abc", "def", "ghi" }, null)]
-        public void FindIndex_ArrayEmpty_ArrayNull_ItemNull_NullReferenceExceptionThrown(String[] sortedArray, String searchItem)
+        [TestCase(new[] { "abc", "def", "ghi" }, null)]
+        [TestCase(null, null)]
+        public void FindIndex_ArrayNull_ItemNull_ArgumentNullExceptionThrown(String[] sortedArray, String searchItem)
         {
             // Arrange
             var searcher = new JumpSearcher<String>();
 
             // Act, Assert
-            _ = Assert.Throws<NullReferenceException>(() => searcher.FindIndex(sortedArray, searchItem));
+            _ = Assert.Throws<ArgumentNullException>(() => searcher.FindIndex(sortedArray, searchItem));
         }
     }
 }
