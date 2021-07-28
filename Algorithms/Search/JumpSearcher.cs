@@ -21,7 +21,7 @@ namespace Algorithms.Search
         {
             if (sortedArray is null || searchItem is null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("The sorted array and search item should not be null!");
             }
 
             int jumpStep = (int)Math.Floor(Math.Sqrt(sortedArray.Length));
