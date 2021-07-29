@@ -1,9 +1,9 @@
 using System;
-using System.Runtime.Serialization;
 
 namespace Algorithms.Knapsack
 {
-    public class BranchAndBoundNullParentException : Exception, ISerializable
+    [Serializable]
+    public class BranchAndBoundNullParentException : Exception
     {
         public BranchAndBoundNullParentException(string msg)
         : base(msg)
