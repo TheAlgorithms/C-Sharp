@@ -17,7 +17,8 @@ namespace Algorithms.Knapsack
         // level --> level of the node in the tree structure
         private int level;
 
-        private BranchAndBoundNode? parent; // parent node
+        // parent node
+        private BranchAndBoundNode? parent;
 
         public BranchAndBoundNode()
         {
@@ -75,15 +76,15 @@ namespace Algorithms.Knapsack
             return taken;
         }
 
-        public BranchAndBoundNode GetParent()
+        public BranchAndBoundNode? GetParent()
         {
-            if (parent != null)
+            if (parent is null)
             {
-                return parent;
+                throw new System.ArgumentNullException("Parent node is null.");
             }
             else
             {
-                throw new System.NullReferenceException("Parent node is null.");
+                return parent;
             }
         }
 

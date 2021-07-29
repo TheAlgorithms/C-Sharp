@@ -121,16 +121,22 @@ namespace Algorithms.Knapsack
         {
             List<T> takenItems = new List<T>();
 
-            while (lastNodeOfOptimalPath.GetLevel() >= 0)
+            BranchAndBoundNode? currentNode = lastNodeOfOptimalPath;
+            int numberOfNodes = lastNodeOfOptimalPath.GetLevel();
+
+            for (int i = numberOfNodes; i >= 0; i--)
             {
                 // the node's level's item is taken, add to knapsack taken items list
-                if(lastNodeOfOptimalPath.IsTaken())
+                if(currentNode != null)
                 {
-                    takenItems.Add(items[lastNodeOfOptimalPath.GetLevel()]);
-                }
+                    if(currentNode.IsTaken())
+                    {
+                        takenItems.Add(items[i]);
+                    }
 
-                // set nodeOfOptimalPath to its parent, to check if its parent is taken in the next iteration
-                lastNodeOfOptimalPath = lastNodeOfOptimalPath.GetParent();
+                    // set currentNode to its parent to check if the parent is taken in the next iteration
+                    currentNode = currentNode.GetParent();
+                }
             }
 
             return takenItems.ToArray();
