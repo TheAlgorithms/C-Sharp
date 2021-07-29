@@ -80,7 +80,7 @@ namespace Algorithms.Knapsack
         {
             if (parent is null)
             {
-                throw new System.ArgumentNullException("Parent node is null.");
+                throw new BranchAndBoundNullParentException("Parent node is null.");
             }
             else
             {
