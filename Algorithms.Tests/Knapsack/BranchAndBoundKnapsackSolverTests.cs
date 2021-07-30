@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Algorithms.Knapsack;
 using NUnit.Framework;
+using FluentAssertions;
 
 namespace Algorithms.Tests.Knapsack
 {
@@ -20,14 +21,12 @@ namespace Algorithms.Tests.Knapsack
             Func<char, int> weightSelector = x => wt[Array.IndexOf(items, x)];
             Func<char, double> valueSelector = x => val[Array.IndexOf(items, x)];
 
-            var expected = new[] {'A', 'B', 'D'};
-
             // Act
             var solver = new BranchAndBoundKnapsackSolver<char>();
-            var actual = solver.Solve(items, capacity, weightSelector, valueSelector);
+            var actualResult = solver.Solve(items, capacity, weightSelector, valueSelector);
 
             // Assert
-            Assert.AreEqual(expected.OrderBy(x => x), actual.OrderBy(x => x));
+            actualResult.Should().BeEquivalentTo('A', 'B', 'D');
         }
     }
 }
