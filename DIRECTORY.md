@@ -41,6 +41,7 @@
   * [Linear Search](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/LinearSearcher.cs)
   * [Fast Search](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/FastSearcher.cs)
   * [Knuth–Morris–Pratt](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Strings/KnuthMorrisPrattSearcher.cs)
+  * [Jump Search](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Search/JumpSearcher.cs)
 ## Sorts
   * Comparison
     * [Binary Insertion Sort](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/BinaryInsertionSorter.cs)
