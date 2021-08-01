@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Algorithms.Knapsack
 {
@@ -31,6 +32,9 @@ namespace Algorithms.Knapsack
         /// </returns>
         public T[] Solve(T[] items, int capacity, Func<T, int> weightSelector, Func<T, double> valueSelector)
         {
+            // This is required for greedy approach in upper bound calculation to work.
+            items = items.OrderBy(i => valueSelector(i) / weightSelector(i)).ToArray();
+
             // nodesQueue --> used to construct tree in breadth first order
             Queue<BranchAndBoundNode> nodesQueue = new();
 
