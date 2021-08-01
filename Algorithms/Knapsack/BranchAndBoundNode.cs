@@ -1,11 +1,9 @@
-using Utilities.Exceptions;
-
 namespace Algorithms.Knapsack
 {
     public class BranchAndBoundNode
     {
-        // taken --> true = the item where index = level is taken, vice versa
-        private readonly bool taken;
+        // isTaken --> true = the item where index = level is taken, vice versa
+        public bool IsTaken { get; }
 
         // cumulativeWeight --> um of weight of item associated in each nodes starting from root to this node (only item that is taken)
         public int CumulativeWeight { get; set; }
@@ -17,25 +15,16 @@ namespace Algorithms.Knapsack
         public double UpperBound { get; set; }
 
         // level --> level of the node in the tree structure
-        public int Level { get; set; }
+        public int Level { get; }
 
         // parent node
-        public BranchAndBoundNode? Parent { get; set; }
+        public BranchAndBoundNode? Parent { get; }
 
-        public BranchAndBoundNode()
+        public BranchAndBoundNode(int level, bool taken, BranchAndBoundNode? parent = null)
         {
-        }
-
-        public BranchAndBoundNode(int level, bool taken, BranchAndBoundNode parent)
-        {
-            this.Level = level;
-            this.taken = taken;
-            this.Parent = parent;
-        }
-
-        public bool IsTaken()
-        {
-            return taken;
+            Level = level;
+            IsTaken = taken;
+            Parent = parent;
         }
     }
 }

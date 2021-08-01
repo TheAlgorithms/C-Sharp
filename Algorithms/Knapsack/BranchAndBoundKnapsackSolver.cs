@@ -31,114 +31,92 @@ namespace Algorithms.Knapsack
         /// </returns>
         public T[] Solve(T[] items, int capacity, Func<T, int> weightSelector, Func<T, double> valueSelector)
         {
-            // parent --> parent node which represents the previous item, may or may not be taken into the knapsack
-            BranchAndBoundNode parent;
-
-            // Nodes --> store the nodes of the tree
-            List<BranchAndBoundNode> nodes = new List<BranchAndBoundNode>();
-
-            // lastNodeOfOptimalPat --> last item in the optimal item sets identified by this algorithm
-            BranchAndBoundNode lastNodeOfOptimalPath = new BranchAndBoundNode();
-
             // nodesQueue --> used to construct tree in breadth first order
-            Queue<BranchAndBoundNode> nodesQueue = new Queue<BranchAndBoundNode>();
+            Queue<BranchAndBoundNode> nodesQueue = new();
 
             // maxCumulativeValue --> maximum value while not exceeding weight capacity.
-            double maxCumulativeValue = 0.0;
+            var maxCumulativeValue = 0.0;
 
             // starting node, associated with a temporary created dummy item
-            BranchAndBoundNode root = new BranchAndBoundNode();
+            BranchAndBoundNode root = new(level: -1, taken: false);
 
-            root.Level = -1;
-            root.CumulativeWeight = 0;
-            root.CumulativeValue = 0;
+            // lastNodeOfOptimalPat --> last item in the optimal item sets identified by this algorithm
+            BranchAndBoundNode lastNodeOfOptimalPath = root;
 
             nodesQueue.Enqueue(root);
 
-            int counter = 0;
-
             while (nodesQueue.Count != 0)
             {
-                parent = nodesQueue.Dequeue();
+                // parent --> parent node which represents the previous item, may or may not be taken into the knapsack
+                BranchAndBoundNode parent = nodesQueue.Dequeue();
 
-                // IF it is the last level
-                if (parent.Level > items.Length - 1)
+                // IF it is the last level, branching cannot be performed
+                if (parent.Level == items.Length - 1)
                 {
                     continue;
                 }
 
                 // create a child node where the associated item is taken into the knapsack
-                nodes.Add(new BranchAndBoundNode(parent.Level + 1, true, parent));
+                var left = new BranchAndBoundNode(parent.Level + 1, true, parent);
 
                 // create a child node where the associated item is not taken into the knapsack
-                nodes.Add(new BranchAndBoundNode(parent.Level + 1, false, parent));
+                var right = new BranchAndBoundNode(parent.Level + 1, false, parent);
 
                 // Since the associated item on current level is taken for the first node,
                 // set the cumulative weight of first node to cumulative weight of parent node + weight of the associated item,
                 // set the cumulative value of first node to cumulative value of parent node + value of current level's item.
-                nodes[counter].CumulativeWeight = parent.CumulativeWeight + weightSelector(items[nodes[counter].Level]);
-                nodes[counter].CumulativeValue = parent.CumulativeValue + valueSelector(items[nodes[counter].Level]);
+                left.CumulativeWeight = parent.CumulativeWeight + weightSelector(items[left.Level]);
+                left.CumulativeValue = parent.CumulativeValue + valueSelector(items[left.Level]);
+                right.CumulativeWeight = parent.CumulativeWeight;
+                right.CumulativeValue = parent.CumulativeValue;
 
                 // IF cumulative weight is smaller than the weight capacity of the knapsack AND
                 // current cumulative value is larger then the current maxCumulativeValue, update the maxCumulativeValue
-                if (nodes[counter].CumulativeWeight <= capacity && nodes[counter].CumulativeValue > maxCumulativeValue)
+                if (left.CumulativeWeight <= capacity && left.CumulativeValue > maxCumulativeValue)
                 {
-                    maxCumulativeValue = nodes[counter].CumulativeValue;
-                    lastNodeOfOptimalPath = nodes[counter];
+                    maxCumulativeValue = left.CumulativeValue;
+                    lastNodeOfOptimalPath = left;
                 }
 
-                // find upperBound of this node
-                nodes[counter].UpperBound = ComputeUpperBound(nodes[counter], items, capacity, weightSelector, valueSelector);
+                left.UpperBound = ComputeUpperBound(left, items, capacity, weightSelector, valueSelector);
+                right.UpperBound = ComputeUpperBound(right, items, capacity, weightSelector, valueSelector);
 
                 // IF upperBound of this node is larger than maxCumulativeValue,
                 // the current path is still possible to reach or surpass the maximum value,
                 // add current node to nodesQueue so that nodes below it can be further explored
-                if (nodes[counter].UpperBound > maxCumulativeValue && nodes[counter].CumulativeWeight < capacity)
+                if (left.UpperBound > maxCumulativeValue && left.CumulativeWeight < capacity)
                 {
-                    nodesQueue.Enqueue(nodes[counter]);
+                    nodesQueue.Enqueue(left);
                 }
 
-                // repeat everything for the second node but the node's level's item is not taken
-                counter++;
-                nodes[counter].Parent = parent;
-
-                nodes[counter].CumulativeWeight = parent.CumulativeWeight;
-                nodes[counter].CumulativeValue = parent.CumulativeValue;
-
-                nodes[counter].UpperBound = ComputeUpperBound(nodes[counter], items, capacity, weightSelector, valueSelector);
-
-                if (nodes[counter].UpperBound > maxCumulativeValue)
+                // Cumulative weight is the same as for parent node and < capacity
+                if (right.UpperBound > maxCumulativeValue)
                 {
-                    nodesQueue.Enqueue(nodes[counter]);
+                    nodesQueue.Enqueue(right);
                 }
-
-                counter++;
             }
 
-            return GetOptimalItems(items, lastNodeOfOptimalPath, weightSelector, valueSelector);
+            return GetOptimalItems(items, lastNodeOfOptimalPath);
         }
 
         // determine items taken based on the path that gives maximum value
-        private static T[] GetOptimalItems(T[] items, BranchAndBoundNode lastNodeOfOptimalPath, Func<T, int> weightSelector, Func<T, double> valueSelector)
+        private static T[] GetOptimalItems(T[] items, BranchAndBoundNode lastNodeOfOptimalPath)
         {
-            List<T> takenItems = new List<T>();
+            List<T> takenItems = new();
 
-            BranchAndBoundNode? currentNode = lastNodeOfOptimalPath;
-            int numberOfNodes = lastNodeOfOptimalPath.Level;
+            BranchAndBoundNode currentNode = lastNodeOfOptimalPath;
+            var numberOfNodes = lastNodeOfOptimalPath.Level;
 
-            for (int i = numberOfNodes; i >= 0; i--)
+            for (var i = numberOfNodes; i >= 0; i--)
             {
                 // the node's level's item is taken, add to knapsack taken items list
-                if(currentNode != null)
+                if(currentNode.IsTaken)
                 {
-                    if(currentNode.IsTaken())
-                    {
-                        takenItems.Add(items[i]);
-                    }
-
-                    // set currentNode to its parent to check if the parent is taken in the next iteration
-                    currentNode = currentNode.Parent;
+                    takenItems.Add(items[i]);
                 }
+
+                // set currentNode to its parent to check if the parent is taken in the next iteration
+                currentNode = currentNode.Parent!;
             }
 
             return takenItems.ToArray();
@@ -163,9 +141,9 @@ namespace Algorithms.Knapsack
         /// </returns>
         private static double ComputeUpperBound(BranchAndBoundNode aNode, T[] items, int capacity, Func<T, int> weightSelector, Func<T, double> valueSelector)
         {
-            double upperBound = aNode.CumulativeValue;
-            int availableWeight = capacity - aNode.CumulativeWeight;
-            int nextLevel = aNode.Level + 1;
+            var upperBound = aNode.CumulativeValue;
+            var availableWeight = capacity - aNode.CumulativeWeight;
+            var nextLevel = aNode.Level + 1;
 
             while (availableWeight > 0 && nextLevel < items.Length)
             {
