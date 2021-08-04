@@ -100,27 +100,21 @@ namespace Algorithms.Knapsack
                 }
             }
 
-            return GetOptimalItems(items, lastNodeOfOptimalPath);
+            return GetItemsFromPath(items, lastNodeOfOptimalPath);
         }
 
-        // determine items taken based on the path that gives maximum value
-        private static T[] GetOptimalItems(T[] items, BranchAndBoundNode lastNodeOfOptimalPath)
+        // determine items taken based on the path
+        private static T[] GetItemsFromPath(T[] items, BranchAndBoundNode lastNodeOfPath)
         {
             List<T> takenItems = new();
 
-            BranchAndBoundNode currentNode = lastNodeOfOptimalPath;
-            var numberOfNodes = lastNodeOfOptimalPath.Level;
-
-            for (var i = numberOfNodes; i >= 0; i--)
+            // only bogus initial node has no parent
+            for (var current = lastNodeOfPath; current.Parent is not null; current = current.Parent)
             {
-                // the node's level's item is taken, add to knapsack taken items list
-                if(currentNode.IsTaken)
+                if(current.IsTaken)
                 {
-                    takenItems.Add(items[i]);
+                    takenItems.Add(items[current.Level]);
                 }
-
-                // set currentNode to its parent to check if the parent is taken in the next iteration
-                currentNode = currentNode.Parent!;
             }
 
             return takenItems.ToArray();
