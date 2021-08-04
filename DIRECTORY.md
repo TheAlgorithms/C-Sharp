@@ -13,6 +13,7 @@
 ## Knapsack problem
   * [Naive solver](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Knapsack/NaiveKnapsackSolver.cs)
   * [Dynamic Programming solver](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Knapsack/DynamicProgrammingKnapsackSolver.cs)
+  * [Branch and bound solver](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Knapsack/BranchAndBoundKnapsackSolver.cs)
 ## Linear Algebra
   * Eigenvalue
     * [Power Iteration](https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/LinearAlgebra/Eigenvalue/PowerIteration.cs)

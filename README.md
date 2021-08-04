@@ -22,6 +22,7 @@ This repository contains algorithms and data structures implemented in C# for ed
   * [Knapsack problem](./Algorithms/Knapsack)
     * [Naive solver](./Algorithms/Knapsack/NaiveKnapsackSolver.cs)
     * [Dynamic Programming solver](./Algorithms/Knapsack/DynamicProgrammingKnapsackSolver.cs)
+    * [Branch and bound solver](./Algorithms/Knapsack/BranchAndBoundKnapsackSolver.cs)
   * [Linear Algebra](./Algorithms/LinearAlgebra)
     * [Eigenvalue](./Algorithms/LinearAlgebra/Eigenvalue)
       * [Power Iteration](./Algorithms/LinearAlgebra/Eigenvalue/PowerIteration.cs)
