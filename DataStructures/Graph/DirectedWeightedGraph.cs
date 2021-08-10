@@ -172,7 +172,7 @@ namespace DataStructures.Graph
 
         private static void ThrowIfWeightZero(double weight)
         {
-            if (weight == 0)
+            if (weight.Equals(0.0d))
             {
                 throw new InvalidOperationException("Edge weight cannot be zero.");
             }
@@ -180,7 +180,7 @@ namespace DataStructures.Graph
 
         private static void ThrowIfEdgeExists(double currentEdgeWeight)
         {
-            if (currentEdgeWeight != 0)
+            if (!currentEdgeWeight.Equals(0.0d))
             {
                 throw new InvalidOperationException($"Vertex already exists: {currentEdgeWeight}");
             }
@@ -206,7 +206,7 @@ namespace DataStructures.Graph
         {
             if (Count == 0)
             {
-                throw new IndexOutOfRangeException("Graph is empty.");
+                throw new InvalidOperationException("Graph is empty.");
             }
         }
     }

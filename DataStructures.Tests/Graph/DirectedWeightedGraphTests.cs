@@ -11,12 +11,27 @@ namespace DataStructures.Tests.Graph
     public class DirectedWeightedGraphTests
     {
         [Test]
-        public void GraphInitializationTest_ShouldThrowOverflow()
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-2)]
+        public void GraphInitializationTest_ShouldThrowOverflow(int capacity)
         {
-            Action createGraph = () => new DirectedWeightedGraph<char>(-10);
+            Func<DirectedWeightedGraph<char>> createGraph = () => new DirectedWeightedGraph<char>(capacity);
 
             createGraph.Should().Throw<OverflowException>()
                 .WithMessage("Graph capacity should always be a positive integer.");
+        }
+
+        [Test]
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(20)]
+        [TestCase(30)]
+        public void GraphInitializationTest_Success(int capacity)
+        {
+            Func<DirectedWeightedGraph<char>> createGraph = () => new DirectedWeightedGraph<char>(capacity);
+
+            createGraph.Should().NotThrow();
         }
 
         [Test]
@@ -79,6 +94,20 @@ namespace DataStructures.Tests.Graph
 
             removeVertex.Should().Throw<InvalidOperationException>()
                 .WithMessage($"Vertex does not belong to graph: {vertexA}.");
+        }
+
+        [Test]
+        public void GraphRemoveVertexTest_ShouldThrowEmptyGraph()
+        {
+            var graph = new DirectedWeightedGraph<char>();
+            var vertexA = graph.AddVertex('A');
+            graph.RemoveVertex(vertexA);
+            vertexA.SetGraph(graph);
+
+            Action removeVertex = () => graph.RemoveVertex(vertexA);
+
+            removeVertex.Should().Throw<InvalidOperationException>()
+                .WithMessage("Graph is empty.");
         }
 
         [Test]
