@@ -11,6 +11,15 @@ namespace DataStructures.Tests.Graph
     public class DirectedWeightedGraphTests
     {
         [Test]
+        public void GraphInitializationTest_ShouldThrowOverflow()
+        {
+            Action createGraph = () => new DirectedWeightedGraph<char>(-10);
+
+            createGraph.Should().Throw<OverflowException>()
+                .WithMessage("Graph capacity should always be a positive integer.");
+        }
+
+        [Test]
         public void GraphAddVertexTest_Success()
         {
             var graph = new DirectedWeightedGraph<char>();

@@ -3,20 +3,46 @@ using System.Collections.Generic;
 
 namespace DataStructures.Graph
 {
-    public class DirectedWeightedGraph<T> : IGraph<T>
+    /// <summary>
+    ///     Implementation of the directed weighted graph via adjacency matrix.
+    /// </summary>
+    /// <typeparam name="T">Generic Type.</typeparam>
+    public class DirectedWeightedGraph<T>
     {
+        /// <summary>
+        ///     Default capacity of the graph.
+        /// </summary>
         private const int DefaultCapacity = 10;
+
+        /// <summary>
+        ///     Capacity of the graph, indicates the maximum amount of vertices.
+        /// </summary>
         private readonly int capacity;
+
+        /// <summary>
+        ///     Adjacency matrix which reflects the edges between vertices and their weight.
+        ///     Zero value indicates no edge between two vertices.
+        /// </summary>
         private readonly double[,] adjacencyMatrix;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="DirectedWeightedGraph{T}"/> class.
+        /// </summary>
+        /// <param name="capacity">Capacity of the graph, indicates the maximum amount of vertices.</param>
         public DirectedWeightedGraph(int capacity)
         {
+            ThrowIfCapacityLessOne(capacity);
+
             this.capacity = capacity;
             Vertices = new List<Vertex<T>>();
             adjacencyMatrix = new double[capacity, capacity];
             Count = 0;
         }
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="DirectedWeightedGraph{T}"/> class
+        ///     with default capacity equals 10.
+        /// </summary>
         public DirectedWeightedGraph()
         {
             capacity = DefaultCapacity;
@@ -25,10 +51,21 @@ namespace DataStructures.Graph
             Count = 0;
         }
 
+        /// <summary>
+        ///     Gets list of vertices of the graph.
+        /// </summary>
         public List<Vertex<T>> Vertices { get; }
 
+        /// <summary>
+        ///     Gets current amount of vertices in the graph.
+        /// </summary>
         public int Count { get; private set; }
 
+        /// <summary>
+        ///     Adds new vertex to the graph.
+        /// </summary>
+        /// <param name="data">Data of the vertex.</param>
+        /// <returns>Reference to created vertex.</returns>
         public Vertex<T> AddVertex(T data)
         {
             ThrowIfOverflow();
@@ -39,6 +76,12 @@ namespace DataStructures.Graph
             return vertex;
         }
 
+        /// <summary>
+        ///     Creates an edge between two vertices of the graph.
+        /// </summary>
+        /// <param name="startVertex">Vertex, edge starts at.</param>
+        /// <param name="endVertex">Vertex, edge ends at.</param>
+        /// <param name="weight">Double weight of an edge.</param>
         public void AddEdge(Vertex<T> startVertex, Vertex<T> endVertex, double weight)
         {
             ThrowIfVertexNotInGraph(startVertex);
@@ -53,6 +96,10 @@ namespace DataStructures.Graph
             adjacencyMatrix[startVertex.Index, endVertex.Index] = weight;
         }
 
+        /// <summary>
+        ///     Removes vertex from the graph.
+        /// </summary>
+        /// <param name="vertex">Vertex to be removed.</param>
         public void RemoveVertex(Vertex<T> vertex)
         {
             ThrowIfVertexNotInGraph(vertex);
@@ -71,13 +118,23 @@ namespace DataStructures.Graph
             Count--;
         }
 
-        public void RemoveEdge(Vertex<T> vertex1, Vertex<T> vertex2)
+        /// <summary>
+        ///     Removes edge between two vertices.
+        /// </summary>
+        /// <param name="startVertex">Vertex, edge starts at.</param>
+        /// <param name="endVertex">Vertex, edge ends at.</param>
+        public void RemoveEdge(Vertex<T> startVertex, Vertex<T> endVertex)
         {
-            ThrowIfVertexNotInGraph(vertex1);
-            ThrowIfVertexNotInGraph(vertex2);
-            adjacencyMatrix[vertex1.Index, vertex2.Index] = 0;
+            ThrowIfVertexNotInGraph(startVertex);
+            ThrowIfVertexNotInGraph(endVertex);
+            adjacencyMatrix[startVertex.Index, endVertex.Index] = 0;
         }
 
+        /// <summary>
+        ///     Gets a neighbors of particular vertex.
+        /// </summary>
+        /// <param name="vertex">Vertex, method gets list of neighbors for.</param>
+        /// <returns>Collection of the neighbors of particular vertex.</returns>
         public IEnumerable<Vertex<T>> GetNeighbors(Vertex<T> vertex)
         {
             ThrowIfVertexNotInGraph(vertex);
@@ -91,12 +148,26 @@ namespace DataStructures.Graph
             }
         }
 
-        public bool AreAdjacent(Vertex<T> vertex1, Vertex<T> vertex2)
+        /// <summary>
+        ///     Returns true, if there is an edge between two vertices.
+        /// </summary>
+        /// <param name="startVertex">Vertex, edge starts at.</param>
+        /// <param name="endVertex">Vertex, edge ends at.</param>
+        /// <returns>True if edge exists, otherwise false.</returns>
+        public bool AreAdjacent(Vertex<T> startVertex, Vertex<T> endVertex)
         {
-            ThrowIfVertexNotInGraph(vertex1);
-            ThrowIfVertexNotInGraph(vertex2);
+            ThrowIfVertexNotInGraph(startVertex);
+            ThrowIfVertexNotInGraph(endVertex);
 
-            return adjacencyMatrix[vertex1.Index, vertex2.Index] != 0;
+            return adjacencyMatrix[startVertex.Index, endVertex.Index] != 0;
+        }
+
+        private static void ThrowIfCapacityLessOne(int capacity)
+        {
+            if (capacity <= 0)
+            {
+                throw new OverflowException("Graph capacity should always be a positive integer.");
+            }
         }
 
         private static void ThrowIfWeightZero(double weight)
