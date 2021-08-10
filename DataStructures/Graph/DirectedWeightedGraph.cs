@@ -69,9 +69,8 @@ namespace DataStructures.Graph
         public Vertex<T> AddVertex(T data)
         {
             ThrowIfOverflow();
-            var vertex = new Vertex<T>(data, Count);
+            var vertex = new Vertex<T>(data, Count, this);
             Vertices.Add(vertex);
-            vertex.SetGraph(this);
             Count++;
             return vertex;
         }
@@ -104,10 +103,8 @@ namespace DataStructures.Graph
         {
             ThrowIfVertexNotInGraph(vertex);
 
-            ThrowIfGraphIsEmpty();
-
             Vertices.Remove(vertex);
-            vertex.SetGraph(null);
+            vertex.SetGraphNull();
 
             for (var i = 0; i < Count; i++)
             {
@@ -190,7 +187,7 @@ namespace DataStructures.Graph
         {
             if (Count == capacity)
             {
-                throw new OverflowException("Graph overflow.");
+                throw new InvalidOperationException("Graph overflow.");
             }
         }
 
@@ -199,14 +196,6 @@ namespace DataStructures.Graph
             if (vertex.Graph != this)
             {
                 throw new InvalidOperationException($"Vertex does not belong to graph: {vertex}.");
-            }
-        }
-
-        private void ThrowIfGraphIsEmpty()
-        {
-            if (Count == 0)
-            {
-                throw new InvalidOperationException("Graph is empty.");
             }
         }
     }

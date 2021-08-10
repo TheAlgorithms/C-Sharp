@@ -59,7 +59,7 @@ namespace DataStructures.Tests.Graph
 
             graph.Count.Should().Be(10);
             graph.Vertices.Should().OnlyContain(x => x.Data == 'A');
-            addOverflow.Should().Throw<OverflowException>()
+            addOverflow.Should().Throw<InvalidOperationException>()
                 .WithMessage("Graph overflow.");
         }
 
@@ -72,16 +72,17 @@ namespace DataStructures.Tests.Graph
             var vertexC = graph.AddVertex('C');
             graph.AddEdge(vertexB, vertexA, 5);
             graph.AddEdge(vertexC, vertexA, 5);
-            var adjacentBa = graph.AreAdjacent(vertexB, vertexA);
-            var adjacentCa = graph.AreAdjacent(vertexC, vertexA);
+            var neighborsB = graph.GetNeighbors(vertexB).ToList();
+            var neighborsC = graph.GetNeighbors(vertexC).ToList();
 
             graph.RemoveVertex(vertexA);
-            vertexA.SetGraph(graph);
 
-            adjacentBa.Should().BeTrue();
-            adjacentCa.Should().BeTrue();
-            graph.AreAdjacent(vertexB, vertexA).Should().BeFalse();
-            graph.AreAdjacent(vertexC, vertexA).Should().BeFalse();
+            neighborsB.Should().HaveCount(1);
+            neighborsB[0].Should().Be(vertexA);
+            neighborsC.Should().HaveCount(1);
+            neighborsC[0].Should().Be(vertexA);
+            graph.GetNeighbors(vertexB).Should().HaveCount(0);
+            graph.GetNeighbors(vertexC).Should().HaveCount(0);
         }
 
         [Test]
@@ -94,20 +95,6 @@ namespace DataStructures.Tests.Graph
 
             removeVertex.Should().Throw<InvalidOperationException>()
                 .WithMessage($"Vertex does not belong to graph: {vertexA}.");
-        }
-
-        [Test]
-        public void GraphRemoveVertexTest_ShouldThrowEmptyGraph()
-        {
-            var graph = new DirectedWeightedGraph<char>();
-            var vertexA = graph.AddVertex('A');
-            graph.RemoveVertex(vertexA);
-            vertexA.SetGraph(graph);
-
-            Action removeVertex = () => graph.RemoveVertex(vertexA);
-
-            removeVertex.Should().Throw<InvalidOperationException>()
-                .WithMessage("Graph is empty.");
         }
 
         [Test]
