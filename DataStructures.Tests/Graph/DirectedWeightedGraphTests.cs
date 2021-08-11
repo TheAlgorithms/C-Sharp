@@ -11,15 +11,15 @@ namespace DataStructures.Tests.Graph
     public class DirectedWeightedGraphTests
     {
         [Test]
-        [TestCase(0)]
         [TestCase(-1)]
         [TestCase(-2)]
+        [TestCase(-3)]
         public void GraphInitializationTest_ShouldThrowOverflow(int capacity)
         {
             Func<DirectedWeightedGraph<char>> createGraph = () => new DirectedWeightedGraph<char>(capacity);
 
-            createGraph.Should().Throw<OverflowException>()
-                .WithMessage("Graph capacity should always be a positive integer.");
+            createGraph.Should().Throw<InvalidOperationException>()
+                .WithMessage("Graph capacity should always be a non-negative integer.");
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace DataStructures.Tests.Graph
         [Test]
         public void GraphAddVertexTest_Success()
         {
-            var graph = new DirectedWeightedGraph<char>();
+            var graph = new DirectedWeightedGraph<char>(10);
 
             graph.AddVertex('A');
             graph.AddVertex('B');
@@ -49,7 +49,7 @@ namespace DataStructures.Tests.Graph
         [Test]
         public void GraphAddVertexTest_ShouldThrowOverflow()
         {
-            var graph = new DirectedWeightedGraph<char>();
+            var graph = new DirectedWeightedGraph<char>(10);
             for (var i = 0; i < 10; i++)
             {
                 graph.AddVertex('A');
@@ -66,7 +66,7 @@ namespace DataStructures.Tests.Graph
         [Test]
         public void GraphRemoveVertexTest_Success()
         {
-            var graph = new DirectedWeightedGraph<char>();
+            var graph = new DirectedWeightedGraph<char>(10);
             var vertexA = graph.AddVertex('A');
             var vertexB = graph.AddVertex('B');
             var vertexC = graph.AddVertex('C');
@@ -88,7 +88,7 @@ namespace DataStructures.Tests.Graph
         [Test]
         public void GraphRemoveVertexTest_ShouldThrowVertexNotInGraph()
         {
-            var graph = new DirectedWeightedGraph<char>();
+            var graph = new DirectedWeightedGraph<char>(10);
             var vertexA = new Vertex<char>('A', 0);
 
             Action removeVertex = () => graph.RemoveVertex(vertexA);
@@ -100,7 +100,7 @@ namespace DataStructures.Tests.Graph
         [Test]
         public void GraphAddEdgeTest_Success()
         {
-            var graph = new DirectedWeightedGraph<char>();
+            var graph = new DirectedWeightedGraph<char>(10);
             var vertexA = graph.AddVertex('A');
             var vertexB = graph.AddVertex('B');
             var vertexC = graph.AddVertex('C');
@@ -114,7 +114,7 @@ namespace DataStructures.Tests.Graph
         [Test]
         public void GraphAddEdgeTest_ShouldThrowZeroWeight()
         {
-            var graph = new DirectedWeightedGraph<char>();
+            var graph = new DirectedWeightedGraph<char>(10);
             var vertexA = graph.AddVertex('A');
             var vertexB = graph.AddVertex('B');
 
@@ -127,7 +127,7 @@ namespace DataStructures.Tests.Graph
         [Test]
         public void GraphAddEdgeTest_ShouldThrowVertexNotInGraph()
         {
-            var graph = new DirectedWeightedGraph<char>();
+            var graph = new DirectedWeightedGraph<char>(10);
             var vertexA = graph.AddVertex('A');
             var vertexB = new Vertex<char>('B', 1);
 
@@ -140,7 +140,7 @@ namespace DataStructures.Tests.Graph
         [Test]
         public void GraphAddEdgeTest_ShouldThrowEdgeExists()
         {
-            var graph = new DirectedWeightedGraph<char>();
+            var graph = new DirectedWeightedGraph<char>(10);
             var vertexA = graph.AddVertex('A');
             var vertexB = graph.AddVertex('B');
             const int currentEdgeWeight = 5;
@@ -155,7 +155,7 @@ namespace DataStructures.Tests.Graph
         [Test]
         public void GraphRemoveEdgeTest_Success()
         {
-            var graph = new DirectedWeightedGraph<char>();
+            var graph = new DirectedWeightedGraph<char>(10);
             var vertexA = graph.AddVertex('A');
             var vertexB = graph.AddVertex('B');
             graph.AddEdge(vertexA, vertexB, 5);
@@ -168,7 +168,7 @@ namespace DataStructures.Tests.Graph
         [Test]
         public void GraphRemoveEdgeTest_ShouldThrowVertexNotInGraph()
         {
-            var graph = new DirectedWeightedGraph<char>();
+            var graph = new DirectedWeightedGraph<char>(10);
             var vertexA = graph.AddVertex('A');
             var vertexB = new Vertex<char>('B', 1);
 
@@ -181,7 +181,7 @@ namespace DataStructures.Tests.Graph
         [Test]
         public void GraphGetNeighborsTest_Success()
         {
-            var graph = new DirectedWeightedGraph<char>();
+            var graph = new DirectedWeightedGraph<char>(10);
             var vertexA = graph.AddVertex('A');
             var vertexB = graph.AddVertex('B');
             var vertexC = graph.AddVertex('C');
@@ -201,7 +201,7 @@ namespace DataStructures.Tests.Graph
         [Test]
         public void GraphGetNeighborsTest_ShouldThrowVertexNotInGraph()
         {
-            var graph = new DirectedWeightedGraph<char>();
+            var graph = new DirectedWeightedGraph<char>(10);
             var vertexA = new Vertex<char>('A', 0);
 
             Func<List<Vertex<char>>> getNeighbors = () =>

@@ -10,11 +10,6 @@ namespace DataStructures.Graph
     public class DirectedWeightedGraph<T>
     {
         /// <summary>
-        ///     Default capacity of the graph.
-        /// </summary>
-        private const int DefaultCapacity = 10;
-
-        /// <summary>
         ///     Capacity of the graph, indicates the maximum amount of vertices.
         /// </summary>
         private readonly int capacity;
@@ -31,22 +26,10 @@ namespace DataStructures.Graph
         /// <param name="capacity">Capacity of the graph, indicates the maximum amount of vertices.</param>
         public DirectedWeightedGraph(int capacity)
         {
-            ThrowIfCapacityLessOne(capacity);
+            ThrowIfNegativeCapacity(capacity);
 
             this.capacity = capacity;
-            Vertices = new List<Vertex<T>>();
-            adjacencyMatrix = new double[capacity, capacity];
-            Count = 0;
-        }
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="DirectedWeightedGraph{T}"/> class
-        ///     with default capacity equals 10.
-        /// </summary>
-        public DirectedWeightedGraph()
-        {
-            capacity = DefaultCapacity;
-            Vertices = new List<Vertex<T>>();
+            Vertices = new Vertex<T>[capacity];
             adjacencyMatrix = new double[capacity, capacity];
             Count = 0;
         }
@@ -54,7 +37,7 @@ namespace DataStructures.Graph
         /// <summary>
         ///     Gets list of vertices of the graph.
         /// </summary>
-        public List<Vertex<T>> Vertices { get; }
+        public Vertex<T>[] Vertices { get; private set; }
 
         /// <summary>
         ///     Gets current amount of vertices in the graph.
@@ -70,7 +53,7 @@ namespace DataStructures.Graph
         {
             ThrowIfOverflow();
             var vertex = new Vertex<T>(data, Count, this);
-            Vertices.Add(vertex);
+            Vertices[Count] = vertex;
             Count++;
             return vertex;
         }
@@ -103,7 +86,22 @@ namespace DataStructures.Graph
         {
             ThrowIfVertexNotInGraph(vertex);
 
-            Vertices.Remove(vertex);
+            // creating temporary array
+            var tempVertexArray = new Vertex<T>[capacity];
+
+            // store in temporary array all vertices except the one we remove
+            for (var i = 0; i < Count; i++)
+            {
+                if (Vertices[i].Equals(vertex))
+                {
+                    continue;
+                }
+
+                tempVertexArray[i] = Vertices[i];
+            }
+
+            Vertices = tempVertexArray;
+
             vertex.SetGraphNull();
 
             for (var i = 0; i < Count; i++)
@@ -159,11 +157,11 @@ namespace DataStructures.Graph
             return adjacencyMatrix[startVertex.Index, endVertex.Index] != 0;
         }
 
-        private static void ThrowIfCapacityLessOne(int capacity)
+        private static void ThrowIfNegativeCapacity(int capacity)
         {
-            if (capacity <= 0)
+            if (capacity < 0)
             {
-                throw new OverflowException("Graph capacity should always be a positive integer.");
+                throw new InvalidOperationException("Graph capacity should always be a non-negative integer.");
             }
         }
 
