@@ -37,7 +37,7 @@ namespace DataStructures.Graph
         /// <summary>
         ///     Gets list of vertices of the graph.
         /// </summary>
-        public Vertex<T>[] Vertices { get; private set; }
+        public Vertex<T>?[] Vertices { get; private set; }
 
         /// <summary>
         ///     Gets current amount of vertices in the graph.
@@ -86,22 +86,7 @@ namespace DataStructures.Graph
         {
             ThrowIfVertexNotInGraph(vertex);
 
-            // creating temporary array
-            var tempVertexArray = new Vertex<T>[capacity];
-
-            // store in temporary array all vertices except the one we remove
-            for (var i = 0; i < Count; i++)
-            {
-                if (Vertices[i].Equals(vertex))
-                {
-                    continue;
-                }
-
-                tempVertexArray[i] = Vertices[i];
-            }
-
-            Vertices = tempVertexArray;
-
+            Vertices[vertex.Index] = null;
             vertex.SetGraphNull();
 
             for (var i = 0; i < Count; i++)
@@ -130,7 +115,7 @@ namespace DataStructures.Graph
         /// </summary>
         /// <param name="vertex">Vertex, method gets list of neighbors for.</param>
         /// <returns>Collection of the neighbors of particular vertex.</returns>
-        public IEnumerable<Vertex<T>> GetNeighbors(Vertex<T> vertex)
+        public IEnumerable<Vertex<T>?> GetNeighbors(Vertex<T> vertex)
         {
             ThrowIfVertexNotInGraph(vertex);
 

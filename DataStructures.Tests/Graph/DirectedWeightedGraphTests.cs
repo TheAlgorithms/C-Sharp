@@ -58,7 +58,7 @@ namespace DataStructures.Tests.Graph
             Action addOverflow = () => graph.AddVertex('A');
 
             graph.Count.Should().Be(10);
-            graph.Vertices.Should().OnlyContain(x => x.Data == 'A');
+            graph.Vertices.Should().OnlyContain(x => x != null && x.Data == 'A');
             addOverflow.Should().Throw<InvalidOperationException>()
                 .WithMessage("Graph overflow.");
         }
@@ -204,7 +204,7 @@ namespace DataStructures.Tests.Graph
             var graph = new DirectedWeightedGraph<char>(10);
             var vertexA = new Vertex<char>('A', 0);
 
-            Func<List<Vertex<char>>> getNeighbors = () =>
+            Func<List<Vertex<char>?>> getNeighbors = () =>
             {
                 var enumerable = graph.GetNeighbors(vertexA);
                 return enumerable.ToList();
