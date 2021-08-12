@@ -116,3 +116,5 @@
   * Linked List
     * [Singly Linked List](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/LinkedList/SinglyLinkedList/SinglyLinkedList.cs)
     * [Doubly Linked List](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/LinkedList/DoublyLinkedList/DoublyLinkedList.cs)
+  * Graph
+    * [Directed Weighted Graph Via Adjacency Matrix](https://github.com/TheAlgorithms/C-Sharp/blob/master/DataStructures/DataStructures/Graph/DirectedWeightedGraph.cs)
