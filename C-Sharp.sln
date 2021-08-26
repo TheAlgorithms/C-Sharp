@@ -7,9 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{DAB16DEC-A
 	ProjectSection(SolutionItems) = preProject
 		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
 		CONTRIBUTING.md = CONTRIBUTING.md
+		DIRECTORY.md = DIRECTORY.md
 		LICENSE = LICENSE
 		README.md = README.md
-		DIRECTORY.md = DIRECTORY.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configs", "Configs", "{F3AC2246-318B-4EE4-BD9E-D751D3044901}"
@@ -32,6 +32,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{3A41157D-296D-4BFC-A34E-91B5ED7F0905}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities.Tests", "Utilities.Tests\Utilities.Tests.csproj", "{ED47E2E2-045C-41DD-B555-A64944D6C2F5}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.fsproj", "{A2B5F68A-8697-46E5-9A63-FFA613B7D658}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{ED47E2E2-045C-41DD-B555-A64944D6C2F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED47E2E2-045C-41DD-B555-A64944D6C2F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED47E2E2-045C-41DD-B555-A64944D6C2F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2B5F68A-8697-46E5-9A63-FFA613B7D658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2B5F68A-8697-46E5-9A63-FFA613B7D658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2B5F68A-8697-46E5-9A63-FFA613B7D658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2B5F68A-8697-46E5-9A63-FFA613B7D658}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

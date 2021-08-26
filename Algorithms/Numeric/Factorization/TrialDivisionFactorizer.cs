@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Linq;
 
 namespace Algorithms.Numeric.Factorization
 {
     /// <summary>
-    ///     Factors number using trial division algorithm.
+    ///     Factors number using trial division algorithm[试除法算法].
     /// </summary>
     public class TrialDivisionFactorizer : IFactorizer
     {
