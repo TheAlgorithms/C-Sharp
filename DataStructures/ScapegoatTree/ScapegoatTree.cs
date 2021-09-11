@@ -14,7 +14,7 @@ namespace DataStructures.ScapegoatTree
     /// <typeparam name="TKey">Type of the tree node value.</typeparam>
     public class ScapegoatTree<TKey> : IEnumerable<TKey> where TKey : IComparable
     {
-        private readonly ScapegoatTreeImplementation<TKey> implementation = new();
+        private readonly ScapegoatTreeImplementationBase<TKey> implementation = new ScapegoatTreeImplementation<TKey>();
 
         private double alpha;
 
@@ -27,12 +27,12 @@ namespace DataStructures.ScapegoatTree
         public event EventHandler? TreeIsUnbalanced;
 
         public ScapegoatTree()
-            : this(0.5, 0)
+            : this(0.5, 0, null)
         {
         }
 
         public ScapegoatTree(double alpha)
-            : this(alpha, 0)
+            : this(alpha, 0, null)
         {
         }
 
@@ -41,17 +41,32 @@ namespace DataStructures.ScapegoatTree
         {
         }
 
+        public ScapegoatTree(ScapegoatTreeImplementationBase<TKey> implementation)
+            : this(0.5, 0, implementation)
+        {
+        }
+
         public ScapegoatTree(TKey key, double alpha)
-            : this(alpha, 1)
+            : this(key, alpha, null)
+        {
+        }
+
+        public ScapegoatTree(TKey key, double alpha, ScapegoatTreeImplementationBase<TKey>? implementation)
+            : this(alpha, 1, implementation)
         {
             this.Root = new Node<TKey>(key);
         }
 
-        private ScapegoatTree(double alpha, int size)
+        private ScapegoatTree(double alpha, int size, ScapegoatTreeImplementationBase<TKey>? implementation)
         {
             if (alpha is < 0.5 or > 1.0)
             {
                 throw new ArgumentException("The alpha parameter value should be in range 0.5..1.0", nameof(alpha));
+            }
+
+            if (implementation != null)
+            {
+                this.implementation = implementation;
             }
 
             this.alpha = alpha;
@@ -62,15 +77,7 @@ namespace DataStructures.ScapegoatTree
 
         public bool IsAlphaWeightBalanced()
         {
-            if (Root == null)
-            {
-                return true;
-            }
-
-            var a = (Root.Left?.GetSize() ?? 0) <= (alpha * Size);
-            var b = (Root.Right?.GetSize() ?? 0) <= (alpha * Size);
-
-            return a && b;
+            return Root?.IsAlphaWeightBalanced(alpha) ?? true;
         }
 
         /// <summary>

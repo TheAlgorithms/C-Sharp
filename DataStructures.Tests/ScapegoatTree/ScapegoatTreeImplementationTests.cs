@@ -306,7 +306,7 @@ namespace DataStructures.Tests.ScapegoatTree
             list.Add(new Node<int>(5));
             list.Add(new Node<int>(6));
 
-            var tree = implementation.RebuildFlatTree(list, 0, list.Count - 1);
+            var tree = implementation.RebuildFromList(list, 0, list.Count - 1);
 
             Assert.AreEqual(list.Count, tree.GetSize());
             Assert.AreEqual(expected, tree);

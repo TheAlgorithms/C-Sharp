@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace DataStructures.ScapegoatTree
 {
-    public class ScapegoatTreeImplementation<TKey>
+    public class ScapegoatTreeImplementation<TKey> : ScapegoatTreeImplementationBase<TKey>
         where TKey : IComparable
     {
-        public Node<TKey>? SearchWithRoot(Node<TKey> root, TKey key)
+        public override Node<TKey>? SearchWithRoot(Node<TKey> root, TKey key)
         {
             while (true)
             {
@@ -28,7 +28,7 @@ namespace DataStructures.ScapegoatTree
             }
         }
 
-        public bool TryDeleteWithRoot(Node<TKey> root, TKey key)
+        public override bool TryDeleteWithRoot(Node<TKey> root, TKey key)
         {
             var previous = root;
             var current = root;
@@ -95,9 +95,8 @@ namespace DataStructures.ScapegoatTree
             else
             {
                 var predecessor = current.Left.GetLargestKeyNode();
-                var result = TryDeleteWithRoot(root, predecessor.Key);
 
-                if (result == false)
+                if (!TryDeleteWithRoot(root, predecessor.Key))
                 {
                     throw new InvalidOperationException("Error while trying to delete a key. The subtree is invalid.");
                 }
@@ -117,7 +116,7 @@ namespace DataStructures.ScapegoatTree
             }
         }
 
-        public bool TryInsertWithRoot(Node<TKey> root, Node<TKey> node, Queue<Node<TKey>> path)
+        public override bool TryInsertWithRoot(Node<TKey> root, Node<TKey> node, Queue<Node<TKey>> path)
         {
             while (true)
             {
@@ -143,6 +142,26 @@ namespace DataStructures.ScapegoatTree
             }
         }
 
+        public override (Node<TKey>? parent, Node<TKey> subtree) RebuildFromPath(double alpha, Queue<Node<TKey>> path)
+        {
+            var (parent, scapegoat) = FindScapegoatInPath(null, path, alpha);
+
+            var list = new List<Node<TKey>>();
+
+            FlattenTree(scapegoat, list);
+
+            return (parent, RebuildFromList(list, 0, list.Count - 1));
+        }
+
+        public override Node<TKey> RebuildWithRoot(Node<TKey> root)
+        {
+            var list = new List<Node<TKey>>();
+
+            FlattenTree(root, list);
+
+            return RebuildFromList(list, 0, list.Count - 1);
+        }
+
         public (Node<TKey>? parent, Node<TKey> scapegoat) FindScapegoatInPath(
             Node<TKey>? parent, Queue<Node<TKey>> path, double alpha)
         {
@@ -155,9 +174,7 @@ namespace DataStructures.ScapegoatTree
             {
                 var depth = path.Count;
 
-                var isNotEmpty = path.TryDequeue(out var next);
-
-                if (isNotEmpty && next != null)
+                if (path.TryDequeue(out var next) && next != null)
                 {
                     if (depth > next.GetAlphaHeight(alpha))
                     {
@@ -188,7 +205,7 @@ namespace DataStructures.ScapegoatTree
             }
         }
 
-        public Node<TKey> RebuildFlatTree(IList<Node<TKey>> list, int start, int end)
+        public Node<TKey> RebuildFromList(IList<Node<TKey>> list, int start, int end)
         {
             if (start > end)
             {
@@ -197,35 +214,11 @@ namespace DataStructures.ScapegoatTree
 
             var pivot = Convert.ToInt32(Math.Ceiling(start + (end - start) / 2.0));
 
-            var node = new Node<TKey>(list[pivot].Key)
+            return new Node<TKey>(list[pivot].Key)
             {
-                Left = start > (pivot - 1) ? null : RebuildFlatTree(list, start, pivot - 1),
-                Right = (pivot + 1) > end ? null : RebuildFlatTree(list, pivot + 1, end),
+                Left = start > (pivot - 1) ? null : RebuildFromList(list, start, pivot - 1),
+                Right = (pivot + 1) > end ? null : RebuildFromList(list, pivot + 1, end),
             };
-
-            return node;
-        }
-
-        public (Node<TKey>? parent, Node<TKey> subtree) RebuildFromPath(double alpha, Queue<Node<TKey>> path)
-        {
-            var (parent, scapegoat) = FindScapegoatInPath(null, path, alpha);
-
-            var list = new List<Node<TKey>>();
-
-            FlattenTree(scapegoat, list);
-
-            var subtree = RebuildFlatTree(list, 0, list.Count - 1);
-
-            return (parent, subtree);
-        }
-
-        public Node<TKey> RebuildWithRoot(Node<TKey> root)
-        {
-            var list = new List<Node<TKey>>();
-
-            FlattenTree(root, list);
-
-            return RebuildFlatTree(list, 0, list.Count - 1);
         }
     }
 }

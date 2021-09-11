@@ -98,8 +98,8 @@ namespace DataStructures.Tests.ScapegoatTree
         public void GetLargestKeyNode_NodeHasLargestChild_ReturnsChild()
         {
             var node = new Node<int>(1);
-            var bigger = new Node<int>(0);
-            var theBiggest = new Node<int>(-1);
+            var bigger = new Node<int>(2);
+            var theBiggest = new Node<int>(3);
             node.Right = bigger;
             bigger.Right = theBiggest;
 

@@ -6,11 +6,38 @@ namespace DataStructures.ScapegoatTree
 {
     public class Node<TKey> : IEnumerable<TKey>, IComparable<TKey> where TKey : IComparable
     {
+        private Node<TKey>? right;
+        private Node<TKey>? left;
+
         public TKey Key { get; }
 
-        public Node<TKey>? Right { get; set; }
+        public Node<TKey>? Right
+        {
+            get => right;
+            set
+            {
+                if (value != null && !value.IsGreaterThanOrSameAs(Key))
+                {
+                    throw new ArgumentException();
+                }
 
-        public Node<TKey>? Left { get; set; }
+                right = value;
+            }
+        }
+
+        public Node<TKey>? Left
+        {
+            get => left;
+            set
+            {
+                if (value != null && value.IsGreaterThanOrSameAs(Key))
+                {
+                    throw new ArgumentException();
+                }
+
+                left = value;
+            }
+        }
 
         public Node(TKey key) => Key = key;
 
@@ -67,6 +94,11 @@ namespace DataStructures.ScapegoatTree
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public bool IsGreaterThanOrSameAs(TKey key)
+        {
+            return this.CompareTo(key) >= 0;
         }
     }
 }
