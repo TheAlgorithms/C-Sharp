@@ -256,10 +256,10 @@ namespace DataStructures.Tests.ScapegoatTree
                 implementation.TryInsertWithRoot(root, new Node<int>(item), path);
             }
 
-            var ex = Assert.Throws<ArgumentException>(
+            var ex = Assert.Throws<InvalidOperationException>(
                 () => implementation.FindScapegoatInPath(root, path!, alpha));
 
-            Assert.AreEqual("No scapegoat node was found. Check if the tree is unbalanced.", ex.Message);
+            Assert.AreEqual("Scapegoat node wasn't found. The tree should be unbalanced.", ex.Message);
         }
 
         [Test]

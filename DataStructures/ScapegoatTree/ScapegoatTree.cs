@@ -61,7 +61,7 @@ namespace DataStructures.ScapegoatTree
         {
             if (alpha is < 0.5 or > 1.0)
             {
-                throw new ArgumentException("The alpha parameter value should be in range 0.5..1.0", nameof(alpha));
+                throw new ArgumentException("The alpha parameter's value should be in 0.5..1.0 range.", nameof(alpha));
             }
 
             this.Base = implementation ?? new ScapegoatTreeImplementation<TKey>();

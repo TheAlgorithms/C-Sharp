@@ -18,7 +18,7 @@ namespace DataStructures.ScapegoatTree
             {
                 if (value != null && !value.IsGreaterThanOrSameAs(Key))
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("The value's key is smaller than or equal to node's right child's key.", nameof(value));
                 }
 
                 right = value;
@@ -32,7 +32,7 @@ namespace DataStructures.ScapegoatTree
             {
                 if (value != null && value.IsGreaterThanOrSameAs(Key))
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("The value's key is greater than or equal to node's left child's key.", nameof(value));
                 }
 
                 left = value;

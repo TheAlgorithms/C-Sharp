@@ -211,14 +211,17 @@ namespace DataStructures.Tests.ScapegoatTree
         {
             var tree = new ScapegoatTree<int>(root, alpha);
 
-            tree.TreeIsUnbalanced += TreeIsUnbalanced;
+            tree.TreeIsUnbalanced += FailTreeIsUnbalanced;
 
             foreach (var item in keys)
             {
                 Assert.DoesNotThrow(() => tree.Insert(item));
             }
 
-            Assert.Throws<InvalidOperationException>(() => tree.Insert(candidate));
+            tree.TreeIsUnbalanced -= FailTreeIsUnbalanced;
+            tree.TreeIsUnbalanced += PassTreeIsUnbalanced;
+
+            Assert.Throws<SuccessException>(() => tree.Insert(candidate));
         }
 
         [Test]
@@ -227,14 +230,17 @@ namespace DataStructures.Tests.ScapegoatTree
         {
             var tree = new ScapegoatTree<int>(root, alpha);
 
-            tree.TreeIsUnbalanced += TreeIsUnbalanced;
+            tree.TreeIsUnbalanced += FailTreeIsUnbalanced;
 
             foreach (var item in keys)
             {
                 Assert.DoesNotThrow(() => tree.Insert(item));
             }
 
-            Assert.Throws<InvalidOperationException>(() => 
+            tree.TreeIsUnbalanced -= FailTreeIsUnbalanced;
+            tree.TreeIsUnbalanced += PassTreeIsUnbalanced;
+
+            Assert.Throws<SuccessException>(() => 
             {
                 foreach (var item in candidates)
                 {
@@ -249,14 +255,14 @@ namespace DataStructures.Tests.ScapegoatTree
         {
             var tree = new ScapegoatTree<int>(root, alpha);
 
-            tree.TreeIsUnbalanced += TreeIsUnbalanced;
+            tree.TreeIsUnbalanced += FailTreeIsUnbalanced;
 
             foreach (var item in keys)
             {
                 Assert.DoesNotThrow(() => tree.Insert(item));
             }
 
-            tree.TreeIsUnbalanced -= TreeIsUnbalanced;
+            tree.TreeIsUnbalanced -= FailTreeIsUnbalanced;
 
             var inserted = tree.Insert(candidate);
 
@@ -266,9 +272,14 @@ namespace DataStructures.Tests.ScapegoatTree
         }
 
 
-        public static void TreeIsUnbalanced(object? sender, EventArgs? e)
+        public static void FailTreeIsUnbalanced(object? sender, EventArgs? e)
         {
-            throw new InvalidOperationException();
+            Assert.Fail();
+        }
+
+        public static void PassTreeIsUnbalanced(object? sender, EventArgs? e)
+        {
+            Assert.Pass();
         }
     }
 }

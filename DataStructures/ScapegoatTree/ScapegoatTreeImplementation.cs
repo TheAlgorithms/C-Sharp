@@ -98,7 +98,7 @@ namespace DataStructures.ScapegoatTree
 
                 if (!TryDeleteWithRoot(root, predecessor.Key))
                 {
-                    throw new InvalidOperationException("Error while trying to delete a key. The subtree is invalid.");
+                    throw new InvalidOperationException("Cannot delete a key. The subtree is invalid.");
                 }
 
                 var tmp = new Node<TKey>(predecessor.Key, current.Right, current.Left);
@@ -185,7 +185,7 @@ namespace DataStructures.ScapegoatTree
                 }
                 else
                 {
-                    throw new ArgumentException("No scapegoat node was found. Check if the tree is unbalanced.");
+                    throw new InvalidOperationException("Scapegoat node wasn't found. The tree should be unbalanced.");
                 }
             }
         }
@@ -209,7 +209,7 @@ namespace DataStructures.ScapegoatTree
         {
             if (start > end)
             {
-                throw new ArgumentException(null, nameof(start));
+                throw new ArgumentException("The parameter's value is invalid.", nameof(start));
             }
 
             var pivot = Convert.ToInt32(Math.Ceiling(start + (end - start) / 2.0));
