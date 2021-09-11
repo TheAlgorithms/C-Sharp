@@ -9,14 +9,12 @@ namespace DataStructures.ScapegoatTree
     /// Self-balancing binary search tree. Will balance itself during delete and insert operations.
     /// Worst-case O(log n) lookup time, and O(log n) amortized insertion and deletion time.
     /// No additional pre-node memory overhead - each node only stores a key and two pointers to child nodes.
-    /// Balancing logic depends on <see cref="alpha"/> value, which should be in (0.5 .. 1) range.
+    /// Balancing logic depends on <see cref="Alpha"/> value, which should be in (0.5 .. 1) range.
     /// </summary>
     /// <typeparam name="TKey">Type of the tree node value.</typeparam>
     public class ScapegoatTree<TKey> : IEnumerable<TKey> where TKey : IComparable
     {
-        private readonly ScapegoatTreeImplementationBase<TKey> implementation = new ScapegoatTreeImplementation<TKey>();
-
-        private double alpha;
+        public double Alpha { get; private set; }
 
         public Node<TKey>? Root { get; private set; }
 
@@ -24,35 +22,37 @@ namespace DataStructures.ScapegoatTree
 
         public int MaxSize { get; private set; }
 
+        public ScapegoatTreeImplementationBase<TKey> Base { get; }
+
         public event EventHandler? TreeIsUnbalanced;
 
         public ScapegoatTree()
-            : this(0.5, 0, null)
+            : this(alpha: 0.5, size: 0, implementation: default)
         {
         }
 
         public ScapegoatTree(double alpha)
-            : this(alpha, 0, null)
+            : this(alpha, size: 0, implementation: default)
         {
         }
 
         public ScapegoatTree(TKey key)
-            : this(key, 0.5)
+            : this(key, alpha: 0.5, implementation: default)
         {
         }
 
         public ScapegoatTree(ScapegoatTreeImplementationBase<TKey> implementation)
-            : this(0.5, 0, implementation)
+            : this(alpha: 0.5, size: 0, implementation)
         {
         }
 
         public ScapegoatTree(TKey key, double alpha)
-            : this(key, alpha, null)
+            : this(key, alpha, default)
         {
         }
 
-        public ScapegoatTree(TKey key, double alpha, ScapegoatTreeImplementationBase<TKey>? implementation)
-            : this(alpha, 1, implementation)
+        public ScapegoatTree(TKey key, double alpha, ScapegoatTreeImplementationBase<TKey>? implementation = default)
+            : this(alpha, size: 1, implementation)
         {
             this.Root = new Node<TKey>(key);
         }
@@ -64,12 +64,9 @@ namespace DataStructures.ScapegoatTree
                 throw new ArgumentException("The alpha parameter value should be in range 0.5..1.0", nameof(alpha));
             }
 
-            if (implementation != null)
-            {
-                this.implementation = implementation;
-            }
+            this.Base = implementation ?? new ScapegoatTreeImplementation<TKey>();
 
-            this.alpha = alpha;
+            this.Alpha = alpha;
 
             this.Size = size;
             this.MaxSize = size;
@@ -77,7 +74,7 @@ namespace DataStructures.ScapegoatTree
 
         public bool IsAlphaWeightBalanced()
         {
-            return Root?.IsAlphaWeightBalanced(alpha) ?? true;
+            return Root?.IsAlphaWeightBalanced(Alpha) ?? true;
         }
 
         /// <summary>
@@ -88,7 +85,7 @@ namespace DataStructures.ScapegoatTree
         /// <returns>Returns node or null if tree is empty or node does not exists.</returns>
         public Node<TKey>? Search(TKey key)
         {
-            return Root == null ? null : implementation.SearchWithRoot(Root, key);
+            return Root == null ? null : Base.SearchWithRoot(Root, key);
         }
 
         /// <summary>
@@ -125,15 +122,15 @@ namespace DataStructures.ScapegoatTree
 
             var path = new Queue<Node<TKey>>();
 
-            if (implementation.TryInsertWithRoot(Root, node, path))
+            if (Base.TryInsertWithRoot(Root, node, path))
             {
                 UpdateSizes();
 
-                if (path.Count > Root.GetAlphaHeight(alpha))
+                if (path.Count > Root.GetAlphaHeight(Alpha))
                 {
                     TreeIsUnbalanced?.Invoke(this, EventArgs.Empty);
 
-                    var (parent, tree) = implementation.RebuildFromPath(alpha, path);
+                    var (parent, tree) = Base.RebuildFromPath(Alpha, path);
 
                     if (parent == null)
                     {
@@ -175,15 +172,15 @@ namespace DataStructures.ScapegoatTree
                 return false;
             }
 
-            if (implementation.TryDeleteWithRoot(Root, key))
+            if (Base.TryDeleteWithRoot(Root, key))
             {
                 Size--;
 
-                if (Root != null && Size < alpha * MaxSize)
+                if (Root != null && Size < Alpha * MaxSize)
                 {
                     TreeIsUnbalanced?.Invoke(this, EventArgs.Empty);
 
-                    Root = implementation.RebuildWithRoot(Root);
+                    Root = Base.RebuildWithRoot(Root);
                     MaxSize = Size;
                 }
 
@@ -204,12 +201,12 @@ namespace DataStructures.ScapegoatTree
         }
 
         /// <summary>
-        /// Changes <see cref="alpha"/> value to adjust balancing.
+        /// Changes <see cref="Alpha"/> value to adjust balancing.
         /// </summary>
         /// <param name="value">New alpha value.</param>
         public void Tune(double value)
         {
-            this.alpha = value;
+            this.Alpha = value;
         }
 
         public IEnumerator<TKey> GetEnumerator()

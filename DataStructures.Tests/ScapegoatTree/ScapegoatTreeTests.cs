@@ -7,6 +7,98 @@ namespace DataStructures.Tests.ScapegoatTree
     public class ScapegoatTreeTests
     {
         [Test]
+        public void Constructor_NoParameters_InitializetionIsCorrect()
+        {
+            var tree = new ScapegoatTree<int>();
+
+            Assert.IsNull(tree.Root);
+            Assert.IsTrue(tree.Size == 0);
+            Assert.IsTrue(tree.MaxSize == 0);
+            Assert.IsTrue(tree.Alpha == 0.5);
+            Assert.IsNotNull(tree.Base);
+            Assert.IsInstanceOf<ScapegoatTreeImplementation<int>>(tree.Base);
+        }
+
+        [Test]
+        public void Constructor_AlphaParameter_InitializetionIsCorrect()
+        {
+            var expected = 0.6;
+
+            var tree = new ScapegoatTree<int>(expected);
+
+            Assert.IsNull(tree.Root);
+            Assert.IsTrue(tree.Size == 0);
+            Assert.IsTrue(tree.MaxSize == 0);
+            Assert.IsTrue(tree.Alpha == expected);
+            Assert.IsNotNull(tree.Base);
+            Assert.IsInstanceOf<ScapegoatTreeImplementation<int>>(tree.Base);
+        }
+
+        [Test]
+        public void Constructor_KeyParameter_InitializetionIsCorrect()
+        {
+            var expected = 10;
+
+            var tree = new ScapegoatTree<int>(expected);
+
+            Assert.IsNotNull(tree.Root);
+            Assert.IsTrue(tree.Root!.Key == expected);
+            Assert.IsTrue(tree.Size == 1);
+            Assert.IsTrue(tree.MaxSize == 1);
+            Assert.IsTrue(tree.Alpha == 0.5);
+            Assert.IsNotNull(tree.Base);
+            Assert.IsInstanceOf<ScapegoatTreeImplementation<int>>(tree.Base);
+        }
+
+        [Test]
+        public void Constructor_ImplementationParameter_InitializetionIsCorrect()
+        {
+            var expected = new ScapegoatTreeTestImplementation<int>();
+
+            var tree = new ScapegoatTree<int>(expected);
+
+            Assert.IsNull(tree.Root);
+            Assert.IsTrue(tree.Size == 0);
+            Assert.IsTrue(tree.MaxSize == 0);
+            Assert.IsTrue(tree.Alpha == 0.5);
+            Assert.IsNotNull(tree.Base);
+            Assert.IsInstanceOf<ScapegoatTreeTestImplementation<int>>(tree.Base);
+        }
+
+        [Test]
+        public void Constructor_KeyAndAlphaParameters_InitializetionIsCorrect()
+        {
+            var key = 10;
+            var alpha = 0.8;
+
+            var tree = new ScapegoatTree<int>(key, alpha);
+
+            Assert.IsNotNull(tree.Root);
+            Assert.IsTrue(tree.Size == 1);
+            Assert.IsTrue(tree.MaxSize == 1);
+            Assert.IsTrue(tree.Alpha == alpha);
+            Assert.IsNotNull(tree.Base);
+            Assert.IsInstanceOf<ScapegoatTreeImplementation<int>>(tree.Base);
+        }
+
+        [Test]
+        public void Constructor_KeyAlphaAndImplementationParameters_InitializetionIsCorrect()
+        {
+            var key = 10;
+            var alpha = 0.8;
+            var implementation = new ScapegoatTreeTestImplementation<int>();
+
+            var tree = new ScapegoatTree<int>(key, alpha, implementation);
+
+            Assert.IsNotNull(tree.Root);
+            Assert.IsTrue(tree.Size == 1);
+            Assert.IsTrue(tree.MaxSize == 1);
+            Assert.IsTrue(tree.Alpha == alpha);
+            Assert.IsNotNull(tree.Base);
+            Assert.IsInstanceOf<ScapegoatTreeTestImplementation<int>>(tree.Base);
+        }
+
+        [Test]
         public void Search_RootIsNull_ReturnsNull()
         {
             var tree = new ScapegoatTree<int>();
