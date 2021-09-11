@@ -24,12 +24,30 @@ namespace DataStructures.ScapegoatTree
 
         public int MaxSize { get; private set; }
 
+        public event EventHandler? TreeIsUnbalanced;
+
         public ScapegoatTree()
-            : this(0.5)
+            : this(0.5, 0)
         {
         }
 
         public ScapegoatTree(double alpha)
+            : this(alpha, 0)
+        {
+        }
+
+        public ScapegoatTree(TKey key)
+            : this(key, 0.5)
+        {
+        }
+
+        public ScapegoatTree(TKey key, double alpha)
+            : this(alpha, 1)
+        {
+            this.Root = new Node<TKey>(key);
+        }
+
+        private ScapegoatTree(double alpha, int size)
         {
             if (alpha is < 0.5 or > 1.0)
             {
@@ -38,8 +56,21 @@ namespace DataStructures.ScapegoatTree
 
             this.alpha = alpha;
 
-            this.Size = 0;
-            this.MaxSize = 0;
+            this.Size = size;
+            this.MaxSize = size;
+        }
+
+        public bool IsAlphaWeightBalanced()
+        {
+            if (Root == null)
+            {
+                return true;
+            }
+
+            var a = (Root.Left?.GetSize() ?? 0) <= (alpha * Size);
+            var b = (Root.Right?.GetSize() ?? 0) <= (alpha * Size);
+
+            return a && b;
         }
 
         /// <summary>
@@ -93,6 +124,8 @@ namespace DataStructures.ScapegoatTree
 
                 if (path.Count > Root.GetAlphaHeight(alpha))
                 {
+                    TreeIsUnbalanced?.Invoke(this, EventArgs.Empty);
+
                     var (parent, tree) = implementation.RebuildFromPath(alpha, path);
 
                     if (parent == null)
@@ -141,6 +174,8 @@ namespace DataStructures.ScapegoatTree
 
                 if (Root != null && Size < alpha * MaxSize)
                 {
+                    TreeIsUnbalanced?.Invoke(this, EventArgs.Empty);
+
                     Root = implementation.RebuildWithRoot(Root);
                     MaxSize = Size;
                 }
