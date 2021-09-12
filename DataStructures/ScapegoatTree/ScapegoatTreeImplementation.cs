@@ -6,6 +6,12 @@ namespace DataStructures.ScapegoatTree
     public class ScapegoatTreeImplementation<TKey> : ScapegoatTreeImplementationBase<TKey>
         where TKey : IComparable
     {
+        /// <summary>
+        /// Searches for the key in the subtree starting from the root.
+        /// </summary>
+        /// <param name="root">Root of subtree.</param>
+        /// <param name="key">Key to search for.</param>
+        /// <returns>Node or null if not found.</returns>
         public override Node<TKey>? SearchWithRoot(Node<TKey> root, TKey key)
         {
             while (true)
@@ -28,6 +34,13 @@ namespace DataStructures.ScapegoatTree
             }
         }
 
+        /// <summary>
+        /// Searches for the key in the subtree starting with root.
+        /// </summary>
+        /// <param name="root">Root of the subtree.</param>
+        /// <param name="key">Key to search for.</param>
+        /// <returns>True if deletion is successfull, false if key not found.</returns>
+        /// <exception cref="InvalidOperationException">Throws exception if the tree is invalid for some reason.</exception>
         public override bool TryDeleteWithRoot(Node<TKey> root, TKey key)
         {
             var previous = root;
@@ -116,6 +129,15 @@ namespace DataStructures.ScapegoatTree
             }
         }
 
+        /// <summary>
+        /// Tries to insert a node into subtee started with root.
+        /// Keeps the traversed path in stack.
+        /// Won't insert duplicate key.
+        /// </summary>
+        /// <param name="root">Root of the subtree.</param>
+        /// <param name="node">Node to insert.</param>
+        /// <param name="path">Stack-based path.</param>
+        /// <returns>True - if key is inserted, False - if key is duplicate.</returns>
         public override bool TryInsertWithRoot(Node<TKey> root, Node<TKey> node, Stack<Node<TKey>> path)
         {
             while (true)
@@ -142,9 +164,16 @@ namespace DataStructures.ScapegoatTree
             }
         }
 
+        /// <summary>
+        /// Rebuilds the subtree using stack-based path (obtained during insert opration).
+        /// Searches for scapegoat node in path, rebuilds a subtree with scapegoat as it's root.
+        /// </summary>
+        /// <param name="alpha">Alpha value.</param>
+        /// <param name="path">Stack-based path.</param>
+        /// <returns>Returns rebuilded subtree and it's parent node.</returns>
         public override (Node<TKey>? parent, Node<TKey> subtree) RebuildFromPath(double alpha, Stack<Node<TKey>> path)
         {
-            var (parent, scapegoat) = FindScapegoatInPath(null, path, alpha);
+            var (parent, scapegoat) = FindScapegoatInPath(path, alpha);
 
             var list = new List<Node<TKey>>();
 
@@ -153,6 +182,11 @@ namespace DataStructures.ScapegoatTree
             return (parent, RebuildFromList(list, 0, list.Count - 1));
         }
 
+        /// <summary>
+        /// Rebuilds a subtree.
+        /// </summary>
+        /// <param name="root">Root of the subtree.</param>
+        /// <returns>Returns a node which is a root of rebuilded subtree.</returns>
         public override Node<TKey> RebuildWithRoot(Node<TKey> root)
         {
             var list = new List<Node<TKey>>();
@@ -162,8 +196,15 @@ namespace DataStructures.ScapegoatTree
             return RebuildFromList(list, 0, list.Count - 1);
         }
 
-        public (Node<TKey>? parent, Node<TKey> scapegoat) FindScapegoatInPath(
-            Node<TKey>? parent, Stack<Node<TKey>> path, double alpha)
+        /// <summary>
+        /// Searches for scapegoat node in stack-based path.
+        /// </summary>
+        /// <param name="path">Stack-based bath (obtained from insert operation).</param>
+        /// <param name="alpha">Alpha value.</param>
+        /// <returns>Scapegoat node and it's parent. Parent can be null if scapegoat is root.</returns>
+        /// <exception cref="ArgumentException">Throws if path is empty.</exception>
+        /// <exception cref="InvalidOperationException">Throws if scapegoat node wasn't found.</exception>
+        public (Node<TKey>? parent, Node<TKey> scapegoat) FindScapegoatInPath(Stack<Node<TKey>> path, double alpha)
         {
             if (path.Count == 0)
             {
@@ -171,6 +212,8 @@ namespace DataStructures.ScapegoatTree
             }
 
             var depth = 1;
+
+            Node<TKey>? parent = null;
 
             while (path.TryPop(out var next) && next is not null)
             {
@@ -186,6 +229,11 @@ namespace DataStructures.ScapegoatTree
             throw new InvalidOperationException("Scapegoat node wasn't found. The tree should be unbalanced.");
         }
 
+        /// <summary>
+        /// Flattens the tree inroder into a list of nodes.
+        /// </summary>
+        /// <param name="root">Root node of a tree.</param>
+        /// <param name="list">Resulting list of nodes.</param>
         public void FlattenTree(Node<TKey> root, List<Node<TKey>> list)
         {
             if (root.Left != null)
@@ -201,6 +249,14 @@ namespace DataStructures.ScapegoatTree
             }
         }
 
+        /// <summary>
+        /// Rebuilds a tree from list of nodes (obtained from FlattenTree method).
+        /// </summary>
+        /// <param name="list">List of nodes.</param>
+        /// <param name="start">Staring index in the list.</param>
+        /// <param name="end">Ending oindex in the list.</param>
+        /// <returns>Root node of rebuilded tree.</returns>
+        /// <exception cref="ArgumentException">Throws if start value is greater than end value.</exception>
         public Node<TKey> RebuildFromList(IList<Node<TKey>> list, int start, int end)
         {
             if (start > end)

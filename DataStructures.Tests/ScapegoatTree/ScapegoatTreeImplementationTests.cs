@@ -236,7 +236,7 @@ namespace DataStructures.Tests.ScapegoatTree
                 implementation.TryInsertWithRoot(root, new Node<int>(item), path);
             }
 
-            var (_, scapegoat) = implementation.FindScapegoatInPath(root, path!, alpha);
+            var (_, scapegoat) = implementation.FindScapegoatInPath(path!, alpha);
 
             Assert.AreEqual(expected, scapegoat.Key);
         }
@@ -257,7 +257,7 @@ namespace DataStructures.Tests.ScapegoatTree
             }
 
             var ex = Assert.Throws<InvalidOperationException>(
-                () => implementation.FindScapegoatInPath(root, path!, alpha));
+                () => implementation.FindScapegoatInPath(path!, alpha));
 
             Assert.AreEqual("Scapegoat node wasn't found. The tree should be unbalanced.", ex.Message);
         }
