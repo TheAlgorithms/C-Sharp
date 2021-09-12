@@ -184,7 +184,7 @@ namespace DataStructures.Tests.ScapegoatTree
         {
             var root = new Node<int>(3);
             var node = new Node<int>(1);
-            var path = new Queue<Node<int>>();
+            var path = new Stack<Node<int>>();
 
             var inserted = implementation.TryInsertWithRoot(root, node, path);
 
@@ -198,7 +198,7 @@ namespace DataStructures.Tests.ScapegoatTree
         {
             var root = new Node<int>(3);
             var node = new Node<int>(4);
-            var path = new Queue<Node<int>>();
+            var path = new Stack<Node<int>>();
 
             var inserted = implementation.TryInsertWithRoot(root, node, path);
 
@@ -212,7 +212,7 @@ namespace DataStructures.Tests.ScapegoatTree
         {
             var root = new Node<int>(3);
             var node = new Node<int>(3);
-            var path = new Queue<Node<int>>();
+            var path = new Stack<Node<int>>();
 
             var inserted = implementation.TryInsertWithRoot(root, node, path);
 
@@ -224,15 +224,15 @@ namespace DataStructures.Tests.ScapegoatTree
 
         [Test]
         [TestCase(8, new[]{1,13,10,20,19,22,29}, 0.57, 8)]
-        [TestCase(3, new[]{2,1,5,6,-1}, 0.5, 3)]
+        [TestCase(3, new[]{2,1,5,6,-1}, 0.5, 2)]
         public void FindScapegoatInPath_TreeIsUnbalanced_ReturnsScapegoat(int first, int[] nodes, double alpha, int expected)
         {
             var root = new Node<int>(first);
-            Queue<Node<int>>? path = null;
+            var path = new Stack<Node<int>>();;
 
             foreach (var item in nodes)
             {
-                path = new Queue<Node<int>>();
+                path.Clear();
                 implementation.TryInsertWithRoot(root, new Node<int>(item), path);
             }
 
@@ -248,11 +248,11 @@ namespace DataStructures.Tests.ScapegoatTree
         {
             var root = new Node<int>(first);
 
-            Queue<Node<int>>? path = null;
+            var path = new Stack<Node<int>>();;
 
             foreach (var item in nodes)
             {
-                path = new Queue<Node<int>>();
+                path.Clear();
                 implementation.TryInsertWithRoot(root, new Node<int>(item), path);
             }
 
@@ -271,7 +271,7 @@ namespace DataStructures.Tests.ScapegoatTree
 
             foreach (var item in nodes)
             {
-                implementation.TryInsertWithRoot(root, new Node<int>(item), new Queue<Node<int>>());
+                implementation.TryInsertWithRoot(root, new Node<int>(item), new Stack<Node<int>>());
             }
 
             var expected = root.ToList();

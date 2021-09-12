@@ -116,11 +116,11 @@ namespace DataStructures.ScapegoatTree
             }
         }
 
-        public override bool TryInsertWithRoot(Node<TKey> root, Node<TKey> node, Queue<Node<TKey>> path)
+        public override bool TryInsertWithRoot(Node<TKey> root, Node<TKey> node, Stack<Node<TKey>> path)
         {
             while (true)
             {
-                path.Enqueue(root);
+                path.Push(root);
 
                 switch (root.CompareTo(node.Key))
                 {
@@ -142,7 +142,7 @@ namespace DataStructures.ScapegoatTree
             }
         }
 
-        public override (Node<TKey>? parent, Node<TKey> subtree) RebuildFromPath(double alpha, Queue<Node<TKey>> path)
+        public override (Node<TKey>? parent, Node<TKey> subtree) RebuildFromPath(double alpha, Stack<Node<TKey>> path)
         {
             var (parent, scapegoat) = FindScapegoatInPath(null, path, alpha);
 
@@ -163,31 +163,27 @@ namespace DataStructures.ScapegoatTree
         }
 
         public (Node<TKey>? parent, Node<TKey> scapegoat) FindScapegoatInPath(
-            Node<TKey>? parent, Queue<Node<TKey>> path, double alpha)
+            Node<TKey>? parent, Stack<Node<TKey>> path, double alpha)
         {
             if (path.Count == 0)
             {
                 throw new ArgumentException("The path collection should not be empty.", nameof(path));
             }
 
-            while (true)
+            var depth = 1;
+
+            while (path.TryPop(out var next) && next is not null)
             {
-                var depth = path.Count;
-
-                if (path.TryDequeue(out var next) && next != null)
+                if (depth > next.GetAlphaHeight(alpha))
                 {
-                    if (depth > next.GetAlphaHeight(alpha))
-                    {
-                        return (parent, next);
-                    }
+                    return (parent, next);
+                }
 
-                    parent = next;
-                }
-                else
-                {
-                    throw new InvalidOperationException("Scapegoat node wasn't found. The tree should be unbalanced.");
-                }
+                parent = next;
+                depth++;
             }
+
+            throw new InvalidOperationException("Scapegoat node wasn't found. The tree should be unbalanced.");
         }
 
         public void FlattenTree(Node<TKey> root, List<Node<TKey>> list)

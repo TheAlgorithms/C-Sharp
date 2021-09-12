@@ -7,7 +7,7 @@ namespace DataStructures.Tests.ScapegoatTree
     public class ScapegoatTreeTestImplementation<TKey> : ScapegoatTreeImplementationBase<TKey>
         where TKey : IComparable
     {
-        public override (Node<TKey>? parent, Node<TKey> subtree) RebuildFromPath(double alpha, Queue<Node<TKey>> path)
+        public override (Node<TKey>? parent, Node<TKey> subtree) RebuildFromPath(double alpha, Stack<Node<TKey>> path)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +27,7 @@ namespace DataStructures.Tests.ScapegoatTree
             throw new NotImplementedException();
         }
 
-        public override bool TryInsertWithRoot(Node<TKey> root, Node<TKey> node, Queue<Node<TKey>> path)
+        public override bool TryInsertWithRoot(Node<TKey> root, Node<TKey> node, Stack<Node<TKey>> path)
         {
             throw new NotImplementedException();
         }

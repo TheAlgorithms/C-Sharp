@@ -12,8 +12,8 @@ namespace DataStructures.ScapegoatTree
 
         public abstract bool TryDeleteWithRoot(Node<TKey> root, TKey key);
 
-        public abstract bool TryInsertWithRoot(Node<TKey> root, Node<TKey> node, Queue<Node<TKey>> path);
+        public abstract bool TryInsertWithRoot(Node<TKey> root, Node<TKey> node, Stack<Node<TKey>> path);
 
-        public abstract (Node<TKey>? parent, Node<TKey> subtree) RebuildFromPath(double alpha, Queue<Node<TKey>> path);
+        public abstract (Node<TKey>? parent, Node<TKey> subtree) RebuildFromPath(double alpha, Stack<Node<TKey>> path);
     }
 }

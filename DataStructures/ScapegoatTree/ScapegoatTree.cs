@@ -120,7 +120,7 @@ namespace DataStructures.ScapegoatTree
                 return true;
             }
 
-            var path = new Queue<Node<TKey>>();
+            var path = new Stack<Node<TKey>>();
 
             if (Base.TryInsertWithRoot(Root, node, path))
             {
