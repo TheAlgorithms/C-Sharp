@@ -110,6 +110,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Segment Tree Multiplication](./DataStructures/SegmentTrees/SegmentTreeApply.cs)
     * [Segment Tree Update](./DataStructures/SegmentTrees/SegmentTreeUpdate.cs)
   * [Binary Search Tree](./DataStructures/BinarySearchTree)
+  * [Scapegoat Tree](./DataStructures/ScapegoatTree)
   * [AA Tree](./DataStructures/AATree)
   * [Stack](./DataStructures/Stack)
     * [Array-based Stack](./DataStructures/Stack/ArrayBasedStack.cs)
