@@ -12,7 +12,7 @@ namespace DataStructures.Tests.ScapegoatTree
         private ScapegoatTreeImplementation<int> implementation = new();
 
         [Test]
-        public void SearchWithRoot_TreeContainsLeftKey_ReturnsNode()
+        public void SearchWithRoot_TreeContainsLeftKey_ReturnsLeftNode()
         {
             var root = new Node<int>(1);
             root.Left = new Node<int>(-1);
@@ -24,7 +24,7 @@ namespace DataStructures.Tests.ScapegoatTree
         }
 
         [Test]
-        public void SearchWithRoot_TreeContainsRightKey_ReturnsNode()
+        public void SearchWithRoot_TreeContainsRightKey_ReturnsRightNode()
         {
             var root = new Node<int>(1);
             root.Left = new Node<int>(-1);
@@ -58,7 +58,7 @@ namespace DataStructures.Tests.ScapegoatTree
         }
 
         [Test]
-        public void TryDeleteWithRoot_RootContainsLeftKey_KeyIsDeleted()
+        public void TryDeleteWithRoot_RootContainsLeftKey_LeftNodeIsDeleted()
         {
             var root = new Node<int>(1);
             root.Left = new Node<int>(-1);
@@ -83,7 +83,7 @@ namespace DataStructures.Tests.ScapegoatTree
         }
 
         [Test]
-        public void TryDeleteWithRoot_RootContainsRightKey_KeyIsDeleted()
+        public void TryDeleteWithRoot_RootContainsRightKey_RightNodeIsDeleted()
         {
             var root = new Node<int>(1);
             root.Left = new Node<int>(-1);
@@ -208,7 +208,7 @@ namespace DataStructures.Tests.ScapegoatTree
         }
 
         [Test]
-        public void TryInsertWithRoot_TreeContainsKey_IgnoresKey()
+        public void TryInsertWithRoot_KeyIsDuplicate_ReturnsFalse()
         {
             var root = new Node<int>(3);
             var node = new Node<int>(3);

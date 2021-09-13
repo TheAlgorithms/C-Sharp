@@ -7,7 +7,7 @@ namespace DataStructures.Tests.ScapegoatTree
     public class ScapegoatTreeTests
     {
         [Test]
-        public void Constructor_NoParameters_InitializetionIsCorrect()
+        public void Constructor_NoParameters_InstanceIsValid()
         {
             var tree = new ScapegoatTree<int>();
 
@@ -20,7 +20,7 @@ namespace DataStructures.Tests.ScapegoatTree
         }
 
         [Test]
-        public void Constructor_AlphaParameter_InitializetionIsCorrect()
+        public void Constructor_AlphaParameter_InstanceIsValid()
         {
             var expected = 0.6;
 
@@ -35,7 +35,7 @@ namespace DataStructures.Tests.ScapegoatTree
         }
 
         [Test]
-        public void Constructor_KeyParameter_InitializetionIsCorrect()
+        public void Constructor_KeyParameter_InstanceIsValid()
         {
             var expected = 10;
 
@@ -51,7 +51,7 @@ namespace DataStructures.Tests.ScapegoatTree
         }
 
         [Test]
-        public void Constructor_ImplementationParameter_InitializetionIsCorrect()
+        public void Constructor_ImplementationParameter_InstanceIsValid()
         {
             var expected = new ScapegoatTreeTestImplementation<int>();
 
@@ -66,7 +66,7 @@ namespace DataStructures.Tests.ScapegoatTree
         }
 
         [Test]
-        public void Constructor_KeyAndAlphaParameters_InitializetionIsCorrect()
+        public void Constructor_KeyAndAlphaParameters_InstanceIsValid()
         {
             var key = 10;
             var alpha = 0.8;
@@ -82,7 +82,7 @@ namespace DataStructures.Tests.ScapegoatTree
         }
 
         [Test]
-        public void Constructor_KeyAlphaAndImplementationParameters_InitializetionIsCorrect()
+        public void Constructor_KeyAlphaAndImplementationParameters_InstanceIsValid()
         {
             var key = 10;
             var alpha = 0.8;
@@ -166,7 +166,7 @@ namespace DataStructures.Tests.ScapegoatTree
 
         [Test]
 
-        public void Insert_KeyIsPresent_DuplicateIsNotInserted()
+        public void Insert_KeyIsPresent_ReturnsFalse()
         {
             var tree = new ScapegoatTree<int>(1);
 

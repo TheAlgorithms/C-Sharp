@@ -11,7 +11,7 @@ namespace DataStructures.Tests.ScapegoatTree
         [Test]
         [TestCase(1,2)]
         [TestCase("A","B")]
-        public void CompareTo_OtherIsGreaterThanInstance_ReturnsMinusOne<TKey>(TKey a, TKey b)
+        public void CompareTo_InstanceKeyPrecedesOtherKey_ReturnsMinusOne<TKey>(TKey a, TKey b)
         where TKey : IComparable
         {
             var instance = new Node<TKey>(a);
@@ -25,7 +25,7 @@ namespace DataStructures.Tests.ScapegoatTree
         [Test]
         [TestCase(2, 1)]
         [TestCase("B","A")]
-        public void CompareTo_OtherIsSmallerThanInstance_ReturnsMinusOne<TKey>(TKey a, TKey b)
+        public void CompareTo_InstanceKeyFollowsOtherKey_ReturnsOne<TKey>(TKey a, TKey b)
             where TKey : IComparable
         {
             var instance = new Node<TKey>(a);
@@ -39,7 +39,7 @@ namespace DataStructures.Tests.ScapegoatTree
         [Test]
         [TestCase(1, 1)]
         [TestCase("A","A")]
-        public void CompareTo_OtherIsEqualToInstance_ReturnsMinusOne<TKey>(TKey a, TKey b)
+        public void CompareTo_InstanceKeyEqualsOtherKey_ReturnsZero<TKey>(TKey a, TKey b)
             where TKey : IComparable
         {
             var instance = new Node<TKey>(a);
