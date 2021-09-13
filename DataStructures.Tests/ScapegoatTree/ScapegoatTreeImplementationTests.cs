@@ -9,7 +9,7 @@ namespace DataStructures.Tests.ScapegoatTree
     public class ScapegoatTreeImplementationTests
     {
 
-        private ScapegoatTreeImplementation<int> implementation = new();
+        private readonly ScapegoatTreeImplementation<int> implementation = new();
 
         [Test]
         public void SearchWithRoot_TreeContainsLeftKey_ReturnsLeftNode()
@@ -117,6 +117,7 @@ namespace DataStructures.Tests.ScapegoatTree
 
             var result = implementation.TryDeleteWithRoot(root, -1);
 
+            Assert.IsTrue(result);
             Assert.IsNotNull(root.Left);
             Assert.AreEqual(3, root.GetSize());
             Assert.AreEqual(-2, root.Left.Key);
@@ -133,6 +134,7 @@ namespace DataStructures.Tests.ScapegoatTree
 
             var result = implementation.TryDeleteWithRoot(root, -1);
 
+            Assert.IsTrue(result);
             Assert.IsNotNull(root.Left);
             Assert.AreEqual(3, root.GetSize());
             Assert.AreEqual(0, root.Left.Key);
@@ -227,8 +229,9 @@ namespace DataStructures.Tests.ScapegoatTree
         [TestCase(3, new[]{2,1,5,6,-1}, 0.5, 2)]
         public void FindScapegoatInPath_TreeIsUnbalanced_ReturnsScapegoat(int first, int[] nodes, double alpha, int expected)
         {
+            var path = new Stack<Node<int>>();
+
             var root = new Node<int>(first);
-            var path = new Stack<Node<int>>();;
 
             foreach (var item in nodes)
             {

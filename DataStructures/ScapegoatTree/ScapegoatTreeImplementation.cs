@@ -16,20 +16,31 @@ namespace DataStructures.ScapegoatTree
         {
             while (true)
             {
-                switch (root.CompareTo(key))
+                var result = root.CompareTo(key);
+
+                if (result > 0)
                 {
-                    case > 0 when root.Left != null:
+                    if (root.Left != null)
+                    {
                         root = root.Left;
                         continue;
-                    case < 0 when root.Right != null:
+                    }
+
+                    return null;
+                }
+                else if (result < 0)
+                {
+                    if (root.Right != null)
+                    {
                         root = root.Right;
                         continue;
-                    case > 0:
-                        return null;
-                    case < 0:
-                        return null;
-                    case 0:
-                        return root;
+                    }
+
+                    return null;
+                }
+                else
+                {
+                    return root;
                 }
             }
         }
@@ -59,36 +70,26 @@ namespace DataStructures.ScapegoatTree
                 {
                     previous = current;
 
-                    switch (result)
+                    if (result < 0 && current.Right != null)
                     {
-                        case < 0 when current.Right != null:
-                            current = current.Right;
-                            continue;
-                        case > 0 when current.Left != null:
-                            current = current.Left;
-                            continue;
-                        case < 0:
-                        case > 0:
-                            return false;
+                        current = current.Right;
+                        continue;
+                    }
+
+                    if (result > 0 && current.Left != null)
+                    {
+                        current = current.Left;
+                        continue;
+                    }
+
+                    if (result < 0 || result > 0)
+                    {
+                        return false;
                     }
                 }
             }
 
             // case 0: Node has no children. Action - delete node:
-            if (current.Left == null && current.Right == null)
-            {
-                if (previous.Left == current)
-                {
-                    previous.Left = null;
-                }
-                else
-                {
-                    previous.Right = null;
-                }
-
-                return true;
-            }
-
             // case 1: Node ahs only one child. Action - add it to parent
             if (current.Left == null || current.Right == null)
             {
@@ -144,22 +145,33 @@ namespace DataStructures.ScapegoatTree
             {
                 path.Push(root);
 
-                switch (root.CompareTo(node.Key))
+                var result = root.CompareTo(node.Key);
+
+                if (result < 0)
                 {
-                    case < 0 when root.Right != null:
+                    if (root.Right != null)
+                    {
                         root = root.Right;
                         continue;
-                    case > 0 when root.Left != null:
+                    }
+
+                    root.Right = node;
+                    return true;
+                }
+                else if (result > 0)
+                {
+                    if (root.Left != null)
+                    {
                         root = root.Left;
                         continue;
-                    case < 0:
-                        root.Right = node;
-                        return true;
-                    case > 0:
-                        root.Left = node;
-                        return true;
-                    case 0:
-                        return false;
+                    }
+
+                    root.Left = node;
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
         }

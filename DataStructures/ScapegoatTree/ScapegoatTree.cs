@@ -46,11 +46,6 @@ namespace DataStructures.ScapegoatTree
         {
         }
 
-        public ScapegoatTree(TKey key, double alpha)
-            : this(key, alpha, default)
-        {
-        }
-
         public ScapegoatTree(TKey key, double alpha, ScapegoatTreeImplementationBase<TKey>? implementation = default)
             : this(alpha, size: 1, implementation)
         {
@@ -130,24 +125,7 @@ namespace DataStructures.ScapegoatTree
                 {
                     TreeIsUnbalanced?.Invoke(this, EventArgs.Empty);
 
-                    var (parent, tree) = Base.RebuildFromPath(Alpha, path);
-
-                    if (parent == null)
-                    {
-                        Root = tree;
-                    }
-                    else
-                    {
-                        switch (parent.CompareTo(tree.Key))
-                        {
-                            case < 0:
-                                parent.Right = tree;
-                                break;
-                            case > 0:
-                                parent.Left = tree;
-                                break;
-                        }
-                    }
+                    RebalanceFromPath(path);
 
                     MaxSize = Math.Max(MaxSize, Size);
                 }
@@ -217,6 +195,32 @@ namespace DataStructures.ScapegoatTree
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        private void RebalanceFromPath(Stack<Node<TKey>> path)
+        {
+            var (parent, tree) = Base.RebuildFromPath(Alpha, path);
+
+            if (parent == null)
+            {
+                Root = tree;
+            }
+            else
+            {
+                var result = parent.CompareTo(tree.Key);
+
+                if (result < 0)
+                {
+                    parent.Right = tree;
+                    return;
+                }
+
+                if (result > 0)
+                {
+                    parent.Left = tree;
+                    return;
+                }
+            }
         }
 
         private void UpdateSizes()
