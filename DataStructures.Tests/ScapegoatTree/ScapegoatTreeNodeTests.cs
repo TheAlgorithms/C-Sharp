@@ -8,11 +8,61 @@ namespace DataStructures.Tests.ScapegoatTree
     [TestFixture]
     public class ScapegoatTreeNodeTests
     {
+
+        [Test]
+        [TestCase(2,1)]
+        [TestCase("B", "A")]
+        public void RightSet_OtherKeyPrecedesRightKey_ThrowsException<TKey>(TKey a, TKey b)
+            where TKey : IComparable
+        { 
+            var instance = new Node<TKey>(a);
+            var other = new Node<TKey>(b);
+
+            Assert.Throws<ArgumentException>(() => instance.Right = other);
+        }
+
+        [Test]
+        [TestCase(1,2)]
+        [TestCase("A","B")]
+        public void RightSet_OtherKeyFollowsRightKey_AddsChild<TKey>(TKey a, TKey b)
+            where TKey : IComparable
+        { 
+            var instance = new Node<TKey>(a);
+            var other = new Node<TKey>(b);
+
+            Assert.DoesNotThrow(() => instance.Right = other);
+        }
+
+        [Test]
+        [TestCase(1,2)]
+        [TestCase("A","B")]
+        public void LeftSet_OtherKeyFolowsLeftKey_ThrowsException<TKey>(TKey a, TKey b)
+            where TKey : IComparable
+        { 
+            var instance = new Node<TKey>(a);
+            var other = new Node<TKey>(b);
+
+            Assert.Throws<ArgumentException>(() => instance.Left = other);
+        }
+
+        [Test]
+        [TestCase(2,1)]
+        [TestCase("B", "A")]
+        public void LeftSet_OtherKeyPrecedesLeftKey_AddsChild<TKey>(TKey a, TKey b)
+            where TKey : IComparable
+        { 
+            var instance = new Node<TKey>(a);
+            var other = new Node<TKey>(b);
+
+            Assert.DoesNotThrow(() => instance.Left = other);
+        }
+
+
         [Test]
         [TestCase(1,2)]
         [TestCase("A","B")]
         public void CompareTo_InstanceKeyPrecedesOtherKey_ReturnsMinusOne<TKey>(TKey a, TKey b)
-        where TKey : IComparable
+            where TKey : IComparable
         {
             var instance = new Node<TKey>(a);
             var other = new Node<TKey>(b);

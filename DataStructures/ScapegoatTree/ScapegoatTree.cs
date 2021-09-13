@@ -54,10 +54,7 @@ namespace DataStructures.ScapegoatTree
 
         private ScapegoatTree(double alpha, int size, ScapegoatTreeImplementationBase<TKey>? implementation)
         {
-            if (alpha is < 0.5 or > 1.0)
-            {
-                throw new ArgumentException("The alpha parameter's value should be in 0.5..1.0 range.", nameof(alpha));
-            }
+            CheckAlpha(alpha);
 
             this.Base = implementation ?? new ScapegoatTreeImplementation<TKey>();
 
@@ -184,6 +181,7 @@ namespace DataStructures.ScapegoatTree
         /// <param name="value">New alpha value.</param>
         public void Tune(double value)
         {
+            CheckAlpha(value);
             this.Alpha = value;
         }
 
@@ -227,6 +225,14 @@ namespace DataStructures.ScapegoatTree
         {
             Size += 1;
             MaxSize = Math.Max(Size, MaxSize);
+        }
+
+        private void CheckAlpha(double alpha)
+        {
+            if (alpha is < 0.5 or > 1.0)
+            {
+                throw new ArgumentException("The alpha parameter's value should be in 0.5..1.0 range.", nameof(alpha));
+            }
         }
     }
 }

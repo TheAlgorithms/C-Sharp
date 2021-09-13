@@ -225,6 +225,14 @@ namespace DataStructures.Tests.ScapegoatTree
         }
 
         [Test]
+        public void FindScapegoatInPath_PathIsEmpty_ThrowsException()
+        { 
+            var path = new Stack<Node<int>>();
+
+            Assert.Throws<ArgumentException>(() => implementation.FindScapegoatInPath(path, 0.5));
+        }
+
+        [Test]
         [TestCase(8, new[]{1,13,10,20,19,22,29}, 0.57, 8)]
         [TestCase(3, new[]{2,1,5,6,-1}, 0.5, 2)]
         public void FindScapegoatInPath_TreeIsUnbalanced_ReturnsScapegoat(int first, int[] nodes, double alpha, int expected)
@@ -239,7 +247,7 @@ namespace DataStructures.Tests.ScapegoatTree
                 implementation.TryInsertWithRoot(root, new Node<int>(item), path);
             }
 
-            var (_, scapegoat) = implementation.FindScapegoatInPath(path!, alpha);
+            var (_, scapegoat) = implementation.FindScapegoatInPath(path, alpha);
 
             Assert.AreEqual(expected, scapegoat.Key);
         }
@@ -249,9 +257,9 @@ namespace DataStructures.Tests.ScapegoatTree
         [TestCase(3, new[]{2,1,5,6}, 0.5)]
         public void FindScapegoatInPath_TreeIsBalanced_ThrowsException(int first, int[] nodes, double alpha)
         {
-            var root = new Node<int>(first);
+            var path = new Stack<Node<int>>();
 
-            var path = new Stack<Node<int>>();;
+            var root = new Node<int>(first);
 
             foreach (var item in nodes)
             {
@@ -260,7 +268,7 @@ namespace DataStructures.Tests.ScapegoatTree
             }
 
             var ex = Assert.Throws<InvalidOperationException>(
-                () => implementation.FindScapegoatInPath(path!, alpha));
+                () => implementation.FindScapegoatInPath(path, alpha));
 
             Assert.AreEqual("Scapegoat node wasn't found. The tree should be unbalanced.", ex.Message);
         }
@@ -314,6 +322,12 @@ namespace DataStructures.Tests.ScapegoatTree
             Assert.AreEqual(list.Count, tree.GetSize());
             Assert.AreEqual(expected, tree);
 
+        }
+
+        [Test]
+        public void RebuildFromList_StartIsInvalid_ThrowsException()
+        {
+            Assert.Throws<ArgumentException>(() => implementation.RebuildFromList(new List<Node<int>>(), 1, 0));
         }
     }
 }

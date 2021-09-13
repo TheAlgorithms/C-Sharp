@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using DataStructures.ScapegoatTree;
 using NUnit.Framework;
 
@@ -32,6 +33,16 @@ namespace DataStructures.Tests.ScapegoatTree
             Assert.IsTrue(tree.Alpha == expected);
             Assert.IsNotNull(tree.Base);
             Assert.IsInstanceOf<ScapegoatTreeImplementation<int>>(tree.Base);
+        }
+
+        [Test]
+        [TestCase(1.1)]
+        [TestCase(0.4)]
+        public void Constructor_AlphaParameterIsInvalid_ThrowsException(double alpha)
+        {
+            Assert.Throws<ArgumentException>(() => new ScapegoatTree<int>(alpha));
+            Assert.Throws<ArgumentException>(() => new ScapegoatTree<int>(1, alpha));
+            Assert.Throws<ArgumentException>(() => new ScapegoatTree<int>(1, alpha, new ScapegoatTreeTestImplementation<int>()));
         }
 
         [Test]
@@ -271,6 +282,107 @@ namespace DataStructures.Tests.ScapegoatTree
             Assert.True(tree.IsAlphaWeightBalanced());
         }
 
+        [Test]
+        public void Contains_RootIsNull_ReturnsFalse()
+        {
+            var tree = new ScapegoatTree<int>();
+
+            Assert.IsFalse(tree.Contains(1));
+        }
+
+        [Test]
+        public void Contains_RootHasKey_ReturnsTrue()
+        {
+            var tree = new ScapegoatTree<int>(1);
+
+            Assert.IsTrue(tree.Contains(1));
+        }
+
+        [Test]
+        public void Contains_TreeHasKey_ReturnsTrue()
+        {
+            var tree = new ScapegoatTree<int>(1);
+
+            tree.Insert(2);
+
+            Assert.IsTrue(tree.Contains(2));
+        }
+
+        [Test]
+        public void Contains_TreeDoesNotContainKey_ReturnsFalse()
+        {
+            var tree = new ScapegoatTree<int>(1);
+
+            tree.Insert(2);
+
+            Assert.IsFalse(tree.Contains(-1));
+        }
+
+        [Test]
+        public void Clear_TreeHasKeys_ClearsTree()
+        {
+            var tree = new ScapegoatTree<int>(1);
+
+            tree.Clear();
+
+            Assert.IsTrue(tree.Size == 0);
+            Assert.IsTrue(tree.MaxSize == 0);
+            Assert.IsNull(tree.Root);
+        }
+
+        [Test]
+        public void Tune_AlphaIsValid_ChangesAlpha()
+        {
+            var expected = 0.7;
+
+            var tree = new ScapegoatTree<int>();
+
+            tree.Tune(expected);
+
+            Assert.AreEqual(expected, tree.Alpha);
+        }
+
+        [Test]
+        public void Tune_AlphaIsNotValid_ThrowsException()
+        {
+            var expected = 9.9;
+
+            var tree = new ScapegoatTree<int>();
+
+            Assert.Throws<ArgumentException>(() => tree.Tune(expected));
+        }
+
+        [Test]
+        public void GetEnumerator_RootIsNull_ReturnsEmpty()
+        {
+            var tree = new ScapegoatTree<int>();
+
+            Assert.AreEqual(Enumerable.Empty<int>(), tree.GetEnumerator());
+        }
+
+        [Test]
+        public void GetEnumerator_RootIsNotNull_ReturnsRootEnumerator()
+        {
+            var tree = new ScapegoatTree<int>(1);
+
+            Assert.AreNotEqual(Enumerable.Empty<int>(), tree.GetEnumerator());
+        }
+
+        [Test]
+        public void IEnumeratorGetEnumerator_RootIsNull_ReturnsEmpty()
+        {
+            var tree = new ScapegoatTree<int>();
+
+            Assert.AreEqual(Enumerable.Empty<int>(), (tree as System.Collections.IEnumerable)!.GetEnumerator());
+        }
+
+        [Test]
+        public void IEnumeratorGetEnumerator_RootIsNotNull_ReturnsEmpty()
+        {
+            var tree = new ScapegoatTree<int>(1);
+
+            Assert.AreNotEqual(Enumerable.Empty<int>(), (tree as System.Collections.IEnumerable)!.GetEnumerator());
+        }
 
         public static void FailTreeIsUnbalanced(object? sender, EventArgs? e)
         {

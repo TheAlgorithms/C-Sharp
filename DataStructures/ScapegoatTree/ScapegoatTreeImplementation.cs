@@ -56,78 +56,42 @@ namespace DataStructures.ScapegoatTree
         {
             var previous = root;
             var current = root;
-            var found = false;
 
-            while (!found)
+            while (true)
             {
                 var result = current.CompareTo(key);
 
                 if (result == 0)
                 {
-                    found = true;
+                    break;
                 }
-                else
-                {
-                    previous = current;
 
-                    if (result < 0 && current.Right != null)
+                previous = current;
+
+                if (result < 0)
+                {
+                    if (current.Right != null)
                     {
                         current = current.Right;
                         continue;
                     }
 
-                    if (result > 0 && current.Left != null)
+                    return false;
+                }
+
+                if (result > 0)
+                {
+                    if (current.Left != null)
                     {
                         current = current.Left;
                         continue;
                     }
 
-                    if (result < 0 || result > 0)
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
 
-            // case 0: Node has no children. Action - delete node:
-            // case 1: Node ahs only one child. Action - add it to parent
-            if (current.Left == null || current.Right == null)
-            {
-                if (previous.Left == current)
-                {
-                    previous.Left = current.Left ?? current.Right;
-                }
-                else
-                {
-                    previous.Right = current.Left ?? current.Right;
-                }
-
-                return true;
-            }
-
-            // case 2: node ahs two children. Action -
-            else
-            {
-                var predecessor = current.Left.GetLargestKeyNode();
-
-                if (!TryDeleteWithRoot(root, predecessor.Key))
-                {
-                    throw new InvalidOperationException("Cannot delete a key. The subtree is invalid.");
-                }
-
-                var tmp = new Node<TKey>(predecessor.Key, current.Right, current.Left);
-
-                if (previous.Left == current)
-                {
-                    previous.Left = tmp;
-                }
-                else
-                {
-                    predecessor.Right = tmp;
-                }
-
-                return true;
-            }
+            return TryRemove(root, previous, current);
         }
 
         /// <summary>
@@ -283,6 +247,49 @@ namespace DataStructures.ScapegoatTree
                 Left = start > (pivot - 1) ? null : RebuildFromList(list, start, pivot - 1),
                 Right = (pivot + 1) > end ? null : RebuildFromList(list, pivot + 1, end),
             };
+        }
+
+        private bool TryRemove(Node<TKey> root, Node<TKey> previous, Node<TKey> current)
+        {
+            // case 0: Node has no children. Action - delete node:
+            // case 1: Node ahs only one child. Action - add it to parent
+            if (current.Left == null || current.Right == null)
+            {
+                if (previous.Left == current)
+                {
+                    previous.Left = current.Left ?? current.Right;
+                }
+                else
+                {
+                    previous.Right = current.Left ?? current.Right;
+                }
+
+                return true;
+            }
+
+            // case 2: node ahs two children. Action -
+            else
+            {
+                var predecessor = current.Left.GetLargestKeyNode();
+
+                if (!TryDeleteWithRoot(root, predecessor.Key))
+                {
+                    throw new InvalidOperationException("Cannot delete a key. The subtree is invalid.");
+                }
+
+                var tmp = new Node<TKey>(predecessor.Key, current.Right, current.Left);
+
+                if (previous.Left == current)
+                {
+                    previous.Left = tmp;
+                }
+                else
+                {
+                    predecessor.Right = tmp;
+                }
+
+                return true;
+            }
         }
     }
 }
