@@ -20,7 +20,7 @@ namespace Algorithms.Graph
         /// <param name="action">Action that needs to be executed on each graph vertex.</param>
         public void VisitAll(IDirectedWeightedGraph<T> graph, Vertex<T> startVertex, Action<Vertex<T>>? action = default)
         {
-            BFS(graph, startVertex, action, new HashSet<Vertex<T>>());
+            Bfs(graph, startVertex, action, new HashSet<Vertex<T>>());
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Algorithms.Graph
         /// <param name="startVertex">Vertex that search starts from.</param>
         /// <param name="action">Action that needs to be executed on each graph vertex.</param>
         /// <param name="visited">Hash set with visited vertices.</param>
-        private void BFS(IDirectedWeightedGraph<T> graph, Vertex<T> startVertex, Action<Vertex<T>>? action, HashSet<Vertex<T>> visited)
+        private void Bfs(IDirectedWeightedGraph<T> graph, Vertex<T> startVertex, Action<Vertex<T>>? action, HashSet<Vertex<T>> visited)
         {
             var queue = new Queue<Vertex<T>>();
 

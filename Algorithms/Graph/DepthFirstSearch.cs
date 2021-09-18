@@ -20,7 +20,7 @@ namespace Algorithms.Graph
         /// <param name="action">Action that needs to be executed on each graph vertex.</param>
         public void VisitAll(IDirectedWeightedGraph<T> graph, Vertex<T> startVertex, Action<Vertex<T>>? action = default)
         {
-            DFS(graph, startVertex, action, new HashSet<Vertex<T>>());
+            Dfs(graph, startVertex, action, new HashSet<Vertex<T>>());
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Algorithms.Graph
         /// <param name="startVertex">Vertex that search starts from.</param>
         /// <param name="action">Action that needs to be executed on each graph vertex.</param>
         /// <param name="visited">Hash set with visited vertices.</param>
-        private void DFS(IDirectedWeightedGraph<T> graph, Vertex<T> startVertex, Action<Vertex<T>>? action, HashSet<Vertex<T>> visited)
+        private void Dfs(IDirectedWeightedGraph<T> graph, Vertex<T> startVertex, Action<Vertex<T>>? action, HashSet<Vertex<T>> visited)
         {
             action?.Invoke(startVertex);
 
@@ -43,7 +43,7 @@ namespace Algorithms.Graph
                     continue;
                 }
 
-                DFS(graph, vertex!, action, visited);
+                Dfs(graph, vertex!, action, visited);
             }
         }
     }
