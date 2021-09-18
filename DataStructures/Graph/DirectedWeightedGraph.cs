@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace DataStructures.Graph
@@ -7,7 +7,7 @@ namespace DataStructures.Graph
     ///     Implementation of the directed weighted graph via adjacency matrix.
     /// </summary>
     /// <typeparam name="T">Generic Type.</typeparam>
-    public class DirectedWeightedGraph<T>
+    public class DirectedWeightedGraph<T> : IDirectedWeightedGraph<T>
     {
         /// <summary>
         ///     Capacity of the graph, indicates the maximum amount of vertices.
