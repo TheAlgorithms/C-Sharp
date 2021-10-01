@@ -108,15 +108,15 @@ namespace DataStructures
 
                 switch (comparer.Compare(item, memory[mid]))
                 {
-                    case 0:
-                        found = true;
-                        return mid;
                     case > 0:
                         left = mid + 1;
                         break;
                     case < 0:
                         right = mid;
                         break;
+                    default:
+                        found = true;
+                        return mid;
                 }
             }
 
