@@ -8,7 +8,7 @@ namespace DataStructures
     ///     Implementation of SortedList using binary search.
     /// </summary>
     /// <typeparam name="T">Generic Type.</typeparam>
-    public class SortedList<T> : ICollection<T>, IReadOnlyCollection<T>
+    public class SortedList<T> : IEnumerable<T>
     {
         private readonly IComparer<T> comparer;
         private readonly List<T> memory;
@@ -82,20 +82,11 @@ namespace DataStructures
             return found;
         }
 
-        public void CopyTo(T[] array, int arrayIndex)
-            => memory.CopyTo(array, arrayIndex);
-
         public IEnumerator<T> GetEnumerator()
             => memory.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator()
             => GetEnumerator();
-
-        int ICollection<T>.Count => memory.Count;
-
-        public bool IsReadOnly => false;
-
-        int IReadOnlyCollection<T>.Count => memory.Count;
 
         private int IndexFor(T item, out bool found)
         {

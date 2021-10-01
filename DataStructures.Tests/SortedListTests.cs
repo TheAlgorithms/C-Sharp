@@ -42,8 +42,7 @@ namespace DataStructures.Tests
 
         [Test]
         public void Contains_PositiveArrayAdded_NegativeNumberAsked_FalseReturned(
-            [Random(0, 200, 10, Distinct = true)]
-            int count)
+            [Random(0, 200, 10, Distinct = true)] int count)
         {
             var values = GetValues(count);
             const int value = -1;
@@ -60,8 +59,7 @@ namespace DataStructures.Tests
 
         [Test]
         public void Contains_PositiveArrayAdded_ContainingValueAsked_TrueReturned(
-            [Random(0, 200, 10, Distinct = true)]
-            int count)
+            [Random(0, 200, 10, Distinct = true)] int count)
         {
             var values = GetValues(count);
             var value = values[TestContext.CurrentContext.Random.Next(count - 1)];
@@ -74,6 +72,59 @@ namespace DataStructures.Tests
             }
 
             Assert.IsTrue(list.Contains(value));
+        }
+
+
+        [Test]
+        public void Remove_PositiveArrayAdded_NegativeNumberAsked_FalseReturned(
+            [Random(0, 200, 10, Distinct = true)] int count)
+        {
+            var values = GetValues(count);
+            const int value = -1;
+
+            var list = new SortedList<int>();
+
+            foreach (var i in values)
+            {
+                list.Add(i);
+            }
+
+            Assert.IsFalse(list.Remove(value));
+        }
+
+        [Test]
+        public void Remove_PositiveArrayAdded_ContainingValueAsked_TrueReturned(
+            [Random(0, 200, 10, Distinct = true)] int count)
+        {
+            var values = GetValues(count);
+            var value = values[TestContext.CurrentContext.Random.Next(count - 1)];
+
+            var list = new SortedList<int>();
+
+            foreach (var i in values)
+            {
+                list.Add(i);
+            }
+
+            Assert.IsTrue(list.Remove(value));
+        }
+
+        [Test]
+        public void Clear_ArrayAdded_ListCleaned_ListIsEmpty(
+            [Random(0, 20, 1, Distinct = true)] int count)
+        {
+            var values = GetValues(count);
+
+            var list = new SortedList<int>();
+
+            foreach (var i in values)
+            {
+                list.Add(i);
+            }
+
+            list.Clear();
+
+            CollectionAssert.IsEmpty(list);
         }
 
         private static List<int> GetValues(int count)
