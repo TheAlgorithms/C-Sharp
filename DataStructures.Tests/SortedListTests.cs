@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
@@ -22,22 +21,6 @@ namespace DataStructures.Tests
             }
 
             CollectionAssert.AreEqual(values.OrderBy(i => i), list);
-        }
-
-        [Test]
-        public void Add_AddAnExistingValue_ArgumentException()
-        {
-            int[] values = { 1, 2, 3 };
-            var value = values[0];
-
-            var list = new SortedList<int>();
-
-            foreach (var i in values)
-            {
-                list.Add(i);
-            }
-
-            Assert.Throws<ArgumentException>(() => list.Add(value));
         }
 
         [Test]
@@ -106,7 +89,14 @@ namespace DataStructures.Tests
                 list.Add(i);
             }
 
+            var expectingValues = values
+                .OrderBy(i => i)
+                .ToList();
+
+            expectingValues.Remove(value);
+
             Assert.IsTrue(list.Remove(value));
+            CollectionAssert.AreEqual(expectingValues, list);
         }
 
         [Test]
