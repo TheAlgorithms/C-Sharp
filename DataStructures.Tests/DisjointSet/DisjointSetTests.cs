@@ -1,17 +1,19 @@
 ﻿using NUnit.Framework;
+using FluentAssertions;
 
 namespace DataStructures.DisjointSet.Tests
 {
-    class DisjointSetTests
+    [TestFixture]
+    public class DisjointSetTests
     {
         [Test]
-        public static void MakeTest()
+        public static void MakeSetDataInitializationTest()
         {
             DisjointSet<int> ds = new DisjointSet<int>();
             var one = ds.MakeSet(1);
             var two = ds.MakeSet(2);
-            Assert.IsTrue(one.Data == 1);
-            Assert.IsTrue(two.Data == 2);
+            one.Data.Should().Be(1);
+            two.Data.Should().Be(2);
         }
         [Test]
         public static void UnionTest()
@@ -21,10 +23,10 @@ namespace DataStructures.DisjointSet.Tests
             var two = ds.MakeSet(2);
             var three = ds.MakeSet(3);
             ds.UnionSet(one, two);
-            Assert.IsTrue(ds.FindSet(one) == ds.FindSet(two));
+            ds.FindSet(one).Should().Be(ds.FindSet(two));
             ds.UnionSet(one, three);
-            Assert.IsTrue(ds.FindSet(two) == ds.FindSet(three));
-            Assert.IsTrue(one.Rank + two.Rank + three.Rank == 1);
+            ds.FindSet(two).Should().Be(ds.FindSet(three));
+            (one.Rank + two.Rank + three.Rank).Should().Be(1);
         }
     }
 }
