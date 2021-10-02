@@ -72,7 +72,7 @@ namespace DataStructures.Tests
                 list.Add(i);
             }
 
-            Assert.IsFalse(list.Remove(value));
+            Assert.IsFalse(list.TryRemove(value));
         }
 
         [Test]
@@ -95,7 +95,7 @@ namespace DataStructures.Tests
 
             expectingValues.Remove(value);
 
-            Assert.IsTrue(list.Remove(value));
+            Assert.IsTrue(list.TryRemove(value));
             CollectionAssert.AreEqual(expectingValues, list);
         }
 
@@ -121,7 +121,6 @@ namespace DataStructures.Tests
             => Enumerable
                 .Range(0, count)
                 .Select(_ => TestContext.CurrentContext.Random.Next(1_000_000))
-                .Distinct()
                 .ToList();
     }
 }
