@@ -73,7 +73,7 @@ namespace DataStructures
         /// </summary>
         /// <param name="item">An element to remove.</param>
         /// <returns>true - element is found and removed, otherwise false.</returns>
-        public bool Remove(T item)
+        public bool TryRemove(T item)
         {
             var index = IndexFor(item, out var found);
 
