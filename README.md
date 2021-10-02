@@ -4,9 +4,9 @@
 [![codecov](https://codecov.io/gh/TheAlgorithms/C-Sharp/branch/master/graph/badge.svg)](https://codecov.io/gh/TheAlgorithms/C-Sharp)
 [![GuardRails badge](https://badges.guardrails.io/TheAlgorithms/C-Sharp.svg?token=84805208ba243f0931a74c5148883f894cbe9fd97fe54d64d6d0a89852067548)](https://dashboard.guardrails.io/default/gh/TheAlgorithms/C-Sharp)
 
-This repository contains algorithms and data structures implemented in C# for educational purposes.  
+This repository contains algorithms and data structures implemented in C# for educational purposes.
 
-## Overview  
+## Overview
 
 * [Algorithms](./Algorithms)
   * [Data Compression](./Algorithms/DataCompression)
@@ -132,6 +132,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Doubly Linked List](./DataStructures/LinkedList/DoublyLinkedList/DoublyLinkedList.cs)
   * [Graph](./DataStructures/Graph)
     * [Directed Weighted Graph Via Adjacency Matrix](./DataStructures/Graph/DirectedWeightedGraph.cs)
+  * [SortedList](./DataStructures/SortedList.cs)
 
 
 ## Contributing
