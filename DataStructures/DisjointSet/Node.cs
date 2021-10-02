@@ -8,15 +8,13 @@ namespace DataStructures.DisjointSet
     {
         public int Rank { get; set; }
 
-        public Node<T> Parent { get; set; }
+        public Node<T> Parent { get; set; } = this;
 
         public T Data { get; set; }
 
         public Node(T data)
         {
-            Parent = this;
-            Rank = 0;
-            this.Data = data;
+            Data = data;
         }
     }
 }
