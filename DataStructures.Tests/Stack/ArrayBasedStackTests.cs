@@ -1,6 +1,10 @@
 using DataStructures.Stack;
 
+using FluentAssertions;
+
 using NUnit.Framework;
+
+using System;
 
 namespace DataStructures.Tests.Stack
 {
@@ -12,15 +16,17 @@ namespace DataStructures.Tests.Stack
         public static void CountTest()
         {
             var stack = new ArrayBasedStack<int>(new[] { 0, 1, 2, 3, 4 });
-            Assert.IsTrue(stack.Top == 4);
+            stack.Top.Should().Be(4);
         }
 
         [Test]
         public static void ClearTest()
         {
             var stack = new ArrayBasedStack<int>(new[] { 0, 1, 2, 3, 4 });
+
             stack.Clear();
-            Assert.IsTrue(stack.Top == -1);
+
+            stack.Top.Should().Be(-1);
         }
 
         [Test]
@@ -30,11 +36,11 @@ namespace DataStructures.Tests.Stack
             
             Assert.Multiple(() =>
             {
-                Assert.IsTrue(stack.Contains(0));
-                Assert.IsTrue(stack.Contains(1));
-                Assert.IsTrue(stack.Contains(2));
-                Assert.IsTrue(stack.Contains(3));
-                Assert.IsTrue(stack.Contains(4));
+                stack.Contains(0).Should().BeTrue();
+                stack.Contains(1).Should().BeTrue();
+                stack.Contains(2).Should().BeTrue();
+                stack.Contains(3).Should().BeTrue();
+                stack.Contains(4).Should().BeTrue();
             });
         }
 
@@ -45,9 +51,9 @@ namespace DataStructures.Tests.Stack
 
             Assert.Multiple(() =>
             {
-                Assert.IsTrue(stack.Peek() == 4);
-                Assert.IsTrue(stack.Peek() == 4);
-                Assert.IsTrue(stack.Peek() == 4);
+                stack.Peek().Should().Be(4);
+                stack.Peek().Should().Be(4);
+                stack.Peek().Should().Be(4);
             });
         }
 
@@ -58,11 +64,11 @@ namespace DataStructures.Tests.Stack
 
             Assert.Multiple(() =>
             {
-                Assert.IsTrue(stack.Pop() == 4);
-                Assert.IsTrue(stack.Pop() == 3);
-                Assert.IsTrue(stack.Pop() == 2);
-                Assert.IsTrue(stack.Pop() == 1);
-                Assert.IsTrue(stack.Pop() == 0);
+                stack.Pop().Should().Be(4);
+                stack.Pop().Should().Be(3);
+                stack.Pop().Should().Be(2);
+                stack.Pop().Should().Be(1);
+                stack.Pop().Should().Be(0);
             });
         }
 
@@ -72,27 +78,28 @@ namespace DataStructures.Tests.Stack
             var stack = new ArrayBasedStack<int>();
 
             stack.Push(0);
-            Assert.IsTrue(stack.Peek() == 0);
+            stack.Peek().Should().Be(0);
 
             stack.Push(1);
-            Assert.IsTrue(stack.Peek() == 1);
+            stack.Peek().Should().Be(1);
 
             stack.Push(2);
-            Assert.IsTrue(stack.Peek() == 2);
+            stack.Peek().Should().Be(2);
 
             stack.Push(3);
-            Assert.IsTrue(stack.Peek() == 3);
+            stack.Peek().Should().Be(3);
 
             stack.Push(4);
-            Assert.IsTrue(stack.Peek() == 4);
+            stack.Peek().Should().Be(4);
         }
 
         [Test]
         public static void AutomaticResizesTest()
         {
+            const int initialCapacity = 2;
             var stack = new ArrayBasedStack<int>
             {
-                Capacity = 2,
+                Capacity = initialCapacity,
             };
 
             stack.Push(0);
@@ -101,7 +108,7 @@ namespace DataStructures.Tests.Stack
             stack.Push(3);
             stack.Push(4);
 
-            Assert.IsTrue(stack.Capacity > 2);
+            stack.Capacity.Should().BeGreaterThan(initialCapacity);
         }
 
         [Test]
@@ -109,7 +116,12 @@ namespace DataStructures.Tests.Stack
         {
             var stack = new ArrayBasedStack<int>();
 
-            Assert.Catch(() => stack.Pop(), StackEmptyErrorMessage);
+            Action poppingAnEmptyStack = () => stack.Pop();
+
+            poppingAnEmptyStack.Should()
+                .Throw<InvalidOperationException>()
+                .WithMessage(StackEmptyErrorMessage);
+
         }
 
         [Test]
@@ -117,7 +129,11 @@ namespace DataStructures.Tests.Stack
         {
             var stack = new ArrayBasedStack<int>();
 
-            Assert.Catch(() => stack.Peek(), StackEmptyErrorMessage);
+            Action peekingAnEmptyStack = () => stack.Peek();
+
+            peekingAnEmptyStack.Should()
+                .Throw<InvalidOperationException>()
+                .WithMessage(StackEmptyErrorMessage);
         }
     }
 }
