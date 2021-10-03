@@ -1,6 +1,10 @@
 using DataStructures.Stack;
+
 using FluentAssertions;
+
 using NUnit.Framework;
+
+using System.Linq;
 
 namespace DataStructures.Tests.Stack
 {
@@ -69,20 +73,14 @@ namespace DataStructures.Tests.Stack
         {
             var stack = new ListBasedStack<int>();
 
-            stack.Push(0);
-            stack.Peek().Should().Be(0);
-
-            stack.Push(1);
-            stack.Peek().Should().Be(1);
-
-            stack.Push(2);
-            stack.Peek().Should().Be(2);
-
-            stack.Push(3);
-            stack.Peek().Should().Be(3);
-
-            stack.Push(4);
-            stack.Peek().Should().Be(4);
+            Assert.Multiple(() =>
+                Enumerable.Range(0, 5)
+                    .ToList()
+                    .ForEach(number =>
+                    {
+                        stack.Push(number);
+                        stack.Peek().Should().Be(number);
+                    }));
         }
     }
 }
