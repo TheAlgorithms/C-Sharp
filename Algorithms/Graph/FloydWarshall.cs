@@ -3,8 +3,20 @@ using DataStructures.Graph;
 
 namespace Algorithms.Graph
 {
+    /// <summary>
+    /// Floyd Warshall algorithm on directed weighted graph.
+    /// </summary>
+    /// <typeparam name="T">generic type of data in graph.</typeparam>
     public class FloydWarshall<T>
     {
+        /// <summary>
+        /// runs the algorithm.
+        /// </summary>
+        /// <param name="graph"></param>
+        /// <returns>
+        /// a 2D array of shortest paths between any two vertices.
+        /// where there is no path between two vertices - double.PositiveInfinity is placed.
+        /// </returns>
         public double[,] Run(DirectedWeightedGraph<T> graph)
         {
             var distances = new double[graph.Count, graph.Count];
