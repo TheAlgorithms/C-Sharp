@@ -39,7 +39,6 @@ namespace DataStructures.DisjointSet
         {
             Node<T> nx = FindSet(x);
             Node<T> ny = FindSet(y);
-
             if (nx == ny)
             {
                 return;
