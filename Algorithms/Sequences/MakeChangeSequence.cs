@@ -15,7 +15,18 @@ namespace Algorithms.Sequences
     public class MakeChangeSequence : ISequence
     {
         /// <summary>
-        ///     Gets sequence of number of ways of making change for n cents using coins of 1, 2, 5, 10 cents.
+        ///     <para>
+        ///         Gets sequence of number of ways of making change for n cents
+        ///         using coins of 1, 2, 5, 10 cents.
+        ///     </para>
+        ///     <para>
+        ///         Uses formula from OEIS page by Michael Somos
+        ///         along with first 18 values to prevent index issues.
+        ///     </para>
+        ///     <para>
+        ///         Formula:
+        ///         a(n) = a(n-2) +a(n-5) - a(n-7) + a(n-10) - a(n-12) - a(n-15) + a(n-17) + 1
+        ///     </para>
         /// </summary>
         public IEnumerable<BigInteger> Sequence
         {
@@ -31,15 +42,13 @@ namespace Algorithms.Sequences
                     yield return value;
                 }
 
-                var index = 18;
-                while(true)
+                for(var index = 18; ; index++)
                 {
                     BigInteger newValue = seed[index - 2] + seed[index - 5] - seed[index - 7]
                                         + seed[index - 10] - seed[index - 12] - seed[index - 15]
                                         + seed[index - 17] + 1;
 
                     seed.Add(newValue);
-                    index++;
                     yield return newValue;
                 }
             }
