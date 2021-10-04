@@ -11,7 +11,7 @@ namespace Algorithms.Tests.Sequences
         [Test]
         public void First10ElementsCorrect()
         {
-            // Values taken from https://oeis.org/A000005 for comparison.
+            // These values are taken from https://oeis.org/A000005 for comparison.
             var oeisSource = new BigInteger[]
                              {
                                  1,  2, 2, 3,  2,  4,  2,  4,  3, 4, 2,  6, 2,
