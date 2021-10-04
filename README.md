@@ -83,6 +83,7 @@ This repository contains algorithms and data structures implemented in C# for ed
       * [Knuth–Morris–Pratt Search](./Algorithms/Strings/KnuthMorrisPrattSearcher.cs)
   * [Sequences](./Algorithms/Sequences)
     * [A000004 Zero](./Algorithms/Sequences/ZeroSequence.cs)
+    * [A000005 Count of Divisors](./Algorithms/Sequences/DivisorsCountSequence.cs)
     * [A000027 Natural](./Algorithms/Sequences/NaturalSequence.cs)
     * [A000040 Primes](./Algorithms/Sequences/PrimesSequence.cs)
     * [A000045 Fibonacci](./Algorithms/Sequences/FibonacciSequence.cs)

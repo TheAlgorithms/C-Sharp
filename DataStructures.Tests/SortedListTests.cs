@@ -9,7 +9,7 @@ namespace DataStructures.Tests
     {
         [Test]
         public void Add_AddMultipleValues_SortingCorrectly(
-            [Random(0, 1000, 100, Distinct = true)]
+            [Random(1, 1000, 100, Distinct = true)]
             int count)
         {
             var values = GetValues(count);
@@ -25,7 +25,7 @@ namespace DataStructures.Tests
 
         [Test]
         public void Contains_PositiveArrayAdded_NegativeNumberAsked_FalseReturned(
-            [Random(0, 200, 10, Distinct = true)] int count)
+            [Random(1, 200, 10, Distinct = true)] int count)
         {
             var values = GetValues(count);
             const int value = -1;
@@ -42,7 +42,7 @@ namespace DataStructures.Tests
 
         [Test]
         public void Contains_PositiveArrayAdded_ContainingValueAsked_TrueReturned(
-            [Random(0, 200, 10, Distinct = true)] int count)
+            [Random(1, 200, 10, Distinct = true)] int count)
         {
             var values = GetValues(count);
             var value = values[TestContext.CurrentContext.Random.Next(count - 1)];
@@ -60,7 +60,7 @@ namespace DataStructures.Tests
 
         [Test]
         public void Remove_PositiveArrayAdded_NegativeNumberAsked_FalseReturned(
-            [Random(0, 200, 10, Distinct = true)] int count)
+            [Random(1, 200, 10, Distinct = true)] int count)
         {
             var values = GetValues(count);
             const int value = -1;
@@ -77,7 +77,7 @@ namespace DataStructures.Tests
 
         [Test]
         public void Remove_PositiveArrayAdded_ContainingValueAsked_TrueReturned(
-            [Random(0, 200, 10, Distinct = true)] int count)
+            [Random(1, 200, 10, Distinct = true)] int count)
         {
             var values = GetValues(count);
             var value = values[TestContext.CurrentContext.Random.Next(count - 1)];
@@ -101,7 +101,7 @@ namespace DataStructures.Tests
 
         [Test]
         public void Clear_ArrayAdded_ListCleaned_ListIsEmpty(
-            [Random(0, 20, 1, Distinct = true)] int count)
+            [Random(1, 20, 1, Distinct = true)] int count)
         {
             var values = GetValues(count);
 
