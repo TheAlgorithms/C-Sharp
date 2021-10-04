@@ -25,8 +25,8 @@ namespace Algorithms.Graph
                 for (var j = 0; j < distances.GetLength(0); j++)
                 {
                     var dist = graph.AdjacentDistance(
-                        graph.Vertices[i] ?? throw new ArgumentNullException($"Vertex was null{graph.Count}."),
-                        graph.Vertices[j] ?? throw new ArgumentNullException($"Vertex was null..{graph.Count}"));
+                        graph.Vertices[i] ?? throw new ArgumentNullException("Vertex."),
+                        graph.Vertices[j] ?? throw new ArgumentNullException("Vertex."));
                     distances[i, j] = dist != 0 ? dist : double.PositiveInfinity;
                 }
             }
