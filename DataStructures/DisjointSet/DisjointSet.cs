@@ -8,10 +8,6 @@ namespace DataStructures.DisjointSet
     /// <typeparam name="T"> generic type for implementation.</typeparam>
     public class DisjointSet<T>
     {
-        public DisjointSet()
-        {
-        }
-
         /// <summary>
         /// make a new set and return its representative.
         /// </summary>
@@ -41,7 +37,9 @@ namespace DataStructures.DisjointSet
         /// <param name="y">second set member.</param>
         public void UnionSet(Node<T> x, Node<T> y)
         {
-            Node<T> nx = FindSet(x), ny = FindSet(y);
+            Node<T> nx = FindSet(x);
+            Node<T> ny = FindSet(y);
+
             if (nx == ny)
             {
                 return;
