@@ -20,22 +20,19 @@ namespace Algorithms.Sequences
         {
             get
             {
-                var n = new BigInteger(1);
-                while (true)
+                yield return BigInteger.One;
+                for (var n = new BigInteger(2); ; n++)
                 {
-                    var count = 0;
-                    for (var k = 0; k <= n; k++)
+                    var count = 2;
+                    for (var k = 2; k < n; k++)
                     {
-                        BigInteger numerator = k * k + n * k + k;
-                        BigInteger divisor = k + 1;
-                        BigInteger.DivRem(numerator, divisor, out var remainder);
+                        BigInteger.DivRem(n, k, out var remainder);
                         if (remainder == 0)
                         {
                             count++;
                         }
                     }
 
-                    n++;
                     yield return count;
                 }
             }
