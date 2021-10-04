@@ -26,15 +26,16 @@ namespace Algorithms.Sequences
                     var count = 0;
                     for (var k = 0; k <= n; k++)
                     {
-                        BigInteger numerator = k * (k + n + 1);
+                        BigInteger numerator = k * k + n * k + k;
                         BigInteger divisor = k + 1;
                         BigInteger.DivRem(numerator, divisor, out var remainder);
-                        if (remainder != 0)
+                        if (remainder == 0)
                         {
                             count++;
                         }
                     }
 
+                    n++;
                     yield return count;
                 }
             }

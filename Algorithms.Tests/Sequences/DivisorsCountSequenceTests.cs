@@ -6,9 +6,9 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Sequences
 {
-    [TestFixture]
     public class DivisorsCountSequenceTests
     {
+        [Test]
         public void First10ElementsCorrect()
         {
             // Values taken from https://oeis.org/A000005 for comparison.
