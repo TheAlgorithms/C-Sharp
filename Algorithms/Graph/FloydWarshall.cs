@@ -50,8 +50,8 @@ namespace Algorithms.Graph
                 for (var j = 0; j < distances.GetLength(0); j++)
                 {
                     var dist = graph.AdjacentDistance(
-                        graph.Vertices[i] ?? throw new ArgumentNullException("Vertex mustn't null.", $"Vertices[{i}]"),
-                        graph.Vertices[j] ?? throw new ArgumentNullException("Vertex mustn't null.", $"Vertices[{i}]"));
+                        graph.Vertices[i] ?? throw new ArgumentNullException(nameof(graph.Vertices)),
+                        graph.Vertices[j] ?? throw new ArgumentNullException(nameof(graph.Vertices)));
                     distances[i, j] = dist != 0 ? dist : double.PositiveInfinity;
                 }
             }
