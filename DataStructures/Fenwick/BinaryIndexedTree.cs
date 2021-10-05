@@ -1,17 +1,17 @@
-using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DataStructures.Fenwick
 {
     /// <summary>
-    /// Represent classical realization of Fenwik tree or Binary Indexed tree.
+    /// Represent classical realization of Fenwiсk tree or Binary Indexed tree.
     ///
     /// BITree[0..n] --> Array that represents Binary Indexed Tree.
     /// arr[0..n-1] --> Input array for which prefix sum is evaluated.
     /// </summary>
     public class BinaryIndexedTree
     {
-        private readonly int[] bITree = new int[1000];
-        private readonly int treeLength = 0;
+        private readonly List<int> fenwickTree;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryIndexedTree"/> class.
@@ -20,19 +20,9 @@ namespace DataStructures.Fenwick
         /// <param name="array">Initial array.</param>
         public BinaryIndexedTree(int[] array)
         {
-            if(array.Length > 1000)
-            {
-                throw new Exception("Array too long");
-            }
+            fenwickTree = Enumerable.Repeat(0, array.Length + 1).ToList();
 
-            treeLength = array.Length;
-
-            for (var i = 1; i <= treeLength; i++)
-            {
-                bITree[i] = 0;
-            }
-
-            for (var i = 0; i < treeLength; i++)
+            for (var i = 0; i < array.Length; i++)
             {
                 UpdateTree(i, array[i]);
             }
@@ -51,7 +41,7 @@ namespace DataStructures.Fenwick
 
             while (startFrom > 0)
             {
-                sum += bITree[startFrom];
+                sum += fenwickTree[startFrom];
                 startFrom -= startFrom & (-startFrom);
             }
 
@@ -68,9 +58,9 @@ namespace DataStructures.Fenwick
         {
             var startFrom = index + 1;
 
-            while (startFrom <= treeLength)
+            while (startFrom <= fenwickTree.Count)
             {
-                bITree[startFrom] += val;
+                fenwickTree[startFrom] += val;
                 startFrom += startFrom & (-startFrom);
             }
         }

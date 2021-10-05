@@ -9,15 +9,6 @@ namespace DataStructures.Tests.Fenwick
     internal class BinaryIndexedTreeTests
     {
         [Test]
-        public void Constructor_ArrayIsTooBig_ThrowException()
-        {
-            var array = new int[1001];
-
-            Action act = () => new BinaryIndexedTree(array);
-            act.Should().Throw<Exception>();
-        }
-
-        [Test]
         public void GetSum_CreateBITAndRequestSum_ReturnCorrect()
         {
             int[] array = { 2, 1, 1, 3, 2, 3, 4, 5, 6, 7, 8, 9 };
