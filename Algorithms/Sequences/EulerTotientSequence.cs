@@ -36,11 +36,6 @@ namespace Algorithms.Sequences
                     var factors = PrimeFactors(i);
                     foreach (var factor in factors)
                     {
-                        if (n % factor != 0)
-                        {
-                            continue;
-                        }
-
                         while (n % factor == 0)
                         {
                             n /= factor;
