@@ -11,7 +11,7 @@ namespace DataStructures.Fenwick
     /// </summary>
     public class BinaryIndexedTree
     {
-        private readonly List<int> fenwickTree;
+        private readonly int[] fenwickTree;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryIndexedTree"/> class.
@@ -20,7 +20,7 @@ namespace DataStructures.Fenwick
         /// <param name="array">Initial array.</param>
         public BinaryIndexedTree(int[] array)
         {
-            fenwickTree = new List<int>(array.Length + 1);
+            fenwickTree = new int[array.Length + 1];
 
             for (var i = 0; i < array.Length; i++)
             {
@@ -58,7 +58,7 @@ namespace DataStructures.Fenwick
         {
             var startFrom = index + 1;
 
-            while (startFrom <= fenwickTree.Count)
+            while (startFrom <= fenwickTree.Length)
             {
                 fenwickTree[startFrom] += val;
                 startFrom += startFrom & (-startFrom);
