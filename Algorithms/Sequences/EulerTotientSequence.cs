@@ -67,7 +67,7 @@ namespace Algorithms.Sequences
         ///     </para>
         /// </summary>
         /// <param name="target">Number that is being factored.</param>
-        /// <returns>List of distinct prime factors of target.</returns>
+        /// <returns>List of prime factors of target.</returns>
         private static IEnumerable<BigInteger> PrimeFactors(BigInteger target)
         {
             return new PrimesSequence()
