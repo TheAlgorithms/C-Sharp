@@ -20,7 +20,7 @@ namespace DataStructures.Fenwick
         /// <param name="array">Initial array.</param>
         public BinaryIndexedTree(int[] array)
         {
-            fenwickTree = new List(array.Length + 1);
+            fenwickTree = new List<int>(array.Length + 1);
 
             for (var i = 0; i < array.Length; i++)
             {
