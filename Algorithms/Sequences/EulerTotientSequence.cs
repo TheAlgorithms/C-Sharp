@@ -21,6 +21,25 @@ namespace Algorithms.Sequences
         ///     <para>
         ///         Gets sequence of Euler totient function phi(n).
         ///     </para>
+        ///     <para>
+        ///         'n' is copied from value of the loop of i that's being enumerated over.
+        ///         1) Initialize result as n
+        ///         2) Consider every number 'factor' (where 'factor' is a prime divisor of n).
+        ///            If factor divides n, then do following
+        ///            a) Subtract all multiples of factor from 1 to n [all multiples of factor
+        ///               will have gcd more than 1 (at least factor) with n]
+        ///            b) Update n by repeatedly dividing it by factor.
+        ///         3) If the reduced n is more than 1, then remove all multiples
+        ///            of n from result.
+        ///     </para>
+        ///     <para>
+        ///         Base code was from https://www.geeksforgeeks.org/eulers-totient-function/.
+        ///      </para>
+        ///     <para>
+        ///         Implementation avoiding floating point operations was used for base
+        ///         and replacement of loop going from 1 to sqrt(n) was replaced with
+        ///         List of prime factors.
+        ///     </para>
         /// </summary>
         public IEnumerable<BigInteger> Sequence
         {
@@ -30,8 +49,8 @@ namespace Algorithms.Sequences
 
                 for (BigInteger i = 2; ; i++)
                 {
-                    var result = i;
                     var n = i;
+                    var result = n;
 
                     var factors = PrimeFactors(i);
                     foreach (var factor in factors)
@@ -67,14 +86,12 @@ namespace Algorithms.Sequences
         ///     </para>
         /// </summary>
         /// <param name="target">Number that is being factored.</param>
-        /// <returns>List of distinct prime factors of target.</returns>
+        /// <returns>List of prime factors of target.</returns>
         private static IEnumerable<BigInteger> PrimeFactors(BigInteger target)
         {
             return new PrimesSequence()
                   .Sequence.TakeWhile(prime => prime * prime <= target)
-                  .Select(prime => new { prime, test = target / prime, })
-                  .Where(t => t.test * t.prime == target)
-                  .Select(t => t.prime)
+                  .Where(prime => target % prime == 0)
                   .ToList();
         }
     }
