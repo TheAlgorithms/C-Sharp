@@ -49,9 +49,7 @@ namespace Algorithms.Graph
             {
                 for (var j = 0; j < distances.GetLength(0); j++)
                 {
-                    var dist = graph.AdjacentDistance(
-                        graph.Vertices[i] ?? throw new ArgumentNullException(nameof(graph.Vertices)),
-                        graph.Vertices[j] ?? throw new ArgumentNullException(nameof(graph.Vertices)));
+                    var dist = graph.AdjacentDistance(graph.Vertices[i] !, graph.Vertices[j] !);
                     distances[i, j] = dist != 0 ? dist : double.PositiveInfinity;
                 }
             }
