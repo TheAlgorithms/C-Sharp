@@ -11,8 +11,8 @@ namespace DataStructures.UnrolledList
     {
         private readonly int sizeNode;
 
-        private UnrolledLinkedListNode start;
-        private UnrolledLinkedListNode end;
+        private UnrolledLinkedListNode start = null!;
+        private UnrolledLinkedListNode end = null!;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnrolledLinkedList"/> class.
@@ -21,9 +21,6 @@ namespace DataStructures.UnrolledList
         /// <param name="chunkSize">The size of signe chunk.</param>
         public UnrolledLinkedList(int chunkSize)
         {
-            start = null!;
-            end = null!;
-
             sizeNode = chunkSize + 1;
         }
 
@@ -48,7 +45,7 @@ namespace DataStructures.UnrolledList
             }
             else
             {
-                UnrolledLinkedListNode pointer = new(sizeNode);
+                var pointer = new UnrolledLinkedListNode(sizeNode);
                 var j = 0;
                 for (var pos = end.Count / 2 + 1; pos < end.Count; pos++)
                 {
@@ -68,7 +65,7 @@ namespace DataStructures.UnrolledList
         /// Help method. Get all list inside to check the state.
         /// </summary>
         /// <returns>Items from all nodes.</returns>
-        public IEnumerable<int> Items()
+        public IEnumerable<int> GetRolledItems()
         {
             UnrolledLinkedListNode pointer = start;
             List<int> result = new();
