@@ -61,12 +61,12 @@ namespace DataStructures.Heap.PairingHeap
 
             if (node == null)
             {
-                throw new ApplicationException("Current value is not present in this heap.");
+                throw new ArgumentException("Current value is not present in this heap.");
             }
 
             if (comparer.Compare(newValue, node.Value) > 0)
             {
-                throw new ApplicationException($"New value is not {(sorting != Sorting.Descending ? "less" : "greater")} than old value.");
+                throw new ArgumentException($"New value is not {(sorting != Sorting.Descending ? "less" : "greater")} than old value.");
             }
 
             UpdateNodeValue(currentValue, newValue, node);
@@ -97,7 +97,7 @@ namespace DataStructures.Heap.PairingHeap
         {
             if (root == null)
             {
-                throw new ApplicationException("Empty heap");
+                throw new ArgumentException("Empty heap");
             }
 
             return root.Value;

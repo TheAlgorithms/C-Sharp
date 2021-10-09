@@ -17,7 +17,7 @@ namespace DataStructures.Tests.Heap.PairingHeap
 
             Action act = () => minHeap.UpdateKey(2, 10);
 
-            act.Should().Throw<ApplicationException>();
+            act.Should().Throw<ArgumentException>();
         }
 
         [Test]
@@ -28,7 +28,7 @@ namespace DataStructures.Tests.Heap.PairingHeap
 
             Action act = () => minHeap.UpdateKey(10, 11);
 
-            act.Should().Throw<ApplicationException>();
+            act.Should().Throw<ArgumentException>();
         }
 
         [Test]

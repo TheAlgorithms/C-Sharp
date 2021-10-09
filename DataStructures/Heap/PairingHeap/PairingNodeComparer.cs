@@ -20,7 +20,14 @@ namespace DataStructures.Heap.PairingHeap
 
         public int Compare(T? x, T? y)
         {
-            return !isMax ? nodeComparer.Compare(x, y) : nodeComparer.Compare(y, x);
+            return !isMax
+                ? CompareNodes(x, y)
+                : CompareNodes(y, x);
+        }
+
+        public int CompareNodes(T? one, T? second)
+        {
+            return nodeComparer.Compare(one, second);
         }
     }
 }
