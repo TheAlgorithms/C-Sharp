@@ -6,11 +6,11 @@ namespace DataStructures.Heap.PairingHeap
     /// Node represented the value and connections.
     /// </summary>
     /// <typeparam name="T">Type, supported comparing.</typeparam>
-    public class PairingHeapNode<T> : IComparable where T : IComparable
+    public class PairingHeapNode<T>
     {
         public PairingHeapNode(T value)
         {
-            this.Value = value;
+            Value = value;
         }
 
         public T Value { get; set; }
@@ -22,10 +22,5 @@ namespace DataStructures.Heap.PairingHeap
         public PairingHeapNode<T> Previous { get; set; } = null!;
 
         public PairingHeapNode<T> Next { get; set; } = null!;
-
-        public int CompareTo(object? obj)
-        {
-            return Value.CompareTo((((PairingHeapNode<T>)obj!) !).Value);
-        }
     }
 }
