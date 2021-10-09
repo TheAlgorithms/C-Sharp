@@ -57,14 +57,14 @@ namespace DataStructures.Heap.PairingHeap
         /// </summary>
         public void UpdateKey(T currentValue, T newValue)
         {
-            var node = mapping[currentValue]?.Where(x => x.Value.Equals(currentValue)).FirstOrDefault();
-
-            if (node == null)
+            if(!mapping.ContainsKey(currentValue))
             {
                 throw new ArgumentException("Current value is not present in this heap.");
             }
 
-            if (comparer.Compare(newValue, node.Value) > 0)
+            var node = mapping[currentValue]?.Where(x => x.Value.Equals(currentValue)).FirstOrDefault();
+
+            if (comparer.Compare(newValue, node!.Value) > 0)
             {
                 throw new ArgumentException($"New value is not {(sorting != Sorting.Descending ? "less" : "greater")} than old value.");
             }
@@ -79,28 +79,6 @@ namespace DataStructures.Heap.PairingHeap
             DeleteChild(node);
 
             root = RebuildHeap(root, node);
-        }
-
-        /// <summary>
-        /// Merge 2 heaps [O(1)].
-        /// </summary>
-        public void Merge(PairingHeap<T> pairingHeap)
-        {
-            root = RebuildHeap(root, pairingHeap.root);
-            Count += pairingHeap.Count;
-        }
-
-        /// <summary>
-        /// Peek element from heap [O(1)].
-        /// </summary>
-        public T Peek()
-        {
-            if (root == null)
-            {
-                throw new ArgumentException("Empty heap");
-            }
-
-            return root.Value;
         }
 
         IEnumerator IEnumerable.GetEnumerator()

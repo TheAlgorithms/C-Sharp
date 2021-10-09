@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 using DataStructures.Heap.PairingHeap;
 using FluentAssertions;
@@ -9,13 +10,36 @@ namespace DataStructures.Tests.Heap.PairingHeap
     internal class PairingHeapTests
     {
         [Test]
+        public void BuildMinHeap_CheckEnumerator_NotThrowOnEnumerate()
+        {
+            var minHeap = new PairingHeap<int>();
+            minHeap.Insert(1);
+
+            var items = minHeap.ToList();
+
+            items.Should().HaveCount(1);
+        }
+
+        [Test]
+        public void BuildMinHeap_CheckEnumerable_NotThrowOnEnumerate()
+        {
+            var minHeap = new PairingHeap<int>();
+            minHeap.Insert(1);
+
+            foreach (var node in (IEnumerable)minHeap)
+            {
+                node.Should().NotBe(null);
+            }
+        }
+
+        [Test]
         public void BuildMinHeap_UpdateNonExistingNode_ThrowException()
         {
             var minHeap = new PairingHeap<int>();
             minHeap.Insert(1);
-            minHeap.Insert(2);
+            minHeap.Extract();
 
-            Action act = () => minHeap.UpdateKey(2, 10);
+            Action act = () => minHeap.UpdateKey(1, 10);
 
             act.Should().Throw<ArgumentException>();
         }
