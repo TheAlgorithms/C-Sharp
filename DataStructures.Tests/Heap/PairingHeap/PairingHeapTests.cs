@@ -1,12 +1,36 @@
 ﻿using System;
 using System.Linq;
 using DataStructures.Heap.PairingHeap;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace DataStructures.Tests.Heap.PairingHeap
 {
     internal class PairingHeapTests
     {
+        [Test]
+        public void BuildMinHeap_UpdateNonExistingNode_ThrowException()
+        {
+            var minHeap = new PairingHeap<int>();
+            minHeap.Insert(1);
+            minHeap.Insert(2);
+
+            Action act = () => minHeap.UpdateKey(2, 10);
+
+            act.Should().Throw<ApplicationException>();
+        }
+
+        [Test]
+        public void BuildMinHeap_UpdateBadNode_ThrowException()
+        {
+            var minHeap = new PairingHeap<int>();
+            minHeap.Insert(10);
+
+            Action act = () => minHeap.UpdateKey(10, 11);
+
+            act.Should().Throw<ApplicationException>();
+        }
+
         [Test]
         public void BuildMinHeap_CreateHeap_HeapIsCheked()
         {
@@ -88,6 +112,7 @@ namespace DataStructures.Tests.Heap.PairingHeap
             {
                 maxHeap.Insert(item);
             }
+
             for (var i = 0; i < testSeries.Count; i++)
             {
                 var incremented = testSeries[i] + rnd.Next(0, 1000);
