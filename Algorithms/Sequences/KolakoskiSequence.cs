@@ -23,23 +23,23 @@ namespace Algorithms.Sequences
         {
             get
             {
-                var list = new List<int> { 1, 2, 2 };
-                yield return list[0];
-                yield return list[1];
-                yield return list[2];
+                yield return 1;
+                yield return 2;
+                yield return 2;
 
+                var queue = new Queue<int>();
+                queue.Enqueue(2);
                 var nextElement = 1;
-                var runIndex = 2;
                 while (true)
                 {
-                    for (var i = 0; i < list[runIndex]; i++)
+                    var nextRun = queue.Dequeue();
+                    for (var i = 0; i < nextRun; i++)
                     {
-                        list.Add(nextElement);
+                        queue.Enqueue(nextElement);
                         yield return nextElement;
                     }
 
-                    nextElement = nextElement == 1 ? 2 : 1;
-                    runIndex++;
+                    nextElement = 1 + nextElement % 2;
                 }
             }
         }
