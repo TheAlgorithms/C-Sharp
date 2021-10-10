@@ -33,8 +33,8 @@ namespace Algorithms.Numeric
             //           true  = “probably prime”
 
             // write n as 2r·d + 1 with d odd(by factoring out powers of 2 from n − 1)
-            BigInteger r = 0, d;
-            d = n - 1;
+            BigInteger r = 0;
+            BigInteger d = n - 1;
             while (d % 2 == 0)
             {
                 r++;
