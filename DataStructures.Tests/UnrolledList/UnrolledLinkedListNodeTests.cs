@@ -8,7 +8,7 @@ namespace DataStructures.Tests.UnrolledList
     public class UnrolledLinkedListNodeTests
     {
         [Test]
-        public void GetAndSet_SetItemNodeAndGetIt_ReturnExtectedItem()
+        public void GetAndSet_SetItemNodeAndGetIt_ReturnExpectedItem()
         {
             var node = new UnrolledLinkedListNode(6);
             node.Set(0, 1);
