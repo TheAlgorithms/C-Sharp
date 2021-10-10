@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Numeric
 {
-    class MillerRabinPrimalityTest
+    public static class MillerRabinPrimalityTest
     {
         [Test]
         [TestCase("7", ExpectedResult = true)]  // true
