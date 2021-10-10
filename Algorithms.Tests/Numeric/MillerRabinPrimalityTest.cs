@@ -28,7 +28,6 @@ namespace Algorithms.Tests.Numeric
             var result = MillerRabinPrimalityChecker.IsProbablyPrimeNumber(number,rounds);
 
             // Assert
-            //Assert.IsTrue(result);
             return result;
         }
 
