@@ -14,6 +14,8 @@ namespace DataStructures.Graph
 
         bool AreAdjacent(Vertex<T> startVertex, Vertex<T> endVertex);
 
+        double AdjacentDistance(Vertex<T> startVertex, Vertex<T> endVertex);
+
         IEnumerable<Vertex<T>?> GetNeighbors(Vertex<T> vertex);
 
         void RemoveEdge(Vertex<T> startVertex, Vertex<T> endVertex);
