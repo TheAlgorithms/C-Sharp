@@ -128,6 +128,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Min-Max Heap](./DataStructures/Heap/MinMaxHeap.cs)
     * [Binary Heap](./DataStructures/Heap/BinaryHeap.cs)
     * [Fibonacci Heap](./DataStructures/Heap/FibonacciHeap/FibonacciHeap.cs)
+    * [Pairing Heap](./DataStructures/Heap/PairingHeap/PairingHeap.cs)
   * [Queue](./DataStructures/Queue)
     * [Array-based Queue](./DataStructures/Queue/ArrayBasedQueue.cs)
     * [List-based Queue](./DataStructures/Queue/ListBasedQueue.cs)
