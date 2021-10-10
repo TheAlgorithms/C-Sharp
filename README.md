@@ -82,6 +82,7 @@ This repository contains algorithms and data structures implemented in C# for ed
       * [MSD Radix Sort](./Algorithms/Sorters/String/MsdRadixStringSorter.cs)
       * [Knuth–Morris–Pratt Search](./Algorithms/Strings/KnuthMorrisPrattSearcher.cs)
   * [Sequences](./Algorithms/Sequences)
+    * [A000002 Kolakoski](./Algorithms/Sequences/KolakoskiSequence.cs)
     * [A000004 Zero](./Algorithms/Sequences/ZeroSequence.cs)
     * [A000005 Count of Divisors](./Algorithms/Sequences/DivisorsCountSequence.cs)
     * [A000008 Make Change](./Algorithms/Sequences/MakeChangeSequence.cs)
