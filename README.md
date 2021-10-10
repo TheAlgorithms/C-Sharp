@@ -91,6 +91,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [A000040 Primes](./Algorithms/Sequences/PrimesSequence.cs)
     * [A000045 Fibonacci](./Algorithms/Sequences/FibonacciSequence.cs)
     * [A000142 Factorial](./Algorithms/Sequences/FactorialSequence.cs)
+    * [A005132 Recaman's](./Algorithms/Sequences/RecamansSequence.cs)
     * [A007318 Binomial](./Algorithms/Sequences/BinomialSequence.cs)
   * [String](./Algorithms/Strings)
     * [Longest Consecutive Character](./Algorithms/Strings/GeneralStringAlgorithms.cs)
@@ -129,6 +130,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Min-Max Heap](./DataStructures/Heap/MinMaxHeap.cs)
     * [Binary Heap](./DataStructures/Heap/BinaryHeap.cs)
     * [Fibonacci Heap](./DataStructures/Heap/FibonacciHeap/FibonacciHeap.cs)
+    * [Pairing Heap](./DataStructures/Heap/PairingHeap/PairingHeap.cs)
   * [Queue](./DataStructures/Queue)
     * [Array-based Queue](./DataStructures/Queue/ArrayBasedQueue.cs)
     * [List-based Queue](./DataStructures/Queue/ListBasedQueue.cs)
@@ -140,6 +142,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Directed Weighted Graph Via Adjacency Matrix](./DataStructures/Graph/DirectedWeightedGraph.cs)
   * [Disjoint Set](./DataStructures/DisjointSet)
   * [SortedList](./DataStructures/SortedList.cs)
+  * [Unrolled linked list](./DataStructures/UnrolledList/UnrolledLinkedList.cs)
 
 
 ## Contributing
