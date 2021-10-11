@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using DataStructures.Probabilistic;
 using NUnit.Framework;
 
@@ -17,6 +19,33 @@ namespace DataStructures.Tests.Probabilistic
             {
                 Name = name;
                 Number = number;
+            }
+        }
+
+        public class SimpleObjectOverridenHash
+        {
+            private const uint FnvPrime = 16777619;
+            private const uint FnvOffsetBasis = 2166136261;
+            public string Name { get; set; }
+            public int Number { get; set; }
+
+            public SimpleObjectOverridenHash(string name, int number)
+            {
+                Name = name;
+                Number = number;
+            }
+
+            public override int GetHashCode()
+            {
+                var bytes = Encoding.UTF8.GetBytes(Name).Concat(BitConverter.GetBytes(Number));
+                var hash = FnvOffsetBasis;
+                foreach (var @byte in bytes)
+                {
+                    hash = hash * FnvPrime;
+                    hash ^= @byte;
+                }
+
+                return (int)hash;
             }
         }
 
@@ -39,7 +68,7 @@ namespace DataStructures.Tests.Probabilistic
                 Assert.IsTrue(filter.Search(k));
             }
 
-            Assert.True(.03 > falsePositives / 1000.0);
+            Assert.True(.05 > falsePositives / 1000.0); // be a bit generous in our fault tolerance here
         }
 
         [Test]
@@ -57,16 +86,28 @@ namespace DataStructures.Tests.Probabilistic
         }
 
         [Test]
-        public void TestBloomFilterSearch()
+        public void TestBloomFilterSearchOverridenHash()
         {
-            var filter = new BloomFilter<SimpleObject>(100000, 3);
-            var simpleObjectInserted = new SimpleObject("foo", 1);
-            var simpleObjectInserted2 = new SimpleObject("foo", 1);
-            var simpleObjectNotInserted = new SimpleObject("bar", 2);
+            var filter = new BloomFilter<SimpleObjectOverridenHash>(100000, 3);
+            var simpleObjectInserted = new SimpleObjectOverridenHash("foo", 1);
+            var simpleObjectInserted2 = new SimpleObjectOverridenHash("foo", 1);
+            var simpleObjectNotInserted = new SimpleObjectOverridenHash("bar", 2);
             filter.Insert(simpleObjectInserted);
             Assert.IsTrue(filter.Search(simpleObjectInserted));
             Assert.IsTrue(filter.Search(simpleObjectInserted2));
             Assert.IsFalse(filter.Search(simpleObjectNotInserted));
+        }
+
+        [Test]
+        public void TestBloomFilterSearch()
+        {
+            var filter = new BloomFilter<SimpleObject>(10000, 3);
+            var simpleObjectInserted = new SimpleObject("foo", 1);
+            var simpleObjectNotInserted = new SimpleObject("foo", 1);
+            filter.Insert(simpleObjectInserted);
+            Assert.False(filter.Search(simpleObjectNotInserted));
+            Assert.True(filter.Search(simpleObjectInserted));
+
         }
     }
 }
