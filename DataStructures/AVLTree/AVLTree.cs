@@ -17,6 +17,8 @@ namespace DataStructures.AVLTree
     ///     regular BST.
     ///     <br></br><br></br>
     ///     See https://en.wikipedia.org/wiki/AVL_tree for more information.
+    ///     <br></br>
+    ///     Visualizer: https://visualgo.net/en/bst.
     /// </remarks>
     /// <typeparam name="TKey">Type of key for the tree.</typeparam>
     public class AVLTree<TKey>
