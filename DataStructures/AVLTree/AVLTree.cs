@@ -36,7 +36,7 @@ namespace DataStructures.AVLTree
         /// <summary>
         ///     Reference to the root node.
         /// </summary>
-        private AVLTreeNode<TKey>? root;
+        private AvlTreeNode<TKey>? root;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AvlTree{TKey}"/> class.
@@ -68,7 +68,7 @@ namespace DataStructures.AVLTree
         {
             if (root is null)
             {
-                root = new AVLTreeNode<TKey>(key);
+                root = new AvlTreeNode<TKey>(key);
             }
             else
             {
@@ -177,7 +177,7 @@ namespace DataStructures.AVLTree
             InOrderWalk(root);
             return result;
 
-            void InOrderWalk(AVLTreeNode<TKey>? node)
+            void InOrderWalk(AvlTreeNode<TKey>? node)
             {
                 if (node is null)
                 {
@@ -200,7 +200,7 @@ namespace DataStructures.AVLTree
             PreOrderWalk(root);
             return result;
 
-            void PreOrderWalk(AVLTreeNode<TKey>? node)
+            void PreOrderWalk(AvlTreeNode<TKey>? node)
             {
                 if (node is null)
                 {
@@ -223,7 +223,7 @@ namespace DataStructures.AVLTree
             PostOrderWalk(root);
             return result;
 
-            void PostOrderWalk(AVLTreeNode<TKey>? node)
+            void PostOrderWalk(AvlTreeNode<TKey>? node)
             {
                 if (node is null)
                 {
@@ -242,7 +242,7 @@ namespace DataStructures.AVLTree
         /// <param name="node">Node to check for null leaf.</param>
         /// <param name="key">Key value to add.</param>
         /// <returns>New node with key inserted.</returns>
-        private AVLTreeNode<TKey> Add(AVLTreeNode<TKey> node, TKey key)
+        private AvlTreeNode<TKey> Add(AvlTreeNode<TKey> node, TKey key)
         {
             // Regular binary search tree insertion
             int compareResult = comparer.Compare(key, node.Key);
@@ -250,7 +250,7 @@ namespace DataStructures.AVLTree
             {
                 if (node.Left is null)
                 {
-                    var newNode = new AVLTreeNode<TKey>(key);
+                    var newNode = new AvlTreeNode<TKey>(key);
                     node.Left = newNode;
                 }
                 else
@@ -262,7 +262,7 @@ namespace DataStructures.AVLTree
             {
                 if (node.Right is null)
                 {
-                    var newNode = new AVLTreeNode<TKey>(key);
+                    var newNode = new AvlTreeNode<TKey>(key);
                     node.Right = newNode;
                 }
                 else
@@ -288,7 +288,7 @@ namespace DataStructures.AVLTree
         /// <param name="node">Node to check for key.</param>
         /// <param name="key">Key value to remove.</param>
         /// <returns>New node with key removed.</returns>
-        private AVLTreeNode<TKey>? Remove(AVLTreeNode<TKey> node, TKey key)
+        private AvlTreeNode<TKey>? Remove(AvlTreeNode<TKey> node, TKey key)
         {
             // Normal binary search tree removal
             var compareResult = comparer.Compare(key, node.Key);
@@ -333,7 +333,7 @@ namespace DataStructures.AVLTree
         /// </summary>
         /// <param name="node">Node to rebalance.</param>
         /// <returns>New node that has been rebalanced.</returns>
-        private AVLTreeNode<TKey> Rebalance(AVLTreeNode<TKey> node)
+        private AvlTreeNode<TKey> Rebalance(AvlTreeNode<TKey> node)
         {
             if (node.BalanceFactor > 1)
             {
@@ -364,7 +364,7 @@ namespace DataStructures.AVLTree
         /// </summary>
         /// <param name="node">Node to rotate about.</param>
         /// <returns>New node with rotation applied.</returns>
-        private AVLTreeNode<TKey> RotateLeft(AVLTreeNode<TKey> node)
+        private AvlTreeNode<TKey> RotateLeft(AvlTreeNode<TKey> node)
         {
             var temp1 = node;
             var temp2 = node!.Right!.Left;
@@ -383,7 +383,7 @@ namespace DataStructures.AVLTree
         /// </summary>
         /// <param name="node">Node to rotate about.</param>
         /// <returns>New node with rotation applied.</returns>
-        private AVLTreeNode<TKey> RotateRight(AVLTreeNode<TKey> node)
+        private AvlTreeNode<TKey> RotateRight(AvlTreeNode<TKey> node)
         {
             var temp1 = node;
             var temp2 = node!.Left!.Right;
@@ -403,7 +403,7 @@ namespace DataStructures.AVLTree
         /// </summary>
         /// <param name="node">Node specifying root of subtree.</param>
         /// <returns>Minimum value in node's subtree.</returns>
-        private AVLTreeNode<TKey> GetMin(AVLTreeNode<TKey> node)
+        private AvlTreeNode<TKey> GetMin(AvlTreeNode<TKey> node)
         {
             while (node.Left is not null)
             {
@@ -419,7 +419,7 @@ namespace DataStructures.AVLTree
         /// </summary>
         /// <param name="node">Node specifyng root of subtree.</param>
         /// <returns>Maximum value in node's subtree.</returns>
-        private AVLTreeNode<TKey> GetMax(AVLTreeNode<TKey> node)
+        private AvlTreeNode<TKey> GetMax(AvlTreeNode<TKey> node)
         {
             while (node.Right is not null)
             {

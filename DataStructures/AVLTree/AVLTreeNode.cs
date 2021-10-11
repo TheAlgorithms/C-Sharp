@@ -6,7 +6,7 @@ namespace DataStructures.AVLTree
     ///     Generic class to represent nodes in an <see cref="AvlTree{TKey}"/> instance.
     /// </summary>
     /// <typeparam name="TKey">The type of key for the node.</typeparam>
-    public class AVLTreeNode<TKey>
+    public class AvlTreeNode<TKey>
     {
         /// <summary>
         ///     Gets or sets key value of node.
@@ -26,18 +26,18 @@ namespace DataStructures.AVLTree
         /// <summary>
         ///     Gets or sets the left child of the node.
         /// </summary>
-        public AVLTreeNode<TKey>? Left { get; set; }
+        public AvlTreeNode<TKey>? Left { get; set; }
 
         /// <summary>
         ///     Gets or sets the right child of the node.
         /// </summary>
-        public AVLTreeNode<TKey>? Right { get; set; }
+        public AvlTreeNode<TKey>? Right { get; set; }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AVLTreeNode{TKey}"/> class.
+        ///     Initializes a new instance of the <see cref="AvlTreeNode{TKey}"/> class.
         /// </summary>
         /// <param name="key">Key value for node.</param>
-        public AVLTreeNode(TKey key)
+        public AvlTreeNode(TKey key)
         {
             Key = key;
             Height = 0;
