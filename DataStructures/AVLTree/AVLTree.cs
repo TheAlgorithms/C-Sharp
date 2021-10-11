@@ -104,9 +104,11 @@ namespace DataStructures.AVLTree
             {
                 throw new KeyNotFoundException($"Key {key} is not in the tree");
             }
-
-            root = Remove(root, key);
-            Count--;
+            else
+            {
+                root = Remove(root, key);
+                Count--;
+            }
         }
 
         /// <summary>
@@ -340,7 +342,7 @@ namespace DataStructures.AVLTree
                     node.Right = RotateRight(node.Right);
                 }
 
-                node = RotateLeft(node);
+                return RotateLeft(node);
             }
             else if (node.BalanceFactor < -1)
             {
@@ -349,10 +351,12 @@ namespace DataStructures.AVLTree
                     node.Left = RotateLeft(node.Left);
                 }
 
-                node = RotateRight(node);
+                return RotateRight(node);
             }
-
-            return node;
+            else
+            {
+                return node;
+            }
         }
 
         /// <summary>
