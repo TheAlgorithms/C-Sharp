@@ -40,9 +40,6 @@ namespace DataStructures.AVLTree
         public AvlTreeNode(TKey key)
         {
             Key = key;
-            Height = 0;
-            Left = null;
-            Right = null;
         }
 
         /// <summary>

@@ -15,9 +15,9 @@ namespace DataStructures.AVLTree
     ///     insertion, deletion, and search all have a worst-case time complexity
     ///     of O(log n). Which is an improvement over the worst-case O(n) for a
     ///     regular BST.
-    ///     <br></br><br></br>
+    ///     
     ///     See https://en.wikipedia.org/wiki/AVL_tree for more information.
-    ///     <br></br>
+    ///     
     ///     Visualizer: https://visualgo.net/en/bst.
     /// </remarks>
     /// <typeparam name="TKey">Type of key for the tree.</typeparam>
@@ -43,9 +43,7 @@ namespace DataStructures.AVLTree
         /// </summary>
         public AvlTree()
         {
-            root = null;
             comparer = Comparer<TKey>.Default;
-            Count = 0;
         }
 
         /// <summary>
@@ -55,9 +53,7 @@ namespace DataStructures.AVLTree
         /// <param name="customComparer">Comparer to use when comparing keys.</param>
         public AvlTree(Comparer<TKey> customComparer)
         {
-            root = null;
             comparer = customComparer;
-            Count = 0;
         }
 
         /// <summary>
