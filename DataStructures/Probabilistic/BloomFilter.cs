@@ -97,11 +97,10 @@ namespace DataStructures.Probabilistic
         /// <returns>The slots of the filter to flip or check.</returns>
         private IEnumerable<int> GetSlots(T item)
         {
-            var initialHash = item.GetHashCode();
-            var secondaryHash = Fnv1(BitConverter.GetBytes(initialHash));
+            var hash = item.GetHashCode();
             for (var i = 0; i < numHashes; i++)
             {
-                yield return Math.Abs(initialHash + (i * secondaryHash)) % sizeBits;
+                yield return Math.Abs((i + 1) * hash)) % sizeBits;
             }
         }
     }
