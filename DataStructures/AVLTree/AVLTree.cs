@@ -21,7 +21,7 @@ namespace DataStructures.AVLTree
     ///     Visualizer: https://visualgo.net/en/bst.
     /// </remarks>
     /// <typeparam name="TKey">Type of key for the tree.</typeparam>
-    public class AVLTree<TKey>
+    public class AvlTree<TKey>
     {
         /// <summary>
         ///     Gets the number of nodes in the tree.
@@ -39,9 +39,9 @@ namespace DataStructures.AVLTree
         private AVLTreeNode<TKey>? root;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AVLTree{TKey}"/> class.
+        ///     Initializes a new instance of the <see cref="AvlTree{TKey}"/> class.
         /// </summary>
-        public AVLTree()
+        public AvlTree()
         {
             root = null;
             comparer = Comparer<TKey>.Default;
@@ -49,11 +49,11 @@ namespace DataStructures.AVLTree
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AVLTree{TKey}"/> class
+        ///     Initializes a new instance of the <see cref="AvlTree{TKey}"/> class
         ///     using the specified comparer.
         /// </summary>
         /// <param name="customComparer">Comparer to use when comparing keys.</param>
-        public AVLTree(Comparer<TKey> customComparer)
+        public AvlTree(Comparer<TKey> customComparer)
         {
             root = null;
             comparer = customComparer;

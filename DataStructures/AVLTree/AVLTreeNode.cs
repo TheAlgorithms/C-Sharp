@@ -3,7 +3,7 @@ using System;
 namespace DataStructures.AVLTree
 {
     /// <summary>
-    ///     Generic class to represent nodes in an <see cref="AVLTree{TKey}"/> instance.
+    ///     Generic class to represent nodes in an <see cref="AvlTree{TKey}"/> instance.
     /// </summary>
     /// <typeparam name="TKey">The type of key for the node.</typeparam>
     public class AVLTreeNode<TKey>

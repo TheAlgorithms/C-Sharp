@@ -12,7 +12,7 @@ namespace DataStructures.Tests
         [Test]
         public void Constructor_UseCustomComparer_FormsCorrectTree()
         {
-            var tree = new AVLTree<int>(Comparer<int>.Create((x, y) => y.CompareTo(x)));
+            var tree = new AvlTree<int>(Comparer<int>.Create((x, y) => y.CompareTo(x)));
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.GetMin().Should().Be(10);
             tree.GetMax().Should().Be(1);
@@ -22,7 +22,7 @@ namespace DataStructures.Tests
         [Test]
         public void Add_MultipleKeys_FormsCorrectTree()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
 
             foreach(var value in new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
             {
@@ -37,7 +37,7 @@ namespace DataStructures.Tests
         [Test]
         public void Add_KeyAlreadyInTree_ThrowsException()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5 });
             Assert.Throws<ArgumentException>(() => tree.Add(1));
         }
@@ -45,7 +45,7 @@ namespace DataStructures.Tests
         [Test]
         public void AddRange_MultipleKeys_FormsCorrectTree()
         {
-            var tree = new AVLTree<char>();
+            var tree = new AvlTree<char>();
             tree.AddRange(new[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g' });
             tree.Count.Should().Be(7);
             tree.GetKeysInOrder().SequenceEqual(new[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g' }).Should().BeTrue();
@@ -55,7 +55,7 @@ namespace DataStructures.Tests
         [Test]
         public void Remove_MultipleKeys_TreeStillValid()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
 
             tree.Remove(7);
@@ -94,14 +94,14 @@ namespace DataStructures.Tests
         [Test]
         public void Remove_EmptyTree_ThrowsException()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
             Assert.Throws<InvalidOperationException>(() => tree.Remove(1));
         }
 
         [Test]
         public void Remove_KeyNotInTree_ThrowsException()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             Assert.Throws<KeyNotFoundException>(() => tree.Remove(24));
         }
@@ -109,7 +109,7 @@ namespace DataStructures.Tests
         [Test]
         public void Contains_CorrectReturn()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.Contains(3).Should().BeTrue();
             tree.Contains(7).Should().BeTrue();
@@ -120,7 +120,7 @@ namespace DataStructures.Tests
         [Test]
         public void Contains_EmptyTree_ReturnsFalse()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
             tree.Contains(5).Should().BeFalse();
             tree.Contains(-12).Should().BeFalse();
         }
@@ -128,7 +128,7 @@ namespace DataStructures.Tests
         [Test]
         public void GetMin_CorrectReturn()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.GetMin().Should().Be(1);
         }
@@ -136,14 +136,14 @@ namespace DataStructures.Tests
         [Test]
         public void GetMin_EmptyTree_ThrowsException()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
             Assert.Throws<InvalidOperationException>(() => tree.GetMin());
         }
 
         [Test]
         public void GetMax_CorrectReturn()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.GetMax().Should().Be(10);
         }
@@ -151,14 +151,14 @@ namespace DataStructures.Tests
         [Test]
         public void GetMax_EmptyTree_ThrowsException()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
             Assert.Throws<InvalidOperationException>(() => tree.GetMax());
         }
 
         [Test]
         public void GetKeysInOrder_CorrectReturn()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.GetKeysInOrder().SequenceEqual(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }).Should().BeTrue();
         }
@@ -166,14 +166,14 @@ namespace DataStructures.Tests
         [Test]
         public void GetKeysInOrder_EmptyTree_CorrectReturn()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
             tree.GetKeysInOrder().SequenceEqual(Array.Empty<int>()).Should().BeTrue();
         }
 
         [Test]
         public void GetKeysPreOrder_CorrectReturn()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.GetKeysPreOrder().SequenceEqual(new[] { 4, 2, 1, 3, 8, 6, 5, 7, 9, 10 }).Should().BeTrue();
         }
@@ -181,14 +181,14 @@ namespace DataStructures.Tests
         [Test]
         public void GetKeysPreOrder_EmptyTree_CorrectReturn()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
             tree.GetKeysPreOrder().SequenceEqual(Array.Empty<int>()).Should().BeTrue();
         }
 
         [Test]
         public void GetKeysPostOrder_CorrectReturn()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.GetKeysPostOrder().SequenceEqual(new[] { 1, 3, 2, 5, 7, 6, 10, 9, 8, 4 }).Should().BeTrue();
         }
@@ -196,7 +196,7 @@ namespace DataStructures.Tests
         [Test]
         public void GetKeysPostOrder_EmptyTree_CorrectReturn()
         {
-            var tree = new AVLTree<int>();
+            var tree = new AvlTree<int>();
             tree.GetKeysPostOrder().SequenceEqual(Array.Empty<int>()).Should().BeTrue();
         }
     }
