@@ -125,6 +125,7 @@ This repository contains algorithms and data structures implemented in C# for ed
   * [Binary Search Tree](./DataStructures/BinarySearchTree)
   * [Fenwick tree (or Binary Indexed Tree)](./DataStructures/BinaryIndexedTree)
   * [AA Tree](./DataStructures/AATree)
+  * [AVL Tree](./DataStructures/AVLTree)
   * [Stack](./DataStructures/Stack)
     * [Array-based Stack](./DataStructures/Stack/ArrayBasedStack.cs)
     * [List-based Stack](./DataStructures/Stack/ListBasedStack.cs)
