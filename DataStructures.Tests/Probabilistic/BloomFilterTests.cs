@@ -52,7 +52,10 @@ namespace DataStructures.Tests.Probabilistic
             {
                 var asSimpleObj = obj as SimpleObjectOverridenHash;
                 if (asSimpleObj == null)
+                {
                     return false;
+                }
+
                 return asSimpleObj.Name == Name && asSimpleObj.Number == Number;
             }
         }
