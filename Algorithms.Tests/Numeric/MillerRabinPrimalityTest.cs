@@ -35,6 +35,7 @@ namespace Algorithms.Tests.Numeric
         [TestCase("-2")]
         [TestCase("0")]
         [TestCase("3")]
+        // By the algorithm definition the number which is checked should be more than 3
         public static void MillerRabinPrimalityShouldThrowEx(String testcase)
         {
             // Arrange
