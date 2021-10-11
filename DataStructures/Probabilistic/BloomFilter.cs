@@ -74,23 +74,6 @@ namespace DataStructures.Probabilistic
         }
 
         /// <summary>
-        /// Implementation of the FNV1 hashing function.
-        /// </summary>
-        /// <param name="data">data to be hashed.</param>
-        /// <returns>the hashed value.</returns>
-        private static int Fnv1(byte[] data)
-        {
-            var hash = FnvOffsetBasis;
-            foreach (var @byte in data)
-            {
-                hash = hash * FnvPrime;
-                hash ^= @byte;
-            }
-
-            return (int)hash;
-        }
-
-        /// <summary>
         /// Yields the appropriate slots for the given item.
         /// </summary>
         /// <param name="item">The item to determine the slots for.</param>
@@ -100,7 +83,7 @@ namespace DataStructures.Probabilistic
             var hash = item.GetHashCode();
             for (var i = 0; i < numHashes; i++)
             {
-                yield return Math.Abs((i + 1) * hash)) % sizeBits;
+                yield return Math.Abs((i + 1) * hash) % sizeBits;
             }
         }
     }
