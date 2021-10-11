@@ -45,7 +45,6 @@ namespace DataStructures.Tests.Probabilistic
         [Test]
         public void TestBloomFilterInsert()
         {
-
             var filter = new BloomFilter<SimpleObject>(100000, 3);
             var rand = new Random();
             for (var i = 0; i < 1000; i++)
