@@ -15,9 +15,7 @@ namespace DataStructures.AVLTree
     ///     insertion, deletion, and search all have a worst-case time complexity
     ///     of O(log n). Which is an improvement over the worst-case O(n) for a
     ///     regular BST.
-    ///     
     ///     See https://en.wikipedia.org/wiki/AVL_tree for more information.
-    ///     
     ///     Visualizer: https://visualgo.net/en/bst.
     /// </remarks>
     /// <typeparam name="TKey">Type of key for the tree.</typeparam>
