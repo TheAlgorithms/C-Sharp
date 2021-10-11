@@ -29,7 +29,7 @@ namespace Algorithms.Numeric
 
             // Input #1: n > 3, an odd integer to be tested for primality
             // Input #2: k, the number of rounds of testing to perform, recommended k = Log2(n)
-            // Output:   false = “composite” if a highly likely prime number
+            // Output:   false = “composite”
             //           true  = “probably prime”
 
             // write n as 2r·d + 1 with d odd(by factoring out powers of 2 from n − 1)
