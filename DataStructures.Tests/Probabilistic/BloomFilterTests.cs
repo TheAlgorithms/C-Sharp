@@ -47,6 +47,14 @@ namespace DataStructures.Tests.Probabilistic
 
                 return (int)hash;
             }
+
+            public override bool Equals(object? obj)
+            {
+                var asSimpleObj = obj as SimpleObjectOverridenHash;
+                if (asSimpleObj == null)
+                    return false;
+                return asSimpleObj.Name == Name && asSimpleObj.Number == Number;
+            }
         }
 
         [Test]
