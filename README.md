@@ -95,6 +95,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [A001462 Golomb's](./Algorithms/Sequences/GolombsSequence.cs)
     * [A005132 Recaman's](./Algorithms/Sequences/RecamansSequence.cs)
     * [A007318 Binomial](./Algorithms/Sequences/BinomialSequence.cs)
+    * [A181391 Van Eck's](./Algorithms/Sequences/VanEcksSequence.cs)
   * [String](./Algorithms/Strings)
     * [Longest Consecutive Character](./Algorithms/Strings/GeneralStringAlgorithms.cs)
     * [Naive String Search](./Algorithms/Strings/NaiveStringSearch.cs)
