@@ -32,10 +32,9 @@ namespace Algorithms.Sequences
                         element = currentIndex - previousIndex;
                     }
 
-                    dictionary[previous] = currentIndex;
-
                     yield return element;
 
+                    dictionary[previous] = currentIndex;
                     previous = element;
                     currentIndex++;
                 }
