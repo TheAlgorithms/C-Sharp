@@ -30,12 +30,9 @@ namespace Algorithms.Sequences
                     if (dictionary.TryGetValue(previous, out var previousIndex))
                     {
                         element = currentIndex - previousIndex;
-                        dictionary[previous] = currentIndex;
                     }
-                    else
-                    {
-                        dictionary.Add(previous, currentIndex);
-                    }
+
+                    dictionary[previous] = currentIndex;
 
                     yield return element;
 
