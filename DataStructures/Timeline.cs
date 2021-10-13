@@ -29,7 +29,7 @@ namespace DataStructures
         /// <summary>
         ///     Inner collection storing the timeline events as key-tuples.
         /// </summary>
-        private List<(DateTime Time, TValue Value)> timeline = new();
+        private readonly List<(DateTime Time, TValue Value)> timeline = new();
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Timeline{TValue}"/> class.
@@ -82,7 +82,11 @@ namespace DataStructures
             get => GetValuesByTime(time);
             set
             {
-                timeline = timeline.Where(@event => @event.Time != time).ToList();
+                var overridenEvents = timeline.Where(@event => @event.Time == time).ToList();
+                foreach (var @event in overridenEvents)
+                {
+                    timeline.Remove(@event);
+                }
 
                 foreach (var v in value)
                 {
@@ -336,7 +340,6 @@ namespace DataStructures
         public void Add(DateTime time, TValue value)
         {
             timeline.Add((time, value));
-            timeline = timeline.OrderBy(pair => pair.Time).ToList();
         }
 
         /// <summary>
@@ -345,7 +348,6 @@ namespace DataStructures
         public void Add(params (DateTime, TValue)[] timeline)
         {
             this.timeline.AddRange(timeline);
-            this.timeline = this.timeline.OrderBy(pair => pair.Time).ToList();
         }
 
         /// <summary>
@@ -459,7 +461,14 @@ namespace DataStructures
                 return false;
             }
 
-            timeline = timeline.Where(pair => !times.Contains(pair.Time)).ToList();
+            var eventsToRemove = times.SelectMany(time =>
+                timeline.Where(@event => @event.Time == time))
+                .ToList();
+
+            foreach (var @event in eventsToRemove)
+            {
+                timeline.Remove(@event);
+            }
 
             return true;
         }
@@ -477,7 +486,14 @@ namespace DataStructures
                 return false;
             }
 
-            timeline = timeline.Where(pair => !values.Contains(pair.Value)).ToList();
+            var eventsToRemove = values.SelectMany(value =>
+                timeline.Where(@event => EqualityComparer<TValue>.Default.Equals(@event.Value, value)))
+                .ToList();
+
+            foreach (var @event in eventsToRemove)
+            {
+                timeline.Remove(@event);
+            }
 
             return true;
         }
