@@ -36,6 +36,37 @@ namespace DataStructures
         }
 
         /// <summary>
+        /// Returns the source names contains ALL terms (first and second) inside at same time.
+        /// </summary>
+        /// <param name="firstTerm">First term.</param>
+        /// <param name="secondTerm">Second term.</param>
+        /// <returns>Source names.</returns>
+        public IEnumerable<string> And(string firstTerm, string secondTerm)
+        {
+            var source = invertedIndex.Where(x => x.Key.Equals(firstTerm))
+                .Select(x => x.Value).SelectMany(x => x);
+
+            var source2 = invertedIndex.Where(x => x.Key.Equals(secondTerm))
+                .Select(x => x.Value).SelectMany(x => x);
+
+            return source.Intersect(source2);
+        }
+
+        /// <summary>
+        /// Returns the source names contains AT LEAST ONE (first or second or both) from terms inside.
+        /// </summary>
+        /// <param name="firstTerm">First term.</param>
+        /// <param name="secondTerm">Second term.</param>
+        /// <returns>Source names.</returns>
+        public IEnumerable<string> Or(string firstTerm, string secondTerm)
+        {
+            var source = invertedIndex.Where(x => x.Key.Equals(firstTerm) || x.Key.Equals(secondTerm))
+                .Select(x => x.Value).SelectMany(x => x);
+
+            return source.Distinct();
+        }
+
+        /// <summary>
         /// Returns the source names contains ALL terms inside at same time.
         /// </summary>
         /// <param name="terms">List of terms.</param>
@@ -60,23 +91,6 @@ namespace DataStructures
         }
 
         /// <summary>
-        /// Returns the source names contains ALL terms (first and second) inside at same time.
-        /// </summary>
-        /// <param name="firstTerm">First term.</param>
-        /// <param name="secondTerm">Second term.</param>
-        /// <returns>Source names.</returns>
-        public IEnumerable<string> And(string firstTerm, string secondTerm)
-        {
-            var source = invertedIndex.Where(x => x.Key.Equals(firstTerm))
-                .Select(x => x.Value).SelectMany(x => x);
-
-            var source2 = invertedIndex.Where(x => x.Key.Equals(secondTerm))
-                .Select(x => x.Value).SelectMany(x => x);
-
-            return source.Intersect(source2);
-        }
-
-        /// <summary>
         /// Returns the source names contains AT LEAST ONE from terms inside.
         /// </summary>
         /// <param name="terms">List of terms.</param>
@@ -93,20 +107,6 @@ namespace DataStructures
             }
 
             return sources.Distinct();
-        }
-
-        /// <summary>
-        /// Returns the source names contains AT LEAST ONE (first or second or both) from terms inside.
-        /// </summary>
-        /// <param name="firstTerm">First term.</param>
-        /// <param name="secondTerm">Second term.</param>
-        /// <returns>Source names.</returns>
-        public IEnumerable<string> Or(string firstTerm, string secondTerm)
-        {
-            var source = invertedIndex.Where(x => x.Key.Equals(firstTerm) || x.Key.Equals(secondTerm))
-                .Select(x => x.Value).SelectMany(x => x);
-
-            return source.Distinct();
         }
     }
 }
