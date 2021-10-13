@@ -592,7 +592,7 @@ namespace DataStructures.Tests
                 { new DateTime(2010, 1, 1), "TestTime4" },
                 { new DateTime(2015, 1, 1), "TestTime5" },
             };
-            timeline.RemoveTime(new DateTime(2000, 1, 1));
+            timeline.RemoveTimes(new DateTime(2000, 1, 1));
             Assert.IsTrue(timeline.Count == 4 && !timeline.ContainsTime(new DateTime(2000, 1, 1)));
         }
 
@@ -607,7 +607,7 @@ namespace DataStructures.Tests
                 { new DateTime(2010, 1, 1), "TestTime4" },
                 { new DateTime(2015, 1, 1), "TestTime5" },
             };
-            timeline.RemoveValue("TestTime1");
+            timeline.RemoveValues("TestTime1");
             Assert.IsTrue(timeline.Count == 4 && !timeline.ContainsValue("TestTime1"));
         }
 
