@@ -142,6 +142,22 @@ namespace DataStructures.Graph
             return adjacencyMatrix[startVertex.Index, endVertex.Index] != 0;
         }
 
+        /// <summary>
+        /// Return the distance between two vertices in the graph.
+        /// </summary>
+        /// <param name="startVertex">first vertex in edge.</param>
+        /// <param name="endVertex">secnod vertex in edge.</param>
+        /// <returns>distance between the two.</returns>
+        public double AdjacentDistance(Vertex<T> startVertex, Vertex<T> endVertex)
+        {
+            if (AreAdjacent(startVertex, endVertex))
+            {
+                return adjacencyMatrix[startVertex.Index, endVertex.Index];
+            }
+
+            return 0;
+        }
+
         private static void ThrowIfNegativeCapacity(int capacity)
         {
             if (capacity < 0)
