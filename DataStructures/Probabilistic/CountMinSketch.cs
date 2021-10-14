@@ -4,8 +4,8 @@ namespace DataStructures.Probabilistic
 {
     public class CountMinSketch<T> where T : notnull
     {
-        private int[][] sketch;
-        private int numHashes;
+        private readonly int[][] sketch;
+        private readonly int numHashes;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CountMinSketch{T}"/> class based off dimensions
