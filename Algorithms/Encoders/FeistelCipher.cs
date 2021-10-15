@@ -35,7 +35,7 @@ namespace Algorithms.Encoders
             }
 
             List<ulong> blocks_list_plain = SplitTextToBlocks(text);
-            string encoded_text = string.Empty;
+            StringBuilder encoded_text = new StringBuilder();
 
             foreach (ulong block in blocks_list_plain)
             {
@@ -45,7 +45,7 @@ namespace Algorithms.Encoders
                 uint right_subblock = (uint)(block & 0x00000000FFFFFFFF);
                 uint left_subblock = (uint)(block >> 32);
 
-                uint round_key = key;
+                uint round_key;
 
                 // Feistel "network" itself
                 for (int round = 0; round < Rounds; round++)
@@ -59,10 +59,10 @@ namespace Algorithms.Encoders
                 // compile text string formating the block value to text (hex based), length of the output = 16 byte always
                 ulong encoded_block = left_subblock;
                 encoded_block = (encoded_block << 32) | right_subblock;
-                encoded_text += string.Format("{0:X16}", encoded_block);
+                encoded_text.Append(string.Format("{0:X16}", encoded_block));
             }
 
-            return encoded_text;
+            return encoded_text.ToString();
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Algorithms.Encoders
             }
 
             List<ulong> blocks_list_encoded = GetBlocksFromEncodedText(text);
-            string decoded_text_hex = string.Empty;
+            StringBuilder decoded_text_hex = new StringBuilder();
 
             foreach (ulong block in blocks_list_encoded)
             {
@@ -117,14 +117,14 @@ namespace Algorithms.Encoders
                     // it's a trick, the code works with non zero characters, if your text has ASCII code 0x00 it will be skipped.
                     if (a != 0)
                     {
-                        decoded_text_hex += (char)a;
+                        decoded_text_hex.Append((char)a);
                     }
 
                     decoded_block = decoded_block << 8;
                 }
             }
 
-            return decoded_text_hex;
+            return decoded_text_hex.ToString();
         }
 
         // Using the size of block = 8 bytes this function splts the text and returns set of 8 bytes (ulong) blocks
