@@ -19,6 +19,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Hill](./Algorithms/Encoders/HillEncoder.cs)
     * [NYSIIS](./Algorithms/Encoders/NysiisEncoder.cs)
     * [Soundex](./Algorithms/Encoders/SoundexEncoder.cs)
+    * [Feistel](./Algorithms/Encoders/FeistelCipher.cs)
   * [Graph](./Algorithms/Graph)
     * [BreadthFirstSearch](./Algorithms/Graph/BreadthFirstSearch.cs)
     * [DepthFirstSearch](./Algorithms/Graph/DepthFirstSearch.cs)
