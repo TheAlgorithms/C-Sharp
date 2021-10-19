@@ -56,7 +56,6 @@ namespace DataStructures
         /// <param name="timeline">The timeline to represent.</param>
         public Timeline(params (DateTime, TValue)[] timeline)
             => this.timeline = timeline
-                .ToList()
                 .OrderBy(pair => pair.Item1)
                 .ToList();
 
