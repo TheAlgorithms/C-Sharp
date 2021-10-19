@@ -42,6 +42,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Series](./Algorithms/Numeric/Series)
       * [Maclaurin Series](./Algorithms/Numeric/Series/Maclaurin.cs)
     * [Gauss-Jordan Elimination](./Algorithms/Numeric/GaussJordanElimination.cs)
+    * [Keith Number Checker](./Algorithms/Numeric/KeithNumberChecker.cs)
     * [Pseudo-Inverse](./Algorithms/Numeric/Pseudoinverse/PseudoInverse.cs)
     * [Narcissistic Number Checker](./Algorithms/Numeric/NarcissisticNumberChecker.cs)
     * [Perfect Number Checker](./Algorithms/Numeric/PerfectNumberChecker.cs)
