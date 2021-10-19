@@ -19,7 +19,7 @@ namespace Algorithms.Tests.Numeric
         {
             var modularExponentiation = new ModularExponentiation();
             var actualRes = modularExponentiation.ModularPow(b, e, m);
-            actualRes.Should().Be(expectedRes, "because they have the same values");
+            actualRes.Should().Be(expectedRes);
         }
     }
 }
