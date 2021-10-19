@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using NUnit.Framework;
 
 namespace DataStructures.Tests
@@ -124,9 +125,9 @@ namespace DataStructures.Tests
                 { new DateTime(2015, 1, 1), "TestTime5" },
             };
 
-            timeline1
+            (timeline1 == timeline2)
                 .Should()
-                .BeEquivalentTo(timeline2);
+                .BeTrue();
         }
 
         [Test]
@@ -168,7 +169,7 @@ namespace DataStructures.Tests
                 .Be(array.Length);
 
             var i = 0;
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 foreach (var (time, value) in timeline)
                 {
@@ -182,7 +183,7 @@ namespace DataStructures.Tests
 
                     ++i;
                 }
-            });
+            }
         }
 
         [Test]
@@ -200,7 +201,7 @@ namespace DataStructures.Tests
             var times = timeline.GetAllTimes();
 
             var i = 0;
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 foreach (var (time, _) in timeline)
                 {
@@ -208,7 +209,7 @@ namespace DataStructures.Tests
                         .Should()
                         .Be(time);
                 }
-            });
+            }
         }
 
         [Test]
@@ -245,7 +246,7 @@ namespace DataStructures.Tests
 
             var times = timeline.GetTimesBefore(new DateTime(2003, 1, 1));
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 times.Length
                     .Should()
@@ -258,7 +259,7 @@ namespace DataStructures.Tests
                 times[1]
                     .Should()
                     .Be(new DateTime(2000, 1, 1));
-            });
+            }
         }
 
         [Test]
@@ -275,7 +276,7 @@ namespace DataStructures.Tests
 
             var times = timeline.GetTimesAfter(new DateTime(2003, 1, 1));
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 times.Length
                     .Should()
@@ -292,7 +293,7 @@ namespace DataStructures.Tests
                 times[2]
                     .Should()
                     .Be(new DateTime(2015, 1, 1));
-            });
+            }
         }
 
         [Test]
@@ -310,7 +311,7 @@ namespace DataStructures.Tests
             var values = timeline.GetAllValues();
 
             var i = 0;
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 foreach (var (_, value) in timeline)
                 {
@@ -318,7 +319,7 @@ namespace DataStructures.Tests
                         .Should()
                         .Be(value);
                 }
-            });
+            }
         }
 
         [Test]
@@ -352,7 +353,7 @@ namespace DataStructures.Tests
 
             var array = timeline.GetValuesBefore(new DateTime(2003, 1, 1)).ToArray();
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 array.Length
                     .Should()
@@ -365,7 +366,7 @@ namespace DataStructures.Tests
                 array[1].Time
                     .Should()
                     .Be(new DateTime(2000, 1, 1));
-            });
+            }
         }
 
         [Test]
@@ -382,7 +383,7 @@ namespace DataStructures.Tests
 
             var array = timeline.GetValuesAfter(new DateTime(2003, 1, 1)).ToArray();
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 array.Length
                     .Should()
@@ -399,7 +400,7 @@ namespace DataStructures.Tests
                 array[2].Time
                     .Should()
                     .Be(new DateTime(2015, 1, 1));
-            });
+            }
         }
 
         [Test]
@@ -435,7 +436,7 @@ namespace DataStructures.Tests
 
             var query = timeline.GetValuesBySecond(20);
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 query.Count
                     .Should()
@@ -444,7 +445,7 @@ namespace DataStructures.Tests
                 timeline
                     .Should()
                     .Contain(query);
-            });
+            }
         }
 
         [Test]
@@ -461,7 +462,7 @@ namespace DataStructures.Tests
 
             var query = timeline.GetValuesByMinute(40);
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 query.Count
                     .Should()
@@ -470,7 +471,7 @@ namespace DataStructures.Tests
                 timeline
                     .Should()
                     .Contain(query);
-            });
+            }
         }
 
         [Test]
@@ -487,7 +488,7 @@ namespace DataStructures.Tests
 
             var query = timeline.GetValuesByHour(16);
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 query.Count
                     .Should()
@@ -496,7 +497,7 @@ namespace DataStructures.Tests
                 timeline
                     .Should()
                     .Contain(query);
-            });
+            }
         }
 
         [Test]
@@ -513,7 +514,7 @@ namespace DataStructures.Tests
 
             var query = timeline.GetValuesByDay(20);
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 query.Count
                     .Should()
@@ -522,7 +523,7 @@ namespace DataStructures.Tests
                 timeline
                     .Should()
                     .Contain(query);
-            });
+            }
         }
 
         [Test]
@@ -539,7 +540,7 @@ namespace DataStructures.Tests
 
             var query = timeline.GetValuesByTimeOfDay(new TimeSpan(0, 21, 15, 40, 600));
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 query.Count
                     .Should()
@@ -548,7 +549,7 @@ namespace DataStructures.Tests
                 timeline
                     .Should()
                     .Contain(query);
-            });
+            }
         }
 
         [Test]
@@ -565,7 +566,7 @@ namespace DataStructures.Tests
 
             var query = timeline.GetValuesByDayOfWeek(DayOfWeek.Monday);
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 query.Count
                     .Should()
@@ -574,7 +575,7 @@ namespace DataStructures.Tests
                 timeline
                     .Should()
                     .Contain(query);
-            });
+            }
         }
 
         [Test]
@@ -591,7 +592,7 @@ namespace DataStructures.Tests
 
             var query = timeline.GetValuesByDayOfYear(32);
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 query.Count
                     .Should()
@@ -600,7 +601,7 @@ namespace DataStructures.Tests
                 timeline
                     .Should()
                     .Contain(query);
-            });
+            }
         }
 
         [Test]
@@ -617,7 +618,7 @@ namespace DataStructures.Tests
 
             var query = timeline.GetValuesByMonth(4);
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 query.Count
                     .Should()
@@ -626,7 +627,7 @@ namespace DataStructures.Tests
                 timeline
                     .Should()
                     .Contain(query);
-            });
+            }
         }
 
         [Test]
@@ -643,7 +644,7 @@ namespace DataStructures.Tests
 
             var query = timeline.GetValuesByYear(2005);
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 query.Count
                     .Should()
@@ -652,7 +653,7 @@ namespace DataStructures.Tests
                 timeline
                     .Should()
                     .Contain(query);
-            });
+            }
         }
 
         [Test]
@@ -689,7 +690,7 @@ namespace DataStructures.Tests
                 (eventDate1, eventName1),
                 (eventDate2, eventName2));
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 timeline.Count
                     .Should()
@@ -702,7 +703,7 @@ namespace DataStructures.Tests
                 timeline[eventDate2][0]
                     .Should()
                     .Be(eventName2);
-            });
+            }
         }
 
         [Test]
@@ -715,7 +716,7 @@ namespace DataStructures.Tests
 
             timeline.Add(new Timeline<string>(eventDate, eventName));
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 timeline.Count
                     .Should()
@@ -724,7 +725,7 @@ namespace DataStructures.Tests
                 timeline[eventDate][0]
                     .Should()
                     .Be(eventName);
-            });
+            }
         }
 
         [Test]
@@ -734,7 +735,7 @@ namespace DataStructures.Tests
 
             timeline.AddNow("Now");
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 timeline.Count
                     .Should()
@@ -743,7 +744,7 @@ namespace DataStructures.Tests
                 timeline.ContainsValue("Now")
                     .Should()
                     .BeTrue();
-            });
+            }
         }
 
         [Test]
@@ -847,7 +848,7 @@ namespace DataStructures.Tests
 
             timeline.Remove(new DateTime(2000, 1, 1), "TestTime2");
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 timeline.Count
                     .Should()
@@ -856,7 +857,7 @@ namespace DataStructures.Tests
                 timeline.Contains(new DateTime(2000, 1, 1), "TestTime2")
                     .Should()
                     .BeFalse();
-            });
+            }
         }
 
         [Test]
@@ -875,7 +876,7 @@ namespace DataStructures.Tests
                 (new DateTime(1995, 1, 1), "TestTime1"),
                 (new DateTime(2000, 1, 1), "TestTime2"));
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 timeline.Count
                     .Should()
@@ -886,7 +887,7 @@ namespace DataStructures.Tests
                         (new DateTime(2000, 1, 1), "TestTime2"))
                     .Should()
                     .BeFalse();
-            });
+            }
         }
 
         [Test]
@@ -903,7 +904,7 @@ namespace DataStructures.Tests
 
             timeline.Remove(new Timeline<string>(new DateTime(2000, 1, 1), "TestTime2"));
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 timeline.Count
                     .Should()
@@ -912,7 +913,7 @@ namespace DataStructures.Tests
                 timeline.Contains(new DateTime(2000, 1, 1), "TestTime2")
                     .Should()
                     .BeFalse();
-            });
+            }
         }
 
         [Test]
@@ -929,7 +930,7 @@ namespace DataStructures.Tests
 
             timeline.RemoveTimes(new DateTime(2000, 1, 1));
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 timeline.Count
                     .Should()
@@ -938,7 +939,7 @@ namespace DataStructures.Tests
                 timeline.ContainsTime(new DateTime(2000, 1, 1))
                     .Should()
                     .BeFalse();
-            });
+            }
         }
 
         [Test]
@@ -955,7 +956,7 @@ namespace DataStructures.Tests
 
             timeline.RemoveValues("TestTime1");
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 timeline.Count
                     .Should()
@@ -964,7 +965,7 @@ namespace DataStructures.Tests
                 timeline.ContainsValue("TestTime1")
                     .Should()
                     .BeFalse();
-            });
+            }
         }
 
         [Test]
@@ -985,7 +986,7 @@ namespace DataStructures.Tests
                 .Should()
                 .Be(array.Length);
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 var i = 0;
                 foreach (var (time, value) in timeline)
@@ -1000,7 +1001,7 @@ namespace DataStructures.Tests
 
                     ++i;
                 }
-            });
+            }
         }
 
         [Test]
@@ -1021,7 +1022,7 @@ namespace DataStructures.Tests
                 .Should()
                 .Be(list.Count);
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 var i = 0;
                 foreach (var (time, value) in timeline)
@@ -1036,7 +1037,7 @@ namespace DataStructures.Tests
 
                     ++i;
                 }
-            });
+            }
         }
 
         [Test]
@@ -1072,7 +1073,7 @@ namespace DataStructures.Tests
                 .Should()
                 .Be(dictionaryList.Count);
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
                 for (var i = 0; i < timelineList.Count; ++i)
                 {
@@ -1084,7 +1085,7 @@ namespace DataStructures.Tests
                         .Should()
                         .Be(dictionaryList[i].Value);
                 }
-            });
+            }
         }
 
         [Test]
