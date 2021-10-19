@@ -4,7 +4,7 @@ using System;
 
 namespace Algorithms.Tests.Numeric
 {
-    public class KeithNumberTest
+    public static class KeithNumberTest
     {
         [Test]
         [TestCase(14)]

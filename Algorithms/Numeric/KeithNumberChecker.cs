@@ -51,12 +51,7 @@ namespace Algorithms.Numeric
                 k++;
             }
 
-            if (sum == number)
-            {
-                return true;
-            }
-
-            return false;
+            return sum == number;
         }
     }
 }
