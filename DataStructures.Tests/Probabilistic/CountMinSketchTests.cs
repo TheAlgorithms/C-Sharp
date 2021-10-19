@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DataStructures.Probabilistic;
 using NUnit.Framework;
+using FluentAssertions;
 
 namespace DataStructures.Tests.Probabilistic
 {
@@ -33,8 +34,8 @@ namespace DataStructures.Tests.Probabilistic
                 sketch.Insert(obj2);
             }
 
-            Assert.GreaterOrEqual(sketch.Query(obj1),5000);
-            Assert.GreaterOrEqual(sketch.Query(obj2),5000);
+            sketch.Query(obj1).Should().BeGreaterOrEqualTo(5000);
+            sketch.Query(obj2).Should().BeGreaterOrEqualTo(5000);
         }
 
         [Test]
@@ -51,8 +52,8 @@ namespace DataStructures.Tests.Probabilistic
                 sketch.Insert(obj2);
             }
 
-            Assert.GreaterOrEqual(sketch.Query(obj1),5000);
-            Assert.GreaterOrEqual(sketch.Query(obj2),5000);
+            sketch.Query(obj1).Should().BeGreaterOrEqualTo(5000);
+            sketch.Query(obj2).Should().BeGreaterOrEqualTo(5000);
         }
 
         [Test]
@@ -84,7 +85,7 @@ namespace DataStructures.Tests.Probabilistic
                 }
             }
 
-            Assert.LessOrEqual(numMisses/(double)insertedItems.Count, .05);
+            (numMisses / (double)insertedItems.Count).Should().BeLessOrEqualTo(.05);
         }
     }
 }
