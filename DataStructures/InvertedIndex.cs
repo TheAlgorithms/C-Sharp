@@ -36,55 +36,24 @@ namespace DataStructures
         }
 
         /// <summary>
-        /// Returns the source names contains ALL terms (first and second) inside at same time.
-        /// </summary>
-        /// <param name="firstTerm">First term.</param>
-        /// <param name="secondTerm">Second term.</param>
-        /// <returns>Source names.</returns>
-        public IEnumerable<string> And(string firstTerm, string secondTerm)
-        {
-            var source = invertedIndex.Where(x => x.Key.Equals(firstTerm))
-                .Select(x => x.Value).SelectMany(x => x);
-
-            var source2 = invertedIndex.Where(x => x.Key.Equals(secondTerm))
-                .Select(x => x.Value).SelectMany(x => x);
-
-            return source.Intersect(source2);
-        }
-
-        /// <summary>
-        /// Returns the source names contains AT LEAST ONE (first or second or both) from terms inside.
-        /// </summary>
-        /// <param name="firstTerm">First term.</param>
-        /// <param name="secondTerm">Second term.</param>
-        /// <returns>Source names.</returns>
-        public IEnumerable<string> Or(string firstTerm, string secondTerm)
-        {
-            var source = invertedIndex.Where(x => x.Key.Equals(firstTerm) || x.Key.Equals(secondTerm))
-                .Select(x => x.Value).SelectMany(x => x);
-
-            return source.Distinct();
-        }
-
-        /// <summary>
         /// Returns the source names contains ALL terms inside at same time.
         /// </summary>
         /// <param name="terms">List of terms.</param>
         /// <returns>Source names.</returns>
         public IEnumerable<string> And(IEnumerable<string> terms)
         {
-            List<IEnumerable<string>> surviers = terms
-                .Select(term => invertedIndex.Where(x => x.Key.Equals(term))
-                    .Select(x => x.Value)
-                    .SelectMany(x => x))
+            var entries = terms
+                .Select(term => invertedIndex
+                    .Where(x => x.Key.Equals(term))
+                    .SelectMany(x => x.Value))
                 .ToList();
 
-            var intersection = surviers
+            var intersection = entries
                 .Skip(1)
-                .Aggregate(new HashSet<string>(surviers.First()), (hashSet, enumerable) =>
+                .Aggregate(new HashSet<string>(entries.First()), (hashSet, enumerable) =>
                 {
-                    var values = hashSet.Intersect(enumerable);
-                    return new HashSet<string>(values);
+                    hashSet.IntersectWith(enumerable);
+                    return hashSet;
                 });
 
             return intersection;
