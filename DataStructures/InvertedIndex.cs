@@ -69,8 +69,9 @@ namespace DataStructures
             var sources = new List<string>();
             foreach (var term in terms)
             {
-                var source = invertedIndex.Where(x => x.Key.Equals(term))
-                    .Select(x => x.Value).SelectMany(x => x);
+                var source = invertedIndex
+                    .Where(x => x.Key.Equals(term))
+                    .SelectMany(x => x.Value);
 
                 sources.AddRange(source);
             }
