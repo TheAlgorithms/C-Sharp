@@ -150,8 +150,8 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Directed Weighted Graph Via Adjacency Matrix](./DataStructures/Graph/DirectedWeightedGraph.cs)
   * [Disjoint Set](./DataStructures/DisjointSet)
   * [SortedList](./DataStructures/SortedList.cs)
+  * [Inverted index](./DataStructures/InvertedIndex.cs)
   * [Unrolled linked list](./DataStructures/UnrolledList/UnrolledLinkedList.cs)
-
 
 ## Contributing
 
