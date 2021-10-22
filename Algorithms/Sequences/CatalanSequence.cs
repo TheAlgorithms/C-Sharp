@@ -29,8 +29,7 @@ namespace Algorithms.Sequences
                 while (true)
                 {
                     yield return catalan;
-                    BigInteger catalan_previous = catalan;
-                    catalan = (2 * (2 * n + 1) * catalan_previous) / (n + 2);
+                    catalan = (2 * (2 * n + 1) * catalan) / (n + 2);
                     n++;
                 }
             }
