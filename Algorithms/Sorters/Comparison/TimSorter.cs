@@ -34,7 +34,6 @@ namespace Algorithms.Sorters.Comparison
         private readonly int[] runBase;
         private readonly int[] runLengths;
 
-        private int minRun;
         private int minGallop;
         private T[] tmp;
         private int stackSize;
@@ -48,7 +47,6 @@ namespace Algorithms.Sorters.Comparison
             runLengths = new int[85];
 
             stackSize = 0;
-            this.minRun = minRun;
             this.minGallop = minGallop;
             tmp = new T[INIT_TEMP_LENGTH];
         }
@@ -254,64 +252,14 @@ namespace Algorithms.Sorters.Comparison
 
             if (comparer.Compare(key, array[i + hint]) > 0)
             {
-                var maxOfs = len - hint;
-                while (offset < maxOfs && comparer.Compare(key, array[i + hint + offset]) > 0)
-                {
-                    lastOfs = offset;
-                    offset = (int)((uint)offset << 1) + 1;
-                    if (offset <= 0)
-                    {
-                        offset = maxOfs;
-                    }
-                }
-
-                if (offset > maxOfs)
-                {
-                    offset = maxOfs;
-                }
-
-                offset += hint;
-                lastOfs += hint;
+                (offset, lastOfs) = RightRun(array, comparer, key, i, len, hint, offset, lastOfs, 0);
             }
             else
             {
-                var maxOfs = hint + 1;
-                while (offset < maxOfs && comparer.Compare(key, array[i + hint - offset]) <= 0)
-                {
-                    lastOfs = offset;
-                    offset = (int)((uint)offset << 1) + 1;
-                    if (offset <= 0)
-                    {
-                        offset = maxOfs;
-                    }
-                }
-
-                if (offset > maxOfs)
-                {
-                    offset = maxOfs;
-                }
-
-                var tmp = lastOfs;
-                lastOfs = hint - offset;
-                offset = hint - tmp;
+                (offset, lastOfs) = LeftRun(array, comparer, key, i, hint, offset, lastOfs, 1);
             }
 
-            lastOfs++;
-            while (lastOfs < offset)
-            {
-                var m = lastOfs + (int)((uint)(offset - lastOfs) >> 1);
-
-                if (comparer.Compare(key, array[i + m]) <= 0)
-                {
-                    offset = m;
-                }
-                else
-                {
-                    lastOfs = m + 1;
-                }
-            }
-
-            return offset;
+            return FinalOffset(array, comparer, key, i, offset, lastOfs, 1);
         }
 
         private static int GallopRight(T[] array, IComparer<T> comparer, T key, int i, int len, int hint)
@@ -321,54 +269,78 @@ namespace Algorithms.Sorters.Comparison
 
             if (comparer.Compare(key, array[i + hint]) < 0)
             {
-                var maxOfs = hint + 1;
-                while (offset < maxOfs && comparer.Compare(key, array[i + hint - offset]) < 0)
-                {
-                    lastOfs = offset;
-                    offset = (int)((uint)offset << 1) + 1;
-                    if (offset <= 0)
-                    {
-                        offset = maxOfs;
-                    }
-                }
-
-                if (offset > maxOfs)
-                {
-                    offset = maxOfs;
-                }
-
-                var tmp = lastOfs;
-                lastOfs = hint - offset;
-                offset = hint - tmp;
+                (offset, lastOfs) = LeftRun(array, comparer, key, i, hint, offset, lastOfs, 0);
             }
             else
             {
-                var maxOfs = len - hint;
-                while (offset < maxOfs && comparer.Compare(key, array[i + hint + offset]) >= 0)
-                {
-                    lastOfs = offset;
-                    offset = (int)((uint)offset << 1) + 1;
-                    if (offset <= 0)
-                    {
-                        offset = maxOfs;
-                    }
-                }
+                (offset, lastOfs) = RightRun(array, comparer, key, i, len, hint, offset, lastOfs, -1);
+            }
 
-                if (offset > maxOfs)
+            return FinalOffset(array, comparer, key, i, offset, lastOfs, 0);
+        }
+
+        private static (int offset, int lastOfs) LeftRun(T[] array, IComparer<T> comparer, T key, int i, int hint, int offset, int lastOfs, int lt)
+        {
+            var maxOfs = hint + 1;
+            while (offset < maxOfs && comparer.Compare(key, array[i + hint - offset]) < lt)
+            {
+                lastOfs = offset;
+                offset = LeftShiftOffset(offset);
+                if (offset <= 0)
                 {
                     offset = maxOfs;
                 }
-
-                offset += hint;
-                lastOfs += hint;
             }
 
+            if (offset > maxOfs)
+            {
+                offset = maxOfs;
+            }
+
+            var tmp = lastOfs;
+            lastOfs = hint - offset;
+            offset = hint - tmp;
+
+            return (offset, lastOfs);
+        }
+
+        private static (int offset, int lastOfs) RightRun(T[] array, IComparer<T> comparer, T key, int i, int len, int hint, int offset, int lastOfs, int gt)
+        {
+            var maxOfs = len - hint;
+            while (offset < maxOfs && comparer.Compare(key, array[i + hint + offset]) > gt)
+            {
+                lastOfs = offset;
+                offset = LeftShiftOffset(offset);
+                if (offset <= 0)
+                {
+                    offset = maxOfs;
+                }
+            }
+
+            if (offset > maxOfs)
+            {
+                offset = maxOfs;
+            }
+
+            offset += hint;
+            lastOfs += hint;
+
+            return (offset, lastOfs);
+        }
+
+        private static int LeftShiftOffset(int offset)
+        {
+            return (int)((uint)offset << 1) + 1;
+        }
+
+        private static int FinalOffset(T[] array, IComparer<T> comparer, T key, int i, int offset, int lastOfs, int lt)
+        {
             lastOfs++;
             while (lastOfs < offset)
             {
                 var m = lastOfs + (int)((uint)(offset - lastOfs) >> 1);
 
-                if (comparer.Compare(key, array[i + m]) < 0)
+                if (comparer.Compare(key, array[i + m]) < lt)
                 {
                     offset = m;
                 }
