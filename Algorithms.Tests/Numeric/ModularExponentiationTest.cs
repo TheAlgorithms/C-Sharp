@@ -1,4 +1,5 @@
 using Algorithms.Numeric;
+using System;
 using NUnit.Framework;
 using FluentAssertions;
 
@@ -14,12 +15,21 @@ namespace Algorithms.Tests.Numeric
         [TestCase(7, 2, 11, 5)]
         [TestCase(4, 13, 497, 445)]
         [TestCase(13, 3, 1, 0)]
-        [TestCase(17, 7, -3, -1)]
         public void ModularExponentiationCorrect(int b, int e, int m, int expectedRes)
         {
             var modularExponentiation = new ModularExponentiation();
             var actualRes = modularExponentiation.ModularPow(b, e, m);
             actualRes.Should().Be(expectedRes);
+        }
+
+        [TestCase(17, 7, -3)]
+        [TestCase(11, 3, -5)]
+        public void ModularExponentiationNegativeMod(int b, int e, int m)
+        {
+            var modularExponentiation = new ModularExponentiation();
+            Action res = () => modularExponentiation.ModularPow(b, e, m);
+            res.Should().Throw<ArgumentException>()
+            .WithMessage("modulus cannot be negative");
         }
     }
 }

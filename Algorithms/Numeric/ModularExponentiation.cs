@@ -1,4 +1,4 @@
-using System.Text;
+using System;
 
 namespace Algorithms.Numeric
 {
@@ -22,14 +22,14 @@ namespace Algorithms.Numeric
             int res = 1;
             if (m == 1)
             {
-                // 1 divides every number
+                // single element in ring of integers modulo 1
                 return 0;
             }
 
             if (m < 0)
             {
                 // exponential not defined in this case
-                return -1;
+                throw new ArgumentException("modulus cannot be negative");
             }
 
             for (int i = 0; i < e; i++)
