@@ -29,7 +29,7 @@ namespace Algorithms.Numeric
             if (m <= 0)
             {
                 // exponential not defined in this case
-                throw new ArgumentException(String.Format("{0} is not a positive integer", m));
+                throw new ArgumentException(string.Format("{0} is not a positive integer", m));
             }
 
             for (int i = 0; i < e; i++)
