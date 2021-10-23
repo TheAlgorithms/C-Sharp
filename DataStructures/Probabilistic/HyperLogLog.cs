@@ -8,8 +8,6 @@ namespace DataStructures.Probabilistic
     {
         private const int P = 16;
         private const double Alpha = .673;
-        private readonly int m;
-        private readonly int b;
         private readonly int[] registers;
         private readonly HashSet<int> setRegisters;
 
@@ -18,8 +16,7 @@ namespace DataStructures.Probabilistic
         /// </summary>
         public HyperLogLog()
         {
-            m = 1 << P;
-            b = (int)Math.Ceiling(Math.Log(m));
+            var m = 1 << P;
             registers = new int[m];
             setRegisters = new HashSet<int>();
         }
