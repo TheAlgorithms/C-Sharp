@@ -92,6 +92,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [A000027 Natural](./Algorithms/Sequences/NaturalSequence.cs)
     * [A000040 Primes](./Algorithms/Sequences/PrimesSequence.cs)
     * [A000045 Fibonacci](./Algorithms/Sequences/FibonacciSequence.cs)
+    * [A000108 Catalan](./Algorithms/Sequences/CatalanSequence.cs)
     * [A000142 Factorial](./Algorithms/Sequences/FactorialSequence.cs)
     * [A001462 Golomb's](./Algorithms/Sequences/GolombsSequence.cs)
     * [A005132 Recaman's](./Algorithms/Sequences/RecamansSequence.cs)
