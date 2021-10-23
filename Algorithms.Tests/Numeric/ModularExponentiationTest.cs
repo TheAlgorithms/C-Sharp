@@ -24,12 +24,13 @@ namespace Algorithms.Tests.Numeric
 
         [TestCase(17, 7, -3)]
         [TestCase(11, 3, -5)]
+        [TestCase(14, 3, 0)]
         public void ModularExponentiationNegativeMod(int b, int e, int m)
         {
             var modularExponentiation = new ModularExponentiation();
             Action res = () => modularExponentiation.ModularPow(b, e, m);
             res.Should().Throw<ArgumentException>()
-            .WithMessage("modulus cannot be negative");
+            .WithMessage(String.Format("{0} is not a positive integer", m));
         }
     }
 }

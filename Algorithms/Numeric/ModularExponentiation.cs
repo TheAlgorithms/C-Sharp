@@ -22,14 +22,14 @@ namespace Algorithms.Numeric
             int res = 1;
             if (m == 1)
             {
-                // single element in ring of integers modulo 1
+                // 1 divides every number
                 return 0;
             }
 
-            if (m < 0)
+            if (m <= 0)
             {
                 // exponential not defined in this case
-                throw new ArgumentException("modulus cannot be negative");
+                throw new ArgumentException(String.Format("{0} is not a positive integer", m));
             }
 
             for (int i = 0; i < e; i++)
