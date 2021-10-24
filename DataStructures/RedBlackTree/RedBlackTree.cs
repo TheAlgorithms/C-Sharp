@@ -96,53 +96,36 @@ namespace DataStructures.RedBlackTree
             node = node.Parent;
 
             // Return tree to valid state
+            int addCase;
             do
             {
-                if (node.Color == NodeColor.Black)
-                {
-                    // Case 1
-                    break;
-                }
-                else if (node.Parent is null)
-                {
-                    // Case 4
-                    node.Color = NodeColor.Black;
-                    break;
-                }
-                else
-                {
-                    // Remaining insert cases need uncle
-                    var grandparent = node.Parent;
-                    var parentDir = comparer.Compare(node.Key, node.Parent.Key);
-                    var uncle = parentDir < 0 ? grandparent.Right : grandparent.Left;
+                addCase = GetAddCase(node);
 
-                    // Case 5 & 6
-                    if (uncle is null || uncle.Color == NodeColor.Black)
-                    {
-                        AddCase56(node, parentDir, childDir);
+                switch(addCase)
+                {
+                    case 1:
                         break;
-                    }
+                    case 2:
+                        var oldParent = node.Parent;
+                        node = AddCase2(node);
 
-                    // Case 2
-                    node.Color = NodeColor.Black;
-                    uncle!.Color = NodeColor.Black;
-                    grandparent.Color = NodeColor.Red;
+                        if (node is not null)
+                        {
+                            childDir = comparer.Compare(oldParent!.Key, oldParent.Parent!.Key);
+                        }
 
-                    // Keep root black
-                    if (node.Parent.Parent is null)
-                    {
-                        node.Parent.Color = NodeColor.Black;
-                    }
-                    else
-                    {
-                        childDir = comparer.Compare(node.Parent.Key, node.Parent.Parent.Key);
-                    }
-
-                    // Set current node as parent to move up tree
-                    node = node.Parent.Parent;
+                        break;
+                    case 4:
+                        node.Color = NodeColor.Black;
+                        break;
+                    case 56:
+                        AddCase56(node, comparer.Compare(node.Key, node.Parent!.Key), childDir);
+                        break;
+                    default:
+                        throw new InvalidOperationException("It should not be possible to get here!");
                 }
             }
-            while (node is not null);
+            while (addCase == 2 && node is not null);
 
             Count++;
         }
@@ -212,7 +195,7 @@ namespace DataStructures.RedBlackTree
                         RemoveCase6(node, distantNephew!, dir);
                         break;
                     default:
-                        throw new Exception("It should not be possible to get here!");
+                        throw new InvalidOperationException("It should not be possible to get here!");
                 }
             }
             while (removeCase == 1 && node.Parent is not null);    // Case 2: Reached root
@@ -393,14 +376,33 @@ namespace DataStructures.RedBlackTree
             return newNode;
         }
 
+        private RedBlackTreeNode<TKey>? AddCase2(RedBlackTreeNode<TKey> node)
+        {
+            var grandparent = node.Parent;
+            var parentDir = comparer.Compare(node.Key, node.Parent!.Key);
+            var uncle = parentDir < 0 ? grandparent!.Right : grandparent!.Left;
+
+            node.Color = NodeColor.Black;
+            uncle!.Color = NodeColor.Black;
+            grandparent.Color = NodeColor.Red;
+
+            // Keep root black
+            if (node.Parent.Parent is null)
+            {
+                node.Parent.Color = NodeColor.Black;
+            }
+
+            // Set current node as parent to move up tree
+            return node.Parent.Parent;
+        }
+
         /// <summary>
         ///     Perform rotations needed for cases 5 and 6 of insertion.
         /// </summary>
         /// <param name="node">Parent of node just inserted.</param>
         /// <param name="parentDir">The side node is on of its parent.</param>
         /// <param name="childDir">The side the child node is on.</param>
-        /// <returns>Node in same position as before but with rotations applied.</returns>
-        private RedBlackTreeNode<TKey> AddCase56(RedBlackTreeNode<TKey> node, int parentDir, int childDir)
+        private void AddCase56(RedBlackTreeNode<TKey> node, int parentDir, int childDir)
         {
             if (parentDir < 0)
             {
@@ -428,14 +430,33 @@ namespace DataStructures.RedBlackTree
                 node.Color = NodeColor.Black;
                 node.Left!.Color = NodeColor.Red;
             }
+        }
 
-            // Update root if it changed
-            if (node.Parent is null)
+        private int GetAddCase(RedBlackTreeNode<TKey> node)
+        {
+            if (node.Color == NodeColor.Black)
             {
-                root = node;
+                return 1;
             }
+            else if (node.Parent is null)
+            {
+                return 4;
+            }
+            else
+            {
+                // Remaining insert cases need uncle
+                var grandparent = node.Parent;
+                var parentDir = comparer.Compare(node.Key, node.Parent.Key);
+                var uncle = parentDir < 0 ? grandparent.Right : grandparent.Left;
 
-            return node;
+                // Case 5 & 6
+                if (uncle is null || uncle.Color == NodeColor.Black)
+                {
+                    return 56;
+                }
+
+                return 2;
+            }
         }
 
         /// <summary>
@@ -486,16 +507,17 @@ namespace DataStructures.RedBlackTree
         /// <returns>Non-root black leaf node or null. Null indicates that removal was performed.</returns>
         private RedBlackTreeNode<TKey>? RemoveSimpleCases(RedBlackTreeNode<TKey> node)
         {
+            // Node to delete is root and has no children
             if (node.Parent is null && node.Left is null && node.Right is null)
             {
-                // Node to delete is root and has no children
                 root = null;
                 Count--;
                 return null;
             }
-            else if (node.Left is not null && node.Right is not null)
+
+            // Node has two children. Swap pointers
+            if (node.Left is not null && node.Right is not null)
             {
-                // Node has two children. Swap pointers
                 var successor = GetMin(node.Right);
                 node.Key = successor.Key;
                 node = successor;
