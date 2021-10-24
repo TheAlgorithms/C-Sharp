@@ -205,9 +205,9 @@ namespace DataStructures.RedBlackTree
                 dir = comparer.Compare(node.Key, node.Parent.Key);
 
                 // Determine current node's sibling and nephews
-                RedBlackTreeNode<TKey>? sibling,
-                                        distantNephew = null,
-                                        closeNewphew = null;
+                RedBlackTreeNode<TKey>? sibling;
+                RedBlackTreeNode<TKey>? distantNephew = null;
+                RedBlackTreeNode<TKey>? closeNewphew = null;
                 if (dir < 0)
                 {
                     sibling = node.Parent.Right;
@@ -229,7 +229,7 @@ namespace DataStructures.RedBlackTree
 
                 if (sibling is not null && sibling.Color == NodeColor.Red)
                 {
-                    RemoveCase3(sibling, closeNewphew, distantNephew, dir);
+                    RemoveCase3(sibling, closeNewphew, dir);
                     break;
                 }
                 else if (distantNephew is not null && distantNephew.Color == NodeColor.Red)
@@ -490,27 +490,29 @@ namespace DataStructures.RedBlackTree
             {
                 throw new KeyNotFoundException($"Key {key} is not in the tree!");
             }
-
-            // Find node
-            int dir;
-            while (true)
+            else
             {
-                dir = comparer.Compare(key, node!.Key);
-                if (dir < 0)
+                // Find node
+                int dir;
+                while (true)
                 {
-                    node = node.Left;
+                    dir = comparer.Compare(key, node!.Key);
+                    if (dir < 0)
+                    {
+                        node = node.Left;
+                    }
+                    else if (dir > 0)
+                    {
+                        node = node.Right;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
-                else if (dir > 0)
-                {
-                    node = node.Right;
-                }
-                else
-                {
-                    break;
-                }
-            }
 
-            return node;
+                return node;
+            }
         }
 
         /// <summary>
@@ -600,10 +602,8 @@ namespace DataStructures.RedBlackTree
         /// </summary>
         /// <param name="sibling">Sibling of removed node.</param>
         /// <param name="closeNephew">Close nephew of removed node.</param>
-        /// <param name="distantNephew">Distant nephew of removed node.</param>
         /// <param name="childDir">Side of parent the removed node was.</param>
-        /// <returns>Updated sibling node.</returns>
-        private RedBlackTreeNode<TKey> RemoveCase3(RedBlackTreeNode<TKey>? sibling, RedBlackTreeNode<TKey>? closeNephew, RedBlackTreeNode<TKey>? distantNephew, int childDir)
+        private void RemoveCase3(RedBlackTreeNode<TKey>? sibling, RedBlackTreeNode<TKey>? closeNephew, int childDir)
         {
             // Rotate and recolor
             if (childDir < 0)
@@ -627,6 +627,7 @@ namespace DataStructures.RedBlackTree
 
             // Get new distant newphew
             sibling = closeNephew;
+            RedBlackTreeNode<TKey>? distantNephew;
             if (childDir < 0)
             {
                 distantNephew = sibling is null ? null : sibling.Right;
@@ -639,7 +640,8 @@ namespace DataStructures.RedBlackTree
             // Parent is red, sibling is black
             if (distantNephew is not null && distantNephew.Color == NodeColor.Red)
             {
-                return RemoveCase6(sibling!, distantNephew, childDir);
+                RemoveCase6(sibling!, distantNephew, childDir);
+                return;
             }
 
             // Get new close nephew
@@ -655,11 +657,13 @@ namespace DataStructures.RedBlackTree
             // Sibling is black, distant nephew is black
             if (closeNephew is not null && closeNephew.Color == NodeColor.Red)
             {
-                return RemoveCase5(sibling!, childDir);
+                RemoveCase5(sibling!, childDir);
+                return;
             }
 
             // Final recoloring
-            return RemoveCase4(sibling!);
+            RemoveCase4(sibling!);
+            return;
         }
 
         /// <summary>
