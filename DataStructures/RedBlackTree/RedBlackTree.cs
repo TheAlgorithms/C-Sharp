@@ -78,71 +78,71 @@ namespace DataStructures.RedBlackTree
             {
                 // Case 3
                 // New node is root
-                root = new RedBlackTreeNode<TKey>(key, null);
-                root.Color = NodeColor.Black;
+                root = new RedBlackTreeNode<TKey>(key, null)
+                {
+                    Color = NodeColor.Black,
+                };
                 Count++;
                 return;
             }
-            else
+
+            // Regular binary tree insertion
+            var node = Add(root, key);
+
+            // Get which side child was added to
+            var childDir = comparer.Compare(node.Key, node.Parent!.Key);
+
+            // Set node to be new node's parent for easier handling
+            node = node.Parent;
+
+            // Return tree to valid state
+            do
             {
-                // Regular binary tree insertion
-                var node = Add(root, key);
-
-                // Get which side child was added to
-                int childDir = comparer.Compare(node.Key, node.Parent!.Key);
-
-                // Set node to be new node's parent for easier handling
-                node = node.Parent;
-
-                // Return tree to valid state
-                do
+                if (node.Color == NodeColor.Black)
                 {
-                    if (node.Color == NodeColor.Black)
+                    // Case 1
+                    break;
+                }
+                else if (node.Parent is null)
+                {
+                    // Case 4
+                    node.Color = NodeColor.Black;
+                    break;
+                }
+                else
+                {
+                    // Remaining insert cases need uncle
+                    var grandparent = node.Parent;
+                    var parentDir = comparer.Compare(node.Key, node.Parent.Key);
+                    var uncle = parentDir < 0 ? grandparent.Right : grandparent.Left;
+
+                    // Case 5 & 6
+                    if (uncle is null || uncle.Color == NodeColor.Black)
                     {
-                        // Case 1
+                        AddCase56(node, parentDir, childDir);
                         break;
                     }
-                    else if (node.Parent is null)
+
+                    // Case 2
+                    node.Color = NodeColor.Black;
+                    uncle!.Color = NodeColor.Black;
+                    grandparent.Color = NodeColor.Red;
+
+                    // Keep root black
+                    if (node.Parent.Parent is null)
                     {
-                        // Case 4
-                        node.Color = NodeColor.Black;
-                        break;
+                        node.Parent.Color = NodeColor.Black;
                     }
                     else
                     {
-                        // Remaining insert cases need uncle
-                        var grandparent = node.Parent;
-                        var parentDir = comparer.Compare(node.Key, node.Parent.Key);
-                        var uncle = parentDir < 0 ? grandparent.Right : grandparent.Left;
-
-                        // Case 5 & 6
-                        if (uncle is null || uncle.Color == NodeColor.Black)
-                        {
-                            AddCase56(node, parentDir, childDir);
-                            break;
-                        }
-
-                        // Case 2
-                        node.Color = NodeColor.Black;
-                        uncle!.Color = NodeColor.Black;
-                        grandparent.Color = NodeColor.Red;
-
-                        // Keep root black
-                        if (node.Parent.Parent is null)
-                        {
-                            node.Parent.Color = NodeColor.Black;
-                        }
-                        else
-                        {
-                            childDir = comparer.Compare(node.Parent.Key, node.Parent.Parent.Key);
-                        }
-
-                        // Set current node as parent to move up tree
-                        node = node.Parent.Parent;
+                        childDir = comparer.Compare(node.Parent.Key, node.Parent.Parent.Key);
                     }
+
+                    // Set current node as parent to move up tree
+                    node = node.Parent.Parent;
                 }
-                while (node is not null);
             }
+            while (node is not null);
 
             Count++;
         }
@@ -153,7 +153,7 @@ namespace DataStructures.RedBlackTree
         /// <param name="keys">Key values to add.</param>
         public void AddRange(IEnumerable<TKey> keys)
         {
-            foreach (TKey key in keys)
+            foreach (var key in keys)
             {
                 Add(key);
             }
@@ -178,54 +178,42 @@ namespace DataStructures.RedBlackTree
             }
 
             // Delete node
-            var dir = comparer.Compare(node.Key, node.Parent!.Key);
-            if (dir < 0)
-            {
-                node.Parent.Left = null;
-            }
-            else
-            {
-                node.Parent.Right = null;
-            }
+            DeleteLeaf(node.Parent!, comparer.Compare(node.Key, node.Parent!.Key));
 
             // Recolor tree
+            int removeCase;
             do
             {
-                dir = comparer.Compare(node.Key, node.Parent.Key);
+                removeCase = GetRemoveCase(node);
+
+                var dir = comparer.Compare(node.Key, node.Parent!.Key);
 
                 // Determine current node's sibling and nephews
                 var sibling = dir < 0 ? node.Parent.Right : node.Parent.Left;
                 var closeNewphew = dir < 0 ? sibling!.Left : sibling!.Right;
                 var distantNephew = dir < 0 ? sibling!.Right : sibling!.Left;
 
-                if (sibling.Color == NodeColor.Red)
+                switch (removeCase)
                 {
-                    RemoveCase3(node, closeNewphew, dir);
-                    break;
-                }
-                else if (distantNephew is not null && distantNephew.Color == NodeColor.Red)
-                {
-                    RemoveCase6(node, distantNephew, dir);
-                    break;
-                }
-                else if (closeNewphew is not null && closeNewphew.Color == NodeColor.Red)
-                {
-                    RemoveCase5(node, sibling!, dir);
-                    break;
-                }
-                else if (node.Parent.Color == NodeColor.Red)
-                {
-                    RemoveCase4(sibling!);
-                    break;
-                }
-                else
-                {
-                    // Case 1
-                    sibling!.Color = NodeColor.Red;
-                    node = node.Parent;
+                    case 1:
+                        sibling.Color = NodeColor.Red;
+                        node = node.Parent;
+                        break;
+                    case 3:
+                        RemoveCase3(node, closeNewphew, dir);
+                        break;
+                    case 4:
+                        RemoveCase4(sibling);
+                        break;
+                    case 5:
+                        RemoveCase5(node, sibling, dir);
+                        break;
+                    case 6:
+                        RemoveCase6(node, distantNephew!, dir);
+                        break;
                 }
             }
-            while (node.Parent is not null);    // Case 2: Reached root
+            while (removeCase == 1 && node.Parent is not null);    // Case 2: Reached root
 
             Count--;
         }
@@ -292,7 +280,7 @@ namespace DataStructures.RedBlackTree
         /// <returns>Keys in tree in order from smallest to largest.</returns>
         public IEnumerable<TKey> GetKeysInOrder()
         {
-            List<TKey> result = new List<TKey>();
+            var result = new List<TKey>();
             InOrderWalk(root);
             return result;
 
@@ -496,70 +484,55 @@ namespace DataStructures.RedBlackTree
         /// <returns>Non-root black leaf node or null. Null indicates that removal was performed.</returns>
         private RedBlackTreeNode<TKey>? RemoveSimpleCases(RedBlackTreeNode<TKey> node)
         {
+            // Root is being deleted
+            if (node.Parent is null && node.Left is null && node.Right is null)
+            {
+                // Node to delete is root and has no children
+                root = null;
+                Count--;
+                return null;
+            }
+
             // Loop until node is a non-root black leaf or node can be deleted without changing black height
             do
             {
-                if (node.Parent is null && node.Left is null && node.Right is null)
-                {
-                    // Node to delete is root and has no children
-                    root = null;
-                    Count--;
-                    return null;
-                }
-                else if (node.Left is not null && node.Right is not null)
+                if (node.Left is not null && node.Right is not null)
                 {
                     // Node has two children. Swap pointers
                     var successor = GetMin(node.Right);
                     node.Key = successor.Key;
                     node = successor;
+                    continue;
                 }
                 else if (node.Color == NodeColor.Red)
                 {
                     // Node is red so it must have no children since it doesn't have two children
-                    var dir = comparer.Compare(node.Key, node.Parent!.Key);
-                    if (dir < 0)
-                    {
-                        node.Parent.Left = null;
-                    }
-                    else
-                    {
-                        node.Parent.Right = null;
-                    }
+                    DeleteLeaf(node.Parent!, comparer.Compare(node.Key, node.Parent!.Key));
 
                     Count--;
                     return null;
                 }
-                else
+
+                // Node is black and has at most one child. If it has a child it must be red.
+                var child = node.Left ?? node.Right;
+
+                // Continue to recoloring if node is leaf
+                if (child is null)
                 {
-                    // Node is black and has at most one child. If it has a child it must be red.
-                    var child = node.Left ?? node.Right;
-
-                    // Continue to recoloring if node is leaf
-                    if (child is null)
-                    {
-                        break;
-                    }
-
-                    child.Color = NodeColor.Black;
-                    child.Parent = node.Parent;
-
-                    if (node.Parent is null)
-                    {
-                        // Root has one child
-                        root = child;
-                    }
-                    else if (comparer.Compare(node.Key, node.Parent.Key) < 0)
-                    {
-                        node.Parent.Left = child;
-                    }
-                    else
-                    {
-                        node.Parent.Right = child;
-                    }
-
-                    Count--;
-                    return null;
+                    break;
                 }
+
+                // Recolor child
+                child.Color = NodeColor.Black;
+                child.Parent = node.Parent;
+
+                var childDir = node.Parent is null ? 0 : comparer.Compare(node.Key, node.Parent.Key);
+
+                // Replace node with child
+                Transplant(node.Parent, child, childDir);
+
+                Count--;
+                return null;
             }
             while (node.Color == NodeColor.Red || node.Left is not null || node.Right is not null);
 
@@ -651,6 +624,85 @@ namespace DataStructures.RedBlackTree
             node.Color = oldParent.Color;
             oldParent.Color = NodeColor.Black;
             distantNephew.Color = NodeColor.Black;
+        }
+
+        /// <summary>
+        ///     Determine which removal case is required.
+        /// </summary>
+        /// <param name="node">Node being removed.</param>
+        /// <returns>Which removal case should be performed.</returns>
+        private int GetRemoveCase(RedBlackTreeNode<TKey> node)
+        {
+            var dir = comparer.Compare(node.Key, node.Parent!.Key);
+
+            // Determine current node's sibling and nephews
+            var sibling = dir < 0 ? node.Parent.Right : node.Parent.Left;
+            var closeNewphew = dir < 0 ? sibling!.Left : sibling!.Right;
+            var distantNephew = dir < 0 ? sibling!.Right : sibling!.Left;
+
+            if (sibling.Color == NodeColor.Red)
+            {
+                return 3;
+            }
+            else if (distantNephew is not null && distantNephew.Color == NodeColor.Red)
+            {
+                return 6;
+            }
+            else if (closeNewphew is not null && closeNewphew.Color == NodeColor.Red)
+            {
+                return 5;
+            }
+            else if (node.Parent.Color == NodeColor.Red)
+            {
+                return 4;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+
+        /// <summary>
+        ///     Set child of node or delete leaf.
+        /// </summary>
+        /// <param name="node">Node to set child of. Set to null for root.</param>
+        /// <param name="child">Node to set as child.</param>
+        /// <param name="dir">Which side of node to place child.</param>
+        private void Transplant(RedBlackTreeNode<TKey>? node, RedBlackTreeNode<TKey>? child, int dir)
+        {
+            if (node is null)
+            {
+                root = child;
+            }
+            else if (child is null)
+            {
+                DeleteLeaf(node, dir);
+            }
+            else if (dir < 0)
+            {
+                node.Left = child;
+            }
+            else
+            {
+                node.Right = child;
+            }
+        }
+
+        /// <summary>
+        ///     Delete leaf node.
+        /// </summary>
+        /// <param name="node">Parent of leaf node to delete.</param>
+        /// <param name="dir">Side of parent leaf is on.</param>
+        private void DeleteLeaf(RedBlackTreeNode<TKey> node, int dir)
+        {
+            if (dir < 0)
+            {
+                node.Left = null;
+            }
+            else
+            {
+                node.Right = null;
+            }
         }
 
         /// <summary>
