@@ -235,6 +235,16 @@ namespace DataStructures.Tests
             tree.Contains(13).Should().BeFalse();
             tree.GetKeysInOrder().SequenceEqual(new[] { 0, 1, 6, 8, 11, 15, 17, 22, 25 }).Should().BeTrue();
             tree.GetKeysPreOrder().SequenceEqual(new[] { 15, 8, 1, 0, 6, 11, 22, 17, 25 }).Should().BeTrue();
+
+            tree = new RedBlackTree<int>();
+            tree.AddRange(new[] { 7, 0, 1, 4, 8, 2, 3, 6, 5, 9 });
+            tree.Remove(7);
+            tree.Remove(0);
+            tree.Remove(1);
+            tree.Remove(4);
+            tree.Remove(8);
+            tree.GetKeysInOrder().SequenceEqual(new[] { 2, 3, 5, 6, 9 }).Should().BeTrue();
+            tree.GetKeysPreOrder().SequenceEqual(new[] { 3, 2, 6, 5, 9 }).Should().BeTrue();
         }
 
         [Test]
