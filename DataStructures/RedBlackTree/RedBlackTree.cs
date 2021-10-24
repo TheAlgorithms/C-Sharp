@@ -113,45 +113,47 @@ namespace DataStructures.RedBlackTree
                     node.Color = NodeColor.Black;
                     break;
                 }
-
-                // Remaining insert cases need uncle
-                var grandparent = node.Parent;
-                var parentDir = comparer.Compare(node.Key, node.Parent.Key);
-                RedBlackTreeNode<TKey>? uncle;
-                if (parentDir < 0)
-                {
-                    uncle = grandparent.Right;
-                }
                 else
                 {
-                    uncle = grandparent.Left;
+                    // Remaining insert cases need uncle
+                    var grandparent = node.Parent;
+                    var parentDir = comparer.Compare(node.Key, node.Parent.Key);
+                    RedBlackTreeNode<TKey>? uncle;
+                    if (parentDir < 0)
+                    {
+                        uncle = grandparent.Right;
+                    }
+                    else
+                    {
+                        uncle = grandparent.Left;
+                    }
+
+                    // Case 5 & 6
+                    if (uncle is null || uncle.Color == NodeColor.Black)
+                    {
+                        AddCase56(node, parentDir, childDir);
+
+                        break;
+                    }
+
+                    // Case 2
+                    node.Color = NodeColor.Black;
+                    uncle!.Color = NodeColor.Black;
+                    grandparent.Color = NodeColor.Red;
+
+                    // Keep root black
+                    if (node.Parent.Parent is null)
+                    {
+                        node.Parent.Color = NodeColor.Black;
+                    }
+                    else
+                    {
+                        childDir = comparer.Compare(node.Parent.Key, node.Parent.Parent.Key);
+                    }
+
+                    // Set current node as parent to move up tree
+                    node = node.Parent.Parent;
                 }
-
-                // Case 5 & 6
-                if (uncle is null || uncle.Color == NodeColor.Black)
-                {
-                    AddCase56(node, parentDir, childDir);
-
-                    break;
-                }
-
-                // Case 2
-                node.Color = NodeColor.Black;
-                uncle!.Color = NodeColor.Black;
-                grandparent.Color = NodeColor.Red;
-
-                // Keep root black
-                if (node.Parent.Parent is null)
-                {
-                    node.Parent.Color = NodeColor.Black;
-                }
-                else
-                {
-                    childDir = comparer.Compare(node.Parent.Key, node.Parent.Parent.Key);
-                }
-
-                // Set current node as parent to move up tree
-                node = node.Parent.Parent;
             }
             while (node is not null);
 
@@ -574,18 +576,13 @@ namespace DataStructures.RedBlackTree
                         // Root has one child
                         root = child;
                     }
+                    else if (comparer.Compare(node.Key, node.Parent.Key) < 0)
+                    {
+                        node.Parent.Left = child;
+                    }
                     else
                     {
-                        // Replace node with child
-                        var dir = comparer.Compare(node.Key, node.Parent.Key);
-                        if (dir < 0)
-                        {
-                            node.Parent.Left = child;
-                        }
-                        else
-                        {
-                            node.Parent.Right = child;
-                        }
+                        node.Parent.Right = child;
                     }
 
                     Count--;
