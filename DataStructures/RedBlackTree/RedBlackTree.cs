@@ -211,6 +211,8 @@ namespace DataStructures.RedBlackTree
                     case 6:
                         RemoveCase6(node, distantNephew!, dir);
                         break;
+                    default:
+                        throw new Exception("It should not be possible to get here!");
                 }
             }
             while (removeCase == 1 && node.Parent is not null);    // Case 2: Reached root
@@ -484,7 +486,6 @@ namespace DataStructures.RedBlackTree
         /// <returns>Non-root black leaf node or null. Null indicates that removal was performed.</returns>
         private RedBlackTreeNode<TKey>? RemoveSimpleCases(RedBlackTreeNode<TKey> node)
         {
-            // Root is being deleted
             if (node.Parent is null && node.Left is null && node.Right is null)
             {
                 // Node to delete is root and has no children
@@ -492,51 +493,57 @@ namespace DataStructures.RedBlackTree
                 Count--;
                 return null;
             }
-
-            // Loop until node is a non-root black leaf or node can be deleted without changing black height
-            do
+            else if (node.Left is not null && node.Right is not null)
             {
-                if (node.Left is not null && node.Right is not null)
-                {
-                    // Node has two children. Swap pointers
-                    var successor = GetMin(node.Right);
-                    node.Key = successor.Key;
-                    node = successor;
-                    continue;
-                }
-                else if (node.Color == NodeColor.Red)
-                {
-                    // Node is red so it must have no children since it doesn't have two children
-                    DeleteLeaf(node.Parent!, comparer.Compare(node.Key, node.Parent!.Key));
+                // Node has two children. Swap pointers
+                var successor = GetMin(node.Right);
+                node.Key = successor.Key;
+                node = successor;
+            }
 
-                    Count--;
-                    return null;
-                }
-
-                // Node is black and has at most one child. If it has a child it must be red.
-                var child = node.Left ?? node.Right;
-
-                // Continue to recoloring if node is leaf
-                if (child is null)
-                {
-                    break;
-                }
-
-                // Recolor child
-                child.Color = NodeColor.Black;
-                child.Parent = node.Parent;
-
-                var childDir = node.Parent is null ? 0 : comparer.Compare(node.Key, node.Parent.Key);
-
-                // Replace node with child
-                Transplant(node.Parent, child, childDir);
+            // At this point node should have at most one child
+            if (node.Color == NodeColor.Red)
+            {
+                // Node is red so it must have no children since it doesn't have two children
+                DeleteLeaf(node.Parent!, comparer.Compare(node.Key, node.Parent!.Key));
 
                 Count--;
                 return null;
             }
-            while (node.Color == NodeColor.Red || node.Left is not null || node.Right is not null);
+            else
+            {
+                // Node is black and may or may not be node
+                return RemoveBlackNode(node);
+            }
+        }
 
-            return node;
+        /// <summary>
+        ///     Node to delete is black. If it is a leaf then we need to recolor, otherwise remove it.
+        /// </summary>
+        /// <param name="node">Black node to examine.</param>
+        /// <returns>Node to start recoloring from. Null if deletion occurred.</returns>
+        private RedBlackTreeNode<TKey>? RemoveBlackNode(RedBlackTreeNode<TKey> node)
+        {
+            // Node is black and has at most one child. If it has a child it must be red.
+            var child = node.Left ?? node.Right;
+
+            // Continue to recoloring if node is leaf
+            if (child is null)
+            {
+                return node;
+            }
+
+            // Recolor child
+            child.Color = NodeColor.Black;
+            child.Parent = node.Parent;
+
+            var childDir = node.Parent is null ? 0 : comparer.Compare(node.Key, node.Parent.Key);
+
+            // Replace node with child
+            Transplant(node.Parent, child, childDir);
+
+            Count--;
+            return null;
         }
 
         /// <summary>
