@@ -84,39 +84,18 @@ namespace DataStructures.RedBlackTree
             else
             {
                 // Regular binary tree insertion
-                var node = root;
+                var node = Add(root, key);
+
+                // Get which side child was added to
                 int childDir;
-                while (true)
+                if (node.Left is not null)
                 {
-                    childDir = comparer.Compare(key, node!.Key);
-                    if (childDir < 0)
-                    {
-                        if (node.Left is null)
-                        {
-                            node.Left = new RedBlackTreeNode<TKey>(key, node);
-                            break;
-                        }
-                        else
-                        {
-                            node = node.Left;
-                        }
-                    }
-                    else if (childDir > 0)
-                    {
-                        if (node.Right is null)
-                        {
-                            node.Right = new RedBlackTreeNode<TKey>(key, node);
-                            break;
-                        }
-                        else
-                        {
-                            node = node.Right;
-                        }
-                    }
-                    else
-                    {
-                        throw new ArgumentException($"Key \"{key}\" already exists in tree!");
-                    }
+                    var compareResult = comparer.Compare(node.Left.Key, key);
+                    childDir = compareResult == 0 ? -1 : 1;
+                }
+                else
+                {
+                    childDir = 1;
                 }
 
                 // Return tree to valid state
@@ -634,6 +613,51 @@ namespace DataStructures.RedBlackTree
                 PostOrderWalk(node.Right);
                 result.Add(node.Key);
             }
+        }
+
+        /// <summary>
+        ///     Perform binary tree insertion.
+        /// </summary>
+        /// <param name="node">Root of subtree to search from.</param>
+        /// <param name="key">Key value to insert.</param>
+        /// <returns>Node that the new node was added to.</returns>
+        private RedBlackTreeNode<TKey> Add(RedBlackTreeNode<TKey> node, TKey key)
+        {
+            int compareResult;
+            while (true)
+            {
+                compareResult = comparer.Compare(key, node!.Key);
+                if (compareResult < 0)
+                {
+                    if (node.Left is null)
+                    {
+                        node.Left = new RedBlackTreeNode<TKey>(key, node);
+                        break;
+                    }
+                    else
+                    {
+                        node = node.Left;
+                    }
+                }
+                else if (compareResult > 0)
+                {
+                    if (node.Right is null)
+                    {
+                        node.Right = new RedBlackTreeNode<TKey>(key, node);
+                        break;
+                    }
+                    else
+                    {
+                        node = node.Right;
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException($"Key \"{key}\" already exists in tree!");
+                }
+            }
+
+            return node;
         }
 
         /// <summary>

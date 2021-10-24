@@ -201,28 +201,6 @@ namespace DataStructures.Tests
             tree.Count.Should().Be(6);
             tree.GetKeysInOrder().SequenceEqual(new[] { 0, 1, 2, 3, 4, 7 }).Should().BeTrue();
             tree.GetKeysPreOrder().SequenceEqual(new[] { 3, 1, 0, 2, 7, 4 }).Should().BeTrue();
-
-            /*int iter = 0;
-            while (iter < 100)
-            {
-                List<int> numberList = new List<int>(10);
-                for (int i = 0; i < 10; i++)
-                {
-                    numberList.Add(i);
-                }
-                Random rng = new Random();
-                var numbers = numberList.OrderBy(x => rng.Next()).ToArray();
-
-                tree = new RedBlackTree<int>();
-                tree.AddRange(numbers);
-                var deleteOrder = numbers.OrderBy(x => rng.Next()).ToArray();
-                foreach (int n in deleteOrder)
-                {
-                    tree.Remove(n);
-                }
-
-                iter++;
-            }*/
         }
 
         [Test]
