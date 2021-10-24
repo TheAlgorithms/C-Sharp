@@ -164,7 +164,11 @@ namespace DataStructures.RedBlackTree
             DeleteLeaf(node.Parent!, comparer.Compare(node.Key, node.Parent!.Key));
 
             // Recolor tree
-            RemoveRecolor(node);
+            do
+            {
+                node = RemoveRecolor(node);
+            }
+            while (node is not null && node.Parent is not null);    // Case 2: Reached root
 
             Count--;
         }
@@ -476,43 +480,43 @@ namespace DataStructures.RedBlackTree
             }
         }
 
-        private void RemoveRecolor(RedBlackTreeNode<TKey> node)
+        /// <summary>
+        ///     Get the tree back into a valid state after removing non-root black leaf.
+        /// </summary>
+        /// <param name="node">Non-root black leaf being removed.</param>
+        private RedBlackTreeNode<TKey>? RemoveRecolor(RedBlackTreeNode<TKey> node)
         {
-            int removeCase;
-            do
+            var removeCase = GetRemoveCase(node);
+
+            var dir = comparer.Compare(node.Key, node.Parent!.Key);
+
+            // Determine current node's sibling and nephews
+            var sibling = dir < 0 ? node.Parent.Right : node.Parent.Left;
+            var closeNewphew = dir < 0 ? sibling!.Left : sibling!.Right;
+            var distantNephew = dir < 0 ? sibling!.Right : sibling!.Left;
+
+            switch (removeCase)
             {
-                removeCase = GetRemoveCase(node);
-
-                var dir = comparer.Compare(node.Key, node.Parent!.Key);
-
-                // Determine current node's sibling and nephews
-                var sibling = dir < 0 ? node.Parent.Right : node.Parent.Left;
-                var closeNewphew = dir < 0 ? sibling!.Left : sibling!.Right;
-                var distantNephew = dir < 0 ? sibling!.Right : sibling!.Left;
-
-                switch (removeCase)
-                {
-                    case 1:
-                        sibling.Color = NodeColor.Red;
-                        node = node.Parent;
-                        break;
-                    case 3:
-                        RemoveCase3(node, closeNewphew, dir);
-                        break;
-                    case 4:
-                        RemoveCase4(sibling);
-                        break;
-                    case 5:
-                        RemoveCase5(node, sibling, dir);
-                        break;
-                    case 6:
-                        RemoveCase6(node, distantNephew!, dir);
-                        break;
-                    default:
-                        throw new InvalidOperationException("It should not be possible to get here!");
-                }
+                case 1:
+                    sibling.Color = NodeColor.Red;
+                    return node.Parent;
+                case 3:
+                    RemoveCase3(node, closeNewphew, dir);
+                    break;
+                case 4:
+                    RemoveCase4(sibling);
+                    break;
+                case 5:
+                    RemoveCase5(node, sibling, dir);
+                    break;
+                case 6:
+                    RemoveCase6(node, distantNephew!, dir);
+                    break;
+                default:
+                    throw new InvalidOperationException("It should not be possible to get here!");
             }
-            while (removeCase == 1 && node.Parent is not null);    // Case 2: Reached root
+
+            return null;
         }
 
         /// <summary>
