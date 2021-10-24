@@ -130,38 +130,7 @@ namespace DataStructures.RedBlackTree
                     // Case 5 & 6
                     if (uncle is null || uncle.Color == NodeColor.Black)
                     {
-                        if (parentDir < 0)
-                        {
-                            // Case 5
-                            if (childDir > 0)
-                            {
-                                node = RotateLeft(node);
-                            }
-
-                            // Case 6
-                            node = RotateRight(node.Parent!);
-                            node.Color = NodeColor.Black;
-                            node.Right!.Color = NodeColor.Red;
-                        }
-                        else
-                        {
-                            // Case 5
-                            if (childDir < 0)
-                            {
-                                node = RotateRight(node);
-                            }
-
-                            // Case 6
-                            node = RotateLeft(node.Parent!);
-                            node.Color = NodeColor.Black;
-                            node.Left!.Color = NodeColor.Red;
-                        }
-
-                        // Update root if it changed
-                        if (node.Parent is null)
-                        {
-                            root = node;
-                        }
+                        AddCase56(node, parentDir, childDir);
 
                         break;
                     }
@@ -655,6 +624,44 @@ namespace DataStructures.RedBlackTree
                 {
                     throw new ArgumentException($"Key \"{key}\" already exists in tree!");
                 }
+            }
+
+            return node;
+        }
+
+        private RedBlackTreeNode<TKey> AddCase56(RedBlackTreeNode<TKey> node, int parentDir, int childDir)
+        {
+            if (parentDir < 0)
+            {
+                // Case 5
+                if (childDir > 0)
+                {
+                    node = RotateLeft(node);
+                }
+
+                // Case 6
+                node = RotateRight(node.Parent!);
+                node.Color = NodeColor.Black;
+                node.Right!.Color = NodeColor.Red;
+            }
+            else
+            {
+                // Case 5
+                if (childDir < 0)
+                {
+                    node = RotateRight(node);
+                }
+
+                // Case 6
+                node = RotateLeft(node.Parent!);
+                node.Color = NodeColor.Black;
+                node.Left!.Color = NodeColor.Red;
+            }
+
+            // Update root if it changed
+            if (node.Parent is null)
+            {
+                root = node;
             }
 
             return node;
