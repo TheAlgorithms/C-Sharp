@@ -1,29 +1,77 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataStructures.RedBlackTree
 {
+    /// <summary>
+    ///     A self-balancing bindary tree.
+    /// </summary>
+    /// <remarks>
+    ///     A red-black tree is a self-balancing binary search tree (BST) that
+    ///     stores a color with each node. A node's color can either be red or
+    ///     black. Several properties are maintained to ensure the tree remains
+    ///     balanced.
+    ///     <list type="number">
+    ///         <item>
+    ///             <term>A red node does not have a red child.</term>
+    ///         </item>
+    ///         <item>
+    ///             <term>All null nodes are considered black.</term>
+    ///         </item>
+    ///         <item>
+    ///             <term>
+    ///                 Every path from a node to its descendant leaf nodes
+    ///             has the same number of black nodes.
+    ///             </term>
+    ///         </item>
+    ///         <item>
+    ///             <term>(Optional) The root is always black.</term>
+    ///         </item>
+    ///     </list>
+    ///     Red-black trees are generally slightly more unbalanced than an
+    ///     AVL tree, but insertion and deletion is generally faster.
+    ///     See https://en.wikipedia.org/wiki/Red%E2%80%93black_tree for more information.
+    /// </remarks>
+    /// <typeparam name="TKey">Type of key for the tree.</typeparam>
     public class RedBlackTree<TKey>
     {
+        /// <summary>
+        ///     Gets the number of nodes in the tree.
+        /// </summary>
         public int Count { get; private set; }
 
+        /// <summary>
+        ///     Comparer to use when comparing key values.
+        /// </summary>
         private readonly Comparer<TKey> comparer;
 
+        /// <summary>
+        ///     Reference to the root node.
+        /// </summary>
         private RedBlackTreeNode<TKey>? root;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="RedBlackTree{TKey}"/> class.
+        /// </summary>
         public RedBlackTree()
         {
             comparer = Comparer<TKey>.Default;
         }
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="RedBlackTree{TKey}"/> class
+        ///     using the specified comparer.
+        /// </summary>
+        /// <param name="customComparer">Comparer to use when comparing keys.</param>
         public RedBlackTree(Comparer<TKey> customComparer)
         {
             comparer = customComparer;
         }
 
+        /// <summary>
+        ///     Add a single node to the tree.
+        /// </summary>
+        /// <param name="key">Key value to add.</param>
         public void Add(TKey key)
         {
             if (root is null)
@@ -163,6 +211,10 @@ namespace DataStructures.RedBlackTree
             Count++;
         }
 
+        /// <summary>
+        ///     Add multiple nodes to the tree.
+        /// </summary>
+        /// <param name="keys">Key values to add.</param>
         public void AddRange(IEnumerable<TKey> keys)
         {
             foreach (TKey key in keys)
@@ -171,6 +223,10 @@ namespace DataStructures.RedBlackTree
             }
         }
 
+        /// <summary>
+        ///     Remove a node from the tree.
+        /// </summary>
+        /// <param name="key">Key value to remove.</param>
         public void Remove(TKey key)
         {
             if (root is null)
