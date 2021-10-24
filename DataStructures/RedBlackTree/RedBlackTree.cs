@@ -164,41 +164,7 @@ namespace DataStructures.RedBlackTree
             DeleteLeaf(node.Parent!, comparer.Compare(node.Key, node.Parent!.Key));
 
             // Recolor tree
-            int removeCase;
-            do
-            {
-                removeCase = GetRemoveCase(node);
-
-                var dir = comparer.Compare(node.Key, node.Parent!.Key);
-
-                // Determine current node's sibling and nephews
-                var sibling = dir < 0 ? node.Parent.Right : node.Parent.Left;
-                var closeNewphew = dir < 0 ? sibling!.Left : sibling!.Right;
-                var distantNephew = dir < 0 ? sibling!.Right : sibling!.Left;
-
-                switch (removeCase)
-                {
-                    case 1:
-                        sibling.Color = NodeColor.Red;
-                        node = node.Parent;
-                        break;
-                    case 3:
-                        RemoveCase3(node, closeNewphew, dir);
-                        break;
-                    case 4:
-                        RemoveCase4(sibling);
-                        break;
-                    case 5:
-                        RemoveCase5(node, sibling, dir);
-                        break;
-                    case 6:
-                        RemoveCase6(node, distantNephew!, dir);
-                        break;
-                    default:
-                        throw new InvalidOperationException("It should not be possible to get here!");
-                }
-            }
-            while (removeCase == 1 && node.Parent is not null);    // Case 2: Reached root
+            RemoveRecolor(node);
 
             Count--;
         }
@@ -376,6 +342,11 @@ namespace DataStructures.RedBlackTree
             return newNode;
         }
 
+        /// <summary>
+        ///     Perform case 2 of insertion by pushing blackness down from parent.
+        /// </summary>
+        /// <param name="node">Parent of inserted node.</param>
+        /// <returns>Grandparent of inserted node.</returns>
         private RedBlackTreeNode<TKey>? AddCase2(RedBlackTreeNode<TKey> node)
         {
             var grandparent = node.Parent;
@@ -432,6 +403,11 @@ namespace DataStructures.RedBlackTree
             }
         }
 
+        /// <summary>
+        ///     Determine which add case applies to inserted node.
+        /// </summary>
+        /// <param name="node">Parent of inserted node.</param>
+        /// <returns>Case number needed to get tree in valid state. Cases 5 and 6 are represented by 56.</returns>
         private int GetAddCase(RedBlackTreeNode<TKey> node)
         {
             if (node.Color == NodeColor.Black)
@@ -498,6 +474,45 @@ namespace DataStructures.RedBlackTree
 
                 return node;
             }
+        }
+
+        private void RemoveRecolor(RedBlackTreeNode<TKey> node)
+        {
+            int removeCase;
+            do
+            {
+                removeCase = GetRemoveCase(node);
+
+                var dir = comparer.Compare(node.Key, node.Parent!.Key);
+
+                // Determine current node's sibling and nephews
+                var sibling = dir < 0 ? node.Parent.Right : node.Parent.Left;
+                var closeNewphew = dir < 0 ? sibling!.Left : sibling!.Right;
+                var distantNephew = dir < 0 ? sibling!.Right : sibling!.Left;
+
+                switch (removeCase)
+                {
+                    case 1:
+                        sibling.Color = NodeColor.Red;
+                        node = node.Parent;
+                        break;
+                    case 3:
+                        RemoveCase3(node, closeNewphew, dir);
+                        break;
+                    case 4:
+                        RemoveCase4(sibling);
+                        break;
+                    case 5:
+                        RemoveCase5(node, sibling, dir);
+                        break;
+                    case 6:
+                        RemoveCase6(node, distantNephew!, dir);
+                        break;
+                    default:
+                        throw new InvalidOperationException("It should not be possible to get here!");
+                }
+            }
+            while (removeCase == 1 && node.Parent is not null);    // Case 2: Reached root
         }
 
         /// <summary>
