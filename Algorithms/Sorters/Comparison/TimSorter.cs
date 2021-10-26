@@ -25,30 +25,23 @@ namespace Algorithms.Sorters.Comparison
     /// <typeparam name="T">Type of array element.</typeparam>
     public class TimSorter<T> : IComparisonSorter<T>
     {
-        private int INIT_TEMP_LENGTH { get; }
-
-        private int MIN_GALLOP { get; }
-
-        private int MIN_MERGE { get; }
-
+        private readonly int minMerge;
+        private readonly int initMinGallop;
         private readonly int[] runBase;
         private readonly int[] runLengths;
 
         private int minGallop;
-        private T[] tmp;
         private int stackSize;
 
-        public TimSorter(int minRun = 32, int minGallop = 7, int initTempLen = 256)
+        public TimSorter(int minMerge = 32, int minGallop = 7)
         {
-            INIT_TEMP_LENGTH = initTempLen;
-            MIN_GALLOP = minGallop;
-            MIN_MERGE = minRun;
+            initMinGallop = minGallop;
+            this.minMerge = minMerge;
             runBase = new int[85];
             runLengths = new int[85];
 
             stackSize = 0;
             this.minGallop = minGallop;
-            tmp = new T[INIT_TEMP_LENGTH];
         }
 
         /// <summary>
@@ -63,13 +56,8 @@ namespace Algorithms.Sorters.Comparison
         {
             var start = 0;
             var remaining = array.Length;
-            var tempLen = remaining < 2 * INIT_TEMP_LENGTH
-                    ? remaining >> 1
-                    : INIT_TEMP_LENGTH;
 
-            tmp = new T[tempLen];
-
-            if (remaining < MIN_MERGE)
+            if (remaining < minMerge)
             {
                 if (remaining < 2)
                 {
@@ -81,7 +69,7 @@ namespace Algorithms.Sorters.Comparison
                 return;
             }
 
-            var minRun = MinRunLength(remaining, MIN_MERGE);
+            var minRun = MinRunLength(remaining, minMerge);
 
             do
             {
@@ -353,6 +341,29 @@ namespace Algorithms.Sorters.Comparison
             return offset;
         }
 
+        private static T[] EnsureCapacity(T[] array, int min)
+        {
+            // Compute smallest power of 2 > minCapacity
+            var newSize = min;
+            newSize |= newSize >> 1;
+            newSize |= newSize >> 2;
+            newSize |= newSize >> 4;
+            newSize |= newSize >> 8;
+            newSize |= newSize >> 16;
+            newSize++;
+
+            if (newSize < 0)
+            {
+                newSize = min;
+            }
+            else
+            {
+                newSize = Math.Min(newSize, array.Length >> 1);
+            }
+
+            return new T[newSize];
+        }
+
         private void MergeCollapse(T[] array, IComparer<T> comparer)
         {
             while (stackSize > 1)
@@ -439,7 +450,7 @@ namespace Algorithms.Sorters.Comparison
         private void MergeLo(T[] array, IComparer<T> comparer, int baseA, int lenA, int baseB, int lenB)
         {
             // Copy first run into temp array
-            var tmp = EnsureCapacity(array, lenA);
+            var tmp = TimSorter<T>.EnsureCapacity(array, lenA);
             Array.Copy(array, baseA, tmp, 0, lenA);
 
             var cursorT = 0;     // Indexes into tmp array.
@@ -538,7 +549,7 @@ namespace Algorithms.Sorters.Comparison
 
                     minGallop--;
                 }
-                while (count1 >= MIN_GALLOP | count2 >= MIN_GALLOP);
+                while (count1 >= initMinGallop | count2 >= initMinGallop);
 
                 if (minGallop < 0)
                 {
@@ -573,7 +584,7 @@ namespace Algorithms.Sorters.Comparison
         private void MergeHi(T[] array, IComparer<T> comparer, int baseA, int lenA, int baseB, int lenB)
         {
             // Copy second run into temp array
-            var tmp = EnsureCapacity(array, lenB);
+            var tmp = TimSorter<T>.EnsureCapacity(array, lenB);
             Array.Copy(array, baseB, tmp, 0, lenB);
 
             var cursorA = baseA + lenA - 1; // Indexes into array.
@@ -674,7 +685,7 @@ namespace Algorithms.Sorters.Comparison
 
                     minGallop--;
                 }
-                while (count1 >= MIN_GALLOP | count2 >= MIN_GALLOP);
+                while (count1 >= initMinGallop | count2 >= initMinGallop);
 
                 if (minGallop < 0)
                 {
@@ -706,34 +717,6 @@ namespace Algorithms.Sorters.Comparison
             {
                 Array.Copy(tmp, 0, array, dest - (lenB - 1), lenB);
             }
-        }
-
-        private T[] EnsureCapacity(T[] array, int min)
-        {
-            if (tmp.Length < min)
-            {
-                // Compute smallest power of 2 > minCapacity
-                var newSize = min;
-                newSize |= newSize >> 1;
-                newSize |= newSize >> 2;
-                newSize |= newSize >> 4;
-                newSize |= newSize >> 8;
-                newSize |= newSize >> 16;
-                newSize++;
-
-                if (newSize < 0)
-                {
-                    newSize = min;
-                }
-                else
-                {
-                    newSize = Math.Min(newSize, array.Length >> 1);
-                }
-
-                Array.Resize(ref tmp, newSize);
-            }
-
-            return tmp;
         }
     }
 }
