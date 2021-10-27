@@ -88,7 +88,7 @@ namespace Algorithms.Encoders
                 uint left_subblock = (uint)(block >> 32);
 
                 // Feistel "network" - decoding, the order of rounds and operations on the blocks is reverted
-                uint round_key = key;
+                uint round_key;
                 for (int round = Rounds - 1; round >= 0; round--)
                 {
                     round_key = GetRoundKey(key, round);

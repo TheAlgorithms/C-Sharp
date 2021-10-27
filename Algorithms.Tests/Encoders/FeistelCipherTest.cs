@@ -17,7 +17,6 @@ namespace Algorithms.Tests.Encoders
             int len_of_string = random.Next(1000);
 
             string message = random.GetString(len_of_string);
-            key = (uint)random.Next();
 
             // Act
             var encoded = encoder.Encode(message, key);
