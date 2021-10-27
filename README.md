@@ -141,6 +141,7 @@ This repository contains algorithms and data structures implemented in C# for ed
   * [Probabilistic](./DataStructures/Probabilistic)
     * [BloomFilter](./DataStructures/Probabilistic/BloomFilter.cs)
     * [Count-Min Sketch](./DataStructures/Probabilistic/CountMinSketch.cs)
+    * [HyperLogLog](./DataStructures/Probabilistic/HyperLogLog.cs)
   * [Queue](./DataStructures/Queue)
     * [Array-based Queue](./DataStructures/Queue/ArrayBasedQueue.cs)
     * [List-based Queue](./DataStructures/Queue/ListBasedQueue.cs)
