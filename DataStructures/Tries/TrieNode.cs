@@ -4,24 +4,24 @@ using System.Collections.Generic;
 namespace DataStructures.Tries
 {
     /// <summary>
-    /// This class represents the nodes of a trie
+    /// This class represents the nodes of a trie.
     /// </summary>
     internal class TrieNode
     {
         /// <summary>
-        /// Initialize a node with a character from the alphabet, and its parent will be null
+        /// Initializes a new instance of the <see cref="TrieNode"/> class. This instance was created with a character from the alphabet, and its parent will be null.
         /// </summary>
-        /// <param name="value">Character of the alphabet that represents the node</param>
+        /// <param name="value">Character of the alphabet that represents the node.</param>
         internal TrieNode(char value)
             : this(value, null)
         {
         }
 
         /// <summary>
-        /// Initialize a node of the trie given the character and its parent in the trie
+        /// Initializes a new instance of the <see cref="TrieNode"/> class. This instance was created with a character from the alphabet, and its parent.
         /// </summary>
-        /// <param name="value">Character of the alphabet that represents the node</param>
-        /// <param name="parent">The parent or ancestor of the node in the trie structure</param>
+        /// <param name="value">Character of the alphabet that represents the node.</param>
+        /// <param name="parent">The parent or ancestor of the node in the trie structure.</param>
         internal TrieNode(char value, TrieNode? parent)
         {
             this.Children = new SortedList<char, TrieNode>();
@@ -30,27 +30,27 @@ namespace DataStructures.Tries
         }
 
         /// <summary>
-        /// Descendants of the current node
+        /// Gets all the descendants of the current node.
         /// </summary>
-        /// <value></value>
+        /// <value>A sorted set with all the descendants.</value>
         internal SortedList<char, TrieNode> Children { get; private set; }
 
         /// <summary>
-        /// The parent or ancestor of the node in the trie structure
+        /// Gets the parent or ancestor of the node in the trie structure.
         /// </summary>
-        /// <value></value>
+        /// <value>A TrieNode that represent a parent.</value>
         internal TrieNode? Parent { get; private set; }
 
         /// <summary>
-        /// Character of the alphabet that represents the node
+        /// Gets the character of the alphabet that represents the node.
         /// </summary>
-        /// <value></value>
+        /// <value>A character of the alphabet.</value>
         internal char Value { get; private set; }
 
         /// <summary>
-        /// Index the descendants of the current node given an alphabet character
+        /// Index the descendants of the current node given an alphabet character.
         /// </summary>
-        /// <value></value>
+        /// <value>A TrieNode with the character c in Children.</value>
         public TrieNode? this[char c]
         {
             get
@@ -67,7 +67,7 @@ namespace DataStructures.Tries
         /// <summary>
         /// Method that checks if the current node is a trie leaf.
         /// </summary>
-        /// <returns>Returns true if the current node has no children, false otherwise</returns>
+        /// <returns>Returns true if the current node has no children, false otherwise.</returns>
         public bool IsLeaf()
         {
             return Children.Count == 0;
