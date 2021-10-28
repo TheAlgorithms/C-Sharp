@@ -285,15 +285,105 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
              */
             var expected = new[,]
             {
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 4, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 5, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 13, 12, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
-                { 4, 5, float.PositiveInfinity, float.PositiveInfinity, 14, float.PositiveInfinity, 9, 6, float.PositiveInfinity },
-                { float.PositiveInfinity, float.PositiveInfinity, 13, 14, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 18 },
-                { float.PositiveInfinity, float.PositiveInfinity, 12, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 9, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 6, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 18, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity }
+                {
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    4,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity
+                },
+                {
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    5,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity
+                },
+                {
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    13,
+                    12,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity
+                },
+                {
+                    4,
+                    5,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    14,
+                    float.PositiveInfinity,
+                    9,
+                    6,
+                    float.PositiveInfinity
+                },
+                {
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    13,
+                    14,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    18
+                },
+                {
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    12,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity
+                },
+                {
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    9,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity
+                },
+                {
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    6,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity
+                },
+                {
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    18,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity,
+                    float.PositiveInfinity
+                }
             };
 
             for (var i = 0; i < matrix.GetLength(0); i++)

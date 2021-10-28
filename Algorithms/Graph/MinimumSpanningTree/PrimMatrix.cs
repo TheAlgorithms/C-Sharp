@@ -11,7 +11,7 @@ namespace Algorithms.Graph.MinimumSpanningTree
     ///     More information: https://en.wikipedia.org/wiki/Prim%27s_algorithm
     ///     Pseudocode and runtime analysis: https://www.personal.kent.edu/~rmuhamma/Algorithms/MyAlgorithms/GraphAlgor/primAlgor.htm .
     /// </summary>
-    public class PrimMatrix
+    public static class PrimMatrix
     {
         /// <summary>
         ///     Determine the minimum spanning tree for a given weighted undirected graph.
@@ -91,7 +91,7 @@ namespace Algorithms.Graph.MinimumSpanningTree
                 var connection = false;
                 for (var j = 0; j < adjacencyMatrix.GetLength(0); j++)
                 {
-                    if (adjacencyMatrix[i, j] != adjacencyMatrix[j, i])
+                    if (Math.Abs(adjacencyMatrix[i, j] - adjacencyMatrix[j, i]) > 0.0000001f)
                     {
                         throw new ArgumentException("Adjacency matrix must be symmetric!");
                     }
