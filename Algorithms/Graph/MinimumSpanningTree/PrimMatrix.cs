@@ -91,7 +91,7 @@ namespace Algorithms.Graph.MinimumSpanningTree
                 var connection = false;
                 for (var j = 0; j < adjacencyMatrix.GetLength(0); j++)
                 {
-                    if (Math.Abs(adjacencyMatrix[i, j] - adjacencyMatrix[j, i]) > 0.0000001f)
+                    if (Math.Abs(adjacencyMatrix[i, j] - adjacencyMatrix[j, i]) > 1e-6)
                     {
                         throw new ArgumentException("Adjacency matrix must be symmetric!");
                     }
