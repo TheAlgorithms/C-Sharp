@@ -111,7 +111,6 @@ namespace DataStructures.Tries
                 {
                     current = current[s[i]] ?? throw new NullReferenceException();
                     index = i + 1;
-                    continue;
                 }
                 else
                 {
