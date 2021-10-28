@@ -14,12 +14,12 @@ namespace DataStructures.Tries
         /// <summary>
         /// This character marks the end of a string.
         /// </summary>
-        private static readonly char Mark = '$';
+        private const char Mark = '$';
 
         /// <summary>
         /// This property represents the root node of the trie.
         /// </summary>
-        private TrieNode root;
+        private readonly TrieNode root;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Trie"/> class. This instances was created without text strings, generating the root node of the trie, without children.
