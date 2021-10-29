@@ -21,6 +21,8 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Soundex](./Algorithms/Encoders/SoundexEncoder.cs)
     * [Feistel](./Algorithms/Encoders/FeistelCipher.cs)
   * [Graph](./Algorithms/Graph)
+    * [Minimum Spanning Tree](./Algorithms/Graph/MinimumSpanningTree)
+      * [Prim's Algorithm (Adjacency Matrix)](./Algorithms/Graph/MinimumSpanningTree/PrimMatrix.cs)
     * [BreadthFirstSearch](./Algorithms/Graph/BreadthFirstSearch.cs)
     * [DepthFirstSearch](./Algorithms/Graph/DepthFirstSearch.cs)
   * [Knapsack problem](./Algorithms/Knapsack)
