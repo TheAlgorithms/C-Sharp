@@ -418,11 +418,11 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
         {
             var adj = new[]
             {
-                new Dictionary<int, float>(){ { 2, 4 } },
-                new Dictionary<int, float>(){ { 0, 3 }, { 2, 5 }, { 3, 6 }, { 4, 2 } },
-                new Dictionary<int, float>(){ { 0, 4 }, { 1, 5 } },
-                new Dictionary<int, float>(){ { 1, 6 } },
-                new Dictionary<int, float>(){ { 1, 2 } }
+                new Dictionary<int, float>{ { 2, 4 } },
+                new Dictionary<int, float>{ { 0, 3 }, { 2, 5 }, { 3, 6 }, { 4, 2 } },
+                new Dictionary<int, float>{ { 0, 4 }, { 1, 5 } },
+                new Dictionary<int, float>{ { 1, 6 } },
+                new Dictionary<int, float>{ { 1, 2 } }
             };
             Assert.Throws<ArgumentException>(() => Kruskal.Solve(adj), "Graph must be undirected!");
         }
@@ -439,9 +439,9 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
              */
             var adj = new[]
             {
-                new Dictionary<int, float>(){ { 1, 3 }, { 2, 2 } },
-                new Dictionary<int, float>(){ { 0, 3 }, { 2, 2 } },
-                new Dictionary<int, float>(){ { 0, 2 }, { 1, 2 } }
+                new Dictionary<int, float>{ { 1, 3 }, { 2, 2 } },
+                new Dictionary<int, float>{ { 0, 3 }, { 2, 2 } },
+                new Dictionary<int, float>{ { 0, 2 }, { 1, 2 } }
             };
 
             /* Expected MST
@@ -453,9 +453,9 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
              */
             var expected = new[]
             {
-                new Dictionary<int, float>(){ { 2, 2 } },
-                new Dictionary<int, float>(){ { 2, 2 } },
-                new Dictionary<int, float>(){ { 0, 2 }, { 1, 2 } }
+                new Dictionary<int, float>{ { 2, 2 } },
+                new Dictionary<int, float>{ { 2, 2 } },
+                new Dictionary<int, float>{ { 0, 2 }, { 1, 2 } }
             };
 
             var res = Kruskal.Solve(adj);
@@ -481,11 +481,11 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
              */
             var adj = new[]
             {
-                new Dictionary<int, float>(){ { 1, 3 }, { 2, 4 } },
-                new Dictionary<int, float>(){ { 0, 3 }, { 2, 5 }, { 3, 6 }, { 4, 2 } },
-                new Dictionary<int, float>(){ { 0, 4 }, { 1, 5 } },
-                new Dictionary<int, float>(){ { 1, 6 } },
-                new Dictionary<int, float>(){ { 1, 2 } }
+                new Dictionary<int, float>{ { 1, 3 }, { 2, 4 } },
+                new Dictionary<int, float>{ { 0, 3 }, { 2, 5 }, { 3, 6 }, { 4, 2 } },
+                new Dictionary<int, float>{ { 0, 4 }, { 1, 5 } },
+                new Dictionary<int, float>{ { 1, 6 } },
+                new Dictionary<int, float>{ { 1, 2 } }
             };
 
             /* Expected MST
@@ -501,11 +501,11 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
              */
             var expected = new[]
             {
-                new Dictionary<int, float>(){ { 1, 3 }, { 2, 4 } },
-                new Dictionary<int, float>(){ { 0, 3 }, { 3, 6 }, { 4, 2 } },
-                new Dictionary<int, float>(){ { 0, 4 } },
-                new Dictionary<int, float>(){ { 1, 6 } },
-                new Dictionary<int, float>(){ { 1, 2 } }
+                new Dictionary<int, float>{ { 1, 3 }, { 2, 4 } },
+                new Dictionary<int, float>{ { 0, 3 }, { 3, 6 }, { 4, 2 } },
+                new Dictionary<int, float>{ { 0, 4 } },
+                new Dictionary<int, float>{ { 1, 6 } },
+                new Dictionary<int, float>{ { 1, 2 } }
             };
 
             var res = Kruskal.Solve(adj);
@@ -527,12 +527,12 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
              */
             var adj = new[]
             {
-                new Dictionary<int, float>(){ { 1, 4 }, { 2, 3 } },
-                new Dictionary<int, float>(){ { 0, 4 }, { 2, 1 }, { 3, 2 } },
-                new Dictionary<int, float>(){ { 0, 3 }, { 1, 1 }, { 3, 4 } },
-                new Dictionary<int, float>(){ { 1, 2 }, { 2, 4 }, { 4, 6 } },
-                new Dictionary<int, float>(){ { 3, 6 }, { 5, 2 } },
-                new Dictionary<int, float>(){ { 4, 2 } }
+                new Dictionary<int, float>{ { 1, 4 }, { 2, 3 } },
+                new Dictionary<int, float>{ { 0, 4 }, { 2, 1 }, { 3, 2 } },
+                new Dictionary<int, float>{ { 0, 3 }, { 1, 1 }, { 3, 4 } },
+                new Dictionary<int, float>{ { 1, 2 }, { 2, 4 }, { 4, 6 } },
+                new Dictionary<int, float>{ { 3, 6 }, { 5, 2 } },
+                new Dictionary<int, float>{ { 4, 2 } }
             };
 
             /* Graph
@@ -544,12 +544,12 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
              */
             var expected = new[]
             {
-                new Dictionary<int, float>(){ { 2, 3 } },
-                new Dictionary<int, float>(){ { 2, 1 }, { 3, 2 } },
-                new Dictionary<int, float>(){ { 0, 3 }, { 1, 1 } },
-                new Dictionary<int, float>(){ { 1, 2 }, { 4, 6 } },
-                new Dictionary<int, float>(){ { 3, 6 }, { 5, 2 } },
-                new Dictionary<int, float>(){ { 4, 2 } }
+                new Dictionary<int, float>{ { 2, 3 } },
+                new Dictionary<int, float>{ { 2, 1 }, { 3, 2 } },
+                new Dictionary<int, float>{ { 0, 3 }, { 1, 1 } },
+                new Dictionary<int, float>{ { 1, 2 }, { 4, 6 } },
+                new Dictionary<int, float>{ { 3, 6 }, { 5, 2 } },
+                new Dictionary<int, float>{ { 4, 2 } }
             };
 
             var res = Kruskal.Solve(adj);
@@ -575,13 +575,13 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
              */
             var adj = new[]
             {
-                new Dictionary<int, float>(){ { 1, 7 }, { 3, 5 } },
-                new Dictionary<int, float>(){ { 0, 7 }, { 2, 8 }, { 3, 9 }, { 4, 7 } },
-                new Dictionary<int, float>(){ { 1, 8 }, { 4, 5 } },
-                new Dictionary<int, float>(){ { 0, 5 }, { 1, 9 }, { 4, 15 }, { 5, 6 } },
-                new Dictionary<int, float>(){ { 1, 7 }, { 2, 5 }, { 3, 15 }, { 5, 8 }, { 6, 9 } },
-                new Dictionary<int, float>(){ { 3, 6 }, { 4, 8 }, { 6, 11 } },
-                new Dictionary<int, float>(){ { 4, 9 }, { 5, 11 } }
+                new Dictionary<int, float>{ { 1, 7 }, { 3, 5 } },
+                new Dictionary<int, float>{ { 0, 7 }, { 2, 8 }, { 3, 9 }, { 4, 7 } },
+                new Dictionary<int, float>{ { 1, 8 }, { 4, 5 } },
+                new Dictionary<int, float>{ { 0, 5 }, { 1, 9 }, { 4, 15 }, { 5, 6 } },
+                new Dictionary<int, float>{ { 1, 7 }, { 2, 5 }, { 3, 15 }, { 5, 8 }, { 6, 9 } },
+                new Dictionary<int, float>{ { 3, 6 }, { 4, 8 }, { 6, 11 } },
+                new Dictionary<int, float>{ { 4, 9 }, { 5, 11 } }
             };
 
             /* Expected MST
@@ -597,13 +597,13 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
              */
             var expected = new[]
             {
-                new Dictionary<int, float>(){ { 1, 7 }, { 3, 5 } },
-                new Dictionary<int, float>(){ { 0, 7 }, { 4, 7 } },
-                new Dictionary<int, float>(){ { 4, 5 } },
-                new Dictionary<int, float>(){ { 0, 5 }, { 5, 6 } },
-                new Dictionary<int, float>(){ { 1, 7 }, { 2, 5 }, { 6, 9 } },
-                new Dictionary<int, float>(){ { 3, 6 } },
-                new Dictionary<int, float>(){ { 4, 9 } }
+                new Dictionary<int, float>{ { 1, 7 }, { 3, 5 } },
+                new Dictionary<int, float>{ { 0, 7 }, { 4, 7 } },
+                new Dictionary<int, float>{ { 4, 5 } },
+                new Dictionary<int, float>{ { 0, 5 }, { 5, 6 } },
+                new Dictionary<int, float>{ { 1, 7 }, { 2, 5 }, { 6, 9 } },
+                new Dictionary<int, float>{ { 3, 6 } },
+                new Dictionary<int, float>{ { 4, 9 } }
             };
 
             var res = Kruskal.Solve(adj);
@@ -629,15 +629,15 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
              */
             var adj = new[]
             {
-                new Dictionary<int, float>(){ { 1, 8 }, { 3, 4 }, { 6, 10 } },
-                new Dictionary<int, float>(){ { 0, 8 }, { 2, 15 }, { 3, 5 } },
-                new Dictionary<int, float>(){ { 1, 15 }, { 3, 25 }, { 4, 13 }, { 5, 12 } },
-                new Dictionary<int, float>(){ { 0, 4 }, { 1, 5 }, { 2, 25 }, { 4, 14 }, { 6, 9 }, { 7, 6 } },
-                new Dictionary<int, float>(){ { 2, 13 }, { 3, 14 }, { 7, 16 }, { 8, 18 } },
-                new Dictionary<int, float>(){ { 2, 12 }, { 8, 30 } },
-                new Dictionary<int, float>(){ { 0, 10 }, { 3, 9 }, { 7, 18 } },
-                new Dictionary<int, float>(){ { 3, 6 }, { 4, 16 }, { 6, 18 }, { 8, 20 } },
-                new Dictionary<int, float>(){ { 4, 18 }, { 5, 30 }, { 7, 20 } }
+                new Dictionary<int, float>{ { 1, 8 }, { 3, 4 }, { 6, 10 } },
+                new Dictionary<int, float>{ { 0, 8 }, { 2, 15 }, { 3, 5 } },
+                new Dictionary<int, float>{ { 1, 15 }, { 3, 25 }, { 4, 13 }, { 5, 12 } },
+                new Dictionary<int, float>{ { 0, 4 }, { 1, 5 }, { 2, 25 }, { 4, 14 }, { 6, 9 }, { 7, 6 } },
+                new Dictionary<int, float>{ { 2, 13 }, { 3, 14 }, { 7, 16 }, { 8, 18 } },
+                new Dictionary<int, float>{ { 2, 12 }, { 8, 30 } },
+                new Dictionary<int, float>{ { 0, 10 }, { 3, 9 }, { 7, 18 } },
+                new Dictionary<int, float>{ { 3, 6 }, { 4, 16 }, { 6, 18 }, { 8, 20 } },
+                new Dictionary<int, float>{ { 4, 18 }, { 5, 30 }, { 7, 20 } }
             };
 
             /* Expected MST
@@ -653,15 +653,15 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
              */
             var expected = new[]
             {
-                new Dictionary<int, float>(){ { 3, 4 } },
-                new Dictionary<int, float>(){ { 3, 5 } },
-                new Dictionary<int, float>(){ { 4, 13 }, { 5, 12 } },
-                new Dictionary<int, float>(){ { 0, 4 }, { 1, 5 }, { 4, 14 }, { 6, 9 }, { 7, 6 } },
-                new Dictionary<int, float>(){ { 2, 13 }, { 3, 14 }, { 8, 18 } },
-                new Dictionary<int, float>(){ { 2, 12 } },
-                new Dictionary<int, float>(){ { 3, 9 } },
-                new Dictionary<int, float>(){ { 3, 6 } },
-                new Dictionary<int, float>(){ { 4, 18 } }
+                new Dictionary<int, float>{ { 3, 4 } },
+                new Dictionary<int, float>{ { 3, 5 } },
+                new Dictionary<int, float>{ { 4, 13 }, { 5, 12 } },
+                new Dictionary<int, float>{ { 0, 4 }, { 1, 5 }, { 4, 14 }, { 6, 9 }, { 7, 6 } },
+                new Dictionary<int, float>{ { 2, 13 }, { 3, 14 }, { 8, 18 } },
+                new Dictionary<int, float>{ { 2, 12 } },
+                new Dictionary<int, float>{ { 3, 9 } },
+                new Dictionary<int, float>{ { 3, 6 } },
+                new Dictionary<int, float>{ { 4, 18 } }
             };
 
             var res = Kruskal.Solve(adj);
@@ -687,13 +687,13 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
              */
             var adj = new[]
             {
-                new Dictionary<int, float>(){ { 1, 7 }, { 3, 5 } },
-                new Dictionary<int, float>(){ { 0, 7 }, { 3, 9 } },
-                new Dictionary<int, float>(){ { 4, 5 }, { 6, 2 } },
-                new Dictionary<int, float>(){ { 0, 5 }, { 1, 9 } },
-                new Dictionary<int, float>(){ { 2, 5 }, { 5, 8 }, { 6, 9 } },
-                new Dictionary<int, float>(){ { 4, 8 }, { 6, 11 } },
-                new Dictionary<int, float>(){ { 2, 2 }, { 4, 9 }, { 5, 11 } }
+                new Dictionary<int, float>{ { 1, 7 }, { 3, 5 } },
+                new Dictionary<int, float>{ { 0, 7 }, { 3, 9 } },
+                new Dictionary<int, float>{ { 4, 5 }, { 6, 2 } },
+                new Dictionary<int, float>{ { 0, 5 }, { 1, 9 } },
+                new Dictionary<int, float>{ { 2, 5 }, { 5, 8 }, { 6, 9 } },
+                new Dictionary<int, float>{ { 4, 8 }, { 6, 11 } },
+                new Dictionary<int, float>{ { 2, 2 }, { 4, 9 }, { 5, 11 } }
             };
 
             /* Expected MST
@@ -709,13 +709,13 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
              */
             var expected = new[]
             {
-                new Dictionary<int, float>(){ { 1, 7 }, { 3, 5 } },
-                new Dictionary<int, float>(){ { 0, 7 } },
-                new Dictionary<int, float>(){ { 4, 5 }, { 6, 2 } },
-                new Dictionary<int, float>(){ { 0, 5 } },
-                new Dictionary<int, float>(){ { 2, 5 }, { 5, 8 } },
-                new Dictionary<int, float>(){ { 4, 8 } },
-                new Dictionary<int, float>(){ { 2, 2 } }
+                new Dictionary<int, float>{ { 1, 7 }, { 3, 5 } },
+                new Dictionary<int, float>{ { 0, 7 } },
+                new Dictionary<int, float>{ { 4, 5 }, { 6, 2 } },
+                new Dictionary<int, float>{ { 0, 5 } },
+                new Dictionary<int, float>{ { 2, 5 }, { 5, 8 } },
+                new Dictionary<int, float>{ { 4, 8 } },
+                new Dictionary<int, float>{ { 2, 2 } }
             };
 
             var res = Kruskal.Solve(adj);
