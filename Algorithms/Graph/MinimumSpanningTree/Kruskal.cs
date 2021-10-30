@@ -66,7 +66,38 @@ namespace Algorithms.Graph.MinimumSpanningTree
         {
             ValidateGraph(adjacencyList);
 
-            return new[] { new Dictionary<int, float>() };
+            var numNodes = adjacencyList.Length;
+            var set = new DisjointSet<int>();
+            var nodes = new Node<int>[numNodes];
+            var edgeWeightList = new List<float>();
+            var nodeConnectList = new List<(int, int)>();
+
+            for (var i = 0; i < numNodes; i++)
+            {
+                nodes[i] = set.MakeSet(i);
+
+                foreach(var (node, weight) in adjacencyList[i])
+                {
+                    edgeWeightList.Add(weight);
+                    nodeConnectList.Add((i, node));
+                }
+            }
+
+            var edges = Solve(set, nodes, edgeWeightList.ToArray(), nodeConnectList.ToArray());
+
+            var mst = new Dictionary<int, float>[numNodes];
+            for (var i = 0; i < numNodes; i++)
+            {
+                mst[i] = new Dictionary<int, float>();
+            }
+
+            foreach (var (node1, node2) in edges)
+            {
+                mst[node1].Add(node2, adjacencyList[node1][node2]);
+                mst[node2].Add(node1, adjacencyList[node1][node2]);
+            }
+
+            return mst;
         }
 
         private static void ValidateGraph(float[,] adj)
