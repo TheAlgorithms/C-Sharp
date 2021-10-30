@@ -159,6 +159,7 @@ This repository contains algorithms and data structures implemented in C# for ed
   * [SortedList](./DataStructures/SortedList.cs)
   * [Inverted index](./DataStructures/InvertedIndex.cs)
   * [Unrolled linked list](./DataStructures/UnrolledList/UnrolledLinkedList.cs)
+  * [Tries](./DataStructures/Tries/Trie.cs)
 
 ## Contributing
 
