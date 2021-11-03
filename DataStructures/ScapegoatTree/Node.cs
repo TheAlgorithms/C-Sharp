@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DataStructures.ScapegoatTree
 {
-    public class Node<TKey> : IEnumerable<TKey>, IComparable<TKey> where TKey : IComparable
+    public class Node<TKey> : IEnumerable<TKey> where TKey : IComparable
     {
         private Node<TKey>? right;
         private Node<TKey>? left;
@@ -41,14 +41,12 @@ namespace DataStructures.ScapegoatTree
 
         public Node(TKey key) => Key = key;
 
-        public Node(TKey key, Node<TKey>? right, Node<TKey> left)
+        public Node(TKey key, Node<TKey>? right, Node<TKey>? left)
             : this(key)
         {
             Right = right;
             Left = left;
         }
-
-        public int CompareTo(TKey? other) => Key.CompareTo(other);
 
         /// <summary>
         /// Returns number of elements in the tree.
@@ -96,9 +94,9 @@ namespace DataStructures.ScapegoatTree
             return GetEnumerator();
         }
 
-        public bool IsGreaterThanOrSameAs(TKey key)
+        private bool IsGreaterThanOrSameAs(TKey key)
         {
-            return this.CompareTo(key) >= 0;
+            return this.Key.CompareTo(key) >= 0;
         }
     }
 }

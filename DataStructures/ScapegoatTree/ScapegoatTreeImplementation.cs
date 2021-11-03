@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DataStructures.ScapegoatTree
 {
-    public class ScapegoatTreeImplementation<TKey> : ScapegoatTreeImplementationBase<TKey>
+    public class ScapegoatTreeImplementation<TKey> : IScapegoatTreeImplementable<TKey>
         where TKey : IComparable
     {
         /// <summary>
@@ -12,35 +12,24 @@ namespace DataStructures.ScapegoatTree
         /// <param name="root">Root of subtree.</param>
         /// <param name="key">Key to search for.</param>
         /// <returns>Node or null if not found.</returns>
-        public override Node<TKey>? SearchWithRoot(Node<TKey> root, TKey key)
+        public Node<TKey>? SearchWithRoot(Node<TKey> root, TKey key)
         {
             while (true)
             {
-                var result = root.CompareTo(key);
+                var result = root.Key.CompareTo(key);
 
-                if (result > 0)
+                switch (result)
                 {
-                    if (root.Left != null)
-                    {
+                    case 0:
+                        return root;
+                    case > 0 when root.Left != null:
                         root = root.Left;
-                        continue;
-                    }
-
-                    return null;
-                }
-                else if (result < 0)
-                {
-                    if (root.Right != null)
-                    {
+                        break;
+                    case < 0 when root.Right != null:
                         root = root.Right;
-                        continue;
-                    }
-
-                    return null;
-                }
-                else
-                {
-                    return root;
+                        break;
+                    default:
+                        return null;
                 }
             }
         }
@@ -50,16 +39,16 @@ namespace DataStructures.ScapegoatTree
         /// </summary>
         /// <param name="root">Root of the subtree.</param>
         /// <param name="key">Key to search for.</param>
-        /// <returns>True if deletion is successfull, false if key not found.</returns>
+        /// <returns>True if deletion is successful, false if key not found.</returns>
         /// <exception cref="InvalidOperationException">Throws exception if the tree is invalid for some reason.</exception>
-        public override bool TryDeleteWithRoot(Node<TKey> root, TKey key)
+        public bool TryDeleteWithRoot(Node<TKey> root, TKey key)
         {
-            var previous = root;
-            var current = root;
+            Node<TKey> previous = root;
+            ref Node<TKey>? current = ref root!;
 
             while (true)
             {
-                var result = current.CompareTo(key);
+                var result = current.Key.CompareTo(key);
 
                 if (result == 0)
                 {
@@ -68,30 +57,57 @@ namespace DataStructures.ScapegoatTree
 
                 previous = current;
 
-                if (result < 0)
+                switch (result)
                 {
-                    if (current.Right != null)
-                    {
+                    case < 0 when current.Right != null:
                         current = current.Right;
                         continue;
-                    }
-
-                    return false;
-                }
-
-                if (result > 0)
-                {
-                    if (current.Left != null)
-                    {
+                    case > 0 when current.Left != null:
                         current = current.Left;
                         continue;
-                    }
-
-                    return false;
+                    default:
+                        return false;
                 }
             }
 
-            return TryRemove(root, previous, current);
+            Node<TKey>? replacementNode;
+
+            // Case 0: Node has no children.
+            // Case 1: Node has one child.
+            if (current.Left is null || current.Right is null)
+            {
+                replacementNode = current.Left ?? current.Right;
+            }
+
+            // Case 2: Node has two children. (This implementation uses the in-order predecessor to replace node.)
+            else
+            {
+                var predecessorNode = current.Left.GetLargestKeyNode();
+                TryDeleteWithRoot(root, predecessorNode.Key);
+
+                replacementNode = new Node<TKey>(predecessorNode.Key)
+                {
+                    Left = current.Left,
+                    Right = current.Right,
+                };
+            }
+
+            // Replace the relevant node with a replacement found in the previous stages.
+            // Special case for replacing the root node.
+            if (current == root)
+            {
+                current = ref replacementNode;
+            }
+            else if (previous.Left == current)
+            {
+                previous.Left = replacementNode;
+            }
+            else
+            {
+                previous.Right = replacementNode;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -103,39 +119,30 @@ namespace DataStructures.ScapegoatTree
         /// <param name="node">Node to insert.</param>
         /// <param name="path">Stack-based path.</param>
         /// <returns>True - if key is inserted, False - if key is duplicate.</returns>
-        public override bool TryInsertWithRoot(Node<TKey> root, Node<TKey> node, Stack<Node<TKey>> path)
+        public bool TryInsertWithRoot(Node<TKey> root, Node<TKey> node, Stack<Node<TKey>> path)
         {
             while (true)
             {
                 path.Push(root);
 
-                var result = root.CompareTo(node.Key);
+                var result = root.Key.CompareTo(node.Key);
 
-                if (result < 0)
+                switch (result)
                 {
-                    if (root.Right != null)
-                    {
+                    case < 0 when root.Right != null:
                         root = root.Right;
                         continue;
-                    }
-
-                    root.Right = node;
-                    return true;
-                }
-                else if (result > 0)
-                {
-                    if (root.Left != null)
-                    {
+                    case < 0:
+                        root.Right = node;
+                        return true;
+                    case > 0 when root.Left != null:
                         root = root.Left;
                         continue;
-                    }
-
-                    root.Left = node;
-                    return true;
-                }
-                else
-                {
-                    return false;
+                    case > 0:
+                        root.Left = node;
+                        return true;
+                    default:
+                        return false;
                 }
             }
         }
@@ -147,7 +154,7 @@ namespace DataStructures.ScapegoatTree
         /// <param name="alpha">Alpha value.</param>
         /// <param name="path">Stack-based path.</param>
         /// <returns>Returns rebuilded subtree and it's parent node.</returns>
-        public override (Node<TKey>? parent, Node<TKey> subtree) RebuildFromPath(double alpha, Stack<Node<TKey>> path)
+        public (Node<TKey>? parent, Node<TKey> subtree) RebuildFromPath(double alpha, Stack<Node<TKey>> path)
         {
             var (parent, scapegoat) = FindScapegoatInPath(path, alpha);
 
@@ -163,7 +170,7 @@ namespace DataStructures.ScapegoatTree
         /// </summary>
         /// <param name="root">Root of the subtree.</param>
         /// <returns>Returns a node which is a root of rebuilded subtree.</returns>
-        public override Node<TKey> RebuildWithRoot(Node<TKey> root)
+        public Node<TKey> RebuildWithRoot(Node<TKey> root)
         {
             var list = new List<Node<TKey>>();
 
@@ -189,16 +196,13 @@ namespace DataStructures.ScapegoatTree
 
             var depth = 1;
 
-            Node<TKey>? parent = null;
-
-            while (path.TryPop(out var next) && next is not null)
+            while (path.TryPop(out var next))
             {
                 if (depth > next.GetAlphaHeight(alpha))
                 {
-                    return (parent, next);
+                    return path.TryPop(out var parent) ? (parent, next) : (null, next);
                 }
 
-                parent = next;
                 depth++;
             }
 
@@ -247,49 +251,6 @@ namespace DataStructures.ScapegoatTree
                 Left = start > (pivot - 1) ? null : RebuildFromList(list, start, pivot - 1),
                 Right = (pivot + 1) > end ? null : RebuildFromList(list, pivot + 1, end),
             };
-        }
-
-        private bool TryRemove(Node<TKey> root, Node<TKey> previous, Node<TKey> current)
-        {
-            // case 0: Node has no children. Action - delete node:
-            // case 1: Node ahs only one child. Action - add it to parent
-            if (current.Left == null || current.Right == null)
-            {
-                if (previous.Left == current)
-                {
-                    previous.Left = current.Left ?? current.Right;
-                }
-                else
-                {
-                    previous.Right = current.Left ?? current.Right;
-                }
-
-                return true;
-            }
-
-            // case 2: node ahs two children. Action -
-            else
-            {
-                var predecessor = current.Left.GetLargestKeyNode();
-
-                if (!TryDeleteWithRoot(root, predecessor.Key))
-                {
-                    throw new InvalidOperationException("Cannot delete a key. The subtree is invalid.");
-                }
-
-                var tmp = new Node<TKey>(predecessor.Key, current.Right, current.Left);
-
-                if (previous.Left == current)
-                {
-                    previous.Left = tmp;
-                }
-                else
-                {
-                    predecessor.Right = tmp;
-                }
-
-                return true;
-            }
         }
     }
 }

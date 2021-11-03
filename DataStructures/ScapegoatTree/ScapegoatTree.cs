@@ -22,7 +22,7 @@ namespace DataStructures.ScapegoatTree
 
         public int MaxSize { get; private set; }
 
-        public ScapegoatTreeImplementationBase<TKey> Base { get; }
+        public IScapegoatTreeImplementable<TKey> Base { get; }
 
         public event EventHandler? TreeIsUnbalanced;
 
@@ -41,18 +41,24 @@ namespace DataStructures.ScapegoatTree
         {
         }
 
-        public ScapegoatTree(ScapegoatTreeImplementationBase<TKey> implementation)
+        public ScapegoatTree(IScapegoatTreeImplementable<TKey> implementation)
             : this(alpha: 0.5, size: 0, implementation)
         {
         }
 
-        public ScapegoatTree(TKey key, double alpha, ScapegoatTreeImplementationBase<TKey>? implementation = default)
+        public ScapegoatTree(Node<TKey> node, double alpha, IScapegoatTreeImplementable<TKey>? implementation = default)
+            : this(alpha, size: node.GetSize(), implementation)
+        {
+            this.Root = node;
+        }
+
+        public ScapegoatTree(TKey key, double alpha, IScapegoatTreeImplementable<TKey>? implementation = default)
             : this(alpha, size: 1, implementation)
         {
             this.Root = new Node<TKey>(key);
         }
 
-        private ScapegoatTree(double alpha, int size, ScapegoatTreeImplementationBase<TKey>? implementation)
+        private ScapegoatTree(double alpha, int size, IScapegoatTreeImplementable<TKey>? implementation)
         {
             CheckAlpha(alpha);
 
@@ -195,6 +201,14 @@ namespace DataStructures.ScapegoatTree
             return GetEnumerator();
         }
 
+        private static void CheckAlpha(double alpha)
+        {
+            if (alpha is < 0.5 or > 1.0)
+            {
+                throw new ArgumentException("The alpha parameter's value should be in 0.5..1.0 range.", nameof(alpha));
+            }
+        }
+
         private void RebalanceFromPath(Stack<Node<TKey>> path)
         {
             var (parent, tree) = Base.RebuildFromPath(Alpha, path);
@@ -205,18 +219,15 @@ namespace DataStructures.ScapegoatTree
             }
             else
             {
-                var result = parent.CompareTo(tree.Key);
+                var result = parent.Key.CompareTo(tree.Key);
 
                 if (result < 0)
                 {
                     parent.Right = tree;
-                    return;
                 }
-
-                if (result > 0)
+                else
                 {
                     parent.Left = tree;
-                    return;
                 }
             }
         }
@@ -225,14 +236,6 @@ namespace DataStructures.ScapegoatTree
         {
             Size += 1;
             MaxSize = Math.Max(Size, MaxSize);
-        }
-
-        private void CheckAlpha(double alpha)
-        {
-            if (alpha is < 0.5 or > 1.0)
-            {
-                throw new ArgumentException("The alpha parameter's value should be in 0.5..1.0 range.", nameof(alpha));
-            }
         }
     }
 }

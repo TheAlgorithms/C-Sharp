@@ -14,7 +14,7 @@ namespace DataStructures.Tests.ScapegoatTree
         [TestCase("B", "A")]
         public void RightSet_OtherKeyPrecedesRightKey_ThrowsException<TKey>(TKey a, TKey b)
             where TKey : IComparable
-        { 
+        {
             var instance = new Node<TKey>(a);
             var other = new Node<TKey>(b);
 
@@ -26,7 +26,7 @@ namespace DataStructures.Tests.ScapegoatTree
         [TestCase("A","B")]
         public void RightSet_OtherKeyFollowsRightKey_AddsChild<TKey>(TKey a, TKey b)
             where TKey : IComparable
-        { 
+        {
             var instance = new Node<TKey>(a);
             var other = new Node<TKey>(b);
 
@@ -38,7 +38,7 @@ namespace DataStructures.Tests.ScapegoatTree
         [TestCase("A","B")]
         public void LeftSet_OtherKeyFolowsLeftKey_ThrowsException<TKey>(TKey a, TKey b)
             where TKey : IComparable
-        { 
+        {
             var instance = new Node<TKey>(a);
             var other = new Node<TKey>(b);
 
@@ -50,7 +50,7 @@ namespace DataStructures.Tests.ScapegoatTree
         [TestCase("B", "A")]
         public void LeftSet_OtherKeyPrecedesLeftKey_AddsChild<TKey>(TKey a, TKey b)
             where TKey : IComparable
-        { 
+        {
             var instance = new Node<TKey>(a);
             var other = new Node<TKey>(b);
 
@@ -67,7 +67,7 @@ namespace DataStructures.Tests.ScapegoatTree
             var instance = new Node<TKey>(a);
             var other = new Node<TKey>(b);
 
-            var result = instance.CompareTo(other.Key);
+            var result = instance.Key.CompareTo(other.Key);
 
             Assert.AreEqual(result, -1);
         }
@@ -81,7 +81,7 @@ namespace DataStructures.Tests.ScapegoatTree
             var instance = new Node<TKey>(a);
             var other = new Node<TKey>(b);
 
-            var result = instance.CompareTo(other.Key);
+            var result = instance.Key.CompareTo(other.Key);
 
             Assert.AreEqual(result, 1);
         }
@@ -95,7 +95,7 @@ namespace DataStructures.Tests.ScapegoatTree
             var instance = new Node<TKey>(a);
             var other = new Node<TKey>(b);
 
-            var result = instance.CompareTo(other.Key);
+            var result = instance.Key.CompareTo(other.Key);
 
             Assert.AreEqual(result, 0);
         }
