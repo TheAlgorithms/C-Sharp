@@ -36,7 +36,7 @@ namespace DataStructures.Tests.ScapegoatTree
         [Test]
         [TestCase(1,2)]
         [TestCase("A","B")]
-        public void LeftSet_OtherKeyFolowsLeftKey_ThrowsException<TKey>(TKey a, TKey b)
+        public void LeftSet_OtherKeyFollowsLeftKey_ThrowsException<TKey>(TKey a, TKey b)
             where TKey : IComparable
         {
             var instance = new Node<TKey>(a);

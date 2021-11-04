@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataStructures.ScapegoatTree;
 using NUnit.Framework;
@@ -16,8 +17,6 @@ namespace DataStructures.Tests.ScapegoatTree
             Assert.IsTrue(tree.Size == 0);
             Assert.IsTrue(tree.MaxSize == 0);
             Assert.AreEqual(0.5, tree.Alpha);
-            Assert.IsNotNull(tree.Base);
-            Assert.IsInstanceOf<ScapegoatTreeImplementation<int>>(tree.Base);
         }
 
         [Test]
@@ -31,8 +30,6 @@ namespace DataStructures.Tests.ScapegoatTree
             Assert.IsTrue(tree.Size == 0);
             Assert.IsTrue(tree.MaxSize == 0);
             Assert.AreEqual(expected, tree.Alpha);
-            Assert.IsNotNull(tree.Base);
-            Assert.IsInstanceOf<ScapegoatTreeImplementation<int>>(tree.Base);
         }
 
         [Test]
@@ -42,7 +39,6 @@ namespace DataStructures.Tests.ScapegoatTree
         {
             Assert.Throws<ArgumentException>(() => new ScapegoatTree<int>(alpha));
             Assert.Throws<ArgumentException>(() => new ScapegoatTree<int>(1, alpha));
-            Assert.Throws<ArgumentException>(() => new ScapegoatTree<int>(1, alpha, new ScapegoatTreeTestImplementation<int>()));
         }
 
         [Test]
@@ -57,23 +53,6 @@ namespace DataStructures.Tests.ScapegoatTree
             Assert.IsTrue(tree.Size == 1);
             Assert.IsTrue(tree.MaxSize == 1);
             Assert.AreEqual(0.5, tree.Alpha);
-            Assert.IsNotNull(tree.Base);
-            Assert.IsInstanceOf<ScapegoatTreeImplementation<int>>(tree.Base);
-        }
-
-        [Test]
-        public void Constructor_ImplementationParameter_InstanceIsValid()
-        {
-            var expected = new ScapegoatTreeTestImplementation<int>();
-
-            var tree = new ScapegoatTree<int>(expected);
-
-            Assert.IsNull(tree.Root);
-            Assert.IsTrue(tree.Size == 0);
-            Assert.IsTrue(tree.MaxSize == 0);
-            Assert.AreEqual(0.5, tree.Alpha);
-            Assert.IsNotNull(tree.Base);
-            Assert.IsInstanceOf<ScapegoatTreeTestImplementation<int>>(tree.Base);
         }
 
         [Test]
@@ -88,42 +67,20 @@ namespace DataStructures.Tests.ScapegoatTree
             Assert.IsTrue(tree.Size == 1);
             Assert.IsTrue(tree.MaxSize == 1);
             Assert.AreEqual(alpha, tree.Alpha);
-            Assert.IsNotNull(tree.Base);
-            Assert.IsInstanceOf<ScapegoatTreeImplementation<int>>(tree.Base);
         }
 
         [Test]
-        public void Constructor_KeyAlphaAndImplementationParameters_InstanceIsValid()
-        {
-            var key = 10;
-            var alpha = 0.8;
-            var implementation = new ScapegoatTreeTestImplementation<int>();
-
-            var tree = new ScapegoatTree<int>(key, alpha, implementation);
-
-            Assert.IsNotNull(tree.Root);
-            Assert.IsTrue(tree.Size == 1);
-            Assert.IsTrue(tree.MaxSize == 1);
-            Assert.AreEqual(alpha, tree.Alpha);
-            Assert.IsNotNull(tree.Base);
-            Assert.IsInstanceOf<ScapegoatTreeTestImplementation<int>>(tree.Base);
-        }
-
-        [Test]
-        public void Constructor_NodeAlphaAndImplementationParameters_InstanceIsValid()
+        public void Constructor_NodeAndAlphaParameters_InstanceIsValid()
         {
             var node = new Node<int>(10, new Node<int>(11), new Node<int>(1));
             var alpha = 0.8;
-            var implementation = new ScapegoatTreeTestImplementation<int>();
 
-            var tree = new ScapegoatTree<int>(node, alpha, implementation);
+            var tree = new ScapegoatTree<int>(node, alpha);
 
             Assert.IsNotNull(tree.Root);
             Assert.IsTrue(tree.Size == 3);
             Assert.IsTrue(tree.MaxSize == 3);
             Assert.AreEqual(alpha, tree.Alpha);
-            Assert.IsNotNull(tree.Base);
-            Assert.IsInstanceOf<ScapegoatTreeTestImplementation<int>>(tree.Base);
         }
 
         [Test]
@@ -158,11 +115,15 @@ namespace DataStructures.Tests.ScapegoatTree
         }
 
         [Test]
-        public void Search_KeyIsNotPresent_ReturnsNull()
+        [TestCase(-2)]
+        [TestCase(3)]
+        public void Search_KeyIsNotPresent_ReturnsNull(int key)
         {
-            var tree = new ScapegoatTree<int>(key: 1);
+            var root = new Node<int>(1, new Node<int>(2), new Node<int>(-1));
 
-            var result = tree.Search(2);
+            var tree = new ScapegoatTree<int>(root, 0.5);
+
+            var result = tree.Search(key);
 
             Assert.IsNull(result);
         }
@@ -240,7 +201,6 @@ namespace DataStructures.Tests.ScapegoatTree
             Assert.IsTrue(deleted);
             Assert.IsNull(tree.Root);
             Assert.AreEqual(0, tree.Size);
-            Assert.AreEqual(tree.Size, tree.MaxSize);
         }
 
         [Test]
@@ -256,7 +216,6 @@ namespace DataStructures.Tests.ScapegoatTree
 
             Assert.IsTrue(deleted);
             Assert.AreEqual(1, tree.Size);
-            Assert.AreEqual(tree.Size, tree.MaxSize);
         }
 
         [Test]
@@ -272,7 +231,6 @@ namespace DataStructures.Tests.ScapegoatTree
 
             Assert.IsTrue(deleted);
             Assert.AreEqual(1, tree.Size);
-            Assert.AreEqual(tree.Size, tree.MaxSize);
         }
 
         [Test]
@@ -292,7 +250,6 @@ namespace DataStructures.Tests.ScapegoatTree
 
             Assert.IsTrue(deleted);
             Assert.AreEqual(2, tree.Size);
-            Assert.AreEqual(tree.Size, tree.MaxSize);
         }
 
         [Test]
@@ -352,6 +309,26 @@ namespace DataStructures.Tests.ScapegoatTree
         }
 
         [Test]
+        [TestCase(20, new[]{10,30,5,11,29,40,50}, 10, 1)]
+        public void Delete_TreeIsUnbalanced_MaxSizeEqualsSize(int root, int[] keys, int candidate, double alpha)
+        {
+            var tree = new ScapegoatTree<int>(root, alpha);
+
+            tree.TreeIsUnbalanced += FailTreeIsUnbalanced;
+
+            foreach (var item in keys)
+            {
+                Assert.DoesNotThrow(() => tree.Insert(item));
+            }
+
+            tree.TreeIsUnbalanced -= FailTreeIsUnbalanced;
+
+            tree.Delete(candidate);
+
+            Assert.AreEqual(tree.Size, tree.MaxSize);
+        }
+
+        [Test]
         [TestCase(3, new[]{2,5,1,6}, -1, 0.5)]
         [TestCase(3, new[]{2,5,1,6}, 7, 0.5)]
         public void Insert_TreeIsUnbalanced_BalancesTree(int root, int[] keys, int candidate, double alpha)
@@ -371,6 +348,18 @@ namespace DataStructures.Tests.ScapegoatTree
 
             Assert.True(inserted);
             Assert.True(tree.Size == 6);
+            Assert.True(tree.IsAlphaWeightBalanced());
+        }
+
+        [TestCase(3, 5, 0.5)]
+        public void Insert_TreeIsUnbalanced_BalancesTree2(int root, int candidate, double alpha)
+        {
+            var tree = new ScapegoatTree<int>(root, alpha);
+
+            var inserted = tree.Insert(candidate);
+
+            Assert.True(inserted);
+            Assert.True(tree.Size == 2);
             Assert.True(tree.IsAlphaWeightBalanced());
         }
 
@@ -477,24 +466,19 @@ namespace DataStructures.Tests.ScapegoatTree
         }
 
         [Test]
-        public void Delete_TreeIsUnbalanced_MaxSizeEqualsSize()
+        public void FindScapegoatInPath_PathIsEmpty_ThrowsAnException()
         {
-            var root = new Node<int>(3, new Node<int>(5), new Node<int>(2));
-            //root.Left!.Left = new Node<int>(1);
-            root.Right!.Right = new Node<int>(6);
-            root.Right!.Right.Right = new Node<int>(7);
-            root.Right!.Right.Right.Right = new Node<int>(9, new Node<int>(10), null);
+            var tree = new ScapegoatTree<int>();
+            Assert.Throws<ArgumentException>(() => tree.FindScapegoatInPath(new Stack<Node<int>>()));
+        }
 
-            var tree = new ScapegoatTree<int>(root, 0.5);
-
-            tree.TreeIsUnbalanced += PassTreeIsUnbalanced;
-
-            Assert.Throws<SuccessException>(() =>
-            {
-                tree.Delete(3);
-            });
-
-            Assert.AreEqual(tree.Size, tree.MaxSize);
+        [Test]
+        public void FindScapegoatInPath_ScapegoatIsNotPresent_ThrowsAnException()
+        {
+            var tree = new ScapegoatTree<int>(1, 1);
+            var path = new Stack<Node<int>>();
+            path.Push(tree.Root!);
+            Assert.Throws<InvalidOperationException>(() => tree.FindScapegoatInPath(path));
         }
 
         private static void FailTreeIsUnbalanced(object? sender, EventArgs? e)

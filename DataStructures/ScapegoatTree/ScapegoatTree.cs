@@ -5,13 +5,6 @@ using System.Linq;
 
 namespace DataStructures.ScapegoatTree
 {
-    /// <summary>
-    /// Self-balancing binary search tree. Will balance itself during delete and insert operations.
-    /// Worst-case O(log n) lookup time, and O(log n) amortized insertion and deletion time.
-    /// No additional pre-node memory overhead - each node only stores a key and two pointers to child nodes.
-    /// Balancing logic depends on <see cref="Alpha"/> value, which should be in (0.5 .. 1) range.
-    /// </summary>
-    /// <typeparam name="TKey">Type of the tree node value.</typeparam>
     public class ScapegoatTree<TKey> : IEnumerable<TKey> where TKey : IComparable
     {
         public double Alpha { get; private set; }
@@ -22,47 +15,33 @@ namespace DataStructures.ScapegoatTree
 
         public int MaxSize { get; private set; }
 
-        public IScapegoatTreeImplementable<TKey> Base { get; }
-
         public event EventHandler? TreeIsUnbalanced;
 
         public ScapegoatTree()
-            : this(alpha: 0.5, size: 0, implementation: default)
+            : this(alpha: 0.5, size: 0)
         {
         }
 
         public ScapegoatTree(double alpha)
-            : this(alpha, size: 0, implementation: default)
+            : this(alpha, size: 0)
         {
         }
 
-        public ScapegoatTree(TKey key)
-            : this(key, alpha: 0.5, implementation: default)
-        {
-        }
-
-        public ScapegoatTree(IScapegoatTreeImplementable<TKey> implementation)
-            : this(alpha: 0.5, size: 0, implementation)
-        {
-        }
-
-        public ScapegoatTree(Node<TKey> node, double alpha, IScapegoatTreeImplementable<TKey>? implementation = default)
-            : this(alpha, size: node.GetSize(), implementation)
+        public ScapegoatTree(Node<TKey> node, double alpha)
+            : this(alpha, size: node.GetSize())
         {
             this.Root = node;
         }
 
-        public ScapegoatTree(TKey key, double alpha, IScapegoatTreeImplementable<TKey>? implementation = default)
-            : this(alpha, size: 1, implementation)
+        public ScapegoatTree(TKey key, double alpha = 0.5)
+            : this(alpha, size: 1)
         {
             this.Root = new Node<TKey>(key);
         }
 
-        private ScapegoatTree(double alpha, int size, IScapegoatTreeImplementable<TKey>? implementation)
+        private ScapegoatTree(double alpha, int size)
         {
             CheckAlpha(alpha);
-
-            this.Base = implementation ?? new ScapegoatTreeImplementation<TKey>();
 
             this.Alpha = alpha;
 
@@ -76,17 +55,6 @@ namespace DataStructures.ScapegoatTree
         }
 
         /// <summary>
-        /// Searches specified key value in the tree.
-        /// Classic binary search algorithm.
-        /// </summary>
-        /// <param name="key">Key value.</param>
-        /// <returns>Returns node or null if tree is empty or node does not exists.</returns>
-        public Node<TKey>? Search(TKey key)
-        {
-            return Root == null ? null : Base.SearchWithRoot(Root, key);
-        }
-
-        /// <summary>
         /// Check if any node in the tree has specified key value.
         /// </summary>
         /// <param name="key">Key value.</param>
@@ -96,15 +64,35 @@ namespace DataStructures.ScapegoatTree
             return Search(key) != null;
         }
 
-        /// <summary>
-        /// Inserts new node with specified key value.
-        /// Doesn't insert duplicate keys. If the key already exists in the tree, method returns false.
-        /// Uses binary search and insert algorithm to insert new node.
-        /// On successful insertion, checks if the tree became unbalanced.
-        /// Uses scapegoat algorithm to find a scapegoat node which subtree is unbalanced and balances it.
-        /// </summary>
-        /// <param name="key">Key value.</param>
-        /// <returns>Returns true if insertion is successful. False, if not.</returns>
+        public Node<TKey>? Search(TKey key)
+        {
+            if (Root == null)
+            {
+                return null;
+            }
+
+            var current = Root;
+
+            while (true)
+            {
+                var result = current.Key.CompareTo(key);
+
+                switch (result)
+                {
+                    case 0:
+                        return current;
+                    case > 0 when current.Left != null:
+                        current = current.Left;
+                        break;
+                    case < 0 when current.Right != null:
+                        current = current.Right;
+                        break;
+                    default:
+                        return null;
+                }
+            }
+        }
+
         public bool Insert(TKey key)
         {
             var node = new Node<TKey>(key);
@@ -120,32 +108,51 @@ namespace DataStructures.ScapegoatTree
 
             var path = new Stack<Node<TKey>>();
 
-            if (Base.TryInsertWithRoot(Root, node, path))
+            var current = Root;
+
+            var found = false;
+
+            while (!found)
             {
-                UpdateSizes();
+                path.Push(current);
 
-                if (path.Count > Root.GetAlphaHeight(Alpha))
+                var result = current.Key.CompareTo(node.Key);
+
+                switch (result)
                 {
-                    TreeIsUnbalanced?.Invoke(this, EventArgs.Empty);
-
-                    RebalanceFromPath(path);
-
-                    MaxSize = Math.Max(MaxSize, Size);
+                    case < 0 when current.Right != null:
+                        current = current.Right;
+                        continue;
+                    case < 0:
+                        current.Right = node;
+                        found = true;
+                        break;
+                    case > 0 when current.Left != null:
+                        current = current.Left;
+                        continue;
+                    case > 0:
+                        current.Left = node;
+                        found = true;
+                        break;
+                    default:
+                        return false;
                 }
-
-                return true;
             }
 
-            return false;
+            UpdateSizes();
+
+            if (path.Count > Root.GetAlphaHeight(Alpha))
+            {
+                TreeIsUnbalanced?.Invoke(this, EventArgs.Empty);
+
+                RebalanceFromPath(path);
+
+                MaxSize = Math.Max(MaxSize, Size);
+            }
+
+            return true;
         }
 
-        /// <summary>
-        /// Deletes a node with specified key from the tree.
-        /// Uses binary search and delete algorithm to find and remove the node.
-        /// After successful removal checks if the tree is unbalanced.
-        /// </summary>
-        /// <param name="key">Key value.</param>
-        /// <returns>Returns true if removal is successful, otherwise false.</returns>
         public bool Delete(TKey key)
         {
             if (Root == null)
@@ -153,7 +160,7 @@ namespace DataStructures.ScapegoatTree
                 return false;
             }
 
-            if (Base.TryDeleteWithRoot(Root, key))
+            if (Remove(Root, Root, key))
             {
                 Size--;
 
@@ -161,7 +168,12 @@ namespace DataStructures.ScapegoatTree
                 {
                     TreeIsUnbalanced?.Invoke(this, EventArgs.Empty);
 
-                    Root = Base.RebuildWithRoot(Root);
+                    var list = new List<Node<TKey>>();
+
+                    Extensions.FlattenTree(Root, list);
+
+                    Root = Extensions.RebuildFromList(list, 0, list.Count - 1);
+
                     MaxSize = Size;
                 }
 
@@ -191,6 +203,28 @@ namespace DataStructures.ScapegoatTree
             this.Alpha = value;
         }
 
+        public (Node<TKey>? parent, Node<TKey> scapegoat) FindScapegoatInPath(Stack<Node<TKey>> path)
+        {
+            if (path.Count == 0)
+            {
+                throw new ArgumentException("The path collection should not be empty.", nameof(path));
+            }
+
+            var depth = 1;
+
+            while (path.TryPop(out var next))
+            {
+                if (depth > next.GetAlphaHeight(Alpha))
+                {
+                    return path.TryPop(out var parent) ? (parent, next) : (null, next);
+                }
+
+                depth++;
+            }
+
+            throw new InvalidOperationException("Scapegoat node wasn't found. The tree should be unbalanced.");
+        }
+
         public IEnumerator<TKey> GetEnumerator()
         {
             return (Root ?? Enumerable.Empty<TKey>()).GetEnumerator();
@@ -209,9 +243,73 @@ namespace DataStructures.ScapegoatTree
             }
         }
 
+        private bool Remove(Node<TKey>? parent, Node<TKey>? node, TKey key)
+        {
+            if (node is null || parent is null)
+            {
+                return false;
+            }
+
+            var compareResult = node.Key.CompareTo(key);
+
+            if (compareResult > 0)
+            {
+                return Remove(node, node.Left, key);
+            }
+
+            if (compareResult < 0)
+            {
+                return Remove(node, node.Right, key);
+            }
+
+            Node<TKey>? replacementNode;
+
+            // Case 0: Node has no children.
+            // Case 1: Node has one child.
+            if (node.Left is null || node.Right is null)
+            {
+                replacementNode = node.Left ?? node.Right;
+            }
+
+            // Case 2: Node has two children. (This implementation uses the in-order predecessor to replace node.)
+            else
+            {
+                var predecessorNode = node.Left.GetLargestKeyNode();
+                Remove(Root, Root, predecessorNode.Key);
+                replacementNode = new Node<TKey>(predecessorNode.Key)
+                {
+                    Left = node.Left,
+                    Right = node.Right,
+                };
+            }
+
+            // Replace the relevant node with a replacement found in the previous stages.
+            // Special case for replacing the root node.
+            if (node == Root)
+            {
+                Root = replacementNode;
+            }
+            else if (parent.Left == node)
+            {
+                parent.Left = replacementNode;
+            }
+            else
+            {
+                parent.Right = replacementNode;
+            }
+
+            return true;
+        }
+
         private void RebalanceFromPath(Stack<Node<TKey>> path)
         {
-            var (parent, tree) = Base.RebuildFromPath(Alpha, path);
+            var (parent, scapegoat) = FindScapegoatInPath(path);
+
+            var list = new List<Node<TKey>>();
+
+            Extensions.FlattenTree(scapegoat, list);
+
+            var tree = Extensions.RebuildFromList(list, 0, list.Count - 1);
 
             if (parent == null)
             {
