@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using DataStructures.ScapegoatTree;
 using NUnit.Framework;
 
@@ -12,7 +11,7 @@ namespace DataStructures.Tests.ScapegoatTree
         [Test]
         [TestCase(2,1)]
         [TestCase("B", "A")]
-        public void RightSet_OtherKeyPrecedesRightKey_ThrowsException<TKey>(TKey a, TKey b)
+        public void RightSetter_OtherKeyPrecedesRightKey_ThrowsException<TKey>(TKey a, TKey b)
             where TKey : IComparable
         {
             var instance = new Node<TKey>(a);
@@ -24,7 +23,7 @@ namespace DataStructures.Tests.ScapegoatTree
         [Test]
         [TestCase(1,2)]
         [TestCase("A","B")]
-        public void RightSet_OtherKeyFollowsRightKey_AddsChild<TKey>(TKey a, TKey b)
+        public void RightSetter_OtherKeyFollowsRightKey_AddsChild<TKey>(TKey a, TKey b)
             where TKey : IComparable
         {
             var instance = new Node<TKey>(a);
@@ -36,7 +35,7 @@ namespace DataStructures.Tests.ScapegoatTree
         [Test]
         [TestCase(1,2)]
         [TestCase("A","B")]
-        public void LeftSet_OtherKeyFollowsLeftKey_ThrowsException<TKey>(TKey a, TKey b)
+        public void LeftSetter_OtherKeyFollowsLeftKey_ThrowsException<TKey>(TKey a, TKey b)
             where TKey : IComparable
         {
             var instance = new Node<TKey>(a);
@@ -48,7 +47,7 @@ namespace DataStructures.Tests.ScapegoatTree
         [Test]
         [TestCase(2,1)]
         [TestCase("B", "A")]
-        public void LeftSet_OtherKeyPrecedesLeftKey_AddsChild<TKey>(TKey a, TKey b)
+        public void LeftSetter_OtherKeyPrecedesLeftKey_AddsChild<TKey>(TKey a, TKey b)
             where TKey : IComparable
         {
             var instance = new Node<TKey>(a);
@@ -129,11 +128,11 @@ namespace DataStructures.Tests.ScapegoatTree
         {
             var node = new Node<int>(1);
             var smaller = new Node<int>(0);
-            var theSmallest = new Node<int>(-1);
+            var smallest = new Node<int>(-1);
             node.Left = smaller;
-            smaller.Left = theSmallest;
+            smaller.Left = smallest;
 
-            Assert.AreEqual(node.GetSmallestKeyNode(), theSmallest);
+            Assert.AreEqual(node.GetSmallestKeyNode(), smallest);
         }
 
         [Test]
@@ -148,12 +147,12 @@ namespace DataStructures.Tests.ScapegoatTree
         public void GetLargestKeyNode_NodeHasLargestChild_ReturnsChild()
         {
             var node = new Node<int>(1);
-            var bigger = new Node<int>(2);
-            var theBiggest = new Node<int>(3);
-            node.Right = bigger;
-            bigger.Right = theBiggest;
+            var larger = new Node<int>(2);
+            var largest = new Node<int>(3);
+            node.Right = larger;
+            larger.Right = largest;
 
-            Assert.AreEqual(node.GetLargestKeyNode(), theBiggest);
+            Assert.AreEqual(node.GetLargestKeyNode(), largest);
         }
 
         [Test]
@@ -186,25 +185,6 @@ namespace DataStructures.Tests.ScapegoatTree
             root.Right = d;
 
             Assert.IsTrue(root.IsAlphaWeightBalanced(0.5));
-        }
-
-        [Test]
-        public void GetEnumerator_TreeHasChildren_ReturnsInOrder()
-        {
-            var root = new Node<int>(0);
-            var a = new Node<int>(-1);
-            var b = new Node<int>(-2);
-            var c = new Node<int>(-3);
-            var d = new Node<int>(1);
-
-            root.Left = a;
-            a.Left = b;
-            b.Left = c;
-            root.Right = d;
-
-            var result = root.AsEnumerable().Aggregate(String.Empty, (s, i) => s + i.ToString());
-
-            Assert.AreEqual("-3-2-101", result);
         }
     }
 }

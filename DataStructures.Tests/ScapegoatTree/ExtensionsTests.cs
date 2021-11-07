@@ -12,16 +12,14 @@ namespace DataStructures.Tests.ScapegoatTree
         {
             var expected = new Node<int>(3)
             {
-                Left = new Node<int>(2)
+                Left = new Node<int>(1)
                 {
-                    Left = new Node<int>(1)
-                    {
-                        Left = new Node<int>(-1),
-                    },
+                    Left = new Node<int>(-1),
+                    Right = new Node<int>(2),
                 },
-                Right = new Node<int>(5)
+                Right = new Node<int>(6)
                 {
-                    Right = new Node<int>(6),
+                    Left = new Node<int>(5),
                 },
             };
 
@@ -39,8 +37,17 @@ namespace DataStructures.Tests.ScapegoatTree
             var tree = Extensions.RebuildFromList(list, 0, list.Count - 1);
 
             Assert.AreEqual(list.Count, tree.GetSize());
-            Assert.AreEqual(expected, tree);
-
+            Assert.AreEqual(expected.Key, tree.Key);
+            Assert.IsNotNull(tree.Left);
+            Assert.IsNotNull(tree.Right);
+            Assert.AreEqual(expected.Left.Key, tree.Left!.Key);
+            Assert.AreEqual(expected.Right.Key, tree.Right!.Key);
+            Assert.IsNotNull(tree.Left.Left);
+            Assert.IsNotNull(tree.Left.Right);
+            Assert.AreEqual(expected.Left.Left.Key, tree.Left!.Left!.Key);
+            Assert.AreEqual(expected.Left.Right.Key, tree.Left!.Right!.Key);
+            Assert.IsNotNull(tree.Right.Left);
+            Assert.AreEqual(expected.Right.Left.Key, tree.Right!.Left!.Key);
         }
 
         [Test]

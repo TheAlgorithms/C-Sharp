@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DataStructures.ScapegoatTree
 {
-    public class ScapegoatTree<TKey> : IEnumerable<TKey> where TKey : IComparable
+    public class ScapegoatTree<TKey> where TKey : IComparable
     {
         public double Alpha { get; private set; }
 
@@ -145,7 +143,7 @@ namespace DataStructures.ScapegoatTree
             {
                 TreeIsUnbalanced?.Invoke(this, EventArgs.Empty);
 
-                RebalanceFromPath(path);
+                BalanceFromPath(path);
 
                 MaxSize = Math.Max(MaxSize, Size);
             }
@@ -225,16 +223,6 @@ namespace DataStructures.ScapegoatTree
             throw new InvalidOperationException("Scapegoat node wasn't found. The tree should be unbalanced.");
         }
 
-        public IEnumerator<TKey> GetEnumerator()
-        {
-            return (Root ?? Enumerable.Empty<TKey>()).GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
         private static void CheckAlpha(double alpha)
         {
             if (alpha is < 0.5 or > 1.0)
@@ -301,7 +289,7 @@ namespace DataStructures.ScapegoatTree
             return true;
         }
 
-        private void RebalanceFromPath(Stack<Node<TKey>> path)
+        private void BalanceFromPath(Stack<Node<TKey>> path)
         {
             var (parent, scapegoat) = FindScapegoatInPath(path);
 

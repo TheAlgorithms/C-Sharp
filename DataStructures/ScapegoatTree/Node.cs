@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace DataStructures.ScapegoatTree
 {
-    public class Node<TKey> : IEnumerable<TKey> where TKey : IComparable
+    public class Node<TKey> where TKey : IComparable
     {
         private Node<TKey>? right;
         private Node<TKey>? left;
@@ -66,32 +64,6 @@ namespace DataStructures.ScapegoatTree
             var isRightBalanced = (Right?.GetSize() ?? 0) <= a * GetSize();
 
             return isLeftBalanced && isRightBalanced;
-        }
-
-        public IEnumerator<TKey> GetEnumerator()
-        {
-            if (Left != null)
-            {
-                foreach (var value in Left)
-                {
-                    yield return value;
-                }
-            }
-
-            yield return Key;
-
-            if (Right != null)
-            {
-                foreach (var value in Right)
-                {
-                    yield return value;
-                }
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
 
         private bool IsGreaterThanOrSameAs(TKey key)

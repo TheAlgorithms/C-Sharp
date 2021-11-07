@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using DataStructures.ScapegoatTree;
 using NUnit.Framework;
 
@@ -164,7 +163,6 @@ namespace DataStructures.Tests.ScapegoatTree
         }
 
         [Test]
-
         public void Insert_KeyIsPresent_ReturnsFalse()
         {
             var tree = new ScapegoatTree<int>(1);
@@ -431,38 +429,6 @@ namespace DataStructures.Tests.ScapegoatTree
             var tree = new ScapegoatTree<int>();
 
             Assert.Throws<ArgumentException>(() => tree.Tune(expected));
-        }
-
-        [Test]
-        public void GetEnumerator_RootIsNull_ReturnsEmpty()
-        {
-            var tree = new ScapegoatTree<int>();
-
-            Assert.AreEqual(Enumerable.Empty<int>(), tree.GetEnumerator());
-        }
-
-        [Test]
-        public void GetEnumerator_RootIsNotNull_ReturnsRootEnumerator()
-        {
-            var tree = new ScapegoatTree<int>(1);
-
-            Assert.AreNotEqual(Enumerable.Empty<int>(), tree.GetEnumerator());
-        }
-
-        [Test]
-        public void IEnumeratorGetEnumerator_RootIsNull_ReturnsEmpty()
-        {
-            var tree = new ScapegoatTree<int>();
-
-            Assert.AreEqual(Enumerable.Empty<int>(), (tree as System.Collections.IEnumerable)!.GetEnumerator());
-        }
-
-        [Test]
-        public void IEnumeratorGetEnumerator_RootIsNotNull_ReturnsEmpty()
-        {
-            var tree = new ScapegoatTree<int>(1);
-
-            Assert.AreNotEqual(Enumerable.Empty<int>(), (tree as System.Collections.IEnumerable)!.GetEnumerator());
         }
 
         [Test]
