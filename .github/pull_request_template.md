@@ -1,6 +1,8 @@
+<!--
 Please include a summary of the change.
 Please also include relevant motivation and context (if applicable).
 Put 'x' in between square brackets to mark an item as complete.
+-->
 
 - [ ] I have performed a self-review of my code
 - [ ] My code follows the style guidelines of this project
@@ -9,4 +11,3 @@ Put 'x' in between square brackets to mark an item as complete.
 - [ ] Comments in areas I changed are up to date
 - [ ] I have added comments to hard-to-understand areas of my code
 - [ ] I have made corresponding changes to the README.md
-- [ ] I have made corresponding changes to the DIRECTORY.md
