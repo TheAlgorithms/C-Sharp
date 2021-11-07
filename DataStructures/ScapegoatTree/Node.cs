@@ -2,6 +2,10 @@ using System;
 
 namespace DataStructures.ScapegoatTree
 {
+    /// <summary>
+    /// Scapegoat tree node class.
+    /// </summary>
+    /// <typeparam name="TKey">Scapegoat tree node key type.</typeparam>
     public class Node<TKey> where TKey : IComparable
     {
         private Node<TKey>? right;
@@ -52,12 +56,22 @@ namespace DataStructures.ScapegoatTree
         /// <returns>Number of elements in the tree.</returns>
         public int GetSize() => (Left?.GetSize() ?? 0) + 1 + (Right?.GetSize() ?? 0);
 
+        /// <summary>
+        /// Gets alpha height of the current node.
+        /// </summary>
+        /// <param name="alpha">Alpha value.</param>
+        /// <returns>Alpha height value.</returns>
         public double GetAlphaHeight(double alpha) => Math.Floor(Math.Log(this.GetSize(), 1.0 / alpha));
 
         public Node<TKey> GetSmallestKeyNode() => Left?.GetSmallestKeyNode() ?? this;
 
         public Node<TKey> GetLargestKeyNode() => Right?.GetLargestKeyNode() ?? this;
 
+        /// <summary>
+        /// Checks if the current node is alpha weight balanced.
+        /// </summary>
+        /// <param name="a">Alpha value.</param>
+        /// <returns>True - if node is alpha weight balanced. If not - false.</returns>
         public bool IsAlphaWeightBalanced(double a)
         {
             var isLeftBalanced = (Left?.GetSize() ?? 0) <= a * GetSize();

@@ -3,16 +3,36 @@ using System.Collections.Generic;
 
 namespace DataStructures.ScapegoatTree
 {
+    /// <summary>
+    /// A scapegoat implementation class.
+    /// See https://people.csail.mit.edu/rivest/pubs/GR93.pdf for more information about scapegoat tree.
+    /// </summary>
+    /// <typeparam name="TKey">The scapegoat tree key type.</typeparam>
     public class ScapegoatTree<TKey> where TKey : IComparable
     {
+        /// <summary>
+        /// Gets the α (alpha) value of the tree.
+        /// </summary>
         public double Alpha { get; private set; }
 
+        /// <summary>
+        /// Gets the root node of the tree.
+        /// </summary>
         public Node<TKey>? Root { get; private set; }
 
+        /// <summary>
+        /// Gets the number of nodes in the tree.
+        /// </summary>
         public int Size { get; private set; }
 
+        /// <summary>
+        /// Gets the maximal value of the tree Size since the last time the tree was completely rebuilt.
+        /// </summary>
         public int MaxSize { get; private set; }
 
+        /// <summary>
+        /// Gets an event handler which will fire when tree is being balanced.
+        /// </summary>
         public event EventHandler? TreeIsUnbalanced;
 
         public ScapegoatTree()
@@ -47,6 +67,10 @@ namespace DataStructures.ScapegoatTree
             this.MaxSize = size;
         }
 
+        /// <summary>
+        /// Checks if current instance of the scapegoat tree is alpha weight balanced.
+        /// </summary>
+        /// <returns>True - if tree is alpha weight balanced. Otherwise, false.</returns>
         public bool IsAlphaWeightBalanced()
         {
             return Root?.IsAlphaWeightBalanced(Alpha) ?? true;
@@ -62,6 +86,11 @@ namespace DataStructures.ScapegoatTree
             return Search(key) != null;
         }
 
+        /// <summary>
+        /// Searches current instance of the scapegoat tree for specified key.
+        /// </summary>
+        /// <param name="key">Key value.</param>
+        /// <returns>Node with the specified key or null.</returns>
         public Node<TKey>? Search(TKey key)
         {
             if (Root == null)
@@ -91,6 +120,11 @@ namespace DataStructures.ScapegoatTree
             }
         }
 
+        /// <summary>
+        /// Inserts a new key into current instance of the scapegoat tree. Rebuilds tree if it's unbalanced.
+        /// </summary>
+        /// <param name="key">Key value.</param>
+        /// <returns>True - if insertion is successful, false - if the key is already present in the tree.</returns>
         public bool Insert(TKey key)
         {
             var node = new Node<TKey>(key);
@@ -151,6 +185,11 @@ namespace DataStructures.ScapegoatTree
             return true;
         }
 
+        /// <summary>
+        /// Removes the specified key from the current instance of the scapegoat tree. Rebuilds tree if it's unbalanced.
+        /// </summary>
+        /// <param name="key">Key value.</param>
+        /// <returns>True - if key was successfully removed, false - if the key wasn't found in the tree.</returns>
         public bool Delete(TKey key)
         {
             if (Root == null)
@@ -201,6 +240,13 @@ namespace DataStructures.ScapegoatTree
             this.Alpha = value;
         }
 
+        /// <summary>
+        /// Searches for a scapegoat node in provided stack.
+        /// </summary>
+        /// <param name="path">Stack instance with nodes, starting with root node.</param>
+        /// <returns>Scapegoat node with its parent node. Parent can be null if scapegoat node is root node.</returns>
+        /// <exception cref="ArgumentException">Thrown if path stack is empty.</exception>
+        /// <exception cref="InvalidOperationException">Thrown if scapegoat wasn't found.</exception>
         public (Node<TKey>? parent, Node<TKey> scapegoat) FindScapegoatInPath(Stack<Node<TKey>> path)
         {
             if (path.Count == 0)

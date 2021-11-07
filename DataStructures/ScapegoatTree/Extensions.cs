@@ -5,6 +5,12 @@ namespace DataStructures.ScapegoatTree
 {
     public static class Extensions
     {
+        /// <summary>
+        /// Flattens scapegoat tree into a list of nodes.
+        /// </summary>
+        /// <param name="root">Scapegoat tree provided as root node.</param>
+        /// <param name="list">An empty list.</param>
+        /// <typeparam name="TKey">Scapegoat tree node key type.</typeparam>
         public static void FlattenTree<TKey>(Node<TKey> root, List<Node<TKey>> list) where TKey : IComparable
         {
             if (root.Left != null)
@@ -20,6 +26,16 @@ namespace DataStructures.ScapegoatTree
             }
         }
 
+        /// <summary>
+        /// Rebuilds a scapegoat tree from list of nodes.
+        /// Use with <see cref="FlattenTree{TKey}"/> method.
+        /// </summary>
+        /// <param name="list">Flattened tree.</param>
+        /// <param name="start">Start index.</param>
+        /// <param name="end">End index.</param>
+        /// <typeparam name="TKey">Scapegoat tree node key type.</typeparam>
+        /// <returns>Scapegoat tree root node.</returns>
+        /// <exception cref="ArgumentException">Thrown if start index is invalid.</exception>
         public static Node<TKey> RebuildFromList<TKey>(IList<Node<TKey>> list, int start, int end)
             where TKey : IComparable
         {
