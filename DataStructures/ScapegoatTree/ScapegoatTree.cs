@@ -5,7 +5,7 @@ namespace DataStructures.ScapegoatTree
 {
     /// <summary>
     /// A scapegoat implementation class.
-    /// See https://people.csail.mit.edu/rivest/pubs/GR93.pdf for more information about scapegoat tree.
+    /// See https://en.wikipedia.org/wiki/Scapegoat_tree for more information about scapegoat tree.
     /// </summary>
     /// <typeparam name="TKey">The scapegoat tree key type.</typeparam>
     public class ScapegoatTree<TKey> where TKey : IComparable
