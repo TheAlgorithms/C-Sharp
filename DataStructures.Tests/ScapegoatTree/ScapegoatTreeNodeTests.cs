@@ -7,7 +7,6 @@ namespace DataStructures.Tests.ScapegoatTree
     [TestFixture]
     public class ScapegoatTreeNodeTests
     {
-
         [Test]
         [TestCase(2,1)]
         [TestCase("B", "A")]
@@ -55,7 +54,6 @@ namespace DataStructures.Tests.ScapegoatTree
 
             Assert.DoesNotThrow(() => instance.Left = other);
         }
-
 
         [Test]
         [TestCase(1,2)]
