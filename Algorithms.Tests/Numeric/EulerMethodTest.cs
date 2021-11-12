@@ -11,7 +11,7 @@ namespace Algorithms.Tests.Numeric
         [Test]
         public static void TestLinearEquation()
         {
-            Func<double, double, double> exampleEquation = (x, y) => x;
+            Func<double, double, double> exampleEquation = (x, _) => x;
             List<double[]> points = EulerMethod.EulerFull(0, 4, 0.001, 0, exampleEquation);
             var yEnd = points[^1][1];
             yEnd.Should().BeApproximately(8, 0.01);
@@ -21,7 +21,7 @@ namespace Algorithms.Tests.Numeric
         public static void TestExampleWikipedia()
         {
             // example from https://en.wikipedia.org/wiki/Euler_method
-            Func<double, double, double> exampleEquation = (x, y) => y;
+            Func<double, double, double> exampleEquation = (_, y) => y;
             List<double[]> points = EulerMethod.EulerFull(0, 4, 0.0125, 1, exampleEquation);
             var yEnd = points[^1][1];
             yEnd.Should().BeApproximately(53.26, 0.01);
@@ -39,23 +39,23 @@ namespace Algorithms.Tests.Numeric
             //     y_2 = 1.025 + 0.025 * (0.025 + 1.025 + 0.025 * 1.025) = 1.051890625
             Func<double, double, double> exampleEquation = (x, y) => x + y + x * y;
             List<double[]> points = EulerMethod.EulerFull(0, 0.05, 0.025, 1, exampleEquation);
-            var y_1 = points[1][1];
-            var y_2 = points[2][1];
-            Assert.AreEqual(y_1, 1.025);
-            Assert.AreEqual(y_2, 1.051890625);
+            var y1 = points[1][1];
+            var y2 = points[2][1];
+            Assert.AreEqual(y1, 1.025);
+            Assert.AreEqual(y2, 1.051890625);
         }
 
         [Test]
         public static void StepsizeIsZeroOrNegative_ThrowsArgumentOutOfRangeException()
         {
-            Func<double, double, double> exampleEquation = (x, y) => x;
+            Func<double, double, double> exampleEquation = (x, _) => x;
             Assert.Throws<ArgumentOutOfRangeException>(() => EulerMethod.EulerFull(0, 4, 0, 0, exampleEquation));
         }
 
         [Test]
         public static void StartIsLargerThanEnd_ThrowsArgumentOutOfRangeException()
         {
-            Func<double, double, double> exampleEquation = (x, y) => x;
+            Func<double, double, double> exampleEquation = (x, _) => x;
             Assert.Throws<ArgumentOutOfRangeException>(() => EulerMethod.EulerFull(0, -4, 0.1, 0, exampleEquation));
         }
     }

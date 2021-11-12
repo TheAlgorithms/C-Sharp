@@ -13,7 +13,7 @@ namespace DataStructures.DisjointSet
         /// </summary>
         /// <param name="x">element to add in to the DS.</param>
         /// <returns>representative of x.</returns>
-        public Node<T> MakeSet(T x) => new Node<T>(x);
+        public Node<T> MakeSet(T x) => new(x);
 
         /// <summary>
         /// find the representative of a certain node.

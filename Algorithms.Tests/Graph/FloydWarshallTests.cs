@@ -46,7 +46,7 @@ namespace Algorithms.Tests.Graph
                 { 3, 0, -4, 1, -1 },
                 { 7, 4, 0, 5, 3 },
                 { 2, -1, -5, 0, -2 },
-                { 8, 5, 1, 6, 0 }
+                { 8, 5, 1, 6, 0 },
             };
 
             var floydWarshaller = new FloydWarshall<int>();

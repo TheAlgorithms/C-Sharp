@@ -18,7 +18,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 3, 0, 5, 6 },
                 { 4, 5, 0, float.PositiveInfinity },
                 { float.PositiveInfinity, 6, float.PositiveInfinity, 0 },
-                { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity }
+                { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity },
             };
             Assert.Throws<ArgumentException>(() => PrimMatrix.Solve(matrix, 0));
 
@@ -28,7 +28,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 0, 3, 4, float.PositiveInfinity, float.PositiveInfinity },
                 { 3, 0, 5, 6, 2 },
                 { 4, 5, 0, float.PositiveInfinity, float.PositiveInfinity },
-                { float.PositiveInfinity, 6, float.PositiveInfinity, 0, float.PositiveInfinity }
+                { float.PositiveInfinity, 6, float.PositiveInfinity, 0, float.PositiveInfinity },
             };
             Assert.Throws<ArgumentException>(() => PrimMatrix.Solve(matrix, 0));
         }
@@ -43,7 +43,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 3, 0, 5, 6, 2 },
                 { 4, 5, 0, float.PositiveInfinity, float.PositiveInfinity },
                 { float.PositiveInfinity, 6, float.PositiveInfinity, 0, float.PositiveInfinity },
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 0 }
+                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 0 },
             };
             Assert.Throws<ArgumentException>(() => PrimMatrix.Solve(matrix, 0));
         }
@@ -58,7 +58,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 3, 0, 5, 6, 2 },
                 { 4, 5, 0, float.PositiveInfinity, float.PositiveInfinity },
                 { float.PositiveInfinity, 6, float.PositiveInfinity, 0, float.PositiveInfinity },
-                { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity, 0 }
+                { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity, 0 },
             };
             Assert.Throws<ArgumentException>(() => PrimMatrix.Solve(matrix, 0));
         }
@@ -77,7 +77,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
             {
                 { 0, 3, 2 },
                 { 3, 0, 2 },
-                { 2, 2, 0 }
+                { 2, 2, 0 },
             };
 
             /* Expected MST
@@ -91,7 +91,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
             {
                 { float.PositiveInfinity, float.PositiveInfinity, 2 },
                 { float.PositiveInfinity, float.PositiveInfinity, 2 },
-                { 2, 2, float.PositiveInfinity }
+                { 2, 2, float.PositiveInfinity },
             };
 
             for (var i = 0; i < matrix.GetLength(0); i++)
@@ -120,7 +120,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 3, 0, 5, 6, 2 },
                 { 4, 5, 0, float.PositiveInfinity, float.PositiveInfinity },
                 { float.PositiveInfinity, 6, float.PositiveInfinity, 0, float.PositiveInfinity },
-                { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity, 0 }
+                { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity, 0 },
             };
 
             /* Expected MST
@@ -140,7 +140,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 3, float.PositiveInfinity, float.PositiveInfinity, 6, 2 },
                 { 4, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
                 { float.PositiveInfinity, 6, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
-                { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity }
+                { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
             };
 
             for (var i = 0; i < matrix.GetLength(0); i++)
@@ -166,7 +166,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 3, 1, 0, 4, float.PositiveInfinity, float.PositiveInfinity },
                 { float.PositiveInfinity, 2, 4, 0, 6, float.PositiveInfinity },
                 { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 6, 0, 2 },
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 2, 0 }
+                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 2, 0 },
             };
 
             /* Graph
@@ -183,7 +183,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 3, 1, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
                 { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity, 6, float.PositiveInfinity },
                 { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 6, float.PositiveInfinity, 2 },
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 2, float.PositiveInfinity }
+                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 2, float.PositiveInfinity },
             };
 
             for (var i = 0; i < matrix.GetLength(0); i++)
@@ -214,7 +214,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 5, 9, float.PositiveInfinity, 0, 15, 6, float.PositiveInfinity },
                 { float.PositiveInfinity, 7, 5, 15, 0, 8, 9 },
                 { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 6, 8, 0, 11 },
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 9, 11, 0 }
+                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 9, 11, 0 },
             };
 
             /* Expected MST
@@ -236,7 +236,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 5, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 6, float.PositiveInfinity },
                 { float.PositiveInfinity, 7, 5, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 9 },
                 { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 6, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 9, float.PositiveInfinity, float.PositiveInfinity }
+                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 9, float.PositiveInfinity, float.PositiveInfinity },
             };
 
             for (var i = 0; i < matrix.GetLength(0); i++)
@@ -269,7 +269,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { float.PositiveInfinity, float.PositiveInfinity, 12, float.PositiveInfinity, float.PositiveInfinity, 0, float.PositiveInfinity, float.PositiveInfinity, 30 },
                 { 10, float.PositiveInfinity, float.PositiveInfinity, 9, float.PositiveInfinity, float.PositiveInfinity, 0, 18, float.PositiveInfinity },
                 { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 6, 16, float.PositiveInfinity, 18, 0, 20 },
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 18, 30, float.PositiveInfinity, 20, 0 }
+                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 18, 30, float.PositiveInfinity, 20, 0 },
             };
 
             /* Expected MST
@@ -294,7 +294,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     float.PositiveInfinity,
-                    float.PositiveInfinity
+                    float.PositiveInfinity,
                 },
                 {
                     float.PositiveInfinity,
@@ -305,7 +305,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     float.PositiveInfinity,
-                    float.PositiveInfinity
+                    float.PositiveInfinity,
                 },
                 {
                     float.PositiveInfinity,
@@ -316,7 +316,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     12,
                     float.PositiveInfinity,
                     float.PositiveInfinity,
-                    float.PositiveInfinity
+                    float.PositiveInfinity,
                 },
                 {
                     4,
@@ -327,7 +327,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     float.PositiveInfinity,
                     9,
                     6,
-                    float.PositiveInfinity
+                    float.PositiveInfinity,
                 },
                 {
                     float.PositiveInfinity,
@@ -338,7 +338,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     float.PositiveInfinity,
-                    18
+                    18,
                 },
                 {
                     float.PositiveInfinity,
@@ -349,7 +349,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     float.PositiveInfinity,
-                    float.PositiveInfinity
+                    float.PositiveInfinity,
                 },
                 {
                     float.PositiveInfinity,
@@ -360,7 +360,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     float.PositiveInfinity,
-                    float.PositiveInfinity
+                    float.PositiveInfinity,
                 },
                 {
                     float.PositiveInfinity,
@@ -371,7 +371,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     float.PositiveInfinity,
-                    float.PositiveInfinity
+                    float.PositiveInfinity,
                 },
                 {
                     float.PositiveInfinity,
@@ -382,8 +382,8 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     float.PositiveInfinity,
-                    float.PositiveInfinity
-                }
+                    float.PositiveInfinity,
+                },
             };
 
             for (var i = 0; i < matrix.GetLength(0); i++)

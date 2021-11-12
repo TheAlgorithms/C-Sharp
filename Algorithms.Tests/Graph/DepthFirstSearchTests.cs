@@ -34,14 +34,14 @@ namespace Algorithms.Tests.Graph
             long countOfVisitedVertices = 0;
 
             //Act
-            dfsSearcher.VisitAll(graph, vertex1, (Vertex<int> vertex) => countOfVisitedVertices++);
+            dfsSearcher.VisitAll(graph, vertex1, _ => countOfVisitedVertices++);
 
             //Assert
             Assert.AreEqual(countOfVisitedVertices, graph.Count);
         }
 
         [Test]
-        public void VisitAll_ShouldCountNumberOfVisitedVerices_TwoSeparatedGraphInOne()
+        public void VisitAll_ShouldCountNumberOfVisitedVertices_TwoSeparatedGraphInOne()
         {
             //Arrange
             var graph = new DirectedWeightedGraph<int>(10);
@@ -73,9 +73,9 @@ namespace Algorithms.Tests.Graph
             long countOfVisitedVerticesPerSecondGraph = 0;
 
             //Act
-            dfsSearcher.VisitAll(graph, vertex1, (Vertex<int> vertex) => countOfVisitedVerticesPerFirstGraph++);
+            dfsSearcher.VisitAll(graph, vertex1, _ => countOfVisitedVerticesPerFirstGraph++);
 
-            dfsSearcher.VisitAll(graph, vertex4, (Vertex<int> vertex) => countOfVisitedVerticesPerSecondGraph++);
+            dfsSearcher.VisitAll(graph, vertex4, _ => countOfVisitedVerticesPerSecondGraph++);
 
             //Assert
             Assert.AreEqual(countOfVisitedVerticesPerFirstGraph, 3);
@@ -115,13 +115,13 @@ namespace Algorithms.Tests.Graph
                 vertex2,
                 vertex3,
                 vertex5,
-                vertex4
+                vertex4,
             };
 
             var sequenceOfVisitedVertices = new List<Vertex<int>>();
 
             //Act
-            dfsSearcher.VisitAll(graph, vertex1, (Vertex<int> vertex) => sequenceOfVisitedVertices.Add(vertex));
+            dfsSearcher.VisitAll(graph, vertex1, vertex => sequenceOfVisitedVertices.Add(vertex));
 
             //Assert
             CollectionAssert.AreEqual(expectedSequenceOfVisitedVertices, sequenceOfVisitedVertices);

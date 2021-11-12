@@ -80,7 +80,7 @@ namespace DataStructures.Tests.Heap.PairingHeap
             Assert.AreEqual(minHeap.Count, minHeap.Count);
 
             var rnd = new Random();
-            var testSeries = Enumerable.Range(0, nodeCount - 1).OrderBy(x => rnd.Next()).ToList();
+            var testSeries = Enumerable.Range(0, nodeCount - 1).OrderBy(_ => rnd.Next()).ToList();
 
             foreach (var item in testSeries)
             {
@@ -130,7 +130,7 @@ namespace DataStructures.Tests.Heap.PairingHeap
             }
 
             var rnd = new Random();
-            var testSeries = Enumerable.Range(0, nodeCount - 1).OrderBy(x => rnd.Next()).ToList();
+            var testSeries = Enumerable.Range(0, nodeCount - 1).OrderBy(_ => rnd.Next()).ToList();
 
             foreach (var item in testSeries)
             {

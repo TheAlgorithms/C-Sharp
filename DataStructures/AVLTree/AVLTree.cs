@@ -167,7 +167,7 @@ namespace DataStructures.AVLTree
         /// <returns>Keys in tree in order from smallest to largest.</returns>
         public IEnumerable<TKey> GetKeysInOrder()
         {
-            List<TKey> result = new List<TKey>();
+            List<TKey> result = new();
             InOrderWalk(root);
             return result;
 

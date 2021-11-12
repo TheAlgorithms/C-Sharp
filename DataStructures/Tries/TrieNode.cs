@@ -24,9 +24,9 @@ namespace DataStructures.Tries
         /// <param name="parent">The parent or ancestor of the node in the trie structure.</param>
         internal TrieNode(char value, TrieNode? parent)
         {
-            this.Children = new SortedList<char, TrieNode>();
-            this.Parent = parent;
-            this.Value = value;
+            Children = new SortedList<char, TrieNode>();
+            Parent = parent;
+            Value = value;
         }
 
         /// <summary>
@@ -53,15 +53,8 @@ namespace DataStructures.Tries
         /// <value>A TrieNode with the character c in Children.</value>
         public TrieNode? this[char c]
         {
-            get
-            {
-                return this.Children.ContainsKey(c) ? this.Children[c] : null;
-            }
-
-            set
-            {
-                this.Children[c] = value ?? throw new NullReferenceException();
-            }
+            get => Children.ContainsKey(c) ? Children[c] : null;
+            set => Children[c] = value ?? throw new NullReferenceException();
         }
 
         /// <summary>

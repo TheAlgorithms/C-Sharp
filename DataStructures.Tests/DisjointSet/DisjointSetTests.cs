@@ -1,7 +1,8 @@
-﻿using NUnit.Framework;
+﻿using DataStructures.DisjointSet;
 using FluentAssertions;
+using NUnit.Framework;
 
-namespace DataStructures.DisjointSet.Tests
+namespace DataStructures.Tests.DisjointSet
 {
     [TestFixture]
     public class DisjointSetTests
@@ -9,7 +10,7 @@ namespace DataStructures.DisjointSet.Tests
         [Test]
         public static void MakeSetDataInitializationTest()
         {
-            DisjointSet<int> ds = new DisjointSet<int>();
+            DisjointSet<int> ds = new();
             var one = ds.MakeSet(1);
             var two = ds.MakeSet(2);
             one.Data.Should().Be(1);
@@ -18,7 +19,7 @@ namespace DataStructures.DisjointSet.Tests
         [Test]
         public static void UnionTest()
         {
-            DisjointSet<int> ds = new DisjointSet<int>();
+            DisjointSet<int> ds = new();
             var one = ds.MakeSet(1);
             var two = ds.MakeSet(2);
             var three = ds.MakeSet(3);
