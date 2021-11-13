@@ -23,7 +23,7 @@ namespace Algorithms.Tests.Sequences
                 1, 2, 2, 1, 2, 2, 1, 1, 2, 1,
                 1, 2, 1, 2, 2, 1, 2, 1, 1, 2,
                 2, 1, 2, 2, 1, 1, 2, 1, 2, 2,
-                1, 2, 2, 1, 1, 2, 1, 1, 2, 2
+                1, 2, 2, 1, 1, 2, 1, 1, 2, 2,
             };
 
             var sequence = new KolakoskiSequence().Sequence.Take(100);

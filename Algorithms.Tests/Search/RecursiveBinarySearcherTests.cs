@@ -17,7 +17,7 @@ namespace Algorithms.Tests.Search
             var subject = new RecursiveBinarySearcher<int>();
             var randomizer = Randomizer.CreateRandomizer();
             var selectedIndex = randomizer.Next(0, n);
-            var collection = Enumerable.Range(0, n).Select(x => randomizer.Next(0, 1000)).OrderBy(x => x).ToList();
+            var collection = Enumerable.Range(0, n).Select(_ => randomizer.Next(0, 1000)).OrderBy(x => x).ToList();
 
             // Act
             var actualIndex = subject.FindIndex(collection, collection[selectedIndex]);
@@ -35,7 +35,7 @@ namespace Algorithms.Tests.Search
             var subject = new RecursiveBinarySearcher<int>();
             var random = Randomizer.CreateRandomizer();
             var collection = Enumerable.Range(0, n)
-                .Select(x => random.Next(0, 1000))
+                .Select(_ => random.Next(0, 1000))
                 .Where(x => x != missingItem)
                 .OrderBy(x => x).ToList();
 

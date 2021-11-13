@@ -26,7 +26,7 @@ namespace DataStructures.Tries
         /// </summary>
         public Trie()
         {
-            this.root = new TrieNode(Trie.Mark);
+            root = new TrieNode(Mark);
         }
 
         /// <summary>
@@ -48,14 +48,14 @@ namespace DataStructures.Tries
         /// <param name="s">The string to insert into the trie.</param>
         public void Insert(string s)
         {
-            s += Trie.Mark;
+            s += Mark;
 
             int index = 0;
             TrieNode match = PrefixQuery(s, ref index);
 
             for (int i = index; i < s.Length; i++)
             {
-                TrieNode t = new TrieNode(s[i], match);
+                TrieNode t = new(s[i], match);
                 match[s[i]] = t;
                 match = t;
             }
@@ -67,7 +67,7 @@ namespace DataStructures.Tries
         /// <param name="s">The text string to be removed from the trie.</param>
         public void Remove(string s)
         {
-            s += Trie.Mark;
+            s += Mark;
             int index = 0;
             TrieNode match = PrefixQuery(s, ref index);
             while(match.IsLeaf())
@@ -91,7 +91,7 @@ namespace DataStructures.Tries
         public bool Find(string s)
         {
             int index = 0;
-            return PrefixQuery(s + Trie.Mark, ref index).IsLeaf();
+            return PrefixQuery(s + Mark, ref index).IsLeaf();
         }
 
         /// <summary>

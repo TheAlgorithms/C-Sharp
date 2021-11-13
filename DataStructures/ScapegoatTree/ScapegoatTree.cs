@@ -48,23 +48,23 @@ namespace DataStructures.ScapegoatTree
         public ScapegoatTree(Node<TKey> node, double alpha)
             : this(alpha, size: node.GetSize())
         {
-            this.Root = node;
+            Root = node;
         }
 
         public ScapegoatTree(TKey key, double alpha = 0.5)
             : this(alpha, size: 1)
         {
-            this.Root = new Node<TKey>(key);
+            Root = new Node<TKey>(key);
         }
 
         private ScapegoatTree(double alpha, int size)
         {
             CheckAlpha(alpha);
 
-            this.Alpha = alpha;
+            Alpha = alpha;
 
-            this.Size = size;
-            this.MaxSize = size;
+            Size = size;
+            MaxSize = size;
         }
 
         /// <summary>
@@ -237,7 +237,7 @@ namespace DataStructures.ScapegoatTree
         public void Tune(double value)
         {
             CheckAlpha(value);
-            this.Alpha = value;
+            Alpha = value;
         }
 
         /// <summary>

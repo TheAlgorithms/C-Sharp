@@ -19,7 +19,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 3, 0, 5, 6 },
                 { 4, 5, 0, float.PositiveInfinity },
                 { float.PositiveInfinity, 6, float.PositiveInfinity, 0 },
-                { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity }
+                { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity },
             };
             Assert.Throws<ArgumentException>(() => Kruskal.Solve(adj), "adj must be square!");
 
@@ -29,7 +29,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 0, 3, 4, float.PositiveInfinity, float.PositiveInfinity },
                 { 3, 0, 5, 6, 2 },
                 { 4, 5, 0, float.PositiveInfinity, float.PositiveInfinity },
-                { float.PositiveInfinity, 6, float.PositiveInfinity, 0, float.PositiveInfinity }
+                { float.PositiveInfinity, 6, float.PositiveInfinity, 0, float.PositiveInfinity },
             };
             Assert.Throws<ArgumentException>(() => Kruskal.Solve(adj), "adj must be square!");
         }
@@ -44,7 +44,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 3, 0, 5, 6, 2 },
                 { 4, 5, 0, float.PositiveInfinity, float.PositiveInfinity },
                 { float.PositiveInfinity, 6, float.PositiveInfinity, 0, float.PositiveInfinity },
-                { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity, 0 }
+                { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity, 0 },
             };
             Assert.Throws<ArgumentException>(() => Kruskal.Solve(adj), "adj must be symmetric!");
         }
@@ -63,7 +63,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
             {
                 { 0, 3, 2 },
                 { 3, 0, 2 },
-                { 2, 2, 0 }
+                { 2, 2, 0 },
             };
 
             /* Expected MST
@@ -77,7 +77,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
             {
                 { float.PositiveInfinity, float.PositiveInfinity, 2 },
                 { float.PositiveInfinity, float.PositiveInfinity, 2 },
-                { 2, 2, float.PositiveInfinity }
+                { 2, 2, float.PositiveInfinity },
             };
 
             Kruskal.Solve(adj).Cast<float>().SequenceEqual(expected.Cast<float>()).Should().BeTrue();
@@ -103,7 +103,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 3, 0, 5, 6, 2 },
                 { 4, 5, 0, float.PositiveInfinity, float.PositiveInfinity },
                 { float.PositiveInfinity, 6, float.PositiveInfinity, 0, float.PositiveInfinity },
-                { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity, 0 }
+                { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity, 0 },
             };
 
             /* Expected MST
@@ -123,7 +123,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 3, float.PositiveInfinity, float.PositiveInfinity, 6, 2 },
                 { 4, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
                 { float.PositiveInfinity, 6, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
-                { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity }
+                { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
             };
 
             Kruskal.Solve(adj).Cast<float>().SequenceEqual(expected.Cast<float>()).Should().BeTrue();
@@ -146,7 +146,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 3, 1, 0, 4, float.PositiveInfinity, float.PositiveInfinity },
                 { float.PositiveInfinity, 2, 4, 0, 6, float.PositiveInfinity },
                 { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 6, 0, 2 },
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 2, 0 }
+                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 2, 0 },
             };
 
             /* Graph
@@ -163,7 +163,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 3, 1, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
                 { float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity, 6, float.PositiveInfinity },
                 { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 6, float.PositiveInfinity, 2 },
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 2, float.PositiveInfinity }
+                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 2, float.PositiveInfinity },
             };
 
             Kruskal.Solve(adj).Cast<float>().SequenceEqual(expected.Cast<float>()).Should().BeTrue();
@@ -191,7 +191,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 5, 9, float.PositiveInfinity, 0, 15, 6, float.PositiveInfinity },
                 { float.PositiveInfinity, 7, 5, 15, 0, 8, 9 },
                 { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 6, 8, 0, 11 },
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 9, 11, 0 }
+                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 9, 11, 0 },
             };
 
             /* Expected MST
@@ -213,7 +213,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 5, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 6, float.PositiveInfinity },
                 { float.PositiveInfinity, 7, 5, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 9 },
                 { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 6, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 9, float.PositiveInfinity, float.PositiveInfinity }
+                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 9, float.PositiveInfinity, float.PositiveInfinity },
             };
 
             Kruskal.Solve(adj).Cast<float>().SequenceEqual(expected.Cast<float>()).Should().BeTrue();
@@ -243,7 +243,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { float.PositiveInfinity, float.PositiveInfinity, 12, float.PositiveInfinity, float.PositiveInfinity, 0, float.PositiveInfinity, float.PositiveInfinity, 30 },
                 { 10, float.PositiveInfinity, float.PositiveInfinity, 9, float.PositiveInfinity, float.PositiveInfinity, 0, 18, float.PositiveInfinity },
                 { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 6, 16, float.PositiveInfinity, 18, 0, 20 },
-                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 18, 30, float.PositiveInfinity, 20, 0 }
+                { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 18, 30, float.PositiveInfinity, 20, 0 },
             };
 
             /* Expected MST
@@ -268,7 +268,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     float.PositiveInfinity,
-                    float.PositiveInfinity
+                    float.PositiveInfinity,
                 },
                 {
                     float.PositiveInfinity,
@@ -279,7 +279,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     float.PositiveInfinity,
-                    float.PositiveInfinity
+                    float.PositiveInfinity,
                 },
                 {
                     float.PositiveInfinity,
@@ -290,7 +290,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     12,
                     float.PositiveInfinity,
                     float.PositiveInfinity,
-                    float.PositiveInfinity
+                    float.PositiveInfinity,
                 },
                 {
                     4,
@@ -301,7 +301,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     float.PositiveInfinity,
                     9,
                     6,
-                    float.PositiveInfinity
+                    float.PositiveInfinity,
                 },
                 {
                     float.PositiveInfinity,
@@ -312,7 +312,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     float.PositiveInfinity,
-                    18
+                    18,
                 },
                 {
                     float.PositiveInfinity,
@@ -323,7 +323,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     float.PositiveInfinity,
-                    float.PositiveInfinity
+                    float.PositiveInfinity,
                 },
                 {
                     float.PositiveInfinity,
@@ -334,7 +334,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     float.PositiveInfinity,
-                    float.PositiveInfinity
+                    float.PositiveInfinity,
                 },
                 {
                     float.PositiveInfinity,
@@ -345,7 +345,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     float.PositiveInfinity,
-                    float.PositiveInfinity
+                    float.PositiveInfinity,
                 },
                 {
                     float.PositiveInfinity,
@@ -356,8 +356,8 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     float.PositiveInfinity,
-                    float.PositiveInfinity
-                }
+                    float.PositiveInfinity,
+                },
             };
 
             Kruskal.Solve(adj).Cast<float>().SequenceEqual(expected.Cast<float>()).Should().BeTrue();
@@ -385,7 +385,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 5, 9, float.PositiveInfinity, 0, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
                 { float.PositiveInfinity, float.PositiveInfinity, 5, float.PositiveInfinity, 0, 8, 9 },
                 { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 8, 0, 11 },
-                { float.PositiveInfinity, float.PositiveInfinity, 2, float.PositiveInfinity, 9, 11, 0 }
+                { float.PositiveInfinity, float.PositiveInfinity, 2, float.PositiveInfinity, 9, 11, 0 },
             };
 
             /* Expected MST
@@ -407,7 +407,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 { 5, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
                 { float.PositiveInfinity, float.PositiveInfinity, 5, float.PositiveInfinity, float.PositiveInfinity, 8, float.PositiveInfinity },
                 { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, 8, float.PositiveInfinity, float.PositiveInfinity },
-                { float.PositiveInfinity, float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity }
+                { float.PositiveInfinity, float.PositiveInfinity, 2, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity },
             };
 
             Kruskal.Solve(adj).Cast<float>().SequenceEqual(expected.Cast<float>()).Should().BeTrue();
@@ -422,7 +422,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 new Dictionary<int, float>{ { 0, 3 }, { 2, 5 }, { 3, 6 }, { 4, 2 } },
                 new Dictionary<int, float>{ { 0, 4 }, { 1, 5 } },
                 new Dictionary<int, float>{ { 1, 6 } },
-                new Dictionary<int, float>{ { 1, 2 } }
+                new Dictionary<int, float>{ { 1, 2 } },
             };
             Assert.Throws<ArgumentException>(() => Kruskal.Solve(adj), "Graph must be undirected!");
         }
@@ -441,7 +441,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
             {
                 new Dictionary<int, float>{ { 1, 3 }, { 2, 2 } },
                 new Dictionary<int, float>{ { 0, 3 }, { 2, 2 } },
-                new Dictionary<int, float>{ { 0, 2 }, { 1, 2 } }
+                new Dictionary<int, float>{ { 0, 2 }, { 1, 2 } },
             };
 
             /* Expected MST
@@ -455,7 +455,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
             {
                 new Dictionary<int, float>{ { 2, 2 } },
                 new Dictionary<int, float>{ { 2, 2 } },
-                new Dictionary<int, float>{ { 0, 2 }, { 1, 2 } }
+                new Dictionary<int, float>{ { 0, 2 }, { 1, 2 } },
             };
 
             var res = Kruskal.Solve(adj);
@@ -485,7 +485,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 new Dictionary<int, float>{ { 0, 3 }, { 2, 5 }, { 3, 6 }, { 4, 2 } },
                 new Dictionary<int, float>{ { 0, 4 }, { 1, 5 } },
                 new Dictionary<int, float>{ { 1, 6 } },
-                new Dictionary<int, float>{ { 1, 2 } }
+                new Dictionary<int, float>{ { 1, 2 } },
             };
 
             /* Expected MST
@@ -505,7 +505,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 new Dictionary<int, float>{ { 0, 3 }, { 3, 6 }, { 4, 2 } },
                 new Dictionary<int, float>{ { 0, 4 } },
                 new Dictionary<int, float>{ { 1, 6 } },
-                new Dictionary<int, float>{ { 1, 2 } }
+                new Dictionary<int, float>{ { 1, 2 } },
             };
 
             var res = Kruskal.Solve(adj);
@@ -532,7 +532,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 new Dictionary<int, float>{ { 0, 3 }, { 1, 1 }, { 3, 4 } },
                 new Dictionary<int, float>{ { 1, 2 }, { 2, 4 }, { 4, 6 } },
                 new Dictionary<int, float>{ { 3, 6 }, { 5, 2 } },
-                new Dictionary<int, float>{ { 4, 2 } }
+                new Dictionary<int, float>{ { 4, 2 } },
             };
 
             /* Graph
@@ -549,7 +549,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 new Dictionary<int, float>{ { 0, 3 }, { 1, 1 } },
                 new Dictionary<int, float>{ { 1, 2 }, { 4, 6 } },
                 new Dictionary<int, float>{ { 3, 6 }, { 5, 2 } },
-                new Dictionary<int, float>{ { 4, 2 } }
+                new Dictionary<int, float>{ { 4, 2 } },
             };
 
             var res = Kruskal.Solve(adj);
@@ -581,7 +581,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 new Dictionary<int, float>{ { 0, 5 }, { 1, 9 }, { 4, 15 }, { 5, 6 } },
                 new Dictionary<int, float>{ { 1, 7 }, { 2, 5 }, { 3, 15 }, { 5, 8 }, { 6, 9 } },
                 new Dictionary<int, float>{ { 3, 6 }, { 4, 8 }, { 6, 11 } },
-                new Dictionary<int, float>{ { 4, 9 }, { 5, 11 } }
+                new Dictionary<int, float>{ { 4, 9 }, { 5, 11 } },
             };
 
             /* Expected MST
@@ -603,7 +603,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 new Dictionary<int, float>{ { 0, 5 }, { 5, 6 } },
                 new Dictionary<int, float>{ { 1, 7 }, { 2, 5 }, { 6, 9 } },
                 new Dictionary<int, float>{ { 3, 6 } },
-                new Dictionary<int, float>{ { 4, 9 } }
+                new Dictionary<int, float>{ { 4, 9 } },
             };
 
             var res = Kruskal.Solve(adj);
@@ -637,7 +637,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 new Dictionary<int, float>{ { 2, 12 }, { 8, 30 } },
                 new Dictionary<int, float>{ { 0, 10 }, { 3, 9 }, { 7, 18 } },
                 new Dictionary<int, float>{ { 3, 6 }, { 4, 16 }, { 6, 18 }, { 8, 20 } },
-                new Dictionary<int, float>{ { 4, 18 }, { 5, 30 }, { 7, 20 } }
+                new Dictionary<int, float>{ { 4, 18 }, { 5, 30 }, { 7, 20 } },
             };
 
             /* Expected MST
@@ -661,7 +661,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 new Dictionary<int, float>{ { 2, 12 } },
                 new Dictionary<int, float>{ { 3, 9 } },
                 new Dictionary<int, float>{ { 3, 6 } },
-                new Dictionary<int, float>{ { 4, 18 } }
+                new Dictionary<int, float>{ { 4, 18 } },
             };
 
             var res = Kruskal.Solve(adj);
@@ -693,7 +693,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 new Dictionary<int, float>{ { 0, 5 }, { 1, 9 } },
                 new Dictionary<int, float>{ { 2, 5 }, { 5, 8 }, { 6, 9 } },
                 new Dictionary<int, float>{ { 4, 8 }, { 6, 11 } },
-                new Dictionary<int, float>{ { 2, 2 }, { 4, 9 }, { 5, 11 } }
+                new Dictionary<int, float>{ { 2, 2 }, { 4, 9 }, { 5, 11 } },
             };
 
             /* Expected MST
@@ -715,7 +715,7 @@ namespace Algorithms.Tests.Graph.MinimumSpanningTree
                 new Dictionary<int, float>{ { 0, 5 } },
                 new Dictionary<int, float>{ { 2, 5 }, { 5, 8 } },
                 new Dictionary<int, float>{ { 4, 8 } },
-                new Dictionary<int, float>{ { 2, 2 } }
+                new Dictionary<int, float>{ { 2, 2 } },
             };
 
             var res = Kruskal.Solve(adj);

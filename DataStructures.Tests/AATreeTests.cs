@@ -7,12 +7,12 @@ using NUnit.Framework;
 
 namespace DataStructures.Tests
 {
-    internal class AATreeTests
+    internal class AaTreeTests
     {
         [Test]
         public void Constructor_UseCustomComparer_FormsCorrectTree()
         {
-            var tree = new AATree<int>(Comparer<int>.Create((x, y) => y.CompareTo(x)));
+            var tree = new AaTree<int>(Comparer<int>.Create((x, y) => y.CompareTo(x)));
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.GetMax().Should().Be(1);
             tree.GetMin().Should().Be(10);
@@ -23,7 +23,7 @@ namespace DataStructures.Tests
         [Test]
         public void Add_MultipleKeys_FormsCorrectTree()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
 
             foreach (var elem in new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
             {
@@ -40,7 +40,7 @@ namespace DataStructures.Tests
         [Test]
         public void Add_KeyAlreadyInTree_ThrowsException()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             Assert.Throws<ArgumentException>(() => tree.Add(1));
         }
@@ -48,7 +48,7 @@ namespace DataStructures.Tests
         [Test]
         public void AddRange_MultipleKeys_FormsCorrectTree()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.Count.Should().Be(10);
             tree.GetKeysInOrder().SequenceEqual(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }).Should().BeTrue();
@@ -59,7 +59,7 @@ namespace DataStructures.Tests
         [Test]
         public void Remove_MultipleKeys_TreeStillValid()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
 
             Remove(4).Should().NotThrow();
@@ -82,7 +82,7 @@ namespace DataStructures.Tests
         [Test]
         public void Remove_KeyNotInTree_Throws()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
 
             Action act = () => tree.Remove(999);
@@ -92,7 +92,7 @@ namespace DataStructures.Tests
         [Test]
         public void Remove_EmptyTree_Throws()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
 
             Action act = () => tree.Remove(999);
             act.Should().Throw<InvalidOperationException>();
@@ -101,7 +101,7 @@ namespace DataStructures.Tests
         [Test]
         public void Contains_NonEmptyTree_ReturnsCorrectAnswer()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.Contains(6).Should().BeTrue();
             tree.Contains(999).Should().BeFalse();
@@ -110,14 +110,14 @@ namespace DataStructures.Tests
         [Test]
         public void Contains_EmptyTree_ReturnsFalse()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
             tree.Contains(999).Should().BeFalse();
         }
 
         [Test]
         public void GetMax_NonEmptyTree_ReturnsCorrectAnswer()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.GetMax().Should().Be(10);
         }
@@ -125,14 +125,14 @@ namespace DataStructures.Tests
         [Test]
         public void GetMax_EmptyTree_ThrowsCorrectException()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
             Assert.Throws<InvalidOperationException>(() => tree.GetMax());
         }
 
         [Test]
         public void GetMin_NonEmptyTree_ReturnsCorrectAnswer()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.GetMin().Should().Be(1);
         }
@@ -140,14 +140,14 @@ namespace DataStructures.Tests
         [Test]
         public void GetMin_EmptyTree_ThrowsCorrectException()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
             Assert.Throws<InvalidOperationException>(() => tree.GetMin());
         }
 
         [Test]
         public void GetKeysInOrder_NonEmptyTree_ReturnsCorrectAnswer()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.GetKeysInOrder().SequenceEqual(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }).Should().BeTrue();
         }
@@ -155,14 +155,14 @@ namespace DataStructures.Tests
         [Test]
         public void GetKeysInOrder_EmptyTree_ReturnsCorrectAnswer()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
             tree.GetKeysInOrder().ToList().Count.Should().Be(0);
         }
 
         [Test]
         public void GetKeysPreOrder_NonEmptyTree_ReturnsCorrectAnswer()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.GetKeysPreOrder().SequenceEqual(new[] { 4, 2, 1, 3, 6, 5, 8, 7, 9, 10 })
                 .Should().BeTrue();
@@ -171,14 +171,14 @@ namespace DataStructures.Tests
         [Test]
         public void GetKeysPreOrder_EmptyTree_ReturnsCorrectAnswer()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
             tree.GetKeysPreOrder().ToList().Count.Should().Be(0);
         }
 
         [Test]
         public void GetKeysPostOrder_NonEmptyTree_ReturnsCorrectAnswer()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
             tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             tree.GetKeysPostOrder().SequenceEqual(new[] { 1, 3, 2, 5, 7, 10, 9, 8, 6, 4 })
                 .Should().BeTrue();
@@ -187,7 +187,7 @@ namespace DataStructures.Tests
         [Test]
         public void GetKeysPostOrder_EmptyTree_ReturnsCorrectAnswer()
         {
-            var tree = new AATree<int>();
+            var tree = new AaTree<int>();
             tree.GetKeysPostOrder().ToList().Count.Should().Be(0);
         }
 
@@ -209,7 +209,7 @@ namespace DataStructures.Tests
         /// </remarks>
         /// <param name="node">The node to check from.</param>
         /// <returns>true if node passes all checks, false otherwise.</returns>
-        private static bool Validate<T>(AATreeNode<T>? node)
+        private static bool Validate<T>(AaTreeNode<T>? node)
         {
             if (node is null)
             {
@@ -242,7 +242,7 @@ namespace DataStructures.Tests
         /// </summary>
         /// <param name="node">The node to check.</param>
         /// <returns>true if node passes check, false otherwise.</returns>
-        private static bool CheckLeafNode<T>(AATreeNode<T> node)
+        private static bool CheckLeafNode<T>(AaTreeNode<T> node)
         {
             var condition = node.Left is null && node.Right is null && node.Level != 1;
             return !condition;
@@ -253,7 +253,7 @@ namespace DataStructures.Tests
         /// </summary>
         /// <param name="node">The node to check.</param>
         /// <returns>true if node passes check, false otherwise.</returns>
-        private static bool CheckLeftSubtree<T>(AATreeNode<T> node)
+        private static bool CheckLeftSubtree<T>(AaTreeNode<T> node)
         {
             var condition = node.Left is not null && node.Level - node.Left.Level != 1;
             return !condition;
@@ -264,7 +264,7 @@ namespace DataStructures.Tests
         /// </summary>
         /// <param name="node">The node to check.</param>
         /// <returns>true if node passes check, false otherwise.</returns>
-        private static bool CheckRightSubtree<T>(AATreeNode<T> node)
+        private static bool CheckRightSubtree<T>(AaTreeNode<T> node)
         {
             var condition = node.Right is not null &&
                             node.Level - node.Right.Level != 1 &&
@@ -277,7 +277,7 @@ namespace DataStructures.Tests
         /// </summary>
         /// <param name="node">The node to check.</param>
         /// <returns>true if node passes check, false otherwise.</returns>
-        private static bool CheckRightGrandChild<T>(AATreeNode<T> node)
+        private static bool CheckRightGrandChild<T>(AaTreeNode<T> node)
         {
             var condition = node.Right?.Right is not null && node.Right.Level < node.Right.Right.Level;
             return !condition;
@@ -288,7 +288,7 @@ namespace DataStructures.Tests
         /// </summary>
         /// <param name="node">The node to check.</param>
         /// <returns>true if node passes check, false otherwise.</returns>
-        private static bool CheckNonLeafChildren<T>(AATreeNode<T> node)
+        private static bool CheckNonLeafChildren<T>(AaTreeNode<T> node)
         {
             var condition = node.Level > 1 && (node.Left is null || node.Right is null);
             return !condition;

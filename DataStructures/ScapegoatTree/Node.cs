@@ -61,7 +61,7 @@ namespace DataStructures.ScapegoatTree
         /// </summary>
         /// <param name="alpha">Alpha value.</param>
         /// <returns>Alpha height value.</returns>
-        public double GetAlphaHeight(double alpha) => Math.Floor(Math.Log(this.GetSize(), 1.0 / alpha));
+        public double GetAlphaHeight(double alpha) => Math.Floor(Math.Log(GetSize(), 1.0 / alpha));
 
         public Node<TKey> GetSmallestKeyNode() => Left?.GetSmallestKeyNode() ?? this;
 
@@ -82,7 +82,7 @@ namespace DataStructures.ScapegoatTree
 
         private bool IsGreaterThanOrSameAs(TKey key)
         {
-            return this.Key.CompareTo(key) >= 0;
+            return Key.CompareTo(key) >= 0;
         }
     }
 }
