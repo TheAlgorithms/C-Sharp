@@ -238,14 +238,9 @@ namespace Algorithms.Sorters.Comparison
             var offset = 1;
             var lastOfs = 0;
 
-            if (comparer.Compare(key, array[i + hint]) > 0)
-            {
-                (offset, lastOfs) = RightRun(array, comparer, key, i, len, hint, offset, lastOfs, 0);
-            }
-            else
-            {
-                (offset, lastOfs) = LeftRun(array, comparer, key, i, hint, offset, lastOfs, 1);
-            }
+            (offset, lastOfs) = comparer.Compare(key, array[i + hint]) > 0
+                ? RightRun(array, comparer, key, i, len, hint, offset, lastOfs, 0)
+                : LeftRun(array, comparer, key, i, hint, offset, lastOfs, 1);
 
             return FinalOffset(array, comparer, key, i, offset, lastOfs, 1);
         }
@@ -255,14 +250,9 @@ namespace Algorithms.Sorters.Comparison
             var offset = 1;
             var lastOfs = 0;
 
-            if (comparer.Compare(key, array[i + hint]) < 0)
-            {
-                (offset, lastOfs) = LeftRun(array, comparer, key, i, hint, offset, lastOfs, 0);
-            }
-            else
-            {
-                (offset, lastOfs) = RightRun(array, comparer, key, i, len, hint, offset, lastOfs, -1);
-            }
+            (offset, lastOfs) = comparer.Compare(key, array[i + hint]) < 0
+                ? LeftRun(array, comparer, key, i, hint, offset, lastOfs, 0)
+                : RightRun(array, comparer, key, i, len, hint, offset, lastOfs, -1);
 
             return FinalOffset(array, comparer, key, i, offset, lastOfs, 0);
         }
@@ -270,9 +260,11 @@ namespace Algorithms.Sorters.Comparison
         private static (int offset, int lastOfs) LeftRun(T[] array, IComparer<T> comparer, T key, int i, int hint, int offset, int lastOfs, int lt)
         {
             var maxOfs = hint + 1;
+            var tmp = lastOfs;
+
             while (offset < maxOfs && comparer.Compare(key, array[i + hint - offset]) < lt)
             {
-                lastOfs = offset;
+                tmp = offset;
                 offset = LeftShiftOffset(offset);
                 if (offset <= 0)
                 {
@@ -285,7 +277,6 @@ namespace Algorithms.Sorters.Comparison
                 offset = maxOfs;
             }
 
-            var tmp = lastOfs;
             lastOfs = hint - offset;
             offset = hint - tmp;
 
@@ -352,14 +343,9 @@ namespace Algorithms.Sorters.Comparison
             newSize |= newSize >> 16;
             newSize++;
 
-            if (newSize < 0)
-            {
-                newSize = min;
-            }
-            else
-            {
-                newSize = Math.Min(newSize, array.Length >> 1);
-            }
+            newSize = newSize > 0
+                ? Math.Min(newSize, array.Length >> 1)
+                : min;
 
             return new T[newSize];
         }
@@ -472,7 +458,7 @@ namespace Algorithms.Sorters.Comparison
                 return;
             }
 
-            var minGallop = this.minGallop;
+            var gallop = minGallop;
 
             while (true)
             {
@@ -503,7 +489,7 @@ namespace Algorithms.Sorters.Comparison
                         }
                     }
                 }
-                while ((count1 | count2) < minGallop);
+                while ((count1 | count2) < gallop);
 
                 // One run is winning so consistently that galloping may be a huge win.
                 // So try that, and continue galloping until (if ever) neither run appears to be winning consistently anymore.
@@ -547,23 +533,20 @@ namespace Algorithms.Sorters.Comparison
                         goto end_of_loop;
                     }
 
-                    minGallop--;
+                    gallop--;
                 }
-                while (count1 >= initMinGallop | count2 >= initMinGallop);
+                while (count1 >= initMinGallop || count2 >= initMinGallop);
 
-                if (minGallop < 0)
-                {
-                    minGallop = 0;
-                }
-
-                // Penalize for leaving gallop mode.
-                minGallop += 2;
+                // Penalize for leaving gallop mode
+                gallop = gallop > 0
+                    ? gallop + 2
+                    : 2;
             }
 
         end_of_loop:
 
-            this.minGallop = minGallop >= 1
-                ? minGallop
+            minGallop = gallop >= 1
+                ? gallop
                 : 1;
 
             if (lenA == 1)
@@ -608,7 +591,7 @@ namespace Algorithms.Sorters.Comparison
                 return;
             }
 
-            var minGallop = this.minGallop;
+            var gallop = minGallop;
 
             while (true)
             {
@@ -639,7 +622,7 @@ namespace Algorithms.Sorters.Comparison
                         }
                     }
                 }
-                while ((count1 | count2) < minGallop);
+                while ((count1 | count2) < gallop);
 
                 // One run is winning so consistently that galloping may be a huge win.
                 // So try that, and continue galloping until (if ever) neither run appears to be winning consistently anymore.
@@ -683,23 +666,20 @@ namespace Algorithms.Sorters.Comparison
                         goto end_of_loop;
                     }
 
-                    minGallop--;
+                    gallop--;
                 }
-                while (count1 >= initMinGallop | count2 >= initMinGallop);
-
-                if (minGallop < 0)
-                {
-                    minGallop = 0;
-                }
+                while (count1 >= initMinGallop || count2 >= initMinGallop);
 
                 // Penalize for leaving gallop mode
-                minGallop += 2;
+                gallop = gallop > 0
+                    ? gallop + 2
+                    : 2;
             }
 
         // End of loop
         end_of_loop:
 
-            this.minGallop = minGallop < 1 ? 1 : minGallop;  // Write back to field
+            minGallop = gallop < 1 ? 1 : gallop;  // Write back to field
 
             if (lenB == 1)
             {
