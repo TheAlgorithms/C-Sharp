@@ -33,6 +33,8 @@ namespace Algorithms.Sorters.Comparison
         private int minGallop;
         private int stackSize;
 
+        private IComparer<T> comparer = default!;
+
         public TimSorter(int minMerge = 32, int minGallop = 7)
         {
             initMinGallop = minGallop;
@@ -54,6 +56,7 @@ namespace Algorithms.Sorters.Comparison
         /// <param name="comparer">Compares elements.</param>
         public void Sort(T[] array, IComparer<T> comparer)
         {
+            this.comparer = comparer;
             var start = 0;
             var remaining = array.Length;
 
@@ -65,7 +68,7 @@ namespace Algorithms.Sorters.Comparison
                 }
 
                 // Don't need to merge, just binary sort
-                BinarySort(array, comparer, start, remaining, start);
+                BinarySort(array, start, remaining, start);
                 return;
             }
 
@@ -74,13 +77,13 @@ namespace Algorithms.Sorters.Comparison
             do
             {
                 // Identify next run
-                var runLen = CountRunAndMakeAscending(array, comparer, start);
+                var runLen = CountRunAndMakeAscending(array, start);
 
                 // If the run is too short extend to Min(MIN_RUN, remaining)
                 if (runLen < minRun)
                 {
                     var force = Math.Min(minRun, remaining);
-                    BinarySort(array, comparer, start, start + force, start + runLen);
+                    BinarySort(array, start, start + force, start + runLen);
                     runLen = force;
                 }
 
@@ -88,58 +91,14 @@ namespace Algorithms.Sorters.Comparison
                 runLengths[stackSize] = runLen;
                 stackSize++;
 
-                MergeCollapse(array, comparer);
+                MergeCollapse(array);
 
                 start += runLen;
                 remaining -= runLen;
             }
             while (remaining != 0);
 
-            MergeForceCollapse(array, comparer);
-        }
-
-        /// <summary>
-        /// Sorts the specified portion of the specified array using a binary
-        /// insertion sort. It requires O(n log n) compares, but O(n^2) data movement.
-        /// </summary>
-        /// <param name="array">Array to sort.</param>
-        /// <param name="comparer">Compares elements.</param>
-        /// <param name="start">The index of the first element in the range to be sorted.</param>
-        /// <param name="end">The index after the last element in the range to be sorted.</param>
-        /// <param name="first">The index of the first element in the range that is not already known to be sorted, must be between start and end.</param>
-        private static void BinarySort(T[] array, IComparer<T> comparer, int start, int end, int first)
-        {
-            if (first >= end || first <= start)
-            {
-                first = start + 1;
-            }
-
-            for (; first < end; first++)
-            {
-                var target = array[first];
-                var targetInsertLocation = BinarySearch(array, start, first - 1, target, comparer);
-                Array.Copy(array, targetInsertLocation, array, targetInsertLocation + 1, first - targetInsertLocation);
-
-                array[targetInsertLocation] = target;
-            }
-        }
-
-        private static int BinarySearch(T[] array, int left, int right, T target, IComparer<T> comparer)
-        {
-            while (left < right)
-            {
-                var mid = (left + right) >> 1;
-                if (comparer.Compare(target, array[mid]) < 0)
-                {
-                    right = mid;
-                }
-                else
-                {
-                    left = mid + 1;
-                }
-            }
-
-            return comparer.Compare(target, array[left]) < 0 ? left : left + 1;
+            MergeForceCollapse(array);
         }
 
         /// <summary>
@@ -167,6 +126,45 @@ namespace Algorithms.Sorters.Comparison
         }
 
         /// <summary>
+        /// Reverse the specified range of the specified array.
+        /// </summary>
+        /// <param name="array">the array in which a range is to be reversed.</param>
+        /// <param name="start">the index of the first element in the range to be reversed.</param>
+        /// <param name="end">the index after the last element in the range to be reversed.</param>
+        private static void ReverseRange(T[] array, int start, int end)
+        {
+            end--;
+            while (start < end)
+            {
+                var t = array[start];
+                array[start++] = array[end];
+                array[end--] = t;
+            }
+        }
+
+        private static T[] EnsureCapacity(T[] array, int min)
+        {
+            // Compute smallest power of 2 > minCapacity
+            var newSize = min;
+            newSize |= newSize >> 1;
+            newSize |= newSize >> 2;
+            newSize |= newSize >> 4;
+            newSize |= newSize >> 8;
+            newSize |= newSize >> 16;
+            newSize++;
+
+            newSize = newSize > 0
+                ? Math.Min(newSize, array.Length >> 1)
+                : min;
+
+            return new T[newSize];
+        }
+
+        private static int BoundLeftShift(int shiftable) => ((uint)shiftable << 1) < int.MaxValue
+                ? (int)((uint)shiftable << 1) + 1
+                : int.MaxValue;
+
+        /// <summary>
         /// Returns the length of the run beginning at the specified position in
         /// the specified array and reverses the run if it is descending (ensuring
         /// that the run will always be ascending when the method returns).
@@ -184,10 +182,9 @@ namespace Algorithms.Sorters.Comparison
         /// reverse a descending sequence without violating stability.
         /// </summary>
         /// <param name="array">the array in which a run is to be counted and possibly reversed.</param>
-        /// <param name="comparer">the comparator to used for the sort.</param>
         /// <param name="start">index of the first element in the run.</param>
         /// <returns>the length of the run beginning at the specified position in the specified array.</returns>
-        private static int CountRunAndMakeAscending(T[] array, IComparer<T> comparer, int start)
+        private int CountRunAndMakeAscending(T[] array, int start)
         {
             var runHi = start + 1;
             if (runHi == array.Length)
@@ -216,48 +213,31 @@ namespace Algorithms.Sorters.Comparison
             return runHi - start;
         }
 
-        /// <summary>
-        /// Reverse the specified range of the specified array.
-        /// </summary>
-        /// <param name="array">the array in which a range is to be reversed.</param>
-        /// <param name="start">the index of the first element in the range to be reversed.</param>
-        /// <param name="end">the index after the last element in the range to be reversed.</param>
-        private static void ReverseRange(T[] array, int start, int end)
-        {
-            end--;
-            while (start < end)
-            {
-                var t = array[start];
-                array[start++] = array[end];
-                array[end--] = t;
-            }
-        }
-
-        private static int GallopLeft(T[] array, IComparer<T> comparer, T key, int i, int len, int hint)
+        private int GallopLeft(T[] array, T key, int i, int len, int hint)
         {
             var offset = 1;
             var lastOfs = 0;
 
             (offset, lastOfs) = comparer.Compare(key, array[i + hint]) > 0
-                ? RightRun(array, comparer, key, i, len, hint, offset, lastOfs, 0)
-                : LeftRun(array, comparer, key, i, hint, offset, lastOfs, 1);
+                ? RightRun(array, key, i, len, hint, offset, lastOfs, 0)
+                : LeftRun(array, key, i, hint, offset, lastOfs, 1);
 
-            return FinalOffset(array, comparer, key, i, offset, lastOfs, 1);
+            return FinalOffset(array, key, i, offset, lastOfs, 1);
         }
 
-        private static int GallopRight(T[] array, IComparer<T> comparer, T key, int i, int len, int hint)
+        private int GallopRight(T[] array, T key, int i, int len, int hint)
         {
             var offset = 1;
             var lastOfs = 0;
 
             (offset, lastOfs) = comparer.Compare(key, array[i + hint]) < 0
-                ? LeftRun(array, comparer, key, i, hint, offset, lastOfs, 0)
-                : RightRun(array, comparer, key, i, len, hint, offset, lastOfs, -1);
+                ? LeftRun(array, key, i, hint, offset, lastOfs, 0)
+                : RightRun(array, key, i, len, hint, offset, lastOfs, -1);
 
-            return FinalOffset(array, comparer, key, i, offset, lastOfs, 0);
+            return FinalOffset(array, key, i, offset, lastOfs, 0);
         }
 
-        private static (int offset, int lastOfs) LeftRun(T[] array, IComparer<T> comparer, T key, int i, int hint, int offset, int lastOfs, int lt)
+        private (int offset, int lastOfs) LeftRun(T[] array, T key, int i, int hint, int offset, int lastOfs, int lt)
         {
             var maxOfs = hint + 1;
             var tmp = lastOfs;
@@ -265,7 +245,7 @@ namespace Algorithms.Sorters.Comparison
             while (offset < maxOfs && comparer.Compare(key, array[i + hint - offset]) < lt)
             {
                 tmp = offset;
-                offset = LeftShiftOffset(offset);
+                offset = BoundLeftShift(offset);
                 if (offset <= 0)
                 {
                     offset = maxOfs;
@@ -283,13 +263,13 @@ namespace Algorithms.Sorters.Comparison
             return (offset, lastOfs);
         }
 
-        private static (int offset, int lastOfs) RightRun(T[] array, IComparer<T> comparer, T key, int i, int len, int hint, int offset, int lastOfs, int gt)
+        private (int offset, int lastOfs) RightRun(T[] array, T key, int i, int len, int hint, int offset, int lastOfs, int gt)
         {
             var maxOfs = len - hint;
             while (offset < maxOfs && comparer.Compare(key, array[i + hint + offset]) > gt)
             {
                 lastOfs = offset;
-                offset = LeftShiftOffset(offset);
+                offset = BoundLeftShift(offset);
                 if (offset <= 0)
                 {
                     offset = maxOfs;
@@ -307,12 +287,7 @@ namespace Algorithms.Sorters.Comparison
             return (offset, lastOfs);
         }
 
-        private static int LeftShiftOffset(int offset)
-        {
-            return (int)((uint)offset << 1) + 1;
-        }
-
-        private static int FinalOffset(T[] array, IComparer<T> comparer, T key, int i, int offset, int lastOfs, int lt)
+        private int FinalOffset(T[] array, T key, int i, int offset, int lastOfs, int lt)
         {
             lastOfs++;
             while (lastOfs < offset)
@@ -332,25 +307,50 @@ namespace Algorithms.Sorters.Comparison
             return offset;
         }
 
-        private static T[] EnsureCapacity(T[] array, int min)
+        /// <summary>
+        /// Sorts the specified portion of the specified array using a binary
+        /// insertion sort. It requires O(n log n) compares, but O(n^2) data movement.
+        /// </summary>
+        /// <param name="array">Array to sort.</param>
+        /// <param name="start">The index of the first element in the range to be sorted.</param>
+        /// <param name="end">The index after the last element in the range to be sorted.</param>
+        /// <param name="first">The index of the first element in the range that is not already known to be sorted, must be between start and end.</param>
+        private void BinarySort(T[] array, int start, int end, int first)
         {
-            // Compute smallest power of 2 > minCapacity
-            var newSize = min;
-            newSize |= newSize >> 1;
-            newSize |= newSize >> 2;
-            newSize |= newSize >> 4;
-            newSize |= newSize >> 8;
-            newSize |= newSize >> 16;
-            newSize++;
+            if (first >= end || first <= start)
+            {
+                first = start + 1;
+            }
 
-            newSize = newSize > 0
-                ? Math.Min(newSize, array.Length >> 1)
-                : min;
+            for (; first < end; first++)
+            {
+                var target = array[first];
+                var targetInsertLocation = BinarySearch(array, start, first - 1, target);
+                Array.Copy(array, targetInsertLocation, array, targetInsertLocation + 1, first - targetInsertLocation);
 
-            return new T[newSize];
+                array[targetInsertLocation] = target;
+            }
         }
 
-        private void MergeCollapse(T[] array, IComparer<T> comparer)
+        private int BinarySearch(T[] array, int left, int right, T target)
+        {
+            while (left < right)
+            {
+                var mid = (left + right) >> 1;
+                if (comparer.Compare(target, array[mid]) < 0)
+                {
+                    right = mid;
+                }
+                else
+                {
+                    left = mid + 1;
+                }
+            }
+
+            return comparer.Compare(target, array[left]) < 0 ? left : left + 1;
+        }
+
+        private void MergeCollapse(T[] array)
         {
             while (stackSize > 1)
             {
@@ -375,7 +375,7 @@ namespace Algorithms.Sorters.Comparison
             }
         }
 
-        private void MergeForceCollapse(T[] array, IComparer<T> comparer)
+        private void MergeForceCollapse(T[] array)
         {
             while (stackSize > 1)
             {
@@ -406,7 +406,7 @@ namespace Algorithms.Sorters.Comparison
 
             stackSize--;
 
-            var k = TimSorter<T>.GallopRight(array, comparer, array[baseB], baseA, lenA, 0);
+            var k = GallopRight(array, array[baseB], baseA, lenA, 0);
 
             baseA += k;
             lenA -= k;
@@ -416,7 +416,7 @@ namespace Algorithms.Sorters.Comparison
                 return;
             }
 
-            lenB = TimSorter<T>.GallopLeft(array, comparer, array[baseA + lenA - 1], baseB, lenB, lenB - 1);
+            lenB = GallopLeft(array, array[baseA + lenA - 1], baseB, lenB, lenB - 1);
 
             if (lenB <= 0)
             {
@@ -425,15 +425,15 @@ namespace Algorithms.Sorters.Comparison
 
             if (lenA <= lenB)
             {
-                MergeLo(array, comparer, baseA, lenA, baseB, lenB);
+                MergeLo(array, baseA, lenA, baseB, lenB);
             }
             else
             {
-                MergeHi(array, comparer, baseA, lenA, baseB, lenB);
+                MergeHi(array, baseA, lenA, baseB, lenB);
             }
         }
 
-        private void MergeLo(T[] array, IComparer<T> comparer, int baseA, int lenA, int baseB, int lenB)
+        private void MergeLo(T[] array, int baseA, int lenA, int baseB, int lenB)
         {
             // Copy first run into temp array
             var tmp = TimSorter<T>.EnsureCapacity(array, lenA);
@@ -495,7 +495,7 @@ namespace Algorithms.Sorters.Comparison
                 // So try that, and continue galloping until (if ever) neither run appears to be winning consistently anymore.
                 do
                 {
-                    count1 = GallopRight(tmp, comparer, array[cursorA], cursorT, lenA, 0);
+                    count1 = GallopRight(tmp, array[cursorA], cursorT, lenA, 0);
                     if (count1 != 0)
                     {
                         Array.Copy(tmp, cursorT, array, dest, count1);
@@ -514,7 +514,7 @@ namespace Algorithms.Sorters.Comparison
                         goto end_of_loop;
                     }
 
-                    count2 = GallopLeft(array, comparer, tmp[cursorT], cursorA, lenB, 0);
+                    count2 = GallopLeft(array, tmp[cursorT], cursorA, lenB, 0);
                     if (count2 != 0)
                     {
                         Array.Copy(array, cursorA, array, dest, count2);
@@ -564,7 +564,7 @@ namespace Algorithms.Sorters.Comparison
             }
         }
 
-        private void MergeHi(T[] array, IComparer<T> comparer, int baseA, int lenA, int baseB, int lenB)
+        private void MergeHi(T[] array, int baseA, int lenA, int baseB, int lenB)
         {
             // Copy second run into temp array
             var tmp = TimSorter<T>.EnsureCapacity(array, lenB);
@@ -628,7 +628,7 @@ namespace Algorithms.Sorters.Comparison
                 // So try that, and continue galloping until (if ever) neither run appears to be winning consistently anymore.
                 do
                 {
-                    count1 = lenA - GallopRight(array, comparer, tmp[cursorT], baseA, lenA, lenA - 1);
+                    count1 = lenA - GallopRight(array, tmp[cursorT], baseA, lenA, lenA - 1);
                     if (count1 != 0)
                     {
                         dest -= count1;
@@ -647,7 +647,7 @@ namespace Algorithms.Sorters.Comparison
                         goto end_of_loop;
                     }
 
-                    count2 = lenB - GallopLeft(tmp, comparer, array[cursorA], 0, lenB, lenB - 1);
+                    count2 = lenB - GallopLeft(tmp, array[cursorA], 0, lenB, lenB - 1);
                     if (count2 != 0)
                     {
                         dest -= count2;
