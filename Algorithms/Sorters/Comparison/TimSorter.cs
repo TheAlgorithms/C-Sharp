@@ -35,6 +35,21 @@ namespace Algorithms.Sorters.Comparison
 
         private IComparer<T> comparer = default!;
 
+        /// <summary>
+        /// Private class for handling gallop merges, allows for tracking array indexes and wins.
+        /// </summary>
+        /// <typeparam name="Tc">Type of array element.</typeparam>
+        private class TimChunk<Tc>
+        {
+            public Tc[] Array { get; set; } = default!;
+
+            public int Index { get; set; } = 0;
+
+            public int Remaining { get; set; } = 0;
+
+            public int Wins { get; set; } = 0;
+        }
+
         public TimSorter(int minMerge = 32, int minGallop = 7)
         {
             initMinGallop = minGallop;
@@ -142,27 +157,63 @@ namespace Algorithms.Sorters.Comparison
             }
         }
 
-        private static T[] EnsureCapacity(T[] array, int min)
+        /// <summary>
+        /// Left shift a value, preventing a roll over to negative numbers.
+        /// </summary>
+        /// <param name="shiftable">int value to left shift.</param>
+        /// <returns>Left shifted value, bound to 2,147,483,647.</returns>
+        private static int BoundLeftShift(int shiftable) => (shiftable << 1) < 0
+                ? (shiftable << 1) + 1
+                : int.MaxValue;
+
+        /// <summary>
+        /// Check the chunks before getting in to a merge to make sure there's something to actually do.
+        /// </summary>
+        /// <param name="left">TimChunk of the left hand side.</param>
+        /// <param name="right">TimChunk of the right hand side.</param>
+        /// <param name="dest">The current target point for the remaining values.</param>
+        /// <returns>If a merge is required.</returns>
+        private static bool NeedsMerge(TimChunk<T> left, TimChunk<T> right, ref int dest)
         {
-            // Compute smallest power of 2 > minCapacity
-            var newSize = min;
-            newSize |= newSize >> 1;
-            newSize |= newSize >> 2;
-            newSize |= newSize >> 4;
-            newSize |= newSize >> 8;
-            newSize |= newSize >> 16;
-            newSize++;
+            right.Array[dest++] = right.Array[right.Index++];
+            if (--right.Remaining == 0)
+            {
+                Array.Copy(left.Array, left.Index, right.Array, dest, left.Remaining);
+                return false;
+            }
 
-            newSize = newSize > 0
-                ? Math.Min(newSize, array.Length >> 1)
-                : min;
+            if (left.Remaining == 1)
+            {
+                Array.Copy(right.Array, right.Index, right.Array, dest, right.Remaining);
+                right.Array[dest + right.Remaining] = left.Array[left.Index];
+                return false;
+            }
 
-            return new T[newSize];
+            return true;
         }
 
-        private static int BoundLeftShift(int shiftable) => ((uint)shiftable << 1) < int.MaxValue
-                ? (int)((uint)shiftable << 1) + 1
-                : int.MaxValue;
+        /// <summary>
+        /// Moves over the last parts of the chunks.
+        /// </summary>
+        /// <param name="left">TimChunk of the left hand side.</param>
+        /// <param name="right">TimChunk of the right hand side.</param>
+        /// <param name="dest">The current target point for the remaining values.</param>
+        private static void FinalizeMerge(TimChunk<T> left, TimChunk<T> right, int dest)
+        {
+            if (left.Remaining == 1)
+            {
+                Array.Copy(right.Array, right.Index, right.Array, dest, right.Remaining);
+                right.Array[dest + right.Remaining] = left.Array[left.Index];
+            }
+            else if (left.Remaining == 0)
+            {
+                throw new ArgumentException("Comparison method violates its general contract!");
+            }
+            else
+            {
+                Array.Copy(left.Array, left.Index, right.Array, dest, left.Remaining);
+            }
+        }
 
         /// <summary>
         /// Returns the length of the run beginning at the specified position in
@@ -213,6 +264,15 @@ namespace Algorithms.Sorters.Comparison
             return runHi - start;
         }
 
+        /// <summary>
+        /// Find the position in the array that a key should fit to the left of where it currently sits.
+        /// </summary>
+        /// <param name="array">Array to search.</param>
+        /// <param name="key">Key to place in the array.</param>
+        /// <param name="i">Base index for the key.</param>
+        /// <param name="len">Length of the chunk to run through.</param>
+        /// <param name="hint">Initial starting position to start from.</param>
+        /// <returns>Offset for the key's location.</returns>
         private int GallopLeft(T[] array, T key, int i, int len, int hint)
         {
             var offset = 1;
@@ -225,6 +285,15 @@ namespace Algorithms.Sorters.Comparison
             return FinalOffset(array, key, i, offset, lastOfs, 1);
         }
 
+        /// <summary>
+        /// Find the position in the array that a key should fit to the right of where it currently sits.
+        /// </summary>
+        /// <param name="array">Array to search.</param>
+        /// <param name="key">Key to place in the array.</param>
+        /// <param name="i">Base index for the key.</param>
+        /// <param name="len">Length of the chunk to run through.</param>
+        /// <param name="hint">Initial starting position to start from.</param>
+        /// <returns>Offset for the key's location.</returns>
         private int GallopRight(T[] array, T key, int i, int len, int hint)
         {
             var offset = 1;
@@ -362,11 +431,11 @@ namespace Algorithms.Sorters.Comparison
                         n--;
                     }
 
-                    MergeAt(array, comparer, n);
+                    MergeAt(array, n);
                 }
                 else if (runLengths[n] <= runLengths[n + 1])
                 {
-                    MergeAt(array, comparer, n);
+                    MergeAt(array, n);
                 }
                 else
                 {
@@ -385,11 +454,11 @@ namespace Algorithms.Sorters.Comparison
                     n--;
                 }
 
-                MergeAt(array, comparer, n);
+                MergeAt(array, n);
             }
         }
 
-        private void MergeAt(T[] array, IComparer<T> comparer, int index)
+        private void MergeAt(T[] array, int index)
         {
             var baseA = runBase[index];
             var lenA = runLengths[index];
@@ -423,280 +492,153 @@ namespace Algorithms.Sorters.Comparison
                 return;
             }
 
-            if (lenA <= lenB)
-            {
-                MergeLo(array, baseA, lenA, baseB, lenB);
-            }
-            else
-            {
-                MergeHi(array, baseA, lenA, baseB, lenB);
-            }
+            Merge(array, baseA, lenA, baseB, lenB);
         }
 
-        private void MergeLo(T[] array, int baseA, int lenA, int baseB, int lenB)
+        private void Merge(T[] array, int baseA, int lenA, int baseB, int lenB)
         {
-            // Copy first run into temp array
-            var tmp = TimSorter<T>.EnsureCapacity(array, lenA);
-            Array.Copy(array, baseA, tmp, 0, lenA);
+            var endA = baseA + lenA;
+            var dest = baseA;
 
-            var cursorT = 0;     // Indexes into tmp array.
-            var cursorA = baseB; // Indexes int array.
-            var dest = baseA;    // Indexes int array.
-
-            // Move first element of second run and deal with degenerate cases.
-            array[dest++] = array[cursorA++];
-            if (--lenB == 0)
+            TimChunk<T> left = new()
             {
-                Array.Copy(tmp, cursorT, array, dest, lenA);
-                return;
-            }
+                Array = array[baseA..endA],
+                Remaining = lenA,
+            };
 
-            if (lenA == 1)
+            TimChunk<T> right = new()
             {
-                Array.Copy(array, cursorA, array, dest, lenB);
-                array[dest + lenB] = tmp[cursorT];
+                Array = array,
+                Index = baseB,
+                Remaining = lenB,
+            };
+
+            // Move first element of the right chunk and deal with degenerate cases.
+            if (!TimSorter<T>.NeedsMerge(left, right, ref dest))
+            {
+                // One of the chunks had 0-1 items in it, so no need to merge anything.
                 return;
             }
 
             var gallop = minGallop;
 
-            while (true)
+            while (RunMerge(left, right, ref dest, ref gallop))
             {
-                var count1 = 0; // Number of times in a row that first run wins.
-                var count2 = 0; // Number of times in a row that second run wins.
-
-                // Do the straightforward thing until (if ever) one run starts winning consistently.
-                do
-                {
-                    if (comparer.Compare(array[cursorA], tmp[cursorT]) < 0)
-                    {
-                        array[dest++] = array[cursorA++];
-                        count2++;
-                        count1 = 0;
-                        if (--lenB == 0)
-                        {
-                            goto end_of_loop;
-                        }
-                    }
-                    else
-                    {
-                        array[dest++] = tmp[cursorT++];
-                        count1++;
-                        count2 = 0;
-                        if (--lenA == 1)
-                        {
-                            goto end_of_loop;
-                        }
-                    }
-                }
-                while ((count1 | count2) < gallop);
-
-                // One run is winning so consistently that galloping may be a huge win.
-                // So try that, and continue galloping until (if ever) neither run appears to be winning consistently anymore.
-                do
-                {
-                    count1 = GallopRight(tmp, array[cursorA], cursorT, lenA, 0);
-                    if (count1 != 0)
-                    {
-                        Array.Copy(tmp, cursorT, array, dest, count1);
-                        dest += count1;
-                        cursorT += count1;
-                        lenA -= count1;
-                        if (lenA <= 1)
-                        {
-                            goto end_of_loop;
-                        }
-                    }
-
-                    array[dest++] = array[cursorA++];
-                    if (--lenB == 0)
-                    {
-                        goto end_of_loop;
-                    }
-
-                    count2 = GallopLeft(array, tmp[cursorT], cursorA, lenB, 0);
-                    if (count2 != 0)
-                    {
-                        Array.Copy(array, cursorA, array, dest, count2);
-                        dest += count2;
-                        cursorA += count2;
-                        lenB -= count2;
-                        if (lenB == 0)
-                        {
-                            goto end_of_loop;
-                        }
-                    }
-
-                    array[dest++] = tmp[cursorT++];
-                    if (--lenA == 1)
-                    {
-                        goto end_of_loop;
-                    }
-
-                    gallop--;
-                }
-                while (count1 >= initMinGallop || count2 >= initMinGallop);
-
                 // Penalize for leaving gallop mode
                 gallop = gallop > 0
                     ? gallop + 2
                     : 2;
             }
-
-        end_of_loop:
 
             minGallop = gallop >= 1
                 ? gallop
                 : 1;
 
-            if (lenA == 1)
-            {
-                Array.Copy(array, cursorA, array, dest, lenB);
-                array[dest + lenB] = tmp[cursorT];
-            }
-            else if (lenA == 0)
-            {
-                throw new ArgumentException("Comparison method violates its general contract!");
-            }
-            else
-            {
-                Array.Copy(tmp, cursorT, array, dest, lenA);
-            }
+            FinalizeMerge(left, right, dest);
         }
 
-        private void MergeHi(T[] array, int baseA, int lenA, int baseB, int lenB)
+        private bool RunMerge(TimChunk<T> left, TimChunk<T> right, ref int dest, ref int gallop)
         {
-            // Copy second run into temp array
-            var tmp = TimSorter<T>.EnsureCapacity(array, lenB);
-            Array.Copy(array, baseB, tmp, 0, lenB);
+            // Reset the number of times in row a run wins.
+            left.Wins = 0;
+            right.Wins = 0;
 
-            var cursorA = baseA + lenA - 1; // Indexes into array.
-            var cursorT = lenB - 1;         // Indexes into tmp array.
-            var dest = baseB + lenB - 1;    // Indexes into array.
-
-            // Move last element of first run and deal with degenerate cases.
-            array[dest--] = array[cursorA--];
-            if (--lenA == 0)
+            // Run a stable merge sort until (if ever) one run starts winning consistently.
+            if (StableMerge(left, right, ref dest, gallop))
             {
-                Array.Copy(tmp, 0, array, dest - (lenB - 1), lenB);
-                return;
+                // Stable merge sort completed with no viable gallops, time to exit.
+                return false;
             }
 
-            if (lenB == 1)
+            // One run is winning so consistently that galloping may be a huge win.
+            // So try that, and continue galloping until (if ever) neither run appears to be winning consistently anymore.
+            do
             {
-                dest -= lenA;
-                cursorA -= lenA;
-                Array.Copy(array, cursorA + 1, array, dest + 1, lenA);
-                array[dest] = tmp[cursorT];
-                return;
-            }
-
-            var gallop = minGallop;
-
-            while (true)
-            {
-                var count1 = 0; // Number of times in a row that first run wins.
-                var count2 = 0; // Number of times in a row that second run wins.
-
-                // Do the straightforward thing until (if ever) one run appears to win consistently.
-                do
+                if (GallopMerge(left, right, ref dest))
                 {
-                    if (comparer.Compare(tmp[cursorT], array[cursorA]) < 0)
+                    // Galloped all the way to the end, merge is complete.
+                    return false;
+                }
+
+                // We had a bit of a run, so make it easier to get started again.
+                gallop--;
+            }
+            while (left.Wins >= initMinGallop || right.Wins >= initMinGallop);
+
+            return true;
+        }
+
+        private bool StableMerge(TimChunk<T> left, TimChunk<T> right, ref int dest, int gallop)
+        {
+            do
+            {
+                if (comparer.Compare(right.Array[right.Index], left.Array[left.Index]) < 0)
+                {
+                    right.Array[dest++] = right.Array[right.Index++];
+                    right.Wins++;
+                    left.Wins = 0;
+                    if (--right.Remaining == 0)
                     {
-                        array[dest--] = array[cursorA--];
-                        count1++;
-                        count2 = 0;
-                        if (--lenA == 0)
-                        {
-                            goto end_of_loop;
-                        }
-                    }
-                    else
-                    {
-                        array[dest--] = tmp[cursorT--];
-                        count2++;
-                        count1 = 0;
-                        if (--lenB == 1)
-                        {
-                            goto end_of_loop;
-                        }
+                        return true;
                     }
                 }
-                while ((count1 | count2) < gallop);
-
-                // One run is winning so consistently that galloping may be a huge win.
-                // So try that, and continue galloping until (if ever) neither run appears to be winning consistently anymore.
-                do
+                else
                 {
-                    count1 = lenA - GallopRight(array, tmp[cursorT], baseA, lenA, lenA - 1);
-                    if (count1 != 0)
+                    right.Array[dest++] = left.Array[left.Index++];
+                    left.Wins++;
+                    right.Wins = 0;
+                    if (--left.Remaining == 1)
                     {
-                        dest -= count1;
-                        cursorA -= count1;
-                        lenA -= count1;
-                        Array.Copy(array, cursorA + 1, array, dest + 1, count1);
-                        if (lenA == 0)
-                        {
-                            goto end_of_loop;
-                        }
+                        return true;
                     }
-
-                    array[dest--] = tmp[cursorT--];
-                    if (--lenB == 1)
-                    {
-                        goto end_of_loop;
-                    }
-
-                    count2 = lenB - GallopLeft(tmp, array[cursorA], 0, lenB, lenB - 1);
-                    if (count2 != 0)
-                    {
-                        dest -= count2;
-                        cursorT -= count2;
-                        lenB -= count2;
-                        Array.Copy(tmp, cursorT + 1, array, dest + 1, count2);
-                        if (lenB <= 1)
-                        {
-                            goto end_of_loop;
-                        }
-                    }
-
-                    array[dest--] = array[cursorA--];
-                    if (--lenA == 0)
-                    {
-                        goto end_of_loop;
-                    }
-
-                    gallop--;
                 }
-                while (count1 >= initMinGallop || count2 >= initMinGallop);
-
-                // Penalize for leaving gallop mode
-                gallop = gallop > 0
-                    ? gallop + 2
-                    : 2;
             }
+            while ((left.Wins | right.Wins) < gallop);
 
-        // End of loop
-        end_of_loop:
+            return false;
+        }
 
-            minGallop = gallop < 1 ? 1 : gallop;  // Write back to field
-
-            if (lenB == 1)
+        private bool GallopMerge(TimChunk<T> left, TimChunk<T> right, ref int dest)
+        {
+            left.Wins = GallopRight(left.Array, right.Array[right.Index], left.Index, left.Remaining, 0);
+            if (left.Wins != 0)
             {
-                dest -= lenA;
-                cursorA -= lenA;
-                Array.Copy(array, cursorA + 1, array, dest + 1, lenA);
-                array[dest] = tmp[cursorT];  // Move first elt of run2 to front of merge
+                Array.Copy(left.Array, left.Index, right.Array, dest, left.Wins);
+                dest += left.Wins;
+                left.Index += left.Wins;
+                left.Remaining -= left.Wins;
+                if (left.Remaining <= 1)
+                {
+                    return true;
+                }
             }
-            else if (lenB == 0)
+
+            right.Array[dest++] = right.Array[right.Index++];
+            if (--right.Remaining == 0)
             {
-                throw new ArgumentException(
-                    "Comparison method violates its general contract!");
+                return true;
             }
-            else
+
+            right.Wins = GallopLeft(right.Array, left.Array[left.Index], right.Index, right.Remaining, 0);
+            if (right.Wins != 0)
             {
-                Array.Copy(tmp, 0, array, dest - (lenB - 1), lenB);
+                Array.Copy(right.Array, right.Index, right.Array, dest, right.Wins);
+                dest += right.Wins;
+                right.Index += right.Wins;
+                right.Remaining -= right.Wins;
+                if (right.Remaining == 0)
+                {
+                    return true;
+                }
             }
+
+            right.Array[dest++] = left.Array[left.Index++];
+            if (--left.Remaining == 1)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
