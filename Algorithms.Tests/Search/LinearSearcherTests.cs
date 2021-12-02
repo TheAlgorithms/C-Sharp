@@ -15,7 +15,7 @@ namespace Algorithms.Tests.Search
             // Arrange
             var searcher = new LinearSearcher<int>();
             var random = Randomizer.CreateRandomizer();
-            var arrayToSearch = Enumerable.Range(0, n).Select(x => random.Next(0, 1000)).ToArray();
+            var arrayToSearch = Enumerable.Range(0, n).Select(_ => random.Next(0, 1000)).ToArray();
 
             // Act
             var expectedItem = Array.Find(arrayToSearch, x => x == arrayToSearch[n / 2]);
@@ -31,7 +31,7 @@ namespace Algorithms.Tests.Search
             // Arrange
             var searcher = new LinearSearcher<int>();
             var random = Randomizer.CreateRandomizer();
-            var arrayToSearch = Enumerable.Range(0, n).Select(x => random.Next(0, 1000)).ToArray();
+            var arrayToSearch = Enumerable.Range(0, n).Select(_ => random.Next(0, 1000)).ToArray();
 
             // Act
             var expectedIndex = Array.FindIndex(arrayToSearch, x => x == arrayToSearch[n / 2]);
@@ -47,11 +47,11 @@ namespace Algorithms.Tests.Search
             // Arrange
             var searcher = new LinearSearcher<int>();
             var random = Randomizer.CreateRandomizer();
-            var arrayToSearch = Enumerable.Range(0, n).Select(x => random.Next(0, 1000)).ToArray();
+            var arrayToSearch = Enumerable.Range(0, n).Select(_ => random.Next(0, 1000)).ToArray();
 
             // Act
             // Assert
-            _ = Assert.Throws<ItemNotFoundException>(() => searcher.Find(arrayToSearch, x => false));
+            _ = Assert.Throws<ItemNotFoundException>(() => searcher.Find(arrayToSearch, _ => false));
         }
 
         [Test]
@@ -60,10 +60,10 @@ namespace Algorithms.Tests.Search
             // Arrange
             var searcher = new LinearSearcher<int>();
             var random = Randomizer.CreateRandomizer();
-            var arrayToSearch = Enumerable.Range(0, n).Select(x => random.Next(0, 1000)).ToArray();
+            var arrayToSearch = Enumerable.Range(0, n).Select(_ => random.Next(0, 1000)).ToArray();
 
             // Act
-            var actualIndex = searcher.FindIndex(arrayToSearch, x => false);
+            var actualIndex = searcher.FindIndex(arrayToSearch, _ => false);
 
             // Assert
             Assert.AreEqual(-1, actualIndex);

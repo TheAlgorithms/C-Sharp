@@ -1,82 +1,82 @@
 using System;
-using NUnit.Framework;
-using FluentAssertions;
 using System.Drawing;
+using FluentAssertions;
+using NUnit.Framework;
 
-namespace FloodFillTest
+namespace Algorithms.Tests.Other
 {
     public static class Tests
     {
-        private static Color black = Color.FromArgb(255, 0, 0, 0);
-        private static Color green = Color.FromArgb(255, 0, 255, 0);
-        private static Color violet = Color.FromArgb(255, 255, 0, 255);
-        private static Color white = Color.FromArgb(255, 255, 255, 255);
-        private static Color orange = Color.FromArgb(255, 255, 128, 0);
+        private static readonly Color Black = Color.FromArgb(255, 0, 0, 0);
+        private static readonly Color Green = Color.FromArgb(255, 0, 255, 0);
+        private static readonly Color Violet = Color.FromArgb(255, 255, 0, 255);
+        private static readonly Color White = Color.FromArgb(255, 255, 255, 255);
+        private static readonly Color Orange = Color.FromArgb(255, 255, 128, 0);
 
         [Test]
         public static void BreadthFirstSearch_ThrowsArgumentOutOfRangeException()
         {
-            Action act = () => Algorithms.Other.FloodFill.BreadthFirstSearch(GenerateTestBitmap(), (10, 10), black, white);
+            Action act = () => Algorithms.Other.FloodFill.BreadthFirstSearch(GenerateTestBitmap(), (10, 10), Black, White);
             act.Should().Throw<ArgumentOutOfRangeException>();
         }
 
         [Test]
         public static void DepthFirstSearch_ThrowsArgumentOutOfRangeException()
         {
-            Action act = () => Algorithms.Other.FloodFill.DepthFirstSearch(GenerateTestBitmap(), (-1, -1), black, white);
+            Action act = () => Algorithms.Other.FloodFill.DepthFirstSearch(GenerateTestBitmap(), (-1, -1), Black, White);
             act.Should().Throw<ArgumentOutOfRangeException>();
         }
 
         [Test]
         public static void BreadthFirstSearch_Test1()
         {
-            TestAlgorithm(Algorithms.Other.FloodFill.BreadthFirstSearch, (1, 1), green, orange, (1, 1), orange);
+            TestAlgorithm(Algorithms.Other.FloodFill.BreadthFirstSearch, (1, 1), Green, Orange, (1, 1), Orange);
         }
 
         [Test]
         public static void BreadthFirstSearch_Test2()
         {
-            TestAlgorithm(Algorithms.Other.FloodFill.BreadthFirstSearch, (1, 1), green, orange, (0, 1), violet);
+            TestAlgorithm(Algorithms.Other.FloodFill.BreadthFirstSearch, (1, 1), Green, Orange, (0, 1), Violet);
         }
 
         [Test]
         public static void BreadthFirstSearch_Test3()
         {
-            TestAlgorithm(Algorithms.Other.FloodFill.BreadthFirstSearch, (1, 1), green, orange, (6, 4), white);
+            TestAlgorithm(Algorithms.Other.FloodFill.BreadthFirstSearch, (1, 1), Green, Orange, (6, 4), White);
         }
 
         [Test]
         public static void DepthFirstSearch_Test1()
         {
-            TestAlgorithm(Algorithms.Other.FloodFill.DepthFirstSearch, (1, 1), green, orange, (1, 1), orange);
+            TestAlgorithm(Algorithms.Other.FloodFill.DepthFirstSearch, (1, 1), Green, Orange, (1, 1), Orange);
         }
 
         [Test]
         public static void DepthFirstSearch_Test2()
         {
-            TestAlgorithm(Algorithms.Other.FloodFill.DepthFirstSearch, (1, 1), green, orange, (0, 1), violet);
+            TestAlgorithm(Algorithms.Other.FloodFill.DepthFirstSearch, (1, 1), Green, Orange, (0, 1), Violet);
         }
 
         [Test]
         public static void DepthFirstSearch_Test3()
         {
-            TestAlgorithm(Algorithms.Other.FloodFill.DepthFirstSearch, (1, 1), green, orange, (6, 4), white);
+            TestAlgorithm(Algorithms.Other.FloodFill.DepthFirstSearch, (1, 1), Green, Orange, (6, 4), White);
         }
 
         private static Bitmap GenerateTestBitmap()
         {
             Color[,] layout =
             {
-                {violet, violet, green, green, black, green, green},
-                {violet, green, green, black, green, green, green},
-                {green, green, green, black, green, green, green},
-                {black, black, green, black, white, white, green},
-                {violet, violet, black, violet, violet, white, white},
-                {green, green, green, violet, violet, violet, violet},
-                {violet, violet, violet, violet, violet, violet, violet}
+                {Violet, Violet, Green, Green, Black, Green, Green},
+                {Violet, Green, Green, Black, Green, Green, Green},
+                {Green, Green, Green, Black, Green, Green, Green},
+                {Black, Black, Green, Black, White, White, Green},
+                {Violet, Violet, Black, Violet, Violet, White, White},
+                {Green, Green, Green, Violet, Violet, Violet, Violet},
+                {Violet, Violet, Violet, Violet, Violet, Violet, Violet},
             };
 
-            Bitmap bitmap = new Bitmap(7, 7);
+            Bitmap bitmap = new(7, 7);
             for (int x = 0; x < layout.GetLength(0); x++)
             {
                 for (int y = 0; y < layout.GetLength(1); y++)

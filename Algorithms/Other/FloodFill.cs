@@ -15,7 +15,7 @@ namespace Algorithms.Other
     /// </summary>
     public static class FloodFill
     {
-        private static List<(int xOffset, int yOffset)> neighbors = new List<(int xOffset, int yOffset)> { (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1) };
+        private static readonly List<(int xOffset, int yOffset)> Neighbors = new() { (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1) };
 
         /// <summary>
         /// Implements the flood fill algorithm through a breadth-first approach using a queue.
@@ -66,10 +66,10 @@ namespace Algorithms.Other
             {
                 bitmap.SetPixel(currentLocation.x, currentLocation.y, replacementColor);
 
-                for (int i = 0; i < neighbors.Count; i++)
+                for (int i = 0; i < Neighbors.Count; i++)
                 {
-                    int x = currentLocation.x + neighbors[i].xOffset;
-                    int y = currentLocation.y + neighbors[i].yOffset;
+                    int x = currentLocation.x + Neighbors[i].xOffset;
+                    int y = currentLocation.y + Neighbors[i].yOffset;
                     if (x >= 0 && x < bitmap.Width && y >= 0 && y < bitmap.Height)
                     {
                         queue.Add((x, y));
@@ -84,10 +84,10 @@ namespace Algorithms.Other
             {
                 bitmap.SetPixel(location.x, location.y, replacementColor);
 
-                for (int i = 0; i < neighbors.Count; i++)
+                for (int i = 0; i < Neighbors.Count; i++)
                 {
-                    int x = location.x + neighbors[i].xOffset;
-                    int y = location.y + neighbors[i].yOffset;
+                    int x = location.x + Neighbors[i].xOffset;
+                    int y = location.y + Neighbors[i].yOffset;
                     if (x >= 0 && x < bitmap.Width && y >= 0 && y < bitmap.Height)
                     {
                         DepthFirstFill(bitmap, (x, y), targetColor, replacementColor);

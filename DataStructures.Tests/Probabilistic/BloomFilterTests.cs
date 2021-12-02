@@ -9,8 +9,9 @@ namespace DataStructures.Tests.Probabilistic
 {
     public class BloomFilterTests
     {
-        static string[] TestNames = new[] { "kal;jsnfka", "alkjsdfn;lakm", "aljfopiawjf", "afowjeaofeij", "oajwsefoaiwje", "aoiwjfaoiejmf", "aoijfoawiejf" };
-        public class SimpleObject
+        static readonly string[] TestNames = { "kal;jsnfka", "alkjsdfn;lakm", "aljfopiawjf", "afowjeaofeij", "oajwsefoaiwje", "aoiwjfaoiejmf", "aoijfoawiejf" };
+
+        private class SimpleObject
         {
             public string Name { get; set; }
             public int Number { get; set; }
@@ -22,7 +23,7 @@ namespace DataStructures.Tests.Probabilistic
             }
         }
 
-        public class SimpleObjectOverridenHash
+        private class SimpleObjectOverridenHash
         {
             private const uint FnvPrime = 16777619;
             private const uint FnvOffsetBasis = 2166136261;

@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace DataStructures.Tests
 {
-    internal class AVLTreeTests
+    internal class AvlTreeTests
     {
         [Test]
         public void Constructor_UseCustomComparer_FormsCorrectTree()

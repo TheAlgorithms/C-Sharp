@@ -2,6 +2,7 @@ using Algorithms.Search;
 using NUnit.Framework;
 using System;
 using System.Linq;
+using FluentAssertions;
 
 namespace Algorithms.Tests.Search
 {
@@ -12,14 +13,14 @@ namespace Algorithms.Tests.Search
         {
             // Arrange
             var searcher = new JumpSearcher<int>();
-            var sortedArray = Enumerable.Range(0, n).Select(x => TestContext.CurrentContext.Random.Next(1_000_000)).OrderBy(x => x).ToArray();
+            var sortedArray = Enumerable.Range(0, n).Select(_ => TestContext.CurrentContext.Random.Next(1_000_000)).OrderBy(x => x).ToArray();
             var expectedIndex = TestContext.CurrentContext.Random.Next(sortedArray.Length);
 
             // Act
             var actualIndex = searcher.FindIndex(sortedArray, sortedArray[expectedIndex]);
 
             // Assert
-            Assert.AreEqual(expectedIndex, actualIndex);
+            sortedArray[actualIndex].Should().Be(sortedArray[expectedIndex]);
         }
 
         [Test]
@@ -27,7 +28,7 @@ namespace Algorithms.Tests.Search
         {
             // Arrange
             var searcher = new JumpSearcher<int>();
-            var sortedArray = Enumerable.Range(0, n).Select(x => TestContext.CurrentContext.Random.Next(1_000_000)).Where(x => x != missingItem).OrderBy(x => x).ToArray();
+            var sortedArray = Enumerable.Range(0, n).Select(_ => TestContext.CurrentContext.Random.Next(1_000_000)).Where(x => x != missingItem).OrderBy(x => x).ToArray();
             var expectedIndex = -1;
 
             // Act
