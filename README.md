@@ -79,6 +79,7 @@ This repository contains algorithms and data structures implemented in C# for ed
         * [Random pivot](./Algorithms/Sorters/Comparison/RandomPivotQuickSorter.cs)
       * [Selection Sort](./Algorithms/Sorters/Comparison/SelectionSorter.cs)
       * [Shell Sort](./Algorithms/Sorters/Comparison/ShellSorter.cs)
+      * [Tim Sort](./Algorithms/Sorters/Comparison/TimSorter.cs)
     * [External](./Algorithms/Sorters/External)
       * [Merge Sort](./Algorithms/Sorters/External/ExternalMergeSorter.cs)
     * [Integer](./Algorithms/Sorters/Integer)
