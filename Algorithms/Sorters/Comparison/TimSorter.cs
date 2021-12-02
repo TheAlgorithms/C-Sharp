@@ -7,7 +7,7 @@ namespace Algorithms.Sorters.Comparison
     ///     Timsort is a hybrid stable sorting algorithm, derived from merge sort and insertion sort, designed to perform well on many kinds of real-world data.
     ///     It was originally implemented by Tim Peters in 2002 for use in the Python programming language.
     ///
-    ///     This class is ported from a Java interpretation of Tim Peter's original work.
+    ///     This class is based on a Java interpretation of Tim Peter's original work.
     ///     Java class is viewable here:
     ///     http://cr.openjdk.java.net/~martin/webrevs/openjdk7/timsort/raw_files/new/src/share/classes/java/util/TimSort.java
     ///
@@ -43,11 +43,11 @@ namespace Algorithms.Sorters.Comparison
         {
             public Tc[] Array { get; set; } = default!;
 
-            public int Index { get; set; } = 0;
+            public int Index { get; set; }
 
-            public int Remaining { get; set; } = 0;
+            public int Remaining { get; set; }
 
-            public int Wins { get; set; } = 0;
+            public int Wins { get; set; }
         }
 
         public TimSorter(int minMerge = 32, int minGallop = 7)
@@ -79,6 +79,7 @@ namespace Algorithms.Sorters.Comparison
             {
                 if (remaining < 2)
                 {
+                    // Arrays of size 0 or 1 are always sorted.
                     return;
                 }
 
@@ -275,12 +276,9 @@ namespace Algorithms.Sorters.Comparison
         /// <returns>Offset for the key's location.</returns>
         private int GallopLeft(T[] array, T key, int i, int len, int hint)
         {
-            var offset = 1;
-            var lastOfs = 0;
-
-            (offset, lastOfs) = comparer.Compare(key, array[i + hint]) > 0
-                ? RightRun(array, key, i, len, hint, offset, lastOfs, 0)
-                : LeftRun(array, key, i, hint, offset, lastOfs, 1);
+            var (offset, lastOfs) = comparer.Compare(key, array[i + hint]) > 0
+                ? RightRun(array, key, i, len, hint, 0)
+                : LeftRun(array, key, i, hint, 1);
 
             return FinalOffset(array, key, i, offset, lastOfs, 1);
         }
@@ -296,20 +294,17 @@ namespace Algorithms.Sorters.Comparison
         /// <returns>Offset for the key's location.</returns>
         private int GallopRight(T[] array, T key, int i, int len, int hint)
         {
-            var offset = 1;
-            var lastOfs = 0;
-
-            (offset, lastOfs) = comparer.Compare(key, array[i + hint]) < 0
-                ? LeftRun(array, key, i, hint, offset, lastOfs, 0)
-                : RightRun(array, key, i, len, hint, offset, lastOfs, -1);
+            var (offset, lastOfs) = comparer.Compare(key, array[i + hint]) < 0
+                ? LeftRun(array, key, i, hint, 0)
+                : RightRun(array, key, i, len, hint, -1);
 
             return FinalOffset(array, key, i, offset, lastOfs, 0);
         }
 
-        private (int offset, int lastOfs) LeftRun(T[] array, T key, int i, int hint, int offset, int lastOfs, int lt)
+        private (int offset, int lastOfs) LeftRun(T[] array, T key, int i, int hint, int lt)
         {
             var maxOfs = hint + 1;
-            var tmp = lastOfs;
+            var (tmp, offset) = (1, 1);
 
             while (offset < maxOfs && comparer.Compare(key, array[i + hint - offset]) < lt)
             {
@@ -326,14 +321,15 @@ namespace Algorithms.Sorters.Comparison
                 offset = maxOfs;
             }
 
-            lastOfs = hint - offset;
+            var lastOfs = hint - offset;
             offset = hint - tmp;
 
             return (offset, lastOfs);
         }
 
-        private (int offset, int lastOfs) RightRun(T[] array, T key, int i, int len, int hint, int offset, int lastOfs, int gt)
+        private (int offset, int lastOfs) RightRun(T[] array, T key, int i, int len, int hint, int gt)
         {
+            var (offset, lastOfs) = (1, 1);
             var maxOfs = len - hint;
             while (offset < maxOfs && comparer.Compare(key, array[i + hint + offset]) > gt)
             {
@@ -416,7 +412,9 @@ namespace Algorithms.Sorters.Comparison
                 }
             }
 
-            return comparer.Compare(target, array[left]) < 0 ? left : left + 1;
+            return comparer.Compare(target, array[left]) < 0
+                ? left
+                : left + 1;
         }
 
         private void MergeCollapse(T[] array)

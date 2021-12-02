@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Algorithms.Sorters.Comparison;
 using Algorithms.Tests.Helpers;
 using NUnit.Framework;
@@ -7,6 +8,8 @@ namespace Algorithms.Tests.Sorters.Comparison
 {
     public static class TimSorterTests
     {
+        private static readonly IntComparer IntComparer = new();
+
         [Test]
         public static void ArraySorted(
             [Random(0, 1000, 100, Distinct = true)]
@@ -14,12 +17,51 @@ namespace Algorithms.Tests.Sorters.Comparison
         {
             // Arrange
             var sorter = new TimSorter<int>();
-            var intComparer = new IntComparer();
             var (correctArray, testArray) = RandomHelper.GetArrays(n);
 
             // Act
-            sorter.Sort(testArray, intComparer);
-            Array.Sort(correctArray, intComparer);
+            sorter.Sort(testArray, IntComparer);
+            Array.Sort(correctArray, IntComparer);
+
+            // Assert
+            Assert.AreEqual(testArray, correctArray);
+        }
+
+        [Test]
+        public static void TinyArray()
+        {
+            // Arrange
+            var sorter = new TimSorter<int>();
+            var tinyArray = new int[] { 1 };
+            var correctArray = new int[] { 1 };
+
+            // Act
+            sorter.Sort(tinyArray, IntComparer);
+
+            // Assert
+            Assert.AreEqual(tinyArray, correctArray);
+        }
+
+        [Test]
+        public static void SmallChunks()
+        {
+            // Arrange
+            var sorter = new TimSorter<int>();
+            var (correctArray, testArray) = RandomHelper.GetArrays(800);
+            Array.Sort(correctArray, IntComparer);
+            Array.Sort(testArray, IntComparer);
+
+            var max = testArray.Max();
+            var min = testArray.Min();
+
+            correctArray[0] = max;
+            correctArray[800-1] = min;
+            testArray[0] = max;
+            testArray[800 - 1] = min;
+
+            // Act
+            sorter.Sort(testArray, IntComparer);
+            Array.Sort(correctArray, IntComparer);
 
             // Assert
             Assert.AreEqual(testArray, correctArray);
