@@ -42,7 +42,7 @@ namespace Algorithms.Numeric
             }
 
             BigInteger x;
-            Random rand = new Random();
+            Random rand = new();
 
             // as there is no native random function for BigInteger we suppose a random int number is sufficient
             int nMaxValue = (n > int.MaxValue) ? int.MaxValue : (int)n;

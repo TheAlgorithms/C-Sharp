@@ -14,7 +14,7 @@ namespace DataStructures.AATree
     ///     More information: https://en.wikipedia.org/wiki/AA_tree .
     /// </remarks>
     /// <typeparam name="TKey">The type of key for the AA tree.</typeparam>
-    public class AATree<TKey>
+    public class AaTree<TKey>
     {
         /// <summary>
         ///     The comparer function to use to compare the keys.
@@ -22,23 +22,23 @@ namespace DataStructures.AATree
         private readonly Comparer<TKey> comparer;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AATree{TKey}" /> class.
+        ///     Initializes a new instance of the <see cref="AaTree{TKey}" /> class.
         /// </summary>
-        public AATree()
+        public AaTree()
             : this(Comparer<TKey>.Default)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AATree{TKey}" /> class with a custom comparer.
+        ///     Initializes a new instance of the <see cref="AaTree{TKey}" /> class with a custom comparer.
         /// </summary>
         /// <param name="customComparer">The custom comparer to use to compare keys.</param>
-        public AATree(Comparer<TKey> customComparer) => comparer = customComparer;
+        public AaTree(Comparer<TKey> customComparer) => comparer = customComparer;
 
         /// <summary>
         ///     Gets the root of the tree.
         /// </summary>
-        public AATreeNode<TKey>? Root { get; private set; }
+        public AaTreeNode<TKey>? Root { get; private set; }
 
         /// <summary>
         ///     Gets the number of elements in the tree.
@@ -130,7 +130,7 @@ namespace DataStructures.AATree
             InOrderWalk(Root);
             return result;
 
-            void InOrderWalk(AATreeNode<TKey>? node)
+            void InOrderWalk(AaTreeNode<TKey>? node)
             {
                 if (node is null)
                 {
@@ -153,7 +153,7 @@ namespace DataStructures.AATree
             PreOrderWalk(Root);
             return result;
 
-            void PreOrderWalk(AATreeNode<TKey>? node)
+            void PreOrderWalk(AaTreeNode<TKey>? node)
             {
                 if (node is null)
                 {
@@ -176,7 +176,7 @@ namespace DataStructures.AATree
             PostOrderWalk(Root);
             return result;
 
-            void PostOrderWalk(AATreeNode<TKey>? node)
+            void PostOrderWalk(AaTreeNode<TKey>? node)
             {
                 if (node is null)
                 {
@@ -196,11 +196,11 @@ namespace DataStructures.AATree
         /// <param name="node">The node to search for a empty spot.</param>
         /// <returns>The node with the added element.</returns>
         /// <exception cref="ArgumentException">Thrown if key is already in the tree.</exception>
-        private AATreeNode<TKey> Add(TKey key, AATreeNode<TKey>? node)
+        private AaTreeNode<TKey> Add(TKey key, AaTreeNode<TKey>? node)
         {
             if (node is null)
             {
-                return new AATreeNode<TKey>(key, 1);
+                return new AaTreeNode<TKey>(key, 1);
             }
 
             if (comparer.Compare(key, node.Key) < 0)
@@ -225,7 +225,7 @@ namespace DataStructures.AATree
         /// <param name="key">The element to remove.</param>
         /// <param name="node">The node to search from.</param>
         /// <returns>The node with the specified element removed.</returns>
-        private AATreeNode<TKey>? Remove(TKey key, AATreeNode<TKey>? node)
+        private AaTreeNode<TKey>? Remove(TKey key, AaTreeNode<TKey>? node)
         {
             if (node is null)
             {
@@ -281,7 +281,7 @@ namespace DataStructures.AATree
         /// <param name="key">The element to check for.</param>
         /// <param name="node">The node to search from.</param>
         /// <returns>true if the element exists in the tree, false otherwise.</returns>
-        private bool Contains(TKey key, AATreeNode<TKey>? node) =>
+        private bool Contains(TKey key, AaTreeNode<TKey>? node) =>
             node is { }
             && comparer.Compare(key, node.Key) is { } v
             && v switch
@@ -296,7 +296,7 @@ namespace DataStructures.AATree
         /// </summary>
         /// <param name="node">The node to traverse from.</param>
         /// <returns>The node with the maximum/right-most element.</returns>
-        private AATreeNode<TKey> GetMax(AATreeNode<TKey> node)
+        private AaTreeNode<TKey> GetMax(AaTreeNode<TKey> node)
         {
             while (true)
             {
@@ -314,7 +314,7 @@ namespace DataStructures.AATree
         /// </summary>
         /// <param name="node">The node to traverse from.</param>
         /// <returns>The node with the minimum/left-most element.</returns>
-        private AATreeNode<TKey> GetMin(AATreeNode<TKey> node)
+        private AaTreeNode<TKey> GetMin(AaTreeNode<TKey> node)
         {
             while (true)
             {
@@ -333,7 +333,7 @@ namespace DataStructures.AATree
         /// </summary>
         /// <param name="node">The node to rebalance from.</param>
         /// <returns>The rebalanced node.</returns>
-        private AATreeNode<TKey>? Skew(AATreeNode<TKey>? node)
+        private AaTreeNode<TKey>? Skew(AaTreeNode<TKey>? node)
         {
             if (node?.Left is null || node.Left.Level != node.Level)
             {
@@ -352,7 +352,7 @@ namespace DataStructures.AATree
         /// </summary>
         /// <param name="node">The node to rebalance from.</param>
         /// <returns>The rebalanced node.</returns>
-        private AATreeNode<TKey>? Split(AATreeNode<TKey>? node)
+        private AaTreeNode<TKey>? Split(AaTreeNode<TKey>? node)
         {
             if (node?.Right?.Right is null || node.Level != node.Right.Right.Level)
             {
@@ -371,7 +371,7 @@ namespace DataStructures.AATree
         /// </summary>
         /// <param name="node">The node to decrease level from.</param>
         /// <returns>The node with modified level.</returns>
-        private AATreeNode<TKey> DecreaseLevel(AATreeNode<TKey> node)
+        private AaTreeNode<TKey> DecreaseLevel(AaTreeNode<TKey> node)
         {
             var newLevel = Math.Min(GetLevel(node.Left), GetLevel(node.Right)) + 1;
             if (newLevel >= node.Level)
@@ -387,7 +387,7 @@ namespace DataStructures.AATree
 
             return node;
 
-            static int GetLevel(AATreeNode<TKey>? x) => x?.Level ?? 0;
+            static int GetLevel(AaTreeNode<TKey>? x) => x?.Level ?? 0;
         }
     }
 }

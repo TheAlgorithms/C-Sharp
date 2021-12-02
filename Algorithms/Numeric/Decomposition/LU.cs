@@ -6,7 +6,7 @@ namespace Algorithms.Numeric.Decomposition
     ///     LU-decomposition factors the "source" matrix as the product of lower triangular matrix
     ///     and upper triangular matrix.
     /// </summary>
-    public static class LU
+    public static class Lu
     {
         /// <summary>
         ///     Performs LU-decomposition on "source" matrix.
