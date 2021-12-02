@@ -304,7 +304,7 @@ namespace Algorithms.Sorters.Comparison
         private (int offset, int lastOfs) LeftRun(T[] array, T key, int i, int hint, int lt)
         {
             var maxOfs = hint + 1;
-            var (tmp, offset) = (1, 1);
+            var (offset, tmp) = (1, 0);
 
             while (offset < maxOfs && comparer.Compare(key, array[i + hint - offset]) < lt)
             {
@@ -325,7 +325,7 @@ namespace Algorithms.Sorters.Comparison
 
         private (int offset, int lastOfs) RightRun(T[] array, T key, int i, int len, int hint, int gt)
         {
-            var (offset, lastOfs) = (1, 1);
+            var (offset, lastOfs) = (1, 0);
             var maxOfs = len - hint;
             while (offset < maxOfs && comparer.Compare(key, array[i + hint + offset]) > gt)
             {
