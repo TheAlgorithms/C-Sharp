@@ -310,10 +310,6 @@ namespace Algorithms.Sorters.Comparison
             {
                 tmp = offset;
                 offset = BoundLeftShift(offset);
-                if (offset <= 0)
-                {
-                    offset = maxOfs;
-                }
             }
 
             if (offset > maxOfs)
@@ -335,10 +331,6 @@ namespace Algorithms.Sorters.Comparison
             {
                 lastOfs = offset;
                 offset = BoundLeftShift(offset);
-                if (offset <= 0)
-                {
-                    offset = maxOfs;
-                }
             }
 
             if (offset > maxOfs)

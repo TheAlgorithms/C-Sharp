@@ -32,8 +32,8 @@ namespace Algorithms.Tests.Sorters.Comparison
         {
             // Arrange
             var sorter = new TimSorter<int>();
-            var tinyArray = new int[] { 1 };
-            var correctArray = new int[] { 1 };
+            var tinyArray = new[] { 1 };
+            var correctArray = new[] { 1 };
 
             // Act
             sorter.Sort(tinyArray, IntComparer);
