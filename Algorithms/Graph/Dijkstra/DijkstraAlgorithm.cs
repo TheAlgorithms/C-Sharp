@@ -7,12 +7,12 @@ namespace Algorithms.Graph.Dijkstra
 {
     public class DijkstraAlgorithm
     {
-        public List<DistanceModel<T>> GenerateShortestPath<T>(DirectedWeightedGraph<T> graph, Vertex<T> start)
+        public List<DistanceModel<T>> GenerateShortestPath<T>(DirectedWeightedGraph<T> graph, Vertex<T> startVertex)
         {
             var visitedVertices = new List<Vertex<T>?>();
 
             // 1. Check that vertex belongs to graph
-            if (start.Graph != null && !start.Graph.Equals(graph))
+            if (startVertex.Graph != null && !startVertex.Graph.Equals(graph))
             {
                 throw new InvalidOperationException("Vertex does not belong to graph.");
             }
@@ -23,10 +23,18 @@ namespace Algorithms.Graph.Dijkstra
             // then it is infinity
             var distanceList = new List<DistanceModel<T>>
             {
-                new(start, start, 0),
+                new(startVertex, startVertex, 0),
             };
 
-            var currentVertex = start;
+            foreach (var vertex in graph.Vertices)
+            {
+                if (vertex != null && vertex != startVertex)
+                {
+                    distanceList.Add(new DistanceModel<T>(vertex, null, double.MaxValue));
+                }
+            }
+
+            var currentVertex = startVertex;
 
             // 3. Initialize the integer variable, which indicates the current passed path
             var currentPath = 0d;
@@ -51,24 +59,23 @@ namespace Algorithms.Graph.Dijkstra
 
                     // 7. If the distance table contains a distance for the vertex and it is greater
                     // then current path: update distance
-                    if (ContainsAndGreater(distanceList, vertex, currentPath + adjacentDistance))
+                    if (KnownDistanceIsGreater(distanceList, vertex, currentPath + adjacentDistance))
                     {
                         var distance = GetDistanceByEndVertex(distanceList, vertex);
                         distance.Distance = currentPath + adjacentDistance;
                         distance.PreviousVertex = currentVertex;
-                        continue;
                     }
 
                     // 8. If the distance table doesn't contain a distance for particular pair of vertices: add it.
-                    if (!Contains(distanceList, vertex))
-                    {
-                        distanceList.Add(new DistanceModel<T>
-                        {
-                            Vertex = vertex,
-                            PreviousVertex = currentVertex,
-                            Distance = currentPath + adjacentDistance,
-                        });
-                    }
+                    // if (!Contains(distanceList, vertex))
+                    // {
+                    //     distanceList.Add(new DistanceModel<T>
+                    //     {
+                    //         Vertex = vertex,
+                    //         PreviousVertex = currentVertex,
+                    //         Distance = currentPath + adjacentDistance,
+                    //     });
+                    // }
                 }
 
                 // 9. If there are any adjacent vertices which is unvisited: exit loop
@@ -121,20 +128,13 @@ namespace Algorithms.Graph.Dijkstra
                 x.Vertex.Equals(endVertex));
         }
 
-        private static bool ContainsAndGreater<T>(
+        private static bool KnownDistanceIsGreater<T>(
             IEnumerable<DistanceModel<T>?> distances,
             Vertex<T>? vertex,
             double value)
         {
             return distances.Any(x =>
                 x is { Vertex: { } } && x.Vertex.Equals(vertex) && x.Distance > value);
-        }
-
-        private static bool Contains<T>(IEnumerable<DistanceModel<T>> distances, Vertex<T>? vertex)
-        {
-            return distances.Any(x =>
-                x.Vertex != null &&
-                x.Vertex.Equals(vertex));
         }
     }
 }

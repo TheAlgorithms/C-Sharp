@@ -52,17 +52,17 @@ namespace Algorithms.Tests.Graph.Dijkstra
             shortestPathList[1].Distance.Should().Be(3);
             shortestPathList[1].PreviousVertex.Should().Be(d);
 
-            shortestPathList[2].Vertex.Should().Be(d);
-            shortestPathList[2].Distance.Should().Be(1);
-            shortestPathList[2].PreviousVertex.Should().Be(a);
+            shortestPathList[2].Vertex.Should().Be(c);
+            shortestPathList[2].Distance.Should().Be(7);
+            shortestPathList[2].PreviousVertex.Should().Be(e);
 
-            shortestPathList[3].Vertex.Should().Be(e);
-            shortestPathList[3].Distance.Should().Be(2);
-            shortestPathList[3].PreviousVertex.Should().Be(d);
+            shortestPathList[3].Vertex.Should().Be(d);
+            shortestPathList[3].Distance.Should().Be(1);
+            shortestPathList[3].PreviousVertex.Should().Be(a);
 
-            shortestPathList[4].Vertex.Should().Be(c);
-            shortestPathList[4].Distance.Should().Be(7);
-            shortestPathList[4].PreviousVertex.Should().Be(e);
+            shortestPathList[4].Vertex.Should().Be(e);
+            shortestPathList[4].Distance.Should().Be(2);
+            shortestPathList[4].PreviousVertex.Should().Be(d);
         }
     }
 }
