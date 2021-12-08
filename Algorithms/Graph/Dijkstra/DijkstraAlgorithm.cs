@@ -29,7 +29,7 @@ namespace Algorithms.Graph.Dijkstra
                 throw new InvalidOperationException($"Vertex does not belong to graph {nameof(startVertex)}.");
             }
 
-            var visitedVertices = new List<Vertex<T>?>();
+            var visitedVertices = new List<Vertex<T>>();
 
             var distanceDictionary = new Dictionary<int, DistanceModel<T>>
             {
@@ -47,24 +47,20 @@ namespace Algorithms.Graph.Dijkstra
 
             var currentPath = 0d;
 
-            while (visitedVertices.Count < graph.Count)
+            while (true)
             {
                 visitedVertices.Add(currentVertex);
 
-                var neighborVertices = graph.GetNeighbors(currentVertex)
-                    .Where(x => !visitedVertices.Contains(x))
+                var neighborVertices = graph
+                    .GetNeighbors(currentVertex)
+                    .Where(x => x != null && !visitedVertices.Contains(x))
                     .ToList();
 
                 foreach (var vertex in neighborVertices)
                 {
-                    if (vertex is null)
-                    {
-                        throw new InvalidOperationException($"Vertex is null {nameof(vertex)}");
-                    }
+                    var adjacentDistance = graph.AdjacentDistance(currentVertex, vertex!);
 
-                    var adjacentDistance = graph.AdjacentDistance(currentVertex, vertex);
-
-                    var tryGetDistance = distanceDictionary.TryGetValue(vertex.Index, out var distance);
+                    var tryGetDistance = distanceDictionary.TryGetValue(vertex!.Index, out var distance);
 
                     if (tryGetDistance && distance!.Distance <= currentPath + adjacentDistance)
                     {
