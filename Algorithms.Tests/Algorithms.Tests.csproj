@@ -24,4 +24,8 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Graph\Dijkstra" />
+  </ItemGroup>
+
 </Project>
