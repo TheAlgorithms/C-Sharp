@@ -28,8 +28,4 @@
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Graph\Dijkstra" />
-  </ItemGroup>
-
 </Project>

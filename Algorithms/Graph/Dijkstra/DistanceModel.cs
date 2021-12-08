@@ -4,11 +4,11 @@ namespace Algorithms.Graph.Dijkstra
 {
     public class DistanceModel<T>
     {
-        public Vertex<T>? Vertex { get; set; }
+        public Vertex<T>? Vertex { get; init; }
 
         public Vertex<T>? PreviousVertex { get; set; }
 
-        public int Distance { get; set; }
+        public double Distance { get; set; }
 
         public DistanceModel()
         {

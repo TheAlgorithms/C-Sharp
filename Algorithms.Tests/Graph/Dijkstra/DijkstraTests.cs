@@ -11,7 +11,7 @@ namespace Algorithms.Tests.Graph.Dijkstra
         [Test]
         public void DijkstraMethodTest()
         {
-            // here test case is from https://youtu.be/pVfj6mxhdMw
+            // here test case is from https://yout-u.be/pVfj6mxhdMw
 
             var graph = new DirectedWeightedGraph<char>(5);
             var a = graph.AddVertex('A');
