@@ -65,30 +65,23 @@ namespace Algorithms.Graph.Dijkstra
                         distance.Distance = currentPath + adjacentDistance;
                         distance.PreviousVertex = currentVertex;
                     }
-
-                    // 8. If the distance table doesn't contain a distance for particular pair of vertices: add it.
-                    // if (!Contains(distanceList, vertex))
-                    // {
-                    //     distanceList.Add(new DistanceModel<T>
-                    //     {
-                    //         Vertex = vertex,
-                    //         PreviousVertex = currentVertex,
-                    //         Distance = currentPath + adjacentDistance,
-                    //     });
-                    // }
                 }
 
+                // 10. Get the minimal weighted edge to the adjacent unvisited vertex
+                var minimalAdjacentVertex = GetMinimalUnvisitedAdjacentVertex(
+                    graph,
+                    currentVertex,
+                    neighborVertices,
+                    visitedVertices);
+
                 // 9. If there are any adjacent vertices which is unvisited: exit loop
-                if (!neighborVertices.Any())
+                if (!neighborVertices.Any() || minimalAdjacentVertex is null)
                 {
                     break;
                 }
 
-                // 10. Get the minimal weighted edge to the adjacent unvisited vertex
-                var minimalAdjacentVertex = GetMinimalAdjacentVertex(graph, currentVertex, neighborVertices);
-
                 // 11. Update current path: add to it the weight of minimal edge, leading to the next unvisited vertex.
-                currentPath += graph.AdjacentDistance(currentVertex, minimalAdjacentVertex!);
+                currentPath += graph.AdjacentDistance(currentVertex, minimalAdjacentVertex);
 
                 // 12. Update current vertex
                 currentVertex = minimalAdjacentVertex;
@@ -97,10 +90,11 @@ namespace Algorithms.Graph.Dijkstra
             return distanceList;
         }
 
-        private static Vertex<T>? GetMinimalAdjacentVertex<T>(
+        private static Vertex<T>? GetMinimalUnvisitedAdjacentVertex<T>(
             IDirectedWeightedGraph<T> graph,
             Vertex<T> startVertex,
-            IEnumerable<Vertex<T>?> adjacentVertices)
+            IEnumerable<Vertex<T>?> adjacentVertices,
+            ICollection<Vertex<T>?> visitedVertices)
         {
             var minDistance = double.MaxValue;
             Vertex<T>? minVertex = default;
@@ -109,7 +103,7 @@ namespace Algorithms.Graph.Dijkstra
             {
                 var currentDistance = graph.AdjacentDistance(startVertex, vertex!);
 
-                if (minDistance > currentDistance)
+                if (minDistance > currentDistance && !visitedVertices.Contains(vertex))
                 {
                     minDistance = currentDistance;
                     minVertex = vertex;
