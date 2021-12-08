@@ -7,14 +7,29 @@ namespace Algorithms.Graph.Dijkstra
 {
     public class DijkstraAlgorithm
     {
+        /// <summary>
+        /// Implementation of the Dijkstra shortest path algorithm.
+        /// https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm.
+        /// </summary>
+        /// <param name="graph">Graph instance.</param>
+        /// <param name="startVertex">Starting vertex instance.</param>
+        /// <typeparam name="T">Generic Parameter.</typeparam>
+        /// <returns>List of distances from current vertex to all other vertices.</returns>
+        /// <exception cref="InvalidOperationException">Exception thrown in case when graph is null or start
+        /// vertex does not belong to graph instance.</exception>
         public List<DistanceModel<T>> GenerateShortestPath<T>(DirectedWeightedGraph<T> graph, Vertex<T> startVertex)
         {
+            if (startVertex.Graph is null)
+            {
+                throw new InvalidOperationException($"Graph is null {nameof(graph)}.");
+            }
+
             var visitedVertices = new List<Vertex<T>?>();
 
             // 1. Check that vertex belongs to graph
-            if (startVertex.Graph != null && !startVertex.Graph.Equals(graph))
+            if (!startVertex.Graph.Equals(graph))
             {
-                throw new InvalidOperationException("Vertex does not belong to graph.");
+                throw new InvalidOperationException($"Vertex does not belong to graph {nameof(startVertex)}.");
             }
 
             // 2. Initialize distance table with start vertex, set distance to 0
@@ -28,7 +43,7 @@ namespace Algorithms.Graph.Dijkstra
 
             foreach (var vertex in graph.Vertices)
             {
-                if (vertex != null && vertex != startVertex)
+                if (vertex is null && vertex != startVertex)
                 {
                     distanceList.Add(new DistanceModel<T>(vertex, null, double.MaxValue));
                 }
@@ -36,18 +51,13 @@ namespace Algorithms.Graph.Dijkstra
 
             var currentVertex = startVertex;
 
-            // 3. Initialize the integer variable, which indicates the current passed path
+            // 3. Initialize the float variable which indicates the total passed path
             var currentPath = 0d;
 
             while (visitedVertices.Count < graph.Count)
             {
                 // 4. Mark current vertex as visited
                 visitedVertices.Add(currentVertex);
-
-                if (currentVertex is null)
-                {
-                    throw new InvalidOperationException();
-                }
 
                 // 5. Get the edges to all adjacent vertices
                 var neighborVertices = graph.GetNeighbors(currentVertex).ToArray();
@@ -67,7 +77,7 @@ namespace Algorithms.Graph.Dijkstra
                     }
                 }
 
-                // 10. Get the minimal weighted edge to the adjacent unvisited vertex
+                // 8. Get the minimal weighted edge to the adjacent unvisited vertex
                 var minimalAdjacentVertex = GetMinimalUnvisitedAdjacentVertex(
                     graph,
                     currentVertex,
@@ -80,10 +90,10 @@ namespace Algorithms.Graph.Dijkstra
                     break;
                 }
 
-                // 11. Update current path: add to it the weight of minimal edge, leading to the next unvisited vertex.
+                // 10. Update current path: add to it the weight of minimal edge, leading to the next unvisited vertex.
                 currentPath += graph.AdjacentDistance(currentVertex, minimalAdjacentVertex);
 
-                // 12. Update current vertex
+                // 11. Update current vertex
                 currentVertex = minimalAdjacentVertex;
             }
 
@@ -128,7 +138,9 @@ namespace Algorithms.Graph.Dijkstra
             double value)
         {
             return distances.Any(x =>
-                x is { Vertex: { } } && x.Vertex.Equals(vertex) && x.Distance > value);
+                x is { Vertex: { } } &&
+                x.Vertex.Equals(vertex) &&
+                x.Distance > value);
         }
     }
 }
