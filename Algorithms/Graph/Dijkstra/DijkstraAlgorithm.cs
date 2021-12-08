@@ -17,7 +17,9 @@ namespace Algorithms.Graph.Dijkstra
         /// <returns>List of distances from current vertex to all other vertices.</returns>
         /// <exception cref="InvalidOperationException">Exception thrown in case when graph is null or start
         /// vertex does not belong to graph instance.</exception>
-        public List<DistanceModel<T>> GenerateShortestPath<T>(DirectedWeightedGraph<T> graph, Vertex<T> startVertex)
+        public Dictionary<int, DistanceModel<T>> GenerateShortestPath<T>(
+            DirectedWeightedGraph<T> graph,
+            Vertex<T> startVertex)
         {
             if (startVertex.Graph is null)
             {
@@ -36,16 +38,18 @@ namespace Algorithms.Graph.Dijkstra
             // According to the algorithm, we should initialize table with infinity distances
             // However, we assume that if list doesn't contains a record for the pair of vertices
             // then it is infinity
-            var distanceList = new List<DistanceModel<T>>
+            var distanceDictionary = new Dictionary<int, DistanceModel<T>>
             {
-                new(startVertex, startVertex, 0),
+                [startVertex.Index] = new(startVertex, startVertex, 0),
             };
 
-            foreach (var vertex in graph.Vertices)
+            foreach (var vertex in graph.Vertices.Where(x => x != null && !x.Equals(startVertex)))
             {
-                if (vertex is null && vertex != startVertex)
+                if (vertex != null)
                 {
-                    distanceList.Add(new DistanceModel<T>(vertex, null, double.MaxValue));
+                    distanceDictionary.Add(
+                        vertex.Index,
+                        new DistanceModel<T>(vertex, null, double.MaxValue));
                 }
             }
 
@@ -65,15 +69,20 @@ namespace Algorithms.Graph.Dijkstra
                 // 6. Examine all the adjacent vertices, but do not mark them as visited
                 foreach (var vertex in neighborVertices)
                 {
-                    var adjacentDistance = graph.AdjacentDistance(currentVertex, vertex!);
+                    if (vertex is null)
+                    {
+                        throw new InvalidOperationException($"Vertex is null {nameof(vertex)}");
+                    }
+
+                    var adjacentDistance = graph.AdjacentDistance(currentVertex, vertex);
 
                     // 7. If the distance table contains a distance for the vertex and it is greater
                     // then current path: update distance
-                    if (KnownDistanceIsGreater(distanceList, vertex, currentPath + adjacentDistance))
+                    if (distanceDictionary.TryGetValue(vertex.Index, out var v) &&
+                        v.Distance > currentPath + adjacentDistance)
                     {
-                        var distance = GetDistanceByEndVertex(distanceList, vertex);
-                        distance.Distance = currentPath + adjacentDistance;
-                        distance.PreviousVertex = currentVertex;
+                        v.Distance = currentPath + adjacentDistance;
+                        v.PreviousVertex = currentVertex;
                     }
                 }
 
@@ -85,7 +94,7 @@ namespace Algorithms.Graph.Dijkstra
                     visitedVertices);
 
                 // 9. If there are any adjacent vertices which is unvisited: exit loop
-                if (!neighborVertices.Any() || minimalAdjacentVertex is null)
+                if (neighborVertices.Length == 0 || minimalAdjacentVertex is null)
                 {
                     break;
                 }
@@ -97,7 +106,7 @@ namespace Algorithms.Graph.Dijkstra
                 currentVertex = minimalAdjacentVertex;
             }
 
-            return distanceList;
+            return distanceDictionary;
         }
 
         private static Vertex<T>? GetMinimalUnvisitedAdjacentVertex<T>(
@@ -121,26 +130,6 @@ namespace Algorithms.Graph.Dijkstra
             }
 
             return minVertex;
-        }
-
-        private static DistanceModel<T> GetDistanceByEndVertex<T>(
-            IEnumerable<DistanceModel<T>> distances,
-            Vertex<T>? endVertex)
-        {
-            return distances.First(x =>
-                x.Vertex != null &&
-                x.Vertex.Equals(endVertex));
-        }
-
-        private static bool KnownDistanceIsGreater<T>(
-            IEnumerable<DistanceModel<T>?> distances,
-            Vertex<T>? vertex,
-            double value)
-        {
-            return distances.Any(x =>
-                x is { Vertex: { } } &&
-                x.Vertex.Equals(vertex) &&
-                x.Distance > value);
         }
     }
 }
