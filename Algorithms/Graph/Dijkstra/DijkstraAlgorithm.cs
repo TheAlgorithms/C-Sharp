@@ -19,29 +19,11 @@ namespace Algorithms.Graph.Dijkstra
         /// vertex does not belong to graph instance.</exception>
         public List<DistanceModel<T>> GenerateShortestPath<T>(DirectedWeightedGraph<T> graph, Vertex<T> startVertex)
         {
-            if (startVertex.Graph is null)
-            {
-                throw new InvalidOperationException($"Graph is null {nameof(graph)}.");
-            }
-
-            if (!startVertex.Graph.Equals(graph))
-            {
-                throw new InvalidOperationException($"Vertex does not belong to graph {nameof(startVertex)}.");
-            }
+            ValidateGraphAndStartVertex(graph, startVertex);
 
             var visitedVertices = new List<Vertex<T>>();
 
-            var distanceDictionary = new Dictionary<int, DistanceModel<T>>
-            {
-                [startVertex.Index] = new(startVertex, startVertex, 0),
-            };
-
-            foreach (var vertex in graph.Vertices.Where(x => x != null && !x.Equals(startVertex)))
-            {
-                distanceDictionary.Add(
-                    vertex!.Index,
-                    new DistanceModel<T>(vertex, null, double.MaxValue));
-            }
+            var distanceDictionary = InitializeDistanceDictionary(graph, startVertex);
 
             var currentVertex = startVertex;
 
@@ -84,6 +66,38 @@ namespace Algorithms.Graph.Dijkstra
             }
 
             return distanceDictionary.Select(x => x.Value).ToList();
+        }
+
+        private static Dictionary<int, DistanceModel<T>> InitializeDistanceDictionary<T>(
+            IDirectedWeightedGraph<T> graph,
+            Vertex<T> startVertex)
+        {
+            var distanceDictionary = new Dictionary<int, DistanceModel<T>>
+            {
+                [startVertex.Index] = new(startVertex, startVertex, 0),
+            };
+
+            foreach (var vertex in graph.Vertices.Where(x => x != null && !x.Equals(startVertex)))
+            {
+                distanceDictionary.Add(
+                    vertex!.Index,
+                    new DistanceModel<T>(vertex, null, double.MaxValue));
+            }
+
+            return distanceDictionary;
+        }
+
+        private static void ValidateGraphAndStartVertex<T>(DirectedWeightedGraph<T> graph, Vertex<T> startVertex)
+        {
+            if (startVertex.Graph is null)
+            {
+                throw new InvalidOperationException($"Graph is null {nameof(graph)}.");
+            }
+
+            if (!startVertex.Graph.Equals(graph))
+            {
+                throw new InvalidOperationException($"Vertex does not belong to graph {nameof(startVertex)}.");
+            }
         }
 
         private static Vertex<T>? GetMinimalUnvisitedAdjacentVertex<T>(
