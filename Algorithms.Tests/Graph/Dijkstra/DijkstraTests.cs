@@ -1,4 +1,6 @@
-﻿using Algorithms.Graph.Dijkstra;
+﻿using System;
+using System.Collections.Generic;
+using Algorithms.Graph.Dijkstra;
 using DataStructures.Graph;
 using FluentAssertions;
 using NUnit.Framework;
@@ -9,7 +11,7 @@ namespace Algorithms.Tests.Graph.Dijkstra
     public class DijkstraTests
     {
         [Test]
-        public void DijkstraMethodTest()
+        public void DijkstraTest_Success()
         {
             // here test case is from https://yout-u.be/pVfj6mxhdMw
 
@@ -41,28 +43,65 @@ namespace Algorithms.Tests.Graph.Dijkstra
             graph.AddEdge(c, b, 5);
             graph.AddEdge(b, c, 5);
 
-            var shortestPathList = new DijkstraAlgorithm().GenerateShortestPath(graph, a);
+            List<DistanceModel<char>> shortestPathList = new DijkstraAlgorithm().GenerateShortestPath(graph, a);
             shortestPathList.Count.Should().Be(5);
 
             shortestPathList[0].Vertex.Should().Be(a);
             shortestPathList[0].Distance.Should().Be(0);
             shortestPathList[0].PreviousVertex.Should().Be(a);
+            shortestPathList[0].ToString().Should()
+                .Be($"Vertex: {a} - Distance: {0} - Previous: {a}");
 
             shortestPathList[1].Vertex.Should().Be(b);
             shortestPathList[1].Distance.Should().Be(3);
             shortestPathList[1].PreviousVertex.Should().Be(d);
+            shortestPathList[1].ToString().Should()
+                .Be($"Vertex: {b} - Distance: {3} - Previous: {d}");
 
             shortestPathList[2].Vertex.Should().Be(c);
             shortestPathList[2].Distance.Should().Be(7);
             shortestPathList[2].PreviousVertex.Should().Be(e);
+            shortestPathList[2].ToString().Should()
+                .Be($"Vertex: {c} - Distance: {7} - Previous: {e}");
 
             shortestPathList[3].Vertex.Should().Be(d);
             shortestPathList[3].Distance.Should().Be(1);
             shortestPathList[3].PreviousVertex.Should().Be(a);
+            shortestPathList[3].ToString().Should()
+                .Be($"Vertex: {d} - Distance: {1} - Previous: {a}");
 
             shortestPathList[4].Vertex.Should().Be(e);
             shortestPathList[4].Distance.Should().Be(2);
             shortestPathList[4].PreviousVertex.Should().Be(d);
+            shortestPathList[4].ToString().Should()
+                .Be($"Vertex: {e} - Distance: {2} - Previous: {d}");
+        }
+
+        [Test]
+        public void DijkstraMethodTest_ShouldThrow_GraphIsNull()
+        {
+            var graph = new DirectedWeightedGraph<char>(5);
+            var a = graph.AddVertex('A');
+            var dijkstraAlgorithm = new DijkstraAlgorithm();
+
+            Func<List<DistanceModel<char>>> action = () => dijkstraAlgorithm.GenerateShortestPath(null!, a);
+
+            action.Should().Throw<InvalidOperationException>()
+                .WithMessage($"Graph is null {nameof(graph)}.");
+        }
+
+        [Test]
+        public void DijkstraMethodTest_ShouldThrow_VertexDoesntBelongToGraph()
+        {
+            var graph = new DirectedWeightedGraph<char>(5);
+            var startVertex = graph.AddVertex('A');
+            var dijkstraAlgorithm = new DijkstraAlgorithm();
+
+            Func<List<DistanceModel<char>>> action = () => dijkstraAlgorithm.GenerateShortestPath(
+                new DirectedWeightedGraph<char>(5), startVertex);
+
+            action.Should().Throw<InvalidOperationException>()
+                .WithMessage($"Vertex does not belong to graph {nameof(startVertex)}.");
         }
     }
 }

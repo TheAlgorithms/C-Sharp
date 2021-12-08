@@ -89,12 +89,12 @@ namespace Algorithms.Graph.Dijkstra
 
         private static void ValidateGraphAndStartVertex<T>(DirectedWeightedGraph<T> graph, Vertex<T> startVertex)
         {
-            if (startVertex.Graph is null)
+            if (graph is null)
             {
                 throw new InvalidOperationException($"Graph is null {nameof(graph)}.");
             }
 
-            if (!startVertex.Graph.Equals(graph))
+            if (startVertex.Graph != null && !startVertex.Graph.Equals(graph))
             {
                 throw new InvalidOperationException($"Vertex does not belong to graph {nameof(startVertex)}.");
             }
