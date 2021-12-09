@@ -5,7 +5,7 @@ using DataStructures.Graph;
 
 namespace Algorithms.Graph.Dijkstra
 {
-    public class DijkstraAlgorithm
+    public static class DijkstraAlgorithm
     {
         /// <summary>
         /// Implementation of the Dijkstra shortest path algorithm for cyclic graphs.
@@ -17,13 +17,13 @@ namespace Algorithms.Graph.Dijkstra
         /// <returns>List of distances from current vertex to all other vertices.</returns>
         /// <exception cref="InvalidOperationException">Exception thrown in case when graph is null or start
         /// vertex does not belong to graph instance.</exception>
-        public List<DistanceModel<T>> GenerateShortestPath<T>(DirectedWeightedGraph<T> graph, Vertex<T> startVertex)
+        public static DistanceModel<T>[] GenerateShortestPath<T>(DirectedWeightedGraph<T> graph, Vertex<T> startVertex)
         {
             ValidateGraphAndStartVertex(graph, startVertex);
 
             var visitedVertices = new List<Vertex<T>>();
 
-            var distanceDictionary = InitializeDistanceDictionary(graph, startVertex);
+            var distanceArray = InitializeDistanceArray(graph, startVertex);
 
             var currentVertex = startVertex;
 
@@ -42,14 +42,14 @@ namespace Algorithms.Graph.Dijkstra
                 {
                     var adjacentDistance = graph.AdjacentDistance(currentVertex, vertex!);
 
-                    var tryGetDistance = distanceDictionary.TryGetValue(vertex!.Index, out var distance);
+                    var distance = distanceArray[vertex!.Index];
 
-                    if (tryGetDistance && distance!.Distance <= currentPath + adjacentDistance)
+                    if (distance.Distance <= currentPath + adjacentDistance)
                     {
                         continue;
                     }
 
-                    distance!.Distance = currentPath + adjacentDistance;
+                    distance.Distance = currentPath + adjacentDistance;
                     distance.PreviousVertex = currentVertex;
                 }
 
@@ -65,26 +65,23 @@ namespace Algorithms.Graph.Dijkstra
                 currentVertex = minimalAdjacentVertex;
             }
 
-            return distanceDictionary.Select(x => x.Value).ToList();
+            return distanceArray;
         }
 
-        private static Dictionary<int, DistanceModel<T>> InitializeDistanceDictionary<T>(
+        private static DistanceModel<T>[] InitializeDistanceArray<T>(
             IDirectedWeightedGraph<T> graph,
             Vertex<T> startVertex)
         {
-            var distanceDictionary = new Dictionary<int, DistanceModel<T>>
-            {
-                [startVertex.Index] = new(startVertex, startVertex, 0),
-            };
+            var distArray = new DistanceModel<T>[graph.Count];
+
+            distArray[startVertex.Index] = new DistanceModel<T>(startVertex, startVertex, 0);
 
             foreach (var vertex in graph.Vertices.Where(x => x != null && !x.Equals(startVertex)))
             {
-                distanceDictionary.Add(
-                    vertex!.Index,
-                    new DistanceModel<T>(vertex, null, double.MaxValue));
+                distArray[vertex!.Index] = new DistanceModel<T>(vertex, null, double.MaxValue);
             }
 
-            return distanceDictionary;
+            return distArray;
         }
 
         private static void ValidateGraphAndStartVertex<T>(DirectedWeightedGraph<T> graph, Vertex<T> startVertex)

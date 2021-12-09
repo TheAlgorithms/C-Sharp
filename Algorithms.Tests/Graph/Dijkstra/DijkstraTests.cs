@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Algorithms.Graph.Dijkstra;
 using DataStructures.Graph;
 using FluentAssertions;
@@ -43,8 +42,8 @@ namespace Algorithms.Tests.Graph.Dijkstra
             graph.AddEdge(c, b, 5);
             graph.AddEdge(b, c, 5);
 
-            var shortestPathList = new DijkstraAlgorithm().GenerateShortestPath(graph, a);
-            shortestPathList.Count.Should().Be(5);
+            var shortestPathList = DijkstraAlgorithm.GenerateShortestPath(graph, a);
+            shortestPathList.Length.Should().Be(5);
 
             shortestPathList[0].Vertex.Should().Be(a);
             shortestPathList[0].Distance.Should().Be(0);
@@ -94,9 +93,9 @@ namespace Algorithms.Tests.Graph.Dijkstra
             graph.AddEdge(a, c, 3);
             graph.AddEdge(c, a, 3);
 
-            var shortestPathList = new DijkstraAlgorithm().GenerateShortestPath(graph, a);
+            var shortestPathList = DijkstraAlgorithm.GenerateShortestPath(graph, a);
 
-            shortestPathList.Count.Should().Be(3);
+            shortestPathList.Length.Should().Be(3);
             shortestPathList[0].Vertex.Should().Be(a);
             shortestPathList[0].Distance.Should().Be(0);
             shortestPathList[0].PreviousVertex.Should().Be(a);
@@ -130,9 +129,9 @@ namespace Algorithms.Tests.Graph.Dijkstra
             graph.AddEdge(a, c, 3);
             graph.AddEdge(c, a, 3);
 
-            var shortestPathList = new DijkstraAlgorithm().GenerateShortestPath(graph, a);
+            var shortestPathList = DijkstraAlgorithm.GenerateShortestPath(graph, a);
 
-            shortestPathList.Count.Should().Be(3);
+            shortestPathList.Length.Should().Be(3);
             shortestPathList[0].Vertex.Should().Be(a);
             shortestPathList[0].Distance.Should().Be(0);
             shortestPathList[0].PreviousVertex.Should().Be(a);
@@ -170,9 +169,9 @@ namespace Algorithms.Tests.Graph.Dijkstra
             graph.AddEdge(c, d, 5);
             graph.AddEdge(d, c, 5);
 
-            var shortestPathList = new DijkstraAlgorithm().GenerateShortestPath(graph, a);
+            var shortestPathList = DijkstraAlgorithm.GenerateShortestPath(graph, a);
 
-            shortestPathList.Count.Should().Be(4);
+            shortestPathList.Length.Should().Be(4);
             shortestPathList[0].Vertex.Should().Be(a);
             shortestPathList[0].Distance.Should().Be(0);
             shortestPathList[0].PreviousVertex.Should().Be(a);
@@ -207,9 +206,8 @@ namespace Algorithms.Tests.Graph.Dijkstra
         {
             var graph = new DirectedWeightedGraph<char>(5);
             var a = graph.AddVertex('A');
-            var dijkstraAlgorithm = new DijkstraAlgorithm();
 
-            Func<List<DistanceModel<char>>> action = () => dijkstraAlgorithm.GenerateShortestPath(null!, a);
+            Func<DistanceModel<char>[]> action = () => DijkstraAlgorithm.GenerateShortestPath(null!, a);
 
             action.Should().Throw<InvalidOperationException>()
                 .WithMessage($"Graph is null {nameof(graph)}.");
@@ -220,9 +218,8 @@ namespace Algorithms.Tests.Graph.Dijkstra
         {
             var graph = new DirectedWeightedGraph<char>(5);
             var startVertex = graph.AddVertex('A');
-            var dijkstraAlgorithm = new DijkstraAlgorithm();
 
-            Func<List<DistanceModel<char>>> action = () => dijkstraAlgorithm.GenerateShortestPath(
+            Func<DistanceModel<char>[]> action = () => DijkstraAlgorithm.GenerateShortestPath(
                 new DirectedWeightedGraph<char>(5), startVertex);
 
             action.Should().Throw<InvalidOperationException>()
