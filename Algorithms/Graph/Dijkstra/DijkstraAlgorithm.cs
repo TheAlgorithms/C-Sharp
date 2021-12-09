@@ -8,7 +8,7 @@ namespace Algorithms.Graph.Dijkstra
     public class DijkstraAlgorithm
     {
         /// <summary>
-        /// Implementation of the Dijkstra shortest path algorithm.
+        /// Implementation of the Dijkstra shortest path algorithm for cyclic graphs.
         /// https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm.
         /// </summary>
         /// <param name="graph">Graph instance.</param>
