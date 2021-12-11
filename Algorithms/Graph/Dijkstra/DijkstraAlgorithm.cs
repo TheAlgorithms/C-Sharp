@@ -88,12 +88,12 @@ namespace Algorithms.Graph.Dijkstra
         {
             if (graph is null)
             {
-                throw new InvalidOperationException($"Graph is null {nameof(graph)}.");
+                throw new ArgumentNullException(nameof(graph));
             }
 
             if (startVertex.Graph != null && !startVertex.Graph.Equals(graph))
             {
-                throw new InvalidOperationException($"Vertex does not belong to graph {nameof(startVertex)}.");
+                throw new ArgumentNullException(nameof(graph));
             }
         }
 

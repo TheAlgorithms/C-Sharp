@@ -12,7 +12,7 @@ namespace Algorithms.Tests.Graph.Dijkstra
         [Test]
         public void DijkstraTest1_Success()
         {
-            // here test case is from https://yout-u.be/pVfj6mxhdMw
+            // here test case is from https://www.youtube.com/watch?v=pVfj6mxhdMw
 
             var graph = new DirectedWeightedGraph<char>(5);
             var a = graph.AddVertex('A');
@@ -209,8 +209,8 @@ namespace Algorithms.Tests.Graph.Dijkstra
 
             Func<DistanceModel<char>[]> action = () => DijkstraAlgorithm.GenerateShortestPath(null!, a);
 
-            action.Should().Throw<InvalidOperationException>()
-                .WithMessage($"Graph is null {nameof(graph)}.");
+            action.Should().Throw<ArgumentNullException>()
+                .WithMessage($"Value cannot be null. (Parameter '{nameof(graph)}')");
         }
 
         [Test]
@@ -222,8 +222,8 @@ namespace Algorithms.Tests.Graph.Dijkstra
             Func<DistanceModel<char>[]> action = () => DijkstraAlgorithm.GenerateShortestPath(
                 new DirectedWeightedGraph<char>(5), startVertex);
 
-            action.Should().Throw<InvalidOperationException>()
-                .WithMessage($"Vertex does not belong to graph {nameof(startVertex)}.");
+            action.Should().Throw<ArgumentNullException>()
+                .WithMessage($"Value cannot be null. (Parameter '{nameof(graph)}')");
         }
     }
 }
