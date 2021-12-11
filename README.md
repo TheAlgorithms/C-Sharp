@@ -26,6 +26,7 @@ This repository contains algorithms and data structures implemented in C# for ed
       * [Kruskal's Algorithm](./Algorithms/Graph/MinimumSpanningTree/Kruskal.cs)
     * [BreadthFirstSearch](./Algorithms/Graph/BreadthFirstSearch.cs)
     * [DepthFirstSearch](./Algorithms/Graph/DepthFirstSearch.cs)
+    * [Dijkstra Shortest Path](./Algorithms/Graph/Dijkstra/DijkstraAlgorithm.cs)
   * [Knapsack problem](./Algorithms/Knapsack)
     * [Naive solver](./Algorithms/Knapsack/NaiveKnapsackSolver.cs)
     * [Dynamic Programming solver](./Algorithms/Knapsack/DynamicProgrammingKnapsackSolver.cs)
