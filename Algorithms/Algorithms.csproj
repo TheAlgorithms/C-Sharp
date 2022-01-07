@@ -28,4 +28,8 @@
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Problems\DynamicCoinChange" />
+  </ItemGroup>
+
 </Project>
