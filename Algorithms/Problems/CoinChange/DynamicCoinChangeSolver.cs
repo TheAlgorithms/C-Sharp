@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Algorithms.Problems.DynamicCoinChange
+namespace Algorithms.Problems.CoinChange
 {
-    public static class DynamicCoinChangeHelper
+    public static class DynamicCoinChangeSolver
     {
         public static int[] GenerateSingleCoinChanges(int coin, IEnumerable<int> coins)
         {

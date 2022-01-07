@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using Algorithms.Problems.DynamicCoinChange;
+using Algorithms.Problems.CoinChange;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Algorithms.Tests.Problems.DynamicCoinChange
+namespace Algorithms.Tests.Problems.CoinChange
 {
     [TestFixture]
     public class GenerateChangesDictionaryTests
@@ -13,7 +13,7 @@ namespace Algorithms.Tests.Problems.DynamicCoinChange
         {
             const int coin = 6;
             var coins = new[] { 1, 3, 4 };
-            var changeDictionary = DynamicCoinChangeHelper.GenerateChangesDictionary(coin, coins);
+            var changeDictionary = DynamicCoinChangeSolver.GenerateChangesDictionary(coin, coins);
 
             changeDictionary[1].SequenceEqual(new[] { 0 }).Should().BeTrue();
             changeDictionary[2].SequenceEqual(new[] { 1 }).Should().BeTrue();

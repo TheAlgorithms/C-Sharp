@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Problems\DynamicCoinChange" />
+    <Folder Include="Problems\CoinChange" />
   </ItemGroup>
 
 </Project>

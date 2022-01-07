@@ -1,8 +1,8 @@
-﻿using Algorithms.Problems.DynamicCoinChange;
+﻿using Algorithms.Problems.CoinChange;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Algorithms.Tests.Problems.DynamicCoinChange
+namespace Algorithms.Tests.Problems.CoinChange
 {
     public class GetMinimalNextCoinTests
     {
@@ -11,8 +11,8 @@ namespace Algorithms.Tests.Problems.DynamicCoinChange
         {
             const int coin = 6;
             var coins = new[] { 1, 3, 4 };
-            var exchangeDict = DynamicCoinChangeHelper.GenerateChangesDictionary(coin, coins);
-            var nextCoin = DynamicCoinChangeHelper.GetMinimalNextCoin(6, exchangeDict);
+            var exchangeDict = DynamicCoinChangeSolver.GenerateChangesDictionary(coin, coins);
+            var nextCoin = DynamicCoinChangeSolver.GetMinimalNextCoin(6, exchangeDict);
 
             nextCoin.Should().Be(3);
         }
