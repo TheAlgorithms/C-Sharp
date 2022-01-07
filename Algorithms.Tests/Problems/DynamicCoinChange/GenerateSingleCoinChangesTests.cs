@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Algorithms.Problems.DynamicCoinChange;
 using FluentAssertions;
 using NUnit.Framework;
@@ -11,6 +12,25 @@ namespace Algorithms.Tests.Problems.DynamicCoinChange
         [Test]
         public void GenerateSingleCoinChangesTests_Success()
         {
+            DynamicCoinChangeHelper
+                .GenerateSingleCoinChanges(6, new[] { 1, 2, 3 })
+                .SequenceEqual(new[] { 3, 4, 5 })
+                .Should().BeTrue();
+
+            DynamicCoinChangeHelper
+                .GenerateSingleCoinChanges(10, new[] { 1, 2, 3, 7, 12, 15, 14 })
+                .SequenceEqual(new[] { 3, 7, 8, 9 })
+                .Should().BeTrue();
+
+            DynamicCoinChangeHelper
+                .GenerateSingleCoinChanges(1, new[] { 1, 2, 3, 7, 12, 15, 14 })
+                .SequenceEqual(new[] { 0 })
+                .Should().BeTrue();
+
+            DynamicCoinChangeHelper
+                .GenerateSingleCoinChanges(2, new[] { 1, 2, 3, 7, 12, 15, 14 })
+                .SequenceEqual(new[] { 0, 1 })
+                .Should().BeTrue();
         }
 
         [Test]
