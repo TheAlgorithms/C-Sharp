@@ -3,7 +3,7 @@ using Algorithms.Problems.CoinChange;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Algorithms.Tests.Problems.CoinChange
+namespace Algorithms.Tests.Problems.CoinChange.Dynamic
 {
     [TestFixture]
     public class MakeCoinChangeDynamicTests

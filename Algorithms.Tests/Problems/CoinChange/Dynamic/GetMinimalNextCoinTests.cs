@@ -2,7 +2,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Algorithms.Tests.Problems.CoinChange
+namespace Algorithms.Tests.Problems.CoinChange.Dynamic
 {
     public class GetMinimalNextCoinTests
     {

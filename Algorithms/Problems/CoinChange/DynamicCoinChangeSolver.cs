@@ -107,7 +107,7 @@ namespace Algorithms.Problems.CoinChange
         {
             if (coin <= 0)
             {
-                throw new IndexOutOfRangeException($"Coin cannot be lesser or equal to zero {nameof(coin)}.");
+                throw new InvalidOperationException($"Coin cannot be lesser or equal to zero {nameof(coin)}.");
             }
         }
 
@@ -122,21 +122,21 @@ namespace Algorithms.Problems.CoinChange
 
             if (coinsAsArray.Length == 0)
             {
-                throw new IndexOutOfRangeException($"Coins array cannot be empty {nameof(coinsAsArray)}.");
+                throw new InvalidOperationException($"Coins array cannot be empty {nameof(coinsAsArray)}.");
             }
 
             var coinsContainOne = coinsAsArray.Any(x => x == 1);
 
             if (!coinsContainOne)
             {
-                throw new IndexOutOfRangeException($"Coins array must contain coin 1 {nameof(coinsAsArray)}.");
+                throw new InvalidOperationException($"Coins array must contain coin 1 {nameof(coinsAsArray)}.");
             }
 
             var containsNegative = coinsAsArray.Any(x => x <= 0);
 
             if (containsNegative)
             {
-                throw new IndexOutOfRangeException(
+                throw new InvalidOperationException(
                     $"Coins array cannot contain negative numbers {nameof(coinsAsArray)}.");
             }
 
@@ -144,7 +144,7 @@ namespace Algorithms.Problems.CoinChange
 
             if (containsDuplicates)
             {
-                throw new IndexOutOfRangeException($"Coins array cannot contain duplicates {nameof(coinsAsArray)}.");
+                throw new InvalidOperationException($"Coins array cannot contain duplicates {nameof(coinsAsArray)}.");
             }
         }
     }

@@ -4,7 +4,7 @@ using Algorithms.Problems.CoinChange;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Algorithms.Tests.Problems.CoinChange
+namespace Algorithms.Tests.Problems.CoinChange.Dynamic
 {
     [TestFixture]
     public class GenerateSingleCoinChangesTests
@@ -41,7 +41,7 @@ namespace Algorithms.Tests.Problems.CoinChange
 
             Func<int[]> act = () => DynamicCoinChangeSolver.GenerateSingleCoinChanges(coin, arr);
 
-            act.Should().Throw<IndexOutOfRangeException>()
+            act.Should().Throw<InvalidOperationException>()
                 .WithMessage($"Coin cannot be lesser or equal to zero {nameof(coin)}.");
         }
 
@@ -65,7 +65,7 @@ namespace Algorithms.Tests.Problems.CoinChange
 
             Func<int[]> act = () => DynamicCoinChangeSolver.GenerateSingleCoinChanges(coin, coinsAsArray);
 
-            act.Should().Throw<IndexOutOfRangeException>()
+            act.Should().Throw<InvalidOperationException>()
                 .WithMessage($"Coins array cannot be empty {nameof(coinsAsArray)}.");
         }
 
@@ -77,7 +77,7 @@ namespace Algorithms.Tests.Problems.CoinChange
 
             Func<int[]> act = () => DynamicCoinChangeSolver.GenerateSingleCoinChanges(coin, coinsAsArray);
 
-            act.Should().Throw<IndexOutOfRangeException>()
+            act.Should().Throw<InvalidOperationException>()
                 .WithMessage($"Coins array must contain coin 1 {nameof(coinsAsArray)}.");
         }
 
@@ -89,7 +89,7 @@ namespace Algorithms.Tests.Problems.CoinChange
 
             Func<int[]> act = () => DynamicCoinChangeSolver.GenerateSingleCoinChanges(coin, coinsAsArray);
 
-            act.Should().Throw<IndexOutOfRangeException>()
+            act.Should().Throw<InvalidOperationException>()
                 .WithMessage($"Coins array cannot contain negative numbers {nameof(coinsAsArray)}.");
         }
 
@@ -101,7 +101,7 @@ namespace Algorithms.Tests.Problems.CoinChange
 
             Func<int[]> act = () => DynamicCoinChangeSolver.GenerateSingleCoinChanges(coin, coinsAsArray);
 
-            act.Should().Throw<IndexOutOfRangeException>()
+            act.Should().Throw<InvalidOperationException>()
                 .WithMessage($"Coins array cannot contain duplicates {nameof(coinsAsArray)}.");
         }
     }
