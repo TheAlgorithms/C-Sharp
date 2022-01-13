@@ -42,19 +42,7 @@ namespace Algorithms.Tests.Problems.CoinChange.Dynamic
             Func<int[]> act = () => DynamicCoinChangeSolver.GenerateSingleCoinChanges(coin, arr);
 
             act.Should().Throw<InvalidOperationException>()
-                .WithMessage($"Coin cannot be lesser or equal to zero {nameof(coin)}.");
-        }
-
-        [Test]
-        public void GenerateSingleCoinChangesTests_ShouldThrow_CoinsArrayCannotBeNull()
-        {
-            const int coin = 10;
-            int[] coinsAsArray = default!;
-
-            Func<int[]> act = () => DynamicCoinChangeSolver.GenerateSingleCoinChanges(coin, coinsAsArray);
-
-            act.Should().Throw<ArgumentNullException>()
-                .WithMessage("Value cannot be null. (Parameter 'enumerableCoins')");
+                .WithMessage($"The coin cannot be lesser or equal to zero {nameof(coin)}.");
         }
 
         [Test]
