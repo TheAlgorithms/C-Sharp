@@ -70,6 +70,7 @@ This repository contains algorithms and data structures implemented in C# for ed
       * [Cocktail Sort](./Algorithms/Sorters/Comparison/CocktailSorter.cs)
       * [Comb Sort](./Algorithms/Sorters/Comparison/CombSorter.cs)
       * [Cycle Sort](./Algorithms/Sorters/Comparison/CycleSorter.cs)
+      * [Fisher-Yates Shuffle](./Algorithms/Sorters/Comparison/FisherYatesShuffler.cs)
       * [Heap Sort](./Algorithms/Sorters/Comparison/HeapSorter.cs)
       * [Insertion Sort](./Algorithms/Sorters/Comparison/InsertionSorter.cs)
       * [Merge Sort](./Algorithms/Sorters/Comparison/MergeSorter.cs)
