@@ -141,11 +141,6 @@ namespace Algorithms.Problems.CoinChange
 
         private static void ValidateCoinsArray(int[] coinsArray)
         {
-            if (coinsArray == null)
-            {
-                throw new ArgumentNullException(nameof(coinsArray));
-            }
-
             var coinsAsArray = coinsArray.ToArray();
 
             if (coinsAsArray.Length == 0)
@@ -165,7 +160,7 @@ namespace Algorithms.Problems.CoinChange
             if (containsNegative)
             {
                 throw new InvalidOperationException(
-                    $"Coins array cannot contain negative numbers {nameof(coinsAsArray)}.");
+                    $"Coins array cannot contain the numbers lesser than zero {nameof(coinsAsArray)}.");
             }
 
             var containsDuplicates = coinsAsArray.GroupBy(x => x).Any(g => g.Count() > 1);
