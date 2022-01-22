@@ -155,12 +155,12 @@ namespace Algorithms.Problems.CoinChange
                 throw new InvalidOperationException($"Coins array must contain coin 1 {nameof(coinsAsArray)}.");
             }
 
-            var containsNegative = coinsAsArray.Any(x => x <= 0);
+            var containsNonPositive = coinsAsArray.Any(x => x <= 0);
 
-            if (containsNegative)
+            if (containsNonPositive)
             {
                 throw new InvalidOperationException(
-                    $"Coins array cannot contain the numbers lesser than zero {nameof(coinsAsArray)}.");
+                    $"{nameof(coinsAsArray)} cannot contain the numbers less than or equal to zero");
             }
 
             var containsDuplicates = coinsAsArray.GroupBy(x => x).Any(g => g.Count() > 1);
