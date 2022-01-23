@@ -1,6 +1,6 @@
 using System;
 
-namespace Algorithms.Sorters.Comparison
+namespace Algorithms.Shufflers
 {
     /// <summary>
     ///     Fisher-Yates shuffle is a simple shuffling algorithm,

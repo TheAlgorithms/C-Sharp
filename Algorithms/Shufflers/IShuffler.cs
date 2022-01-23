@@ -1,4 +1,4 @@
-namespace Algorithms.Sorters.Comparison
+namespace Algorithms.Shufflers
 {
     /// <summary>
     ///     Shuffles array.

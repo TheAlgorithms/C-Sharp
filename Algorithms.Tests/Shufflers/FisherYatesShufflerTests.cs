@@ -1,14 +1,14 @@
-using System;
-using Algorithms.Sorters.Comparison;
+using Algorithms.Shufflers;
 using Algorithms.Tests.Helpers;
+using FluentAssertions;
 using NUnit.Framework;
+using System;
 
-namespace Algorithms.Tests.Sorters.Comparison
-{
+namespace Algorithms.Tests.Shufflers {
     public static class FisherYatesShufflerTests
     {
         [Test]
-        public static void ArrayShuffled_NewArrayHaveSameSize(
+        public static void ArrayShuffled_NewArrayHasSameSize(
             [Random(0, 1000, 100, Distinct = true)]
             int n)
         {
@@ -20,11 +20,11 @@ namespace Algorithms.Tests.Sorters.Comparison
             shuffler.Shuffle(testArray);
 
             // Assert
-            Assert.AreEqual(testArray.Length, correctArray.Length);
+            testArray.Length.Should().Be(correctArray.Length);
         }
 
         [Test]
-        public static void ArrayShuffled_NewArrayHaveSameValues(
+        public static void ArrayShuffled_NewArrayHasSameValues(
             [Random(0, 1000, 100, Distinct = true)]
             int n)
         {
@@ -38,7 +38,7 @@ namespace Algorithms.Tests.Sorters.Comparison
             Array.Sort(correctArray);
 
             // Assert
-            Assert.AreEqual(testArray, correctArray);
+            testArray.Should().BeEquivalentTo(correctArray);
         }
     }
 }
