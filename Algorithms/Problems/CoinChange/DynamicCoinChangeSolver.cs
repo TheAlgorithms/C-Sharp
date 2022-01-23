@@ -160,7 +160,7 @@ namespace Algorithms.Problems.CoinChange
             if (containsNonPositive)
             {
                 throw new InvalidOperationException(
-                    $"{nameof(coinsAsArray)} cannot contain the numbers less than or equal to zero");
+                    $"{nameof(coinsAsArray)} cannot contain numbers less than or equal to zero");
             }
 
             var containsDuplicates = coinsAsArray.GroupBy(x => x).Any(g => g.Count() > 1);
