@@ -78,7 +78,7 @@ namespace Algorithms.Tests.Problems.CoinChange.Dynamic
             Func<int[]> act = () => DynamicCoinChangeSolver.GenerateSingleCoinChanges(coin, coinsAsArray);
 
             act.Should().Throw<InvalidOperationException>()
-                .WithMessage($"Coins array cannot contain the numbers lesser than zero {nameof(coinsAsArray)}.");
+                .WithMessage($"{nameof(coinsAsArray)} cannot contain numbers less than or equal to zero");
         }
 
         [Test]
