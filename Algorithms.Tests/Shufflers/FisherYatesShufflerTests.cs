@@ -4,7 +4,8 @@ using FluentAssertions;
 using NUnit.Framework;
 using System;
 
-namespace Algorithms.Tests.Shufflers {
+namespace Algorithms.Tests.Shufflers
+{
     public static class FisherYatesShufflerTests
     {
         [Test]
