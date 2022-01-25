@@ -103,6 +103,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [A000108 Catalan](./Algorithms/Sequences/CatalanSequence.cs)
     * [A000142 Factorial](./Algorithms/Sequences/FactorialSequence.cs)
     * [A001462 Golomb's](./Algorithms/Sequences/GolombsSequence.cs)
+    * [A001478 Negative Integers](./Algorithms/Sequences/NegativeIntegersSequence.cs)
     * [A005132 Recaman's](./Algorithms/Sequences/RecamansSequence.cs)
     * [A007318 Binomial](./Algorithms/Sequences/BinomialSequence.cs)
     * [A181391 Van Eck's](./Algorithms/Sequences/VanEcksSequence.cs)
