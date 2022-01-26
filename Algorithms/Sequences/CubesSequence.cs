@@ -23,7 +23,7 @@ namespace Algorithms.Sequences
         {
             get
             {
-                var n = new BigInteger(0);
+                var n = BigInteger.Zero;
 
                 while (true)
                 {
