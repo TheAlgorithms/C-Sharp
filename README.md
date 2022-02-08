@@ -104,7 +104,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [A000142 Factorial](./Algorithms/Sequences/FactorialSequence.cs)
     * [A001462 Golomb's](./Algorithms/Sequences/GolombsSequence.cs)
     * [A005132 Recaman's](./Algorithms/Sequences/RecamansSequence.cs)
-    * [A006880 Number of primes](./Algorithms/Sequences/NumberOfPrimesSequence.cs)
+    * [A006880 Number of Primes by Powers of 10](./Algorithms/Sequences/NumberOfPrimesByPowersOf10Sequence.cs)
     * [A007318 Binomial](./Algorithms/Sequences/BinomialSequence.cs)
     * [A181391 Van Eck's](./Algorithms/Sequences/VanEcksSequence.cs)
   * [String](./Algorithms/Strings)
