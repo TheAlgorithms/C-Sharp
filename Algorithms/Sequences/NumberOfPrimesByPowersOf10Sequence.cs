@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -7,10 +6,10 @@ namespace Algorithms.Sequences
 {
     /// <summary>
     ///     <para>
-    ///         Sequence of numbers of primes < 10^n (prime-counting function π(x)).
+    ///         Sequence of number of primes less than 10^n (with at most n digits).
     ///     </para>
     ///     <para>
-    ///         Wikipedia: https://en.wikipedia.org/wiki/Prime-counting_function.
+    ///         Wikipedia: https://wikipedia.org/wiki/Prime-counting_function.
     ///     </para>
     ///     <para>
     ///         OEIS: https://oeis.org/A006880.
@@ -32,12 +31,12 @@ namespace Algorithms.Sequences
 
                 while (true)
                 {
-                    counter += primes.Sequence.SkipWhile(p => p < prevPowerOf10).TakeWhile(p => p < powerOf10).Count();
+                    counter += primes.Sequence.
+                        SkipWhile(p => p < prevPowerOf10).TakeWhile(p => p < powerOf10).Count();
 
                     yield return counter;
                     prevPowerOf10 = powerOf10;
                     powerOf10 *= 10;
-
                 }
             }
         }
