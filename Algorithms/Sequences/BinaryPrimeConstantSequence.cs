@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 
 namespace Algorithms.Sequences
@@ -26,15 +25,16 @@ namespace Algorithms.Sequences
             get
             {
                 ISequence primes = new PrimesSequence();
-                var n = 1;
-                var isPrime = 0;
+                var n = new BigInteger(0);
 
-                while (true)
+                foreach (var p in primes.Sequence)
                 {
-                    isPrime = primes.Sequence.SkipWhile(p => p < n).TakeWhile(p => p <= n).Count();
+                    for (n++; n < p; n++)
+                    {
+                        yield return 0;
+                    }
 
-                    yield return isPrime;
-                    n++;
+                    yield return 1;
                 }
             }
         }
