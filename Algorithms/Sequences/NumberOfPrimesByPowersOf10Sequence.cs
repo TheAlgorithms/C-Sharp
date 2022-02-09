@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 
 namespace Algorithms.Sequences
@@ -25,18 +24,18 @@ namespace Algorithms.Sequences
             get
             {
                 ISequence primes = new PrimesSequence();
-                var prevPowerOf10 = new BigInteger(0);
                 var powerOf10 = new BigInteger(1);
                 var counter = new BigInteger(0);
 
-                while (true)
+                foreach (var p in primes.Sequence)
                 {
-                    counter += primes.Sequence.
-                        SkipWhile(p => p < prevPowerOf10).TakeWhile(p => p < powerOf10).Count();
+                    if (p > powerOf10)
+                    {
+                        yield return counter;
+                        powerOf10 *= 10;
+                    }
 
-                    yield return counter;
-                    prevPowerOf10 = powerOf10;
-                    powerOf10 *= 10;
+                    counter++;
                 }
             }
         }
