@@ -111,6 +111,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [A006879 Number of Primes by Number of Digits](./Algorithms/Sequences/NumberOfPrimesByNumberOfDigitsSequence.cs)
     * [A006880 Number of Primes by Powers of 10](./Algorithms/Sequences/NumberOfPrimesByPowersOf10Sequence.cs)
     * [A007318 Binomial](./Algorithms/Sequences/BinomialSequence.cs)
+    * [A010051 Binary Prime Constant](./Algorithms/Sequences/BinaryPrimeConstantSequence.cs)
     * [A011557 Powers of 10](./Algorithms/Sequences/PowersOf10Sequence.cs)
     * [A181391 Van Eck's](./Algorithms/Sequences/VanEcksSequence.cs)
   * [String](./Algorithms/Strings)
