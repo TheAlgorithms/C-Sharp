@@ -61,6 +61,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Recursive Binary Search](./Algorithms/Search/RecursiveBinarySearcher.cs)
     * [Linear Search](./Algorithms/Search/LinearSearcher.cs)
     * [Fast Search](./Algorithms/Search/FastSearcher.cs)
+    * [Fibonacci Search](./Algorithms/Search/FibonacciSearcher.cs)
     * [Jump Search](./Algorithms/Search/JumpSearcher.cs)
   * [Sorts](./Algorithms/Sorters)
     * [Comparison](./Algorithms/Sorters/Comparison)
