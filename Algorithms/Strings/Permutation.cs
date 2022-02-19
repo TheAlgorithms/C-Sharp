@@ -13,7 +13,7 @@ namespace Algorithms.Strings
         {
             if (word.Length < 2)
             {
-                return new List<string>()
+                return new List<string>
                 {
                     word,
                 };
