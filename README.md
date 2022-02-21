@@ -104,6 +104,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [A000079 Powers of 2](./Algorithms/Sequences/PowersOf2Sequence.cs)
     * [A000108 Catalan](./Algorithms/Sequences/CatalanSequence.cs)
     * [A000142 Factorial](./Algorithms/Sequences/FactorialSequence.cs)
+    * [A000215 Fermat Numbers](./Algorithms/Sequences/FermatNumbersSequence.cs)
     * [A000290 Squares](./Algorithms/Sequences/SquaresSequence.cs)
     * [A000578 Cubes](./Algorithms/Sequences/CubesSequence.cs)
     * [A000720 PrimePi](./Algorithms/Sequences/PrimePiSequence.cs)
