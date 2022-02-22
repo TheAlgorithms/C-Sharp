@@ -8,9 +8,8 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Strings
 {
-    public class AnagramTests
+    public class PermutationTests
     {
-
         [TestCase("")]
         [TestCase("A")]
         [TestCase("abcd")]
@@ -19,35 +18,51 @@ namespace Algorithms.Tests.Strings
         [TestCase("aabbbccccd")]
         public void Test_GetEveryUniquePermutation(string word)
         {
-            var anagrams = Permutation.GetEveryUniquePermutation(word);
+            var permutations = Permutation.GetEveryUniquePermutation(word);
 
-            // make sure we have the right number of anagrams
-            var occDic = new Dictionary<char, int>();
+            // We need to make sure that
+            // 1. We have the right number of permutations
+            // 2. Every string in permutations List is a permutation of word
+            // 3. There are no repetitions
+
+            // Start 1.
+            // The number of unique permutations is
+            // n!/(A1! * A2! * ... An!)
+            // where n is the length of word and Ai is the number of occurrences if ith char in the string
+            var charOccurrence = new Dictionary<char, int>();
             foreach (var c in word)
             {
-                if (occDic.ContainsKey(c))
+                if (charOccurrence.ContainsKey(c))
                 {
-                    occDic[c] += 1;
+                    charOccurrence[c] += 1;
                 }
                 else
                 {
-                    occDic[c] = 1;
+                    charOccurrence[c] = 1;
                 }
             }
-
+            // now we know the values of A1, A2, ..., An
+            // evaluate the above formula
             var expectedNumberOfAnagrams = Factorial.Calculate(word.Length);
-            expectedNumberOfAnagrams = occDic.Aggregate(expectedNumberOfAnagrams, (current, keyValuePair) =>
+            expectedNumberOfAnagrams = charOccurrence.Aggregate(expectedNumberOfAnagrams, (current, keyValuePair) =>
             {
                 return current / Factorial.Calculate(keyValuePair.Value);
             });
-            Assert.AreEqual(expectedNumberOfAnagrams, anagrams.Count);
+            Assert.AreEqual(expectedNumberOfAnagrams, permutations.Count);
+            // End 1.
 
-            // make sure all strings in "anagrams" are actually a permutation of "word"
+            // Start 2
+            // string A is a permutation of string B if and only if sorted(A) == sorted(b)
             var wordSorted = SortString(word);
-            foreach (var anagram in anagrams)
+            foreach (var permutation in permutations)
             {
-                Assert.AreEqual(wordSorted, SortString(anagram));
+                Assert.AreEqual(wordSorted, SortString(permutation));
             }
+            // End 2
+
+            // Start 3
+            Assert.AreEqual(permutations.Count, new HashSet<string>(permutations).Count);
+            // End 3
         }
 
         private static string SortString(string word)
