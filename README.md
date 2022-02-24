@@ -122,6 +122,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Rabin Karp](./Algorithms/Strings/RabinKarp.cs)
     * [Boyer Moore](./Algorithms/Strings/BoyerMoore.cs)
     * [Palindrome Checker](./Algorithms/Strings/palindrome.cs)
+    * [Get all permutations of a string](./Algorithms/Strings/Permutation.cs)
   * [Other](./Algorithms/Other)
     * [Fermat Prime Checker](./Algorithms/Other/FermatPrimeChecker.cs)
     * [Sieve of Eratosthenes](./Algorithms/Other/SieveOfEratosthenes.cs)
