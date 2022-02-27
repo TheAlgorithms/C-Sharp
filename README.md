@@ -111,6 +111,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [A001478 Negative Integers](./Algorithms/Sequences/NegativeIntegersSequence.cs)
     * [A002110 Primorial Numbers](./Algorithms/Sequences/PrimorialNumbersSequence.cs)
     * [A005132 Recaman's](./Algorithms/Sequences/RecamansSequence.cs)
+    * [A006862 Euclid Numbers](./Algorithms/Sequences/EuclidNumbersSequence.cs)
     * [A006879 Number of Primes by Number of Digits](./Algorithms/Sequences/NumberOfPrimesByNumberOfDigitsSequence.cs)
     * [A006880 Number of Primes by Powers of 10](./Algorithms/Sequences/NumberOfPrimesByPowersOf10Sequence.cs)
     * [A007318 Binomial](./Algorithms/Sequences/BinomialSequence.cs)
