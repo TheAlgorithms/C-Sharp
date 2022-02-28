@@ -23,7 +23,7 @@ namespace Algorithms.Tests.Search
             var actualIndex = searcher.FindIndex(arrayToSearch, arrayToSearch[selectedIndex]);
 
             // Assert
-            Assert.AreEqual(arrayToSearch[selectedIndex], arrayToSearch[actualIndex]);
+            sortedArray[actualIndex].Should().Be(sortedArray[selectedIndex]);
         }
         [Test]
         public static void FindIndex_ItemMissing_MinusOneReturned(
@@ -42,7 +42,7 @@ namespace Algorithms.Tests.Search
             var actualIndex = subject.FindIndex(collection, missingItem);
 
             // Assert
-            Assert.AreEqual(-1, actualIndex);
+            actualIndex.Should().Be(-1);
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace Algorithms.Tests.Search
             var actualIndex = searcher.FindIndex(arrayToSearch, itemToSearch);
 
             // Assert
-            Assert.AreEqual(-1, actualIndex);
+            actualIndex.Should().Be(-1);
         }
     }
 }

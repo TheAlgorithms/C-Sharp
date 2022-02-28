@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+using FluentAssertions;
 
 namespace Algorithms.Search
 {
@@ -31,20 +31,12 @@ namespace Algorithms.Search
 
             int bound = 1;
 
-            while (bound < (endLocation - startLocation))
+            while ((bound < (endLocation - startLocation)) && sortedData[bound] <  item)
             {
-                if (sortedData[bound] <  item)
-                {
-                    bound *= 2;
-                }
-                else
-                {
-                    break;
-                }
+                bound *= 2;
             }
-
             return searcher.FindIndex(sortedData, item, (bound / 2), min(bound + 1, sortedData.Length));
-        }
         }
     }
 }
+
