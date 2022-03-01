@@ -108,6 +108,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [A000290 Squares](./Algorithms/Sequences/SquaresSequence.cs)
     * [A000578 Cubes](./Algorithms/Sequences/CubesSequence.cs)
     * [A000720 PrimePi](./Algorithms/Sequences/PrimePiSequence.cs)
+    * [A001146 Number of Boolean Functions](./Algorithms/Sequences/NumberOfBooleanFunctionsSequence.cs)
     * [A001462 Golomb's](./Algorithms/Sequences/GolombsSequence.cs)
     * [A001478 Negative Integers](./Algorithms/Sequences/NegativeIntegersSequence.cs)
     * [A002110 Primorial Numbers](./Algorithms/Sequences/PrimorialNumbersSequence.cs)
