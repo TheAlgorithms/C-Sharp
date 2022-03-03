@@ -59,7 +59,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [A-Star](./Algorithms/Search/AStar/)
     * [Binary Search](./Algorithms/Search/BinarySearcher.cs)
     * [Recursive Binary Search](./Algorithms/Search/RecursiveBinarySearcher.cs)
-    * [Exponential Search](./Algorithms/Search/ExponentialSearch.cs)
+    * [Exponential Search](./Algorithms/Search/ExponentialSearcher.cs)
     * [Linear Search](./Algorithms/Search/LinearSearcher.cs)
     * [Fast Search](./Algorithms/Search/FastSearcher.cs)
     * [Fibonacci Search](./Algorithms/Search/FibonacciSearcher.cs)
