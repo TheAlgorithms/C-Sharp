@@ -25,6 +25,7 @@ namespace Algorithms.Tests.Search
             // Assert
             sortedArray[actualIndex].Should().Be(sortedArray[selectedIndex]);
         }
+
         [Test]
         public static void FindIndex_ItemMissing_MinusOneReturned(
             [Random(0, 1000, 10)] int n,
