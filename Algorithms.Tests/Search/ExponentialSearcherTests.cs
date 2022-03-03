@@ -14,7 +14,7 @@ namespace Algorithms.Tests.Search
         public static void FindIndex_ItemPresent_IndexCorrect([Random(1, 1000, 100)] int n)
         {
             // Arrange
-            var subject = new ExponentialSearcher();
+            var searcher = new ExponentialSearcher();
             var random = Randomizer.CreateRandomizer();
             var arrayToSearch = Enumerable.Range(0, n).Select(_ => random.Next(0, 1000)).OrderBy(x => x).ToArray();
             var selectedIndex = random.Next(0, n);
