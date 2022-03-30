@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Sorters.Comparison
 {
-    public class ExchangeSorterTests
+    public static class ExchangeSorterTests
     {
         [Test]
         public static void ArraySorted(
