@@ -21,28 +21,23 @@ namespace Algorithms.Graph
         /// <param name="reversed">Reversed list of vertex for the second DFS.</param>
         public static void Visit(Vertex<T> v, IDirectedWeightedGraph<T> graph, HashSet<Vertex<T>> visited, Stack<Vertex<T>> reversed)
         {
-            if (!visited.Contains(v))
+            if (visited.Contains(v))
             {
-                // Set v as visited
-                visited.Add(v);
+                return;
+            }
 
-                // Push v in the stack.
-                // This can also be done with a List, inserting v at the begining of the list
-                // after visit the neighbors.
-                reversed.Push(v);
+            // Set v as visited
+            visited.Add(v);
 
-                // Visit neighbors
-                var neighbors = graph.GetNeighbors(v);
-                if (neighbors != null)
-                {
-                    foreach (var u in neighbors)
-                    {
-                        if (u != null)
-                        {
-                            Visit(u!, graph, visited, reversed);
-                        }
-                    }
-                }
+            // Push v in the stack.
+            // This can also be done with a List, inserting v at the begining of the list
+            // after visit the neighbors.
+            reversed.Push(v);
+
+            // Visit neighbors
+            foreach (var u in graph.GetNeighbors(v))
+            {
+                Visit(u!, graph, visited, reversed);
             }
         }
 
@@ -59,20 +54,18 @@ namespace Algorithms.Graph
         public static void Assign(Vertex<T> v, Vertex<T> root, IDirectedWeightedGraph<T> graph, Dictionary<Vertex<T>, Vertex<T>> roots)
         {
             // If v already has a representative vertex (root) already assigned, do nothing.
-            if (!roots.ContainsKey(v))
+            if (roots.ContainsKey(v))
             {
-                // Assign the root to the vertex.
-                roots.Add(v, root);
+                return;
+            }
 
-                // Assign the current root vertex to v neighbors.
-                var neighbors = graph.GetNeighbors(v);
-                if (neighbors != null)
-                {
-                    foreach (var u in neighbors)
-                    {
-                        Assign(u!, root, graph, roots);
-                    }
-                }
+            // Assign the root to the vertex.
+            roots.Add(v, root);
+
+            // Assign the current root vertex to v neighbors.
+            foreach (var u in graph.GetNeighbors(v))
+            {
+                Assign(u!, root, graph, roots);
             }
         }
 
@@ -115,7 +108,7 @@ namespace Algorithms.Graph
         {
             var representatives = GetRepresentatives(graph);
             Dictionary<Vertex<T>, List<Vertex<T>>> scc = new Dictionary<Vertex<T>, List<Vertex<T>>>();
-            foreach(var kv in representatives)
+            foreach (var kv in representatives)
             {
                 // Assign all vertex (key) that have the seem root (value) to a single list.
                 if (scc.ContainsKey(kv.Value))
