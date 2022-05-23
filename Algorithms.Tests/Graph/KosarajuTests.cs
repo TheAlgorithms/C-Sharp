@@ -13,6 +13,7 @@ namespace Algorithms.Tests.Graph
         [Test]
         public void GetRepresentativesTest()
         {
+            // Create a graph with some SCC. 
             var graph = new DirectedWeightedGraph<int>(10);
 
             var vertex1 = graph.AddVertex(1);
@@ -32,8 +33,10 @@ namespace Algorithms.Tests.Graph
             graph.AddEdge(vertex5, vertex4, 1);
             graph.AddEdge(vertex5, vertex6, 1);
 
+            // Run the agorithm and obtain the representative vertex of the SCC to which each vertex belongs.
             Dictionary<Vertex<int>,Vertex<int>> result = Kosaraju<int>.GetRepresentatives(graph);
 
+            // Check every Vertex belongs to a SCC
             result.Should().ContainKey(vertex1);
             result.Should().ContainKey(vertex2);
             result.Should().ContainKey(vertex3);
@@ -42,7 +45,7 @@ namespace Algorithms.Tests.Graph
             result.Should().ContainKey(vertex6);
             result.Should().ContainKey(vertex7);
 
-
+            // There should be 4 SCC: {1,2,3}, {4,5}, {6} and {7}
             // Vertices 1, 2 and 3 are a SCC
             result[vertex1].Should().Be(result[vertex2]).And.Be(result[vertex3]);
 
@@ -60,6 +63,7 @@ namespace Algorithms.Tests.Graph
         [Test]
         public void GetSCCTest()
         {
+            // Create a graph with some SCC. 
             var graph = new DirectedWeightedGraph<int>(10);
 
             var vertex1 = graph.AddVertex(1);
@@ -79,8 +83,10 @@ namespace Algorithms.Tests.Graph
             graph.AddEdge(vertex5, vertex4, 1);
             graph.AddEdge(vertex5, vertex6, 1);
 
+            // Run the algorithm and get SCC as lists of vertices. 
             var scc = Kosaraju<int>.GetSCC(graph);
 
+            // There should be 4 SCC: {1,2,3}, {4,5}, {6} and {7}
             scc.Should().HaveCount(4);
 
             // Vertices 1, 2 and 3 are a SCC

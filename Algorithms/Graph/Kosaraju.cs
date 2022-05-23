@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataStructures.Graph;
 
 namespace Algorithms.Graph
@@ -19,9 +16,9 @@ namespace Algorithms.Graph
         /// First DFS for Kosaraju algorithm: traverse the graph creating a reverse order explore list <paramref name="reversed"/>.
         /// </summary>
         /// <param name="v">Vertex to explore.</param>
-        /// <param name="graph">Graph with vertex and edges.</param>
+        /// <param name="graph">Graph instance.</param>
         /// <param name="visited">List of already visited vertex.</param>
-        /// <param name="reversed">Reversed list of vertex.</param>
+        /// <param name="reversed">Reversed list of vertex for the second DFS.</param>
         public static void Visit(Vertex<T> v, IDirectedWeightedGraph<T> graph, HashSet<Vertex<T>> visited, Stack<Vertex<T>> reversed)
         {
             if (!visited.Contains(v))
@@ -61,10 +58,10 @@ namespace Algorithms.Graph
         /// </param>
         public static void Assign(Vertex<T> v, Vertex<T> root, IDirectedWeightedGraph<T> graph, Dictionary<Vertex<T>, Vertex<T>> roots)
         {
-            // If v has a representative vertex (root) already assigned, do nothing.
+            // If v already has a representative vertex (root) already assigned, do nothing.
             if (!roots.ContainsKey(v))
             {
-                // Assign theroot to the vertex.
+                // Assign the root to the vertex.
                 roots.Add(v, root);
 
                 // Assign the current root vertex to v neighbors.
