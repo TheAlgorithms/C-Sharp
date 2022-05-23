@@ -61,7 +61,7 @@ namespace Algorithms.Tests.Graph
         }
 
         [Test]
-        public void GetSCCTest()
+        public void GetSccTest()
         {
             // Create a graph with some SCC. 
             var graph = new DirectedWeightedGraph<int>(10);
@@ -84,7 +84,7 @@ namespace Algorithms.Tests.Graph
             graph.AddEdge(vertex5, vertex6, 1);
 
             // Run the algorithm and get SCC as lists of vertices. 
-            var scc = Kosaraju<int>.GetSCC(graph);
+            var scc = Kosaraju<int>.GetScc(graph);
 
             // There should be 4 SCC: {1,2,3}, {4,5}, {6} and {7}
             scc.Should().HaveCount(4);

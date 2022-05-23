@@ -104,7 +104,7 @@ namespace Algorithms.Graph
         /// </summary>
         /// <param name="graph">Graph to explore.</param>
         /// <returns>An array of SCC.</returns>
-        public static IEnumerable<Vertex<T>>[] GetSCC(IDirectedWeightedGraph<T> graph)
+        public static IEnumerable<Vertex<T>>[] GetScc(IDirectedWeightedGraph<T> graph)
         {
             var representatives = GetRepresentatives(graph);
             Dictionary<Vertex<T>, List<Vertex<T>>> scc = new Dictionary<Vertex<T>, List<Vertex<T>>>();
