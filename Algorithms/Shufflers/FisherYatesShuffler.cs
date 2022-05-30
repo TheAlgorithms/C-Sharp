@@ -16,9 +16,9 @@ namespace Algorithms.Shufflers
         ///     choose element we use in swap operation.
         /// </summary>
         /// <param name="array">Array to shuffle.</param>
-        public void Shuffle(T[] array)
+        public void Shuffle(T[] array, int? seed = null)
         {
-            var random = new Random();
+            var random = seed == null ? new Random() : new Random((int)seed);
 
             for (var i = array.Length - 1; i > 0; i--)
             {

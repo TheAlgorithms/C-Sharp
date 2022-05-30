@@ -41,5 +41,49 @@ namespace Algorithms.Tests.Shufflers
             // Assert
             testArray.Should().BeEquivalentTo(correctArray);
         }
+
+        [Test]
+        public static void ArrayShuffled_SameArraySameSeed(
+            [Random(0, 1000, 10, Distinct = true)]
+            int n,
+            [Random(0, 1000000, 10, Distinct = true)]
+            int seed
+            )
+        {
+            // Arrange
+            var shuffler = new FisherYatesShuffler<int>();
+            var (arr1, arr2) = RandomHelper.GetArrays(n);
+
+
+            // Act
+            shuffler.Shuffle(arr1, seed);
+            shuffler.Shuffle(arr2, seed);
+
+            // Assert
+            arr1.Should().Equal(arr2);
+        }
+
+        [Test]
+        public static void ArrayShuffled_SameArrayDiferentSeed(
+            [Random(0, 1000, 5, Distinct = true)]
+            int n,
+            [Random(0, 1000000, 5, Distinct = true)]
+            int seed1,
+             [Random(0, 1000000, 5, Distinct = true)]
+            int seed2
+            )
+        {
+            // Arrange
+            var shuffler = new FisherYatesShuffler<int>();
+            var (arr1, arr2) = RandomHelper.GetArrays(n);
+
+
+            // Act
+            shuffler.Shuffle(arr1, seed1);
+            shuffler.Shuffle(arr2, seed2);
+
+            // Assert
+            arr1.Should().NotEqual(arr2);
+        }
     }
 }

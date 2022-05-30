@@ -10,6 +10,6 @@ namespace Algorithms.Shufflers
         ///     Shuffles array.
         /// </summary>
         /// <param name="array">Array to Shuffle.</param>
-        void Shuffle(T[] array);
+        void Shuffle(T[] array, int? seed = null);
     }
 }
