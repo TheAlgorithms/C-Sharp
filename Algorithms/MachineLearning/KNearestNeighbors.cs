@@ -36,6 +36,9 @@ namespace Algorithms.MachineLearning
         /// </param>
         /// <param name="k">Number of neeighbors that will vote for the classification.</param>
         /// <returns>The predicted classification for the given point.</returns>
+        /// <exception cref="ArgumentException">
+        /// Exception thrown when the point given have different dimensions than the points of the dataset.
+        /// </exception>
         public string Predict(double[] point, int k)
         {
             // Tuples of index and distance.

@@ -29,18 +29,31 @@ namespace Algorithms.Tests.MachineLearning
             IrisDataSet dataSet = new IrisDataSet();
             dataSet.Randomize(seed);
 
-            // Create the model with 100% of the data, we are testing the method, not the model. 
-            double[][] trainingData = dataSet.Data;
-            string[] trainingClass = dataSet.Class;
-
+            // Initialize the model
             KNearestNeighbors knn = new KNearestNeighbors(dataSet.Data, dataSet.Class);
 
-            // Predict some values. This is not intended to test the kNN model, but the method.
+            // Predict some values.
+            // This is not intended to test the kNN model (eg. cross-validation), but the method.
             // So these are some fixed predictions using the full dataset.
             knn.Predict(new double[] { 5.1, 3.8, 1.5, 0.3 }, 1).Should().Be(IrisDataSet.ClassIrisSetosa);
             knn.Predict(new double[] { 6.0, 2.7, 5.1, 1.6 }, 1).Should().Be(IrisDataSet.ClassIrisVersicolor);
             knn.Predict(new double[] { 5.7, 2.5, 5.0, 2.0 }, 1).Should().Be(IrisDataSet.ClassIrisVirginica);
             knn.Predict(new double[] { 5.9, 3.0, 4.2, 1.5 }, 1).Should().Be(IrisDataSet.ClassIrisVersicolor);
+        }
+
+        [Test]
+        public void PredictThrowsBadArgumentException()
+        {
+            // Get data and randomize the dataset. 
+            IrisDataSet dataSet = new IrisDataSet();
+
+            KNearestNeighbors knn = new KNearestNeighbors(dataSet.Data, dataSet.Class);
+
+            Action act1 = () => knn.Predict(new double[] { 3.8, 1.5, 0.3 }, 3);
+            act1.Should().Throw<ArgumentException>();
+
+            Action act2 = () => knn.Predict(new double[] { 3.8, 2, 4, 1.5, 0.3 }, 3);
+            act2.Should().Throw<ArgumentException>();
         }
     }
 }
