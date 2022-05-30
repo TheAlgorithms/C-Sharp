@@ -14,7 +14,7 @@ namespace Algorithms.MachineLearning.DataSets
     /// Iris dataset for classification.
     /// See https://archive.ics.uci.edu/ml/datasets/iris/.
     /// </summary>
-    internal class IrisDataSet
+    public class IrisDataSet
     {
         /// <summary> Text for class Iris-setosa. </summary>
         public const string ClassIrisSetosa = "Iris-setosa";
@@ -59,7 +59,7 @@ namespace Algorithms.MachineLearning.DataSets
         /// Downloads the data and fill <see cref="Data"/> and <see cref="Class"/> arrays.
         /// </summary>
         /// <exception cref="Exception">Might throw an exception if data could not be downloaded or parsed. </exception>
-        public IrisDataSet()
+        public IrisDataSet(string url = IrisUrl)
         {
             try
             {
@@ -71,17 +71,12 @@ namespace Algorithms.MachineLearning.DataSets
                 using (var client = new WebClient())
                 {
                     // Download the Web resource and save it into a data buffer.
-                    byte[] myDataBuffer = client.DownloadData(IrisUrl);
+                    byte[] myDataBuffer = client.DownloadData(url);
                     rawText = Encoding.ASCII.GetString(myDataBuffer);
                 }
 
                 // Load data as string[]
                 string[] rawData = rawText.Split("\n");
-
-                if (rawData.Length < IrisNumSamples)
-                {
-                    throw new Exception("Insuficient data downloaded");
-                }
 
                 // Load the values
                 for (int i = 0; i < IrisNumSamples; i++)
