@@ -9,9 +9,9 @@ namespace Algorithms.MachineLearning
     /// <summary>
     /// K nearest neighbors for regression.
     /// </summary>
-    public class KNNRegression : KNearestNeighbors<double>
+    public class KnnRegression : KNearestNeighbors<double>
     {
-        public KNNRegression(double[][] data, double[] classes, Func<double[], double[], double> distanceFunction)
+        public KnnRegression(double[][] data, double[] classes, Func<double[], double[], double> distanceFunction)
             : base(data, classes, distanceFunction)
         {
         }

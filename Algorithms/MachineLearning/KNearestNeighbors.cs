@@ -32,7 +32,7 @@ namespace Algorithms.MachineLearning
         /// </summary>
         private readonly Func<double[], double[], double> distanceFunction;
 
-        public KNearestNeighbors(double[][] data, T[] classes, Func<double[], double[], double> distanceFunction)
+        protected KNearestNeighbors(double[][] data, T[] classes, Func<double[], double[], double> distanceFunction)
         {
             this.data = data;
             this.classes = classes;

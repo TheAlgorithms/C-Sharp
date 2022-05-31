@@ -14,10 +14,10 @@ namespace Algorithms.Tests.MachineLearning
     /// SingleThreaded is added to avoid conflicts with random when executed on parallel. 
     /// </remarks>
     [SingleThreaded]
-    public class KNNClassificationTests
+    public class KnnClassificationTests
     {
         [Test]
-        public void KNNClassificationPredictTest([Random(0, 10000000, 10, Distinct = true)] int seed)
+        public void KnnClassificationPredictTest([Random(0, 10000000, 10, Distinct = true)] int seed)
         {
             // Get data and randomize the dataset. 
             IrisDataSet dataSet = new IrisDataSet();
@@ -36,7 +36,7 @@ namespace Algorithms.Tests.MachineLearning
         }
 
         [Test]
-        public void KNNClassificationPredictThrowsBadArgumentException()
+        public void KnnClassificationPredictThrowsBadArgumentException()
         {
             IrisDataSet dataSet = new IrisDataSet();
 

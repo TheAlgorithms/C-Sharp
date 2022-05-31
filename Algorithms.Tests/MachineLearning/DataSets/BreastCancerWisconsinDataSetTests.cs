@@ -27,7 +27,7 @@ namespace Algorithms.Tests.MachineLearning.DataSets
         {
             Action action = () =>
             {
-                new BreastCancerWisconsinDataSet(badUrl);
+                new BreastCancerWisconsinDataSet(badUrl).Should().BeNull();
             };
             action.Should().Throw<Exception>();
         }

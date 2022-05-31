@@ -7,7 +7,7 @@ using FluentAssertions;
 
 namespace Algorithms.Tests.MachineLearning
 {
-    internal class KNNRegressionTest
+    internal class KnnRegressionTest
     {
 
         [Test]
@@ -20,7 +20,7 @@ namespace Algorithms.Tests.MachineLearning
         [TestCase(new[] { 9.683, 19.34, 61.05, 285.7, 0.08491, 0.0503, 0.02337, 0.009615, 0.158, 0.06235,
             0.2957, 1.363, 2.054, 18.24, 0.00744, 0.01123, 0.02337, 0.009615, 0.02203, 0.004154, 10.93,
             25.59, 69.1, 364.2, 0.1199, 0.09546, 0.0935, 0.03846, 0.2552, 0.0792 }, 0, 54627)]
-        public void KNNRegressionPredictTest(
+        public void KnnRegressionPredictTest(
             double[] dataPoint,
             double expected, int seed)
         {
@@ -29,7 +29,7 @@ namespace Algorithms.Tests.MachineLearning
             dataSet.Randomize(seed);
 
             // Initialize the model
-            var knn = new KNNRegression(dataSet.Data, dataSet.Class, EuclideanDistance.Distance);
+            var knn = new KnnRegression(dataSet.Data, dataSet.Class, EuclideanDistance.Distance);
 
             // Predict some values.
             // This is not intended to test the kNN model (eg. cross-validation), but the method.
@@ -39,12 +39,12 @@ namespace Algorithms.Tests.MachineLearning
         }
 
         [Test]
-        public void KNNRegressionPredictThrowsBadArgumentException()
+        public void KnnRegressionPredictThrowsBadArgumentException()
         {
             // Get data and randomize the dataset. 
             BreastCancerWisconsinDataSet dataSet = new BreastCancerWisconsinDataSet();
 
-            var knn = new KNNRegression(dataSet.Data, dataSet.Class, EuclideanDistance.Distance);
+            var knn = new KnnRegression(dataSet.Data, dataSet.Class, EuclideanDistance.Distance);
 
             Action act1 = () => knn.Predict(new[] { 3.8, 1.5, 0.3 }, 3);
             act1.Should().Throw<ArgumentException>();
