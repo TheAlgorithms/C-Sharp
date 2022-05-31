@@ -9,23 +9,37 @@ namespace Algorithms.MachineLearning
     /// <summary>
     /// K-Nearest Neighbors implementation.
     /// https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm.
+    ///
+    /// This algorithm uses feature similarity yo predict the value of any new sample or data point.
+    /// That is, the value or classification of a new sample is obtained from the examples in the
+    /// training set that most closely resemble the new one.
     /// </summary>
-    public class KNearestNeighbors
+    /// <typeparam name="T">Type of classes. Should be double or float for regression.</typeparam>
+    public abstract class KNearestNeighbors<T>
     {
         /// <summary>
-        /// Variables values for each point.
+        /// Features of the samples.
         /// </summary>
+        /// <example>
+        /// data[sampleIndex][featureIndex].
+        /// </example>
         private readonly double[][] data;
 
         /// <summary>
-        /// Classification for each point.
+        /// Classification or value for each point.
         /// </summary>
-        private readonly string[] classes;
+        private readonly T[] classes;
 
-        public KNearestNeighbors(double[][] data, string[] classes)
+        /// <summary>
+        /// Function to measure the distance between two points.
+        /// </summary>
+        private readonly Func<double[], double[], double> distanceFunction;
+
+        public KNearestNeighbors(double[][] data, T[] classes, Func<double[], double[], double> distanceFunction)
         {
             this.data = data;
             this.classes = classes;
+            this.distanceFunction = distanceFunction;
         }
 
         /// <summary>
@@ -39,7 +53,7 @@ namespace Algorithms.MachineLearning
         /// <exception cref="ArgumentException">
         /// Exception thrown when the point given have different dimensions than the points of the dataset.
         /// </exception>
-        public string Predict(double[] point, int k)
+        public T Predict(double[] point, int k)
         {
             // Tuples of index and distance.
             Tuple<int, double>[] distances = new Tuple<int, double>[classes.Length];
@@ -53,22 +67,26 @@ namespace Algorithms.MachineLearning
             Array.Sort(distances, (x1, x2) => x1.Item2.CompareTo(x2.Item2));
 
             // Get the votes of the K nearest neighbours
-            Dictionary<string, int> votes = new Dictionary<string, int>();
+            List<T> votes = new List<T>();
+
             for (int i = 0; i < k; i++)
             {
-                var vote = classes[distances[i].Item1];
-                if (votes.ContainsKey(vote))
-                {
-                    votes[vote]++;
-                }
-                else
-                {
-                    votes.Add(vote, 1);
-                }
+                votes.Add(classes[distances[i].Item1]);
             }
 
             // Return the classification that has more votes.
-            return votes.OrderByDescending(x => x.Value).First().Key;
+            return GetResult(votes);
         }
+
+        /// <summary>
+        /// Get the value or class to assign to the new sample.
+        /// </summary>
+        /// <remarks>
+        /// For regression kNN it will return the mean value of the k nearest neighbors.
+        /// For classification kNN it will return the most voted class.
+        /// </remarks>
+        /// <param name="votes">Values or classes of the k nearest neighbors.</param>
+        /// <returns>The value or class to set to the new data point.</returns>
+        protected abstract T GetResult(List<T> votes);
     }
 }
