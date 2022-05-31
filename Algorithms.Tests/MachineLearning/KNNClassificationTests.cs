@@ -21,7 +21,8 @@ namespace Algorithms.Tests.MachineLearning
         {
             // Get data and randomize the dataset. 
             IrisDataSet dataSet = new IrisDataSet();
-            dataSet.Randomize(seed);
+            DataSetUtils<string>.Randomize(dataSet.Data, dataSet.Class, seed);
+            
 
             // Initialize the model
             var knn = new KnnClassification<string>(dataSet.Data, dataSet.Class, EuclideanDistance.Distance);

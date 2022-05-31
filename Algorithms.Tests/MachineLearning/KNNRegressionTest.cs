@@ -26,7 +26,7 @@ namespace Algorithms.Tests.MachineLearning
         {
             // Get data and randomize the dataset. 
             BreastCancerWisconsinDataSet dataSet = new BreastCancerWisconsinDataSet();
-            dataSet.Randomize(seed);
+            DataSetUtils<double>.Randomize(dataSet.Data, dataSet.Class, seed);
 
             // Initialize the model
             var knn = new KnnRegression(dataSet.Data, dataSet.Class, EuclideanDistance.Distance);

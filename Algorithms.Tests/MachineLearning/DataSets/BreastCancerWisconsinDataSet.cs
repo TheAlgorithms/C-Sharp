@@ -99,22 +99,6 @@ namespace Algorithms.Tests.MachineLearning.DataSets
 
             Class[numSample] = values[1] == "M" ? 1 : 0;
         }
-            
-        /// <summary>
-        /// Shuffle the dataset. 
-        /// </summary>
-        /// <param name="seed"></param>
-        public void Randomize(int? seed = null)
-        {
-            // Get the new order for the data
-            int[] order = Enumerable.Range(0, Data.Count()).ToArray();
-            var shuffler = new FisherYatesShuffler<int>();
-            shuffler.Shuffle(order, seed);
-
-            // Set the order
-            int[] order2 = (int[])order.Clone();
-            Array.Sort(order, Data);
-            Array.Sort(order2, Class);
-        }
+    
     }
 }
