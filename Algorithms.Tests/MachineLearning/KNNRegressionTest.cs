@@ -46,10 +46,10 @@ namespace Algorithms.Tests.MachineLearning
 
             var knn = new KnnRegression(dataSet.Data, dataSet.Class, EuclideanDistance.Distance);
 
-            Action act1 = () => knn.Predict(new[] { 3.8, 1.5, 0.3 }, 3);
+            Action act1 = () => knn.Predict(new[] { 2, 5.3, 0 }, 3);
             act1.Should().Throw<ArgumentException>();
 
-            Action act2 = () => knn.Predict(new[] { 3.8, 2, 4, 1.5, 0.3 }, 3);
+            Action act2 = () => knn.Predict(new[] { 1, 2, 0.0, 1.5, -0.3 }, 3);
             act2.Should().Throw<ArgumentException>();
         }
     }
