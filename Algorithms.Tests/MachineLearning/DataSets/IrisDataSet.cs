@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Algorithms.Shufflers;
 
-namespace Algorithms.MachineLearning.DataSets
+namespace Algorithms.Tests.MachineLearning.DataSets
 {
     /// <summary>
     /// Iris dataset for classification.
@@ -82,7 +82,7 @@ namespace Algorithms.MachineLearning.DataSets
                 for (int i = 0; i < IrisNumSamples; i++)
                 {
                     var values = rawData[i].Split(",");
-                    Data[i] = new []
+                    Data[i] = new[]
                     {
                         double.Parse(values[0], CultureInfo.InvariantCulture),
                         double.Parse(values[1], CultureInfo.InvariantCulture),
@@ -94,7 +94,7 @@ namespace Algorithms.MachineLearning.DataSets
             }
             catch (Exception)
             {
-                throw new Exception("Dataset could not be loaded.");
+                throw new ArgumentException("Dataset could not be loaded from the given URL.");
             }
         }
 
