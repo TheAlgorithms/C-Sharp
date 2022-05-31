@@ -25,7 +25,7 @@ namespace Algorithms.Tests.MachineLearning.DataSets
         {
             string badUrl = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/";
             Action action = () => {
-                IrisDataSet dataset = new IrisDataSet(badUrl);
+                new IrisDataSet(badUrl);
             };
             action.Should().Throw<Exception>();
         }

@@ -15,12 +15,12 @@ namespace Algorithms.MachineLearning
         /// <summary>
         /// Variables values for each point.
         /// </summary>
-        private double[][] data;
+        private readonly double[][] data;
 
         /// <summary>
         /// Classification for each point.
         /// </summary>
-        private string[] classes;
+        private readonly string[] classes;
 
         public KNearestNeighbors(double[][] data, string[] classes)
         {

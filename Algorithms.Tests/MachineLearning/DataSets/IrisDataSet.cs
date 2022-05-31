@@ -17,16 +17,16 @@ namespace Algorithms.MachineLearning.DataSets
     public class IrisDataSet
     {
         /// <summary> Text for class Iris-setosa. </summary>
-        public const string ClassIrisSetosa = "Iris-setosa";
+        public static readonly string ClassIrisSetosa = "Iris-setosa";
 
         /// <summary> Text for class Iris-versicolor. </summary>
-        public const string ClassIrisVersicolor = "Iris-versicolor";
+        public static readonly string ClassIrisVersicolor = "Iris-versicolor";
 
         /// <summary> Text for class Iris-virginica. </summary>
-        public const string ClassIrisVirginica = "Iris-virginica";
+        public static readonly string ClassIrisVirginica = "Iris-virginica";
 
         /// <summary> Number of samples in the dataset.</summary>
-        public const int IrisNumSamples = 150;
+        public static readonly int IrisNumSamples = 150;
 
         /// <summary> Download URL. </summary>
         private const string IrisUrl = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data";
@@ -82,7 +82,7 @@ namespace Algorithms.MachineLearning.DataSets
                 for (int i = 0; i < IrisNumSamples; i++)
                 {
                     var values = rawData[i].Split(",");
-                    Data[i] = new double[]
+                    Data[i] = new []
                     {
                         double.Parse(values[0], CultureInfo.InvariantCulture),
                         double.Parse(values[1], CultureInfo.InvariantCulture),

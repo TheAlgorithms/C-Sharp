@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Algorithms.Maths
 {
-    public class EuclideanDistance
+    public static class EuclideanDistance
     {
         /// <summary>
         /// Calculate the euclidean distance between two N-dimensional points.
