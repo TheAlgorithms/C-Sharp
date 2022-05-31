@@ -10,9 +10,9 @@ namespace Algorithms.MachineLearning
     /// K nearest neighbors for classification.
     /// </summary>
     /// <typeparam name="T">Type of the class of the data points.</typeparam>
-    public class KNNClassification<T> : KNearestNeighbors<T>
+    public class KnnClassification<T> : KNearestNeighbors<T>
     {
-        public KNNClassification(double[][] data, T[] classes, Func<double[], double[], double> distanceFunction)
+        public KnnClassification(double[][] data, T[] classes, Func<double[], double[], double> distanceFunction)
            : base(data, classes, distanceFunction)
         {
         }

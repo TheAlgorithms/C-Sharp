@@ -24,7 +24,7 @@ namespace Algorithms.Tests.MachineLearning
             dataSet.Randomize(seed);
 
             // Initialize the model
-            var knn = new KNNClassification<string>(dataSet.Data, dataSet.Class, EuclideanDistance.Distance);
+            var knn = new KnnClassification<string>(dataSet.Data, dataSet.Class, EuclideanDistance.Distance);
 
             // Predict some values.
             // This is not intended to test the kNN model (eg. cross-validation), but the method.
@@ -40,7 +40,7 @@ namespace Algorithms.Tests.MachineLearning
         {
             IrisDataSet dataSet = new IrisDataSet();
 
-            var knn = new KNNClassification<string>(dataSet.Data, dataSet.Class, EuclideanDistance.Distance);
+            var knn = new KnnClassification<string>(dataSet.Data, dataSet.Class, EuclideanDistance.Distance);
 
             Action act1 = () => knn.Predict(new [] { 3.8, 1.5, 0.3 }, 3);
             act1.Should().Throw<ArgumentException>();
