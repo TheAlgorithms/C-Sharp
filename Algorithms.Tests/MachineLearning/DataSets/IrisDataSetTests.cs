@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -17,6 +13,7 @@ namespace Algorithms.Tests.MachineLearning.DataSets
             dataset.Should().NotBeNull();
             dataset.Data.Should().HaveCount(150);
             dataset.Class.Should().HaveCount(150);
+            dataset.Data[149].Should().NotBeNull();
         }
 
         [Test]

@@ -1,13 +1,6 @@
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Algorithms.MachineLearning;
-using System.Net;
-using System.IO;
-using System.Globalization;
 using FluentAssertions;
 using Algorithms.Tests.MachineLearning.DataSets;
 using Algorithms.Maths;
@@ -45,7 +38,6 @@ namespace Algorithms.Tests.MachineLearning
         [Test]
         public void KNNClassificationPredictThrowsBadArgumentException()
         {
-            // Get data and randomize the dataset. 
             IrisDataSet dataSet = new IrisDataSet();
 
             var knn = new KNNClassification<string>(dataSet.Data, dataSet.Class, EuclideanDistance.Distance);

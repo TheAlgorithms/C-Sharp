@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using Algorithms.Shufflers;
 
 namespace Algorithms.Tests.MachineLearning.DataSets
@@ -98,6 +95,10 @@ namespace Algorithms.Tests.MachineLearning.DataSets
             }
         }
 
+        /// <summary>
+        /// Shuffle the dataset. 
+        /// </summary>
+        /// <param name="seed"></param>
         public void Randomize(int? seed = null)
         {
             // Get the new order for the data

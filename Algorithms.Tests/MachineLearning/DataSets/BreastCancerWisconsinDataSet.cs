@@ -1,15 +1,14 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using Algorithms.Shufflers;
 
 namespace Algorithms.Tests.MachineLearning.DataSets
 {
     /// <summary>
+    /// Breast Cancer Wisconsin dataset for regression.
     /// https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/
     /// </summary>
     internal class BreastCancerWisconsinDataSet
@@ -76,6 +75,13 @@ namespace Algorithms.Tests.MachineLearning.DataSets
             }
         }
 
+        /// <summary>
+        /// Parse a line of the dataset wich contains the raw features and fill a position of
+        /// <see cref="Data"/> list of samples.
+        /// </summary>
+        /// <param name="line">Line of the dataset, vlaues seperated by ;.</param>
+        /// <param name="numSample"></param>
+        /// <exception cref="ArgumentException">Thrown if data has no the right length.</exception>
         private void FillFeaturesFromRow(string line, int numSample)
         {
             Data[numSample] = new double[30];
@@ -93,7 +99,11 @@ namespace Algorithms.Tests.MachineLearning.DataSets
 
             Class[numSample] = values[1] == "M" ? 1 : 0;
         }
-
+            
+        /// <summary>
+        /// Shuffle the dataset. 
+        /// </summary>
+        /// <param name="seed"></param>
         public void Randomize(int? seed = null)
         {
             // Get the new order for the data

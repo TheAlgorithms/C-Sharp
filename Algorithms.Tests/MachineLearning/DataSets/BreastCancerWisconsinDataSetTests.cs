@@ -16,7 +16,8 @@ namespace Algorithms.Tests.MachineLearning.DataSets
             BreastCancerWisconsinDataSet dataset = new BreastCancerWisconsinDataSet();
             dataset.Should().NotBeNull();
             dataset.Data.Should().HaveCount(569);
-            dataset.Class.Should().HaveCount(569);            
+            dataset.Class.Should().HaveCount(569);
+            dataset.Data[568].Should().NotBeNull();
         }
 
         [Test]

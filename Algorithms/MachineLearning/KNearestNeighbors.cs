@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Algorithms.MachineLearning
 {
@@ -49,7 +46,7 @@ namespace Algorithms.MachineLearning
         /// Data point to predict its classification. Should have the same dimensions than the points in the dataset.
         /// </param>
         /// <param name="k">Number of neeighbors that will vote for the classification.</param>
-        /// <returns>The predicted classification for the given point.</returns>
+        /// <returns>Predicted classification for the given point.</returns>
         /// <exception cref="ArgumentException">
         /// Exception thrown when the point given have different dimensions than the points of the dataset.
         /// </exception>
