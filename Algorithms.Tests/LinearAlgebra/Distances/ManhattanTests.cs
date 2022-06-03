@@ -33,7 +33,7 @@ namespace Algorithms.Tests.LinearAlgebra.Distances
         [TestCase(new[] { 1.0 }, new[] { 1.0, 2.0, 3.0 })]
         public void DistanceThrowsArgumentExceptionOnDifferentPointDimensions(double[] point1, double[] point2)
         {
-            Action action = new Action(() => { Manhattan.Distance(point1, point2); });
+            Action action = () => Manhattan.Distance(point1, point2);
             action.Should().Throw<ArgumentException>();
         }
     }
