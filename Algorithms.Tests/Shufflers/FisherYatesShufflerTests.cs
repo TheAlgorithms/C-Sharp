@@ -26,7 +26,7 @@ namespace Algorithms.Tests.Shufflers
 
         [Test]
         public static void ArrayShuffled_NewArrayHasSameValues(
-            [Random(0, 1000, 100, Distinct = true)]
+          [Random(0, 1000, 100, Distinct = true)]
             int n)
         {
             // Arrange
@@ -35,11 +35,53 @@ namespace Algorithms.Tests.Shufflers
 
             // Act
             shuffler.Shuffle(testArray);
-            Array.Sort(testArray);
-            Array.Sort(correctArray);
 
             // Assert
             testArray.Should().BeEquivalentTo(correctArray);
         }
+
+        [Test]
+        public static void ArrayShuffled_SameShuffle(
+           [Random(0, 1000, 2, Distinct = true)] int n,
+           [Random(1000, 10000, 5, Distinct = true)] int seed)
+        {
+            // Arrange
+            var shuffler = new FisherYatesShuffler<int>();
+            var (array1, array2) = RandomHelper.GetArrays(n);
+
+            // Act
+            shuffler.Shuffle(array1, seed);
+            shuffler.Shuffle(array2, seed);
+
+            // Assert
+            array1.Should().BeEquivalentTo(array2, options => options.WithStrictOrdering());
+        }
+
+        [Test]
+        public static void ArrayShuffled_DifferentSeedDifferentShuffle(
+          [Random(0, 100, 2, Distinct = true)] int n,
+          [Random(1000, 10000, 5, Distinct = true)] int seed)
+        {
+            // Arrange
+            var shuffler = new FisherYatesShuffler<int>();
+            var (array1, array2) = RandomHelper.GetArrays(n);
+
+            // Act
+            shuffler.Shuffle(array1, seed);
+            shuffler.Shuffle(array2, seed + 13);
+
+            // It seems the actual version of FluentAssertion has no options in NotBeEquivalentTo.
+            // With default options, it does not check for order, but for same elements in the colecction.
+            //  array1.Should().NotBeEquivalentTo(array2, options => options.WithStrictOrdering());
+            // So:
+            int hits = 0; 
+            for(int i = 0; i < n; i++)
+            {
+                if (array1[i] == array2[i]) hits++;
+            }
+            hits.Should().BeLessThan(array2.Length);
+        }
+
+
     }
 }
