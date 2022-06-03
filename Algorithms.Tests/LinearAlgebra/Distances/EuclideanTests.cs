@@ -31,7 +31,7 @@ namespace Algorithms.Tests.LinearAlgebra.Distances
         [TestCase(new[] { 12.0 }, new[] { 1.5, 7.0, 3.2 })]
         public static void DistanceThrowsArgumentExceptionOnDifferentPointDimensions(double[] point1, double[] point2)
         {
-            Action action = new Action(() => { Euclidean.Distance(point1, point2); });
+            Action action = () => Euclidean.Distance(point1, point2);
             action.Should().Throw<ArgumentException>();
         }
     }
