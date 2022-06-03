@@ -72,16 +72,16 @@ namespace Algorithms.Tests.Shufflers
 
             // It seems the actual version of FluentAssertion has no options in NotBeEquivalentTo.
             // With default options, it does not check for order, but for same elements in the colecction.
-            //  array1.Should().NotBeEquivalentTo(array2, options => options.WithStrictOrdering());
-            // So:
-            int hits = 0; 
-            for(int i = 0; i < n; i++)
+            // So until the library is updated check that not all the items have the same order. 
+            int hits = 0;
+            for (int i = 0; i < n; i++)
             {
-                if (array1[i] == array2[i]) hits++;
+                if (array1[i] == array2[i])
+                {
+                    hits++;
+                }
             }
             hits.Should().BeLessThan(array2.Length);
         }
-
-
     }
 }
