@@ -25,7 +25,7 @@ namespace Algorithms.LinearAlgebra.Distances
         {
             if (point1.Length != point2.Length)
             {
-                throw new ArgumentException("Both points should have the same length.");
+                throw new ArgumentException("Both points should have the same dimensionality");
             }
 
             // distance = |x1-y1| + |x2-y2| + ... + |xn-yn|

@@ -36,7 +36,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Distances](./Algorithms/LinearAlgebra/Distances)
       * [Manhattan](./Algorithms/LinearAlgebra/Distances/Manhattan.cs)
     * [Eigenvalue](./Algorithms/LinearAlgebra/Eigenvalue)
-      * [Power Iteration](./Algorithms/LinearAlgebra/Eigenvalue/PowerIteration.cs)    
+      * [Power Iteration](./Algorithms/LinearAlgebra/Eigenvalue/PowerIteration.cs)
   * [Numeric](./Algorithms/Numeric)
     * [Aliquot Sum Calculator](./Algorithms/Numeric/AliquotSumCalculator.cs)
     * [Decomposition](./Algorithms/Numeric/Decomposition)
