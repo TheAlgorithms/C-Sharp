@@ -34,6 +34,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Branch and bound solver](./Algorithms/Knapsack/BranchAndBoundKnapsackSolver.cs)
   * [Linear Algebra](./Algorithms/LinearAlgebra)
     * [Distances](./Algorithms/LinearAlgebra/Distances)
+      * [Euclidean](./Algorithms/LinearAlgebra/Distances/Euclidean.cs)
       * [Manhattan](./Algorithms/LinearAlgebra/Distances/Manhattan.cs)
     * [Eigenvalue](./Algorithms/LinearAlgebra/Eigenvalue)
       * [Power Iteration](./Algorithms/LinearAlgebra/Eigenvalue/PowerIteration.cs)
