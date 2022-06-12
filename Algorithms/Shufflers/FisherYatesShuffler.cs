@@ -19,7 +19,7 @@ namespace Algorithms.Shufflers
         /// <param name="seed">Random generator seed. Used to repeat the shuffle.</param>
         public void Shuffle(T[] array, int? seed = null)
         {
-            var random = seed == null ? new Random() : new Random((int)seed);
+            var random = seed is null ? new Random() : new Random(seed.Value);
 
             for (var i = array.Length - 1; i > 0; i--)
             {

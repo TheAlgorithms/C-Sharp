@@ -26,7 +26,7 @@ namespace Algorithms.Tests.Shufflers
 
         [Test]
         public static void ArrayShuffled_NewArrayHasSameValues(
-          [Random(0, 1000, 100, Distinct = true)]
+            [Random(0, 1000, 100, Distinct = true)]
             int n)
         {
             // Arrange
@@ -71,7 +71,7 @@ namespace Algorithms.Tests.Shufflers
             shuffler.Shuffle(array2, seed + 13);
 
             // It seems the actual version of FluentAssertion has no options in NotBeEquivalentTo.
-            // With default options, it does not check for order, but for same elements in the colecction.
+            // With default options, it does not check for order, but for the same elements in the collection.
             // So until the library is updated check that not all the items have the same order. 
             int hits = 0;
             for (int i = 0; i < n; i++)
