@@ -22,7 +22,11 @@ static unsafe void MemoryAlloc()
         }
         for (int i = 0; i < Size; i++)
         {
-            Console.WriteLine(array[i]);
+            fixed (byte* ptr = &array[i])
+            {
+                Console.Write((int)ptr);
+                Console.WriteLine($"{*(ulong*)ptr}\t{*ptr}");
+            }
         }
     }
     finally
@@ -33,3 +37,4 @@ static unsafe void MemoryAlloc()
         }
     }
 }
+Console.ReadLine();
