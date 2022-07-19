@@ -20,24 +20,24 @@ namespace Algorithms.Tests.Problems.StableMarriage
         public static void MatchingIsSuccessful()
         {
             var random = new Random(7);
-            var proposers = Enumerable.Range(1, 10).Select(x => new Proposer()).ToArray();
-            var accepters = Enumerable.Range(1, 10).Select(x => new Accepter()).ToArray();
+            var proposers = Enumerable.Range(1, 10).Select(_ => new Proposer()).ToArray();
+            var acceptors = Enumerable.Range(1, 10).Select(_ => new Accepter()).ToArray();
 
             foreach (var proposer in proposers)
             {
-                proposer.PreferenceOrder = new LinkedList<Accepter>(accepters.OrderBy(x => random.Next()));
+                proposer.PreferenceOrder = new LinkedList<Accepter>(acceptors.OrderBy(_ => random.Next()));
             }
 
-            foreach (var accepter in accepters)
+            foreach (var acceptor in acceptors)
             {
-                accepter.PreferenceOrder = proposers.OrderBy(x => random.Next()).ToList();
+                acceptor.PreferenceOrder = proposers.OrderBy(_ => random.Next()).ToList();
             }
 
-            GaleShapley.Match(proposers, accepters);
+            GaleShapley.Match(proposers, acceptors);
 
-            Assert.IsTrue(accepters.All(x => x.EngagedTo is not null));
+            Assert.IsTrue(acceptors.All(x => x.EngagedTo is not null));
             Assert.IsTrue(proposers.All(x => x.EngagedTo is not null));
-            Assert.IsTrue(AreMatchesStable(proposers, accepters));
+            Assert.IsTrue(AreMatchesStable(proposers, acceptors));
         }
 
         private static bool AreMatchesStable(Proposer[] proposers, Accepter[] accepters) =>

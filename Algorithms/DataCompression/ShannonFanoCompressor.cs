@@ -86,7 +86,7 @@ namespace Algorithms.DataCompression
                 return node;
             }
 
-            var left = splitter.Solve(node.Data, 0.5 * node.Data.Sum(x => x.frequency), x => x.frequency, x => 1);
+            var left = splitter.Solve(node.Data, 0.5 * node.Data.Sum(x => x.frequency), x => x.frequency, _ => 1);
             var right = node.Data.Except(left).ToArray();
 
             node.LeftChild = GenerateShannonFanoTree(new ListNode(left));
