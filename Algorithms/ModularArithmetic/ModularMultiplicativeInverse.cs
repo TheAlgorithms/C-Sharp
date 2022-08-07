@@ -6,7 +6,7 @@ namespace Algorithms.ModularArithmetic
     /// <summary>
     /// Modular multiplicative inverse: https://en.wikipedia.org/wiki/Modular_multiplicative_inverse.
     /// </summary>
-    public static class MultiplicativeInverse
+    public static class ModularMultiplicativeInverse
     {
         /// <summary>
         ///     Computes the modular multiplicative inverse of a in Z/nZ, if there is any (i.e. if a and n are coprime).

@@ -5,7 +5,7 @@ using System.Numerics;
 
 namespace Algorithms.Tests.ModularArithmetic
 {
-    public static class MultiplicativeInverseTest
+    public static class ModularMultiplicativeInverseTest
     {
         [Test]
         [TestCase(2, 3, 2)]
@@ -14,7 +14,7 @@ namespace Algorithms.Tests.ModularArithmetic
         public static void TestCompute(long a, long n, long expected)
         {
             // Act
-            var inverse = MultiplicativeInverse.Compute(a, n);
+            var inverse = ModularMultiplicativeInverse.Compute(a, n);
 
             // Assert
             Assert.AreEqual(expected, inverse);
@@ -30,7 +30,7 @@ namespace Algorithms.Tests.ModularArithmetic
         public static void TestCompute_Irrevertible(long a, long n)
         {
             // Act
-            void Act() => MultiplicativeInverse.Compute(a, n);
+            void Act() => ModularMultiplicativeInverse.Compute(a, n);
 
             // Assert
             _ = Assert.Throws<ArithmeticException>(Act);
@@ -43,7 +43,7 @@ namespace Algorithms.Tests.ModularArithmetic
         public static void TestCompute_BigInteger(long a, long n, long expected)
         {
             // Act
-            var inverse = MultiplicativeInverse.Compute(new BigInteger(a), new BigInteger(n));
+            var inverse = ModularMultiplicativeInverse.Compute(new BigInteger(a), new BigInteger(n));
 
             // Assert
             Assert.AreEqual(new BigInteger(expected), inverse);
@@ -59,7 +59,7 @@ namespace Algorithms.Tests.ModularArithmetic
         public static void TestCompute_BigInteger_Irrevertible(long a, long n)
         {
             // Act
-            void Act() => MultiplicativeInverse.Compute(new BigInteger(a), new BigInteger(n));
+            void Act() => ModularMultiplicativeInverse.Compute(new BigInteger(a), new BigInteger(n));
 
             // Assert
             _ = Assert.Throws<ArithmeticException>(Act);
