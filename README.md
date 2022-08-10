@@ -130,6 +130,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [A019434 Fermat Primes](./Algorithms/Sequences/FermatPrimesSequence.cs)
     * [A181391 Van Eck's](./Algorithms/Sequences/VanEcksSequence.cs)
   * [String](./Algorithms/Strings)
+    * [Anagram Checker](./Algorithms/Strings/AnagramCheckers.cs)
     * [Longest Consecutive Character](./Algorithms/Strings/GeneralStringAlgorithms.cs)
     * [Naive String Search](./Algorithms/Strings/NaiveStringSearch.cs)
     * [Rabin Karp](./Algorithms/Strings/RabinKarp.cs)
