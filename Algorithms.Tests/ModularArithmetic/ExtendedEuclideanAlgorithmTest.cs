@@ -21,12 +21,12 @@ namespace Algorithms.Tests.ModularArithmetic
         public static void TestCompute(long a, long b, long expectedGCD, long expectedBezoutOfA, long expectedBezoutOfB)
         {
             // Act
-            var gcd = ExtendedEuclideanAlgorithm.Compute(a, b, out var bezoutOfA, out var bezoutOfB);
+            var eeaResult = ExtendedEuclideanAlgorithm.Compute(a, b);
 
             // Assert
-            Assert.AreEqual(expectedGCD, gcd);
-            Assert.AreEqual(expectedBezoutOfA, bezoutOfA);
-            Assert.AreEqual(expectedBezoutOfB, bezoutOfB);
+            Assert.AreEqual(expectedGCD, eeaResult.gcd);
+            Assert.AreEqual(expectedBezoutOfA, eeaResult.bezoutA);
+            Assert.AreEqual(expectedBezoutOfB, eeaResult.bezoutB);
         }
 
         [Test]
@@ -44,12 +44,12 @@ namespace Algorithms.Tests.ModularArithmetic
         public static void TestCompute_BigInteger(long a, long b, long expectedGCD, long expectedBezoutOfA, long expectedBezoutOfB)
         {
             // Act
-            var gcd = ExtendedEuclideanAlgorithm.Compute(new BigInteger(a), new BigInteger(b), out var bezoutOfA, out var bezoutOfB);
+            var eeaResult = ExtendedEuclideanAlgorithm.Compute(new BigInteger(a), new BigInteger(b));
 
             // Assert
-            Assert.AreEqual(new BigInteger(expectedGCD), gcd);
-            Assert.AreEqual(new BigInteger(expectedBezoutOfA), bezoutOfA);
-            Assert.AreEqual(new BigInteger(expectedBezoutOfB), bezoutOfB);
+            Assert.AreEqual(new BigInteger(expectedGCD), eeaResult.gcd);
+            Assert.AreEqual(new BigInteger(expectedBezoutOfA), eeaResult.bezoutA);
+            Assert.AreEqual(new BigInteger(expectedBezoutOfB), eeaResult.bezoutB);
         }
     }
 }

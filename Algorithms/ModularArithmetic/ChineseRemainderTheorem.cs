@@ -49,7 +49,7 @@ namespace Algorithms.ModularArithmetic
                 var n_i = listOfNs[i];
                 var modulus_i = prodN / n_i;
 
-                _ = ExtendedEuclideanAlgorithm.Compute(n_i, modulus_i, out _, out var bezout_modulus_i);
+                var bezout_modulus_i = ExtendedEuclideanAlgorithm.Compute(n_i, modulus_i).bezoutB;
                 result += a_i * bezout_modulus_i * modulus_i;
             }
 
@@ -102,7 +102,7 @@ namespace Algorithms.ModularArithmetic
                 var n_i = listOfNs[i];
                 var modulus_i = prodN / n_i;
 
-                _ = ExtendedEuclideanAlgorithm.Compute(n_i, modulus_i, out _, out var bezout_modulus_i);
+                var bezout_modulus_i = ExtendedEuclideanAlgorithm.Compute(n_i, modulus_i).bezoutB;
                 result += a_i * bezout_modulus_i * modulus_i;
             }
 
@@ -129,14 +129,14 @@ namespace Algorithms.ModularArithmetic
                 throw new ArgumentException("The parameters 'listOfAs' and 'listOfNs' must not be null and have to be of equal length!");
             }
 
-            foreach (var n in listOfNs.Where(x => x <= 1))
+            if (listOfNs.Any(x => x <= 1))
             {
-                throw new ArgumentException($"The value {n} for some n_i is smaller than or equal to 1.");
+                throw new ArgumentException($"The value {listOfNs.First(x => x <= 1)} for some n_i is smaller than or equal to 1.");
             }
 
-            foreach (var a in listOfAs.Where(x => x < 0))
+            if (listOfAs.Any(x => x < 0))
             {
-                throw new ArgumentException($"The value {a} for some a_i is smaller than 0.");
+                throw new ArgumentException($"The value {listOfAs.First(x => x < 0)} for some a_i is smaller than 0.");
             }
 
             // Check if all pairs of (n_i, n_j) are coprime:
@@ -145,7 +145,7 @@ namespace Algorithms.ModularArithmetic
                 for (var j = i + 1; j < listOfNs.Count; j++)
                 {
                     long gcd;
-                    if ((gcd = ExtendedEuclideanAlgorithm.Compute(listOfNs[i], listOfNs[j], out _, out _)) != 1L)
+                    if ((gcd = ExtendedEuclideanAlgorithm.Compute(listOfNs[i], listOfNs[j]).gcd) != 1L)
                     {
                         throw new ArgumentException($"The GCD of n_{i} = {listOfNs[i]} and n_{j} = {listOfNs[j]} equals {gcd} and thus these values aren't coprime.");
                     }
@@ -166,14 +166,14 @@ namespace Algorithms.ModularArithmetic
                 throw new ArgumentException("The parameters 'listOfAs' and 'listOfNs' must not be null and have to be of equal length!");
             }
 
-            foreach (var n in listOfNs.Where(x => x <= 1))
+            if (listOfNs.Any(x => x <= 1))
             {
-                throw new ArgumentException($"The value {n} for some n_i is smaller than or equal to 1.");
+                throw new ArgumentException($"The value {listOfNs.First(x => x <= 1)} for some n_i is smaller than or equal to 1.");
             }
 
-            foreach (var a in listOfAs.Where(x => x < 0))
+            if (listOfAs.Any(x => x < 0))
             {
-                throw new ArgumentException($"The value {a} for some a_i is smaller than 0.");
+                throw new ArgumentException($"The value {listOfAs.First(x => x < 0)} for some a_i is smaller than 0.");
             }
 
             // Check if all pairs of (n_i, n_j) are coprime:
@@ -182,7 +182,7 @@ namespace Algorithms.ModularArithmetic
                 for (var j = i + 1; j < listOfNs.Count; j++)
                 {
                     BigInteger gcd;
-                    if ((gcd = ExtendedEuclideanAlgorithm.Compute(listOfNs[i], listOfNs[j], out _, out _)) != BigInteger.One)
+                    if ((gcd = ExtendedEuclideanAlgorithm.Compute(listOfNs[i], listOfNs[j]).gcd) != BigInteger.One)
                     {
                         throw new ArgumentException($"The GCD of n_{i} = {listOfNs[i]} and n_{j} = {listOfNs[j]} equals {gcd} and thus these values aren't coprime.");
                     }

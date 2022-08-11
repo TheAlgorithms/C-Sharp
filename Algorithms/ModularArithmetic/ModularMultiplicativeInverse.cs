@@ -17,15 +17,16 @@ namespace Algorithms.ModularArithmetic
         /// <exception cref="ArithmeticException">If there exists no multiplicative inverse of a in Z/nZ.</exception>
         public static long Compute(long a, long n)
         {
-            var gcd = ExtendedEuclideanAlgorithm.Compute(a, n, out var inverseOfA, out _);
+            var eeaResult = ExtendedEuclideanAlgorithm.Compute(a, n);
 
             // Check if there is an inverse:
-            if (gcd != 1)
+            if (eeaResult.gcd != 1)
             {
                 throw new ArithmeticException($"{a} is not invertible in Z/{n}Z.");
             }
 
-            // Make sure, inverseOfA is in the interval [0, n).
+            // Make sure, inverseOfA (i.e. the bezout coefficient of a) is in the interval [0, n).
+            var inverseOfA = eeaResult.bezoutA;
             if (inverseOfA < 0)
             {
                 inverseOfA += n;
@@ -43,15 +44,16 @@ namespace Algorithms.ModularArithmetic
         /// <exception cref="ArithmeticException">If there exists no multiplicative inverse of a in Z/nZ.</exception>
         public static BigInteger Compute(BigInteger a, BigInteger n)
         {
-            var gcd = ExtendedEuclideanAlgorithm.Compute(a, n, out var inverseOfA, out _);
+            var eeaResult = ExtendedEuclideanAlgorithm.Compute(a, n);
 
             // Check if there is an inverse:
-            if (gcd != 1)
+            if (eeaResult.gcd != 1)
             {
                 throw new ArithmeticException($"{a} is not invertible in Z/{n}Z.");
             }
 
-            // Make sure, inverseOfA is in the interval [0, n).
+            // Make sure, inverseOfA (i.e. the bezout coefficient of a) is in the interval [0, n).
+            var inverseOfA = eeaResult.bezoutA;
             if (inverseOfA < 0)
             {
                 inverseOfA += n;

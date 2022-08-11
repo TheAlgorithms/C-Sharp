@@ -13,18 +13,16 @@ namespace Algorithms.ModularArithmetic
         /// </summary>
         /// <param name="a">Input number.</param>
         /// <param name="b">Second input number.</param>
-        /// <param name="bezoutOfA">The Bézout coefficient of a.</param>
-        /// <param name="bezoutOfB">The Bézout coefficient of b.</param>
-        /// <returns>The greatest common divisor of a and b.</returns>
-        public static long Compute(long a, long b, out long bezoutOfA, out long bezoutOfB)
+        /// <returns>A record of ExtendedEuclideanAlgorithmResult containing the bezout coefficients of a and b as well as the gcd(a,b).</returns>
+        public static ExtendedEuclideanAlgorithmResult<long> Compute(long a, long b)
         {
             long quotient;
             long tmp;
             var s = 0L;
-            bezoutOfA = 1L;
+            var bezoutOfA = 1L;
             var r = b;
             var gcd = a;
-            bezoutOfB = 0L;
+            var bezoutOfB = 0L;
 
             while (r != 0)
             {
@@ -44,7 +42,7 @@ namespace Algorithms.ModularArithmetic
                 bezoutOfB = (gcd - bezoutOfA * a) / b; // integer division
             }
 
-            return gcd;
+            return new ExtendedEuclideanAlgorithmResult<long>(bezoutOfA, bezoutOfB, gcd);
         }
 
         /// <summary>
@@ -53,18 +51,16 @@ namespace Algorithms.ModularArithmetic
         /// </summary>
         /// <param name="a">Input number.</param>
         /// <param name="b">Second input number.</param>
-        /// <param name="bezoutOfA">The Bézout coefficient of a.</param>
-        /// <param name="bezoutOfB">The Bézout coefficient of b.</param>
-        /// <returns>The greatest common divisor of a and b.</returns>
-        public static BigInteger Compute(BigInteger a, BigInteger b, out BigInteger bezoutOfA, out BigInteger bezoutOfB)
+        /// <returns>A record of ExtendedEuclideanAlgorithmResult containing the bezout coefficients of a and b as well as the gcd(a,b).</returns>
+        public static ExtendedEuclideanAlgorithmResult<BigInteger> Compute(BigInteger a, BigInteger b)
         {
             BigInteger quotient;
             BigInteger tmp;
             var s = BigInteger.Zero;
-            bezoutOfA = BigInteger.One;
+            var bezoutOfA = BigInteger.One;
             var r = b;
             var gcd = a;
-            bezoutOfB = BigInteger.Zero;
+            var bezoutOfB = BigInteger.Zero;
 
             while (r != 0)
             {
@@ -84,7 +80,16 @@ namespace Algorithms.ModularArithmetic
                 bezoutOfB = (gcd - bezoutOfA * a) / b; // integer division
             }
 
-            return gcd;
+            return new ExtendedEuclideanAlgorithmResult<BigInteger>(bezoutOfA, bezoutOfB, gcd);
         }
+
+        /// <summary>
+        /// The result type for the computation of the Extended Euclidean Algorithm.
+        /// </summary>
+        /// <typeparam name="T">The data type of the computation (i.e. long or BigInteger).</typeparam>
+        /// <param name="bezoutA">The bezout coefficient of the parameter a to the computation.</param>
+        /// <param name="bezoutB">The bezout coefficient of the parameter b to the computation.</param>
+        /// <param name="gcd">The greatest common divisor of the parameters a and b to the computation.</param>
+        public record ExtendedEuclideanAlgorithmResult<T>(T bezoutA, T bezoutB, T gcd);
     }
 }
