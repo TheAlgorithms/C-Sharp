@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace DataStructures.LinkedList.SkipList
 {
     [DebuggerDisplay("Key = {Key}, Height = {Height}, Value = {Value}")]
-    internal struct SkipListNode<TValue>
+    internal class SkipListNode<TValue>
     {
         public SkipListNode(int key, TValue? value, int height)
         {
