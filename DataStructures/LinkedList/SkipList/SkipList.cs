@@ -93,9 +93,9 @@ namespace DataStructures.LinkedList.SkipList
         /// </remarks>
         public void AddOrUpdate(int key, TValue value)
         {
-            var skipPath = GetSkipNodes(key);
+            var skipNodes = GetSkipNodes(key);
 
-            var previousNode = skipPath.First();
+            var previousNode = skipNodes.First();
             if (previousNode.Next[0].Key == key)
             {
                 // Node with the given key already exists.
@@ -105,12 +105,12 @@ namespace DataStructures.LinkedList.SkipList
             }
 
             // Node with the given key does not exist.
-            // Insert the new one and update the skip path.
+            // Insert the new one and update the skip nodes.
             var newNode = new SkipListNode<TValue>(key, value, GetRandomHeight());
             for (var level = 0; level < newNode.Height; level++)
             {
-                newNode.Next[level] = skipPath[level].Next[level];
-                skipPath[level].Next[level] = newNode;
+                newNode.Next[level] = skipNodes[level].Next[level];
+                skipNodes[level].Next[level] = newNode;
             }
 
             Count++;
