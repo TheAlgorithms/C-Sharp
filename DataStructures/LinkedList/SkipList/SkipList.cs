@@ -17,7 +17,7 @@ namespace DataStructures.LinkedList.SkipList
     /// unluckily to happen on any decent list size).
     /// These two properties make the skip list an excellent data structure for
     /// implementing additional operations like finding min/max value in the list,
-    /// getting values with the key in a given range, etc.
+    /// finding values with the key in a given range, etc.
     ///
     /// Sourses:
     /// - "Skip Lists: A Probabilistic Alternative to Balanced Trees" by William Pugh.
@@ -82,6 +82,15 @@ namespace DataStructures.LinkedList.SkipList
             set => AddOrUpdate(key, value);
         }
 
+        /// <summary>
+        /// Adds an element with the specified key and value to the list.
+        /// If an element with the same key already exists, updates its value.
+        /// </summary>
+        /// <param name="key">The key of the element to add.</param>
+        /// <param name="value">The value of the element to add.</param>
+        /// <remarks>
+        /// Time complexity: O(log n) where n is the number of elements in the list.
+        /// </remarks>
         public void AddOrUpdate(int key, TValue value)
         {
             var skipPath = GetSkipNodes(key);
@@ -111,7 +120,7 @@ namespace DataStructures.LinkedList.SkipList
         /// Returns whether a value with the given key exists in the list.
         /// </summary>
         /// <remarks>
-        /// This method is O(log n) where n is the number of elements in the list.
+        /// Time complexity: O(log n) where n is the number of elements in the list.
         /// </remarks>
         public bool Contains(int key)
         {
@@ -126,7 +135,7 @@ namespace DataStructures.LinkedList.SkipList
         /// <c>true</c> if the value was removed; otherwise, <c>false</c>.
         /// </returns>
         /// <remarks>
-        /// This method is O(log n) where n is the number of elements in the list.
+        /// Time complexity: O(log n) where n is the number of elements in the list.
         /// </remarks>
         public bool Remove(int key)
         {
@@ -154,7 +163,7 @@ namespace DataStructures.LinkedList.SkipList
         /// </summary>
         /// <remarks>
         /// Order of values is the ascending order of their keys.
-        /// This method is O(n) where n is the number of elements in the list.
+        /// Time complexity: O(n) where n is the number of elements in the list.
         /// </remarks>
         public IEnumerable<TValue> GetValues()
         {
@@ -172,7 +181,7 @@ namespace DataStructures.LinkedList.SkipList
         /// </summary>
         /// <remarks>
         /// The node on level 0 will point to the node with the given key, if it exists.
-        /// This method is O(log n) where n is the number of elements in the list.
+        /// Time complexity: O(log n) where n is the number of elements in the list.
         /// </remarks>
         private SkipListNode<TValue>[] GetSkipNodes(int key)
         {
