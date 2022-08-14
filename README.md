@@ -188,6 +188,7 @@ This repository contains algorithms and data structures implemented in C# for ed
   * [Linked List](./DataStructures/LinkedList)
     * [Singly Linked List](./DataStructures/LinkedList/SinglyLinkedList/SinglyLinkedList.cs)
     * [Doubly Linked List](./DataStructures/LinkedList/DoublyLinkedList/DoublyLinkedList.cs)
+    * [Skip List](./DataStructures/LinkedList/SkipList/SkipList.cs)
   * [Graph](./DataStructures/Graph)
     * [Directed Weighted Graph Via Adjacency Matrix](./DataStructures/Graph/DirectedWeightedGraph.cs)
   * [Disjoint Set](./DataStructures/DisjointSet)
