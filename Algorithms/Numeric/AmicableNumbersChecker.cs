@@ -9,6 +9,7 @@ namespace Algorithms.Numeric
     /// <summary>
     /// Amicable numbers are two different natural numbers related in such a way that the sum of the proper divisors of
     /// each is equal to the other number. That is, σ(a)=b+a and σ(b)=a+b, where σ(n) is equal to the sum of positive divisors of n (see also divisor function).
+    /// See <a href="https://en.wikipedia.org/wiki/Amicable_numbers">here</a> for more info.
     /// </summary>
     public static class AmicableNumbersChecker
     {
