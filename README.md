@@ -44,6 +44,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Modular Multiplicative Inverse](./Algorithms/ModularArithmetic/ModularMultiplicativeInverse.cs)
   * [Numeric](./Algorithms/Numeric)
     * [Aliquot Sum Calculator](./Algorithms/Numeric/AliquotSumCalculator.cs)
+    * [Amicable Numbers Checker](./Algorithms/Numeric/AmicableNumbersChecker.cs)
     * [Decomposition](./Algorithms/Numeric/Decomposition)
       * [LU Decomposition](./Algorithms/Numeric/Decomposition/LU.cs)
       * [Thin Singular Vector Decomposition](./Algorithms/Numeric/Decomposition/ThinSVD.cs)
