@@ -32,7 +32,7 @@ namespace Algorithms.Cache
 
         // Note that <c>Dictionary</c> stores <c>LinkedListNode</c> as it allows
         // removing the node from the <c>LinkedList</c> in O(1) time.
-        private readonly Dictionary<TKey, LinkedListNode<CachedItem>> map = new();
+        private readonly Dictionary<TKey, LinkedListNode<CachedItem>> cache = new();
         private readonly LinkedList<CachedItem> lruList = new();
 
         /// <summary>
@@ -52,12 +52,12 @@ namespace Algorithms.Cache
         /// <remarks> Time complexity: O(1). </remarks>
         public TValue? Get(TKey key)
         {
-            if (!map.ContainsKey(key))
+            if (!cache.ContainsKey(key))
             {
                 return default;
             }
 
-            var node = map[key];
+            var node = cache[key];
             lruList.Remove(node);
             lruList.AddLast(node);
 
@@ -73,7 +73,7 @@ namespace Algorithms.Cache
         /// <remarks> Time complexity: O(1). </remarks>
         public bool TryGet(TKey key, out TValue? value)
         {
-            if (!map.ContainsKey(key))
+            if (!cache.ContainsKey(key))
             {
                 value = default;
                 return false;
@@ -93,12 +93,15 @@ namespace Algorithms.Cache
         /// If the value is already cached, it is updated and the item is moved
         /// to the end of the LRU list.
         /// If the cache is full, the least recently used item is removed.
+        ///
+        /// https://en.wikipedia.org/wiki/Cache_replacement_policies
+        /// https://www.educative.io/m/implement-least-recently-used-cache .
         /// </remarks>
         public void Put(TKey key, TValue value)
         {
-            if (map.ContainsKey(key))
+            if (cache.ContainsKey(key))
             {
-                var node = map[key];
+                var node = cache[key];
                 node.Value.Value = value;
                 lruList.Remove(node);
                 lruList.AddLast(node);
@@ -107,13 +110,13 @@ namespace Algorithms.Cache
             {
                 var item = new CachedItem { Key = key, Value = value };
                 var node = lruList.AddLast(item);
-                map.Add(key, node);
+                cache.Add(key, node);
 
-                if (map.Count > capacity)
+                if (cache.Count > capacity)
                 {
                     var first = lruList.First!;
                     lruList.RemoveFirst();
-                    map.Remove(first.Value.Key);
+                    cache.Remove(first.Value.Key);
                 }
             }
         }
