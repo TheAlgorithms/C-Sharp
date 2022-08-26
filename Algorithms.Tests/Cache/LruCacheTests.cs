@@ -13,10 +13,7 @@ namespace Algorithms.Tests.Cache
             var cache = new LruCache<int, string>();
             cache.Put(1, "one");
 
-            string? value;
-            cache.TryGet(1, out value).Should().BeTrue();
-            value.Should().Be("one");
-
+            cache.Contains(1).Should().BeTrue();
             cache.Get(1).Should().Be("one");
         }
 
@@ -26,10 +23,7 @@ namespace Algorithms.Tests.Cache
             var cache = new LruCache<int, string>();
             cache.Put(1, "one");
 
-            string? value;
-            cache.TryGet(5, out value).Should().BeFalse();
-            value.Should().BeNull();
-
+            cache.Contains(5).Should().BeFalse();
             cache.Get(5).Should().BeNull();
         }
 
