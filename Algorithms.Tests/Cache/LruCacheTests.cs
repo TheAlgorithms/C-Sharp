@@ -28,6 +28,16 @@ namespace Algorithms.Tests.Cache
         }
 
         [Test]
+        public static void TestCacheUpdate()
+        {
+            var cache = new LruCache<int, string>();
+            cache.Put(1, "one");
+            cache.Put(1, "ONE");
+
+            cache.Get(1).Should().Be("ONE");
+        }
+
+        [Test]
         public static void RemoveOldestItem_ItemWasNotUsed()
         {
             var cache = new LruCache<int, string>(capacity: 2);
