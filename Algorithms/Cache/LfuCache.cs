@@ -45,7 +45,7 @@ namespace Algorithms.Cache
         // removing the node from the <c>LinkedList</c> in O(1) time.
         private readonly Dictionary<TKey, LinkedListNode<CachedItem>> cache = new();
 
-        // map frequency (number of times the item was requested or updated)
+        // Map frequency (number of times the item was requested or updated)
         // to the LRU linked list.
         private readonly Dictionary<int, LinkedList<CachedItem>> frequencies = new();
 

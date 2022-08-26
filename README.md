@@ -9,6 +9,9 @@ This repository contains algorithms and data structures implemented in C# for ed
 ## Overview
 
 * [Algorithms](./Algorithms)
+  * [Cache](./Algorithms/Cache)
+    * [Least Frequently Used (LFU) Cache](./Algorithms/Cache/LfuCache.cs)
+    * [Least Recently Used (LRU) Cache](./Algorithms/Cache/LruCache.cs)
   * [Data Compression](./Algorithms/DataCompression)
     * [Burrows-Wheeler transform](./Algorithms/DataCompression/BurrowsWheelerTransform.cs)
     * [Huffman Compressor](./Algorithms/DataCompression/HuffmanCompressor.cs)
