@@ -1,9 +1,9 @@
 using System;
-using Algorithms.Cache;
+using DataStructures.Cache;
 using NUnit.Framework;
 using FluentAssertions;
 
-namespace Algorithms.Tests.Cache
+namespace DataStructures.Tests.Cache
 {
     public static class LruCacheTests
     {

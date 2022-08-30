@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Algorithms.Cache
+namespace DataStructures.Cache
 {
     /// <summary>
     /// Least Frequently Used (LFU) cache implementation.
