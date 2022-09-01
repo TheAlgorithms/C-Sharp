@@ -197,6 +197,9 @@ This repository contains algorithms and data structures implemented in C# for ed
   * [Inverted index](./DataStructures/InvertedIndex.cs)
   * [Unrolled linked list](./DataStructures/UnrolledList/UnrolledLinkedList.cs)
   * [Tries](./DataStructures/Tries/Trie.cs)
+  * [Cache](./DataStructures/Cache)
+    * [Least Frequently Used (LFU) Cache](./DataStructures/Cache/LfuCache.cs)
+    * [Least Recently Used (LRU) Cache](./DataStructures/Cache/LruCache.cs)
 
 ## Contributing
 
