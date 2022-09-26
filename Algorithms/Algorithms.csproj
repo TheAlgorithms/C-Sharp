@@ -28,7 +28,4 @@
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="BreadthFirstTreeTraversal.cs" />
-  </ItemGroup>
 </Project>
