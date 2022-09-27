@@ -7,7 +7,7 @@ namespace Algorithms.Search
     ///     if element is greater or less than the half being checked.
     ///     time complexity: O(log(n)),
     ///     space complexity: O(1).
-    ///     Note: Array is sorted before hand.
+    ///     Note: Array must be sorted beforehand.
     /// </summary>
     /// <typeparam name="T">Type of element stored inside array. 2.</typeparam>
     public class BinarySearcher<T> where T : IComparable<T>

@@ -12,8 +12,7 @@ namespace Algorithms.Strings
         /// <summary>
         ///     Function to check if a string is a palindrome.
         /// </summary>
-        /// <param name="word">String being checked. 2.</param>
-        /// <returns>Return a boolean if string was a palindrome. 3.</returns>
+        /// <param name="word">String being checked.</param>
         public static bool IsStringPalindrome(string word) =>
             TypifyString(word).Equals(TypifyString(ReverseString(word)));
 
