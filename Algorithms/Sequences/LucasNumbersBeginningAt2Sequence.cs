@@ -14,7 +14,7 @@ namespace Algorithms.Sequences
     ///         OEIS: http://oeis.org/A000032.
     ///     </para>
     /// </summary>
-    public class LucasSequenceBeginningAt2 : ISequence
+    public class LucasNumbersBeginningAt2Sequence : ISequence
     {
         /// <summary>
         ///     <para>

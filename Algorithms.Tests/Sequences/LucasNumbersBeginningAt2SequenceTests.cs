@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Sequences;
 
-public class LucasSequenceBeginningAt2Tests
+public class LucasNumbersBeginningAt2SequenceTests
 {
     [Test]
     public void FirstElementsCorrect()
@@ -103,7 +103,7 @@ public class LucasSequenceBeginningAt2Tests
                                       };
 
         var check    = bigNumbers.Select(BigInteger.Parse).ToArray();
-        var sequence = new LucasSequenceBeginningAt2().Sequence.Take(check.Length);
+        var sequence = new LucasNumbersBeginningAt2Sequence().Sequence.Take(check.Length);
         sequence.SequenceEqual(check).Should().BeTrue();
     }
 }
