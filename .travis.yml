@@ -1,7 +1,7 @@
 language: csharp
 solution: C-Sharp.sln
 mono: none
-dist: xenial
+dist: focal
 dotnet: 6.0
 script:
  - sudo apt update
