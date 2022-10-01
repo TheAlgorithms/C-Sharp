@@ -55,7 +55,7 @@ namespace Algorithms.DataCompression
         /// <returns>Symbol-frequency array.</returns>
         private static ListNode[] GetListNodesFromText(string text)
         {
-            var occurenceCounts = new Dictionary<char, double>();
+            var occurenceCounts = new Dictionary<char, int>();
 
             foreach (var ch in text)
             {

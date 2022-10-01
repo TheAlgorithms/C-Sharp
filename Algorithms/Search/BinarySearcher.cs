@@ -3,16 +3,17 @@
 namespace Algorithms.Search
 {
     /// <summary>
-    ///     TODO.
+    ///     Binary Searcher checks an array for element specified by checking
+    ///     if element is greater or less than the half being checked.
+    ///     time complexity: O(log(n)),
+    ///     space complexity: O(1).
+    ///     Note: Array must be sorted beforehand.
     /// </summary>
-    /// <typeparam name="T">TODO. 2.</typeparam>
+    /// <typeparam name="T">Type of element stored inside array. 2.</typeparam>
     public class BinarySearcher<T> where T : IComparable<T>
     {
         /// <summary>
-        ///     Finds index of item in array that equals to item searched for,
-        ///     time complexity: O(log(n)),
-        ///     space complexity: O(1),
-        ///     where n - array size.
+        ///     Finds index of an array by using binary search.
         /// </summary>
         /// <param name="sortedData">Sorted array to search in.</param>
         /// <param name="item">Item to search for.</param>

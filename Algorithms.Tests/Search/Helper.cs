@@ -7,7 +7,7 @@ namespace Algorithms.Tests.Search
     {
         public static int[] GetSortedArray(int length) =>
             Enumerable.Range(0, length)
-                .Select(x => TestContext.CurrentContext.Random.Next(1_000_000))
+                .Select(_ => TestContext.CurrentContext.Random.Next(1_000_000))
                 .OrderBy(x => x)
                 .ToArray();
 

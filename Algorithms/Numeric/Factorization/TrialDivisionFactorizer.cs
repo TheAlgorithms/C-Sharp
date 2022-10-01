@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 
 namespace Algorithms.Numeric.Factorization
@@ -9,7 +9,7 @@ namespace Algorithms.Numeric.Factorization
     public class TrialDivisionFactorizer : IFactorizer
     {
         /// <summary>
-        ///     Finds a factor of a given number or returns false if it's prime.
+        ///     Finds the smallest non trivial factor (i.e.: 1 &lt; factor &lt;= sqrt(<paramref name="n" />)) of a given number or returns false if it's prime.
         /// </summary>
         /// <param name="n">Integer to factor.</param>
         /// <param name="factor">Found factor.</param>
