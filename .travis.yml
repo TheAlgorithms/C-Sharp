@@ -2,7 +2,7 @@ language: csharp
 solution: C-Sharp.sln
 mono: none
 dist: xenial
-dotnet: 5.0
+dotnet: 6.0
 script:
  - sudo apt update
  - sudo apt install -y libgdiplus
