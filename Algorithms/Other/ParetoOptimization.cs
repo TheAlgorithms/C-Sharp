@@ -28,6 +28,10 @@ namespace Algorithms.Other
                 {
                     decimal directParwiseDifference = GetMinimalPairwiseDifference(matrix[i], matrix[j]);
                     decimal indirectParwiseDifference = GetMinimalPairwiseDifference(matrix[j], matrix[i]);
+                    /*
+                     * in case all criteria of one set are larger that the criteria of another, this
+                     * decision is not optimal and it has to be removed
+                    */
                     if (directParwiseDifference >= 0)
                     {
                         matrix.RemoveAt(j);
