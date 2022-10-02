@@ -113,6 +113,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [A000008 Make Change](./Algorithms/Sequences/MakeChangeSequence.cs)
     * [A000010 Euler's Totient](./Algorithms/Sequences/EulerTotientSequence.cs)
     * [A000027 Natural](./Algorithms/Sequences/NaturalSequence.cs)
+    * [A000032 Lucas Numbers](./Algorithms/Sequences/LucasNumbersBeginningAt2Sequence.cs)
     * [A000040 Primes](./Algorithms/Sequences/PrimesSequence.cs)
     * [A000045 Fibonacci](./Algorithms/Sequences/FibonacciSequence.cs)
     * [A000079 Powers of 2](./Algorithms/Sequences/PowersOf2Sequence.cs)
