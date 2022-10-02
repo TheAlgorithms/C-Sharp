@@ -8,7 +8,7 @@ namespace Algorithms.Numeric
     ///
     /// For example, 145 is a Krishnamurthy number since: 1! + 4! + 5! = 1 + 24 + 120 = 145.
     /// </summary>
-    public class KrishnamurthyNumberChecker
+    public static class KrishnamurthyNumberChecker
     {
         /// <summary>
         /// Check if a number is Krishnamurthy number or not.
