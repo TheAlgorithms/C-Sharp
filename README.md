@@ -67,6 +67,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Perfect Square Checker](./Algorithms/Numeric/PerfectSquareChecker.cs)
     * [Euler Method](./Algorithms/Numeric/EulerMethod.cs)
     * [Miller-Rabin primality check](./Algorithms/Numeric/MillerRabinPrimalityChecker.cs)
+    * [KrishnamurthyNumberChecker](./Algorithms/Numeric/KrishnamurthyNumberChecker.cs)
   * [Searches](./Algorithms/Search)
     * [A-Star](./Algorithms/Search/AStar/)
     * [Binary Search](./Algorithms/Search/BinarySearcher.cs)
