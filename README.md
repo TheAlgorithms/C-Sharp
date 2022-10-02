@@ -1,7 +1,7 @@
 # The Algorithms - C#
 
 [![Discord chat](https://img.shields.io/discord/808045925556682782.svg?logo=discord&colorB=7289DA)](https://discord.gg/c7MnfGFGa6)
-[![Build Status](https://travis-ci.com/TheAlgorithms/C-Sharp.svg?branch=master)](https://travis-ci.com/TheAlgorithms/C-Sharp)
+[![Build Status](https://app.travis-ci.com/TheAlgorithms/C-Sharp.svg?branch=master)](https://app.travis-ci.com/TheAlgorithms/C-Sharp)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/58895a2795bd48a8b3b7eb6ebe22d576)](https://www.codacy.com/gh/TheAlgorithms/C-Sharp/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TheAlgorithms/C-Sharp&amp;utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/TheAlgorithms/C-Sharp/branch/master/graph/badge.svg)](https://codecov.io/gh/TheAlgorithms/C-Sharp)
 [![GuardRails badge](https://badges.guardrails.io/TheAlgorithms/C-Sharp.svg?token=84805208ba243f0931a74c5148883f894cbe9fd97fe54d64d6d0a89852067548)](https://dashboard.guardrails.io/default/gh/TheAlgorithms/C-Sharp)
@@ -114,6 +114,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [A000008 Make Change](./Algorithms/Sequences/MakeChangeSequence.cs)
     * [A000010 Euler's Totient](./Algorithms/Sequences/EulerTotientSequence.cs)
     * [A000027 Natural](./Algorithms/Sequences/NaturalSequence.cs)
+    * [A000032 Lucas Numbers](./Algorithms/Sequences/LucasNumbersBeginningAt2Sequence.cs)
     * [A000040 Primes](./Algorithms/Sequences/PrimesSequence.cs)
     * [A000045 Fibonacci](./Algorithms/Sequences/FibonacciSequence.cs)
     * [A000079 Powers of 2](./Algorithms/Sequences/PowersOf2Sequence.cs)
