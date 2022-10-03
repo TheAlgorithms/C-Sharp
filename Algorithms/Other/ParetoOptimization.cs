@@ -19,28 +19,31 @@ namespace Algorithms.Other
         /// Performs decision optimizations by using Paretor's optimization algorithm.
         /// </summary>
         /// <param name="matrix">Contains a collection of the criterias sets.</param>
-        public void Optimize(List<List<decimal>> matrix)
+        /// <returns>An optimized collection of the criterias sets.</returns>
+        public List<List<decimal>> Optimize(List<List<decimal>> matrix)
         {
+            var optimizedMatrix = new List<List<decimal>>(matrix.Select(i => i));
             int i = 0;
-            while (i < matrix.Count)
+            while (i < optimizedMatrix.Count)
             {
-                for (int j = i + 1; j < matrix.Count; j++)
+                for (int j = i + 1; j < optimizedMatrix.Count; j++)
                 {
-                    decimal directParwiseDifference = GetMinimalPairwiseDifference(matrix[i], matrix[j]);
-                    decimal indirectParwiseDifference = GetMinimalPairwiseDifference(matrix[j], matrix[i]);
+                    decimal directParwiseDifference = GetMinimalPairwiseDifference(optimizedMatrix[i], optimizedMatrix[j]);
+                    decimal indirectParwiseDifference = GetMinimalPairwiseDifference(optimizedMatrix[j], optimizedMatrix[i]);
                     /*
                      * in case all criteria of one set are larger that the criteria of another, this
                      * decision is not optimal and it has to be removed
                     */
                     if (directParwiseDifference >= 0)
                     {
-                        matrix.RemoveAt(j);
+                        optimizedMatrix.RemoveAt(j);
                         i--;
                         break;
                     }
-                    else if (indirectParwiseDifference >= 0)
+
+                    if (indirectParwiseDifference >= 0)
                     {
-                        matrix.RemoveAt(i);
+                        optimizedMatrix.RemoveAt(i);
                         i--;
                         break;
                     }
@@ -48,6 +51,8 @@ namespace Algorithms.Other
 
                 i++;
             }
+
+            return optimizedMatrix;
         }
 
         /// <summary>
