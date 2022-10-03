@@ -69,7 +69,7 @@ namespace DataStructures.Tests.LinkedList
             var list = new SkipList<string>();
             list[1] = "value1";
 
-            String value;
+            string value;
             Action act = () => value = list[2];
             act.Should().Throw<KeyNotFoundException>();
         }

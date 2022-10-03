@@ -19,8 +19,8 @@ namespace Algorithms.Numeric
         /// <param name="n">Number to check.</param>
         /// <param name="rounds">Number of rounds, the parameter determines the accuracy of the test, recommended value is Log2(n).</param>
         /// <returns>True if is a highly likely prime number; False otherwise.</returns>
-        /// <exception cref="ArgumentException">Error: number should be morhe than 3.</exception>
-        public static bool IsProbablyPrimeNumber(BigInteger n, BigInteger rounds)
+        /// <exception cref="ArgumentException">Error: number should be more than 3.</exception>
+        public static bool IsProbablyPrimeNumber(BigInteger n, BigInteger rounds, int? seed = null)
         {
             if (n <= 3)
             {
@@ -41,8 +41,9 @@ namespace Algorithms.Numeric
                 d /= 2;
             }
 
-            BigInteger x;
-            Random rand = new();
+            Random rand = seed is null
+                ? new()
+                : new(seed.Value);
 
             // as there is no native random function for BigInteger we suppose a random int number is sufficient
             int nMaxValue = (n > int.MaxValue) ? int.MaxValue : (int)n;
@@ -51,7 +52,7 @@ namespace Algorithms.Numeric
             while (rounds > 0)
             {
                 rounds--;
-                x = BigInteger.ModPow(a, d, n);
+                var x = BigInteger.ModPow(a, d, n);
                 if (x == 1 || x == (n - 1))
                 {
                     continue;
