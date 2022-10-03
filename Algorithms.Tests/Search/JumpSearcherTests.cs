@@ -56,10 +56,10 @@ namespace Algorithms.Tests.Search
         [TestCase(null, "abc")]
         [TestCase(new[] { "abc", "def", "ghi" }, null)]
         [TestCase(null, null)]
-        public void FindIndex_ArrayNull_ItemNull_ArgumentNullExceptionThrown(String[] sortedArray, String searchItem)
+        public void FindIndex_ArrayNull_ItemNull_ArgumentNullExceptionThrown(string[] sortedArray, string searchItem)
         {
             // Arrange
-            var searcher = new JumpSearcher<String>();
+            var searcher = new JumpSearcher<string>();
 
             // Act, Assert
             _ = Assert.Throws<ArgumentNullException>(() => searcher.FindIndex(sortedArray, searchItem));
