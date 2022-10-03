@@ -34,16 +34,9 @@ namespace Algorithms.Other
                      * in case all criteria of one set are larger that the criteria of another, this
                      * decision is not optimal and it has to be removed
                     */
-                    if (directParwiseDifference >= 0)
+                    if (directParwiseDifference >= 0 || indirectParwiseDifference >= 0)
                     {
-                        optimizedMatrix.RemoveAt(j);
-                        i--;
-                        break;
-                    }
-
-                    if (indirectParwiseDifference >= 0)
-                    {
-                        optimizedMatrix.RemoveAt(i);
+                        optimizedMatrix.RemoveAt(directParwiseDifference >= 0 ? j : i);
                         i--;
                         break;
                     }
@@ -64,17 +57,15 @@ namespace Algorithms.Other
         private decimal GetMinimalPairwiseDifference(List<decimal> arr1, List<decimal> arr2)
         {
             decimal min = decimal.MaxValue;
-            if (arr1.Count != arr2.Count)
+            if (arr1.Count == arr2.Count)
             {
-                return min;
-            }
-
-            for (int i = 0; i < arr1.Count; i++)
-            {
-                decimal difference = arr1[i] - arr2[i];
-                if (min > difference)
+                for (int i = 0; i < arr1.Count; i++)
                 {
-                    min = difference;
+                    decimal difference = arr1[i] - arr2[i];
+                    if (min > difference)
+                    {
+                        min = difference;
+                    }
                 }
             }
 
