@@ -3,7 +3,6 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Numeric
 {
-    [TestFixture]
     public class KrishnamurthyNumberCheckerTests
     {
         [Test]
