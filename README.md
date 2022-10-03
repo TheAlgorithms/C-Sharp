@@ -72,6 +72,7 @@ find more than one implementation for the same objective but using different alg
       * [Maclaurin Series](./Algorithms/Numeric/Series/Maclaurin.cs)
     * [Gauss-Jordan Elimination](./Algorithms/Numeric/GaussJordanElimination.cs)
     * [BinomialCoefficient](./Algorithms/Numeric/BinomialCoefficient.cs)
+    * [Combinations Calculation](./Algorithms/Numeric/CombinationsCalculation.cs)
     * [Factorial](./Algorithms/Numeric/Factorial.cs)
     * [Keith Number Checker](./Algorithms/Numeric/KeithNumberChecker.cs)
     * [Pseudo-Inverse](./Algorithms/Numeric/Pseudoinverse/PseudoInverse.cs)
