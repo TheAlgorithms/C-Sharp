@@ -1,3 +1,5 @@
+<div align = "center">
+
 # The Algorithms - C#
 
 [![Discord chat](https://img.shields.io/discord/808045925556682782.svg?logo=discord&colorB=7289DA)](https://discord.gg/c7MnfGFGa6)
@@ -7,9 +9,16 @@
 [![GuardRails badge](https://badges.guardrails.io/TheAlgorithms/C-Sharp.svg?token=84805208ba243f0931a74c5148883f894cbe9fd97fe54d64d6d0a89852067548)](https://dashboard.guardrails.io/default/gh/TheAlgorithms/C-Sharp)
 [![Donate](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/TheAlgorithms/donate)
 
-This repository contains algorithms and data structures implemented in C# for educational purposes.
+## All Algorithms implemented in C# - for education purposes
 
-## Overview
+The repository is a collection of a variety of algorithms implemented in C#. The algorithms span over a variety of topics
+from computer science, mathematics and statistics, data science, machine learning, engineering, etc. The implementations
+and their associated documentations are meant to provide a learning resource for educators and students. Hence, one may
+find more than one implementation for the same objective but using different algorithm strategies and optimizations.
+
+</div>
+
+## List of Algorithms
 
 * [Algorithms](./Algorithms)
   * [Data Compression](./Algorithms/DataCompression)
@@ -30,11 +39,13 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [BreadthFirstSearch](./Algorithms/Graph/BreadthFirstSearch.cs)
     * [DepthFirstSearch](./Algorithms/Graph/DepthFirstSearch.cs)
     * [Dijkstra Shortest Path](./Algorithms/Graph/Dijkstra/DijkstraAlgorithm.cs)
+    * [FloydWarshall](./Algorithms/Graph/FloydWarshall.cs)
     * [Kosaraju](./Algorithms/Graph/Kosaraju.cs)
   * [Knapsack problem](./Algorithms/Knapsack)
     * [Naive solver](./Algorithms/Knapsack/NaiveKnapsackSolver.cs)
     * [Dynamic Programming solver](./Algorithms/Knapsack/DynamicProgrammingKnapsackSolver.cs)
     * [Branch and bound solver](./Algorithms/Knapsack/BranchAndBoundKnapsackSolver.cs)
+    * [IHeuristicSolver](./Algorithms/Knapsack/IHeuristicSolver.cs)
   * [Linear Algebra](./Algorithms/LinearAlgebra)
     * [Distances](./Algorithms/LinearAlgebra/Distances)
       * [Euclidean](./Algorithms/LinearAlgebra/Distances/Euclidean.cs)
@@ -60,6 +71,8 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Series](./Algorithms/Numeric/Series)
       * [Maclaurin Series](./Algorithms/Numeric/Series/Maclaurin.cs)
     * [Gauss-Jordan Elimination](./Algorithms/Numeric/GaussJordanElimination.cs)
+    * [BinomialCoefficient](./Algorithms/Numeric/BinomialCoefficient.cs)
+    * [Factorial](./Algorithms/Numeric/Factorial.cs)
     * [Keith Number Checker](./Algorithms/Numeric/KeithNumberChecker.cs)
     * [Pseudo-Inverse](./Algorithms/Numeric/Pseudoinverse/PseudoInverse.cs)
     * [Narcissistic Number Checker](./Algorithms/Numeric/NarcissisticNumberChecker.cs)
@@ -149,6 +162,8 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Fermat Prime Checker](./Algorithms/Other/FermatPrimeChecker.cs)
     * [Sieve of Eratosthenes](./Algorithms/Other/SieveOfEratosthenes.cs)
     * [Luhn](./Algorithms/Other/Luhn.cs)
+    * [Int2Binary](./Algorithms/Other/Int2Binary.cs)
+    * [GeoLocation](./Algorithms/Other/GeoLocation.cs)
     * [Mandelbrot](./Algorithms/Other/Mandelbrot.cs)
     * [Koch Snowflake](./Algorithms/Other/KochSnowflake.cs)
     * [RGB-HSV Conversion](./Algorithms/Other/RGBHSVConversion.cs)
@@ -156,6 +171,8 @@ This repository contains algorithms and data structures implemented in C# for ed
   * [Problems](./Algorithms/Problems)
     * [Stable Marriage](./Algorithms/Problems/StableMarriage)
       * [Gale-Shapley](./Algorithms/Problems/StableMarriage/GaleShapley.cs)
+      * [Accepter](./Algorithms/Problems/StableMarriage/Accepter.cs)
+      * [Proposer](./Algorithms/Problems/StableMarriage/Proposer.cs)
     * [N-Queens](./Algorithms/Problems/NQueens)
       * [Backtracking](./Algorithms/Problems/NQueens/BacktrackingNQueensSolver.cs)
     * [Dynamic Coin Change](./Algorithms/Problems/CoinChange)
@@ -205,9 +222,10 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Least Frequently Used (LFU) Cache](./DataStructures/Cache/LfuCache.cs)
     * [Least Recently Used (LRU) Cache](./DataStructures/Cache/LruCache.cs)
 
+
 ## Contributing
 
 You can contribute with pleasure to this repository.
 Please orient on the directory structure and overall code style of this repository
-and refer to [our contributing guidelines](./CONTRIBUTING.md) for more detail.
+and refer to [our contributing guidelines](./CONTRIBUTING.md) for more details.
 If you want to ask a question or suggest something, please open an issue.
