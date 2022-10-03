@@ -59,7 +59,7 @@ namespace Algorithms.Tests.Shufflers
 
         [Test]
         public static void ArrayShuffled_DifferentSeedDifferentShuffle(
-          [Random(0, 100, 2, Distinct = true)] int n,
+          [Random(10, 100, 2, Distinct = true)] int n,
           [Random(1000, 10000, 5, Distinct = true)] int seed)
         {
             // Arrange
