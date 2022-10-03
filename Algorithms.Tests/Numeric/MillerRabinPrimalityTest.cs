@@ -10,9 +10,9 @@ namespace Algorithms.Tests.Numeric
         [TestCase("7", ExpectedResult = true)]  // true
         [TestCase("47", ExpectedResult = true)] // true
         [TestCase("247894109041876714378152933343208766493", ExpectedResult = true)] // true
+        [TestCase("247894109041876714378152933343208766493", 1, ExpectedResult = true)] // true
         [TestCase("315757551269487563269454472438030700351", ExpectedResult = true)] // true
-
-        [TestCase("2476099", ExpectedResult = false)] // false 19^5
+        [TestCase("2476099", 12445, ExpectedResult = false)] // false 19^5
         // false 247894109041876714378152933343208766493*315757551269487563269454472438030700351
         [TestCase("78274436845194327170519855212507883195883737501141260366253362532531612139043", ExpectedResult = false)]
         [Retry(3)]
