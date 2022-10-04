@@ -11,7 +11,7 @@ namespace Algorithms.Other
     /// There are different methods to select the best decisions from the defined set of decisions.
     /// This class contains implementations of the popular convolution methods: linear and maxmin.
     /// </summary>
-    public static class Convolutions
+    public static class DecisionsConvolutions
     {
         /// <summary>
         /// This method implements the linear method of decision selection. It is based on

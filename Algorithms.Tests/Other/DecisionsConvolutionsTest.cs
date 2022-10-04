@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Algorithms.Tests.Other
 {
-    public class ConvolutionsTest
+    public class DecisionsConvolutionsTest
     {
         [Test]
         public static void Verify_Linear_Convolution()
@@ -30,7 +30,7 @@ namespace Algorithms.Tests.Other
             var priorities = new List<decimal> { 1, 1, 1, 1, 0.545m, 0.583m };
 
             // Act
-            var optimizedMatrix = Convolutions.Linear(matrix, priorities);
+            var optimizedMatrix = DecisionsConvolutions.Linear(matrix, priorities);
 
             // Assert
             Assert.AreEqual(optimizedMatrix, expectedMatrix);
@@ -56,7 +56,7 @@ namespace Algorithms.Tests.Other
             var priorities = new List<decimal> { 1, 1, 1, 1, 0.545m, 0.583m };
 
             // Act
-            var optimizedMatrix = Convolutions.MaxMin(matrix, priorities);
+            var optimizedMatrix = DecisionsConvolutions.MaxMin(matrix, priorities);
 
             // Assert
             Assert.AreEqual(optimizedMatrix, expectedMatrix);
