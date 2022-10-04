@@ -103,7 +103,6 @@ public class OnesCountingSequenceTest
             calculated.Add(CountOnes(new BigInteger(i)));
         }
 
-        var sequence = new OnesCountingSequence().Sequence.Take(oeisValues.Length);
         calculated.SequenceEqual(oeisValues).Should().BeTrue();
     }
 }
