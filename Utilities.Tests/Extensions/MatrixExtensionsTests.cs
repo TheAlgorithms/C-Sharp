@@ -179,5 +179,33 @@ namespace Utilities.Tests.Extensions
             double[,] operand,
             double[,] result) =>
             source.Subtract(operand).Should().BeEquivalentTo(result);
+
+        [Test]
+        public void RoundToNextInt_ShouldReturnRoundedMatrix()
+        {
+            var source = new[,]
+            {
+                { -1.9, 1.9 },
+                { -1.5, 1.5 },
+                { -1.1, 1.1 },
+                { -0.9, 0.9 },
+                { -0.5, 0.5 },
+                { -0.1, 0.1 },
+            };
+
+            var result = new double[,]
+            {
+                { -2, 2 },
+                { -2, 2 },
+                { -1, 1 },
+                { -1, 1 },
+                { 0, 0 },
+                { 0, 0 },
+            };
+
+            var actualResult = source.RoundToNextInt();
+
+            actualResult.Should().BeEquivalentTo(result);
+        }
     }
 }
