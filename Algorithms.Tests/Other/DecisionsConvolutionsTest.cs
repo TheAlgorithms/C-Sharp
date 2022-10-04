@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Algorithms.Tests.Other
 {
-    public class DecisionsConvolutionsTest
+    public static class DecisionsConvolutionsTest
     {
         [Test]
         public static void Verify_Linear_Convolution()
