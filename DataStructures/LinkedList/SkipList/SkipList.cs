@@ -209,7 +209,7 @@ namespace DataStructures.LinkedList.SkipList
         private int GetRandomHeight()
         {
             int height = 1;
-            while (random.NextDouble() < Probability && height <= maxLevels)
+            while (random.NextDouble() < Probability && height < maxLevels)
             {
                 height++;
             }
