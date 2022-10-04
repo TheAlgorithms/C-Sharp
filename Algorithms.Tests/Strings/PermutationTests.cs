@@ -15,7 +15,7 @@ namespace Algorithms.Tests.Strings
         [TestCase("abcd")]
         [TestCase("aabcd")]
         [TestCase("aabbbcd")]
-        [TestCase("aabbbccccd")]
+        [TestCase("aabbccccd")]
         public void Test_GetEveryUniquePermutation(string word)
         {
             var permutations = Permutation.GetEveryUniquePermutation(word);
