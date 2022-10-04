@@ -168,6 +168,7 @@ find more than one implementation for the same objective but using different alg
     * [Koch Snowflake](./Algorithms/Other/KochSnowflake.cs)
     * [RGB-HSV Conversion](./Algorithms/Other/RGBHSVConversion.cs)
     * [Flood Fill](./Algorithms/Other/FloodFill.cs)
+    * [Pareto Optimization](./Algorithms/Other/ParetoOptimization.cs)
   * [Problems](./Algorithms/Problems)
     * [Stable Marriage](./Algorithms/Problems/StableMarriage)
       * [Gale-Shapley](./Algorithms/Problems/StableMarriage/GaleShapley.cs)
