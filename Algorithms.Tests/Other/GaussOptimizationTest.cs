@@ -50,8 +50,8 @@ namespace Algorithms.Tests.Other
             (x1, x2) = gaussOptimization.Optimize(func, n, step, eps, x1, x2);
 
             // Assert
-            Assert.GreaterOrEqual(x1, 0.8);
-            Assert.GreaterOrEqual(x2, 0.8);
+            Assert.AreEqual(x1, 1, 0.3);
+            Assert.AreEqual(x2, 1, 0.3);
         }
 
         [Test]
@@ -94,8 +94,8 @@ namespace Algorithms.Tests.Other
             (x1, x2) = gaussOptimization.Optimize(func, n, step, eps, x1, x2);
 
             // Assert
-            Assert.LessOrEqual(x1, -0.7);
-            Assert.LessOrEqual(x2, -0.7);
+            Assert.AreEqual(x1, -1, 0.3);
+            Assert.AreEqual(x2, -1, 0.3);
         }
     }
 }
