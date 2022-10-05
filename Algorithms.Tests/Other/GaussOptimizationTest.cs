@@ -43,13 +43,13 @@ namespace Algorithms.Tests.Other
 
             // This value is used to control the accuracy of the optimization. In case if the error is less
             // than eps, optimization will be stopped
-            double eps = Math.Pow(0.1, 100);
+            double eps = Math.Pow(0.1, 10);
 
             // Act
             gaussOptimization.Optimize(func, n, step, eps, ref x1, ref x2);
 
             // Assert
-            Assert.AreEqual(0.85714285714285643, x1);
+            Assert.AreEqual(0.85714285709636828, x1);
             Assert.AreEqual(1, x2);
         }
     }
