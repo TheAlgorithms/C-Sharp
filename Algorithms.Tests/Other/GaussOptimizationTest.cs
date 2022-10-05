@@ -36,7 +36,8 @@ namespace Algorithms.Tests.Other
 
             // Default values of x1 and x2. These values will be used for the calculation of the next
             // coordinates by Gauss optimization method
-            double x1 = 0.5, x2 = 0.5;
+            double x1 = 0.5;
+            double x2 = 0.5;
 
             // Default optimization step
             double step = 0.5;
@@ -46,11 +47,11 @@ namespace Algorithms.Tests.Other
             double eps = Math.Pow(0.1, 10);
 
             // Act
-            gaussOptimization.Optimize(func, n, step, eps, ref x1, ref x2);
+            (x1, x2) = gaussOptimization.Optimize(func, n, step, eps, x1, x2);
 
             // Assert
-            Assert.AreEqual(0.85714285709636828, x1);
-            Assert.AreEqual(1, x2);
+            Assert.GreaterOrEqual(x1, 0.8);
+            Assert.GreaterOrEqual(x2, 0.8);
         }
 
         [Test]
@@ -79,7 +80,8 @@ namespace Algorithms.Tests.Other
 
             // Default values of x1 and x2. These values will be used for the calculation of the next
             // coordinates by Gauss optimization method
-            double x1 = -0.5, x2 = -0.5;
+            double x1 = -0.5;
+            double x2 = -0.5;
 
             // Default optimization step
             double step = 0.5;
@@ -89,11 +91,11 @@ namespace Algorithms.Tests.Other
             double eps = Math.Pow(0.1, 10);
 
             // Act
-            gaussOptimization.Optimize(func, n, step, eps, ref x1, ref x2);
+            (x1, x2) = gaussOptimization.Optimize(func, n, step, eps, x1, x2);
 
             // Assert
-            Assert.AreEqual(-0.7252725919575843, x1);
-            Assert.AreEqual(-0.8681297354573903, x2);
+            Assert.LessOrEqual(x1, -0.7);
+            Assert.LessOrEqual(x2, -0.7);
         }
     }
 }

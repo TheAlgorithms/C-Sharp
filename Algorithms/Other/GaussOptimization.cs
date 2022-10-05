@@ -25,13 +25,14 @@ namespace Algorithms.Other
         /// optimization will be stopped.</param>
         /// <param name="x1">The first function parameter.</param>
         /// <param name="x2">The second function parameter.</param>
-        public void Optimize(
+        /// <returns>A tuple of coordinates of function extremum.</returns>
+        public (double, double) Optimize(
             Func<double, double, double> func,
             double n,
             double step,
             double eps,
-            ref double x1,
-            ref double x2)
+            double x1,
+            double x2)
         {
             // The initial value of the error
             double error = 1;
@@ -72,6 +73,8 @@ namespace Algorithms.Other
                 // Step reduction
                 step /= n;
             }
+
+            return (x1, x2);
         }
     }
 }
