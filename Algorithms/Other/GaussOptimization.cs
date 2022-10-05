@@ -47,26 +47,26 @@ namespace Algorithms.Other
                 // Determination of the best option.
                 var possibleFunctionValues = new List<double> { bottom, top, left, right };
                 double maxValue = possibleFunctionValues.Max();
-                double maxValueIndex = possibleFunctionValues.IndexOf(maxValue);
 
                 // Error evaluation
                 error = maxValue - func(x1, x2);
 
                 // Coordinates update for the best option
-                switch (maxValueIndex)
+                if (maxValue == bottom)
                 {
-                    case 0:
-                        x2 -= step;
-                        break;
-                    case 1:
-                        x2 += step;
-                        break;
-                    case 2:
-                        x1 -= step;
-                        break;
-                    default:
-                        x1 += step;
-                        break;
+                    x2 -= step;
+                }
+                else if (maxValue == top)
+                {
+                    x2 += step;
+                }
+                else if (maxValue == left)
+                {
+                    x1 -= step;
+                }
+                else
+                {
+                    x1 += step;
                 }
 
                 // Step reduction
