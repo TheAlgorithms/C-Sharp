@@ -21,7 +21,6 @@ namespace Algorithms.Tests.Problems.NQueens
         [TestCase(9, 352)]
         [TestCase(10, 724)]
         [TestCase(11, 2680)]
-        [TestCase(12, 14200)]
         public static void SolvesCorrectly(int n, int expectedNumberOfSolutions)
         {
             // Arrange
