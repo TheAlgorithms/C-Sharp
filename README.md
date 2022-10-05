@@ -158,6 +158,7 @@ find more than one implementation for the same objective but using different alg
     * [Boyer Moore](./Algorithms/Strings/BoyerMoore.cs)
     * [Palindrome Checker](./Algorithms/Strings/Palindrome.cs)
     * [Get all permutations of a string](./Algorithms/Strings/Permutation.cs)
+    * [Levenshtein Distance](./Algorithms/Strings/LevenshteinDistance.cs)
   * [Other](./Algorithms/Other)
     * [Fermat Prime Checker](./Algorithms/Other/FermatPrimeChecker.cs)
     * [Sieve of Eratosthenes](./Algorithms/Other/SieveOfEratosthenes.cs)
