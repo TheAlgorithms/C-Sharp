@@ -131,6 +131,7 @@ find more than one implementation for the same objective but using different alg
     * [A000045 Fibonacci](./Algorithms/Sequences/FibonacciSequence.cs)
     * [A000079 Powers of 2](./Algorithms/Sequences/PowersOf2Sequence.cs)
     * [A000108 Catalan](./Algorithms/Sequences/CatalanSequence.cs)
+    * [A000120 1's Counting](./Algorithms/Sequences/OnesCountingSequence.cs)
     * [A000142 Factorial](./Algorithms/Sequences/FactorialSequence.cs)
     * [A000215 Fermat Numbers](./Algorithms/Sequences/FermatNumbersSequence.cs)
     * [A000290 Squares](./Algorithms/Sequences/SquaresSequence.cs)
