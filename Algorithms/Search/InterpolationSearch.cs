@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Lncodes.Algorithm.Search.Interpolation
+namespace InterpolationSearch
 {
     public sealed class InterpolationSearch
     {
