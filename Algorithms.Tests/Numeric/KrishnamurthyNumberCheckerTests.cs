@@ -5,7 +5,6 @@ namespace Algorithms.Tests.Numeric
 {
     public class KrishnamurthyNumberCheckerTests
     {
-        [Test]
         [TestCase(1)]
         [TestCase(2)]
         [TestCase(145)]
@@ -16,7 +15,6 @@ namespace Algorithms.Tests.Numeric
             Assert.IsTrue(result);
         }
 
-        [Test]
         [TestCase(3)]
         [TestCase(4)]
         [TestCase(239847)]
@@ -27,7 +25,6 @@ namespace Algorithms.Tests.Numeric
             Assert.IsFalse(result);
         }
 
-        [Test]
         [TestCase(0)]
         [TestCase(-1)]
         public void KrishnamurthyNumberCheckerNotPositiveNumber(int number)
