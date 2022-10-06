@@ -1,27 +1,33 @@
-public static int Search(int[] list, int data)
+using System.Collections.Generic;
+
+namespace Lncodes.Algorithm.Search.Interpolation
 {
-	int lo = 0;
-	int mid = -1;
-	int hi = list.Length - 1;
-	int index = -1;
+    public sealed class InterpolationSearch
+    {
+        /// <summary>
+        /// Method to interpolation search
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="element"></param>
+        /// <returns cref="int"></returns>
+        public int Search(IReadOnlyList<decimal> data, decimal element)
+        {
+            var minRangeIndex = 0;
+            var maxRangeIndex = data.Count - 1;
 
-	while (lo <= hi)
-	{
-		mid = (int)(lo + (((double)(hi - lo) / (list[hi] - list[lo])) * (data - list[lo])));
+            while (minRangeIndex <= maxRangeIndex)
+            {
+                var midIndex = InterpolationCalculator.GetInterpolationValue(element, data[minRangeIndex], data[maxRangeIndex], minRangeIndex, maxRangeIndex);
 
-		if (list[mid] == data)
-		{
-			index = mid;
-			break;
-		}
-		else
-		{
-			if (list[mid] < data)
-				lo = mid + 1;
-			else
-				hi = mid - 1;
-		}
-	}
+                if (data[midIndex].Equals(element))
+                    return midIndex;
 
-	return index;
+                if (data[midIndex] < element)
+                    minRangeIndex = midIndex + 1;
+                else
+                    maxRangeIndex = midIndex - 1;
+            }
+            return -1;
+        }
+    }
 }
