@@ -45,7 +45,7 @@ namespace Algorithms.Strings
                 var endIndex = Math.Min(i + matchingCharacterRange, shorterString.Length - 1);
                 for (var j = startIndex; j <= endIndex; j++)
                 {
-                    if (s1[i] == s2[j])
+                    if (s1[i] == s2[j] && !s2MatchedIndeces[j])
                     {
                         matches++;
                         s1MatchedIndeces[i] = true;

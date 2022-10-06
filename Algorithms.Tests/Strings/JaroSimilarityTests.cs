@@ -11,6 +11,7 @@ namespace Algorithms.Tests.Strings
         [TestCase("abc", "123", 0)]
         [TestCase("FAREMVIEL", "FARMVILLE", 0.88d)]
         [TestCase("CRATE", "TRACE", 0.73d)]
+        [TestCase("CRATE11111", "CRTAE11111", 0.96d)]
         [TestCase("a", "a", 1)]
         [TestCase("", "", 1)]
         public void Calculate_ReturnsCorrectJaroSimilarity(string s1, string s2, double expected)
