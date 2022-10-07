@@ -93,16 +93,6 @@ namespace DataStructures.AVLTree
         /// <param name="key">Key value to remove.</param>
         public void Remove(TKey key)
         {
-            if (root is null)
-            {
-                throw new InvalidOperationException("Tree is empty!");
-            }
-
-            if (!Contains(key))
-            {
-                throw new KeyNotFoundException($"Key {key} is not in the tree");
-            }
-
             root = Remove(root, key);
             Count--;
         }
@@ -143,7 +133,7 @@ namespace DataStructures.AVLTree
         {
             if (root is null)
             {
-                throw new InvalidOperationException("Tree is empty!");
+                throw new InvalidOperationException("AVL tree is empty.");
             }
 
             return GetMin(root).Key;
@@ -157,7 +147,7 @@ namespace DataStructures.AVLTree
         {
             if (root is null)
             {
-                throw new InvalidOperationException("Tree is empty!");
+                throw new InvalidOperationException("AVL tree is empty.");
             }
 
             return GetMax(root).Key;
@@ -371,7 +361,7 @@ namespace DataStructures.AVLTree
             else
             {
                 throw new ArgumentException(
-                    $"Key \"{key}\" already exists in tree!");
+                    $"Key \"{key}\" already exists in AVL tree.");
             }
 
             // Check all of the new node's ancestors for inbalance and perform
@@ -387,17 +377,23 @@ namespace DataStructures.AVLTree
         /// <param name="node">Node to check for key.</param>
         /// <param name="key">Key value to remove.</param>
         /// <returns>New node with key removed.</returns>
-        private AvlTreeNode<TKey>? Remove(AvlTreeNode<TKey> node, TKey key)
+        private AvlTreeNode<TKey>? Remove(AvlTreeNode<TKey>? node, TKey key)
         {
+            if (node == null)
+            {
+                throw new KeyNotFoundException(
+                    $"Key \"{key}\" is not in the AVL tree.");
+            }
+
             // Normal binary search tree removal
             var compareResult = comparer.Compare(key, node.Key);
             if (compareResult < 0)
             {
-                node.Left = Remove(node.Left!, key);
+                node.Left = Remove(node.Left, key);
             }
             else if (compareResult > 0)
             {
-                node.Right = Remove(node.Right!, key);
+                node.Right = Remove(node.Right, key);
             }
             else
             {

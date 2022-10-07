@@ -95,7 +95,7 @@ namespace DataStructures.Tests
         public void Remove_EmptyTree_ThrowsException()
         {
             var tree = new AvlTree<int>();
-            Assert.Throws<InvalidOperationException>(() => tree.Remove(1));
+            Assert.Throws<KeyNotFoundException>(() => tree.Remove(1));
         }
 
         [Test]
