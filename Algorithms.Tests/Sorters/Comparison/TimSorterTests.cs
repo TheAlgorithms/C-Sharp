@@ -12,7 +12,7 @@ namespace Algorithms.Tests.Sorters.Comparison
 
         [Test]
         public static void ArraySorted(
-            [Random(0, 10_000, 1000)] int n)
+            [Random(0, 10_000, 2000)] int n)
         {
             // Arrange
             var sorter = new TimSorter<int>();
