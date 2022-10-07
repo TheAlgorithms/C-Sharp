@@ -190,6 +190,66 @@ namespace DataStructures.Tests
         }
 
         [Test]
+        public void Remove_MultipleKeys_TreeStillValid_Variant2()
+        {
+            var tree = new AvlTree<int>();
+            tree.AddRange(Data);
+
+            tree.Remove(10);
+
+            tree.Count.Should().Be(9);
+            tree.Contains(10).Should().BeFalse();
+
+            tree.Remove(5);
+
+            tree.Count.Should().Be(8);
+            tree.Contains(5).Should().BeFalse();
+
+            tree.Remove(7);
+
+            tree.Count.Should().Be(7);
+            tree.Contains(7).Should().BeFalse();
+
+            tree.Remove(9);
+
+            tree.Count.Should().Be(6);
+            tree.Contains(9).Should().BeFalse();
+
+            tree.Remove(1);
+
+            tree.Count.Should().Be(5);
+            tree.Contains(1).Should().BeFalse();
+
+            tree.Remove(3);
+
+            tree.Count.Should().Be(4);
+            tree.Contains(3).Should().BeFalse();
+
+            tree.Remove(2);
+
+            tree.Count.Should().Be(3);
+            tree.Contains(2).Should().BeFalse();
+
+            tree.GetKeysInOrder()
+                .Should()
+                .BeEquivalentTo(
+                    new[] { 4,6,8 },
+                    config => config.WithStrictOrdering());
+
+            tree.GetKeysPreOrder()
+                .Should()
+                .BeEquivalentTo(
+                    new[] { 6,4,8 },
+                    config => config.WithStrictOrdering());
+
+            tree.GetKeysPostOrder()
+                .Should()
+                .BeEquivalentTo(
+                    new[] { 4,8,6 },
+                    config => config.WithStrictOrdering());
+        }
+
+        [Test]
         public void Remove_EmptyTree_ThrowsException()
         {
             var tree = new AvlTree<int>();
