@@ -5,8 +5,9 @@ using System.Linq;
 namespace Algorithms.Search
 {
     /// <summary>
-    /// A boyer-moore majority finder algorithm implementation.
+    ///     A boyer-moore majority finder algorithm implementation.
     /// </summary>
+    /// <typeparam name="T">Type of element stored inside array. 2.</typeparam>
     public class BoyerMoore<T> where T : IComparable
     {
         public static T FindMajority(IEnumerable<T> input)
