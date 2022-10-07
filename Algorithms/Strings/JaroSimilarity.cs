@@ -60,7 +60,16 @@ namespace Algorithms.Strings
                 return 0;
             }
 
-            // number of matched characters that not in the right order
+            var transpositions = CalculateTranspositions(s1, s2, s1MatchedIndeces, s2MatchedIndeces);
+
+            return ((matches / s1.Length) + (matches / s2.Length) + ((matches - transpositions) / matches)) / 3;
+        }
+
+        /// <summary>
+        ///     Calculates number of matched characters that are not in the right order.
+        /// </summary>
+        private static int CalculateTranspositions(string s1, string s2, bool[] s1MatchedIndeces, bool[] s2MatchedIndeces)
+        {
             var transpositions = 0;
             var s2Index = 0;
             for (var s1Index = 0; s1Index < s1.Length; s1Index++)
@@ -82,8 +91,7 @@ namespace Algorithms.Strings
             }
 
             transpositions /= 2;
-
-            return ((matches / s1.Length) + (matches / s2.Length) + ((matches - transpositions) / matches)) / 3;
+            return transpositions;
         }
     }
 }
