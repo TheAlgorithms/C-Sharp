@@ -173,6 +173,7 @@ find more than one implementation for the same objective but using different alg
     * [RGB-HSV Conversion](./Algorithms/Other/RGBHSVConversion.cs)
     * [Flood Fill](./Algorithms/Other/FloodFill.cs)
     * [Pareto Optimization](./Algorithms/Other/ParetoOptimization.cs)
+    * [Gauss Optimization](./Algorithms/Other/GaussOptimization.cs)
     * [Decisions Convolutions](./Algorithms/Other/DecisionsConvolutions.cs)
   * [Problems](./Algorithms/Problems)
     * [Stable Marriage](./Algorithms/Problems/StableMarriage)
