@@ -22,7 +22,7 @@ namespace Algorithms.Search
             return default(T);
         }
 
-        //Find majority candidate
+        // Find majority candidate
         private static T FindMajorityCandidate(IEnumerable<T> input, int length)
         {
             int count = 1;
@@ -49,7 +49,7 @@ namespace Algorithms.Search
             return candidate;
         }
 
-        //verify that candidate is indeed the majority
+        // Verify that candidate is indeed the majority
         private static bool VerifyMajority(IEnumerable<T> input, int size, T candidate)
         {
             return input.Count(x => x.Equals(candidate)) > size / 2;
