@@ -101,10 +101,14 @@ namespace Algorithms.Tests.Numeric
         }
 
         [TestCase(25, 2)]
-        public void TestAutomorphicNumberSequenceFlipLowerAndUpperBounds(int lower, int upper)
+        public void TestAutomorphicNumberSequenceReversedBounds(int lower, int upper)
         {
-            List<long> automorphicList = new() { 5, 6, 25 };
-            Assert.That(AutomorphicNumber.GetAutomorphicNumbers(lower, upper), Is.EqualTo(automorphicList));
+            Assert.Throws(Is.TypeOf<ArgumentException>()
+                .And.Message.EqualTo($"Lower Bound must be lower than Upper Bound: Actual values [{lower},{upper}]"),
+                delegate
+                {
+                    AutomorphicNumber.GetAutomorphicNumbers(lower, upper);
+                });
         }
     }
 }

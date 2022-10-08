@@ -17,8 +17,10 @@ namespace Algorithms.Numeric
         /// <param name="lowerBound">The lower bound of the list.</param>
         /// <param name="upperBound">The upper bound of the list.</param>
         /// <returns>A list that contains all of the automorphic numbers between <paramref name="lowerBound"/> and <paramref name="upperBound"/> inclusive.</returns>
-        /// <exception cref="ArgumentException">If the <paramref name="lowerBound"/> or <paramref name="upperBound"/> is not greater than zero.</exception>
-        /// <remarks>If the <paramref name="lowerBound"/> is greater than the <paramref name="upperBound"/> then the two bounds are flipped.</remarks>
+        /// <exception cref="ArgumentException">If the <paramref name="lowerBound"/>
+        /// or <paramref name="upperBound"/> is not greater than zero
+        /// or <paramref name="upperBound"/>is lower than the <paramref name="lowerBound"/>.</exception>
+        
         public static List<long> GetAutomorphicNumbers(long lowerBound, long upperBound)
         {
             if (lowerBound < 1)
@@ -33,9 +35,7 @@ namespace Algorithms.Numeric
 
             if (lowerBound > upperBound)
             {
-                var tmp = lowerBound;
-                lowerBound = upperBound;
-                upperBound = tmp;
+                throw new ArgumentException($"Lower Bound must be lower than Upper Bound: Actual values [{lowerBound},{upperBound}]");
             }
 
             List<long> result = new();
