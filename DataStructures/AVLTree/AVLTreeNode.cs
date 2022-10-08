@@ -3,20 +3,16 @@ using System;
 namespace DataStructures.AVLTree
 {
     /// <summary>
-    ///     Generic class to represent nodes in an <see cref="AvlTree{TKey}"/> instance.
+    ///     Generic class to represent nodes in an <see cref="AvlTree{TKey}"/>
+    ///     instance.
     /// </summary>
     /// <typeparam name="TKey">The type of key for the node.</typeparam>
-    public class AvlTreeNode<TKey>
+    internal class AvlTreeNode<TKey>
     {
         /// <summary>
         ///     Gets or sets key value of node.
         /// </summary>
         public TKey Key { get; set; }
-
-        /// <summary>
-        ///     Gets the height of the node.
-        /// </summary>
-        public int Height { get; private set; }
 
         /// <summary>
         ///     Gets the balance factor of the node.
@@ -34,7 +30,13 @@ namespace DataStructures.AVLTree
         public AvlTreeNode<TKey>? Right { get; set; }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AvlTreeNode{TKey}"/> class.
+        ///     Gets or sets the height of the node.
+        /// </summary>
+        private int Height { get; set; }
+
+        /// <summary>
+        ///     Initializes a new instance of the
+        ///     <see cref="AvlTreeNode{TKey}"/> class.
         /// </summary>
         /// <param name="key">Key value for node.</param>
         public AvlTreeNode(TKey key)
@@ -47,17 +49,17 @@ namespace DataStructures.AVLTree
         /// </summary>
         public void UpdateBalanceFactor()
         {
-            if(Left is null && Right is null)
+            if (Left is null && Right is null)
             {
                 Height = 0;
                 BalanceFactor = 0;
             }
-            else if(Left is null)
+            else if (Left is null)
             {
                 Height = Right!.Height + 1;
                 BalanceFactor = Height;
             }
-            else if(Right is null)
+            else if (Right is null)
             {
                 Height = Left!.Height + 1;
                 BalanceFactor = -Height;
