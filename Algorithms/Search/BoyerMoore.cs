@@ -5,16 +5,16 @@ using System.Linq;
 namespace Algorithms.Search
 {
     /// <summary>
-    ///     A boyer-moore majority finder algorithm implementation.
+    ///     A Boyer-Moore majority finder algorithm implementation.
     /// </summary>
-    /// <typeparam name="T">Type of element stored inside array. 2.</typeparam>
+    /// <typeparam name="T">Type of element stored inside array.</typeparam>
     public static class BoyerMoore<T> where T : IComparable
     {
         public static T FindMajority(IEnumerable<T> input)
         {
             var candidate = findMajorityCandidate(input, input.Count());
 
-            if (verify(input, input.Count(), candidate))
+            if (verifyMajority(input, input.Count(), candidate))
             {
                 return candidate;
             }
@@ -50,7 +50,7 @@ namespace Algorithms.Search
         }
 
         //verify that candidate is indeed the majority
-        private static bool Verify(IEnumerable<T> input, int size, T candidate)
+        private static bool verifyMajority(IEnumerable<T> input, int size, T candidate)
         {
             return input.Count(x => x.Equals(candidate)) > size / 2;
         }
