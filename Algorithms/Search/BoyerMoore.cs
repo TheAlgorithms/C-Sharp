@@ -8,7 +8,7 @@ namespace Algorithms.Search
     ///     A Boyer-Moore majority finder algorithm implementation.
     /// </summary>
     /// <typeparam name="T">Type of element stored inside array.</typeparam>
-    public static class BoyerMoore<T> where T : IComparable
+    public static class BoyerMoore<T> where T : struct, IComparable
     {
         public static T FindMajority(IEnumerable<T> input)
         {
