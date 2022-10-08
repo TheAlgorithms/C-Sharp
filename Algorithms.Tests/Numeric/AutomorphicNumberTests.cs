@@ -69,7 +69,7 @@ namespace Algorithms.Tests.Numeric
         [TestCase(8, 12)]
         public void TestNoAutomorphicNumberInTheSequence(int lower, int upper)
         {
-            List<long> automorphicList = new() { };
+            List<long> automorphicList = new();
             Assert.That(AutomorphicNumber.GetAutomorphicNumbers(lower, upper), Is.EqualTo(automorphicList));
         }
 
