@@ -19,7 +19,7 @@ namespace Algorithms.Search
                 return candidate;
             }
 
-            return default(T);
+            return default(T?);
         }
 
         // Find majority candidate
