@@ -162,6 +162,7 @@ find more than one implementation for the same objective but using different alg
     * [Get all permutations of a string](./Algorithms/Strings/Permutation.cs)
     * [Levenshtein Distance](./Algorithms/Strings/LevenshteinDistance.cs)
     * [Hamming Distance](./Algorithms/Strings/HammingDistance.cs)
+    * [Jaro Similarity](./Algorithms/Strings/JaroSimilarity.cs)
   * [Other](./Algorithms/Other)
     * [Fermat Prime Checker](./Algorithms/Other/FermatPrimeChecker.cs)
     * [Sieve of Eratosthenes](./Algorithms/Other/SieveOfEratosthenes.cs)
