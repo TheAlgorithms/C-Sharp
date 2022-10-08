@@ -3,13 +3,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Search
 {
-    [TestClass]
     public class BoyerMoore_Tests
     {
-        [TestMethod]
+        [Test]
         public void BoyerMoore_Majority_Finder_Test()
         {
             var elementCount = 1000;
