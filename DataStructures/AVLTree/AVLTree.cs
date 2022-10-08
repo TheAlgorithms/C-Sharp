@@ -12,9 +12,9 @@ namespace DataStructures.AVLTree
     ///     balancing BST invented. The primary property of an AVL tree is that
     ///     the height of both child subtrees for any node only differ by one.
     ///     Due to the balanced nature of the tree, its time complexities for
-    ///     insertion, deletion, and search all have a worst-case time complexity
-    ///     of O(log n). Which is an improvement over the worst-case O(n) for a
-    ///     regular BST.
+    ///     insertion, deletion, and search all have a worst-case time
+    ///     complexity of O(log n). Which is an improvement over the worst-case
+    ///     O(n) for a regular BST.
     ///     See https://en.wikipedia.org/wiki/AVL_tree for more information.
     ///     Visualizer: https://visualgo.net/en/bst.
     /// </remarks>
@@ -37,7 +37,8 @@ namespace DataStructures.AVLTree
         private AvlTreeNode<TKey>? root;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AvlTree{TKey}"/> class.
+        ///     Initializes a new instance of the <see cref="AvlTree{TKey}"/>
+        ///     class.
         /// </summary>
         public AvlTree()
         {
@@ -45,10 +46,12 @@ namespace DataStructures.AVLTree
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AvlTree{TKey}"/> class
-        ///     using the specified comparer.
+        ///     Initializes a new instance of the <see cref="AvlTree{TKey}"/>
+        ///     class using the specified comparer.
         /// </summary>
-        /// <param name="customComparer">Comparer to use when comparing keys.</param>
+        /// <param name="customComparer">
+        /// Comparer to use when comparing keys.
+        /// </param>
         public AvlTree(Comparer<TKey> customComparer)
         {
             comparer = customComparer;
@@ -78,7 +81,7 @@ namespace DataStructures.AVLTree
         /// <param name="keys">Key values to add.</param>
         public void AddRange(IEnumerable<TKey> keys)
         {
-            foreach(var key in keys)
+            foreach (var key in keys)
             {
                 Add(key);
             }
@@ -90,19 +93,8 @@ namespace DataStructures.AVLTree
         /// <param name="key">Key value to remove.</param>
         public void Remove(TKey key)
         {
-            if (root is null)
-            {
-                throw new InvalidOperationException("Tree is empty!");
-            }
-            else if (!Contains(key))
-            {
-                throw new KeyNotFoundException($"Key {key} is not in the tree");
-            }
-            else
-            {
-                root = Remove(root, key);
-                Count--;
-            }
+            root = Remove(root, key);
+            Count--;
         }
 
         /// <summary>
@@ -139,9 +131,9 @@ namespace DataStructures.AVLTree
         /// <returns>Minimum value in tree.</returns>
         public TKey GetMin()
         {
-            if(root is null)
+            if (root is null)
             {
-                throw new InvalidOperationException("Tree is empty!");
+                throw new InvalidOperationException("AVL tree is empty.");
             }
 
             return GetMin(root).Key;
@@ -153,16 +145,17 @@ namespace DataStructures.AVLTree
         /// <returns>Maximum value in tree.</returns>
         public TKey GetMax()
         {
-            if(root is null)
+            if (root is null)
             {
-                throw new InvalidOperationException("Tree is empty!");
+                throw new InvalidOperationException("AVL tree is empty.");
             }
 
             return GetMax(root).Key;
         }
 
         /// <summary>
-        ///     Get keys in order from smallest to largest as defined by the comparer.
+        ///     Get keys in order from smallest to largest as defined by the
+        ///     comparer.
         /// </summary>
         /// <returns>Keys in tree in order from smallest to largest.</returns>
         public IEnumerable<TKey> GetKeysInOrder()
@@ -231,6 +224,107 @@ namespace DataStructures.AVLTree
         }
 
         /// <summary>
+        ///     Helper function to rebalance the tree so that all nodes have a
+        ///     balance factor in the range [-1, 1].
+        /// </summary>
+        /// <param name="node">Node to rebalance.</param>
+        /// <returns>New node that has been rebalanced.</returns>
+        private static AvlTreeNode<TKey> Rebalance(AvlTreeNode<TKey> node)
+        {
+            if (node.BalanceFactor > 1)
+            {
+                if (node.Right!.BalanceFactor == -1)
+                {
+                    node.Right = RotateRight(node.Right);
+                }
+
+                return RotateLeft(node);
+            }
+
+            if (node.BalanceFactor < -1)
+            {
+                if (node.Left!.BalanceFactor == 1)
+                {
+                    node.Left = RotateLeft(node.Left);
+                }
+
+                return RotateRight(node);
+            }
+
+            return node;
+        }
+
+        /// <summary>
+        ///     Perform a left (counter-clockwise) rotation.
+        /// </summary>
+        /// <param name="node">Node to rotate about.</param>
+        /// <returns>New node with rotation applied.</returns>
+        private static AvlTreeNode<TKey> RotateLeft(AvlTreeNode<TKey> node)
+        {
+            var temp1 = node;
+            var temp2 = node.Right!.Left;
+            node = node.Right;
+            node.Left = temp1;
+            node.Left.Right = temp2;
+
+            node.Left.UpdateBalanceFactor();
+            node.UpdateBalanceFactor();
+
+            return node;
+        }
+
+        /// <summary>
+        ///     Perform a right (clockwise) rotation.
+        /// </summary>
+        /// <param name="node">Node to rotate about.</param>
+        /// <returns>New node with rotation applied.</returns>
+        private static AvlTreeNode<TKey> RotateRight(AvlTreeNode<TKey> node)
+        {
+            var temp1 = node;
+            var temp2 = node.Left!.Right;
+            node = node.Left;
+            node.Right = temp1;
+            node.Right.Left = temp2;
+
+            node.Right.UpdateBalanceFactor();
+            node.UpdateBalanceFactor();
+
+            return node;
+        }
+
+        /// <summary>
+        ///     Helper function to get node instance with minimum key value
+        ///     in the specified subtree.
+        /// </summary>
+        /// <param name="node">Node specifying root of subtree.</param>
+        /// <returns>Minimum value in node's subtree.</returns>
+        private static AvlTreeNode<TKey> GetMin(AvlTreeNode<TKey> node)
+        {
+            while (node.Left is not null)
+            {
+                node = node.Left;
+            }
+
+            return node;
+        }
+
+        /// <summary>
+        ///     Helper function to get node instance with maximum key value
+        ///     in the specified subtree.
+        /// </summary>
+        /// <param name="node">Node specifying root of subtree.</param>
+        /// <returns>Maximum value in node's subtree.</returns>
+        private static AvlTreeNode<TKey> GetMax(AvlTreeNode<TKey> node)
+        {
+            while (node.Right is not null)
+            {
+                node = node.Right;
+            }
+
+            return node;
+        }
+
+        /// <summary>
         ///     Recursively function to add a node to the tree.
         /// </summary>
         /// <param name="node">Node to check for null leaf.</param>
@@ -239,7 +333,7 @@ namespace DataStructures.AVLTree
         private AvlTreeNode<TKey> Add(AvlTreeNode<TKey> node, TKey key)
         {
             // Regular binary search tree insertion
-            int compareResult = comparer.Compare(key, node.Key);
+            var compareResult = comparer.Compare(key, node.Key);
             if (compareResult < 0)
             {
                 if (node.Left is null)
@@ -266,7 +360,8 @@ namespace DataStructures.AVLTree
             }
             else
             {
-                throw new ArgumentException($"Key \"{key}\" already exists in tree!");
+                throw new ArgumentException(
+                    $"Key \"{key}\" already exists in AVL tree.");
             }
 
             // Check all of the new node's ancestors for inbalance and perform
@@ -282,17 +377,23 @@ namespace DataStructures.AVLTree
         /// <param name="node">Node to check for key.</param>
         /// <param name="key">Key value to remove.</param>
         /// <returns>New node with key removed.</returns>
-        private AvlTreeNode<TKey>? Remove(AvlTreeNode<TKey> node, TKey key)
+        private AvlTreeNode<TKey>? Remove(AvlTreeNode<TKey>? node, TKey key)
         {
+            if (node == null)
+            {
+                throw new KeyNotFoundException(
+                    $"Key \"{key}\" is not in the AVL tree.");
+            }
+
             // Normal binary search tree removal
             var compareResult = comparer.Compare(key, node.Key);
             if (compareResult < 0)
             {
-                node.Left = Remove(node.Left!, key);
+                node.Left = Remove(node.Left, key);
             }
             else if (compareResult > 0)
             {
-                node.Right = Remove(node.Right!, key);
+                node.Right = Remove(node.Right, key);
             }
             else
             {
@@ -300,7 +401,8 @@ namespace DataStructures.AVLTree
                 {
                     return null;
                 }
-                else if (node.Left is null)
+
+                if (node.Left is null)
                 {
                     var successor = GetMin(node.Right!);
                     node.Right = Remove(node.Right!, successor.Key);
@@ -319,108 +421,6 @@ namespace DataStructures.AVLTree
             node.UpdateBalanceFactor();
 
             return Rebalance(node);
-        }
-
-        /// <summary>
-        ///     Helper function to rebalance the tree so that all nodes have a
-        ///     balance factor in the range [-1, 1].
-        /// </summary>
-        /// <param name="node">Node to rebalance.</param>
-        /// <returns>New node that has been rebalanced.</returns>
-        private AvlTreeNode<TKey> Rebalance(AvlTreeNode<TKey> node)
-        {
-            if (node.BalanceFactor > 1)
-            {
-                if (node.Right!.BalanceFactor == -1)
-                {
-                    node.Right = RotateRight(node.Right);
-                }
-
-                return RotateLeft(node);
-            }
-            else if (node.BalanceFactor < -1)
-            {
-                if (node.Left!.BalanceFactor == 1)
-                {
-                    node.Left = RotateLeft(node.Left);
-                }
-
-                return RotateRight(node);
-            }
-            else
-            {
-                return node;
-            }
-        }
-
-        /// <summary>
-        ///     Perform a left (counter-clockwise) rotation.
-        /// </summary>
-        /// <param name="node">Node to rotate about.</param>
-        /// <returns>New node with rotation applied.</returns>
-        private AvlTreeNode<TKey> RotateLeft(AvlTreeNode<TKey> node)
-        {
-            var temp1 = node;
-            var temp2 = node!.Right!.Left;
-            node = node.Right;
-            node.Left = temp1;
-            node.Left.Right = temp2;
-
-            node.Left.UpdateBalanceFactor();
-            node.UpdateBalanceFactor();
-
-            return node;
-        }
-
-        /// <summary>
-        ///     Perform a right (clockwise) rotation.
-        /// </summary>
-        /// <param name="node">Node to rotate about.</param>
-        /// <returns>New node with rotation applied.</returns>
-        private AvlTreeNode<TKey> RotateRight(AvlTreeNode<TKey> node)
-        {
-            var temp1 = node;
-            var temp2 = node!.Left!.Right;
-            node = node.Left;
-            node.Right = temp1;
-            node.Right.Left = temp2;
-
-            node.Right.UpdateBalanceFactor();
-            node.UpdateBalanceFactor();
-
-            return node;
-        }
-
-        /// <summary>
-        ///     Helper function to get node instance with minimum key value
-        ///     in the specified subtree.
-        /// </summary>
-        /// <param name="node">Node specifying root of subtree.</param>
-        /// <returns>Minimum value in node's subtree.</returns>
-        private AvlTreeNode<TKey> GetMin(AvlTreeNode<TKey> node)
-        {
-            while (node.Left is not null)
-            {
-                node = node.Left;
-            }
-
-            return node;
-        }
-
-        /// <summary>
-        ///     Helper function to get node instance with maximum key value
-        ///     in the specified subtree.
-        /// </summary>
-        /// <param name="node">Node specifyng root of subtree.</param>
-        /// <returns>Maximum value in node's subtree.</returns>
-        private AvlTreeNode<TKey> GetMax(AvlTreeNode<TKey> node)
-        {
-            while (node.Right is not null)
-            {
-                node = node.Right;
-            }
-
-            return node;
         }
     }
 }
