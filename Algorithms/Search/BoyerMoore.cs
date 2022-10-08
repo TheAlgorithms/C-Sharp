@@ -12,9 +12,9 @@ namespace Algorithms.Search
     {
         public static T FindMajority(IEnumerable<T> input)
         {
-            var candidate = findMajorityCandidate(input, input.Count());
+            var candidate = FindMajorityCandidate(input, input.Count());
 
-            if (verifyMajority(input, input.Count(), candidate))
+            if (VerifyMajority(input, input.Count(), candidate))
             {
                 return candidate;
             }
@@ -23,7 +23,7 @@ namespace Algorithms.Search
         }
 
         //Find majority candidate
-        private static T findMajorityCandidate(IEnumerable<T> input, int length)
+        private static T FindMajorityCandidate(IEnumerable<T> input, int length)
         {
             int count = 1;
             T candidate = input.First();
@@ -50,7 +50,7 @@ namespace Algorithms.Search
         }
 
         //verify that candidate is indeed the majority
-        private static bool verifyMajority(IEnumerable<T> input, int size, T candidate)
+        private static bool VerifyMajority(IEnumerable<T> input, int size, T candidate)
         {
             return input.Count(x => x.Equals(candidate)) > size / 2;
         }
