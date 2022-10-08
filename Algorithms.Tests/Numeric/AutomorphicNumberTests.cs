@@ -2,9 +2,6 @@ using Algorithms.Numeric;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Algorithms.Tests.Numeric
 {
@@ -66,6 +63,13 @@ namespace Algorithms.Tests.Numeric
         public void TestAutomorphicNumberSequence(int lower, int upper)
         {
             List<long> automorphicList = new() { 1, 5, 6, 25, 76 };
+            Assert.That(AutomorphicNumber.GetAutomorphicNumbers(lower, upper), Is.EqualTo(automorphicList));
+        }
+
+        [TestCase(8, 12)]
+        public void TestNoAutomorphicNumberInTheSequence(int lower, int upper)
+        {
+            List<long> automorphicList = new() { };
             Assert.That(AutomorphicNumber.GetAutomorphicNumbers(lower, upper), Is.EqualTo(automorphicList));
         }
 

@@ -20,8 +20,7 @@ namespace Algorithms.Numeric
         /// <exception cref="ArgumentException">If the <paramref name="lowerBound"/>
         /// or <paramref name="upperBound"/> is not greater than zero
         /// or <paramref name="upperBound"/>is lower than the <paramref name="lowerBound"/>.</exception>
-        
-        public static List<long> GetAutomorphicNumbers(long lowerBound, long upperBound)
+        public static IEnumerable<long> GetAutomorphicNumbers(long lowerBound, long upperBound)
         {
             if (lowerBound < 1)
             {
@@ -38,17 +37,7 @@ namespace Algorithms.Numeric
                 throw new ArgumentException($"Lower Bound must be lower than Upper Bound: Actual values [{lowerBound},{upperBound}]");
             }
 
-            List<long> result = new();
-
-            for (long i = lowerBound; i <= upperBound; i++)
-            {
-                if (IsAutomorphic(i))
-                {
-                    result.Add(i);
-                }
-            }
-
-            return result;
+            return GenerateAutomorphicNumbers(lowerBound, upperBound);
         }
 
         /// <summary>
@@ -79,6 +68,23 @@ namespace Algorithms.Numeric
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Generate all automorphic numbers from <paramref name="lowerBound"/> to <paramref name="upperBound"/> inclusive.
+        /// </summary>
+        /// <param name="lowerBound">The lower bound to search for automorphic numbers.</param>
+        /// <param name="upperBound">The upper boind to search for automorphic numbers.</param>
+        /// <returns>A sequence of automorphic numbers.</returns>
+        private static IEnumerable<long> GenerateAutomorphicNumbers(long lowerBound, long upperBound)
+        {
+            for (long i = lowerBound; i <= upperBound; i++)
+            {
+                if (IsAutomorphic(i))
+                {
+                    yield return i;
+                }
+            }
         }
     }
 }
