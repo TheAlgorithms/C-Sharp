@@ -10,7 +10,7 @@ namespace Algorithms.Search
     /// <typeparam name="T">Type of element stored inside array.</typeparam>
     public static class BoyerMoore<T> where T : IComparable
     {
-        public static T FindMajority(IEnumerable<T> input)
+        public static T? FindMajority(IEnumerable<T> input)
         {
             var candidate = FindMajorityCandidate(input, input.Count());
 
@@ -19,7 +19,7 @@ namespace Algorithms.Search
                 return candidate;
             }
 
-            return default(T);
+            return default(T?);
         }
 
         // Find majority candidate
