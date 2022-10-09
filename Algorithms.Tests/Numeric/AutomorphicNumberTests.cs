@@ -52,7 +52,7 @@ namespace Algorithms.Tests.Numeric
         public void TestInvalidAutomorphicNumbers(int number)
         {
             Assert.Throws(Is.TypeOf<ArgumentException>()
-                .And.Message.EqualTo($"An automorphic number must always be positive: Actual value {number}"),
+                .And.Message.EqualTo($"An automorphic number must always be positive."),
                 delegate
                 {
                     AutomorphicNumber.IsAutomorphic(number);
@@ -85,7 +85,7 @@ namespace Algorithms.Tests.Numeric
         public void TestAutomorphicNumberSequenceInvalidLowerBound(int lower, int upper)
         {
             Assert.Throws(Is.TypeOf<ArgumentException>()
-                .And.Message.EqualTo($"Lower Bound must be greater than 0: Actual value {lower}"),
+                .And.Message.EqualTo($"Lower bound must be greater than 0."),
                 delegate
                 {
                     AutomorphicNumber.GetAutomorphicNumbers(lower, upper);
@@ -97,7 +97,7 @@ namespace Algorithms.Tests.Numeric
         public void TestAutomorphicNumberSequenceInvalidUpperBound(int lower, int upper)
         {
             Assert.Throws(Is.TypeOf<ArgumentException>()
-                .And.Message.EqualTo($"Upper Bound must be greater than 0: Actual value {upper}"),
+                .And.Message.EqualTo($"Upper bound must be greater than 0."),
                 delegate
                 {
                     AutomorphicNumber.GetAutomorphicNumbers(lower, upper);
@@ -108,7 +108,7 @@ namespace Algorithms.Tests.Numeric
         public void TestAutomorphicNumberSequenceReversedBounds(int lower, int upper)
         {
             Assert.Throws(Is.TypeOf<ArgumentException>()
-                .And.Message.EqualTo($"Lower Bound must be lower than Upper Bound: Actual values [{lower},{upper}]"),
+                .And.Message.EqualTo($"The lower bound must be less than or equal to the upper bound."),
                 delegate
                 {
                     AutomorphicNumber.GetAutomorphicNumbers(lower, upper);

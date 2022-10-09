@@ -24,17 +24,17 @@ namespace Algorithms.Numeric
         {
             if (lowerBound < 1)
             {
-                throw new ArgumentException($"Lower Bound must be greater than 0: Actual value {lowerBound}");
+                throw new ArgumentException($"Lower bound must be greater than 0.");
             }
 
             if (upperBound < 1)
             {
-                throw new ArgumentException($"Upper Bound must be greater than 0: Actual value {upperBound}");
+                throw new ArgumentException($"Upper bound must be greater than 0.");
             }
 
             if (lowerBound > upperBound)
             {
-                throw new ArgumentException($"Lower Bound must be lower than Upper Bound: Actual values [{lowerBound},{upperBound}]");
+                throw new ArgumentException($"The lower bound must be less than or equal to the upper bound.");
             }
 
             return GenerateAutomorphicNumbers(lowerBound, upperBound);
@@ -50,7 +50,7 @@ namespace Algorithms.Numeric
         {
             if (number < 1)
             {
-                throw new ArgumentException($"An automorphic number must always be positive: Actual value {number}");
+                throw new ArgumentException($"An automorphic number must always be positive.");
             }
 
             BigInteger square = new BigInteger(number * number);
