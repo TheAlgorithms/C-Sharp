@@ -17,11 +17,7 @@ namespace Algorithms.Tests.Numeric
         [TestCase(9376)]
         [TestCase(90625)]
         [TestCase(109376)]
-        [TestCase(890625)]
-        [TestCase(2890625)]
-        [TestCase(7109376)]
-        [TestCase(12890625)]
-        [TestCase(87109376)]
+        
         public void TestAutomorphicNumbers(int number)
         {
             Assert.That(AutomorphicNumber.IsAutomorphic(number), Is.True);

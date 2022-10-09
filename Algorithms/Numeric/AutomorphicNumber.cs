@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 
 namespace Algorithms.Numeric
@@ -20,7 +21,7 @@ namespace Algorithms.Numeric
         /// <exception cref="ArgumentException">If the <paramref name="lowerBound"/>
         /// or <paramref name="upperBound"/> is not greater than zero
         /// or <paramref name="upperBound"/>is lower than the <paramref name="lowerBound"/>.</exception>
-        public static IEnumerable<long> GetAutomorphicNumbers(long lowerBound, long upperBound)
+        public static IEnumerable<int> GetAutomorphicNumbers(int lowerBound, int upperBound)
         {
             if (lowerBound < 1)
             {
@@ -37,7 +38,7 @@ namespace Algorithms.Numeric
                 throw new ArgumentException($"The lower bound must be less than or equal to the upper bound.");
             }
 
-            return GenerateAutomorphicNumbers(lowerBound, upperBound);
+            return Enumerable.Range(lowerBound, upperBound).Where(IsAutomorphic);
         }
 
         /// <summary>
@@ -46,14 +47,14 @@ namespace Algorithms.Numeric
         /// <param name="number">The number to check.</param>
         /// <returns>True if the number is automorphic, false otherwise.</returns>
         /// <exception cref="ArgumentException">If the number is non-positive.</exception>
-        public static bool IsAutomorphic(long number)
+        public static bool IsAutomorphic(int number)
         {
             if (number < 1)
             {
                 throw new ArgumentException($"An automorphic number must always be positive.");
             }
 
-            BigInteger square = new BigInteger(number * number);
+            BigInteger square = BigInteger.Pow(number, 2);
 
             // Extract the last digits of both numbers
             while (number > 0)
@@ -68,23 +69,6 @@ namespace Algorithms.Numeric
             }
 
             return true;
-        }
-
-        /// <summary>
-        /// Generate all automorphic numbers from <paramref name="lowerBound"/> to <paramref name="upperBound"/> inclusive.
-        /// </summary>
-        /// <param name="lowerBound">The lower bound to search for automorphic numbers.</param>
-        /// <param name="upperBound">The upper boind to search for automorphic numbers.</param>
-        /// <returns>A sequence of automorphic numbers.</returns>
-        private static IEnumerable<long> GenerateAutomorphicNumbers(long lowerBound, long upperBound)
-        {
-            for (long i = lowerBound; i <= upperBound; i++)
-            {
-                if (IsAutomorphic(i))
-                {
-                    yield return i;
-                }
-            }
         }
     }
 }
