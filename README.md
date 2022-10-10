@@ -127,6 +127,7 @@ find more than one implementation for the same objective but using different alg
     * [A000005 Count of Divisors](./Algorithms/Sequences/DivisorsCountSequence.cs)
     * [A000008 Make Change](./Algorithms/Sequences/MakeChangeSequence.cs)
     * [A000010 Euler's Totient](./Algorithms/Sequences/EulerTotientSequence.cs)
+    * [A000012 All Ones](./Algorithms/Sequences/AllOnesSequence.cs)
     * [A000027 Natural](./Algorithms/Sequences/NaturalSequence.cs)
     * [A000032 Lucas Numbers](./Algorithms/Sequences/LucasNumbersBeginningAt2Sequence.cs)
     * [A000040 Primes](./Algorithms/Sequences/PrimesSequence.cs)
