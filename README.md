@@ -81,6 +81,7 @@ find more than one implementation for the same objective but using different alg
     * [Euler Method](./Algorithms/Numeric/EulerMethod.cs)
     * [Miller-Rabin primality check](./Algorithms/Numeric/MillerRabinPrimalityChecker.cs)
     * [KrishnamurthyNumberChecker](./Algorithms/Numeric/KrishnamurthyNumberChecker.cs)
+    * [Automorphic Number](./Algorithms/Numeric/AutomorphicNumber.cs)
   * [Searches](./Algorithms/Search)
     * [A-Star](./Algorithms/Search/AStar/)
     * [Binary Search](./Algorithms/Search/BinarySearcher.cs)
