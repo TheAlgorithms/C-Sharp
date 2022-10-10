@@ -60,7 +60,7 @@ namespace DataStructures.Tests.Probabilistic
         {
             var filter = new BloomFilter<int>(1000);
             var set = new HashSet<int>();
-            var rand = new Random();
+            var rand = new Random(124);
             var falsePositives = 0;
             for (var i = 0; i < 1000; i++)
             {
