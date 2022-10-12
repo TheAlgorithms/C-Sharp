@@ -150,6 +150,7 @@ find more than one implementation for the same objective but using different alg
     * [A006879 Number of Primes by Number of Digits](./Algorithms/Sequences/NumberOfPrimesByNumberOfDigitsSequence.cs)
     * [A006880 Number of Primes by Powers of 10](./Algorithms/Sequences/NumberOfPrimesByPowersOf10Sequence.cs)
     * [A007318 Binomial](./Algorithms/Sequences/BinomialSequence.cs)
+    * [A007395 All Twos](./Algorithms/Sequences/AllTwosSequence.cs)
     * [A010051 Binary Prime Constant](./Algorithms/Sequences/BinaryPrimeConstantSequence.cs)
     * [A011557 Powers of 10](./Algorithms/Sequences/PowersOf10Sequence.cs)
     * [A057588 Kummer Numbers](./Algorithms/Sequences/KummerNumbersSequence.cs)
