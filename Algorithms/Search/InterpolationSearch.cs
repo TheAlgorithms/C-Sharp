@@ -3,7 +3,7 @@
 /// <summary>
 /// An interpolation search requires a sorted array in order for it to work.
 /// </summary>
-public class InterpolationSearch
+public static class InterpolationSearch
 {
     private static int[] values = { 1, 3, 5, 8, 10, 22, 31, 35, 37, 42, 51 };
 
