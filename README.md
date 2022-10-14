@@ -90,6 +90,7 @@ find more than one implementation for the same objective but using different alg
     * [Fast Search](./Algorithms/Search/FastSearcher.cs)
     * [Fibonacci Search](./Algorithms/Search/FibonacciSearcher.cs)
     * [Jump Search](./Algorithms/Search/JumpSearcher.cs)
+    * [Interplation Search](./Algorithms/Search/InterpolationSearch.cs)
   * [Sorts](./Algorithms/Sorters)
     * [Comparison](./Algorithms/Sorters/Comparison)
       * [Binary Insertion Sort](./Algorithms/Sorters/Comparison/BinaryInsertionSorter.cs)
