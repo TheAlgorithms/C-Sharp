@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Algorithms.Tests.Sequences;
 
 [TestFixture]
-public class MatchstickTriangleSequenceTests
+public static class MatchstickTriangleSequenceTests
 {
     private static BigInteger[] TestList = {
                                                0, 1, 5, 13, 27, 48, 78, 118, 170, 235, 315, 411, 525, 658,
