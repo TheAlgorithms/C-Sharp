@@ -30,12 +30,12 @@ public class TetrahedralSequence : ISequence
     {
         get
         {
-            var value = BigInteger.Zero;
+            var index = BigInteger.Zero;
             var six = new BigInteger(6);
             while (true)
             {
-                yield return BigInteger.Divide(value * (value + 1) * (value + 2), six);
-                value++;
+                yield return BigInteger.Divide(index * (index + 1) * (index + 2), six);
+                index++;
             }
         }
     }
