@@ -57,14 +57,12 @@ public class MatchstickTriangleSequence : ISequence
     {
         get
         {
-            yield return 0;
-            var index = BigInteger.One;
+            var index = BigInteger.Zero;
             var eight = new BigInteger(8);
             while (true)
             {
                 var temp = index * (index + 2) * (index * 2 + 1);
                 var result = BigInteger.Divide(temp, eight);
-                Console.WriteLine(result);
                 yield return result;
                 index++;
             }
