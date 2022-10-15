@@ -26,6 +26,12 @@ public class NewtonSquareRootTests
     }
 
     [Test]
+    public void CalculateSquareRootOfZero()
+    {
+        Assert.That(NewtonSquareRoot.Calculate(0), Is.EqualTo(BigInteger.Zero));
+    }
+
+    [Test]
     public void CalculateSquareRootNegativeNumber()
     {
         Assert.Throws(Is.TypeOf<ArgumentException>()
