@@ -144,6 +144,7 @@ find more than one implementation for the same objective but using different alg
     * [A001462 Golomb's](./Algorithms/Sequences/GolombsSequence.cs)
     * [A001478 Negative Integers](./Algorithms/Sequences/NegativeIntegersSequence.cs)
     * [A002110 Primorial Numbers](./Algorithms/Sequences/PrimorialNumbersSequence.cs)
+    * [A002717 Matchstick Triangle Arrangement](./Algorithms/Sequences/MatchstickTriangleSequence.cs)
     * [A005132 Recaman's](./Algorithms/Sequences/RecamansSequence.cs)
     * [A006577 Number of '3n+1' steps to reach 1](./Algorithms/Sequences/ThreeNPlusOneStepsSequence.cs)
     * [A006862 Euclid Numbers](./Algorithms/Sequences/EuclidNumbersSequence.cs)
