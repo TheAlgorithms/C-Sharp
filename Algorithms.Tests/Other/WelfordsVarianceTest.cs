@@ -98,7 +98,7 @@ namespace Algorithms.Tests.Other
         public void WelfordVariance_Example8()
         {
             var stats = new WelfordsVariance();
-            stats.AddRange(new double[] { 51.3, 55.6, 49.9, 52.0 });
+            stats.AddRange(new [] { 51.3, 55.6, 49.9, 52.0 });
             Assert.AreEqual(4, stats.Count);
             Assert.AreEqual(52.2, stats.Mean, 0.0000001);
             Assert.AreEqual(4.4250000, stats.Variance, 0.0000001);
