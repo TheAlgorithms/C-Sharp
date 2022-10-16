@@ -82,6 +82,7 @@ find more than one implementation for the same objective but using different alg
     * [Miller-Rabin primality check](./Algorithms/Numeric/MillerRabinPrimalityChecker.cs)
     * [KrishnamurthyNumberChecker](./Algorithms/Numeric/KrishnamurthyNumberChecker.cs)
     * [Automorphic Number](./Algorithms/Numeric/AutomorphicNumber.cs)
+    * [Newton's Square Root Calculation](./Algorithms/NewtonSquareRoot.cs)
   * [Searches](./Algorithms/Search)
     * [A-Star](./Algorithms/Search/AStar/)
     * [Binary Search](./Algorithms/Search/BinarySearcher.cs)
