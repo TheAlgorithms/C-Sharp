@@ -15,14 +15,18 @@ namespace Algorithms.Search;
 /// </summary>
 public class InterpolationSearch
 {
-    /* Index of values to search from */
-    private readonly int[] indicies = { 1, 3, 5, 8, 10, 22, 31, 35, 37, 42, 51 };
-
-    /* The key (value) we want to find in the index of values */
-    private readonly int key = 22;
-
-    private int Search(IReadOnlyList<int> valuesToSearch, int keyToFind)
+    public int FindIndex(IReadOnlyList<int> valuesToSearch, int keyToFind)
     {
+        if (valuesToSearch.Count == 1)
+        {
+            if (valuesToSearch[0] == keyToFind)
+            {
+                return valuesToSearch[0];
+            }
+
+            return -1;
+        }
+
         var l = 0;
         var r = valuesToSearch.Count - 1;
 
@@ -51,11 +55,5 @@ public class InterpolationSearch
 
         /* Return -1 in order to indicate that the key was not found. */
         return -1;
-    }
-
-    protected InterpolationSearch()
-    {
-        var value = Search(indicies, key);
-        Console.WriteLine(value != -1 ? $"Value [{value}]: was found!" : $"[Key {key}] was not found.");
     }
 }

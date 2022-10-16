@@ -1,65 +1,40 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using Algorithms.Search;
+using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Search;
 
 public class InterpolationSearchTest
 {
     [Test]
-    public void Interpolation_Search_Test()
+    public void Interpolation_Find_Index_Test([Random(1, 1000, 100)] int n)
     {
-        int[] values = { 1, 3, 5, 8, 10, 22, 31, 35, 37, 42, 51 };
-        var key = 22;
-        var l = 0;
-        var r = values.Length - 1;
+        // Arrange
+        var search = new InterpolationSearch();
+        var random = Randomizer.CreateRandomizer();
+        var arrayToSearch = Enumerable.Range(0, n).Select(_ => random.Next(0, 1000)).OrderBy(x => x).ToArray();
+        var selectedIndex = arrayToSearch[random.Next(0, arrayToSearch.Length - 1)];
 
-        while (key >= values[l] && key <= values[r] && l <= r)
-        {
-            int seek = l + (r - l) * (key - values[l]) / (values[r] - values[l]);
-            if (values[seek] == key)
-            {
-                Assert.AreEqual(values[seek], key);
-            }
+        //Act
+        var value = search.FindIndex(arrayToSearch, selectedIndex);
 
-            if (values[seek] < key)
-            {
-                l = seek + 1;
-            }
-            else
-            {
-                r = seek - 1;
-            }
-        }
+        //Assert
+        Assert.AreNotEqual(-1, value);
     }
 
     [Test]
-    public void Interpolation_Search_Not_Found_Test()
+    public void Interpolation_Find_Index_Not_Found_Test([Random(2, 1000, 100)] int n)
     {
-        int[] values = { 1, 3, 5, 8, 10, 22, 31, 35, 37, 42, 51 };
-        var key = 100;
-        var l = 0;
-        var r = values.Length - 1;
+        // Arrange
+        var search = new InterpolationSearch();
+        var random = Randomizer.CreateRandomizer();
+        var arrayToSearch = Enumerable.Range(0, n).Select(_ => random.Next(0, 1000)).OrderBy(x => x).ToArray();
 
-        int value = -1;
+        //Act
+        var value = search.FindIndex(arrayToSearch, 1001);
 
-        while (key >= values[l] && key <= values[r] && l <= r)
-        {
-            int seek = l + (r - l) * (key - values[l]) / (values[r] - values[l]);
-            value = values[seek];
-            if (value == key)
-            {
-                Assert.AreEqual(values[seek], key);
-            }
-
-            if (value < key)
-            {
-                l = seek + 1;
-            }
-            else
-            {
-                r = seek - 1;
-            }
-        }
-
-        Assert.AreNotEqual(key, value);
+        //Assert
+        Assert.AreEqual(-1, value);
     }
 }
