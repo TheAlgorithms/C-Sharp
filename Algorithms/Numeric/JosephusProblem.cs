@@ -12,11 +12,6 @@ public static class JosephusProblem
     /// <returns>The 1-indexed position where the player must choose in order to win the game.</returns>
     public static long FindWinner(long n, long k)
     {
-        if (n <= 0)
-        {
-            throw new ArgumentException("The group of people cannot be smaller than 1");
-        }
-
         if (k <= 0)
         {
             throw new ArgumentException("The step cannot be smaller than 1");
