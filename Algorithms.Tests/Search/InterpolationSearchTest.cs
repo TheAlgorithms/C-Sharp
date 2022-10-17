@@ -13,14 +13,17 @@ public class InterpolationSearchTest
         // Arrange
         var search = new InterpolationSearch();
         var random = Randomizer.CreateRandomizer();
-        var arrayToSearch = Enumerable.Range(0, n).Select(_ => random.Next(0, 1000)).OrderBy(x => x).ToArray();
-        var selectedIndex = arrayToSearch[random.Next(0, arrayToSearch.Length - 1)];
+        var arrayToSearch = Enumerable.Range(0, n).Select(_ => random.Next(0, 1000)).OrderBy(x => x).Distinct().ToArray();
+
+        var index = random.Next(0, arrayToSearch.Length - 1);
+        var selectedValue = arrayToSearch[index];
 
         //Act
-        var value = search.FindIndex(arrayToSearch, selectedIndex);
+        var value = search.FindValue(arrayToSearch, selectedValue);
+
 
         //Assert
-        Assert.AreNotEqual(-1, value);
+        Assert.AreEqual(index, value);
     }
 
     [Test]
@@ -32,7 +35,7 @@ public class InterpolationSearchTest
         var arrayToSearch = Enumerable.Range(0, n).Select(_ => random.Next(0, 1000)).OrderBy(x => x).ToArray();
 
         //Act
-        var value = search.FindIndex(arrayToSearch, 1001);
+        var value = search.FindValue(arrayToSearch, 1001);
 
         //Assert
         Assert.AreEqual(-1, value);

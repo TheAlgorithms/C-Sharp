@@ -15,13 +15,13 @@ namespace Algorithms.Search;
 /// </summary>
 public class InterpolationSearch
 {
-    public int FindIndex(IReadOnlyList<int> valuesToSearch, int keyToFind)
+    public int FindValue(IReadOnlyList<int> valuesToSearch, int keyToFind)
     {
         if (valuesToSearch.Count == 1)
         {
             if (valuesToSearch[0] == keyToFind)
             {
-                return valuesToSearch[0];
+                return 0;
             }
 
             return -1;
