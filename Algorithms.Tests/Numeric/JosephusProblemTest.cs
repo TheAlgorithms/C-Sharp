@@ -7,15 +7,6 @@ namespace Algorithms.Tests.Numeric;
 
 public class JosephusProblemTest
 {
-    [TestCase(0, 0)]
-    [TestCase(-1, -1)]
-    [TestCase(-1, 5)]
-    public void JosephusProblemInvalidGroupSize(long groupSize, long step)
-    {
-        Assert.Throws(Is.TypeOf<ArgumentException>()
-                .And.Message.EqualTo("The group of people cannot be smaller than 1"),
-            delegate { JosephusProblem.FindWinner(groupSize, step); });
-    }
 
     [TestCase(10, 0)]
     [TestCase(10, -1)]
