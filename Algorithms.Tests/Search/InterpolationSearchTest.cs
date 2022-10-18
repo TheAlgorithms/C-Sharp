@@ -33,7 +33,6 @@ public class InterpolationSearchTest
         var search = new InterpolationSearch();
         var random = Randomizer.CreateRandomizer();
         var arrayToSearch = Enumerable.Range(0, n).Select(_ => random.Next(0, 1000)).OrderBy(x => x).ToArray();
-        var index = random.Next(0, arrayToSearch.Length - 1);
         var selectedValue = 1001;
 
         //Act
