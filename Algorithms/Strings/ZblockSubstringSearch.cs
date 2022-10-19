@@ -34,7 +34,7 @@ namespace Algorithms.Strings
                 else
                 {
                     var k = i - left;
-                    if (zArray[k] < (k - i + 1))
+                    if (zArray[k] < (right - i + 1))
                     {
                         zArray[i] = zArray[k];
                     }
