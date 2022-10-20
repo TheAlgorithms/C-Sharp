@@ -23,10 +23,7 @@ namespace Algorithms.Strings
                 {
                     left = i;
                     right = i;
-                    while(right < n && concatStr[right - left].Equals(concatStr[right]))
-                    {
-                        right++;
-                    }
+                    right = ComputeNewRightValue(concatStr, n, left, right);
 
                     zArray[i] = right - left;
                     right--;
@@ -41,11 +38,7 @@ namespace Algorithms.Strings
                     else
                     {
                         left = i;
-                        while (right < n && concatStr[right - left].Equals(concatStr[right]))
-                        {
-                            right++;
-                        }
-
+                        right = ComputeNewRightValue(concatStr, n, left, right);
                         zArray[i] = right - left;
                         right--;
                     }
@@ -62,6 +55,16 @@ namespace Algorithms.Strings
             }
 
             return found;
+        }
+
+        private static int ComputeNewRightValue(string concatStr, int n, int left, int right)
+        {
+            while (right < n && concatStr[right - left].Equals(concatStr[right]))
+            {
+                right++;
+            }
+
+            return right;
         }
     }
 }
