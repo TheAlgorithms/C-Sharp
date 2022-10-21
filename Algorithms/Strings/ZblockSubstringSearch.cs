@@ -22,8 +22,7 @@ namespace Algorithms.Strings
                 if(i > right)
                 {
                     left = i;
-                    right = i;
-                    right = ComputeNewRightValue(concatStr, n, left, right);
+                    right = ComputeNewRightValue(concatStr, n, left, i);
 
                     zArray[i] = right - left;
                     right--;
