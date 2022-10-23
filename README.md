@@ -179,6 +179,7 @@ find more than one implementation for the same objective but using different alg
     * [Luhn](./Algorithms/Other/Luhn.cs)
     * [Int2Binary](./Algorithms/Other/Int2Binary.cs)
     * [GeoLocation](./Algorithms/Other/GeoLocation.cs)
+    * [Gregorian Easter](./Algorithms/Other/GregorianEaster.cs)
     * [Mandelbrot](./Algorithms/Other/Mandelbrot.cs)
     * [Koch Snowflake](./Algorithms/Other/KochSnowflake.cs)
     * [RGB-HSV Conversion](./Algorithms/Other/RGBHSVConversion.cs)
