@@ -140,6 +140,7 @@ find more than one implementation for the same objective but using different alg
     * [A000124 Central Polygonal Numbers](./Algorithms/Sequences/CentralPolygonalNumbersSequence.cs)
     * [A000125 Cake Numbers](./Algorithms/Sequences/CakeNumbersSequence.cs)
     * [A000142 Factorial](./Algorithms/Sequences/FactorialSequence.cs)
+    * [A000213 Tribonacci Numbers](./Algorithms/Sequences/TribonacciNumbersSequence.cs)
     * [A000215 Fermat Numbers](./Algorithms/Sequences/FermatNumbersSequence.cs)
     * [A000290 Squares](./Algorithms/Sequences/SquaresSequence.cs)
     * [A000292 Tetrahedral numbers](./Algorithms/Sequences/TetrahedralSequence.cs)
