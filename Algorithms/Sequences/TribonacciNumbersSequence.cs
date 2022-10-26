@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 
 namespace Algorithms.Sequences;
@@ -17,19 +18,14 @@ public class TribonacciNumbersSequence : ISequence
     {
         get
         {
-            yield return 1;
-            yield return 1;
-            yield return 1;
-            BigInteger beforePrevious = 1;
-            BigInteger previous = 1;
-            BigInteger current = 1;
+            var buffer = Enumerable.Repeat(BigInteger.One, 4).ToArray();
             while (true)
             {
-                var next = beforePrevious + previous + current;
-                beforePrevious = previous;
-                previous = current;
-                current = next;
-                yield return next;
+                yield return buffer[0];
+                var next = buffer[0] + buffer[1] + buffer[2];
+                buffer[0] = buffer[1];
+                buffer[1] = buffer[2];
+                buffer[2] = next;
             }
         }
     }
