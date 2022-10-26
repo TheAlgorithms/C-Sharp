@@ -17,20 +17,15 @@ public class TetranacciNumbersSequence : ISequence
     {
         get
         {
-            yield return 1;
-            yield return 1;
-            yield return 1;
-            yield return 1;
-
-            var buffer = new[] { new BigInteger(1), new BigInteger(1), new BigInteger(1), new BigInteger(1) };
+            var buffer = Enumerable.Repeat(BigInteger.One, 4).ToArray();
             while (true)
             {
+                yield return buffer[0];
                 var next = buffer[0] + buffer[1] + buffer[2] + buffer[3];
                 buffer[0] = buffer[1];
                 buffer[1] = buffer[2];
                 buffer[2] = buffer[3];
                 buffer[3] = next;
-                yield return next;
             }
         }
     }
