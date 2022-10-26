@@ -28,4 +28,12 @@
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Graph\BreadthFirstTreeTraversal\" />
+    <None Remove="Graph\BreadthFirstTreeTraversal\Dijkstra\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Graph\BreadthFirstTreeTraversal\" />
+    <Folder Include="Graph\BreadthFirstTreeTraversal\Dijkstra\" />
+  </ItemGroup>
 </Project>
