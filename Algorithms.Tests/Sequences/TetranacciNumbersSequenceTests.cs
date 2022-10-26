@@ -9,7 +9,7 @@ namespace Algorithms.Tests.Sequences;
 public class TetranacciNumbersSequenceTests
 {
     [Test]
-    public void First34ElementsCorrect()
+    public void First35ElementsCorrect()
     {
         var sequence = new TetranacciNumbersSequence().Sequence.Take(35);
         sequence.SequenceEqual(new BigInteger[]
