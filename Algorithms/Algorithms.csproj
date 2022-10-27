@@ -27,11 +27,4 @@
     <ProjectReference Include="..\DataStructures\DataStructures.csproj" />
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Graph\Dijkstra\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Graph\Dijkstra\" />
-  </ItemGroup>
 </Project>
