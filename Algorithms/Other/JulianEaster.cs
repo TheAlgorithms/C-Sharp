@@ -5,7 +5,7 @@ namespace Algorithms.Other
 {
     /// <summary>
     ///     Date of Easter calculated with Meeus's Julian algorithm.
-    ///     The algorithm is described <a href="https://en.wikipedia.org/wiki/Date_of_Easter#Meeus's_Julian_algorithm">here</a>.
+    ///     The algorithm is described in Jean Meeus' <a href="https://archive.org/details/astronomicalalgorithmsjeanmeeus1991/page/n73/mode/2up">Astronomical Algorithms (1991, p. 69)</a>.
     /// </summary>
     public static class JulianEaster
     {
