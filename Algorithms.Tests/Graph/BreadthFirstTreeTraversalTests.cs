@@ -40,8 +40,8 @@ namespace Algorithms.Tests.Graph
         }
 
         [Test]
-        [TestCase(new int[] {7, 9, 5})]
-        [TestCase(new int[] { 7, 13, 11, 15, 14, 4, 5, 16, 2 })]
+        [TestCase(new [] {7, 9, 5})]
+        [TestCase(new [] { 7, 13, 11, 15, 14, 4, 5, 16, 2 })]
         public static void IncorrectLevelOrderTraversal(int[] insertion)
         {
             // Arrange
