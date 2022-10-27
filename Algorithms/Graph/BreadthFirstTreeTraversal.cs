@@ -7,6 +7,8 @@ namespace Algorithms.Graph
     /// <summary>
     ///     Breadth first tree traversal traverses through a binary tree
     ///     by iterating through each level first.
+    ///     time complexity: O(n).
+    ///     space complexity: O(w) where w is the max width of a binary tree.
     /// </summary>
     /// <typeparam name="TKey">Type of key held in binary search tree.</typeparam>
     public static class BreadthFirstTreeTraversal<TKey>
@@ -45,6 +47,44 @@ namespace Algorithms.Graph
             }
 
             return levelOrder;
+        }
+
+        /// <summary>
+        ///     Deepest Node return the deepest node in a binary tree. If more
+        ///     than one node is on the deepest level, it is defined as the
+        ///     right-most node of a binary tree. Deepest node uses breadth
+        ///     first traversal to reach the end.
+        /// </summary>
+        /// <param name="tree">Tree passed to find deepest node.</param>
+        /// <returns>Returns the deepest node in the tree.</returns>
+        public static TKey? DeepestNode(BinarySearchTree<TKey> tree)
+        {
+            BinarySearchTreeNode<TKey>? root = tree.Root;
+            if (root is null)
+            {
+                return default(TKey);
+            }
+
+            Queue<BinarySearchTreeNode<TKey>> breadthTraversal = new Queue<BinarySearchTreeNode<TKey>>();
+            breadthTraversal.Enqueue(root);
+            TKey deepest = root.Key;
+            while (breadthTraversal.Count > 0)
+            {
+                BinarySearchTreeNode<TKey> current = breadthTraversal.Dequeue();
+                if (current.Left is not null)
+                {
+                    breadthTraversal.Enqueue(current.Left);
+                }
+
+                if (current.Right is not null)
+                {
+                    breadthTraversal.Enqueue(current.Right);
+                }
+
+                deepest = current.Key;
+            }
+
+            return deepest;
         }
     }
 }

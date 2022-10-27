@@ -29,11 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Graph\BreadthFirstTreeTraversal\" />
-    <None Remove="Graph\BreadthFirstTreeTraversal\Dijkstra\" />
+    <None Remove="Graph\Dijkstra\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Graph\BreadthFirstTreeTraversal\" />
-    <Folder Include="Graph\BreadthFirstTreeTraversal\Dijkstra\" />
+    <Folder Include="Graph\Dijkstra\" />
   </ItemGroup>
 </Project>
