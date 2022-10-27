@@ -191,6 +191,7 @@ find more than one implementation for the same objective but using different alg
     * [Gauss Optimization](./Algorithms/Other/GaussOptimization.cs)
     * [Decisions Convolutions](./Algorithms/Other/DecisionsConvolutions.cs)
     * [Welford's Variance](./Algorithms/Other/WelfordsVariance.cs)
+    * [Julian Easter](./Algorithms/Other/JulianEaster.cs)
   * [Problems](./Algorithms/Problems)
     * [Stable Marriage](./Algorithms/Problems/StableMarriage)
       * [Gale-Shapley](./Algorithms/Problems/StableMarriage/GaleShapley.cs)
