@@ -46,9 +46,11 @@ namespace DataStructures.Tests.LinkedList
             dll.Add(4);
 
             var arr = dll.GetData().ToArray();
+            var reversedArr = dll.GetDataReversed().ToArray();
 
             Assert.AreEqual(dll.Count, 5);
             Assert.AreEqual(new[] { 0, 1, 2, 3, 4 }, arr);
+            Assert.AreEqual(new[] { 4, 3, 2, 1, 0 }, reversedArr);
         }
 
         [Test]
@@ -61,9 +63,11 @@ namespace DataStructures.Tests.LinkedList
             dll.Remove();
 
             var arr = dll.GetData().ToArray();
+            var reversedArr = dll.GetDataReversed().ToArray();
 
             Assert.AreEqual(dll.Count, 2);
             Assert.AreEqual(new[] { 1, 3 }, arr);
+            Assert.AreEqual(new[] { 3, 1 }, reversedArr);
         }
 
         [Test]
