@@ -24,20 +24,20 @@ namespace DataStructures.BinarySearchTree
         private readonly Comparer<TKey> comparer;
 
         /// <summary>
-        ///     The root of the BST.
+        ///     Gets the root of the BST.
         /// </summary>
-        private BinarySearchTreeNode<TKey>? root;
+        public BinarySearchTreeNode<TKey>? Root { get; private set; }
 
         public BinarySearchTree()
         {
-            root = null;
+            Root = null;
             Count = 0;
             comparer = Comparer<TKey>.Default;
         }
 
         public BinarySearchTree(Comparer<TKey> customComparer)
         {
-            root = null;
+            Root = null;
             Count = 0;
             comparer = customComparer;
         }
@@ -56,13 +56,13 @@ namespace DataStructures.BinarySearchTree
         /// </exception>
         public void Add(TKey key)
         {
-            if (root is null)
+            if (Root is null)
             {
-                root = new BinarySearchTreeNode<TKey>(key);
+                Root = new BinarySearchTreeNode<TKey>(key);
             }
             else
             {
-                Add(root, key);
+                Add(Root, key);
             }
 
             Count++;
@@ -86,14 +86,14 @@ namespace DataStructures.BinarySearchTree
         /// </summary>
         /// <param name="key">The key to search for.</param>
         /// <returns>The node with the specified key if it exists, otherwise a default value is returned.</returns>
-        public BinarySearchTreeNode<TKey>? Search(TKey key) => Search(root, key);
+        public BinarySearchTreeNode<TKey>? Search(TKey key) => Search(Root, key);
 
         /// <summary>
         ///     Checks if the specified key is in the BST.
         /// </summary>
         /// <param name="key">The key to search for.</param>
         /// <returns>true if the key is in the BST, false otherwise.</returns>
-        public bool Contains(TKey key) => Search(root, key) is not null;
+        public bool Contains(TKey key) => Search(Root, key) is not null;
 
         /// <summary>
         ///     Removes a node with a key that matches <paramref name="key" />.
@@ -102,12 +102,12 @@ namespace DataStructures.BinarySearchTree
         /// <returns>true if the removal was successful, false otherwise.</returns>
         public bool Remove(TKey key)
         {
-            if (root is null)
+            if (Root is null)
             {
                 return false;
             }
 
-            var result = Remove(root, root, key);
+            var result = Remove(Root, Root, key);
             if (result)
             {
                 Count--;
@@ -122,12 +122,12 @@ namespace DataStructures.BinarySearchTree
         /// <returns>The node if possible, a default value otherwise.</returns>
         public BinarySearchTreeNode<TKey>? GetMin()
         {
-            if (root is null)
+            if (Root is null)
             {
                 return default;
             }
 
-            return GetMin(root);
+            return GetMin(Root);
         }
 
         /// <summary>
@@ -136,31 +136,31 @@ namespace DataStructures.BinarySearchTree
         /// <returns>The node if possible, a default value otherwise.</returns>
         public BinarySearchTreeNode<TKey>? GetMax()
         {
-            if (root is null)
+            if (Root is null)
             {
                 return default;
             }
 
-            return GetMax(root);
+            return GetMax(Root);
         }
 
         /// <summary>
         ///     Returns all the keys in the BST, sorted In-Order.
         /// </summary>
         /// <returns>A list of keys in the BST.</returns>
-        public ICollection<TKey> GetKeysInOrder() => GetKeysInOrder(root);
+        public ICollection<TKey> GetKeysInOrder() => GetKeysInOrder(Root);
 
         /// <summary>
         ///     Returns all the keys in the BST, sorted Pre-Order.
         /// </summary>
         /// <returns>A list of keys in the BST.</returns>
-        public ICollection<TKey> GetKeysPreOrder() => GetKeysPreOrder(root);
+        public ICollection<TKey> GetKeysPreOrder() => GetKeysPreOrder(Root);
 
         /// <summary>
         ///     Returns all the keys in the BST, sorted Post-Order.
         /// </summary>
         /// <returns>A list of keys in the BST.</returns>
-        public ICollection<TKey> GetKeysPostOrder() => GetKeysPostOrder(root);
+        public ICollection<TKey> GetKeysPostOrder() => GetKeysPostOrder(Root);
 
         /// <summary>
         ///     Recursive method to add a key to the BST.
@@ -261,7 +261,7 @@ namespace DataStructures.BinarySearchTree
             else
             {
                 var predecessorNode = GetMax(node.Left);
-                Remove(root, root, predecessorNode.Key);
+                Remove(Root, Root, predecessorNode.Key);
                 replacementNode = new BinarySearchTreeNode<TKey>(predecessorNode.Key)
                 {
                     Left = node.Left,
@@ -271,9 +271,9 @@ namespace DataStructures.BinarySearchTree
 
             // Replace the relevant node with a replacement found in the previous stages.
             // Special case for replacing the root node.
-            if (node == root)
+            if (node == Root)
             {
-                root = replacementNode;
+                Root = replacementNode;
             }
             else if (parent.Left == node)
             {

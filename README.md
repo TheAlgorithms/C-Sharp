@@ -36,6 +36,7 @@ find more than one implementation for the same objective but using different alg
     * [Minimum Spanning Tree](./Algorithms/Graph/MinimumSpanningTree)
       * [Prim's Algorithm (Adjacency Matrix)](./Algorithms/Graph/MinimumSpanningTree/PrimMatrix.cs)
       * [Kruskal's Algorithm](./Algorithms/Graph/MinimumSpanningTree/Kruskal.cs)
+    * [BreadthFirstTreeTraversal](./Algorithms/Graph/BreadthFirstTreeTraversal.cs)
     * [BreadthFirstSearch](./Algorithms/Graph/BreadthFirstSearch.cs)
     * [DepthFirstSearch](./Algorithms/Graph/DepthFirstSearch.cs)
     * [Dijkstra Shortest Path](./Algorithms/Graph/Dijkstra/DijkstraAlgorithm.cs)
