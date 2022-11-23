@@ -212,6 +212,7 @@ find more than one implementation for the same objective but using different alg
     * [Segment Tree Multiplication](./DataStructures/SegmentTrees/SegmentTreeApply.cs)
     * [Segment Tree Update](./DataStructures/SegmentTrees/SegmentTreeUpdate.cs)
   * [Binary Search Tree](./DataStructures/BinarySearchTree)
+  * [B Tree](./DataStructures/BTree)
   * [Scapegoat Tree](./DataStructures/ScapegoatTree)
   * [Fenwick tree (or Binary Indexed Tree)](./DataStructures/BinaryIndexedTree)
   * [AA Tree](./DataStructures/AATree)
