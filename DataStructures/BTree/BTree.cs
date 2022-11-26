@@ -150,64 +150,15 @@ namespace DataStructures.BTree
 
                 if (leftSibling != null && leftSibling.Entries.Count > Degree - 1)
                 {
-                    // left sibling has a node to spare, so this moves one node from left sibling
-                    // into parent's node and one node from parent into this current node ("child")
-                    childNode.Entries.Insert(0, parentNode.Entries[subtreeIndexInNode]);
-                    parentNode.Entries[subtreeIndexInNode] = leftSibling.Entries.Last();
-                    leftSibling.Entries.RemoveAt(leftSibling.Entries.Count - 1);
-
-                    if (!leftSibling.IsLeaf)
-                    {
-                        childNode.Children.Insert(0, leftSibling.Children.Last());
-                        leftSibling.Children.RemoveAt(leftSibling.Children.Count - 1);
-                    }
+                    MoveLeftNodeIntoParent(parentNode, leftSibling, subtreeIndexInNode);
                 }
                 else if (rightSibling != null && rightSibling.Entries.Count > Degree - 1)
                 {
-                    // right sibling has a node to spare, so this moves one node from right sibling
-                    // into parent's node and one node from parent into this current node ("child")
-                    childNode.Entries.Add(parentNode.Entries[subtreeIndexInNode]);
-                    parentNode.Entries[subtreeIndexInNode] = rightSibling.Entries.First();
-                    rightSibling.Entries.RemoveAt(0);
-
-                    if (!rightSibling.IsLeaf)
-                    {
-                        childNode.Children.Add(rightSibling.Children.First());
-                        rightSibling.Children.RemoveAt(0);
-                    }
+                    MoveRightNodeIntoParent(parentNode, rightSibling, subtreeIndexInNode);
                 }
                 else
                 {
-                    // this block merges either left or right sibling into the current node "child"
-                    if (leftSibling != null)
-                    {
-                        childNode.Entries.Insert(0, parentNode.Entries[subtreeIndexInNode]);
-                        var oldEntries = childNode.Entries;
-                        childNode.Entries = leftSibling.Entries;
-                        childNode.Entries.AddRange(oldEntries);
-                        if (!leftSibling.IsLeaf)
-                        {
-                            var oldChildren = childNode.Children;
-                            childNode.Children = leftSibling.Children;
-                            childNode.Children.AddRange(oldChildren);
-                        }
-
-                        parentNode.Children.RemoveAt(leftIndex);
-                        parentNode.Entries.RemoveAt(subtreeIndexInNode);
-                    }
-                    else
-                    {
-                        Assert(rightSibling != null, "Node should have at least one sibling");
-                        childNode.Entries.Add(parentNode.Entries[subtreeIndexInNode]);
-                        childNode.Entries.AddRange(rightSibling.Entries);
-                        if (!rightSibling.IsLeaf)
-                        {
-                            childNode.Children.AddRange(rightSibling.Children);
-                        }
-
-                        parentNode.Children.RemoveAt(rightIndex);
-                        parentNode.Entries.RemoveAt(subtreeIndexInNode);
-                    }
+                    MergesSiblingIntoCurrentNode(parentNode, subtreeIndexInNode);
                 }
             }
 
@@ -215,6 +166,83 @@ namespace DataStructures.BTree
             // move on - this guarantees that if any node needs to be removed from it to
             // guarantee BTree's property, we will be fine with that
             DeleteInternal(childNode, keyToDelete);
+        }
+
+        private void MoveLeftNodeIntoParent(BTreeNode<TK> parentNode, BTreeNode<TK> leftSibling, int subtreeIndexInNode)
+        {
+            var childNode = parentNode.Children[subtreeIndexInNode];
+
+            // left sibling has a node to spare, so this moves one node from left sibling
+            // into parent's node and one node from parent into this current node ("child")
+            childNode.Entries.Insert(0, parentNode.Entries[subtreeIndexInNode]);
+            parentNode.Entries[subtreeIndexInNode] = leftSibling.Entries.Last();
+            leftSibling.Entries.RemoveAt(leftSibling.Entries.Count - 1);
+
+            if (!leftSibling.IsLeaf)
+            {
+                childNode.Children.Insert(0, leftSibling.Children.Last());
+                leftSibling.Children.RemoveAt(leftSibling.Children.Count - 1);
+            }
+        }
+
+        private void MergesSiblingIntoCurrentNode(BTreeNode<TK> parentNode, int subtreeIndexInNode)
+        {
+            var childNode = parentNode.Children[subtreeIndexInNode];
+            var leftIndex = subtreeIndexInNode - 1;
+            var leftSibling = subtreeIndexInNode > 0 ? parentNode.Children[leftIndex] : null;
+
+            // this block merges either left or right sibling into the current node "child"
+            if (leftSibling != null)
+            {
+                childNode.Entries.Insert(0, parentNode.Entries[subtreeIndexInNode]);
+                var oldEntries = childNode.Entries;
+                childNode.Entries = leftSibling.Entries;
+                childNode.Entries.AddRange(oldEntries);
+                if (!leftSibling.IsLeaf)
+                {
+                    var oldChildren = childNode.Children;
+                    childNode.Children = leftSibling.Children;
+                    childNode.Children.AddRange(oldChildren);
+                }
+
+                parentNode.Children.RemoveAt(leftIndex);
+                parentNode.Entries.RemoveAt(subtreeIndexInNode);
+            }
+            else
+            {
+                var rightIndex = subtreeIndexInNode + 1;
+                var rightSibling = subtreeIndexInNode < parentNode.Children.Count - 1
+                    ? parentNode.Children[rightIndex]
+                    : null;
+
+                Assert(rightSibling != null, "Node should have at least one sibling");
+                childNode.Entries.Add(parentNode.Entries[subtreeIndexInNode]);
+                childNode.Entries.AddRange(rightSibling.Entries);
+                if (!rightSibling.IsLeaf)
+                {
+                    childNode.Children.AddRange(rightSibling.Children);
+                }
+
+                parentNode.Children.RemoveAt(rightIndex);
+                parentNode.Entries.RemoveAt(subtreeIndexInNode);
+            }
+        }
+
+        private void MoveRightNodeIntoParent(BTreeNode<TK> parentNode, BTreeNode<TK> rightSibling, int subtreeIndexInNode)
+        {
+            var childNode = parentNode.Children[subtreeIndexInNode];
+
+            // right sibling has a node to spare, so this moves one node from right sibling
+            // into parent's node and one node from parent into this current node ("child")
+            childNode.Entries.Add(parentNode.Entries[subtreeIndexInNode]);
+            parentNode.Entries[subtreeIndexInNode] = rightSibling.Entries.First();
+            rightSibling.Entries.RemoveAt(0);
+
+            if (!rightSibling.IsLeaf)
+            {
+                childNode.Children.Add(rightSibling.Children.First());
+                rightSibling.Children.RemoveAt(0);
+            }
         }
 
         /// <summary>

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DataStructures.BTree;
@@ -10,6 +11,12 @@ namespace DataStructures.Tests
         private const int Degree = 2;
 
         private readonly int[] testKeyData = { 10, 20, 30, 50};
+
+        [Test]
+        public void Constructor_CreateTreeWithIncorrectDegree_ThrowArgumentException()
+        {
+            Assert.Throws<ArgumentException>(() => new BTree<int>(0));
+        }
 
         [Test]
         public void Constructor_CreateTree_FormsCorrectBTree()
