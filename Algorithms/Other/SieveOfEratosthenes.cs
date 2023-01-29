@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 namespace Algorithms.Other
 {
     /// <summary>
-    ///     TODO.
+    /// Implements the Sieve of Eratosthenes.
     /// </summary>
     public class SieveOfEratosthenes
     {
