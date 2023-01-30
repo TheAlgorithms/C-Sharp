@@ -678,7 +678,7 @@ namespace Algorithms.Tests.Other
         [TestCase(10, false)]
         public static void TestIsPrime(int input, bool expected)
         {
-            Assert.AreEqual( new SieveOfEratosthenes(100).IsPrime(input), expected);
+            Assert.AreEqual(new SieveOfEratosthenes(100).IsPrime(input), expected);
         }
     }
 }
