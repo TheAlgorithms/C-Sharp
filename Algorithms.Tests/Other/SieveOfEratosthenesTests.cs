@@ -674,14 +674,11 @@ namespace Algorithms.Tests.Other
         [Test]
         public static void TestMaxNumber() => Assert.AreEqual(new SieveOfEratosthenes(69).MaximumNumber, 69);
 
-        [Test]
         [TestCase(13, true)]
         [TestCase(10, false)]
         public static void TestIsPrime(int input, bool expected)
         {
             Assert.AreEqual( new SieveOfEratosthenes(100).IsPrime(input), expected);
-
         }
-
     }
 }

@@ -11,7 +11,7 @@ namespace Algorithms.Other
     /// </summary>
     public class SieveOfEratosthenes
     {
-        private bool[] primes;
+        private readonly bool[] primes;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SieveOfEratosthenes"/> class.
