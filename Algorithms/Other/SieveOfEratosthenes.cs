@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 namespace Algorithms.Other
 {
     /// <summary>
-    /// Implements the Sieve of Eratosthenes.
+    ///     Implements the Sieve of Eratosthenes.
     /// </summary>
     public class SieveOfEratosthenes
     {
@@ -34,9 +34,9 @@ namespace Algorithms.Other
                     continue;
                 }
 
-                for(long notPrime = i * i; notPrime <= maximumNumberToCheck; notPrime += i)
+                for(long composite = i * i; composite <= maximumNumberToCheck; composite += i)
                 {
-                    primes[notPrime] = false;
+                    primes[composite] = false;
                 }
             }
         }
@@ -44,10 +44,7 @@ namespace Algorithms.Other
         /// <summary>
         /// Gets the maximumNumberToCheck the class was instantiated with.
         /// </summary>
-        public long MaximumNumber
-        {
-            get { return primes.Length - 1; }
-        }
+        public long MaximumNumber => primes.Length - 1;
 
         /// <summary>
         /// Returns a boolean indicating whether the number is prime.
