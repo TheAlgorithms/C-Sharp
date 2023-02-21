@@ -25,17 +25,5 @@ namespace Algorithms.Numeric
 
             return result;
         }
-
-        /*
-            public static long Calculate(int num)
-            {
-                if (num < 0)
-                {
-                    throw new ArgumentException("Only for num >= 0");
-                }
-
-                return num == 0 ? 1 : num * Calculate(num - 1);
-            }
-        */
     }
 }
