@@ -117,7 +117,7 @@ namespace Algorithms.Numeric.Series
         /// <param name="x">Given point.</param>
         /// <param name="i">Term index from 0 to n.</param>
         /// <returns>Single term value.</returns>
-        private static double ExpTerm(double x, int i) => Math.Pow(x, i) / Factorial.Calculate(i);
+        private static double ExpTerm(double x, int i) => Math.Pow(x, i) / Factorial(i);
 
         /// <summary>
         ///     Single term for sin(x) function approximation: (-1)^i * x^(2*i + 1) / (2*i + 1)!.
@@ -126,7 +126,7 @@ namespace Algorithms.Numeric.Series
         /// <param name="i">Term index from 0 to n.</param>
         /// <returns>Single term value.</returns>
         private static double SinTerm(double x, int i) =>
-            Math.Pow(-1, i) / Factorial.Calculate(2 * i + 1) * Math.Pow(x, 2 * i + 1);
+            Math.Pow(-1, i) / Factorial(2 * i + 1) * Math.Pow(x, 2 * i + 1);
 
         /// <summary>
         ///     Single term for cos(x) function approximation: (-1)^i * x^(2*i) / (2*i)!.
@@ -135,6 +135,23 @@ namespace Algorithms.Numeric.Series
         /// <param name="i">Term index from 0 to n.</param>
         /// <returns>Single term value.</returns>
         private static double CosTerm(double x, int i) =>
-            Math.Pow(-1, i) / Factorial.Calculate(2 * i) * Math.Pow(x, 2 * i);
+            Math.Pow(-1, i) / Factorial(2 * i) * Math.Pow(x, 2 * i);
+
+        /// <summary>
+        /// Calculates the factorial of an integer.
+        /// </summary>
+        /// <param name="num">num is an integer less than 21.</param>
+        /// <returns>The factorial of the number.</returns>
+        private static long Factorial(int num)
+        {
+            long result = 1;
+
+            for(int i = 2; i <= num; i++)
+            {
+                result *= i;
+            }
+
+            return result;
+        }
     }
 }

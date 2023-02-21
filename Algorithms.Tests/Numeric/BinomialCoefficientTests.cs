@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Numerics;
 using Algorithms.Numeric;
 using NUnit.Framework;
 
@@ -16,7 +17,7 @@ namespace Algorithms.Tests.Numeric
             var result = BinomialCoefficient.Calculate(n, k);
 
             // Assert
-            Assert.AreEqual(expected, result);
+            Assert.AreEqual(new BigInteger(expected), result);
         }
 
         [Test]

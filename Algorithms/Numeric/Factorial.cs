@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Numerics;
 
 namespace Algorithms.Numeric
 {
@@ -11,16 +12,30 @@ namespace Algorithms.Numeric
         /// <summary>
         ///     Calculates factorial of a number.
         /// </summary>
-        /// <param name="num">Input number.</param>
+        /// <param name="num">Input number. Caller responsible for num >= 0.</param>
         /// <returns>Factorial of input number.</returns>
-        public static long Calculate(int num)
+        public static BigInteger Calculate(BigInteger num)
         {
-            if (num < 0)
+            BigInteger result = BigInteger.One;
+
+            for(BigInteger i = 2; i <= num; i++)
             {
-                throw new ArgumentException("Only for num >= 0");
+                result *= i;
             }
 
-            return num == 0 ? 1 : num * Calculate(num - 1);
+            return result;
         }
+
+        /*
+            public static long Calculate(int num)
+            {
+                if (num < 0)
+                {
+                    throw new ArgumentException("Only for num >= 0");
+                }
+
+                return num == 0 ? 1 : num * Calculate(num - 1);
+            }
+        */
     }
 }
