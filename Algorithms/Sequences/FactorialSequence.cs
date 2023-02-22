@@ -23,8 +23,8 @@ namespace Algorithms.Sequences
         {
             get
             {
-                var n = 0;
-                var factorial = new BigInteger(1);
+                var factorial = BigInteger.One;
+                var n = BigInteger.Zero;
                 while (true)
                 {
                     yield return factorial;
