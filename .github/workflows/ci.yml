@@ -1,4 +1,4 @@
-name: Build & Test
+name: CI
 
 on: [push, pull_request]
 
@@ -10,10 +10,10 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 7.x
-      - name: Install dependencies
+          dotnet-version: 6.x
+      - name: Restore
         run: dotnet restore
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --no-restore
       - name: Test
         run: dotnet test --no-restore --verbosity normal
