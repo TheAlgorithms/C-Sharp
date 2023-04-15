@@ -1,12 +1,22 @@
+<div align = "center">
+
 # The Algorithms - C#
-[![Build Status](https://travis-ci.com/TheAlgorithms/C-Sharp.svg?branch=master)](https://travis-ci.com/TheAlgorithms/C-Sharp)
+
+[![Discord chat](https://img.shields.io/discord/808045925556682782.svg?logo=discord&colorB=7289DA)](https://discord.gg/c7MnfGFGa6)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/58895a2795bd48a8b3b7eb6ebe22d576)](https://www.codacy.com/gh/TheAlgorithms/C-Sharp/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TheAlgorithms/C-Sharp&amp;utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/TheAlgorithms/C-Sharp/branch/master/graph/badge.svg)](https://codecov.io/gh/TheAlgorithms/C-Sharp)
-[![GuardRails badge](https://badges.guardrails.io/TheAlgorithms/C-Sharp.svg?token=84805208ba243f0931a74c5148883f894cbe9fd97fe54d64d6d0a89852067548)](https://dashboard.guardrails.io/default/gh/TheAlgorithms/C-Sharp)
+[![Donate](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/TheAlgorithms/donate)
 
-This repository contains algorithms and data structures implemented in C# for educational purposes.
+## All Algorithms implemented in C# - for education purposes
 
-## Overview
+The repository is a collection of a variety of algorithms implemented in C#. The algorithms span over a variety of topics
+from computer science, mathematics and statistics, data science, machine learning, engineering, etc. The implementations
+and their associated documentations are meant to provide a learning resource for educators and students. Hence, one may
+find more than one implementation for the same objective but using different algorithm strategies and optimizations.
+
+</div>
+
+## List of Algorithms
 
 * [Algorithms](./Algorithms)
   * [Data Compression](./Algorithms/DataCompression)
@@ -24,14 +34,17 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Minimum Spanning Tree](./Algorithms/Graph/MinimumSpanningTree)
       * [Prim's Algorithm (Adjacency Matrix)](./Algorithms/Graph/MinimumSpanningTree/PrimMatrix.cs)
       * [Kruskal's Algorithm](./Algorithms/Graph/MinimumSpanningTree/Kruskal.cs)
+    * [BreadthFirstTreeTraversal](./Algorithms/Graph/BreadthFirstTreeTraversal.cs)
     * [BreadthFirstSearch](./Algorithms/Graph/BreadthFirstSearch.cs)
     * [DepthFirstSearch](./Algorithms/Graph/DepthFirstSearch.cs)
     * [Dijkstra Shortest Path](./Algorithms/Graph/Dijkstra/DijkstraAlgorithm.cs)
+    * [FloydWarshall](./Algorithms/Graph/FloydWarshall.cs)
     * [Kosaraju](./Algorithms/Graph/Kosaraju.cs)
   * [Knapsack problem](./Algorithms/Knapsack)
     * [Naive solver](./Algorithms/Knapsack/NaiveKnapsackSolver.cs)
     * [Dynamic Programming solver](./Algorithms/Knapsack/DynamicProgrammingKnapsackSolver.cs)
     * [Branch and bound solver](./Algorithms/Knapsack/BranchAndBoundKnapsackSolver.cs)
+    * [IHeuristicSolver](./Algorithms/Knapsack/IHeuristicSolver.cs)
   * [Linear Algebra](./Algorithms/LinearAlgebra)
     * [Distances](./Algorithms/LinearAlgebra/Distances)
       * [Euclidean](./Algorithms/LinearAlgebra/Distances/Euclidean.cs)
@@ -44,6 +57,7 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Modular Multiplicative Inverse](./Algorithms/ModularArithmetic/ModularMultiplicativeInverse.cs)
   * [Numeric](./Algorithms/Numeric)
     * [Aliquot Sum Calculator](./Algorithms/Numeric/AliquotSumCalculator.cs)
+    * [Amicable Numbers Checker](./Algorithms/Numeric/AmicableNumbersChecker.cs)
     * [Decomposition](./Algorithms/Numeric/Decomposition)
       * [LU Decomposition](./Algorithms/Numeric/Decomposition/LU.cs)
       * [Thin Singular Vector Decomposition](./Algorithms/Numeric/Decomposition/ThinSVD.cs)
@@ -56,6 +70,8 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Series](./Algorithms/Numeric/Series)
       * [Maclaurin Series](./Algorithms/Numeric/Series/Maclaurin.cs)
     * [Gauss-Jordan Elimination](./Algorithms/Numeric/GaussJordanElimination.cs)
+    * [BinomialCoefficient](./Algorithms/Numeric/BinomialCoefficient.cs)
+    * [Factorial](./Algorithms/Numeric/Factorial.cs)
     * [Keith Number Checker](./Algorithms/Numeric/KeithNumberChecker.cs)
     * [Pseudo-Inverse](./Algorithms/Numeric/Pseudoinverse/PseudoInverse.cs)
     * [Narcissistic Number Checker](./Algorithms/Numeric/NarcissisticNumberChecker.cs)
@@ -63,6 +79,10 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Perfect Square Checker](./Algorithms/Numeric/PerfectSquareChecker.cs)
     * [Euler Method](./Algorithms/Numeric/EulerMethod.cs)
     * [Miller-Rabin primality check](./Algorithms/Numeric/MillerRabinPrimalityChecker.cs)
+    * [KrishnamurthyNumberChecker](./Algorithms/Numeric/KrishnamurthyNumberChecker.cs)
+    * [Automorphic Number](./Algorithms/Numeric/AutomorphicNumber.cs)
+    * [Josephus Problem](./Algorithms/Numeric/JosephusProblem.cs)
+    * [Newton's Square Root Calculation](./Algorithms/NewtonSquareRoot.cs)
   * [Searches](./Algorithms/Search)
     * [A-Star](./Algorithms/Search/AStar/)
     * [Binary Search](./Algorithms/Search/BinarySearcher.cs)
@@ -108,27 +128,38 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [A000005 Count of Divisors](./Algorithms/Sequences/DivisorsCountSequence.cs)
     * [A000008 Make Change](./Algorithms/Sequences/MakeChangeSequence.cs)
     * [A000010 Euler's Totient](./Algorithms/Sequences/EulerTotientSequence.cs)
+    * [A000012 All Ones](./Algorithms/Sequences/AllOnesSequence.cs)
     * [A000027 Natural](./Algorithms/Sequences/NaturalSequence.cs)
+    * [A000032 Lucas Numbers](./Algorithms/Sequences/LucasNumbersBeginningAt2Sequence.cs)
     * [A000040 Primes](./Algorithms/Sequences/PrimesSequence.cs)
     * [A000045 Fibonacci](./Algorithms/Sequences/FibonacciSequence.cs)
     * [A000079 Powers of 2](./Algorithms/Sequences/PowersOf2Sequence.cs)
     * [A000108 Catalan](./Algorithms/Sequences/CatalanSequence.cs)
+    * [A000120 1's Counting](./Algorithms/Sequences/OnesCountingSequence.cs)
+    * [A000124 Central Polygonal Numbers](./Algorithms/Sequences/CentralPolygonalNumbersSequence.cs)
+    * [A000125 Cake Numbers](./Algorithms/Sequences/CakeNumbersSequence.cs)
     * [A000142 Factorial](./Algorithms/Sequences/FactorialSequence.cs)
+    * [A000213 Tribonacci Numbers](./Algorithms/Sequences/TribonacciNumbersSequence.cs)
     * [A000215 Fermat Numbers](./Algorithms/Sequences/FermatNumbersSequence.cs)
+    * [A000288 Tetranacci Numbers](./Algorithms/Sequences/TetranacciNumbersSequence.cs)
     * [A000290 Squares](./Algorithms/Sequences/SquaresSequence.cs)
+    * [A000292 Tetrahedral numbers](./Algorithms/Sequences/TetrahedralSequence.cs)
     * [A000578 Cubes](./Algorithms/Sequences/CubesSequence.cs)
     * [A000720 PrimePi](./Algorithms/Sequences/PrimePiSequence.cs)
     * [A001146 Number of Boolean Functions](./Algorithms/Sequences/NumberOfBooleanFunctionsSequence.cs)
     * [A001462 Golomb's](./Algorithms/Sequences/GolombsSequence.cs)
     * [A001478 Negative Integers](./Algorithms/Sequences/NegativeIntegersSequence.cs)
     * [A002110 Primorial Numbers](./Algorithms/Sequences/PrimorialNumbersSequence.cs)
+    * [A002717 Matchstick Triangle Arrangement](./Algorithms/Sequences/MatchstickTriangleSequence.cs)
     * [A005132 Recaman's](./Algorithms/Sequences/RecamansSequence.cs)
     * [A006577 Number of '3n+1' steps to reach 1](./Algorithms/Sequences/ThreeNPlusOneStepsSequence.cs)
     * [A006862 Euclid Numbers](./Algorithms/Sequences/EuclidNumbersSequence.cs)
     * [A006879 Number of Primes by Number of Digits](./Algorithms/Sequences/NumberOfPrimesByNumberOfDigitsSequence.cs)
     * [A006880 Number of Primes by Powers of 10](./Algorithms/Sequences/NumberOfPrimesByPowersOf10Sequence.cs)
     * [A007318 Binomial](./Algorithms/Sequences/BinomialSequence.cs)
+    * [A007395 All Twos](./Algorithms/Sequences/AllTwosSequence.cs)
     * [A010051 Binary Prime Constant](./Algorithms/Sequences/BinaryPrimeConstantSequence.cs)
+    * [A010701 All Threes](./Algorithms/Sequences/BinaryPrimeConstantSequence.cs)
     * [A011557 Powers of 10](./Algorithms/Sequences/PowersOf10Sequence.cs)
     * [A057588 Kummer Numbers](./Algorithms/Sequences/KummerNumbersSequence.cs)
     * [A019434 Fermat Primes](./Algorithms/Sequences/FermatPrimesSequence.cs)
@@ -140,17 +171,32 @@ This repository contains algorithms and data structures implemented in C# for ed
     * [Boyer Moore](./Algorithms/Strings/BoyerMoore.cs)
     * [Palindrome Checker](./Algorithms/Strings/Palindrome.cs)
     * [Get all permutations of a string](./Algorithms/Strings/Permutation.cs)
+    * [Levenshtein Distance](./Algorithms/Strings/LevenshteinDistance.cs)
+    * [Hamming Distance](./Algorithms/Strings/HammingDistance.cs)
+    * [Jaro Similarity](./Algorithms/Strings/JaroSimilarity.cs)
+    * [Jaro-Winkler Distance](./Algorithms/Strings/JaroWinklerDistance.cs)
+    * [Z-block substring search](./Algorithms/Strings/ZblockSubstringSearch.cs)
   * [Other](./Algorithms/Other)
     * [Fermat Prime Checker](./Algorithms/Other/FermatPrimeChecker.cs)
     * [Sieve of Eratosthenes](./Algorithms/Other/SieveOfEratosthenes.cs)
     * [Luhn](./Algorithms/Other/Luhn.cs)
+    * [Int2Binary](./Algorithms/Other/Int2Binary.cs)
+    * [GeoLocation](./Algorithms/Other/GeoLocation.cs)
     * [Mandelbrot](./Algorithms/Other/Mandelbrot.cs)
     * [Koch Snowflake](./Algorithms/Other/KochSnowflake.cs)
     * [RGB-HSV Conversion](./Algorithms/Other/RGBHSVConversion.cs)
     * [Flood Fill](./Algorithms/Other/FloodFill.cs)
+    * [Pareto Optimization](./Algorithms/Other/ParetoOptimization.cs)
+    * [Gauss Optimization](./Algorithms/Other/GaussOptimization.cs)
+    * [Decisions Convolutions](./Algorithms/Other/DecisionsConvolutions.cs)
+    * [Welford's Variance](./Algorithms/Other/WelfordsVariance.cs)
+    * [Julian Easter](./Algorithms/Other/JulianEaster.cs)
+    * [Pollard's Rho](./Algorithms/Other/PollardsRhoFactorizing.cs)
   * [Problems](./Algorithms/Problems)
     * [Stable Marriage](./Algorithms/Problems/StableMarriage)
       * [Gale-Shapley](./Algorithms/Problems/StableMarriage/GaleShapley.cs)
+      * [Accepter](./Algorithms/Problems/StableMarriage/Accepter.cs)
+      * [Proposer](./Algorithms/Problems/StableMarriage/Proposer.cs)
     * [N-Queens](./Algorithms/Problems/NQueens)
       * [Backtracking](./Algorithms/Problems/NQueens/BacktrackingNQueensSolver.cs)
     * [Dynamic Coin Change](./Algorithms/Problems/CoinChange)
@@ -188,6 +234,7 @@ This repository contains algorithms and data structures implemented in C# for ed
   * [Linked List](./DataStructures/LinkedList)
     * [Singly Linked List](./DataStructures/LinkedList/SinglyLinkedList/SinglyLinkedList.cs)
     * [Doubly Linked List](./DataStructures/LinkedList/DoublyLinkedList/DoublyLinkedList.cs)
+    * [Skip List](./DataStructures/LinkedList/SkipList/SkipList.cs)
   * [Graph](./DataStructures/Graph)
     * [Directed Weighted Graph Via Adjacency Matrix](./DataStructures/Graph/DirectedWeightedGraph.cs)
   * [Disjoint Set](./DataStructures/DisjointSet)
@@ -195,10 +242,14 @@ This repository contains algorithms and data structures implemented in C# for ed
   * [Inverted index](./DataStructures/InvertedIndex.cs)
   * [Unrolled linked list](./DataStructures/UnrolledList/UnrolledLinkedList.cs)
   * [Tries](./DataStructures/Tries/Trie.cs)
+  * [Cache](./DataStructures/Cache)
+    * [Least Frequently Used (LFU) Cache](./DataStructures/Cache/LfuCache.cs)
+    * [Least Recently Used (LRU) Cache](./DataStructures/Cache/LruCache.cs)
+
 
 ## Contributing
 
 You can contribute with pleasure to this repository.
 Please orient on the directory structure and overall code style of this repository
-and refer to [our contributing guidelines](./CONTRIBUTING.md) for more detail.
+and refer to [our contributing guidelines](./CONTRIBUTING.md) for more details.
 If you want to ask a question or suggest something, please open an issue.

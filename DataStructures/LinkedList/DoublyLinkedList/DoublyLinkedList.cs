@@ -113,9 +113,9 @@ namespace DataStructures.LinkedList.DoublyLinkedList
             node.Previous = existingNode;
             existingNode.Next = node;
 
-            if (existingNode.Next is not null)
+            if (node.Next is not null)
             {
-                existingNode.Next.Previous = node;
+                node.Next.Previous = node;
             }
 
             Count++;

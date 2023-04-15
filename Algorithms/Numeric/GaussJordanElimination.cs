@@ -3,7 +3,7 @@
 namespace Algorithms.Numeric
 {
     /// <summary>
-    ///     TODO.
+    ///     Algorithm used to find the inverse of any matrix that can be inverted.
     /// </summary>
     public class GaussJordanElimination
     {

@@ -42,13 +42,10 @@ namespace DataStructures.Stack
         ///     Initializes a new instance of the <see cref="ArrayBasedStack{T}" /> class.
         /// </summary>
         /// <param name="items">Items to push onto the <see cref="ArrayBasedStack{T}" />.</param>
-        public ArrayBasedStack(IEnumerable<T> items)
-            : this()
+        public ArrayBasedStack(T[] items)
         {
-            foreach (var item in items)
-            {
-                Push(item);
-            }
+            stack = items;
+            top = items.Length - 1;
         }
 
         /// <summary>

@@ -2,6 +2,8 @@
 Please include a summary of the change.
 Please also include relevant motivation and context (if applicable).
 Put 'x' in between square brackets to mark an item as complete.
+[x] means checked checkbox
+[ ] means unchecked checkbox
 -->
 
 - [ ] I have performed a self-review of my code

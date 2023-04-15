@@ -6,7 +6,7 @@ this repository.
 
 We welcome adding new algorithms and data structures that were mentioned in books or other reputable sources.
 We also welcome fixing bugs in code, clarifying documentation and adding new test cases to check existing code.
-The framework targeted by our code is **dotnet 5**. The corresponding SDK can be found [here](https://dotnet.microsoft.com/download/dotnet/5.0).
+The framework targeted by our code is **dotnet 6**. The corresponding SDK can be found [here](https://dotnet.microsoft.com/download/dotnet/6.0).
 
 Please note that we have a code of conduct, please follow it in all your interactions with the project.
 
