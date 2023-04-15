@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Numerics;
 using Algorithms.Numeric;
 using NUnit.Framework;
 
@@ -8,15 +9,15 @@ namespace Algorithms.Tests.Numeric
     {
         [TestCase(4, 2, 6)]
         [TestCase(7, 3, 35)]
-        public static void CalculateFromPairs(int n, int k, long expected)
+        public static void CalculateFromPairs(int n, int k, int expected)
         {
             // Arrange
 
             // Act
-            var result = BinomialCoefficient.Calculate(n, k);
+            var result = BinomialCoefficient.Calculate(new BigInteger(n), new BigInteger(k));
 
             // Assert
-            Assert.AreEqual(expected, result);
+            Assert.AreEqual(new BigInteger(expected), result);
         }
 
         [Test]
@@ -28,7 +29,7 @@ namespace Algorithms.Tests.Numeric
             // Act
 
             // Assert
-            _ = Assert.Throws<ArgumentException>(() => BinomialCoefficient.Calculate(n, k));
+            _ = Assert.Throws<ArgumentException>(() => BinomialCoefficient.Calculate(new BigInteger(n), new BigInteger(k)));
         }
     }
 }
