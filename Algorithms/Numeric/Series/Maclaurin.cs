@@ -117,7 +117,7 @@ namespace Algorithms.Numeric.Series
         /// <param name="x">Given point.</param>
         /// <param name="i">Term index from 0 to n.</param>
         /// <returns>Single term value.</returns>
-        private static double ExpTerm(double x, int i) => Math.Pow(x, i) / Factorial.Calculate(i);
+        private static double ExpTerm(double x, int i) => Math.Pow(x, i) / (long)Factorial.Calculate(i);
 
         /// <summary>
         ///     Single term for sin(x) function approximation: (-1)^i * x^(2*i + 1) / (2*i + 1)!.
@@ -126,7 +126,7 @@ namespace Algorithms.Numeric.Series
         /// <param name="i">Term index from 0 to n.</param>
         /// <returns>Single term value.</returns>
         private static double SinTerm(double x, int i) =>
-            Math.Pow(-1, i) / Factorial.Calculate(2 * i + 1) * Math.Pow(x, 2 * i + 1);
+            Math.Pow(-1, i) / ((long)Factorial.Calculate(2 * i + 1)) * Math.Pow(x, 2 * i + 1);
 
         /// <summary>
         ///     Single term for cos(x) function approximation: (-1)^i * x^(2*i) / (2*i)!.
@@ -135,6 +135,6 @@ namespace Algorithms.Numeric.Series
         /// <param name="i">Term index from 0 to n.</param>
         /// <returns>Single term value.</returns>
         private static double CosTerm(double x, int i) =>
-            Math.Pow(-1, i) / Factorial.Calculate(2 * i) * Math.Pow(x, 2 * i);
+            Math.Pow(-1, i) / ((long)Factorial.Calculate(2 * i)) * Math.Pow(x, 2 * i);
     }
 }
