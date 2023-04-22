@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using Algorithms.Numeric;
 using Algorithms.Strings;
 using FluentAssertions;
@@ -48,7 +49,7 @@ namespace Algorithms.Tests.Strings
             {
                 return current / Factorial.Calculate(keyValuePair.Value);
             });
-            Assert.AreEqual(expectedNumberOfAnagrams, permutations.Count);
+            Assert.AreEqual(expectedNumberOfAnagrams, new BigInteger(permutations.Count));
             // End 1.
 
             // Start 2
