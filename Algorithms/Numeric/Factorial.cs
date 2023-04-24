@@ -25,12 +25,6 @@ namespace Algorithms.Numeric
                 throw new ArgumentException("Only for num >= 0");
             }
 
-            // Factorial of 0 is 1. No need to calculate further.
-            if(BigInteger.Compare(num, BigInteger.Zero) == 0)
-            {
-                return BigInteger.One;
-            }
-
             // Factorial of numbers greater than 0.
             BigInteger result = BigInteger.One;
 

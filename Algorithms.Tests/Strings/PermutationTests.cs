@@ -4,7 +4,6 @@ using System.Linq;
 using System.Numerics;
 using Algorithms.Numeric;
 using Algorithms.Strings;
-using FluentAssertions;
 using NUnit.Framework;
 
 namespace Algorithms.Tests.Strings
