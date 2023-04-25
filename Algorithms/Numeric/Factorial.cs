@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 
 namespace Algorithms.Numeric
 {
@@ -9,18 +10,30 @@ namespace Algorithms.Numeric
     public static class Factorial
     {
         /// <summary>
-        ///     Calculates factorial of a number.
+        ///     Calculates factorial of a integer number.
         /// </summary>
-        /// <param name="num">Input number.</param>
-        /// <returns>Factorial of input number.</returns>
-        public static long Calculate(int num)
+        /// <param name="inputNum">Integer Input number.</param>
+        /// <returns>Factorial of integer input number.</returns>
+        public static BigInteger Calculate(int inputNum)
         {
-            if (num < 0)
+            // Convert integer input to BigInteger
+            BigInteger num = new BigInteger(inputNum);
+
+            // Don't calculate factorial if input is a negative number.
+            if (BigInteger.Compare(num, BigInteger.Zero) < 0)
             {
                 throw new ArgumentException("Only for num >= 0");
             }
 
-            return num == 0 ? 1 : num * Calculate(num - 1);
+            // Factorial of numbers greater than 0.
+            BigInteger result = BigInteger.One;
+
+            for (BigInteger i = BigInteger.One; BigInteger.Compare(i, num) <= 0; i = BigInteger.Add(i, BigInteger.One))
+            {
+                result = BigInteger.Multiply(result, i);
+            }
+
+            return result;
         }
     }
 }
