@@ -10,7 +10,7 @@ namespace Algorithms.Numeric
     ///     The most widely known member of the Runge–Kutta family is generally referred to as
     ///     "RK4", the "classic Runge–Kutta method" or simply as "the Runge–Kutta method".
     ///     </summary>
-    public class RungeKuttaMethod
+    public static class RungeKuttaMethod
     {
         /// <summary>
         ///     Loops through all the steps until xEnd is reached, adds a point for each step and then
