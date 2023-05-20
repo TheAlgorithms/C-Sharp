@@ -78,6 +78,7 @@ find more than one implementation for the same objective but using different alg
     * [Perfect Number Checker](./Algorithms/Numeric/PerfectNumberChecker.cs)
     * [Perfect Square Checker](./Algorithms/Numeric/PerfectSquareChecker.cs)
     * [Euler Method](./Algorithms/Numeric/EulerMethod.cs)
+    * [Classic Runge-Kutta Method](./Algorithms/Numeric/RungeKuttaMethod.cs)
     * [Miller-Rabin primality check](./Algorithms/Numeric/MillerRabinPrimalityChecker.cs)
     * [KrishnamurthyNumberChecker](./Algorithms/Numeric/KrishnamurthyNumberChecker.cs)
     * [Automorphic Number](./Algorithms/Numeric/AutomorphicNumber.cs)
