@@ -1,8 +1,8 @@
-using Algorithms.ModularArithmetic;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using Algorithms.ModularArithmetic;
+using NUnit.Framework;
 
 namespace Algorithms.Tests.ModularArithmetic
 {
@@ -100,8 +100,8 @@ namespace Algorithms.Tests.ModularArithmetic
 
             // Act
             var x = ChineseRemainderTheorem.Compute(
-                new List<BigInteger> { BigInteger.One, BigInteger.One, new BigInteger(3), BigInteger.One },
-                new List<BigInteger> { new BigInteger(2), new BigInteger(3), new BigInteger(5), new BigInteger(7) }
+                new List<BigInteger> { BigInteger.One, BigInteger.One, new(3), BigInteger.One },
+                new List<BigInteger> { new(2), new(3), new(5), new(7) }
             );
 
             // Assert
@@ -115,8 +115,8 @@ namespace Algorithms.Tests.ModularArithmetic
 
             // Act
             var x = ChineseRemainderTheorem.Compute(
-                new List<BigInteger> { BigInteger.Zero, BigInteger.Zero, new BigInteger(2), BigInteger.One, BigInteger.One },
-                new List<BigInteger> { new BigInteger(2), new BigInteger(5), new BigInteger(7), new BigInteger(9), new BigInteger(11) }
+                new List<BigInteger> { BigInteger.Zero, BigInteger.Zero, new(2), BigInteger.One, BigInteger.One },
+                new List<BigInteger> { new(2), new(5), new(7), new(9), new(11) }
             );
 
             // Assert
@@ -130,8 +130,8 @@ namespace Algorithms.Tests.ModularArithmetic
 
             // Act
             var x = ChineseRemainderTheorem.Compute(
-                new List<BigInteger> { BigInteger.One, new BigInteger(4), new BigInteger(13) },
-                new List<BigInteger> { new BigInteger(4), new BigInteger(9), new BigInteger(25) }
+                new List<BigInteger> { BigInteger.One, new(4), new(13) },
+                new List<BigInteger> { new(4), new(9), new(25) }
             );
 
             // Assert
@@ -142,7 +142,7 @@ namespace Algorithms.Tests.ModularArithmetic
         public static void TestCompute_BigInteger_RequirementsNotMet_ArgumentLengthDifferent()
         {
             // Act
-            void Act() => ChineseRemainderTheorem.Compute(new List<BigInteger>(), new List<BigInteger> { new BigInteger(5) });
+            void Act() => ChineseRemainderTheorem.Compute(new List<BigInteger>(), new List<BigInteger> { new(5) });
 
             // Assert
             _ = Assert.Throws<ArgumentException>(Act);
@@ -151,7 +151,7 @@ namespace Algorithms.Tests.ModularArithmetic
         [Test]
         public static void TestCompute_BigInteger_RequirementsNotMet_NTooSmall()
         {
-            foreach (var n in new List<BigInteger> { new BigInteger(long.MinValue), BigInteger.MinusOne, BigInteger.Zero, BigInteger.One })
+            foreach (var n in new List<BigInteger> { new(long.MinValue), BigInteger.MinusOne, BigInteger.Zero, BigInteger.One })
             {
                 // Act
                 void Act() => ChineseRemainderTheorem.Compute(new List<BigInteger> { BigInteger.One }, new List<BigInteger> { n });
@@ -164,10 +164,10 @@ namespace Algorithms.Tests.ModularArithmetic
         [Test]
         public static void TestCompute_BigInteger_RequirementsNotMet_ATooSmall()
         {
-            foreach (var a in new List<BigInteger> { new BigInteger(long.MinValue), new BigInteger(-2), BigInteger.MinusOne })
+            foreach (var a in new List<BigInteger> { new(long.MinValue), new(-2), BigInteger.MinusOne })
             {
                 // Act
-                void Act() => ChineseRemainderTheorem.Compute(new List<BigInteger> { a }, new List<BigInteger> { new BigInteger(3) });
+                void Act() => ChineseRemainderTheorem.Compute(new List<BigInteger> { a }, new List<BigInteger> { new(3) });
 
                 // Assert
                 _ = Assert.Throws<ArgumentException>(Act);
@@ -177,12 +177,12 @@ namespace Algorithms.Tests.ModularArithmetic
         [Test]
         public static void TestCompute_BigInteger_RequirementsNotMet_NNotCoprime()
         {
-            foreach (var n in new List<BigInteger> { new BigInteger(3), new BigInteger(9), new BigInteger(15), new BigInteger(27) })
+            foreach (var n in new List<BigInteger> { new(3), new(9), new(15), new(27) })
             {
                 // Act
                 void Act() => ChineseRemainderTheorem.Compute(
                     new List<BigInteger> { BigInteger.One, BigInteger.One, BigInteger.One, BigInteger.One, BigInteger.One },
-                    new List<BigInteger> { new BigInteger(2), new BigInteger(3), new BigInteger(5), new BigInteger(7), n }
+                    new List<BigInteger> { new(2), new(3), new(5), new(7), n }
                 );
 
                 // Assert

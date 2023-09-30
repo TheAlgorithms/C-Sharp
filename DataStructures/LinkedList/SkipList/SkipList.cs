@@ -36,7 +36,7 @@ namespace DataStructures.LinkedList.SkipList
         private readonly int maxLevels;
         private readonly SkipListNode<TValue> head;
         private readonly SkipListNode<TValue> tail;
-        private readonly Random random = new Random();
+        private readonly Random random = new();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SkipList{TValue}"/> class.
@@ -49,7 +49,7 @@ namespace DataStructures.LinkedList.SkipList
             head = new(int.MinValue, default(TValue), maxLevels);
             tail = new(int.MaxValue, default(TValue), maxLevels);
 
-            for(int i = 0; i < maxLevels; i++)
+            for (int i = 0; i < maxLevels; i++)
             {
                 head.Next[i] = tail;
             }
@@ -69,7 +69,7 @@ namespace DataStructures.LinkedList.SkipList
             get
             {
                 var previousNode = GetSkipNodes(key).First();
-                if(previousNode.Next[0].Key == key)
+                if (previousNode.Next[0].Key == key)
                 {
                     return previousNode.Next[0].Value!;
                 }
