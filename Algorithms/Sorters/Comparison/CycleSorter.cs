@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Algorithms.Sorters.Comparison
 {
@@ -37,18 +37,13 @@ namespace Algorithms.Sorters.Comparison
 
             pos = SkipSameElements(array, pos, item, comparer);
 
-            var temp = array[pos];
-            array[pos] = item;
-            item = temp;
-
+            (item, array[pos]) = (array[pos], item);
             while (pos != startingIndex)
             {
                 pos = startingIndex + CountSmallerElements(array, startingIndex + 1, item, comparer);
                 pos = SkipSameElements(array, pos, item, comparer);
 
-                temp = array[pos];
-                array[pos] = item;
-                item = temp;
+                (array[pos], item) = (item, array[pos]);
             }
         }
 

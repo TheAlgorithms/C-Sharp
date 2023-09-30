@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Algorithms.Sorters.Comparison
 {
@@ -38,9 +38,7 @@ namespace Algorithms.Sorters.Comparison
                 {
                     if (comparer.Compare(array[k], array[k + step]) > 0)
                     {
-                        var temp = array[k];
-                        array[k] = array[k + step];
-                        array[k + step] = temp;
+                        (array[k + step], array[k]) = (array[k], array[k + step]);
                         wasChanged = true;
                     }
                 }

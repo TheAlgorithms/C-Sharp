@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Algorithms.Sorters.Comparison
 {
@@ -26,10 +26,7 @@ namespace Algorithms.Sorters.Comparison
 
             for (var i = data.Count - 1; i > 0; i--)
             {
-                var temp = data[i];
-                data[i] = data[0];
-                data[0] = temp;
-
+                (data[0], data[i]) = (data[i], data[0]);
                 heapSize--;
                 MakeHeap(data, heapSize, 0, comparer);
             }
@@ -57,10 +54,7 @@ namespace Algorithms.Sorters.Comparison
                 }
 
                 // process of reheaping / swapping
-                var temp = input[rIndex];
-                input[rIndex] = input[largest];
-                input[largest] = temp;
-
+                (input[largest], input[rIndex]) = (input[rIndex], input[largest]);
                 rIndex = largest;
             }
         }

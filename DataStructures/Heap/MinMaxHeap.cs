@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -373,9 +373,7 @@ namespace DataStructures.Heap
 
         private void SwapNodes(int i, int j)
         {
-            var temp = heap[i];
-            heap[i] = heap[j];
-            heap[j] = temp;
+            (heap[j], heap[i]) = (heap[i], heap[j]);
         }
     }
 }

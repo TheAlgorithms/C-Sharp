@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace DataStructures.Heap
@@ -181,9 +181,7 @@ namespace DataStructures.Heap
         /// <param name="idx2">Second index.</param>
         private void Swap(int idx1, int idx2)
         {
-            var tmp = data[idx1];
-            data[idx1] = data[idx2];
-            data[idx2] = tmp;
+            (data[idx2], data[idx1]) = (data[idx1], data[idx2]);
         }
 
         /// <summary>

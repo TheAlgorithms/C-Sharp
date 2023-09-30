@@ -23,9 +23,7 @@ namespace Algorithms.Sorters.Comparison
             {
                 for (var j = i; j > 0 && comparer.Compare(array[j], array[j - 1]) < 0; j--)
                 {
-                    var temp = array[j - 1];
-                    array[j - 1] = array[j];
-                    array[j] = temp;
+                    (array[j], array[j - 1]) = (array[j - 1], array[j]);
                 }
             }
         }

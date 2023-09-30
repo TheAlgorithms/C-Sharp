@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Algorithms.Sorters.Comparison
 {
@@ -56,10 +56,7 @@ namespace Algorithms.Sorters.Comparison
                     return nright;
                 }
 
-                var t = array[nleft];
-                array[nleft] = array[nright];
-                array[nright] = t;
-
+                (array[nright], array[nleft]) = (array[nleft], array[nright]);
                 nleft++;
                 nright--;
             }

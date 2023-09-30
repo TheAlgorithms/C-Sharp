@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Algorithms.Sorters.Comparison
 {
@@ -32,9 +32,7 @@ namespace Algorithms.Sorters.Comparison
                         continue;
                     }
 
-                    var highValue = array[i];
-                    array[i] = array[i + 1];
-                    array[i + 1] = highValue;
+                    (array[i + 1], array[i]) = (array[i], array[i + 1]);
                 }
 
                 endIndex--;
@@ -47,10 +45,7 @@ namespace Algorithms.Sorters.Comparison
                         continue;
                     }
 
-                    var highValue = array[i];
-                    array[i] = array[i - 1];
-                    array[i - 1] = highValue;
-
+                    (array[i - 1], array[i]) = (array[i], array[i - 1]);
                     swapped = true;
                 }
 

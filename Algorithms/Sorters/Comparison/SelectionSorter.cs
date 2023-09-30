@@ -30,9 +30,7 @@ namespace Algorithms.Sorters.Comparison
                     }
                 }
 
-                var t = array[i];
-                array[i] = array[jmin];
-                array[jmin] = t;
+                (array[jmin], array[i]) = (array[i], array[jmin]);
             }
         }
     }

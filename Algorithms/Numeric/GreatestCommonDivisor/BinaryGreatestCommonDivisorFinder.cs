@@ -54,9 +54,7 @@ namespace Algorithms.Numeric.GreatestCommonDivisor
                 // Now u and v are both odd. Swap if necessary so u <= v,
                 if (u > v)
                 {
-                    var t = v;
-                    v = u;
-                    u = t;
+                    (u, v) = (v, u);
                 }
 
                 // Here v >= u and v - u is even

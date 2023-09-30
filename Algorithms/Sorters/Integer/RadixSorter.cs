@@ -1,4 +1,4 @@
-﻿namespace Algorithms.Sorters.Integer
+namespace Algorithms.Sorters.Integer
 {
     /// <summary>
     ///     Radix sort is a non-comparative integer sorting algorithm that sorts data with integer keys by grouping keys by the
@@ -40,9 +40,7 @@
                     b[cntarray[key]] = array[p];
                 }
 
-                var temp = b;
-                b = array;
-                array = temp;
+                (array, b) = (b, array);
             }
         }
     }

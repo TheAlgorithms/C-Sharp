@@ -363,9 +363,7 @@ namespace DataStructures.Heap.FibonacciHeap
                     if (x.Key.CompareTo(y.Key) > 0)
                     {
                         // Exchange x and y
-                        var temp = x;
-                        x = y;
-                        y = temp;
+                        (y, x) = (x, y);
                     }
 
                     // Make y a child of x
