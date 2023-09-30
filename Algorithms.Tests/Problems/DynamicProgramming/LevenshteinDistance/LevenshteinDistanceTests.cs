@@ -1,7 +1,6 @@
-using Algorithms.Strings;
 using NUnit.Framework;
 
-namespace Algorithms.Tests.Strings
+namespace Algorithms.Tests.DynamicProgramming.LevenshteinDistance
 {
     public class LevenshteinDistanceTests
     {
@@ -14,7 +13,7 @@ namespace Algorithms.Tests.Strings
         [TestCase("abcde", "12345", 5)]
         public void Calculate_ReturnsCorrectLevenshteinDistance(string source, string destination, int expectedDistance)
         {
-            var result = LevenshteinDistance.Calculate(source, destination);
+            var result = Algorithms.Problems.DynamicProgramming.LevenshteinDistance.Calculate(source, destination);
             Assert.AreEqual(expectedDistance, result);
         }
     }

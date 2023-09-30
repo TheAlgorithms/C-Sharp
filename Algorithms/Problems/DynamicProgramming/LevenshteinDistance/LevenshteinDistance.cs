@@ -1,6 +1,6 @@
 using System;
 
-namespace Algorithms.Strings
+namespace Algorithms.Problems.DynamicProgramming
 {
     /// <summary>
     ///     <para>

@@ -23,4 +23,14 @@
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Problems\DynamicProgramming\" />
+    <None Remove="Problems\DynamicProgramming\CoinChange\" />
+    <None Remove="Problems\DynamicProgramming\LevenshteinDistance\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Problems\DynamicProgramming\" />
+    <Folder Include="Problems\DynamicProgramming\CoinChange\" />
+    <Folder Include="Problems\DynamicProgramming\LevenshteinDistance\" />
+  </ItemGroup>
 </Project>
