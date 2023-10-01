@@ -4,16 +4,16 @@ using System.Text;
 namespace Algorithms.DataCompression
 {
     /// <summary>
-    ///     TODO.
+    ///     Provides method for text conversion by key mapping.
     /// </summary>
     public class Translator
     {
         /// <summary>
-        ///     TODO.
+        ///     Converts the input text according to the translation keys.
         /// </summary>
-        /// <param name="text">TODO. 2.</param>
-        /// <param name="translationKeys">TODO. 3.</param>
-        /// <returns>TODO. 4.</returns>
+        /// <param name="text">Input text.</param>
+        /// <param name="translationKeys">Translation keys used for text matching.</param>
+        /// <returns>Converted text according to the translation keys.</returns>
         public string Translate(string text, Dictionary<string, string> translationKeys)
         {
             var sb = new StringBuilder();
