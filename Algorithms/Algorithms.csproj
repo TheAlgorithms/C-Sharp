@@ -27,15 +27,4 @@
     <ProjectReference Include="..\DataStructures\DataStructures.csproj" />
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Problems\DynamicProgramming\" />
-    <None Remove="Problems\DynamicProgramming\CoinChange\" />
-    <None Remove="Problems\DynamicProgramming\LevenshteinDistance\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Problems\DynamicProgramming\" />
-    <Folder Include="Problems\DynamicProgramming\CoinChange\" />
-    <Folder Include="Problems\DynamicProgramming\LevenshteinDistance\" />
-  </ItemGroup>
 </Project>
