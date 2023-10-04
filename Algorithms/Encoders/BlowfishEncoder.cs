@@ -20,7 +20,7 @@ namespace Algorithms.Encoders;
 /// are swapped at the end of each round, except for the last one. The final output is XORed with two more subkeys to
 /// produce the encrypted or decrypted block.
 /// </para>
-/// <see href="https://en.wikipedia.org/wiki/Blowfish_%28cipher%29">Blowfish on Wikipedia</see>
+/// <see href="https://en.wikipedia.org/wiki/Blowfish_%28cipher%29">Blowfish on Wikipedia</see>.
 /// </summary>
 public class BlowfishEncoder
 {
@@ -227,7 +227,6 @@ public class BlowfishEncoder
     /// Decrypts a string using the blowfish algorithm.
     /// </summary>
     /// <param name="cipherText">The string to be decrypted, represented as a hexadecimal string.</param>
-    /// <param name="key">The secret key to be used for decryption, represented as a hexadecimal string.</param>
     /// <returns>The decrypted string, represented as a hexadecimal string.</returns>
     public string Decrypt(string cipherText)
     {
@@ -365,8 +364,6 @@ public class BlowfishEncoder
         answer = AddAndMod(answer, a[3]);
         return answer;
     }
-
-
 
     /// <summary>
     /// Performs one round of the blowfish encryption on a 64-bit block of data.

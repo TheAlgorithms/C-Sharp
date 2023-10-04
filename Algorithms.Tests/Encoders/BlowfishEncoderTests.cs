@@ -8,8 +8,9 @@ namespace Algorithms.Tests.Encoders;
 
 public class BlowfishEncoderTests
 {
-    private BlowfishEncoder _encoder;
+    private BlowfishEncoder _encoder = new();
     const string key = "aabb09182736ccdd";
+
     [SetUp]
     public void Setup()
     {
@@ -39,13 +40,5 @@ public class BlowfishEncoderTests
         var result = _encoder.Decrypt(cipherText);
 
         result.Should().Be(plainText);
-    }
-
-    [TearDown]
-    public void TearDown()
-    {
-        // It seems that the state of the algorithm is not reset between tests sometimes
-        // so the tear down will make sure that we have a fresh instance of the S and P tables.
-        _encoder = null!;
     }
 }
