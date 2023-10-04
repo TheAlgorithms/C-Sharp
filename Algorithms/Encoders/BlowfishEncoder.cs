@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 
 namespace Algorithms.Encoders;
 
@@ -301,18 +302,18 @@ public class BlowfishEncoder
         left = HexadecimalToBinary(left);
         right = HexadecimalToBinary(right);
 
-        var xor = string.Empty;
+        var xor = new StringBuilder();
 
         // Loop through each bit in the binary strings
         for (var i = 0; i < left.Length; i++)
         {
             // Perform a bitwise XOR operation on the corresponding bits and append the result to xor
-            xor += (char)(((left[i] - '0') ^ (right[i] - '0')) + '0');
+            xor.Append((char)(((left[i] - '0') ^ (right[i] - '0')) + '0'));
         }
 
         // Convert the binary string to a hexadecimal string
-        xor = BinaryToHexadecimal(xor);
-        return xor;
+        var result = BinaryToHexadecimal(xor.ToString());
+        return result;
     }
 
     /// <summary>
@@ -368,17 +369,17 @@ public class BlowfishEncoder
     /// <summary>
     /// Performs one round of the blowfish encryption on a 64-bit block of data.
     /// </summary>
-    /// <param name="round">The round number, from 0 to 15, indicating which subkey from the P-array to use.</param>
+    /// <param name="feistelRound">The round number, from 0 to 15, indicating which subkey from the P-array to use.</param>
     /// <param name="plainText">The 64-bit block of data to be encrypted or decrypted, represented as a hexadecimal string.</param>
     /// <returns>The encrypted or decrypted block of data, represented as a hexadecimal string.</returns>
-    private string Round(int round, string plainText)
+    private string Round(int feistelRound, string plainText)
     {
         // Split the plainText into two 32-bit halves.
         var left = plainText[..8];
         var right = plainText.Substring(8, 8);
 
         // XOR the left half with the subkey from the P-array.
-        left = Xor(left, p[round]);
+        left = Xor(left, p[feistelRound]);
 
         // Apply the F function to the left half.
         var fOutput = F(left);
