@@ -102,7 +102,7 @@ public class Iso10126d2PaddingTests
     [Test]
     public void GetPaddingCount_WhenPaddingBlockIsCorrupted_ShouldThrowAnException()
     {
-        var input = new byte[] { 1, 2, 3, 4, 5 };
+        var input = new byte[] { 1, 2, 3, 4, 5, 7 };
 
         Action act = () => padding.GetPaddingCount(input);
 
