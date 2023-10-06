@@ -19,6 +19,9 @@ find more than one implementation for the same objective but using different alg
 ## List of Algorithms
 
 * [Algorithms](./Algorithms)
+  * [Crypto](./Algorithms/Crypto/)
+    * [Paddings](./Algorithms/Crypto/Paddings/)
+      * [PKC7 Padding](./Algorithms/Crypto/Paddings/PKCS7Padding.cs) 
   * [Data Compression](./Algorithms/DataCompression)
     * [Burrows-Wheeler transform](./Algorithms/DataCompression/BurrowsWheelerTransform.cs)
     * [Huffman Compressor](./Algorithms/DataCompression/HuffmanCompressor.cs)
