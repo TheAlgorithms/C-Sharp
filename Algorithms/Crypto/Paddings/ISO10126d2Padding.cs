@@ -36,7 +36,7 @@ public class Iso10126d2Padding
         // Calculate how many bytes need to be added to reach the next multiple of block size.
         var code = (byte)(inputData.Length - inputOffset);
 
-        if (inputOffset + code > inputData.Length)
+        if (inputOffset + code >= inputData.Length)
         {
             throw new ArgumentException("Not enough space in input array for padding");
         }
