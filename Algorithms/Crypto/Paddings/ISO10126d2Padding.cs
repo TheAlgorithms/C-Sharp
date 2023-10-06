@@ -36,7 +36,7 @@ public class Iso10126d2Padding
         // Calculate how many bytes need to be added to reach the next multiple of block size.
         var code = (byte)(inputData.Length - inputOffset);
 
-        if (inputOffset + code >= inputData.Length)
+        if (code == 0 || inputOffset + code > inputData.Length)
         {
             throw new ArgumentException("Not enough space in input array for padding");
         }
@@ -108,6 +108,14 @@ public class Iso10126d2Padding
         var paddingStartIndex = input.Length - paddingCount;
         var paddingCheckFailed = 0;
 
+        // The paddingCheckFailed will be non-zero under the following circumstances:
+        // 1. When paddingStartIndex is negative: This happens when paddingCount (the last byte of the input array) is
+        // greater than the length of the input array. In other words, the padding count is claiming that there are more
+        // padding bytes than there are bytes in the array, which is not a valid scenario.
+        // 2. When paddingCount - 1 is negative: This happens when paddingCount is zero or less. Since paddingCount
+        // represents the number of padding bytes and is derived from the last byte of the input array, it should always
+        // be a positive number. If it's zero or less, it means that either there's no padding, or an invalid negative
+        // padding count has shomehow encoded into the last byte of the input array.
         paddingCheckFailed = (paddingStartIndex | (paddingCount - 1)) >> 31;
         if (paddingCheckFailed != 0)
         {
