@@ -135,7 +135,7 @@ public class PKCS7Padding
         }
 
         // Get the last byte of the input data as the padding value.
-        var lastByte = input[input.Length];
+        var lastByte = input[^1];
         var paddingCount = lastByte & 0xFF;
 
         // Calculate the index where the padding starts
