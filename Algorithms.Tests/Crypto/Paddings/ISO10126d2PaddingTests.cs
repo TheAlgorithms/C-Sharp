@@ -7,7 +7,7 @@ namespace Algorithms.Tests.Crypto.Paddings;
 
 public class Iso10126d2PaddingTests
 {
-    private Iso10126d2Padding padding = new Iso10126d2Padding();
+    private readonly Iso10126D2Padding padding = new Iso10126D2Padding();
 
     [Test]
     public void AddPadding_WhenInputOffsetIsLessThanInputDataLength_ShouldNotThrowException()
