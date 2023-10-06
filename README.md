@@ -22,6 +22,7 @@ find more than one implementation for the same objective but using different alg
   * [Crypto](./Algorithms/Crypto/)
     * [Paddings](./Algorithms/Crypto/Paddings/)
       * [ISO-10125d2 Padding](./Algorithms/Crypto/Paddings/ISO10126d2Padding.cs)
+      * [PKC7 Padding](./Algorithms/Crypto/Paddings/PKCS7Padding.cs) 
   * [Data Compression](./Algorithms/DataCompression)
     * [Burrows-Wheeler transform](./Algorithms/DataCompression/BurrowsWheelerTransform.cs)
     * [Huffman Compressor](./Algorithms/DataCompression/HuffmanCompressor.cs)
