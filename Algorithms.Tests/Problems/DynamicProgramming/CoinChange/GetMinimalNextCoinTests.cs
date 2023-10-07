@@ -1,8 +1,8 @@
-﻿using Algorithms.Problems.CoinChange;
+﻿using Algorithms.Problems.DynamicProgramming.CoinChange;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Algorithms.Tests.Problems.CoinChange.Dynamic
+namespace Algorithms.Tests.Problems.DynamicProgramming.CoinChange
 {
     public class GetMinimalNextCoinTests
     {
