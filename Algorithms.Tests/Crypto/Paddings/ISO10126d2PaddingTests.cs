@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Crypto.Paddings;
 
-public class Iso10126d2PaddingTests
+public class Iso10126D2PaddingTests
 {
     private readonly Iso10126D2Padding padding = new Iso10126D2Padding();
 
