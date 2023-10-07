@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Algorithms.Problems.CoinChange
+namespace Algorithms.Problems.DynamicProgramming.CoinChange
 {
     public static class DynamicCoinChangeSolver
     {
