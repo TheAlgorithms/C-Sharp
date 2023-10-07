@@ -126,7 +126,7 @@ public class Iso7816D4Padding
             var currentByte = input[currentIndex] & 0xFF;
 
             // Compute a mask to indicate if the current byte is 0x00.
-            var isZeroMask = ((currentByte ^ 0x00) - 1) >> 31;
+            var isZeroMask = (currentByte - 1) >> 31;
 
             // Compute a mask to indicate if the current byte is 0x80.
             var isPaddingStartMask = ((currentByte ^ 0x80) - 1) >> 31;
