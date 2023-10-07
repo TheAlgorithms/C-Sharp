@@ -1,7 +1,7 @@
-using Algorithms.Strings;
 using NUnit.Framework;
+using Algorithms.Problems.DynamicProgramming;
 
-namespace Algorithms.Tests.Strings
+namespace Algorithms.Tests.DynamicProgramming
 {
     public class LevenshteinDistanceTests
     {
