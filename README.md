@@ -19,6 +19,9 @@ find more than one implementation for the same objective but using different alg
 ## List of Algorithms
 
 * [Algorithms](./Algorithms)
+  * [Crypto](./Algorithms/Crypto/)
+    * [Paddings](./Algorithms/Crypto/Paddings/)
+      * [PKC7 Padding](./Algorithms/Crypto/Paddings/PKCS7Padding.cs) 
   * [Data Compression](./Algorithms/DataCompression)
     * [Burrows-Wheeler transform](./Algorithms/DataCompression/BurrowsWheelerTransform.cs)
     * [Huffman Compressor](./Algorithms/DataCompression/HuffmanCompressor.cs)
@@ -30,6 +33,7 @@ find more than one implementation for the same objective but using different alg
     * [NYSIIS](./Algorithms/Encoders/NysiisEncoder.cs)
     * [Soundex](./Algorithms/Encoders/SoundexEncoder.cs)
     * [Feistel](./Algorithms/Encoders/FeistelCipher.cs)
+    * [Blowfish](./Algorithms/Encoders/BlowfishEncoder.cs)
   * [Graph](./Algorithms/Graph)
     * [Minimum Spanning Tree](./Algorithms/Graph/MinimumSpanningTree)
       * [Prim's Algorithm (Adjacency Matrix)](./Algorithms/Graph/MinimumSpanningTree/PrimMatrix.cs)
