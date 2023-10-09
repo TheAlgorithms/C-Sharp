@@ -49,7 +49,7 @@ public class TbcPaddingTests
     public void AddPadding_WhenLastBitIsZero_ShouldPadWith0xFF()
     {
         var input = new byte[] { 0x02 };
-        var inputOffset = 0;
+        const int inputOffset = 0;
 
         var result = padding.AddPadding(input, inputOffset);
 
@@ -61,7 +61,7 @@ public class TbcPaddingTests
     public void AddPadding_WhenLastBitIsOne_ShouldPadWith0x00()
     {
         var input = new byte[] { 0x03 };
-        var inputOffset = 0;
+        const int inputOffset = 0;
 
         var result = padding.AddPadding(input, inputOffset);
 
@@ -124,25 +124,22 @@ public class TbcPaddingTests
     [Test]
     public void GetPaddingBytes_WhenCalledWithPaddedData_ShouldReturnCorrectPaddingCount()
     {
-        // Arrange
-        var paddedData = new byte[] { 0x01, 0x02, 0x03, 0xff, 0xff };
-        var expectedPaddingCount = 2;
 
-        // Act
+        var paddedData = new byte[] { 0x01, 0x02, 0x03, 0xff, 0xff };
+        const int expectedPaddingCount = 2;
+
         var result = padding.GetPaddingBytes(paddedData);
 
-        // Assert
         result.Should().Be(expectedPaddingCount);
     }
 
     [Test]
     public void GetPaddingBytes_WhenCalledWithUnpaddedData_ShouldReturnZero()
     {
-        // Arrange
         var unpaddedData = new byte[] { 0x01, 0x02, 0x03 };
 
         Action action = () => padding.GetPaddingBytes(unpaddedData);
-        // Assert
+
         action.Should().Throw<ArgumentException>()
             .WithMessage("No padding found");
     }
@@ -150,12 +147,10 @@ public class TbcPaddingTests
     [Test]
     public void GetPaddingBytes_WhenCalledWithEmptyArray_ShouldReturnZero()
     {
-        // Arrange
         var emptyData = Array.Empty<byte>();
 
-        // Act
         Action action = () => padding.GetPaddingBytes(emptyData);
-        // Assert
+
         action.Should().Throw<ArgumentException>()
             .WithMessage("No padding found.");
     }
