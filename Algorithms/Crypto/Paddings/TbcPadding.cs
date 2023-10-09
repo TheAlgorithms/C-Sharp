@@ -64,11 +64,16 @@ public class TbcPadding
     /// </remarks>
     public byte[] RemovePadding(byte[] input)
     {
+        if (input.Length == 0)
+        {
+            return Array.Empty<byte>();
+        }
+
         // Get the last byte of the input array.
         var lastByte = input[^1];
 
         // Determine the byte code
-        var code = (byte)((lastByte & 0x01) == 0 ? 0xff : 0x00);
+        var code = (byte)((lastByte & 0x01) == 0 ? 0x00 : 0xff);
 
         // Start from the end of the array and move towards the front.
         int i;
@@ -105,19 +110,39 @@ public class TbcPadding
     /// </remarks>
     public int GetPaddingBytes(byte[] input)
     {
-        var i = input.Length;
-        var code = input[--i] & 0xFF;
-        var count = 1;
-        var countingMask = -1;
+        var length = input.Length;
 
-        while (--i >= 0)
+        if (length == 0)
         {
-            var next = input[i] & 0xff;
-            var matchMask = ((next ^ code) - 1) >> 31;
-            countingMask &= matchMask;
-            count -= countingMask;
+            throw new ArgumentException("No padding found.");
         }
 
-        return count;
+        // Get the value of the last byte as the padding value
+        var paddingValue = input[--length] & 0xFF;
+        var paddingCount = 1; // Start count at 1 for the last byte
+        var countingMask = -1; // Initialize counting mask
+
+        // Check if there is no padding
+        if (paddingValue != 0 && paddingValue != 0xFF)
+        {
+            throw new ArgumentException("No padding found");
+        }
+
+        // Loop backwards through the array
+        for (var i = length - 1; i >= 0; i--)
+        {
+            var currentByte = input[i] & 0xFF;
+
+            // Calculate matchMask. If currentByte equals paddingValue, matchMask will be 0, otherwise -1
+            var matchMask = ((currentByte ^ paddingValue) - 1) >> 31;
+
+            // Update countingMask. Once a non-matching byte is found, countingMask will remain -1
+            countingMask &= matchMask;
+
+            // Increment count only if countingMask is 0 (i.e., currentByte matches paddingValue)
+            paddingCount -= countingMask;
+        }
+
+        return paddingCount;
     }
 }
