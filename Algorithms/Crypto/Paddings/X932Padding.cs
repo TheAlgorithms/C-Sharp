@@ -25,7 +25,7 @@ public class X932Padding
     /// <summary>
     /// Initializes a new instance of the <see cref="X932Padding"/> class with the specified padding mode.
     /// </summary>
-    /// <param name="useRandomPadding">A boolean value that indicates whether to use random padding or not.</param>
+    /// <param name="useRandomPadding">A boolean value that indicates whether to use random bytes as padding or not.</param>
     public X932Padding(bool useRandomPadding) =>
         this.useRandomPadding = useRandomPadding;
 
