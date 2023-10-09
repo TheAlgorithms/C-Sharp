@@ -3,6 +3,21 @@ using System.Security.Cryptography;
 
 namespace Algorithms.Crypto.Paddings;
 
+/// <summary>
+/// <para>
+/// X9.32 padding is a padding scheme for symmetric encryption algorithms that is based on the ANSI X9.32 standard.
+/// </para>
+/// <para>
+/// It adds bytes with value equal to 0 up to the end of the plaintext. For example if the plaintext is 13 bytes long
+/// and the block size is 16 bytes, then 2 bytes with value 0 will be added as padding. The last byte indicates the
+/// number of padding bytes.
+/// </para>
+/// <para>
+/// If random padding mode is selected then random bytes are added before the padding bytes. For example, if the plaintext
+/// is 13 bytes long, then 2 random bytes will be added as padding. Again the last byte indicates the number of padding
+/// bytes.
+/// </para>
+/// </summary>
 public class X932Padding
 {
     private readonly bool useRandomPadding;
