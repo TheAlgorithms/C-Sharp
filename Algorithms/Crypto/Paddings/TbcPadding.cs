@@ -2,6 +2,19 @@
 
 namespace Algorithms.Crypto.Paddings;
 
+/// <summary>
+/// <para>
+/// Trailing-Bit-Complement padding is a padding scheme that is defined in the ISO/IEC 9797-1 standard.
+/// </para>
+/// <para>
+/// It is used for adding data to the end of a message that needs to be encrypted or decrypted by a block cipher.
+/// </para>
+/// <para>
+/// The padding bytes are either 0x00 or 0xFF, depending on the last bit of the original data. For example, if the last
+/// bit of the original data is 0, then the padding bytes are 0xFF; if the last bit is 1, then the padding bytes are 0x00.
+/// The padding bytes are added at the end of the data block until the desired length is reached.
+/// </para>
+/// </summary>
 public class TbcPadding
 {
     /// <summary>
