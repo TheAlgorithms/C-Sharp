@@ -7,7 +7,7 @@ namespace Algorithms.Tests.Crypto.Paddings;
 
 public class TbcPaddingTests
 {
-    private TbcPadding padding = new TbcPadding();
+    private readonly TbcPadding padding = new TbcPadding();
 
     [Test]
     public void AddPadding_WhenInputOffsetIsZero_ShouldPadWithLastBit()
