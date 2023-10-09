@@ -3,11 +3,11 @@ using Algorithms.Crypto.Paddings;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Algorithms.Tests.Crypto.Padding;
+namespace Algorithms.Tests.Crypto.Paddings;
 
-public class PKCS7PaddingTests
+public class Pkcs7PaddingTests
 {
-    private const int defaultBlockSize = 16;
+    private const int DefaultBlockSize = 16;
 
     [Test]
     public void Constructor_WhenBlockSizeIsLessThanOne_ShouldThrowArgumentOutOfRangeException()
@@ -44,7 +44,7 @@ public class PKCS7PaddingTests
     [Test]
     public void AddPadding_WhenNotEnoughSpaceInInputArrayForPadding_ShouldThrowArgumentException()
     {
-        var padding = new Pkcs7Padding(defaultBlockSize);
+        var padding = new Pkcs7Padding(DefaultBlockSize);
         const int inputOffset = 1;
 
         var size16Input = new byte[16];
@@ -58,29 +58,29 @@ public class PKCS7PaddingTests
     [Test]
     public void AddPadding_WhenInputArrayHasEnoughSpace_ShouldReturnCorrectPaddingSize()
     {
-        var padding = new Pkcs7Padding(defaultBlockSize);
-        const int inputOffset = defaultBlockSize;
+        var padding = new Pkcs7Padding(DefaultBlockSize);
+        const int inputOffset = DefaultBlockSize;
 
         var size32Input = new byte[32];
 
         var result = padding.AddPadding(size32Input, inputOffset);
 
-        result.Should().Be(defaultBlockSize);
+        result.Should().Be(DefaultBlockSize);
     }
 
     [Test]
     public void AddPadding_WhenAppliedToAnInputArray_ShouldAddCorrectPKCS7Padding()
     {
-        var padding = new Pkcs7Padding(defaultBlockSize);
-        const int inputOffset = defaultBlockSize;
+        var padding = new Pkcs7Padding(DefaultBlockSize);
+        const int inputOffset = DefaultBlockSize;
 
         var size32Input = new byte[32];
 
         padding.AddPadding(size32Input, inputOffset);
 
-        for (var i = 0; i < defaultBlockSize - 1; i++)
+        for (var i = 0; i < DefaultBlockSize - 1; i++)
         {
-            size32Input[inputOffset + i].Should().Be(defaultBlockSize);
+            size32Input[inputOffset + i].Should().Be(DefaultBlockSize);
         }
     }
 
@@ -94,7 +94,7 @@ public class PKCS7PaddingTests
             size32Input[size32Input.Length - 1 - i] = (byte)paddingSize;
         }
 
-        var padding = new Pkcs7Padding(defaultBlockSize);
+        var padding = new Pkcs7Padding(DefaultBlockSize);
 
         var output = padding.RemovePadding(size32Input);
 
@@ -104,8 +104,8 @@ public class PKCS7PaddingTests
     [Test]
     public void RemovePadding_WhenInputLengthNotMultipleOfBlockSize_ShouldThrowArgumentException()
     {
-        var input = new byte[defaultBlockSize + 1]; // Length is not a multiple of blockSize
-        var padding = new Pkcs7Padding(defaultBlockSize);
+        var input = new byte[DefaultBlockSize + 1]; // Length is not a multiple of blockSize
+        var padding = new Pkcs7Padding(DefaultBlockSize);
 
         Action act = () => padding.RemovePadding(input);
 
@@ -118,8 +118,8 @@ public class PKCS7PaddingTests
     {
         var size32Input = new byte[32];
 
-        size32Input[^1] = (byte)(defaultBlockSize + 1); // Set invalid padding length
-        var padding = new Pkcs7Padding(defaultBlockSize);
+        size32Input[^1] = (byte)(DefaultBlockSize + 1); // Set invalid padding length
+        var padding = new Pkcs7Padding(DefaultBlockSize);
 
         Action act = () => padding.RemovePadding(size32Input);
 
@@ -131,9 +131,9 @@ public class PKCS7PaddingTests
     {
         var size32Input = new byte[32];
 
-        size32Input[^1] = (byte)(defaultBlockSize); // Set valid padding length
-        size32Input[^2] = (byte)(defaultBlockSize - 1); // Set invalid padding byte
-        var padding = new Pkcs7Padding(defaultBlockSize);
+        size32Input[^1] = (byte)(DefaultBlockSize); // Set valid padding length
+        size32Input[^2] = (byte)(DefaultBlockSize - 1); // Set invalid padding byte
+        var padding = new Pkcs7Padding(DefaultBlockSize);
 
         Action act = () => padding.RemovePadding(size32Input);
 
@@ -152,7 +152,7 @@ public class PKCS7PaddingTests
             size32Input[size32Input.Length - 1 - i] = (byte)paddingSize; // Add padding bytes at the end of the array
         }
 
-        var padding = new Pkcs7Padding(defaultBlockSize);
+        var padding = new Pkcs7Padding(DefaultBlockSize);
 
         var output = padding.GetPaddingCount(size32Input);
 
@@ -164,10 +164,10 @@ public class PKCS7PaddingTests
     {
         var size32Input = new byte[32];
 
-        size32Input[^1] = defaultBlockSize;
-        size32Input[^2] = defaultBlockSize - 1;
+        size32Input[^1] = DefaultBlockSize;
+        size32Input[^2] = DefaultBlockSize - 1;
 
-        var padding = new Pkcs7Padding(defaultBlockSize);
+        var padding = new Pkcs7Padding(DefaultBlockSize);
 
         Action act = () => padding.GetPaddingCount(size32Input);
 
