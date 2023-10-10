@@ -44,15 +44,16 @@ public class Md2Digest
     };
 
     // The X buffer is a 48-byte auxiliary block used to compute the message digest.
-    private byte[] xBuffer = new byte[48];
-    private int xBufferOffset = 0;
+    private readonly byte[] xBuffer = new byte[48];
 
     // The M buffer is a 16-byte auxiliary block that keeps 16 byte blocks from the input data.
-    private byte[] mBuffer = new byte[16];
-    private int mBufferOffset = 0;
+    private readonly byte[] mBuffer = new byte[16];
 
     // The checksum buffer
-    private byte[] checkSum = new byte[16];
+    private readonly byte[] checkSum = new byte[16];
+
+    private int xBufferOffset;
+    private int mBufferOffset;
 
     /// <summary>
     /// Computes the MD2 hash of the input byte array.
