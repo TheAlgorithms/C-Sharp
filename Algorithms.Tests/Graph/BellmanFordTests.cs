@@ -39,9 +39,9 @@ namespace Algorithms.Tests.Graph
                 { vertex5, -4 }
             };
 
-            var bellmanFord = new BellmanFord<int>();
+            var bellmanFord = new BellmanFord<int>(graph);
 
-            var calculatedDistances = bellmanFord.Run(graph, vertex1);
+            var calculatedDistances = bellmanFord.Run(vertex1);
             calculatedDistances.Should().BeEquivalentTo(expectedDistances);
         }
     }
