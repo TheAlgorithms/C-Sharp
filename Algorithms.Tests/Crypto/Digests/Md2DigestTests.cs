@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text;
-using Algorithms.Crypto.Digesters;
+using Algorithms.Crypto.Digests;
 using FluentAssertions;
 using NUnit.Framework;
 

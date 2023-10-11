@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Algorithms.Crypto.Digesters;
+namespace Algorithms.Crypto.Digests;
 
 /// <summary>
 /// MD2 is a cryptographic hash function that takes an input message and produces a 128-bit output, also called a message
