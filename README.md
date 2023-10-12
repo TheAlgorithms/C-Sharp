@@ -177,7 +177,7 @@ find more than one implementation for the same objective but using different alg
     * [A057588 Kummer Numbers](./Algorithms/Sequences/KummerNumbersSequence.cs)
     * [A019434 Fermat Primes](./Algorithms/Sequences/FermatPrimesSequence.cs)
     * [A181391 Van Eck's](./Algorithms/Sequences/VanEcksSequence.cs)
-  * [String](./Algorithms/Strings)
+  * [String](./Algorithms/Strings) 
     * [Similarity](./Algorithms/Strings/Similarity/)
       * [Hamming Distance](./Algorithms/Strings/HammingDistance.cs)
       * [Jaro Similarity](./Algorithms/Strings/JaroSimilarity.cs)
