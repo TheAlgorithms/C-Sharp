@@ -29,6 +29,4 @@ public class Md2DigestTests
 
         output.Should().Be(expected);
     }
-
-
 }

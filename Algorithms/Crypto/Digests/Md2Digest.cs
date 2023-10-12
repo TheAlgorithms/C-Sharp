@@ -193,15 +193,6 @@ public class Md2Digest
     private void Update(byte input)
     {
         mBuffer[mBufferOffset++] = input;
-
-        if (mBufferOffset != 16)
-        {
-            return;
-        }
-
-        ProcessCheckSum(mBuffer);
-        ProcessBlock(mBuffer);
-        mBufferOffset = 0;
     }
 
     /// <summary>
@@ -212,14 +203,6 @@ public class Md2Digest
     /// <param name="length">The length of the data.</param>
     private void Update(byte[] input, int inputOffset, int length)
     {
-        // fill the current word
-        while ((mBufferOffset != 0) && (length > 0))
-        {
-            Update(input[inputOffset]);
-            inputOffset++;
-            length--;
-        }
-
         // process whole words
         while (length >= 16)
         {
