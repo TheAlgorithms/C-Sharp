@@ -10,9 +10,9 @@ namespace Algorithms.Graph
     /// <typeparam name="T">Generic type of data in the graph.</typeparam>
     public class BellmanFord<T>
     {
-        private DirectedWeightedGraph<T> graph;
-        private Dictionary<Vertex<T>, double> distances;
-        private Dictionary<Vertex<T>, Vertex<T>?> predecessors;
+        private readonly DirectedWeightedGraph<T> graph;
+        private readonly Dictionary<Vertex<T>, double> distances;
+        private readonly Dictionary<Vertex<T>, Vertex<T>?> predecessors;
 
         public BellmanFord(DirectedWeightedGraph<T> graph)
         {
@@ -61,23 +61,28 @@ namespace Algorithms.Graph
                 {
                     if (vertex != null)
                     {
-                        var u = vertex;
-
-                        foreach (var neighbor in graph.GetNeighbors(vertex))
-                        {
-                            if (neighbor != null)
-                            {
-                                var v = neighbor;
-                                var weight = graph.AdjacentDistance(u, v);
-
-                                if (distances[u] + weight < distances[v])
-                                {
-                                    distances[v] = distances[u] + weight;
-                                    predecessors[v] = u;
-                                }
-                            }
-                        }
+                        RelaxEdgesForVertex(vertex);
                     }
+                }
+            }
+        }
+
+        private void RelaxEdgesForVertex(Vertex<T> u)
+        {
+            foreach (var neighbor in graph.GetNeighbors(u))
+            {
+                if (neighbor == null)
+                {
+                    continue;
+                }
+
+                var v = neighbor;
+                var weight = graph.AdjacentDistance(u, v);
+
+                if (distances[u] + weight < distances[v])
+                {
+                    distances[v] = distances[u] + weight;
+                    predecessors[v] = u;
                 }
             }
         }
@@ -88,21 +93,26 @@ namespace Algorithms.Graph
             {
                 if (vertex != null)
                 {
-                    var u = vertex;
+                    CheckForNegativeCyclesForVertex(vertex);
+                }
+            }
+        }
 
-                    foreach (var neighbor in graph.GetNeighbors(vertex))
-                    {
-                        if (neighbor != null)
-                        {
-                            var v = neighbor;
-                            var weight = graph.AdjacentDistance(u, v);
+        private void CheckForNegativeCyclesForVertex(Vertex<T> u)
+        {
+            foreach (var neighbor in graph.GetNeighbors(u))
+            {
+                if (neighbor == null)
+                {
+                    continue;
+                }
 
-                            if (distances[u] + weight < distances[v])
-                            {
-                                throw new Exception("Graph contains a negative weight cycle.");
-                            }
-                        }
-                    }
+                var v = neighbor;
+                var weight = graph.AdjacentDistance(u, v);
+
+                if (distances[u] + weight < distances[v])
+                {
+                    throw new InvalidOperationException("Graph contains a negative weight cycle.");
                 }
             }
         }
