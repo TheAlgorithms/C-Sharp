@@ -18,7 +18,8 @@ public class Md2DigestTests
     [TestCase("abcdefghijklmnopqrstuvwxyz", "4E8DDFF3650292AB5A4108C3AA47940B")]
     [TestCase("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", "DA33DEF2A42DF13975352846C30338CD")]
     [TestCase("12345678901234567890123456789012345678901234567890123456789012345678901234567890", "D5976F79D83D3A0DC9806C3C66F3EFD8")]
-    public void Digest_ReturnsCorrectValue_Dummy(string input, string expected)
+    [TestCase("123456789012345678901234567890123456789012345678901234567890123456789012345678901", "6FAD0685C4A3D03E3D352D12BBAD6BE3")]
+    public void Digest_ReturnsCorrectValue(string input, string expected)
     {
         var inputBytes = Encoding.ASCII.GetBytes(input);
 
