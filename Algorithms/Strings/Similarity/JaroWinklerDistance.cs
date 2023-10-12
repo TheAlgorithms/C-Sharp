@@ -1,7 +1,6 @@
-using System;
 using System.Linq;
 
-namespace Algorithms.Strings
+namespace Algorithms.Strings.Similarity
 {
     /// <summary>
     ///     <para>

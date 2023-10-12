@@ -1,4 +1,4 @@
-namespace Algorithms.Strings
+namespace Algorithms.Strings.PatternMatching
 {
     /// <summary>Implementation Z-block substring search.
     /// </summary>
