@@ -7,11 +7,7 @@ public class JaccardSimilarity
 {
     public double Calculate(string left, string right)
     {
-        if (left == null || right == null)
-        {
-            var paramName = left == null ? nameof(left) : nameof(right);
-            throw new ArgumentNullException(paramName, "Input cannot be null");
-        }
+        ValidateInput(left, right);
 
         var leftLength = left.Length;
         var rightLength = right.Length;
@@ -26,17 +22,8 @@ public class JaccardSimilarity
             return 0.0d;
         }
 
-        var leftSet = new HashSet<char>();
-        for (var i = 0; i < leftLength; i++)
-        {
-            leftSet.Add(left[i]);
-        }
-
-        var rightSet = new HashSet<char>();
-        for (var i = 0; i < rightLength; i++)
-        {
-            rightSet.Add(right[i]);
-        }
+        var leftSet = new HashSet<char>(left);
+        var rightSet = new HashSet<char>(right);
 
         var unionSet = new HashSet<char>(leftSet);
         foreach (var c in rightSet)
@@ -46,5 +33,14 @@ public class JaccardSimilarity
 
         var intersectionSize = leftSet.Count + rightSet.Count - unionSet.Count;
         return 1.0d * intersectionSize / unionSet.Count;
+    }
+
+    private void ValidateInput(string left, string right)
+    {
+        if (left == null || right == null)
+        {
+            var paramName = left == null ? nameof(left) : nameof(right);
+            throw new ArgumentNullException(paramName, "Input cannot be null");
+        }
     }
 }
