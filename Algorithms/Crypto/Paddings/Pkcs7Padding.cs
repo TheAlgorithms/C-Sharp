@@ -20,7 +20,7 @@ namespace Algorithms.Crypto.Paddings;
 /// padding, such as AES.
 /// </para>
 /// </summary>
-public class Pkcs7Padding
+public class Pkcs7Padding : IBlockCipherPadding
 {
     private readonly int blockSize;
 
@@ -78,7 +78,7 @@ public class Pkcs7Padding
     /// </summary>
     /// <param name="input">The input data with PKCS7 padding. Must not be null and must have a vaild length and padding.</param>
     /// <returns>The input data without the padding as a new byte array.</returns>
-    /// <exception cref="ArgumentException">
+    /// <exception cref="InvalidPaddingException">
     /// Thrown if the input data is null, has an invalid length, or has an invalid padding.
     /// </exception>
     public byte[] RemovePadding(byte[] input)
@@ -95,7 +95,7 @@ public class Pkcs7Padding
         // Check if padding length is valid
         if (paddingLength < 1 || paddingLength > blockSize)
         {
-            throw new ArgumentException("Invalid padding length");
+            throw new InvalidPaddingException("Invalid padding length");
         }
 
         // Check if all padding bytes have the correct value
@@ -103,7 +103,7 @@ public class Pkcs7Padding
         {
             if (input[input.Length - 1 - i] != paddingLength)
             {
-                throw new ArgumentException("Invalid padding");
+                throw new InvalidPaddingException("Invalid padding");
             }
         }
 
@@ -121,7 +121,7 @@ public class Pkcs7Padding
     /// </summary>
     /// <param name="input">The input data with PKCS7 padding. Must not be null and must have a valid padding.</param>
     /// <returns>The number of padding bytes in the input data.</returns>
-    /// <exception cref="ArgumentException">
+    /// <exception cref="InvalidPaddingException">
     /// Thrown if the input data is null or has an invalid padding.
     /// </exception>
     /// <remarks>
@@ -168,7 +168,7 @@ public class Pkcs7Padding
         // Check if the padding check failed.
         if (paddingCheckFailed != 0)
         {
-            throw new ArgumentException("Padding block is corrupted");
+            throw new InvalidPaddingException("Padding block is corrupted");
         }
 
         // Return the number of padding bytes.

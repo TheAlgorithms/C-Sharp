@@ -19,7 +19,7 @@ namespace Algorithms.Crypto.Paddings;
 /// the end of the data.
 /// </para>
 /// </summary>
-public class Iso10126D2Padding
+public class Iso10126D2Padding : IBlockCipherPadding
 {
     /// <summary>
     /// Adds random padding to the input data array to make it a multiple of the block size according to the
@@ -63,7 +63,7 @@ public class Iso10126D2Padding
     /// <returns>
     /// The input data without the padding as a new byte array.
     /// </returns>
-    /// <exception cref="ArgumentException">
+    /// <exception cref="InvalidPaddingException">
     /// Thrown when the padding length is invalid.
     /// </exception>
     public byte[] RemovePadding(byte[] inputData)
@@ -74,7 +74,7 @@ public class Iso10126D2Padding
         // Check if the padding size is valid.
         if (paddingLength < 1 || paddingLength > inputData.Length)
         {
-            throw new ArgumentException("Invalid padding length");
+            throw new InvalidPaddingException("Invalid padding length");
         }
 
         // Create a new array to hold the original data.
@@ -92,7 +92,7 @@ public class Iso10126D2Padding
     /// <param name="input">The input data array that has been padded.</param>
     /// <returns>The number of padding bytes.</returns>
     /// <exception cref="ArgumentNullException">Thrown when the input is null.</exception>
-    /// <exception cref="ArgumentException">Thrown when the padding block is corrupted.</exception>
+    /// <exception cref="InvalidPaddingException">Thrown when the padding block is corrupted.</exception>
     public int GetPaddingCount(byte[] input)
     {
         if (input == null)
@@ -119,7 +119,7 @@ public class Iso10126D2Padding
         paddingCheckFailed = (paddingStartIndex | (paddingCount - 1)) >> 31;
         if (paddingCheckFailed != 0)
         {
-            throw new ArgumentException("Padding block is corrupted");
+            throw new InvalidPaddingException("Padding block is corrupted");
         }
 
         return paddingCount;

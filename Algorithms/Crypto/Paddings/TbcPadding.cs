@@ -15,7 +15,7 @@ namespace Algorithms.Crypto.Paddings;
 /// The padding bytes are added at the end of the data block until the desired length is reached.
 /// </para>
 /// </summary>
-public class TbcPadding
+public class TbcPadding : IBlockCipherPadding
 {
     /// <summary>
     /// Adds padding to the input array according to the TBC standard.
@@ -121,13 +121,13 @@ public class TbcPadding
     /// avoid branching. If the input array is not padded or has an invalid padding, the method may return incorrect
     /// results.
     /// </remarks>
-    public int GetPaddingBytes(byte[] input)
+    public int GetPaddingCount(byte[] input)
     {
         var length = input.Length;
 
         if (length == 0)
         {
-            throw new ArgumentException("No padding found.");
+            throw new InvalidPaddingException("No padding found.");
         }
 
         // Get the value of the last byte as the padding value
@@ -138,7 +138,7 @@ public class TbcPadding
         // Check if there is no padding
         if (paddingValue != 0 && paddingValue != 0xFF)
         {
-            throw new ArgumentException("No padding found");
+            throw new InvalidPaddingException("No padding found");
         }
 
         // Loop backwards through the array
