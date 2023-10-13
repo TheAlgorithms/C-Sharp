@@ -1,6 +1,6 @@
 using System;
 
-namespace Algorithms.Strings.PatternMatching
+namespace Algorithms.Strings
 {
     /// <summary>
     ///     Implements simple algorithms on strings.
