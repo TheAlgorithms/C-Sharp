@@ -22,13 +22,11 @@ public class JaccardSimilarityTests
     [TestCase("", "", 1.0d)]
     [TestCase("left", "", 0.0d)]
     [TestCase("", "right", 0.0d)]
-    [TestCase("", "right", 0.0d)]
-    [TestCase("", "right", 0.0d)]
     [TestCase("frog", "fog", 0.75d)]
     [TestCase("fly", "ant", 0.0d)]
     [TestCase("elephant", "hippo", 0.22222d)]
     [TestCase("ABC Corporation", "ABC Corp", 0.636363d)]
-    public void Calculate_JaccardSimilarity_CalculatesTheCorrectDistance(string left, string right, double expected)
+    public void Calculate_WhenProvidedWithStrings_CalculatesTheCorrectDistance(string left, string right, double expected)
     {
         var similarity = jaccard.Calculate(left, right);
 
