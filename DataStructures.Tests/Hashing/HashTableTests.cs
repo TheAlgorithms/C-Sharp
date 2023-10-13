@@ -48,6 +48,7 @@ namespace DataStructures.Tests.Hashing
             }
             catch (ArgumentException)
             {
+                Console.WriteLine("ArgumentException");
             }
             Assert.AreEqual(1, hashTable.Count);
         }

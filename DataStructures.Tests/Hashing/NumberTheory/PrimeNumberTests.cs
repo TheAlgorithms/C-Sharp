@@ -8,6 +8,12 @@ namespace DataStructures.Tests.Hashing.NumberTheory
     [TestFixture]
     public class PrimeNumberTests
     {
+
+        public PrimeNumberTests()
+        {
+            Console.WriteLine("PrimeNumberTests");
+        }
+
         private static readonly object[] IsPrimeSource =
         {
             new object[] { 0, false },

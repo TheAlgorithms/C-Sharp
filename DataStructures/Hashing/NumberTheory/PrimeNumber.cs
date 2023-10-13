@@ -12,6 +12,11 @@ namespace DataStructures.Hashing.NumberTheory
     /// </remarks>
     public class PrimeNumber
     {
+        public PrimeNumber()
+        {
+            Console.WriteLine("PrimeNumber");
+        }
+
         /// <summary>
         /// Checks if a number is prime or not.
         /// </summary>

@@ -57,7 +57,7 @@ namespace DataStructures.Hashing
         {
             get
             {
-                if (key == null)
+                if (EqualityComparer<TKey>.Default.Equals(key, default(TKey)))
                 {
                     throw new ArgumentNullException(nameof(key));
                 }
@@ -148,7 +148,9 @@ namespace DataStructures.Hashing
             }
 
             var index = GetIndex(key);
-            if (entries[index] != null)
+            if (
+                entries[index] != null &&
+                EqualityComparer<TKey>.Default.Equals(entries[index] !.Key!, key))
             {
                 throw new ArgumentException("Key already exists");
             }
@@ -186,8 +188,6 @@ namespace DataStructures.Hashing
             }
 
             entries[index] = null;
-
-            // entries.SetValue(null, index);
             size--;
             version++;
 
