@@ -73,7 +73,7 @@ namespace DataStructures.Hashing
 
             set
             {
-                if (key == null)
+                if (EqualityComparer<TKey>.Default.Equals(key, default(TKey)))
                 {
                     throw new ArgumentNullException(nameof(key));
                 }
@@ -155,12 +155,12 @@ namespace DataStructures.Hashing
                 throw new ArgumentException("Key already exists");
             }
 
-            if (value == null)
+            if (EqualityComparer<TValue>.Default.Equals(value, default(TValue)))
             {
                 throw new ArgumentNullException(nameof(value));
             }
 
-            entries[index] = new Entry<TKey, TValue>(key, value);
+            entries[index] = new Entry<TKey, TValue>(key, value!);
             size++;
             version++;
         }
