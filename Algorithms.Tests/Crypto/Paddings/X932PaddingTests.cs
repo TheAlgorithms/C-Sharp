@@ -145,7 +145,7 @@ public class X932PaddingTests
 
         Action act = () => zeroPadding.RemovePadding(inputData);
 
-        act.Should().Throw<ArgumentException>()
+        act.Should().Throw<InvalidPaddingException>()
             .WithMessage("Invalid padding length");
     }
 
@@ -166,7 +166,7 @@ public class X932PaddingTests
 
         Action action = () => zeroPadding.GetPaddingCount(inputData);
 
-        action.Should().Throw<ArgumentException>()
+        action.Should().Throw<InvalidPaddingException>()
             .WithMessage("Pad block corrupted");
     }
 }

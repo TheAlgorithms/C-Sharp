@@ -123,7 +123,7 @@ public class Pkcs7PaddingTests
 
         Action act = () => padding.RemovePadding(size32Input);
 
-        act.Should().Throw<ArgumentException>().WithMessage("Invalid padding length");
+        act.Should().Throw<InvalidPaddingException>().WithMessage("Invalid padding length");
     }
 
     [Test]
@@ -137,7 +137,7 @@ public class Pkcs7PaddingTests
 
         Action act = () => padding.RemovePadding(size32Input);
 
-        act.Should().Throw<ArgumentException>()
+        act.Should().Throw<InvalidPaddingException>()
             .WithMessage("Invalid padding");
     }
 
@@ -171,7 +171,7 @@ public class Pkcs7PaddingTests
 
         Action act = () => padding.GetPaddingCount(size32Input);
 
-        act.Should().Throw<ArgumentException>()
+        act.Should().Throw<InvalidPaddingException>()
             .WithMessage("Padding block is corrupted");
     }
 }

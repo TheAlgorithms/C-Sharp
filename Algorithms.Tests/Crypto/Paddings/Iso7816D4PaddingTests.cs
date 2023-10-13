@@ -89,7 +89,7 @@ public class Iso7816D4PaddingTests
 
         Action act = () => padding.RemovePadding(inputData);
 
-        act.Should().Throw<ArgumentException>()
+        act.Should().Throw<InvalidPaddingException>()
             .WithMessage("Invalid padding");
     }
 
@@ -110,7 +110,7 @@ public class Iso7816D4PaddingTests
 
         Action act = () => padding.RemovePadding(input);
 
-        act.Should().Throw<ArgumentException>()
+        act.Should().Throw<InvalidPaddingException>()
             .WithMessage("Invalid padding");
     }
 
@@ -131,7 +131,7 @@ public class Iso7816D4PaddingTests
 
         Action act = () => padding.GetPaddingCount(inputData);
 
-        act.Should().Throw<ArgumentException>()
+        act.Should().Throw<InvalidPaddingException>()
             .WithMessage("Pad block corrupted");
     }
 
@@ -142,7 +142,7 @@ public class Iso7816D4PaddingTests
 
         Action act = () => padding.GetPaddingCount(inputData);
 
-        act.Should().Throw<ArgumentException>()
+        act.Should().Throw<InvalidPaddingException>()
             .WithMessage("Pad block corrupted");
     }
 
@@ -163,7 +163,7 @@ public class Iso7816D4PaddingTests
 
         Action act = () => padding.GetPaddingCount(inputData);
 
-        act.Should().Throw<ArgumentException>()
+        act.Should().Throw<InvalidPaddingException>()
             .WithMessage("Pad block corrupted");
     }
 }

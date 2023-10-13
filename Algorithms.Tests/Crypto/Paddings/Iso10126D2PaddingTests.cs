@@ -62,7 +62,7 @@ public class Iso10126D2PaddingTests
 
         Action act = () => padding.RemovePadding(inputData);
 
-        act.Should().Throw<ArgumentException>()
+        act.Should().Throw<InvalidPaddingException>()
             .WithMessage("Invalid padding length");
     }
 
@@ -73,7 +73,7 @@ public class Iso10126D2PaddingTests
 
         Action act = () => padding.RemovePadding(inputData);
 
-        act.Should().Throw<ArgumentException>()
+        act.Should().Throw<InvalidPaddingException>()
             .WithMessage("Invalid padding length");
     }
 
@@ -106,7 +106,7 @@ public class Iso10126D2PaddingTests
 
         Action act = () => padding.GetPaddingCount(input);
 
-        act.Should().Throw<ArgumentException>()
+        act.Should().Throw<InvalidPaddingException>()
             .WithMessage("Padding block is corrupted");
     }
 
