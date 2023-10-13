@@ -7,7 +7,7 @@ namespace Algorithms.Tests.Strings.Similarity;
 
 public class JaccardSimilarityTests
 {
-    private JaccardSimilarity jaccard = new JaccardSimilarity();
+    private readonly JaccardSimilarity jaccard = new JaccardSimilarity();
     private readonly double precision = 0.0001;
 
     [TestCase("left", null)]
