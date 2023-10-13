@@ -10,9 +10,9 @@ namespace Algorithms.Graph
     /// <typeparam name="T">Generic type of data in the graph.</typeparam>
     public class BellmanFord<T>
     {
-        private DirectedWeightedGraph<T> graph;
-        private Dictionary<Vertex<T>, double> distances;
-        private Dictionary<Vertex<T>, Vertex<T>?> predecessors;
+        private readonly DirectedWeightedGraph<T> graph;
+        private readonly Dictionary<Vertex<T>, double> distances;
+        private readonly Dictionary<Vertex<T>, Vertex<T>?> predecessors;
 
         public BellmanFord(DirectedWeightedGraph<T> graph, Dictionary<Vertex<T>, double> distances, Dictionary<Vertex<T>, Vertex<T>?> predecessors)
         {
