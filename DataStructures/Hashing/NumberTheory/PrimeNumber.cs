@@ -10,13 +10,8 @@ namespace DataStructures.Hashing.NumberTheory
     /// <remarks>
     /// A prime number is a natural number greater than 1 that is not a product of two smaller natural numbers.
     /// </remarks>
-    public class PrimeNumber
+    public static class PrimeNumber
     {
-        public PrimeNumber()
-        {
-            Console.WriteLine("PrimeNumber");
-        }
-
         /// <summary>
         /// Checks if a number is prime or not.
         /// </summary>

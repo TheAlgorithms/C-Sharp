@@ -84,6 +84,7 @@ namespace DataStructures.Tests.Hashing
             }
             catch (ArgumentException)
             {
+                Console.WriteLine("ArgumentException");
             }
 
             Assert.AreEqual(2, hashTable.Count);
@@ -100,6 +101,7 @@ namespace DataStructures.Tests.Hashing
             }
             catch (ArgumentNullException)
             {
+                Console.WriteLine("ArgumentNullException");
             }
             Assert.AreEqual(0, hashTable.Count);
         }
