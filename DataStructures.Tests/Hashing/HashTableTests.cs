@@ -274,7 +274,7 @@ namespace DataStructures.Tests.Hashing
             hashTable.Add("one", 1);
             hashTable.Add("two", 2);
 
-            var keys = new List<string> { "one", "two"};
+            var keys = new List<string> { "one", "two" };
 
             CollectionAssert.AreEquivalent(keys, hashTable.Keys);
         }
@@ -287,7 +287,7 @@ namespace DataStructures.Tests.Hashing
             hashTable.Add("one", 1);
             hashTable.Add("two", 2);
 
-            var values = new List<int> { 1, 2};
+            var values = new List<int> { 1, 2 };
 
             CollectionAssert.AreEquivalent(values, hashTable.Values);
         }
@@ -334,7 +334,11 @@ namespace DataStructures.Tests.Hashing
         public void This_Get_ThrowsException_WhenKeyIsNull()
         {
             var hashTable = new HashTable<string, int>(4);
-            Assert.Throws<ArgumentNullException>(() => { var value = hashTable[null]; });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var value = hashTable[null];
+                Console.WriteLine(value);
+            });
         }
 
         [Test]
@@ -372,7 +376,10 @@ namespace DataStructures.Tests.Hashing
         public void This_Get_KeyNotFoundException_WhenKeyDoesNotExist()
         {
             var hashTable = new HashTable<string, int>(4);
-            Assert.Throws<KeyNotFoundException>(() => { var value = hashTable["one"]; });
+            Assert.Throws<KeyNotFoundException>(() => {
+                var value = hashTable["one"];
+                Console.WriteLine(value);
+                 });
         }
     }
 }
