@@ -137,7 +137,7 @@ namespace DataStructures.Hashing
         /// </remarks>
         public void Add(TKey? key, TValue? value)
         {
-            if (key == null)
+            if (EqualityComparer<TKey>.Default.Equals(key, default(TKey)))
             {
                 throw new ArgumentNullException(nameof(key));
             }
@@ -160,7 +160,7 @@ namespace DataStructures.Hashing
                 throw new ArgumentNullException(nameof(value));
             }
 
-            entries[index] = new Entry<TKey, TValue>(key, value!);
+            entries[index] = new Entry<TKey, TValue>(key!, value!);
             size++;
             version++;
         }
@@ -176,7 +176,7 @@ namespace DataStructures.Hashing
         /// </remarks>
         public bool Remove(TKey? key)
         {
-            if (key == null)
+            if (EqualityComparer<TKey>.Default.Equals(key, default(TKey)))
             {
                 throw new ArgumentNullException(nameof(key));
             }
@@ -207,12 +207,12 @@ namespace DataStructures.Hashing
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="key"/> is null.</exception>
         public int GetIndex(TKey? key)
         {
-            if (key == null)
+            if (EqualityComparer<TKey>.Default.Equals(key, default(TKey)))
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            var hash = key.GetHashCode();
+            var hash = key!.GetHashCode();
             var index = hash % capacity;
 
             if (index < 0)
@@ -234,7 +234,7 @@ namespace DataStructures.Hashing
         /// </remarks>
         public Entry<TKey, TValue>? FindEntry(TKey? key)
         {
-            if (key == null)
+            if (EqualityComparer<TKey>.Default.Equals(key, default(TKey)))
             {
                 throw new ArgumentNullException(nameof(key));
             }
@@ -254,7 +254,7 @@ namespace DataStructures.Hashing
         /// </remarks>
         public bool ContainsKey(TKey? key)
         {
-            if (key == null)
+            if (EqualityComparer<TKey>.Default.Equals(key, default(TKey)))
             {
                 throw new ArgumentNullException(nameof(key));
             }
@@ -269,7 +269,7 @@ namespace DataStructures.Hashing
         /// <returns>True if the hash table contains the value, false otherwise.</returns>
         public bool ContainsValue(TValue? value)
         {
-            if (value == null)
+            if (EqualityComparer<TValue>.Default.Equals(value, default(TValue)))
             {
                 throw new ArgumentNullException(nameof(value));
             }
