@@ -53,7 +53,7 @@ namespace DataStructures.Hashing
         /// </summary>
         /// <param name="key">Key to get or set.</param>
         /// <returns>Value associated with the key.</returns>
-        public TValue this[TKey key]
+        public TValue this[TKey? key]
         {
             get
             {

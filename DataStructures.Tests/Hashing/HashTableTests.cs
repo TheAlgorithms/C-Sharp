@@ -253,5 +253,126 @@ namespace DataStructures.Tests.Hashing
             /// After resizing, the capacity should be 10
             Assert.AreEqual(10, hashTable.Capacity);
         }
+        [Test]
+        public void LoadFactor_ReturnsCorrectValue()
+        {
+            var hashTable = new HashTable<string, int>(4);
+
+            hashTable.Add("one", 1);
+            hashTable.Add("two", 2);
+            hashTable.Add("three", 3);
+            hashTable.Add("four", 4);
+            hashTable.Add("humour", 5);
+            Assert.AreEqual(0.75f, hashTable.LoadFactor);
+        }
+
+        [Test]
+        public void Keys_ReturnsCorrectKeys()
+        {
+            var hashTable = new HashTable<string, int>(4);
+
+            hashTable.Add("one", 1);
+            hashTable.Add("two", 2);
+
+            var keys = new List<string> { "one", "two"};
+
+            CollectionAssert.AreEquivalent(keys, hashTable.Keys);
+        }
+
+        [Test]
+        public void Values_ReturnsCorrectValues()
+        {
+            var hashTable = new HashTable<string, int>(4);
+
+            hashTable.Add("one", 1);
+            hashTable.Add("two", 2);
+
+            var values = new List<int> { 1, 2};
+
+            CollectionAssert.AreEquivalent(values, hashTable.Values);
+        }
+
+        [Test]
+        public void Constructor_ThrowsException_WhenCapacityIsZero()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => new HashTable<string, int>(0));
+        }
+
+        [Test]
+        public void Constructor_ThrowsException_WhenLoadFactorIsZero()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => new HashTable<string, int>(4, 0));
+        }
+
+        [Test]
+        public void Constructor_ThrowsException_WhenLoadFactorIsLessThanZero()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => new HashTable<string, int>(4, -1));
+        }
+
+        [Test]
+        public void Constructor_ThrowsException_WhenLoadFactorIsGreaterThanOne()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => new HashTable<string, int>(4, 2));
+        }
+
+        [Test]
+        public void GetIndex_ThrowsException_WhenKeyIsNull()
+        {
+            var hashTable = new HashTable<string, int>(4);
+            Assert.Throws<ArgumentNullException>(() => hashTable.GetIndex(null));
+        }
+
+        [Test]
+        public void FindEntry_ThrowsException_WhenKeyIsNull()
+        {
+            var hashTable = new HashTable<string, int>(4);
+            Assert.Throws<ArgumentNullException>(() => hashTable.FindEntry(null));
+        }
+
+        [Test]
+        public void This_Get_ThrowsException_WhenKeyIsNull()
+        {
+            var hashTable = new HashTable<string, int>(4);
+            Assert.Throws<ArgumentNullException>(() => { var value = hashTable[null]; });
+        }
+
+        [Test]
+        public void This_Set_ThrowsException_WhenKeyIsNull()
+        {
+            var hashTable = new HashTable<string, int>(4);
+            Assert.Throws<ArgumentNullException>(() => hashTable[null] = 1);
+        }
+
+        [Test]
+        public void This_Get_ReturnsCorrectValue()
+        {
+            var hashTable = new HashTable<string, int>(4);
+            hashTable.Add("one", 1);
+            Assert.AreEqual(1, hashTable["one"]);
+        }
+
+        [Test]
+        public void This_Set_UpdatesValue()
+        {
+            var hashTable = new HashTable<string, int>(4);
+            hashTable.Add("one", 1);
+            hashTable["one"] = 2;
+            Assert.AreEqual(2, hashTable["one"]);
+        }
+
+        [Test]
+        public void This_Set_KeyNotFoundException_WhenKeyDoesNotExist()
+        {
+            var hashTable = new HashTable<string, int>(4);
+            Assert.Throws<KeyNotFoundException>(() => hashTable["one"] = 2);
+        }
+
+        [Test]
+        public void This_Get_KeyNotFoundException_WhenKeyDoesNotExist()
+        {
+            var hashTable = new HashTable<string, int>(4);
+            Assert.Throws<KeyNotFoundException>(() => { var value = hashTable["one"]; });
+        }
     }
 }
