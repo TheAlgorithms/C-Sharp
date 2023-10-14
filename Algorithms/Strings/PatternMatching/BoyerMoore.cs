@@ -1,6 +1,6 @@
 using System;
 
-namespace Algorithms.Strings
+namespace Algorithms.Strings.PatternMatching
 {
     /// <summary>
     ///     The idea:   You compare the pattern with the text from right to left.
