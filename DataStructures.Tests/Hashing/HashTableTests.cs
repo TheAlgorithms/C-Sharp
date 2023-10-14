@@ -269,12 +269,12 @@ namespace DataStructures.Tests.Hashing
         [Test]
         public void Keys_ReturnsCorrectKeys()
         {
-            var hashTable = new HashTable<string, int>(4);
+            var hashTable = new HashTable<int, string>();
+            hashTable.Add(1, "one");
+            hashTable.Add(2, "two");
+            hashTable.Add(3, "three");
 
-            hashTable.Add("one", 1);
-            hashTable.Add("two", 2);
-
-            var keys = new List<string> { "one", "two" };
+            var keys = new List<int> { 1,2,3 };
 
             CollectionAssert.AreEquivalent(keys, hashTable.Keys);
         }
@@ -282,14 +282,14 @@ namespace DataStructures.Tests.Hashing
         [Test]
         public void Values_ReturnsCorrectValues()
         {
-            var hashTable = new HashTable<string, int>(4);
+            var hashTable = new HashTable<int, string>();
+            hashTable.Add(1, "one");
+            hashTable.Add(2, "two");
+            hashTable.Add(3, "three");
 
-            hashTable.Add("one", 1);
-            hashTable.Add("two", 2);
+            var values = new List<string> { "one", "two", "three" };
 
-            var values = new List<int> { 1, 2 };
-
-            CollectionAssert.AreEquivalent(values, hashTable.Values);
+            CollectionAssert.AreEquivalent(values, hashTable?.Values);
         }
 
         [Test]
