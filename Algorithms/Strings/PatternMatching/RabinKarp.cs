@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Algorithms.Strings
+namespace Algorithms.Strings.PatternMatching
 {
     /// <summary>
     ///     The idea: You calculate the hash for the pattern <c>p</c> and the hash values for all the prefixes of the text

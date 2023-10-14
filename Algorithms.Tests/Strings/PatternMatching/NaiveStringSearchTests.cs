@@ -1,5 +1,6 @@
 using System.Linq;
 using Algorithms.Strings;
+using Algorithms.Strings.PatternMatching;
 using NUnit.Framework;
 
 namespace Algorithms.Tests.Strings

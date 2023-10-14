@@ -1,4 +1,5 @@
 using Algorithms.Strings;
+using Algorithms.Strings.Similarity;
 using FluentAssertions;
 using NUnit.Framework;
 

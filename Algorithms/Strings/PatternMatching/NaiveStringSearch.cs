@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 // Implements the traditional naive string matching algorithm in C# for TheAlgorithms/C-Sharp.
-namespace Algorithms.Strings
+namespace Algorithms.Strings.PatternMatching
 {
     /// <summary>
     ///     Implements the traditional naive string matching algorithm in C#.
