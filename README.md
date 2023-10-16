@@ -215,8 +215,8 @@ find more than one implementation for the same objective but using different alg
     * [N-Queens](./Algorithms/Problems/NQueens)
       * [Backtracking](./Algorithms/Problems/NQueens/BacktrackingNQueensSolver.cs)
     * [Dynamic Programming](./Algorithms/Problems/DynamicProgramming)
-      * [Coin Change](./Algorithms/Problems/CoinChange/DynamicCoinChangeSolver.cs)
-      * [Levenshtein Distance](./Algorithms/Problems/LevenshteinDistance/LevenshteinDistance.cs)
+      * [Coin Change](./Algorithms/Problems/DynamicProgramming/CoinChange/DynamicCoinChangeSolver.cs)
+      * [Levenshtein Distance](./Algorithms/Problems/DynamicProgramming//LevenshteinDistance/LevenshteinDistance.cs)
 
 * [Data Structures](./DataStructures)
   * [Bit Array](./DataStructures/BitArray.cs)
