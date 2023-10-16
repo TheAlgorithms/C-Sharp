@@ -2,6 +2,7 @@
 
 namespace Algorithms.Crypto.Paddings;
 
+[Serializable]
 public class InvalidPaddingException : Exception
 {
     public InvalidPaddingException()
