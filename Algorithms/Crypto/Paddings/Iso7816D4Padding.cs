@@ -72,7 +72,7 @@ public class Iso7816D4Padding : IBlockCipherPadding
     /// The input data with ISO 7816-4 padding. Must not be null and must have a valid length and padding.
     /// </param>
     /// <returns>The input data without the padding as a new byte array.</returns>
-    /// <exception cref="InvalidPaddingException">
+    /// <exception cref="ArgumentException">
     /// Thrown when the input data has invalid padding.
     /// </exception>
     public byte[] RemovePadding(byte[] inputData)
@@ -89,7 +89,7 @@ public class Iso7816D4Padding : IBlockCipherPadding
         // Check if the first padding byte is 0x80.
         if (paddingIndex < 0 || inputData[paddingIndex] != 0x80)
         {
-            throw new InvalidPaddingException("Invalid padding");
+            throw new ArgumentException("Invalid padding");
         }
 
         // Create a new array to store the unpadded data.
@@ -107,7 +107,7 @@ public class Iso7816D4Padding : IBlockCipherPadding
     /// </summary>
     /// <param name="input">The input data array that has padding.</param>
     /// <returns>The number of padding bytes in the input data.</returns>
-    /// <exception cref="InvalidPaddingException"> Thrown when the input data has invalid padding.</exception>
+    /// <exception cref="ArgumentException"> Thrown when the input data has invalid padding.</exception>
     public int GetPaddingCount(byte[] input)
     {
         // Initialize the index of the first padding byte to -1.
@@ -145,7 +145,7 @@ public class Iso7816D4Padding : IBlockCipherPadding
         // Check if the index of the first padding byte is valid.
         if (paddingStartIndex < 0)
         {
-            throw new InvalidPaddingException("Pad block corrupted");
+            throw new ArgumentException("Pad block corrupted");
         }
 
         // Return the number of padding bytes.

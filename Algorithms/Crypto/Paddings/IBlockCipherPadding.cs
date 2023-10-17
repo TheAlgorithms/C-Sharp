@@ -1,4 +1,6 @@
-﻿namespace Algorithms.Crypto.Paddings;
+﻿using System;
+
+namespace Algorithms.Crypto.Paddings;
 
 /// <summary>
 /// A common interface that all block cipher padding schemes should follow.
@@ -24,7 +26,7 @@ public interface IBlockCipherPadding
     /// </summary>
     /// <param name="inputData">The input data array containing the padding.</param>
     /// <returns>The input data without the padding as a new byte array.</returns>
-    /// <exception cref="InvalidPaddingException">Thrown when the input data has invalid padding.</exception>
+    /// <exception cref="ArgumentException">Thrown when the input data has invalid padding.</exception>
     public byte[] RemovePadding(byte[] inputData);
 
     /// <summary>
@@ -32,6 +34,6 @@ public interface IBlockCipherPadding
     /// </summary>
     /// <param name="input">The input data array that has padding.</param>
     /// <returns>The number of padding bytes in the input data.</returns>
-    /// <exception cref="InvalidPaddingException">Thrown when the input data has invalid padding.</exception>
+    /// <exception cref="ArgumentException">Thrown when the input data has invalid padding.</exception>
     public int GetPaddingCount(byte[] input);
 }

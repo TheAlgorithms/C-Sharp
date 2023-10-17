@@ -140,7 +140,7 @@ public class TbcPaddingTests
 
         Action action = () => padding.GetPaddingCount(unpaddedData);
 
-        action.Should().Throw<InvalidPaddingException>()
+        action.Should().Throw<ArgumentException>()
             .WithMessage("No padding found");
     }
 
@@ -151,7 +151,7 @@ public class TbcPaddingTests
 
         Action action = () => padding.GetPaddingCount(emptyData);
 
-        action.Should().Throw<InvalidPaddingException>()
+        action.Should().Throw<ArgumentException>()
             .WithMessage("No padding found.");
     }
 }

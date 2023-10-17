@@ -78,7 +78,7 @@ public class X932Padding : IBlockCipherPadding
     /// </summary>
     /// <param name="inputData">The input data array to be unpadded.</param>
     /// <returns>The unpadded data array.</returns>
-    /// <exception cref="InvalidPaddingException">
+    /// <exception cref="ArgumentException">
     /// Thrown when the input data is empty or has an invalid padding length.
     /// </exception>
     public byte[] RemovePadding(byte[] inputData)
@@ -95,7 +95,7 @@ public class X932Padding : IBlockCipherPadding
         // Check if the padding length is valid.
         if (paddingLength < 1 || paddingLength > inputData.Length)
         {
-            throw new InvalidPaddingException("Invalid padding length");
+            throw new ArgumentException("Invalid padding length");
         }
 
         // Create a new array for the output data.
@@ -113,7 +113,7 @@ public class X932Padding : IBlockCipherPadding
     /// </summary>
     /// <param name="input">The input data array to be checked.</param>
     /// <returns>The number of padding bytes in the input data.</returns>
-    /// <exception cref="InvalidPaddingException">
+    /// <exception cref="ArgumentException">
     /// Thrown when the input data has a corrupted padding block.
     /// </exception>
     public int GetPaddingCount(byte[] input)
@@ -131,7 +131,7 @@ public class X932Padding : IBlockCipherPadding
         // Throw an exception if the result is negative.
         if (failed != 0)
         {
-            throw new InvalidPaddingException("Pad block corrupted");
+            throw new ArgumentException("Pad block corrupted");
         }
 
         // Return the padding length.

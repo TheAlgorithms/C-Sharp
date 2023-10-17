@@ -127,7 +127,7 @@ public class TbcPadding : IBlockCipherPadding
 
         if (length == 0)
         {
-            throw new InvalidPaddingException("No padding found.");
+            throw new ArgumentException("No padding found.");
         }
 
         // Get the value of the last byte as the padding value
@@ -138,7 +138,7 @@ public class TbcPadding : IBlockCipherPadding
         // Check if there is no padding
         if (paddingValue != 0 && paddingValue != 0xFF)
         {
-            throw new InvalidPaddingException("No padding found");
+            throw new ArgumentException("No padding found");
         }
 
         // Loop backwards through the array
