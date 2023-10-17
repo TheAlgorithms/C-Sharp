@@ -20,7 +20,7 @@ namespace Algorithms.Crypto.Paddings;
 /// padding, such as AES.
 /// </para>
 /// </summary>
-public class Pkcs7Padding
+public class Pkcs7Padding : IBlockCipherPadding
 {
     private readonly int blockSize;
 

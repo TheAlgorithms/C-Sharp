@@ -128,7 +128,7 @@ public class TbcPaddingTests
         var paddedData = new byte[] { 0x01, 0x02, 0x03, 0xff, 0xff };
         const int expectedPaddingCount = 2;
 
-        var result = padding.GetPaddingBytes(paddedData);
+        var result = padding.GetPaddingCount(paddedData);
 
         result.Should().Be(expectedPaddingCount);
     }
@@ -138,7 +138,7 @@ public class TbcPaddingTests
     {
         var unpaddedData = new byte[] { 0x01, 0x02, 0x03 };
 
-        Action action = () => padding.GetPaddingBytes(unpaddedData);
+        Action action = () => padding.GetPaddingCount(unpaddedData);
 
         action.Should().Throw<ArgumentException>()
             .WithMessage("No padding found");
@@ -149,7 +149,7 @@ public class TbcPaddingTests
     {
         var emptyData = Array.Empty<byte>();
 
-        Action action = () => padding.GetPaddingBytes(emptyData);
+        Action action = () => padding.GetPaddingCount(emptyData);
 
         action.Should().Throw<ArgumentException>()
             .WithMessage("No padding found.");

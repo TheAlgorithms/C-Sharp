@@ -28,7 +28,7 @@ namespace Algorithms.Crypto.Paddings;
 /// depend on any specific character encoding or representation.
 /// </para>
 /// </summary>
-public class Iso7816D4Padding
+public class Iso7816D4Padding : IBlockCipherPadding
 {
     /// <summary>
     /// Adds padding to the input data according to the ISO 7816-4 standard.

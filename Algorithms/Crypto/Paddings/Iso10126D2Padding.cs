@@ -19,7 +19,7 @@ namespace Algorithms.Crypto.Paddings;
 /// the end of the data.
 /// </para>
 /// </summary>
-public class Iso10126D2Padding
+public class Iso10126D2Padding : IBlockCipherPadding
 {
     /// <summary>
     /// Adds random padding to the input data array to make it a multiple of the block size according to the

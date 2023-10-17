@@ -18,7 +18,7 @@ namespace Algorithms.Crypto.Paddings;
 /// bytes.
 /// </para>
 /// </summary>
-public class X932Padding
+public class X932Padding : IBlockCipherPadding
 {
     private readonly bool useRandomPadding;
 
