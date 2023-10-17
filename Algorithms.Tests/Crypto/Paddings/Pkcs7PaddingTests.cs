@@ -154,7 +154,7 @@ public class Pkcs7PaddingTests
     [Test]
     public void GetPaddingCount_WhenInputArrayIsValid_ShouldReturnCorrectPaddingCount()
     {
-        var paddingSize = 5;
+        const int paddingSize = 5;
         var size32Input = new byte[32];
 
         for (var i = 0; i < paddingSize; i++)
