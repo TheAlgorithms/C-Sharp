@@ -142,6 +142,16 @@ public class Pkcs7PaddingTests
     }
 
     [Test]
+    public void GetPaddingCount_WhenArrayIsNull_ShouldThrowArgumentNullException()
+    {
+        var padding = new Pkcs7Padding(DefaultBlockSize);
+
+        Action act = () => padding.GetPaddingCount(null!);
+
+        act.Should().Throw<ArgumentNullException>();
+    }
+
+    [Test]
     public void GetPaddingCount_WhenInputArrayIsValid_ShouldReturnCorrectPaddingCount()
     {
         var paddingSize = 5;
