@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace Algorithms.Crypto.Paddings;
 
-[Serializable]
-public class InvalidPaddingException : Exception
+public class InvalidPaddingException : Exception, ISerializable
 {
     public InvalidPaddingException()
     {
@@ -16,6 +16,11 @@ public class InvalidPaddingException : Exception
 
     public InvalidPaddingException(string? message, Exception? innerException)
         : base(message, innerException)
+    {
+    }
+
+    protected InvalidPaddingException(SerializationInfo info, StreamingContext context)
+        : base(info, context)
     {
     }
 }
