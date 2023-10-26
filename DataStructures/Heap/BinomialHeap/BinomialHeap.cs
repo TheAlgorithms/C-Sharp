@@ -214,19 +214,4 @@ public class BinomialHeap<T> where T : IComparable<T>
     }
 }
 
-// Example usage:
-class Program
-{
-    static void Main()
-    {
-        BinomialHeap<int> binomialHeap = new BinomialHeap<int>();
 
-        binomialHeap.Insert(4);
-        binomialHeap.Insert(2);
-        binomialHeap.Insert(8);
-        binomialHeap.Insert(1);
-
-        Console.WriteLine("Extracted Min: " + binomialHeap.ExtractMin()); // Output: 1
-        Console.WriteLine("Extracted Min: " + binomialHeap.ExtractMin()); // Output: 2
-    }
-}
