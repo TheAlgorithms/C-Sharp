@@ -8,37 +8,39 @@ namespace Algorithms.Tests.Encoders;
 
 public class BlowfishEncoderTests
 {
-    private BlowfishEncoder _encoder = new();
-    const string key = "aabb09182736ccdd";
-
-    [SetUp]
-    public void Setup()
-    {
-        _encoder = new BlowfishEncoder();
-        _encoder.GenerateKey(key);
-    }
+    private const string Key = "aabb09182736ccdd";
 
     [Test]
     public void BlowfishEncoder_Encryption_ShouldWorkCorrectly()
     {
-        const string plainText = "123456abcd132536";
+        // Arrange
+        var encoder = new BlowfishEncoder();
+        encoder.GenerateKey(Key);
 
+        const string plainText = "123456abcd132536";
         const string cipherText = "d748ec383d3405f7";
 
-        var result = _encoder.Encrypt(plainText);
+        // Act
+        var result = encoder.Encrypt(plainText);
 
+        // Assert
         result.Should().Be(cipherText);
     }
 
     [Test]
     public void BlowfishEncoder_Decryption_ShouldWorkCorrectly()
     {
-        const string cipherText = "d748ec383d3405f7";
+        // Arrange
+        var encoder = new BlowfishEncoder();
+        encoder.GenerateKey(Key);
 
+        const string cipherText = "d748ec383d3405f7";
         const string plainText = "123456abcd132536";
 
-        var result = _encoder.Decrypt(cipherText);
+        // Act
+        var result = encoder.Decrypt(cipherText);
 
+        // Assert
         result.Should().Be(plainText);
     }
 }
