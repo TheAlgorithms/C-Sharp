@@ -1,7 +1,6 @@
-﻿namespace Algorithms.Numeric.GreatestCommonDivisor
+namespace Algorithms.Numeric.GreatestCommonDivisor;
+
+public interface IGreatestCommonDivisorFinder
 {
-    public interface IGreatestCommonDivisorFinder
-    {
-        int FindGcd(int a, int b);
-    }
+    int FindGcd(int a, int b);
 }
