@@ -270,18 +270,18 @@ As part of our continuous effort to stay up-to-date with the latest technologies
 
 ### New Requirements
 
-- To build and run this project, **.NET 8 SDK** is now required.
-- Ensure your development tools are compatible with .NET 8.
+* To build and run this project, **.NET 8 SDK** is now required.
+* Ensure your development tools are compatible with .NET 8.
 
 ### Building the Project
 
-- With .NET 8 SDK installed, you can build the project using the standard `dotnet build` command.
-- All existing build scripts have been updated to accommodate the .NET 8 SDK.
+* With .NET 8 SDK installed, you can build the project using the standard `dotnet build` command.
+* All existing build scripts have been updated to accommodate the .NET 8 SDK.
 
 ### Running Tests
 
-- Our comprehensive suite of unit tests ensures compatibility with .NET 8.
-- Run tests using the `dotnet test` command as usual.
+* Our comprehensive suite of unit tests ensures compatibility with .NET 8.
+* Run tests using the `dotnet test` command as usual.
 
 ## Contributing
 
