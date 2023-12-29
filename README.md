@@ -264,6 +264,25 @@ find more than one implementation for the same objective but using different alg
     * [Least Frequently Used (LFU) Cache](./DataStructures/Cache/LfuCache.cs)
     * [Least Recently Used (LRU) Cache](./DataStructures/Cache/LruCache.cs)
 
+## Project Update: .NET 8 Migration
+
+As part of our continuous effort to stay up-to-date with the latest technologies, we have migrated our project to .NET 8. This upgrade enhances our project with the latest features and improvements from the .NET ecosystem.
+
+### New Requirements
+
+* To build and run this project, **.NET 8 SDK** is now required.
+* Ensure your development tools are compatible with .NET 8.
+
+### Building the Project
+
+* With .NET 8 SDK installed, you can build the project using the standard `dotnet build` command.
+* All existing build scripts have been updated to accommodate the .NET 8 SDK.
+
+### Running Tests
+
+* Our comprehensive suite of unit tests ensures compatibility with .NET 8.
+* Run tests using the `dotnet test` command as usual.
+
 ## Contributing
 
 You can contribute with pleasure to this repository.

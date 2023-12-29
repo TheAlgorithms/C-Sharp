@@ -12,7 +12,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.x
+          dotnet-version: 8.x
       - name: Restore
         run: dotnet restore
       - name: Build
