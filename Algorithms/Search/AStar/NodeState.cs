@@ -1,23 +1,22 @@
-﻿namespace Algorithms.Search.AStar
+namespace Algorithms.Search.AStar;
+
+/// <summary>
+///     The states the nodes can have.
+/// </summary>
+public enum NodeState
 {
     /// <summary>
-    ///     The states the nodes can have.
+    ///     TODO.
     /// </summary>
-    public enum NodeState
-    {
-        /// <summary>
-        ///     TODO.
-        /// </summary>
-        Unconsidered = 0,
+    Unconsidered = 0,
 
-        /// <summary>
-        ///     TODO.
-        /// </summary>
-        Open = 1,
+    /// <summary>
+    ///     TODO.
+    /// </summary>
+    Open = 1,
 
-        /// <summary>
-        ///     TODO.
-        /// </summary>
-        Closed = 2,
-    }
+    /// <summary>
+    ///     TODO.
+    /// </summary>
+    Closed = 2,
 }
