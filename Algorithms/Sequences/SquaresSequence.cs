@@ -1,35 +1,34 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Numerics;
 
-namespace Algorithms.Sequences
+namespace Algorithms.Sequences;
+
+/// <summary>
+///     <para>
+///         Sequence of square numbers.
+///     </para>
+///     <para>
+///         Wikipedia: https://wikipedia.org/wiki/Square_number.
+///     </para>
+///     <para>
+///         OEIS: http://oeis.org/A000290.
+///     </para>
+/// </summary>
+public class SquaresSequence : ISequence
 {
     /// <summary>
-    ///     <para>
-    ///         Sequence of square numbers.
-    ///     </para>
-    ///     <para>
-    ///         Wikipedia: https://wikipedia.org/wiki/Square_number.
-    ///     </para>
-    ///     <para>
-    ///         OEIS: http://oeis.org/A000290.
-    ///     </para>
+    /// Gets sequence of square numbers.
     /// </summary>
-    public class SquaresSequence : ISequence
+    public IEnumerable<BigInteger> Sequence
     {
-        /// <summary>
-        /// Gets sequence of square numbers.
-        /// </summary>
-        public IEnumerable<BigInteger> Sequence
+        get
         {
-            get
-            {
-                var n = new BigInteger(0);
+            var n = new BigInteger(0);
 
-                while (true)
-                {
-                    yield return n * n;
-                    n++;
-                }
+            while (true)
+            {
+                yield return n * n;
+                n++;
             }
         }
     }
