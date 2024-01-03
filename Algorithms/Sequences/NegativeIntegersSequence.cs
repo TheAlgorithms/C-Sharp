@@ -1,34 +1,33 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Numerics;
 
-namespace Algorithms.Sequences
+namespace Algorithms.Sequences;
+
+/// <summary>
+///     <para>
+///         Sequence of negative integers.
+///     </para>
+///     <para>
+///         Wikipedia: https://wikipedia.org/wiki/Negative_number.
+///     </para>
+///     <para>
+///         OEIS: http://oeis.org/A001478.
+///     </para>
+/// </summary>
+public class NegativeIntegersSequence : ISequence
 {
     /// <summary>
-    ///     <para>
-    ///         Sequence of negative integers.
-    ///     </para>
-    ///     <para>
-    ///         Wikipedia: https://wikipedia.org/wiki/Negative_number.
-    ///     </para>
-    ///     <para>
-    ///         OEIS: http://oeis.org/A001478.
-    ///     </para>
+    /// Gets sequence of negative integers.
     /// </summary>
-    public class NegativeIntegersSequence : ISequence
+    public IEnumerable<BigInteger> Sequence
     {
-        /// <summary>
-        /// Gets sequence of negative integers.
-        /// </summary>
-        public IEnumerable<BigInteger> Sequence
+        get
         {
-            get
-            {
-                var n = new BigInteger(-1);
+            var n = new BigInteger(-1);
 
-                while (true)
-                {
-                    yield return n--;
-                }
+            while (true)
+            {
+                yield return n--;
             }
         }
     }

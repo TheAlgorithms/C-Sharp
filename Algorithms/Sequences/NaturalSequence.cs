@@ -1,33 +1,32 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Numerics;
 
-namespace Algorithms.Sequences
+namespace Algorithms.Sequences;
+
+/// <summary>
+///     <para>
+///         Sequence of natural numbers.
+///     </para>
+///     <para>
+///         Wikipedia: https://wikipedia.org/wiki/Natural_number.
+///     </para>
+///     <para>
+///         OEIS: https://oeis.org/A000027.
+///     </para>
+/// </summary>
+public class NaturalSequence : ISequence
 {
     /// <summary>
-    ///     <para>
-    ///         Sequence of natural numbers.
-    ///     </para>
-    ///     <para>
-    ///         Wikipedia: https://wikipedia.org/wiki/Natural_number.
-    ///     </para>
-    ///     <para>
-    ///         OEIS: https://oeis.org/A000027.
-    ///     </para>
+    ///     Gets sequence of natural numbers.
     /// </summary>
-    public class NaturalSequence : ISequence
+    public IEnumerable<BigInteger> Sequence
     {
-        /// <summary>
-        ///     Gets sequence of natural numbers.
-        /// </summary>
-        public IEnumerable<BigInteger> Sequence
+        get
         {
-            get
+            var n = new BigInteger(1);
+            while (true)
             {
-                var n = new BigInteger(1);
-                while (true)
-                {
-                    yield return n++;
-                }
+                yield return n++;
             }
         }
     }

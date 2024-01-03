@@ -1,35 +1,34 @@
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace Algorithms.Sequences
+namespace Algorithms.Sequences;
+
+/// <summary>
+///     <para>
+///         Sequence of powers of 10: a(n) = 10^n.
+///     </para>
+///     <para>
+///         Wikipedia: https://wikipedia.org/wiki/Power_of_10.
+///     </para>
+///     <para>
+///         OEIS: https://oeis.org/A011557.
+///     </para>
+/// </summary>
+public class PowersOf10Sequence : ISequence
 {
     /// <summary>
-    ///     <para>
-    ///         Sequence of powers of 10: a(n) = 10^n.
-    ///     </para>
-    ///     <para>
-    ///         Wikipedia: https://wikipedia.org/wiki/Power_of_10.
-    ///     </para>
-    ///     <para>
-    ///         OEIS: https://oeis.org/A011557.
-    ///     </para>
+    /// Gets sequence of powers of 10.
     /// </summary>
-    public class PowersOf10Sequence : ISequence
+    public IEnumerable<BigInteger> Sequence
     {
-        /// <summary>
-        /// Gets sequence of powers of 10.
-        /// </summary>
-        public IEnumerable<BigInteger> Sequence
+        get
         {
-            get
-            {
-                var n = new BigInteger(1);
+            var n = new BigInteger(1);
 
-                while (true)
-                {
-                    yield return n;
-                    n *= 10;
-                }
+            while (true)
+            {
+                yield return n;
+                n *= 10;
             }
         }
     }

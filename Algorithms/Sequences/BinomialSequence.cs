@@ -1,67 +1,66 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Numerics;
 
-namespace Algorithms.Sequences
+namespace Algorithms.Sequences;
+
+/// <summary>
+///     <para>
+///         Sequence of binomial coefficients.
+///     </para>
+///     <para>
+///         Wikipedia: https://en.wikipedia.org/wiki/Binomial_coefficient.
+///     </para>
+///     <para>
+///         OEIS: http://oeis.org/A007318.
+///     </para>
+/// </summary>
+public class BinomialSequence : ISequence
 {
     /// <summary>
-    ///     <para>
-    ///         Sequence of binomial coefficients.
-    ///     </para>
-    ///     <para>
-    ///         Wikipedia: https://en.wikipedia.org/wiki/Binomial_coefficient.
-    ///     </para>
-    ///     <para>
-    ///         OEIS: http://oeis.org/A007318.
-    ///     </para>
+    ///     Gets sequence of binomial coefficients.
     /// </summary>
-    public class BinomialSequence : ISequence
+    public IEnumerable<BigInteger> Sequence
     {
-        /// <summary>
-        ///     Gets sequence of binomial coefficients.
-        /// </summary>
-        public IEnumerable<BigInteger> Sequence
+        get
         {
-            get
-            {
-                var i = 0;
+            var i = 0;
 
-                while (true)
+            while (true)
+            {
+                var row = GenerateRow(i);
+                foreach (var coefficient in row)
                 {
-                    var row = GenerateRow(i);
-                    foreach (var coefficient in row)
-                    {
-                        yield return coefficient;
-                    }
-
-                    i++;
+                    yield return coefficient;
                 }
+
+                i++;
             }
         }
+    }
 
-        private static BigInteger BinomialCoefficient(long n, long k)
+    private static BigInteger BinomialCoefficient(long n, long k)
+    {
+        if (k == 0 || k == n)
         {
-            if (k == 0 || k == n)
-            {
-                return new BigInteger(1);
-            }
-
-            if (n < 0)
-            {
-                return new BigInteger(0);
-            }
-
-            return BinomialCoefficient(n - 1, k) + BinomialCoefficient(n - 1, k - 1);
+            return new BigInteger(1);
         }
 
-        private static IEnumerable<BigInteger> GenerateRow(long n)
+        if (n < 0)
         {
-            long k = 0;
+            return new BigInteger(0);
+        }
 
-            while (k <= n)
-            {
-                yield return BinomialCoefficient(n, k);
-                k++;
-            }
+        return BinomialCoefficient(n - 1, k) + BinomialCoefficient(n - 1, k - 1);
+    }
+
+    private static IEnumerable<BigInteger> GenerateRow(long n)
+    {
+        long k = 0;
+
+        while (k <= n)
+        {
+            yield return BinomialCoefficient(n, k);
+            k++;
         }
     }
 }

@@ -1,39 +1,38 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Numerics;
 
-namespace Algorithms.Sequences
+namespace Algorithms.Sequences;
+
+/// <summary>
+///     <para>
+///         Fibonacci sequence.
+///     </para>
+///     <para>
+///         Wikipedia: https://wikipedia.org/wiki/Fibonacci_number.
+///     </para>
+///     <para>
+///         OEIS: https://oeis.org/A000045.
+///     </para>
+/// </summary>
+public class FibonacciSequence : ISequence
 {
     /// <summary>
-    ///     <para>
-    ///         Fibonacci sequence.
-    ///     </para>
-    ///     <para>
-    ///         Wikipedia: https://wikipedia.org/wiki/Fibonacci_number.
-    ///     </para>
-    ///     <para>
-    ///         OEIS: https://oeis.org/A000045.
-    ///     </para>
+    ///     Gets Fibonacci sequence.
     /// </summary>
-    public class FibonacciSequence : ISequence
+    public IEnumerable<BigInteger> Sequence
     {
-        /// <summary>
-        ///     Gets Fibonacci sequence.
-        /// </summary>
-        public IEnumerable<BigInteger> Sequence
+        get
         {
-            get
+            yield return 0;
+            yield return 1;
+            BigInteger previous = 0;
+            BigInteger current = 1;
+            while (true)
             {
-                yield return 0;
-                yield return 1;
-                BigInteger previous = 0;
-                BigInteger current = 1;
-                while (true)
-                {
-                    var next = previous + current;
-                    previous = current;
-                    current = next;
-                    yield return next;
-                }
+                var next = previous + current;
+                previous = current;
+                current = next;
+                yield return next;
             }
         }
     }

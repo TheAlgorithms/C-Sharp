@@ -1,52 +1,51 @@
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace Algorithms.Sequences
+namespace Algorithms.Sequences;
+
+/// <summary>
+///     <para>
+///         Number of halving and tripling steps to reach 1 in the '3n+1' problem.
+///     </para>
+///     <para>
+///         Wikipedia: https://en.wikipedia.org/wiki/Collatz_conjecture.
+///     </para>
+///     <para>
+///         OEIS: https://oeis.org/A006577.
+///     </para>
+/// </summary>
+public class ThreeNPlusOneStepsSequence : ISequence
 {
     /// <summary>
-    ///     <para>
-    ///         Number of halving and tripling steps to reach 1 in the '3n+1' problem.
-    ///     </para>
-    ///     <para>
-    ///         Wikipedia: https://en.wikipedia.org/wiki/Collatz_conjecture.
-    ///     </para>
-    ///     <para>
-    ///         OEIS: https://oeis.org/A006577.
-    ///     </para>
+    /// Gets sequence of number of halving and tripling steps to reach 1 in the '3n+1' problem.
     /// </summary>
-    public class ThreeNPlusOneStepsSequence : ISequence
+    public IEnumerable<BigInteger> Sequence
     {
-        /// <summary>
-        /// Gets sequence of number of halving and tripling steps to reach 1 in the '3n+1' problem.
-        /// </summary>
-        public IEnumerable<BigInteger> Sequence
+        get
         {
-            get
+            BigInteger startingValue = 1;
+
+            while (true)
             {
-                BigInteger startingValue = 1;
+                BigInteger counter = 0;
+                BigInteger currentValue = startingValue;
 
-                while (true)
+                while (currentValue != 1)
                 {
-                    BigInteger counter = 0;
-                    BigInteger currentValue = startingValue;
-
-                    while (currentValue != 1)
+                    if (currentValue.IsEven)
                     {
-                        if (currentValue.IsEven)
-                        {
-                            currentValue /= 2;
-                        }
-                        else
-                        {
-                            currentValue = 3 * currentValue + 1;
-                        }
-
-                        counter++;
+                        currentValue /= 2;
+                    }
+                    else
+                    {
+                        currentValue = 3 * currentValue + 1;
                     }
 
-                    yield return counter;
-                    startingValue++;
+                    counter++;
                 }
+
+                yield return counter;
+                startingValue++;
             }
         }
     }

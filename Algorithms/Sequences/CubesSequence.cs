@@ -1,35 +1,34 @@
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace Algorithms.Sequences
+namespace Algorithms.Sequences;
+
+/// <summary>
+///     <para>
+///         Sequence of cube numbers.
+///     </para>
+///     <para>
+///         Wikipedia: https://en.wikipedia.org/wiki/Cube_(algebra).
+///     </para>
+///     <para>
+///         OEIS: https://oeis.org/A000578.
+///     </para>
+/// </summary>
+public class CubesSequence : ISequence
 {
     /// <summary>
-    ///     <para>
-    ///         Sequence of cube numbers.
-    ///     </para>
-    ///     <para>
-    ///         Wikipedia: https://en.wikipedia.org/wiki/Cube_(algebra).
-    ///     </para>
-    ///     <para>
-    ///         OEIS: https://oeis.org/A000578.
-    ///     </para>
+    /// Gets sequence of cube numbers.
     /// </summary>
-    public class CubesSequence : ISequence
+    public IEnumerable<BigInteger> Sequence
     {
-        /// <summary>
-        /// Gets sequence of cube numbers.
-        /// </summary>
-        public IEnumerable<BigInteger> Sequence
+        get
         {
-            get
-            {
-                var n = BigInteger.Zero;
+            var n = BigInteger.Zero;
 
-                while (true)
-                {
-                    yield return n * n * n;
-                    n++;
-                }
+            while (true)
+            {
+                yield return n * n * n;
+                n++;
             }
         }
     }

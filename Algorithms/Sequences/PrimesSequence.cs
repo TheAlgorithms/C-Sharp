@@ -1,46 +1,45 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
-namespace Algorithms.Sequences
+namespace Algorithms.Sequences;
+
+/// <summary>
+///     <para>
+///         Sequence of prime numbers.
+///     </para>
+///     <para>
+///         Wikipedia: https://wikipedia.org/wiki/Prime_number.
+///     </para>
+///     <para>
+///         OEIS: https://oeis.org/A000040.
+///     </para>
+/// </summary>
+public class PrimesSequence : ISequence
 {
     /// <summary>
-    ///     <para>
-    ///         Sequence of prime numbers.
-    ///     </para>
-    ///     <para>
-    ///         Wikipedia: https://wikipedia.org/wiki/Prime_number.
-    ///     </para>
-    ///     <para>
-    ///         OEIS: https://oeis.org/A000040.
-    ///     </para>
+    ///     Gets sequence of prime numbers.
     /// </summary>
-    public class PrimesSequence : ISequence
+    public IEnumerable<BigInteger> Sequence
     {
-        /// <summary>
-        ///     Gets sequence of prime numbers.
-        /// </summary>
-        public IEnumerable<BigInteger> Sequence
+        get
         {
-            get
+            yield return 2;
+            var primes = new List<BigInteger>
             {
-                yield return 2;
-                var primes = new List<BigInteger>
-                {
-                    2,
-                };
-                var n = new BigInteger(3);
+                2,
+            };
+            var n = new BigInteger(3);
 
-                while (true)
+            while (true)
+            {
+                if (primes.All(p => n % p != 0))
                 {
-                    if (primes.All(p => n % p != 0))
-                    {
-                        yield return n;
-                        primes.Add(n);
-                    }
-
-                    n += 2;
+                    yield return n;
+                    primes.Add(n);
                 }
+
+                n += 2;
             }
         }
     }
