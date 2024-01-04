@@ -1,9 +1,8 @@
 using System;
 
-namespace Algorithms.Sorters.External
+namespace Algorithms.Sorters.External;
+
+public interface ISequentialStorageWriter<in T> : IDisposable
 {
-    public interface ISequentialStorageWriter<in T> : IDisposable
-    {
-        void Write(T value);
-    }
+    void Write(T value);
 }

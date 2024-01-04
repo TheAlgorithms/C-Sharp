@@ -1,129 +1,128 @@
 using System;
 using System.Collections.Generic;
 
-namespace Algorithms.Sorters.External
-{
-    public class ExternalMergeSorter<T> : IExternalSorter<T>
-    {
-        public void Sort(
-            ISequentialStorage<T> mainMemory,
-            ISequentialStorage<T> temporaryMemory,
-            IComparer<T> comparer)
-        {
-            var originalSource = mainMemory;
-            var source = mainMemory;
-            var temp = temporaryMemory;
-            var totalLength = mainMemory.Length;
-            for (var stripLength = 1L; stripLength < totalLength; stripLength *= 2)
-            {
-                using var left = source.GetReader();
-                using var right = source.GetReader();
-                using var output = temp.GetWriter();
+namespace Algorithms.Sorters.External;
 
+public class ExternalMergeSorter<T> : IExternalSorter<T>
+{
+    public void Sort(
+        ISequentialStorage<T> mainMemory,
+        ISequentialStorage<T> temporaryMemory,
+        IComparer<T> comparer)
+    {
+        var originalSource = mainMemory;
+        var source = mainMemory;
+        var temp = temporaryMemory;
+        var totalLength = mainMemory.Length;
+        for (var stripLength = 1L; stripLength < totalLength; stripLength *= 2)
+        {
+            using var left = source.GetReader();
+            using var right = source.GetReader();
+            using var output = temp.GetWriter();
+
+            for (var i = 0L; i < stripLength; i++)
+            {
+                right.Read();
+            }
+
+            Merge(left, right, output, stripLength, Math.Min(stripLength, totalLength - stripLength), comparer);
+            var step = 2 * stripLength;
+            long rightStripStart;
+            for (rightStripStart = stripLength + step; rightStripStart < mainMemory.Length; rightStripStart += step)
+            {
                 for (var i = 0L; i < stripLength; i++)
                 {
+                    left.Read();
                     right.Read();
                 }
 
-                Merge(left, right, output, stripLength, Math.Min(stripLength, totalLength - stripLength), comparer);
-                var step = 2 * stripLength;
-                long rightStripStart;
-                for (rightStripStart = stripLength + step; rightStripStart < mainMemory.Length; rightStripStart += step)
-                {
-                    for (var i = 0L; i < stripLength; i++)
-                    {
-                        left.Read();
-                        right.Read();
-                    }
-
-                    Merge(
-                        left,
-                        right,
-                        output,
-                        stripLength,
-                        Math.Min(stripLength, totalLength - rightStripStart),
-                        comparer);
-                }
-
-                for (var i = 0L; i < totalLength + stripLength - rightStripStart; i++)
-                {
-                    output.Write(right.Read());
-                }
-
-                (source, temp) = (temp, source);
+                Merge(
+                    left,
+                    right,
+                    output,
+                    stripLength,
+                    Math.Min(stripLength, totalLength - rightStripStart),
+                    comparer);
             }
 
-            if (source == originalSource)
+            for (var i = 0L; i < totalLength + stripLength - rightStripStart; i++)
             {
-                return;
+                output.Write(right.Read());
             }
 
-            using var sorted = source.GetReader();
-            using var dest = originalSource.GetWriter();
-            for (var i = 0; i < totalLength; i++)
-            {
-                dest.Write(sorted.Read());
-            }
+            (source, temp) = (temp, source);
         }
 
-        private static void Merge(
-            ISequentialStorageReader<T> left,
-            ISequentialStorageReader<T> right,
-            ISequentialStorageWriter<T> output,
-            long leftLength,
-            long rightLength,
-            IComparer<T> comparer)
+        if (source == originalSource)
         {
-            var leftIndex = 0L;
-            var rightIndex = 0L;
+            return;
+        }
 
-            var l = left.Read();
-            var r = right.Read();
-            while (true)
-            {
-                if (comparer.Compare(l, r) < 0)
-                {
-                    output.Write(l);
-                    leftIndex++;
-                    if (leftIndex == leftLength)
-                    {
-                        break;
-                    }
+        using var sorted = source.GetReader();
+        using var dest = originalSource.GetWriter();
+        for (var i = 0; i < totalLength; i++)
+        {
+            dest.Write(sorted.Read());
+        }
+    }
 
-                    l = left.Read();
-                }
-                else
-                {
-                    output.Write(r);
-                    rightIndex++;
-                    if (rightIndex == rightLength)
-                    {
-                        break;
-                    }
+    private static void Merge(
+        ISequentialStorageReader<T> left,
+        ISequentialStorageReader<T> right,
+        ISequentialStorageWriter<T> output,
+        long leftLength,
+        long rightLength,
+        IComparer<T> comparer)
+    {
+        var leftIndex = 0L;
+        var rightIndex = 0L;
 
-                    r = right.Read();
-                }
-            }
-
-            if (leftIndex < leftLength)
+        var l = left.Read();
+        var r = right.Read();
+        while (true)
+        {
+            if (comparer.Compare(l, r) < 0)
             {
                 output.Write(l);
-                Copy(left, output, leftLength - leftIndex - 1);
-            }
+                leftIndex++;
+                if (leftIndex == leftLength)
+                {
+                    break;
+                }
 
-            if (rightIndex < rightLength)
+                l = left.Read();
+            }
+            else
             {
                 output.Write(r);
-                Copy(right, output, rightLength - rightIndex - 1);
+                rightIndex++;
+                if (rightIndex == rightLength)
+                {
+                    break;
+                }
+
+                r = right.Read();
             }
         }
 
-        private static void Copy(ISequentialStorageReader<T> from, ISequentialStorageWriter<T> to, long count)
+        if (leftIndex < leftLength)
         {
-            for (var i = 0; i < count; i++)
-            {
-                to.Write(from.Read());
-            }
+            output.Write(l);
+            Copy(left, output, leftLength - leftIndex - 1);
+        }
+
+        if (rightIndex < rightLength)
+        {
+            output.Write(r);
+            Copy(right, output, rightLength - rightIndex - 1);
+        }
+    }
+
+    private static void Copy(ISequentialStorageReader<T> from, ISequentialStorageWriter<T> to, long count)
+    {
+        for (var i = 0; i < count; i++)
+        {
+            to.Write(from.Read());
         }
     }
 }
