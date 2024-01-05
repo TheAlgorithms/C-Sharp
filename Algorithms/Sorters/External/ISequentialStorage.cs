@@ -1,11 +1,10 @@
-namespace Algorithms.Sorters.External
+namespace Algorithms.Sorters.External;
+
+public interface ISequentialStorage<T>
 {
-    public interface ISequentialStorage<T>
-    {
-        public int Length { get; }
+    public int Length { get; }
 
-        ISequentialStorageReader<T> GetReader();
+    ISequentialStorageReader<T> GetReader();
 
-        ISequentialStorageWriter<T> GetWriter();
-    }
+    ISequentialStorageWriter<T> GetWriter();
 }

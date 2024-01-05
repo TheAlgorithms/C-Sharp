@@ -1,9 +1,8 @@
 using System;
 
-namespace Algorithms.Sorters.External
+namespace Algorithms.Sorters.External;
+
+public interface ISequentialStorageReader<out T> : IDisposable
 {
-    public interface ISequentialStorageReader<out T> : IDisposable
-    {
-        T Read();
-    }
+    T Read();
 }
