@@ -2,76 +2,75 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DataStructures.Queue
+namespace DataStructures.Queue;
+
+/// <summary>
+///     Implementation of a list based queue. FIFO style.
+/// </summary>
+/// <typeparam name="T">Generic Type.</typeparam>
+public class ListBasedQueue<T>
 {
+    private readonly LinkedList<T> queue;
+
     /// <summary>
-    ///     Implementation of a list based queue. FIFO style.
+    ///     Initializes a new instance of the <see cref="ListBasedQueue{T}" /> class.
     /// </summary>
-    /// <typeparam name="T">Generic Type.</typeparam>
-    public class ListBasedQueue<T>
+    public ListBasedQueue() => queue = new LinkedList<T>();
+
+    /// <summary>
+    ///     Clears the queue.
+    /// </summary>
+    public void Clear()
     {
-        private readonly LinkedList<T> queue;
+        queue.Clear();
+    }
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ListBasedQueue{T}" /> class.
-        /// </summary>
-        public ListBasedQueue() => queue = new LinkedList<T>();
-
-        /// <summary>
-        ///     Clears the queue.
-        /// </summary>
-        public void Clear()
+    /// <summary>
+    ///     Returns the first item in the queue and removes it from the queue.
+    /// </summary>
+    /// <exception cref="InvalidOperationException">Thrown if the queue is empty.</exception>
+    public T Dequeue()
+    {
+        if (queue.First is null)
         {
-            queue.Clear();
+            throw new InvalidOperationException("There are no items in the queue.");
         }
 
-        /// <summary>
-        ///     Returns the first item in the queue and removes it from the queue.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown if the queue is empty.</exception>
-        public T Dequeue()
-        {
-            if (queue.First is null)
-            {
-                throw new InvalidOperationException("There are no items in the queue.");
-            }
+        var item = queue.First;
+        queue.RemoveFirst();
+        return item.Value;
+    }
 
-            var item = queue.First;
-            queue.RemoveFirst();
-            return item.Value;
+    /// <summary>
+    ///     Returns a boolean indicating whether the queue is empty.
+    /// </summary>
+    public bool IsEmpty() => !queue.Any();
+
+    /// <summary>
+    ///     Returns a boolean indicating whether the queue is full.
+    /// </summary>
+    public bool IsFull() => false;
+
+    /// <summary>
+    ///     Returns the first item in the queue and keeps it in the queue.
+    /// </summary>
+    /// <exception cref="InvalidOperationException">Thrown if the queue is empty.</exception>
+    public T Peek()
+    {
+        if (queue.First is null)
+        {
+            throw new InvalidOperationException("There are no items in the queue.");
         }
 
-        /// <summary>
-        ///     Returns a boolean indicating whether the queue is empty.
-        /// </summary>
-        public bool IsEmpty() => !queue.Any();
+        return queue.First.Value;
+    }
 
-        /// <summary>
-        ///     Returns a boolean indicating whether the queue is full.
-        /// </summary>
-        public bool IsFull() => false;
-
-        /// <summary>
-        ///     Returns the first item in the queue and keeps it in the queue.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown if the queue is empty.</exception>
-        public T Peek()
-        {
-            if (queue.First is null)
-            {
-                throw new InvalidOperationException("There are no items in the queue.");
-            }
-
-            return queue.First.Value;
-        }
-
-        /// <summary>
-        ///     Adds an item at the last position in the queue.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown if the queue is full.</exception>
-        public void Enqueue(T item)
-        {
-            queue.AddLast(item);
-        }
+    /// <summary>
+    ///     Adds an item at the last position in the queue.
+    /// </summary>
+    /// <exception cref="InvalidOperationException">Thrown if the queue is full.</exception>
+    public void Enqueue(T item)
+    {
+        queue.AddLast(item);
     }
 }
