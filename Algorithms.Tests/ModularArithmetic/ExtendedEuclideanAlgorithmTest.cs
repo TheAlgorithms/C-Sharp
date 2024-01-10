@@ -6,7 +6,6 @@ namespace Algorithms.Tests.ModularArithmetic;
 
 public static class ExtendedEuclideanAlgorithmTest
 {
-    [Test]
     [TestCase(240, 46, 2, -9, 47)]
     [TestCase(46, 240, 2, 47, -9)]
     [TestCase(2, 3, 1, -1, 1)]
@@ -29,7 +28,6 @@ public static class ExtendedEuclideanAlgorithmTest
         Assert.AreEqual(expectedBezoutOfB, eeaResult.bezoutB);
     }
 
-    [Test]
     [TestCase(240, 46, 2, -9, 47)]
     [TestCase(46, 240, 2, 47, -9)]
     [TestCase(2, 3, 1, -1, 1)]

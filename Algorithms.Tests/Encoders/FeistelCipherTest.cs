@@ -26,7 +26,6 @@ public static class FeistelCipherTests
         Assert.AreEqual(message, decoded);
     }
 
-    [Test]
     [TestCase("00001111",                           (uint)0x12345678)]
     [TestCase("00001111222233334444555566667",      (uint)0x12345678)]
     [TestCase("000011112222333344445555666677",     (uint)0x12345678)]

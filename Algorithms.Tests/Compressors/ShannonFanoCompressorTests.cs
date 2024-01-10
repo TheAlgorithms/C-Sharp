@@ -7,7 +7,6 @@ namespace Algorithms.Tests.Compressors;
 
 public static class ShannonFanoCompressorTests
 {
-    [Test]
     [TestCase("dddddddddd", "1111111111")]
     [TestCase("a", "1")]
     [TestCase("", "")]

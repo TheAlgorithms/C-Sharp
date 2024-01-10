@@ -5,7 +5,6 @@ namespace Algorithms.Tests.Numeric.Factorization;
 
 public static class TrialDivisionFactorizerTests
 {
-    [Test]
     [TestCase(2)]
     [TestCase(3)]
     [TestCase(29)]
@@ -22,7 +21,6 @@ public static class TrialDivisionFactorizerTests
         Assert.IsFalse(success);
     }
 
-    [Test]
     [TestCase(4, 2)]
     [TestCase(6, 2)]
     [TestCase(8, 2)]

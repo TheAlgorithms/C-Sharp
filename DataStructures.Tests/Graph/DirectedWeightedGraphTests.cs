@@ -10,7 +10,6 @@ namespace DataStructures.Tests.Graph;
 [TestFixture]
 public class DirectedWeightedGraphTests
 {
-    [Test]
     [TestCase(-1)]
     [TestCase(-2)]
     [TestCase(-3)]
@@ -22,7 +21,6 @@ public class DirectedWeightedGraphTests
             .WithMessage("Graph capacity should always be a non-negative integer.");
     }
 
-    [Test]
     [TestCase(1)]
     [TestCase(10)]
     [TestCase(20)]

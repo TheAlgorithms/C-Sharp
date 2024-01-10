@@ -5,7 +5,6 @@ namespace Algorithms.Tests.Numeric;
 
 public static class PerfectSquareTests
 {
-    [Test]
     [TestCase(-4, ExpectedResult = false)]
     [TestCase(4, ExpectedResult = true)]
     [TestCase(9, ExpectedResult = true)]

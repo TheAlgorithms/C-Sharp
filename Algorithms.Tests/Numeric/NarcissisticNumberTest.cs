@@ -5,7 +5,6 @@ namespace Algorithms.Tests.Numeric;
 
 public static class NarcissisticNumberTest
 {
-    [Test]
     [TestCase(2, ExpectedResult = true)]
     [TestCase(3, ExpectedResult = true)]
     [TestCase(28, ExpectedResult = false)]

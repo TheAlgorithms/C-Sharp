@@ -6,7 +6,6 @@ namespace Algorithms.Tests.Numeric;
 
 public static class KeithNumberTest
 {
-    [Test]
     [TestCase(14)]
     [TestCase(47)]
     [TestCase(197)]
@@ -20,7 +19,6 @@ public static class KeithNumberTest
         Assert.IsTrue(result);
     }
 
-    [Test]
     [TestCase(-2)]
     public static void KeithNumberShouldThrowEx(int number)
     {

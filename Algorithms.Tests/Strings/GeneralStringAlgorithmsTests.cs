@@ -6,7 +6,6 @@ namespace Algorithms.Tests.Strings
 {
     public static class GeneralStringAlgorithmsTests
     {
-        [Test]
         [TestCase("Griffith", 'f', 2)]
         [TestCase("Randomwoooord", 'o', 4)]
         [TestCase("Control", 'C', 1)]

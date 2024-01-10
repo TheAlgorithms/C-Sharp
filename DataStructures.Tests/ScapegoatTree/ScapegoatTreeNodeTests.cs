@@ -7,7 +7,6 @@ namespace DataStructures.Tests.ScapegoatTree;
 [TestFixture]
 public class ScapegoatTreeNodeTests
 {
-    [Test]
     [TestCase(2,1)]
     [TestCase("B", "A")]
     public void RightSetter_OtherKeyPrecedesRightKey_ThrowsException<TKey>(TKey a, TKey b)
@@ -19,7 +18,6 @@ public class ScapegoatTreeNodeTests
         Assert.Throws<ArgumentException>(() => instance.Right = other);
     }
 
-    [Test]
     [TestCase(1,2)]
     [TestCase("A","B")]
     public void RightSetter_OtherKeyFollowsRightKey_AddsChild<TKey>(TKey a, TKey b)
@@ -31,7 +29,6 @@ public class ScapegoatTreeNodeTests
         Assert.DoesNotThrow(() => instance.Right = other);
     }
 
-    [Test]
     [TestCase(1,2)]
     [TestCase("A","B")]
     public void LeftSetter_OtherKeyFollowsLeftKey_ThrowsException<TKey>(TKey a, TKey b)
@@ -43,7 +40,6 @@ public class ScapegoatTreeNodeTests
         Assert.Throws<ArgumentException>(() => instance.Left = other);
     }
 
-    [Test]
     [TestCase(2,1)]
     [TestCase("B", "A")]
     public void LeftSetter_OtherKeyPrecedesLeftKey_AddsChild<TKey>(TKey a, TKey b)
@@ -55,7 +51,6 @@ public class ScapegoatTreeNodeTests
         Assert.DoesNotThrow(() => instance.Left = other);
     }
 
-    [Test]
     [TestCase(1,2)]
     [TestCase("A","B")]
     public void CompareTo_InstanceKeyPrecedesOtherKey_ReturnsMinusOne<TKey>(TKey a, TKey b)
@@ -69,7 +64,6 @@ public class ScapegoatTreeNodeTests
         Assert.AreEqual(result, -1);
     }
 
-    [Test]
     [TestCase(2, 1)]
     [TestCase("B","A")]
     public void CompareTo_InstanceKeyFollowsOtherKey_ReturnsOne<TKey>(TKey a, TKey b)
@@ -83,7 +77,6 @@ public class ScapegoatTreeNodeTests
         Assert.AreEqual(result, 1);
     }
 
-    [Test]
     [TestCase(1, 1)]
     [TestCase("A","A")]
     public void CompareTo_InstanceKeyEqualsOtherKey_ReturnsZero<TKey>(TKey a, TKey b)

@@ -8,12 +8,11 @@ namespace Algorithms.Tests.LinearAlgebra.Distances;
 public class ManhattanTests
 {
     /// <summary>
-    /// Test the result given by Manhattan distance function. 
+    /// Test the result given by Manhattan distance function.
     /// </summary>
     /// <param name="point1">Origin point.</param>
     /// <param name="point2">Target point.</param>
     /// <param name="expectedDistance">Expected result.</param>
-    [Test]
     [TestCase(new[] { 1.5 }, new[] { -1.0 }, 2.5)]
     [TestCase(new[] { 2.0, 3.0 }, new[] { -1.0, 5.0 }, 5)]
     [TestCase(new[] { 1.0, 2.0, 3.0 }, new[] { 1.0, 2.0, 3.0 }, 0)]
@@ -28,7 +27,6 @@ public class ManhattanTests
     /// </summary>
     /// <param name="point1">First point of N dimensions.</param>
     /// <param name="point2">Second point of M dimensions, M != N.</param>
-    [Test]
     [TestCase(new[] { 2.0, 3.0 }, new[] { -1.0 })]
     [TestCase(new[] { 1.0 }, new[] { 1.0, 2.0, 3.0 })]
     public void DistanceThrowsArgumentExceptionOnDifferentPointDimensions(double[] point1, double[] point2)

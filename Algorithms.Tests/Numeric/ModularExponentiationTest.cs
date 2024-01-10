@@ -7,7 +7,6 @@ namespace Algorithms.Tests.Numeric;
 
 public class ModularExponentiationTest
 {
-    [Test]
     [TestCase(3, 6, 11, 3)]
     [TestCase(5, 3, 13, 8)]
     [TestCase(2, 7, 17, 9)]

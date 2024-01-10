@@ -5,7 +5,6 @@ namespace Algorithms.Tests.DynamicProgramming
 {
     public class LevenshteinDistanceTests
     {
-        [Test]
         [TestCase("kitten", "sitting", 3)]
         [TestCase("bob", "bond", 2)]
         [TestCase("algorithm", "logarithm", 3)]

@@ -7,7 +7,6 @@ namespace Algorithms.Tests.Strings
 {
     public class HammingDistanceTests
     {
-        [Test]
         [TestCase("equal", "equal", 0)]
         [TestCase("dog", "dig", 1)]
         [TestCase("12345", "abcde", 5)]
