@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-namespace Algorithms.Tests.Helpers
+namespace Algorithms.Tests.Helpers;
+
+internal class IntComparer : IComparer<int>
 {
-    internal class IntComparer : IComparer<int>
-    {
-        public int Compare(int x, int y) => x.CompareTo(y);
-    }
+    public int Compare(int x, int y) => x.CompareTo(y);
 }
