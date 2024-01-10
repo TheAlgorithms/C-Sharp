@@ -31,7 +31,6 @@ public class ScapegoatTreeTests
         Assert.AreEqual(expected, tree.Alpha);
     }
 
-    [Test]
     [TestCase(1.1)]
     [TestCase(0.4)]
     public void Constructor_AlphaParameterIsInvalid_ThrowsException(double alpha)
@@ -113,7 +112,6 @@ public class ScapegoatTreeTests
         Assert.AreEqual(1, result!.Key);
     }
 
-    [Test]
     [TestCase(-2)]
     [TestCase(3)]
     public void Search_KeyIsNotPresent_ReturnsNull(int key)
@@ -262,7 +260,6 @@ public class ScapegoatTreeTests
         Assert.AreEqual(2, tree.MaxSize);
     }
 
-    [Test]
     [TestCase(3, new[]{2,5,1,6}, -1, 0.5)]
     public void Insert_TreeIsUnbalanced_RebuildsTree(int root, int[] keys, int candidate, double alpha)
     {
@@ -281,7 +278,6 @@ public class ScapegoatTreeTests
         Assert.Throws<SuccessException>(() => tree.Insert(candidate));
     }
 
-    [Test]
     [TestCase(20, new[]{10,30,5,11,29,40,50, 1, 12}, new[]{50,40,30,29}, 0.7)]
     public void Delete_TreeIsUnbalanced_BalancesTree(int root, int[] keys, int[] candidates, double alpha)
     {
@@ -306,7 +302,6 @@ public class ScapegoatTreeTests
         });
     }
 
-    [Test]
     [TestCase(20, new[]{10,30,5,11,29,40,50}, 10, 1)]
     public void Delete_TreeIsUnbalanced_MaxSizeEqualsSize(int root, int[] keys, int candidate, double alpha)
     {
@@ -326,7 +321,6 @@ public class ScapegoatTreeTests
         Assert.AreEqual(tree.Size, tree.MaxSize);
     }
 
-    [Test]
     [TestCase(3, new[]{2,5,1,6}, -1, 0.5)]
     [TestCase(3, new[]{2,5,1,6}, 7, 0.5)]
     public void Insert_TreeIsUnbalanced_BalancesTree(int root, int[] keys, int candidate, double alpha)

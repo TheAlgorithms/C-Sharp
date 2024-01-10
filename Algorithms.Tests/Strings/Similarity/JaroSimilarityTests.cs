@@ -7,7 +7,6 @@ namespace Algorithms.Tests.Strings
 {
     public class JaroSimilarityTests
     {
-        [Test]
         [TestCase("equal", "equal", 1)]
         [TestCase("abc", "123", 0)]
         [TestCase("FAREMVIEL", "FARMVILLE", 0.88d)]

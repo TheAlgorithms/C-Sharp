@@ -20,7 +20,6 @@ public static class BinomialCoefficientTests
         Assert.AreEqual(new BigInteger(expected), result);
     }
 
-    [Test]
     [TestCase(3, 7)]
     public static void TeoremCalculateThrowsException(int n, int k)
     {

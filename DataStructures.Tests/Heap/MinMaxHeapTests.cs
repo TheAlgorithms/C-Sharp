@@ -34,7 +34,6 @@ public static class MinMaxHeapTests
         Assert.AreEqual("aaaa", mmh.GetMax());
     }
 
-    [Test]
     [TestCaseSource("CollectionsSource")]
     public static void AddTest<T>(IEnumerable<T> collection)
     {
@@ -52,7 +51,6 @@ public static class MinMaxHeapTests
         Assert.AreEqual(collection.Count(), mmh.Count);
     }
 
-    [Test]
     [TestCaseSource("CollectionsSource")]
     public static void ExtractMaxTest<T>(IEnumerable<T> collection)
     {
@@ -69,7 +67,6 @@ public static class MinMaxHeapTests
         Assert.AreEqual(collection.Count() - 1, mmh.Count);
     }
 
-    [Test]
     [TestCaseSource("CollectionsSource")]
     public static void ExtractMinTest<T>(IEnumerable<T> collection)
     {
@@ -87,7 +84,6 @@ public static class MinMaxHeapTests
     }
 
 
-    [Test]
     [TestCaseSource("CollectionsSource")]
     public static void GetMaxTest<T>(IEnumerable<T> collection)
     {
@@ -100,7 +96,6 @@ public static class MinMaxHeapTests
         Assert.AreEqual(collection.Max(), maxValue);
     }
 
-    [Test]
     [TestCaseSource("CollectionsSource")]
     public static void GetMinTest<T>(IEnumerable<T> collection)
     {

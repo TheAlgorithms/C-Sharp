@@ -8,7 +8,6 @@ namespace Algorithms.Tests.Other;
 /// </summary>
 public class LuhnTests
 {
-    [Test]
     [TestCase("89014103211118510720")] // ICCID
     [TestCase("071052120")] // Social Security Code
     [TestCase("449125546588769")] // IMEI
@@ -25,7 +24,6 @@ public class LuhnTests
         Assert.True(validate);
     }
 
-    [Test]
     [TestCase("89012104211118510720")] // ICCID
     [TestCase("021053120")] // Social Security Code
     [TestCase("449145545588969")] // IMEI
@@ -42,7 +40,6 @@ public class LuhnTests
         Assert.False(validate);
     }
 
-    [Test]
     [TestCase("x9012104211118510720")] // ICCID
     [TestCase("0210x3120")] // Social Security Code
     [TestCase("44914554558896x")] // IMEI

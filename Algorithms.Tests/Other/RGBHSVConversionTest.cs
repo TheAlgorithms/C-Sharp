@@ -29,7 +29,6 @@ public static class RgbHsvConversionTest
     }
 
     // expected RGB-values taken from https://www.rapidtables.com/convert/color/hsv-to-rgb.html
-    [Test]
     [TestCase(0, 0, 0, 0, 0, 0)]
     [TestCase(0, 0, 1, 255, 255, 255)]
     [TestCase(0, 1, 1, 255, 0, 0)]
@@ -55,7 +54,6 @@ public static class RgbHsvConversionTest
     }
 
     // Parameters of test-cases for TestRGBOutput reversed
-    [Test]
     [TestCase(0, 0, 0, 0, 0, 0)]
     [TestCase(255, 255, 255, 0, 0, 1)]
     [TestCase(255, 0, 0, 0, 1, 1)]

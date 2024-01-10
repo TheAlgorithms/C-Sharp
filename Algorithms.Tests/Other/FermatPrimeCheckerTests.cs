@@ -6,7 +6,6 @@ namespace Algorithms.Tests.Other;
 
 public static class FermatPrimeCheckerTests
 {
-    [Test]
     [TestCase(5, true)]
     [TestCase(2633, true)]
     [TestCase(9439, true)]

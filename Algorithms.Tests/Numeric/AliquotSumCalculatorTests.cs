@@ -7,7 +7,6 @@ namespace Algorithms.Tests.Numeric;
 
 public static class AliquotSumCalculatorTests
 {
-    [Test]
     [TestCase(1, 0)]
     [TestCase(3, 1)]
     [TestCase(25, 6)]
@@ -23,7 +22,6 @@ public static class AliquotSumCalculatorTests
         result.Should().Be(expectedSum);
     }
 
-    [Test]
     [TestCase(-2)]
     public static void CalculateSum_NegativeInput_ExceptionIsThrown(int number)
     {

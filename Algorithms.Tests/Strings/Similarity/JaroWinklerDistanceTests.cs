@@ -7,7 +7,6 @@ namespace Algorithms.Tests.Strings
 {
     public class JaroWinklerDistanceTests
     {
-        [Test]
         [TestCase("equal", "equal", 0)]
         [TestCase("abc", "123", 1)]
         [TestCase("Winkler", "Welfare", 0.33)]

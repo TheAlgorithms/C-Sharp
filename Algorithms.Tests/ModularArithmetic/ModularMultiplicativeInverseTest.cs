@@ -7,7 +7,6 @@ namespace Algorithms.Tests.ModularArithmetic;
 
 public static class ModularMultiplicativeInverseTest
 {
-    [Test]
     [TestCase(2, 3, 2)]
     [TestCase(1, 1, 0)]
     [TestCase(13, 17, 4)]
@@ -20,7 +19,6 @@ public static class ModularMultiplicativeInverseTest
         Assert.AreEqual(expected, inverse);
     }
 
-    [Test]
     [TestCase(46, 240)]
     [TestCase(0, 17)]
     [TestCase(17, 0)]
@@ -36,7 +34,6 @@ public static class ModularMultiplicativeInverseTest
         _ = Assert.Throws<ArithmeticException>(Act);
     }
 
-    [Test]
     [TestCase(2, 3, 2)]
     [TestCase(1, 1, 0)]
     [TestCase(13, 17, 4)]
@@ -49,7 +46,6 @@ public static class ModularMultiplicativeInverseTest
         Assert.AreEqual(new BigInteger(expected), inverse);
     }
 
-    [Test]
     [TestCase(46, 240)]
     [TestCase(0, 17)]
     [TestCase(17, 0)]

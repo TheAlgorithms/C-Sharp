@@ -8,7 +8,6 @@ namespace Algorithms.Tests.Compressors;
 
 public static class HuffmanCompressorTests
 {
-    [Test]
     [TestCase("This is a string", "101010110111011101110111100011111010010010010011000")]
     [TestCase("Hello", "1101110010")]
     [TestCase("dddddddddd", "1111111111")]

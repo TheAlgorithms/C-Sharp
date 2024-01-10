@@ -5,7 +5,6 @@ namespace Algorithms.Tests.Other;
 
 public static class Int2BinaryTests
 {
-    [Test]
     [TestCase((ushort)0, "0000000000000000")]
     [TestCase((ushort)0b1, "0000000000000001")]
     [TestCase((ushort)0b0001010100111000, "0001010100111000")]
@@ -24,7 +23,6 @@ public static class Int2BinaryTests
     }
 
 
-    [Test]
     [TestCase((uint)0, "00000000000000000000000000000000")]
     [TestCase((uint)0b1, "00000000000000000000000000000001")]
     [TestCase((uint)0b0001010100111000, "00000000000000000001010100111000")]
@@ -43,7 +41,6 @@ public static class Int2BinaryTests
         Assert.AreEqual(expected, result);
     }
 
-    [Test]
     [TestCase((ulong)0, "0000000000000000000000000000000000000000000000000000000000000000")]
     [TestCase((ulong)0b1, "0000000000000000000000000000000000000000000000000000000000000001")]
     [TestCase((ulong)0b0001010100111000, "0000000000000000000000000000000000000000000000000001010100111000")]

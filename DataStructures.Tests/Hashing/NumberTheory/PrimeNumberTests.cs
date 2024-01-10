@@ -93,7 +93,6 @@ public static class PrimeNumberTests
         new object[] { 10, 1, true, 7 }
     };
 
-    [Test]
     [TestCaseSource("IsPrimeSource")]
     public static void IsPrimeTest(int number, bool expected)
     {
@@ -101,7 +100,6 @@ public static class PrimeNumberTests
         Assert.AreEqual(expected, actual);
     }
 
-    [Test]
     [TestCaseSource("NextPrimeSource")]
     public static void NextPrimeTest(int number, int factor, bool desc, int expected)
     {

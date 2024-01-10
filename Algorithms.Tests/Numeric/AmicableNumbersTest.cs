@@ -5,7 +5,6 @@ namespace Algorithms.Tests.Numeric;
 
 public static class AmicableNumbersTest
 {
-    [Test]
     [TestCase(220, 284)]
     [TestCase(1184, 1210)]
     [TestCase(2620, 2924)]
