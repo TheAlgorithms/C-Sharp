@@ -1,32 +1,31 @@
-﻿using Algorithms.Strings;
+using Algorithms.Strings;
 using NUnit.Framework;
 
-namespace Algorithms.Tests.Strings
+namespace Algorithms.Tests.Strings;
+
+public static class PalindromeTests
 {
-    public static class PalindromeTests
+    [TestCase("Anna")]
+    [TestCase("A Santa at Nasa")]
+    public static void TextIsPalindrome_TrueExpected(string text)
     {
-        [TestCase("Anna")]
-        [TestCase("A Santa at Nasa")]
-        public static void TextIsPalindrome_TrueExpected(string text)
-        {
-            // Arrange
-            // Act
-            var isPalindrome = Palindrome.IsStringPalindrome(text);
+        // Arrange
+        // Act
+        var isPalindrome = Palindrome.IsStringPalindrome(text);
 
-            // Assert
-            Assert.True(isPalindrome);
-        }
+        // Assert
+        Assert.True(isPalindrome);
+    }
 
-        [TestCase("hallo")]
-        [TestCase("Once upon a time")]
-        public static void TextNotPalindrome_FalseExpected(string text)
-        {
-            // Arrange
-            // Act
-            var isPalindrome = Palindrome.IsStringPalindrome(text);
+    [TestCase("hallo")]
+    [TestCase("Once upon a time")]
+    public static void TextNotPalindrome_FalseExpected(string text)
+    {
+        // Arrange
+        // Act
+        var isPalindrome = Palindrome.IsStringPalindrome(text);
 
-            // Assert
-            Assert.False(isPalindrome);
-        }
+        // Assert
+        Assert.False(isPalindrome);
     }
 }

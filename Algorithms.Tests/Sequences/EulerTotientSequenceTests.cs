@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace Algorithms.Tests.Sequences
 {
-    public class EulerTotientSequenceTests
+    public class EulerTotientSequenceTests;
     {
         [Test]
         public void FirstElementsCorrect()

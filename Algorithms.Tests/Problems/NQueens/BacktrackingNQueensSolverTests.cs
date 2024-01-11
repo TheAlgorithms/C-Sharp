@@ -1,127 +1,126 @@
-﻿using System;
+using System;
 using System.Linq;
 using Algorithms.Problems.NQueens;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Algorithms.Tests.Problems.NQueens
+namespace Algorithms.Tests.Problems.NQueens;
+
+public static class BacktrackingNQueensSolverTests
 {
-    public static class BacktrackingNQueensSolverTests
+    [TestCase(0, 0)]
+    [TestCase(1, 1)]
+    [TestCase(2, 0)]
+    [TestCase(3, 0)]
+    [TestCase(4, 2)]
+    [TestCase(5, 10)]
+    [TestCase(6, 4)]
+    [TestCase(7, 40)]
+    [TestCase(8, 92)]
+    [TestCase(8, 92)]
+    [TestCase(9, 352)]
+    [TestCase(10, 724)]
+    [TestCase(11, 2680)]
+    public static void SolvesCorrectly(int n, int expectedNumberOfSolutions)
     {
-        [TestCase(0, 0)]
-        [TestCase(1, 1)]
-        [TestCase(2, 0)]
-        [TestCase(3, 0)]
-        [TestCase(4, 2)]
-        [TestCase(5, 10)]
-        [TestCase(6, 4)]
-        [TestCase(7, 40)]
-        [TestCase(8, 92)]
-        [TestCase(8, 92)]
-        [TestCase(9, 352)]
-        [TestCase(10, 724)]
-        [TestCase(11, 2680)]
-        public static void SolvesCorrectly(int n, int expectedNumberOfSolutions)
-        {
-            // Arrange
-            // Act
-            var result = new BacktrackingNQueensSolver().BacktrackSolve(n).ToList();
+        // Arrange
+        // Act
+        var result = new BacktrackingNQueensSolver().BacktrackSolve(n).ToList();
 
-            // Assert
-            result.Should().HaveCount(expectedNumberOfSolutions);
-            foreach (var solution in result)
+        // Assert
+        result.Should().HaveCount(expectedNumberOfSolutions);
+        foreach (var solution in result)
+        {
+            ValidateOneQueenPerRow(solution);
+            ValidateOneQueenPerColumn(solution);
+            ValidateOneQueenPerTopLeftBottomRightDiagonalLine(solution);
+            ValidateOneQueenPerBottomLeftTopRightDiagonalLine(solution);
+        }
+    }
+
+    [Test]
+    public static void NCannotBeNegative()
+    {
+        var n = -1;
+
+        Action act = () => new BacktrackingNQueensSolver().BacktrackSolve(n);
+
+        act.Should().Throw<ArgumentException>();
+    }
+
+    private static void ValidateOneQueenPerRow(bool[,] solution)
+    {
+        for (var i = 0; i < solution.GetLength(1); i++)
+        {
+            var foundQueen = false;
+            for (var j = 0; j < solution.GetLength(0); j++)
             {
-                ValidateOneQueenPerRow(solution);
-                ValidateOneQueenPerColumn(solution);
-                ValidateOneQueenPerTopLeftBottomRightDiagonalLine(solution);
-                ValidateOneQueenPerBottomLeftTopRightDiagonalLine(solution);
+                foundQueen = ValidateCell(foundQueen, solution[j, i]);
+            }
+        }
+    }
+
+    private static void ValidateOneQueenPerColumn(bool[,] solution)
+    {
+        for (var i = 0; i < solution.GetLength(0); i++)
+        {
+            var foundQueen = false;
+            for (var j = 0; j < solution.GetLength(1); j++)
+            {
+                foundQueen = ValidateCell(foundQueen, solution[i, j]);
+            }
+        }
+    }
+
+    private static void ValidateOneQueenPerTopLeftBottomRightDiagonalLine(bool[,] solution)
+    {
+        for (var i = 0; i < solution.GetLength(0); i++)
+        {
+            var foundQueen = false;
+            for (var j = 0; i + j < solution.GetLength(1); j++)
+            {
+                foundQueen = ValidateCell(foundQueen, solution[i + j, i]);
             }
         }
 
-        [Test]
-        public static void NCannotBeNegative()
+        for (var i = 0; i < solution.GetLength(1); i++)
         {
-            var n = -1;
-
-            Action act = () => new BacktrackingNQueensSolver().BacktrackSolve(n);
-
-            act.Should().Throw<ArgumentException>();
-        }
-
-        private static void ValidateOneQueenPerRow(bool[,] solution)
-        {
-            for (var i = 0; i < solution.GetLength(1); i++)
+            var foundQueen = false;
+            for (var j = 0; i + j < solution.GetLength(0); j++)
             {
-                var foundQueen = false;
-                for (var j = 0; j < solution.GetLength(0); j++)
-                {
-                    foundQueen = ValidateCell(foundQueen, solution[j, i]);
-                }
+                foundQueen = ValidateCell(foundQueen, solution[j, i + j]);
             }
         }
+    }
 
-        private static void ValidateOneQueenPerColumn(bool[,] solution)
+    private static void ValidateOneQueenPerBottomLeftTopRightDiagonalLine(bool[,] solution)
+    {
+        for (var i = 0; i < solution.GetLength(0); i++)
         {
-            for (var i = 0; i < solution.GetLength(0); i++)
+            var foundQueen = false;
+            for (var j = 0; i - j >= 0; j++)
             {
-                var foundQueen = false;
-                for (var j = 0; j < solution.GetLength(1); j++)
-                {
-                    foundQueen = ValidateCell(foundQueen, solution[i, j]);
-                }
+                foundQueen = ValidateCell(foundQueen, solution[i - j, i]);
             }
         }
 
-        private static void ValidateOneQueenPerTopLeftBottomRightDiagonalLine(bool[,] solution)
+        for (var i = 0; i < solution.GetLength(1); i++)
         {
-            for (var i = 0; i < solution.GetLength(0); i++)
+            var foundQueen = false;
+            for (var j = 0; i - j >= 0 && solution.GetLength(0) - j > 0; j++)
             {
-                var foundQueen = false;
-                for (var j = 0; i + j < solution.GetLength(1); j++)
-                {
-                    foundQueen = ValidateCell(foundQueen, solution[i + j, i]);
-                }
-            }
-
-            for (var i = 0; i < solution.GetLength(1); i++)
-            {
-                var foundQueen = false;
-                for (var j = 0; i + j < solution.GetLength(0); j++)
-                {
-                    foundQueen = ValidateCell(foundQueen, solution[j, i + j]);
-                }
+                foundQueen = ValidateCell(foundQueen, solution[solution.GetLength(0) - j - 1, i - j]);
             }
         }
+    }
 
-        private static void ValidateOneQueenPerBottomLeftTopRightDiagonalLine(bool[,] solution)
+    private static bool ValidateCell(bool foundQueen, bool currentCell)
+    {
+        if (foundQueen)
         {
-            for (var i = 0; i < solution.GetLength(0); i++)
-            {
-                var foundQueen = false;
-                for (var j = 0; i - j >= 0; j++)
-                {
-                    foundQueen = ValidateCell(foundQueen, solution[i - j, i]);
-                }
-            }
-
-            for (var i = 0; i < solution.GetLength(1); i++)
-            {
-                var foundQueen = false;
-                for (var j = 0; i - j >= 0 && solution.GetLength(0) - j > 0; j++)
-                {
-                    foundQueen = ValidateCell(foundQueen, solution[solution.GetLength(0) - j - 1, i - j]);
-                }
-            }
+            currentCell.Should().BeFalse();
         }
 
-        private static bool ValidateCell(bool foundQueen, bool currentCell)
-        {
-            if (foundQueen)
-            {
-                currentCell.Should().BeFalse();
-            }
-
-            return foundQueen || currentCell;
-        }
+        return foundQueen || currentCell;
     }
 }
