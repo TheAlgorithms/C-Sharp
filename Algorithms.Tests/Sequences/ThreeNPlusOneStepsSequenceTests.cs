@@ -4,7 +4,8 @@ using Algorithms.Sequences;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Algorithms.Tests.Sequences; 
+namespace Algorithms.Tests.Sequences;
+
 public class ThreeNPlusOneStepsSequenceTests {
     [Test]
     public void First50ElementsCorrect() {
