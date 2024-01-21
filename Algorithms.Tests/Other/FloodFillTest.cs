@@ -1,11 +1,13 @@
 using System;
 using System.Drawing;
+using System.Runtime.Versioning;
 using FluentAssertions;
 using NUnit.Framework;
 
 namespace Algorithms.Tests.Other;
 
-public static class Tests
+[SupportedOSPlatform("windows")]
+public static class FloodFillTests
 {
     private static readonly Color Black = Color.FromArgb(255, 0, 0, 0);
     private static readonly Color Green = Color.FromArgb(255, 0, 255, 0);

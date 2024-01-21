@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
+using System.Runtime.Versioning;
 using Algorithms.Other;
 using FluentAssertions;
 using NUnit.Framework;
 
 namespace Algorithms.Tests.Other;
 
+[SupportedOSPlatform("windows")]
 public static class KochSnowflakeTest
 {
     [Test]

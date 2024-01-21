@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
+using System.Runtime.Versioning;
 
 namespace Algorithms.Other;
 
@@ -21,6 +22,7 @@ namespace Algorithms.Other;
 ///     Processing language, see  https://natureofcode.com/book/chapter-8-fractals/
 ///     #84-the-koch-curve-and-the-arraylist-technique ).
 /// </summary>
+[SupportedOSPlatform("windows")]
 public static class KochSnowflake
 {
     /// <summary>

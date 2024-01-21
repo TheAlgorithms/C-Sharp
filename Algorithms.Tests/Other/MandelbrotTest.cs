@@ -1,10 +1,12 @@
 using System;
 using System.Drawing;
+using System.Runtime.Versioning;
 using Algorithms.Other;
 using NUnit.Framework;
 
 namespace Algorithms.Tests.Other;
 
+[SupportedOSPlatform("windows")]
 public static class MandelbrotTest
 {
     [Test]

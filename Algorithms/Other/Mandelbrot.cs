@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Runtime.Versioning;
 
 namespace Algorithms.Other;
 
@@ -20,6 +21,7 @@ namespace Algorithms.Other;
 ///     (description adapted from https://en.wikipedia.org/wiki/Mandelbrot_set)
 ///     (see also https://en.wikipedia.org/wiki/Plotting_algorithms_for_the_Mandelbrot_set).
 /// </summary>
+[SupportedOSPlatform("windows")]
 public static class Mandelbrot
 {
     /// <summary>

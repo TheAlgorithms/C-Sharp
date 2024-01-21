@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.Versioning;
 
 namespace Algorithms.Other;
 
@@ -12,6 +13,7 @@ namespace Algorithms.Other;
 /// (description adapted from https://en.wikipedia.org/wiki/Flood_fill)
 /// (see also: https://www.techiedelight.com/flood-fill-algorithm/).
 /// </summary>
+[SupportedOSPlatform("windows")]
 public static class FloodFill
 {
     private static readonly List<(int xOffset, int yOffset)> Neighbors = new() { (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1) };
