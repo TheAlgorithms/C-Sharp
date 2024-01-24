@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace DataStructures.Tests;
 
@@ -37,7 +38,7 @@ public class SortedListTests
             list.Add(i);
         }
 
-        Assert.IsFalse(list.Contains(value));
+        Assert.That(list.Contains(value), Is.False);
     }
 
     [Test]
@@ -54,7 +55,7 @@ public class SortedListTests
             list.Add(i);
         }
 
-        Assert.IsTrue(list.Contains(value));
+        Assert.That(list.Contains(value), Is.True);
     }
 
 
@@ -72,7 +73,7 @@ public class SortedListTests
             list.Add(i);
         }
 
-        Assert.IsFalse(list.TryRemove(value));
+        Assert.That(list.TryRemove(value), Is.False);
     }
 
     [Test]
@@ -95,7 +96,7 @@ public class SortedListTests
 
         expectingValues.Remove(value);
 
-        Assert.IsTrue(list.TryRemove(value));
+        Assert.That(list.TryRemove(value), Is.True);
         CollectionAssert.AreEqual(expectingValues, list);
     }
 
@@ -114,7 +115,7 @@ public class SortedListTests
 
         list.Clear();
 
-        CollectionAssert.IsEmpty(list);
+        Assert.That(list, Is.Empty);
     }
 
     private static List<int> GetValues(int count)

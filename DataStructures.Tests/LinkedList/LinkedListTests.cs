@@ -21,7 +21,7 @@ public static class LinkedListTests
         }
 
         // Assert
-        Assert.AreEqual(quantity, a.Length());
+        Assert.That(quantity, Is.EqualTo(a.Length()));
     }
 
     [Test]
@@ -33,7 +33,7 @@ public static class LinkedListTests
         // Act
 
         // Assert
-        Assert.AreEqual(0, a.Length());
+        Assert.That(0, Is.EqualTo(a.Length()));
     }
 
     [Test]
@@ -51,8 +51,8 @@ public static class LinkedListTests
         var items = testObj.GetListData();
 
         // Assert
-        Assert.AreEqual(5, items.Count());
-        Assert.AreEqual("O", testObj.GetElementByIndex(4));
+        Assert.That(5, Is.EqualTo(items.Count()));
+        Assert.That("O", Is.EqualTo(testObj.GetElementByIndex(4)));
     }
 
     [Test]
@@ -97,13 +97,13 @@ public static class LinkedListTests
         var resultString = testObj.GetElementByIndex(0) + testObj.GetElementByIndex(1);
 
         // Assert
-        Assert.AreEqual("HI", resultString);
-        Assert.IsTrue(xRemoveSucess);
-        Assert.IsTrue(oRemoveSucess);
-        Assert.IsTrue(eRemoveSucess);
-        Assert.IsTrue(lRemoveSucess);
-        Assert.IsTrue(l2RemoveSucess);
-        Assert.IsFalse(l3RemoveSucess);
-        Assert.IsFalse(nonExistantRemoveSucess);
+        Assert.That("HI", Is.EqualTo(resultString));
+        Assert.That(xRemoveSucess, Is.True);
+        Assert.That(oRemoveSucess, Is.True);
+        Assert.That(eRemoveSucess, Is.True);
+        Assert.That(lRemoveSucess, Is.True);
+        Assert.That(l2RemoveSucess, Is.True);
+        Assert.That(l3RemoveSucess, Is.False);
+        Assert.That(nonExistantRemoveSucess, Is.False);
     }
 }

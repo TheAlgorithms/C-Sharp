@@ -19,6 +19,6 @@ public class SegmentTreeUpdateTests
     public void Update_Test(int node, int value, int left, int right, int aftQuery)
     {
         testTree.Update(node, value);
-        Assert.AreEqual(aftQuery, testTree.Query(left, right));
+        Assert.That(aftQuery, Is.EqualTo(testTree.Query(left, right)));
     }
 }

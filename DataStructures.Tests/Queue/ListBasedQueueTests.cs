@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using DataStructures.Queue;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace DataStructures.Tests.Queue;
 
@@ -24,9 +25,9 @@ public static class ListBasedQueueTests
         }
 
         // Assert
-        Assert.AreEqual("ABC", result.ToString());
-        Assert.IsTrue(q.IsEmpty(), "Queue is empty");
-        Assert.IsFalse(q.IsFull(), "Queue is full");
+        Assert.That("ABC", Is.EqualTo(result.ToString()));
+        ClassicAssert.IsTrue(q.IsEmpty(), "Queue is empty");
+        ClassicAssert.IsFalse(q.IsFull(), "Queue is full");
     }
 
     [Test]
@@ -45,9 +46,9 @@ public static class ListBasedQueueTests
         }
 
         // Assert
-        Assert.AreEqual(1, peeked);
-        Assert.IsFalse(q.IsEmpty(), "Queue is empty");
-        Assert.IsFalse(q.IsFull(), "Queue is full");
+        Assert.That(1, Is.EqualTo(peeked));
+        ClassicAssert.IsFalse(q.IsEmpty(), "Queue is empty");
+        ClassicAssert.IsFalse(q.IsFull(), "Queue is full");
     }
 
     [Test]
@@ -68,7 +69,7 @@ public static class ListBasedQueueTests
         }
 
         // Assert
-        Assert.AreEqual(typeof(InvalidOperationException), exception?.GetType());
+        Assert.That(typeof(InvalidOperationException), Is.EqualTo(exception?.GetType()));
     }
 
     [Test]
@@ -89,7 +90,7 @@ public static class ListBasedQueueTests
         }
 
         // Assert
-        Assert.AreEqual(typeof(InvalidOperationException), exception?.GetType());
+        Assert.That(typeof(InvalidOperationException), Is.EqualTo(exception?.GetType()));
     }
 
     [Test]
@@ -104,7 +105,7 @@ public static class ListBasedQueueTests
         q.Clear();
 
         // Assert
-        Assert.IsTrue(q.IsEmpty(), "Queue is empty");
-        Assert.IsFalse(q.IsFull(), "Queue is full");
+        ClassicAssert.IsTrue(q.IsEmpty(), "Queue is empty");
+        ClassicAssert.IsFalse(q.IsFull(), "Queue is full");
     }
 }

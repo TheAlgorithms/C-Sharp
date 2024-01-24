@@ -12,10 +12,10 @@ public class ScapegoatTreeTests
     {
         var tree = new ScapegoatTree<int>();
 
-        Assert.IsNull(tree.Root);
-        Assert.IsTrue(tree.Size == 0);
-        Assert.IsTrue(tree.MaxSize == 0);
-        Assert.AreEqual(0.5, tree.Alpha);
+        Assert.That(tree.Root, Is.Null);
+        Assert.That(tree.Size == 0, Is.True);
+        Assert.That(tree.MaxSize == 0, Is.True);
+        Assert.That(tree.Alpha, Is.EqualTo(0.5));
     }
 
     [Test]
@@ -25,10 +25,10 @@ public class ScapegoatTreeTests
 
         var tree = new ScapegoatTree<int>(expected);
 
-        Assert.IsNull(tree.Root);
-        Assert.IsTrue(tree.Size == 0);
-        Assert.IsTrue(tree.MaxSize == 0);
-        Assert.AreEqual(expected, tree.Alpha);
+        Assert.That(tree.Root, Is.Null);
+        Assert.That(tree.Size == 0, Is.True);
+        Assert.That(tree.MaxSize == 0, Is.True);
+        Assert.That(tree.Alpha, Is.EqualTo(expected));
     }
 
     [TestCase(1.1)]
@@ -46,11 +46,11 @@ public class ScapegoatTreeTests
 
         var tree = new ScapegoatTree<int>(expected);
 
-        Assert.IsNotNull(tree.Root);
-        Assert.IsTrue(tree.Root!.Key == expected);
-        Assert.IsTrue(tree.Size == 1);
-        Assert.IsTrue(tree.MaxSize == 1);
-        Assert.AreEqual(0.5, tree.Alpha);
+        Assert.That(tree.Root, Is.Not.Null);
+        Assert.That(tree.Root!.Key == expected, Is.True);
+        Assert.That(tree.Size == 1, Is.True);
+        Assert.That(tree.MaxSize == 1, Is.True);
+        Assert.That(tree.Alpha, Is.EqualTo(0.5));
     }
 
     [Test]
@@ -61,10 +61,10 @@ public class ScapegoatTreeTests
 
         var tree = new ScapegoatTree<int>(key, alpha);
 
-        Assert.IsNotNull(tree.Root);
-        Assert.IsTrue(tree.Size == 1);
-        Assert.IsTrue(tree.MaxSize == 1);
-        Assert.AreEqual(alpha, tree.Alpha);
+        Assert.That(tree.Root, Is.Not.Null);
+        Assert.That(tree.Size == 1, Is.True);
+        Assert.That(tree.MaxSize == 1, Is.True);
+        Assert.That(tree.Alpha, Is.EqualTo(alpha));
     }
 
     [Test]
@@ -75,10 +75,10 @@ public class ScapegoatTreeTests
 
         var tree = new ScapegoatTree<int>(node, alpha);
 
-        Assert.IsNotNull(tree.Root);
-        Assert.IsTrue(tree.Size == 3);
-        Assert.IsTrue(tree.MaxSize == 3);
-        Assert.AreEqual(alpha, tree.Alpha);
+        Assert.That(tree.Root, Is.Not.Null);
+        Assert.That(tree.Size == 3, Is.True);
+        Assert.That(tree.MaxSize == 3, Is.True);
+        Assert.That(tree.Alpha, Is.EqualTo(alpha));
     }
 
     [Test]
@@ -88,7 +88,7 @@ public class ScapegoatTreeTests
 
         var result = tree.IsAlphaWeightBalanced();
 
-        Assert.IsTrue(result);
+        Assert.That(result, Is.True);
     }
 
     [Test]
@@ -98,7 +98,7 @@ public class ScapegoatTreeTests
 
         var result = tree.Search(1);
 
-        Assert.IsNull(result);
+        Assert.That(result, Is.Null);
     }
 
     [Test]
@@ -108,8 +108,8 @@ public class ScapegoatTreeTests
 
         var result = tree.Search(1);
 
-        Assert.IsNotNull(result);
-        Assert.AreEqual(1, result!.Key);
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result!.Key, Is.EqualTo(1));
     }
 
     [TestCase(-2)]
@@ -122,7 +122,7 @@ public class ScapegoatTreeTests
 
         var result = tree.Search(key);
 
-        Assert.IsNull(result);
+        Assert.That(result, Is.Null);
     }
 
     [Test]
@@ -132,11 +132,11 @@ public class ScapegoatTreeTests
 
         var inserted = tree.Insert(1);
 
-        Assert.IsTrue(inserted);
-        Assert.IsNotNull(tree.Root);
-        Assert.AreEqual(1, tree.Root!.Key);
-        Assert.AreEqual(1, tree.Size);
-        Assert.AreEqual(1, tree.MaxSize);
+        Assert.That(inserted, Is.True);
+        Assert.That(tree.Root, Is.Not.Null);
+        Assert.That(tree.Root!.Key, Is.EqualTo(1));
+        Assert.That(tree.Size, Is.EqualTo(1));
+        Assert.That(tree.MaxSize, Is.EqualTo(1));
     }
 
     [Test]
@@ -146,7 +146,7 @@ public class ScapegoatTreeTests
 
         var deleted = tree.Delete(1);
 
-        Assert.IsFalse(deleted);
+        Assert.That(deleted, Is.False);
     }
 
     [Test]
@@ -156,8 +156,8 @@ public class ScapegoatTreeTests
 
         var deleted = tree.Delete(2);
 
-        Assert.IsFalse(deleted);
-        Assert.AreEqual(1, tree.Size);
+        Assert.That(deleted, Is.False);
+        Assert.That(tree.Size, Is.EqualTo(1));
     }
 
     [Test]
@@ -167,9 +167,9 @@ public class ScapegoatTreeTests
 
         var inserted = tree.Insert(1);
 
-        Assert.IsFalse(inserted);
-        Assert.AreEqual(1, tree.Size);
-        Assert.AreEqual(1, tree.MaxSize);
+        Assert.That(inserted, Is.False);
+        Assert.That(tree.Size, Is.EqualTo(1));
+        Assert.That(tree.MaxSize, Is.EqualTo(1));
     }
 
     [Test]
@@ -179,12 +179,12 @@ public class ScapegoatTreeTests
 
         var inserted = tree.Insert(2);
 
-        Assert.IsTrue(inserted);
+        Assert.That(inserted, Is.True);
 
         var deleted = tree.Delete(2);
 
-        Assert.IsTrue(deleted);
-        Assert.AreEqual(1, tree.Size);
+        Assert.That(deleted, Is.True);
+        Assert.That(tree.Size, Is.EqualTo(1));
     }
 
     [Test]
@@ -194,9 +194,9 @@ public class ScapegoatTreeTests
 
         var deleted = tree.Delete(1);
 
-        Assert.IsTrue(deleted);
-        Assert.IsNull(tree.Root);
-        Assert.AreEqual(0, tree.Size);
+        Assert.That(deleted, Is.True);
+        Assert.That(tree.Root, Is.Null);
+        Assert.That(tree.Size, Is.EqualTo(0));
     }
 
     [Test]
@@ -206,12 +206,12 @@ public class ScapegoatTreeTests
 
         var inserted = tree.Insert(-1);
 
-        Assert.IsTrue(inserted);
+        Assert.That(inserted, Is.True);
 
         var deleted = tree.Delete(1);
 
-        Assert.IsTrue(deleted);
-        Assert.AreEqual(1, tree.Size);
+        Assert.That(deleted, Is.True);
+        Assert.That(tree.Size, Is.EqualTo(1));
     }
 
     [Test]
@@ -221,12 +221,12 @@ public class ScapegoatTreeTests
 
         var inserted = tree.Insert(2);
 
-        Assert.IsTrue(inserted);
+        Assert.That(inserted, Is.True);
 
         var deleted = tree.Delete(1);
 
-        Assert.IsTrue(deleted);
-        Assert.AreEqual(1, tree.Size);
+        Assert.That(deleted, Is.True);
+        Assert.That(tree.Size, Is.EqualTo(1));
     }
 
     [Test]
@@ -236,16 +236,16 @@ public class ScapegoatTreeTests
 
         var inserted = tree.Insert(-1);
 
-        Assert.IsTrue(inserted);
+        Assert.That(inserted, Is.True);
 
         inserted = tree.Insert(2);
 
-        Assert.IsTrue(inserted);
+        Assert.That(inserted, Is.True);
 
         var deleted = tree.Delete(1);
 
-        Assert.IsTrue(deleted);
-        Assert.AreEqual(2, tree.Size);
+        Assert.That(deleted, Is.True);
+        Assert.That(tree.Size, Is.EqualTo(2));
     }
 
     [Test]
@@ -255,9 +255,9 @@ public class ScapegoatTreeTests
 
         var inserted = tree.Insert(2);
 
-        Assert.IsTrue(inserted);
-        Assert.AreEqual(2, tree.Size);
-        Assert.AreEqual(2, tree.MaxSize);
+        Assert.That(inserted, Is.True);
+        Assert.That(tree.Size, Is.EqualTo(2));
+        Assert.That(tree.MaxSize, Is.EqualTo(2));
     }
 
     [TestCase(3, new[]{2,5,1,6}, -1, 0.5)]
@@ -318,7 +318,7 @@ public class ScapegoatTreeTests
 
         tree.Delete(candidate);
 
-        Assert.AreEqual(tree.Size, tree.MaxSize);
+        Assert.That(tree.MaxSize, Is.EqualTo(tree.Size));
     }
 
     [TestCase(3, new[]{2,5,1,6}, -1, 0.5)]
@@ -338,9 +338,9 @@ public class ScapegoatTreeTests
 
         var inserted = tree.Insert(candidate);
 
-        Assert.True(inserted);
-        Assert.True(tree.Size == 6);
-        Assert.True(tree.IsAlphaWeightBalanced());
+        Assert.That(inserted, Is.True);
+        Assert.That(tree.Size == 6, Is.True);
+        Assert.That(tree.IsAlphaWeightBalanced(), Is.True);
     }
 
     [TestCase(3, 5, 0.5)]
@@ -350,9 +350,9 @@ public class ScapegoatTreeTests
 
         var inserted = tree.Insert(candidate);
 
-        Assert.True(inserted);
-        Assert.True(tree.Size == 2);
-        Assert.True(tree.IsAlphaWeightBalanced());
+        Assert.That(inserted, Is.True);
+        Assert.That(tree.Size == 2, Is.True);
+        Assert.That(tree.IsAlphaWeightBalanced(), Is.True);
     }
 
     [Test]
@@ -360,7 +360,7 @@ public class ScapegoatTreeTests
     {
         var tree = new ScapegoatTree<int>();
 
-        Assert.IsFalse(tree.Contains(1));
+        Assert.That(tree.Contains(1), Is.False);
     }
 
     [Test]
@@ -368,7 +368,7 @@ public class ScapegoatTreeTests
     {
         var tree = new ScapegoatTree<int>(1);
 
-        Assert.IsTrue(tree.Contains(1));
+        Assert.That(tree.Contains(1), Is.True);
     }
 
     [Test]
@@ -378,7 +378,7 @@ public class ScapegoatTreeTests
 
         tree.Insert(2);
 
-        Assert.IsTrue(tree.Contains(2));
+        Assert.That(tree.Contains(2), Is.True);
     }
 
     [Test]
@@ -388,7 +388,7 @@ public class ScapegoatTreeTests
 
         tree.Insert(2);
 
-        Assert.IsFalse(tree.Contains(-1));
+        Assert.That(tree.Contains(-1), Is.False);
     }
 
     [Test]
@@ -398,9 +398,9 @@ public class ScapegoatTreeTests
 
         tree.Clear();
 
-        Assert.IsTrue(tree.Size == 0);
-        Assert.IsTrue(tree.MaxSize == 0);
-        Assert.IsNull(tree.Root);
+        Assert.That(tree.Size == 0, Is.True);
+        Assert.That(tree.MaxSize == 0, Is.True);
+        Assert.That(tree.Root, Is.Null);
     }
 
     [Test]
@@ -412,7 +412,7 @@ public class ScapegoatTreeTests
 
         tree.Tune(expected);
 
-        Assert.AreEqual(expected, tree.Alpha);
+        Assert.That(tree.Alpha, Is.EqualTo(expected));
     }
 
     [Test]

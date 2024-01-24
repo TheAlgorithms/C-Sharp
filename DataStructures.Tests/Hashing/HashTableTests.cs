@@ -33,7 +33,7 @@ public class HashTableTests
 
         hashTable.Add("a", 1);
 
-        Assert.AreEqual(1, hashTable.Count);
+        Assert.That(hashTable.Count, Is.EqualTo(1));
     }
 
     [Test]
@@ -50,7 +50,7 @@ public class HashTableTests
         {
             Console.WriteLine("ArgumentException");
         }
-        Assert.AreEqual(1, hashTable.Count);
+        Assert.That(hashTable.Count, Is.EqualTo(1));
     }
 
     [Test]
@@ -66,9 +66,9 @@ public class HashTableTests
     {
         var hashTable = new HashTable<string, int>();
 
-        hashTable.Add("a", 1);
+        hashTable.Add("b", 1);
 
-        Assert.AreEqual(1, hashTable.Count);
+        Assert.That(hashTable.Count, Is.EqualTo(1));
     }
 
     [Test]
@@ -87,7 +87,7 @@ public class HashTableTests
             Console.WriteLine("ArgumentException");
         }
 
-        Assert.AreEqual(2, hashTable.Count);
+        Assert.That(hashTable.Count, Is.EqualTo(2));
     }
 
     [Test]
@@ -103,7 +103,7 @@ public class HashTableTests
         {
             Console.WriteLine("ArgumentNullException");
         }
-        Assert.AreEqual(0, hashTable.Count);
+        Assert.That(hashTable.Count, Is.EqualTo(0));
     }
 
     [Test]
@@ -113,7 +113,7 @@ public class HashTableTests
 
         hashTable.Add("a", 1);
         hashTable.Add("b", 1);
-        Assert.AreEqual(2, hashTable.Count);
+        Assert.That(hashTable.Count, Is.EqualTo(2));
     }
 
     [Test]
@@ -129,7 +129,7 @@ public class HashTableTests
     {
         var hashTable = new HashTable<string, int>();
 
-        Assert.IsFalse(hashTable.Remove("a"));
+        Assert.That(hashTable.Remove("a"), Is.False);
     }
 
     [Test]
@@ -139,7 +139,7 @@ public class HashTableTests
 
         hashTable.Add("a", 1);
 
-        Assert.IsTrue(hashTable.Remove("a"));
+        Assert.That(hashTable.Remove("a"), Is.True);
     }
 
     [Test]
@@ -150,7 +150,7 @@ public class HashTableTests
         hashTable.Add("a", 1);
         hashTable.Remove("a");
 
-        Assert.AreEqual(0, hashTable.Count);
+        Assert.That(hashTable.Count, Is.EqualTo(0));
     }
 
     [Test]
@@ -160,7 +160,7 @@ public class HashTableTests
 
         hashTable.Remove("a");
 
-        Assert.AreEqual(0, hashTable.Count);
+        Assert.That(hashTable.Count, Is.EqualTo(0));
     }
 
     [Test]
@@ -168,7 +168,7 @@ public class HashTableTests
     {
         var hashTable = new HashTable<string, int>();
 
-        Assert.IsFalse(hashTable.ContainsValue(1));
+        Assert.That(hashTable.ContainsValue(1), Is.False);
     }
 
     [Test]
@@ -178,7 +178,7 @@ public class HashTableTests
 
         hashTable.Add("a", 1);
 
-        Assert.IsTrue(hashTable.ContainsValue(1));
+        Assert.That(hashTable.ContainsValue(1), Is.True);
     }
 
     [Test]
@@ -194,7 +194,7 @@ public class HashTableTests
     {
         var hashTable = new HashTable<string, int>();
 
-        Assert.IsFalse(hashTable.ContainsKey("a"));
+        Assert.That(hashTable.ContainsKey("a"), Is.False);
     }
 
     [Test]
@@ -204,7 +204,7 @@ public class HashTableTests
 
         hashTable.Add("a", 1);
 
-        Assert.IsTrue(hashTable.ContainsKey("a"));
+        Assert.That(hashTable.ContainsKey("a"), Is.True);
     }
 
     [Test]
@@ -223,7 +223,7 @@ public class HashTableTests
         hashTable.Add("a", 1);
         hashTable.Clear();
 
-        Assert.AreEqual(0, hashTable.Count);
+        Assert.That(hashTable.Count, Is.EqualTo(0));
     }
 
     [Test]
@@ -234,7 +234,7 @@ public class HashTableTests
         hashTable.Add("a", 1);
         hashTable.Clear();
 
-        Assert.IsFalse(hashTable.ContainsKey("a"));
+        Assert.That(hashTable.ContainsKey("a"), Is.False);
     }
 
     [Test]
@@ -251,7 +251,7 @@ public class HashTableTests
         /// Next Prime number after 4 is 5
         /// Capacity should be 5
         /// After resizing, the capacity should be 10
-        Assert.AreEqual(10, hashTable.Capacity);
+        Assert.That(hashTable.Capacity, Is.EqualTo(10));
     }
     [Test]
     public void LoadFactor_ReturnsCorrectValue()
@@ -263,7 +263,7 @@ public class HashTableTests
         hashTable.Add("three", 3);
         hashTable.Add("four", 4);
         hashTable.Add("humour", 5);
-        Assert.AreEqual(0.75f, hashTable.LoadFactor);
+        Assert.That(hashTable.LoadFactor, Is.EqualTo(0.75f));
     }
 
     [Test]
@@ -276,7 +276,7 @@ public class HashTableTests
 
         var keys = new List<int> { 1,2,3 };
 
-        CollectionAssert.AreEquivalent(keys, hashTable.Keys);
+        Assert.That(keys, Is.EquivalentTo(hashTable.Keys));
     }
 
     [Test]
@@ -289,7 +289,7 @@ public class HashTableTests
 
         var values = new List<string> { "one", "two", "three" };
 
-        CollectionAssert.AreEquivalent(values, hashTable?.Values);
+        Assert.That(values, Is.EquivalentTo(hashTable.Values));
     }
 
     [Test]
@@ -353,7 +353,7 @@ public class HashTableTests
     {
         var hashTable = new HashTable<string, int>(4);
         hashTable.Add("one", 1);
-        Assert.AreEqual(1, hashTable["one"]);
+        Assert.That(hashTable["one"], Is.EqualTo(1));
     }
 
     [Test]
@@ -362,7 +362,7 @@ public class HashTableTests
         var hashTable = new HashTable<string, int>(4);
         hashTable.Add("one", 1);
         hashTable["one"] = 2;
-        Assert.AreEqual(2, hashTable["one"]);
+        Assert.That(hashTable["one"], Is.EqualTo(2));
     }
 
     [Test]
