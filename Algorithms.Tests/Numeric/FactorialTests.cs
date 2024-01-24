@@ -21,7 +21,7 @@ public static class FactorialTests
         var result = Factorial.Calculate(input);
 
         // Assert
-        Assert.AreEqual(expectedBigInt, result);
+        Assert.That(result, Is.EqualTo(expectedBigInt));
     }
 
     [TestCase(-5)]

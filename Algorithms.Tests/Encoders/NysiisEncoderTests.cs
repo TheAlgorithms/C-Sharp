@@ -26,6 +26,6 @@ public class NysiisEncoderTests
     {
         var enc = new NysiisEncoder();
         var nysiis = enc.Encode(source);
-        Assert.AreEqual(expected, nysiis);
+        Assert.That(nysiis, Is.EqualTo(expected));
     }
 }

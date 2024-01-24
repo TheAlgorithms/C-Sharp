@@ -34,6 +34,6 @@ public static class GaussJordanEliminationTests
         var result = solver.Solve(input);
 
         // Assert
-        Assert.IsFalse(result);
+        Assert.That(result, Is.False);
     }
 }

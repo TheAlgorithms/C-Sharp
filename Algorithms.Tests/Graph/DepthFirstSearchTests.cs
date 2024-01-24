@@ -37,7 +37,7 @@ public class DepthFirstSearchTests
         dfsSearcher.VisitAll(graph, vertex1, _ => countOfVisitedVertices++);
 
         //Assert
-        Assert.AreEqual(countOfVisitedVertices, graph.Count);
+        Assert.That(graph.Count, Is.EqualTo(countOfVisitedVertices));
     }
 
     [Test]
@@ -78,9 +78,9 @@ public class DepthFirstSearchTests
         dfsSearcher.VisitAll(graph, vertex4, _ => countOfVisitedVerticesPerSecondGraph++);
 
         //Assert
-        Assert.AreEqual(countOfVisitedVerticesPerFirstGraph, 3);
+        Assert.That(3, Is.EqualTo(countOfVisitedVerticesPerFirstGraph));
 
-        Assert.AreEqual(countOfVisitedVerticesPerSecondGraph, 3);
+        Assert.That(3, Is.EqualTo(countOfVisitedVerticesPerSecondGraph));
     }
 
     [Test]
@@ -124,6 +124,6 @@ public class DepthFirstSearchTests
         dfsSearcher.VisitAll(graph, vertex1, vertex => sequenceOfVisitedVertices.Add(vertex));
 
         //Assert
-        CollectionAssert.AreEqual(expectedSequenceOfVisitedVertices, sequenceOfVisitedVertices);
+        Assert.That(sequenceOfVisitedVertices, Is.EqualTo(expectedSequenceOfVisitedVertices));
     }
 }

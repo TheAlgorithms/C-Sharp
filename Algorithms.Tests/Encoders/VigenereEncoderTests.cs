@@ -22,7 +22,7 @@ public static class VigenereEncoderTests
         var decoded = encoder.Decode(encoded, key);
 
         // Assert
-        Assert.AreEqual(message, decoded);
+        Assert.That(decoded, Is.EqualTo(message));
     }
 
     [Test]
@@ -38,7 +38,7 @@ public static class VigenereEncoderTests
         var decoded = encoder.Decode(encoded, key);
 
         // Assert
-        Assert.AreEqual(message, decoded);
+        Assert.That(decoded, Is.EqualTo(message));
     }
 
     [Test]

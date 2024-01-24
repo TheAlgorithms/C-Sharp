@@ -48,7 +48,7 @@ public class PermutationTests
         {
             return current / Factorial.Calculate(keyValuePair.Value);
         });
-        Assert.AreEqual(expectedNumberOfAnagrams, new BigInteger(permutations.Count));
+        Assert.That(new BigInteger(permutations.Count), Is.EqualTo(expectedNumberOfAnagrams));
         // End 1.
 
         // Start 2
@@ -56,12 +56,12 @@ public class PermutationTests
         var wordSorted = SortString(word);
         foreach (var permutation in permutations)
         {
-            Assert.AreEqual(wordSorted, SortString(permutation));
+            Assert.That(SortString(permutation), Is.EqualTo(wordSorted));
         }
         // End 2
 
         // Start 3
-        Assert.AreEqual(permutations.Count, new HashSet<string>(permutations).Count);
+        Assert.That(new HashSet<string>(permutations).Count, Is.EqualTo(permutations.Count));
         // End 3
     }
 

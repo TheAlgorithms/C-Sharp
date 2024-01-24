@@ -14,6 +14,6 @@ public class LevenshteinDistanceTests
     public void Calculate_ReturnsCorrectLevenshteinDistance(string source, string destination, int expectedDistance)
     {
         var result = LevenshteinDistance.Calculate(source, destination);
-        Assert.AreEqual(expectedDistance, result);
+        Assert.That(result, Is.EqualTo(expectedDistance));
     }
 }

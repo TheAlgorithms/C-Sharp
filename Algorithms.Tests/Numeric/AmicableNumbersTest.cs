@@ -17,6 +17,6 @@ public static class AmicableNumbersTest
         var result = AmicableNumbersChecker.AreAmicableNumbers(x, y);
 
         // Assert
-        Assert.IsTrue(result);
+        Assert.That(result, Is.True);
     }
 }

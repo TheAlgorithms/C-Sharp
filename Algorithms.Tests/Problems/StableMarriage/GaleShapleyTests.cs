@@ -35,13 +35,13 @@ public static class GaleShapleyTests
 
         GaleShapley.Match(proposers, acceptors);
 
-        Assert.IsTrue(acceptors.All(x => x.EngagedTo is not null));
-        Assert.IsTrue(proposers.All(x => x.EngagedTo is not null));
-        Assert.IsTrue(AreMatchesStable(proposers, acceptors));
+        Assert.That(acceptors.ToList().TrueForAll(x => x.EngagedTo is not null));
+        Assert.That(proposers.ToList().TrueForAll(x => x.EngagedTo is not null));
+        Assert.That(AreMatchesStable(proposers, acceptors), Is.True);
     }
 
     private static bool AreMatchesStable(Proposer[] proposers, Accepter[] accepters) =>
-        proposers.All(p =>
+        proposers.ToList().TrueForAll(p =>
             p.EngagedTo is not null
             && Score(p, p.EngagedTo) <= accepters
                 .Where(a => a.PrefersOverCurrent(p))

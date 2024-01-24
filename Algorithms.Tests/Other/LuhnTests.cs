@@ -21,7 +21,7 @@ public class LuhnTests
         validate = Luhn.Validate(number);
 
         // Assert
-        Assert.True(validate);
+        Assert.That(validate, Is.True);
     }
 
     [TestCase("89012104211118510720")] // ICCID
@@ -37,7 +37,7 @@ public class LuhnTests
         validate = Luhn.Validate(number);
 
         // Assert
-        Assert.False(validate);
+        Assert.That(validate, Is.False);
     }
 
     [TestCase("x9012104211118510720")] // ICCID
@@ -55,6 +55,6 @@ public class LuhnTests
         validate = Luhn.Validate(number.Replace("x", lostNum.ToString()));
 
         // Assert
-        Assert.True(validate);
+        Assert.That(validate, Is.True);
     }
 }

@@ -16,7 +16,7 @@ public static class GeneralStringAlgorithmsTests
         var (symbol, count) = GeneralStringAlgorithms.FindLongestConsecutiveCharacters(text);
 
         // Assert
-        Assert.AreEqual(expectedSymbol, symbol);
-        Assert.AreEqual(expectedCount, count);
+        Assert.That(symbol, Is.EqualTo(expectedSymbol));
+        Assert.That(count, Is.EqualTo(expectedCount));
     }
 }

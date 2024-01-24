@@ -12,24 +12,18 @@ public class KrishnamurthyNumberCheckerTests
     public void KrishnamurthyNumberCheckerKnownNumbers(int number)
     {
         var result = KrishnamurthyNumberChecker.IsKMurthyNumber(number);
-        Assert.IsTrue(result);
+        Assert.That(result, Is.True);
     }
 
     [TestCase(3)]
     [TestCase(4)]
     [TestCase(239847)]
     [TestCase(12374)]
+    [TestCase(0)]
+    [TestCase(-1)]
     public void KrishnamurthyNumberCheckerNotKMNumber(int number)
     {
         var result = KrishnamurthyNumberChecker.IsKMurthyNumber(number);
-        Assert.IsFalse(result);
-    }
-
-    [TestCase(0)]
-    [TestCase(-1)]
-    public void KrishnamurthyNumberCheckerNotPositiveNumber(int number)
-    {
-        var result = KrishnamurthyNumberChecker.IsKMurthyNumber(number);
-        Assert.IsFalse(result);
+        Assert.That(result, Is.False);
     }
 }

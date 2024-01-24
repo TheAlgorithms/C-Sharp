@@ -13,6 +13,6 @@ public class PollardsRhoFactorizingTests
     public void SimpleTest(int number, int expectedResult)
     {
         var result = PollardsRhoFactorizing.Calculate(number);
-        Assert.AreEqual(expectedResult, result);
+        Assert.That(result, Is.EqualTo(expectedResult));
     }
 }

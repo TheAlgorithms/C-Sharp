@@ -17,7 +17,7 @@ public static class BinomialCoefficientTests
         var result = BinomialCoefficient.Calculate(new BigInteger(n), new BigInteger(k));
 
         // Assert
-        Assert.AreEqual(new BigInteger(expected), result);
+        Assert.That(result, Is.EqualTo(new BigInteger(expected)));
     }
 
     [TestCase(3, 7)]

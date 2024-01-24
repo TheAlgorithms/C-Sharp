@@ -16,7 +16,7 @@ public static class KeithNumberTest
         var result = KeithNumberChecker.IsKeithNumber(number);
 
         // Assert
-        Assert.IsTrue(result);
+        Assert.That(result, Is.True);
     }
 
     [TestCase(-2)]

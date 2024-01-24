@@ -23,7 +23,7 @@ public static class RecursiveBinarySearcherTests
         var actualIndex = subject.FindIndex(collection, collection[selectedIndex]);
 
         // Assert
-        Assert.AreEqual(collection[selectedIndex], collection[actualIndex]);
+        Assert.That(collection[actualIndex], Is.EqualTo(collection[selectedIndex]));
     }
 
     [Test]
@@ -43,7 +43,7 @@ public static class RecursiveBinarySearcherTests
         var actualIndex = subject.FindIndex(collection, missingItem);
 
         // Assert
-        Assert.AreEqual(-1, actualIndex);
+        Assert.That(actualIndex, Is.EqualTo(-1));
     }
 
     [Test]
@@ -57,7 +57,7 @@ public static class RecursiveBinarySearcherTests
         var actualIndex = subject.FindIndex(collection, itemToSearch);
 
         // Assert
-        Assert.AreEqual(-1, actualIndex);
+        Assert.That(actualIndex, Is.EqualTo(-1));
     }
 
     [Test]

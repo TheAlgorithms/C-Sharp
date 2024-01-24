@@ -21,6 +21,6 @@ public static class FermatPrimeCheckerTests
         var result = FermatPrimeChecker.IsPrime(inputNum, times);
 
         // Assert
-        Assert.AreEqual(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 }

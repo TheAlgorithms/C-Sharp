@@ -21,6 +21,6 @@ public static class SoundexEncoderTest
     {
         SoundexEncoder enc = new();
         var nysiis = enc.Encode(source);
-        Assert.AreEqual(nysiis, encoded);
+        Assert.That(encoded, Is.EqualTo(nysiis));
     }
 }

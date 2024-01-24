@@ -21,6 +21,6 @@ public static class BucketSorterTests
         Array.Sort(correctArray);
 
         // Assert
-        Assert.AreEqual(correctArray, testArray);
+        Assert.That(testArray, Is.EqualTo(correctArray));
     }
 }

@@ -35,7 +35,7 @@ public class JumpSearcherTests
         var actualIndex = searcher.FindIndex(sortedArray, missingItem);
 
         // Assert
-        Assert.AreEqual(expectedIndex, actualIndex);
+        Assert.That(actualIndex, Is.EqualTo(expectedIndex));
     }
 
     [Test]
@@ -50,7 +50,7 @@ public class JumpSearcherTests
         var actualIndex = searcher.FindIndex(sortedArray, missingItem);
 
         // Assert
-        Assert.AreEqual(expectedIndex, actualIndex);
+        Assert.That(actualIndex, Is.EqualTo(expectedIndex));
     }
 
     [TestCase(null, "abc")]

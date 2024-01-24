@@ -1,6 +1,7 @@
 using System;
 using Algorithms.Other;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Algorithms.Tests.Other;
 
@@ -19,6 +20,6 @@ public static class GeoLocationTests
         var actualValue = Convert.ToDouble(result);
 
         // Assert
-        Assert.AreEqual(expectedValue, actualValue, 1d); // Accept if distance diff is +/-1 meters.
+        ClassicAssert.AreEqual(expectedValue, actualValue, 1d); // Accept if distance diff is +/-1 meters.
     }
 }

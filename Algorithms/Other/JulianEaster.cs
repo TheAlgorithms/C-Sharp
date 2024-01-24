@@ -24,7 +24,7 @@ public static class JulianEaster
         var month = (int)Math.Floor((d + e + 114) / 31M);
         var day = ((d + e + 114) % 31) + 1;
 
-        DateTime easter = new(year, month, day, new JulianCalendar());
+        DateTime easter = new(year, month, day, 00, 00, 00, DateTimeKind.Utc);
 
         return easter;
     }

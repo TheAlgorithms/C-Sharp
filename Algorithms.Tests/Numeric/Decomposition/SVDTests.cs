@@ -2,6 +2,7 @@ using System;
 using Algorithms.Numeric.Decomposition;
 using FluentAssertions;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using Utilities.Extensions;
 using M = Utilities.Extensions.MatrixExtensions;
 using V = Utilities.Extensions.VectorExtensions;
@@ -45,7 +46,7 @@ public class SvdTests
         {
             for (var j = 0; j < matrix1.GetLength(1); j++)
             {
-                Assert.AreEqual(matrix1[i, j], matrix2[i, j], epsilon, $"At index ({i}, {j})");
+                ClassicAssert.AreEqual(matrix1[i, j], matrix2[i, j], epsilon, $"At index ({i}, {j})");
             }
         }
     }
@@ -113,12 +114,12 @@ public class SvdTests
             if (s[i] > epsilon)
             {
                 // if the singular value is non-zero, then the basis vector in v should be a unit vector
-                Assert.AreEqual(1, extracted.Magnitude(), epsilon);
+                ClassicAssert.AreEqual(1, extracted.Magnitude(), epsilon);
             }
             else
             {
                 // if the singular value is zero, then the basis vector in v should be zeroed out
-                Assert.AreEqual(0, extracted.Magnitude(), epsilon);
+                ClassicAssert.AreEqual(0, extracted.Magnitude(), epsilon);
             }
         }
 

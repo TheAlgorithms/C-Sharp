@@ -22,6 +22,6 @@ public static class HillEnconderTests
         var decodeText = encoder.Decode(encodedText, key);
 
         // Assert
-        Assert.AreEqual(message, decodeText);
+        Assert.That(decodeText, Is.EqualTo(message));
     }
 }

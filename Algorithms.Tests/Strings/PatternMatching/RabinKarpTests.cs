@@ -15,6 +15,6 @@ public class RabinKarpTest
     public void FindAllOccurrences_IndexCheck(string t, string p, int[] expectedIndices)
     {
         List<int> result = RabinKarp.FindAllOccurrences(t, p);
-        Assert.AreEqual(result, new List<int>(expectedIndices));
+        Assert.That(result, Is.EqualTo(new List<int>(expectedIndices)));
     }
 }

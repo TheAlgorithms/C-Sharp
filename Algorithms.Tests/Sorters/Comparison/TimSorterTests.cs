@@ -23,7 +23,7 @@ public static class TimSorterTests
         Array.Sort(correctArray, IntComparer);
 
         // Assert
-        Assert.AreEqual(testArray, correctArray);
+        Assert.That(correctArray, Is.EqualTo(testArray));
     }
 
     [Test]
@@ -38,7 +38,7 @@ public static class TimSorterTests
         sorter.Sort(tinyArray, IntComparer);
 
         // Assert
-        Assert.AreEqual(tinyArray, correctArray);
+        Assert.That(correctArray, Is.EqualTo(tinyArray));
     }
 
     [Test]
@@ -63,6 +63,6 @@ public static class TimSorterTests
         Array.Sort(correctArray, IntComparer);
 
         // Assert
-        Assert.AreEqual(testArray, correctArray);
+        Assert.That(correctArray, Is.EqualTo(testArray));
     }
 }

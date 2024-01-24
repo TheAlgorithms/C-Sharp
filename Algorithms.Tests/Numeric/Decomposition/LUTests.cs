@@ -22,9 +22,9 @@ public class LuTests
         (double[,] lower, double[,] upper) = Lu.Decompose(identityMatrix);
 
         // Assert
-        Assert.AreEqual(expectedLower, lower);
-        Assert.AreEqual(expectedUpper, upper);
-        Assert.AreEqual(lower.Multiply(upper), identityMatrix);
+        Assert.That(lower, Is.EqualTo(expectedLower));
+        Assert.That(upper, Is.EqualTo(expectedUpper));
+        Assert.That(identityMatrix, Is.EqualTo(lower.Multiply(upper)));
     }
 
     [Test]
@@ -39,9 +39,9 @@ public class LuTests
         (double[,] lower, double[,] upper) = Lu.Decompose(source);
 
         // Assert
-        Assert.AreEqual(expectedLower, lower);
-        Assert.AreEqual(expectedUpper, upper);
-        Assert.AreEqual(lower.Multiply(upper), source);
+        Assert.That(lower, Is.EqualTo(expectedLower));
+        Assert.That(upper, Is.EqualTo(expectedUpper));
+        Assert.That(source, Is.EqualTo(lower.Multiply(upper)));
     }
 
     [Test]
@@ -56,9 +56,9 @@ public class LuTests
         (double[,] lower, double[,] upper) = Lu.Decompose(source);
 
         // Assert
-        Assert.AreEqual(expectedLower, lower);
-        Assert.AreEqual(expectedUpper, upper);
-        Assert.AreEqual(lower.Multiply(upper), source);
+        Assert.That(lower, Is.EqualTo(expectedLower));
+        Assert.That(upper, Is.EqualTo(expectedUpper));
+        Assert.That(source, Is.EqualTo(lower.Multiply(upper)));
     }
 
     [Test]
@@ -85,7 +85,7 @@ public class LuTests
         var solution = Lu.Eliminate(identityMatrix, coefficients);
 
         // Assert
-        Assert.AreEqual(coefficients, solution);
+        Assert.That(solution, Is.EqualTo(coefficients));
     }
 
     [Test]
@@ -100,7 +100,7 @@ public class LuTests
         var solution = Lu.Eliminate(source, coefficients);
 
         // Assert
-        Assert.IsTrue(VectorMembersAreEqual(expectedSolution, solution));
+        Assert.That(VectorMembersAreEqual(expectedSolution, solution), Is.True);
     }
 
     [Test]
@@ -121,7 +121,7 @@ public class LuTests
         var solution = Lu.Eliminate(source, coefficients);
 
         // Assert
-        Assert.IsTrue(VectorMembersAreEqual(expectedSolution, solution));
+        Assert.That(VectorMembersAreEqual(expectedSolution, solution), Is.True);
     }
 
     [Test]

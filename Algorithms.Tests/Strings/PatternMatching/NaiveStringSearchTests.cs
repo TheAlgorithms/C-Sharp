@@ -20,7 +20,7 @@ public static class NaiveStringSearchTests
         var sequencesAreEqual = expectedOccurrences.SequenceEqual(actualOccurrences);
 
         // Assert
-        Assert.IsTrue(sequencesAreEqual);
+        Assert.That(sequencesAreEqual, Is.True);
     }
 
     [Test]
@@ -36,7 +36,7 @@ public static class NaiveStringSearchTests
         var sequencesAreEqual = expectedOccurrences.SequenceEqual(actualOccurrences);
 
         // Assert
-        Assert.IsTrue(sequencesAreEqual);
+        Assert.That(sequencesAreEqual, Is.True);
     }
 
     [Test]
@@ -52,6 +52,6 @@ public static class NaiveStringSearchTests
         var sequencesAreEqual = expectedOccurrences.SequenceEqual(actualOccurrences);
 
         // Assert
-        Assert.IsTrue(sequencesAreEqual);
+        Assert.That(sequencesAreEqual, Is.True);
     }
 }

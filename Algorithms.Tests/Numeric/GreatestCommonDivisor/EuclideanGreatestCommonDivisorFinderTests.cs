@@ -23,6 +23,6 @@ public static class EuclideanGreatestCommonDivisorFinderTests
         var actualGcd = gcdFinder.FindGcd(a, b);
 
         // Assert
-        Assert.AreEqual(expectedGcd, actualGcd);
+        Assert.That(actualGcd, Is.EqualTo(expectedGcd));
     }
 }
