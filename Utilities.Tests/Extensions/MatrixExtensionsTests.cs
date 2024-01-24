@@ -142,7 +142,7 @@ public class MatrixExtensionsTests
         var result = a.IsEqual(b);
 
         // Assert
-        Assert.True(result);
+        Assert.That(result, Is.True);
     }
 
     [Test]
@@ -156,7 +156,7 @@ public class MatrixExtensionsTests
         var result = a.IsEqual(b);
 
         // Assert
-        Assert.False(result);
+        Assert.That(result, Is.False);
     }
 
     [Test]
@@ -170,7 +170,7 @@ public class MatrixExtensionsTests
         var result = a.IsEqual(b);
 
         // Assert
-        Assert.False(result);
+        Assert.That(result, Is.False);
     }
 
     [TestCaseSource(nameof(MatrixSubtractTestCases))]
