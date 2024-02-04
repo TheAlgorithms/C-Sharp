@@ -672,7 +672,7 @@ public static class SieveOfEratosthenesTests
         Assert.That(new SieveOfEratosthenes(104729).GetPrimes(), Is.EqualTo(First10000PrimeNumbers));
 
     [Test]
-    public static void TestMaxNumber() => Assert.That(69, Is.EqualTo(new SieveOfEratosthenes(69).MaximumNumber));
+    public static void TestMaxNumber() => Assert.That(new SieveOfEratosthenes(69).MaximumNumber, Is.EqualTo(69));
 
     [TestCase(13, true)]
     [TestCase(10, false)]
