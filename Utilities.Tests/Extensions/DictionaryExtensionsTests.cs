@@ -29,7 +29,6 @@ public class DictionaryExtensionsTests
 
         dictionary.Should().HaveCount(3);
 
-        // Post update change
         dictionary.Should().ContainKey("one");
         dictionary.Should().ContainKey("two");
         dictionary.Should().ContainKey("three");
