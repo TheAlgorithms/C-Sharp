@@ -32,6 +32,5 @@ public class DictionaryExtensionsTests
         dictionary.Should().ContainKey("one");
         dictionary.Should().ContainKey("two");
         dictionary.Should().ContainKey("three");
-
     }
 }
