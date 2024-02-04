@@ -51,6 +51,8 @@ public class FloydWarshallTests
 
         var floydWarshaller = new FloydWarshall<int>();
 
-        floydWarshaller.Run(graph).Should().Equal(actualDistances);
+        //floydWarshaller.Run(graph).Should().Equals(actualDistances);
+        floydWarshaller.Run(graph).Should().BeEquivalentTo(actualDistances);//Post update change 
+
     }
 }

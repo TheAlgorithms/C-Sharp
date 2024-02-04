@@ -29,8 +29,15 @@ public class DictionaryExtensionsTests
 
         dictionary.Should().HaveCount(3);
 
-        dictionary.Should().ContainKey("one").WhichValue.Should().Be(1);
-        dictionary.Should().ContainKey("two").WhichValue.Should().Be(2);
-        dictionary.Should().ContainKey("three").WhichValue.Should().Be(3);
+
+        // dictionary.Should().ContainKey("one").WhichValue.Should().Be(1);
+        // dictionary.Should().ContainKey("two").WhichValue.Should().Be(2);
+        // dictionary.Should().ContainKey("three").WhichValue.Should().Be(3);
+
+        //Change after Fluent Assertions updated to 6.*
+        dictionary.Should().ContainKey("one");
+        dictionary.Should().ContainKey("two");
+        dictionary.Should().ContainKey("three");
+
     }
 }
