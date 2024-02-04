@@ -42,7 +42,7 @@ public static class MinMaxHeapTests
     }
 
     #region AddTest
-    [Test, TestCaseSource(nameof(CollectionsSourceInt))]
+    [TestCaseSource(nameof(CollectionsSourceInt))]
     public static void AddTestInt(IEnumerable<int> collection)
     {
         var mmh = new MinMaxHeap<int>();
@@ -59,7 +59,7 @@ public static class MinMaxHeapTests
         Assert.That(collection.Count(), Is.EqualTo(mmh.Count));
     }
 
-    [Test, TestCaseSource(nameof(CollectionsSourceString))]
+    [TestCaseSource(nameof(CollectionsSourceString))]
     public static void AddTestString(IEnumerable<string> collection)
     {
         var mmh = new MinMaxHeap<string>();
@@ -76,7 +76,7 @@ public static class MinMaxHeapTests
         Assert.That(collection.Count(), Is.EqualTo(mmh.Count));
     }
 
-    [Test, TestCaseSource(nameof(CollectionsSourceChar))]
+    [TestCaseSource(nameof(CollectionsSourceChar))]
     public static void AddTestChar(IEnumerable<char> collection)
     {
         var mmh = new MinMaxHeap<char>();
@@ -95,7 +95,7 @@ public static class MinMaxHeapTests
     #endregion
 
     #region ExtractMaxTest
-    [Test, TestCaseSource(nameof(CollectionsSourceInt))]
+    [TestCaseSource(nameof(CollectionsSourceInt))]
     public static void ExtractMaxTestInt(IEnumerable<int> collection)
     {
         var ordered = collection.OrderByDescending(x => x);
@@ -111,7 +111,7 @@ public static class MinMaxHeapTests
         Assert.That(collection.Count() - 1, Is.EqualTo(mmh.Count));
     }
 
-    [Test, TestCaseSource(nameof(CollectionsSourceString))]
+    [TestCaseSource(nameof(CollectionsSourceString))]
     public static void ExtractMaxTestString(IEnumerable<string> collection)
     {
         var ordered = collection.OrderByDescending(x => x);
@@ -127,7 +127,7 @@ public static class MinMaxHeapTests
         Assert.That(collection.Count() - 1, Is.EqualTo(mmh.Count));
     }
 
-    [Test, TestCaseSource(nameof(CollectionsSourceChar))]
+    [TestCaseSource(nameof(CollectionsSourceChar))]
     public static void ExtractMaxTestChar(IEnumerable<char> collection)
     {
         var ordered = collection.OrderByDescending(x => x);
@@ -145,7 +145,7 @@ public static class MinMaxHeapTests
     #endregion
 
     #region ExtractMinTest
-    [Test, TestCaseSource(nameof(CollectionsSourceInt))]
+    [TestCaseSource(nameof(CollectionsSourceInt))]
     public static void ExtractMinTestInt(IEnumerable<int> collection)
     {
         var ordered = collection.OrderBy(x => x);
@@ -161,7 +161,7 @@ public static class MinMaxHeapTests
         Assert.That(collection.Count() - 1, Is.EqualTo(mmh.Count));
     }
 
-    [Test, TestCaseSource(nameof(CollectionsSourceString))]
+    [TestCaseSource(nameof(CollectionsSourceString))]
     public static void ExtractMinTestString(IEnumerable<string> collection)
     {
         var ordered = collection.OrderBy(x => x);
@@ -177,7 +177,7 @@ public static class MinMaxHeapTests
         Assert.That(collection.Count() - 1, Is.EqualTo(mmh.Count));
     }
 
-    [Test, TestCaseSource(nameof(CollectionsSourceChar))]
+    [TestCaseSource(nameof(CollectionsSourceChar))]
     public static void ExtractMinTestChar(IEnumerable<char> collection)
     {
         var ordered = collection.OrderBy(x => x);
@@ -195,7 +195,7 @@ public static class MinMaxHeapTests
     #endregion
 
     #region GetMaxTest
-    [Test, TestCaseSource(nameof(CollectionsSourceInt))]
+    [TestCaseSource(nameof(CollectionsSourceInt))]
     public static void GetMaxTestInt(IEnumerable<int> collection)
     {
         var emptyHeap = new MinMaxHeap<int>();
@@ -207,7 +207,7 @@ public static class MinMaxHeapTests
         Assert.That(collection.Max(), Is.EqualTo(maxValue));
     }
 
-    [Test, TestCaseSource(nameof(CollectionsSourceString))]
+    [TestCaseSource(nameof(CollectionsSourceString))]
     public static void GetMaxTestString(IEnumerable<string> collection)
     {
         var emptyHeap = new MinMaxHeap<string>();
@@ -219,7 +219,7 @@ public static class MinMaxHeapTests
         Assert.That(collection.Max(), Is.EqualTo(maxValue));
     }
 
-    [Test, TestCaseSource(nameof(CollectionsSourceChar))]
+    [TestCaseSource(nameof(CollectionsSourceChar))]
     public static void GetMaxTestChar(IEnumerable<char> collection)
     {
         var emptyHeap = new MinMaxHeap<char>();
@@ -233,7 +233,7 @@ public static class MinMaxHeapTests
     #endregion
 
     #region GetMinTest
-    [Test, TestCaseSource(nameof(CollectionsSourceInt))]
+    [TestCaseSource(nameof(CollectionsSourceInt))]
     public static void GetMinTestInt(IEnumerable<int> collection)
     {
         var emptyHeap = new MinMaxHeap<int>();
@@ -245,7 +245,7 @@ public static class MinMaxHeapTests
         Assert.That(collection.Min(), Is.EqualTo(minValue));
     }
 
-    [Test, TestCaseSource(nameof(CollectionsSourceString))]
+    [TestCaseSource(nameof(CollectionsSourceString))]
     public static void GetMinTestString(IEnumerable<string> collection)
     {
         var emptyHeap = new MinMaxHeap<string>();
@@ -257,7 +257,7 @@ public static class MinMaxHeapTests
         Assert.That(collection.Min(), Is.EqualTo(minValue));
     }
 
-    [Test, TestCaseSource(nameof(CollectionsSourceChar))]
+    [TestCaseSource(nameof(CollectionsSourceChar))]
     public static void GetMinTestChar(IEnumerable<char> collection)
     {
         var emptyHeap = new MinMaxHeap<char>();
