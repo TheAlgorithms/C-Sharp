@@ -25,8 +25,7 @@ public static class BranchAndBoundKnapsackSolverTests
         var actualResult = solver.Solve(items, capacity, weightSelector, valueSelector);
 
         // Assert
-        actualResult.Should().BeEquivalentTo(new[] { 'A', 'B', 'D' });//Post update change 
-
+        actualResult.Should().BeEquivalentTo(new[] { 'A', 'B', 'D' });
     }
 
     [Test]
@@ -47,8 +46,7 @@ public static class BranchAndBoundKnapsackSolverTests
         var actualResult = solver.Solve(items, capacity, weightSelector, valueSelector);
 
         // Assert
-        actualResult.Should().BeEquivalentTo(new[] { 'H', 'D', 'A' });// Post update change
-
+        actualResult.Should().BeEquivalentTo(new[] { 'H', 'D', 'A' });
     }
 
     [Test]

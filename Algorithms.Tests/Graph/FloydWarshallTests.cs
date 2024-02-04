@@ -50,7 +50,6 @@ public class FloydWarshallTests
         };
 
         var floydWarshaller = new FloydWarshall<int>();
-        floydWarshaller.Run(graph).Should().BeEquivalentTo(actualDistances);//Post update change 
-
+        floydWarshaller.Run(graph).Should().BeEquivalentTo(actualDistances);
     }
 }
