@@ -1,7 +1,6 @@
 using System;
 using DataStructures.Heap.FibonacciHeap;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace DataStructures.Tests.Heap.FibonacciHeaps;
 
@@ -86,7 +85,7 @@ internal static class FibonacciHeapTests
         for (var i = 0; i < heapSize - 1; i++)
         {
             var newElement = heap.Pop();
-            ClassicAssert.LessOrEqual(element, newElement);
+            Assert.That(element, Is.LessThanOrEqualTo(newElement));
             element = newElement;
         }
 
@@ -227,7 +226,7 @@ internal static class FibonacciHeapTests
         for (var i = 0; i < 10; i++)
         {
             var newVal = heap.Pop();
-            ClassicAssert.True(currentVal < newVal);
+            Assert.That(currentVal < newVal, Is.True);
 
             currentVal = newVal;
         }
@@ -239,7 +238,7 @@ internal static class FibonacciHeapTests
         for (var i = 0; i < 9; i++)
         {
             var newVal = heap.Pop();
-            ClassicAssert.True(currentVal < newVal);
+            Assert.That(currentVal < newVal, Is.True);
 
             currentVal = newVal;
         }

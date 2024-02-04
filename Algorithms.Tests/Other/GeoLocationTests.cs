@@ -20,6 +20,6 @@ public static class GeoLocationTests
         var actualValue = Convert.ToDouble(result);
 
         // Assert
-        ClassicAssert.AreEqual(expectedValue, actualValue, 1d); // Accept if distance diff is +/-1 meters.
+        Assert.That(actualValue, Is.EqualTo(expectedValue).Within(1d)); // Accept if distance diff is +/-1 meters.
     }
 }

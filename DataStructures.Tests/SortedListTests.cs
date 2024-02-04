@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace DataStructures.Tests;
 
@@ -21,7 +20,7 @@ public class SortedListTests
             list.Add(value);
         }
 
-        CollectionAssert.AreEqual(values.OrderBy(i => i), list);
+        Assert.That(list, Is.EqualTo(values.OrderBy(i => i)));
     }
 
     [Test]
@@ -97,7 +96,7 @@ public class SortedListTests
         expectingValues.Remove(value);
 
         Assert.That(list.TryRemove(value), Is.True);
-        CollectionAssert.AreEqual(expectingValues, list);
+        Assert.That(list, Is.EqualTo(expectingValues));
     }
 
     [Test]

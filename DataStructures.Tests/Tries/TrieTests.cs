@@ -1,14 +1,13 @@
-using System;
 using DataStructures.Tries;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace DataStructures.Tests.Tries;
 
 public static class TrieTests
 {
     [Test]
-    public static void FindWordInTrie(){
+    public static void FindWordInTrie()
+    {
         // Arrange
         string[] words = {
             "trie",
@@ -21,18 +20,19 @@ public static class TrieTests
         Trie trie = new(words);
 
         // Assert
-        ClassicAssert.IsTrue(trie.Find("trie"), "The word 'trie' isn't in Trie structure");
-        ClassicAssert.IsTrue(trie.Find("node"), "The word 'node' isn't in Trie structure");
-        ClassicAssert.IsTrue(trie.Find("none"), "The word 'none' isn't in Trie structure");
-        ClassicAssert.IsTrue(trie.Find("treatment"), "The word 'treatment' isn't in Trie structure");
+        Assert.That(trie.Find("trie"), Is.True, "The word 'trie' isn't in Trie structure");
+        Assert.That(trie.Find("node"), Is.True, "The word 'node' isn't in Trie structure");
+        Assert.That(trie.Find("none"), Is.True, "The word 'none' isn't in Trie structure");
+        Assert.That(trie.Find("treatment"), Is.True, "The word 'treatment' isn't in Trie structure");
 
-        ClassicAssert.IsFalse(trie.Find("nodes"), "The word 'nodes' is in Trie sturcture");
-        ClassicAssert.IsFalse(trie.Find(""), "The word empty is in Trie structure");
-        ClassicAssert.IsFalse(trie.Find("tri"), "The word 'tri' is in Trie structure");
+        Assert.That(trie.Find("nodes"), Is.False, "The word 'nodes' is in Trie sturcture");
+        Assert.That(trie.Find(""), Is.False, "The word empty is in Trie structure");
+        Assert.That(trie.Find("tri"), Is.False, "The word 'tri' is in Trie structure");
     }
 
     [Test]
-    public static void InsertInTrie(){
+    public static void InsertInTrie()
+    {
         // Arrange
         string[] words = {
             "trie",
@@ -50,14 +50,15 @@ public static class TrieTests
         }
 
         // Assert
-        ClassicAssert.IsTrue(trie.Find("trie"), "The word 'trie' isn't in Trie structure");
-        ClassicAssert.IsTrue(trie.Find("node"), "The word 'node' isn't in Trie structure");
-        ClassicAssert.IsTrue(trie.Find("none"), "The word 'none' isn't in Trie structure");
-        ClassicAssert.IsTrue(trie.Find("treatment"), "The word 'treatment' isn't in Trie structure");
+        Assert.That(trie.Find("trie"), Is.True, "The word 'trie' isn't in Trie structure");
+        Assert.That(trie.Find("node"), Is.True, "The word 'node' isn't in Trie structure");
+        Assert.That(trie.Find("none"), Is.True, "The word 'none' isn't in Trie structure");
+        Assert.That(trie.Find("treatment"), Is.True, "The word 'treatment' isn't in Trie structure");
     }
 
     [Test]
-    public static void RemoveFromTrie(){
+    public static void RemoveFromTrie()
+    {
         // Arrange
         string[] words = {
             "trie",
@@ -76,10 +77,10 @@ public static class TrieTests
         trie.Remove("trie");
 
         // Assert
-        ClassicAssert.IsFalse(trie.Find("trie"), "The word 'trie' is in Trie structure");
-        ClassicAssert.IsTrue(trie.Find("treatment"), "The word 'treament' isn't in Trie structure");
-        ClassicAssert.IsTrue(trie.Find("node"), "The word 'node' isn't in Trie structure");
-        ClassicAssert.IsTrue(trie.Find("none"), "The word 'none' isn't in Trie structure");
+        Assert.That(trie.Find("trie"), Is.False, "The word 'trie' is in Trie structure");
+        Assert.That(trie.Find("treatment"), Is.True, "The word 'treament' isn't in Trie structure");
+        Assert.That(trie.Find("node"), Is.True, "The word 'node' isn't in Trie structure");
+        Assert.That(trie.Find("none"), Is.True, "The word 'none' isn't in Trie structure");
     }
 
     [Test]
@@ -94,12 +95,13 @@ public static class TrieTests
         trie.Insert(w);
 
         // Assert
-        ClassicAssert.IsTrue(trie.Find("trie"), "The word 'trie' isn't in Trie structure");
-        ClassicAssert.IsFalse(trie.Find("nodes"), "The word 'nodes' is in Trie sturcture");
+        Assert.That(trie.Find("trie"), Is.True, "The word 'trie' isn't in Trie structure");
+        Assert.That(trie.Find("nodes"), Is.False, "The word 'nodes' is in Trie sturcture");
     }
 
     [Test]
-    public static void RemoveAWordThatIsNtInTrie(){
+    public static void RemoveAWordThatIsNtInTrie()
+    {
         // Arrange
         const string w = "trie";
         Trie trie = new();
@@ -110,6 +112,6 @@ public static class TrieTests
         trie.Remove("none");
 
         // Assert
-        ClassicAssert.IsTrue(trie.Find("trie"), "The word 'trie' isn't in Trie structure");
+        Assert.That(trie.Find("trie"), Is.True, "The word 'trie' isn't in Trie structure");
     }
 }

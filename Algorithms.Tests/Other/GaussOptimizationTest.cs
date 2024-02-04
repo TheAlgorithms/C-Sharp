@@ -1,6 +1,5 @@
 using Algorithms.Other;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 using System;
 using System.Collections.Generic;
 
@@ -48,8 +47,8 @@ public static class GaussOptimizationTest
         (x1, x2) = gaussOptimization.Optimize(func, n, step, eps, x1, x2);
 
         // Assert
-        ClassicAssert.AreEqual(x1, 1, 0.3);
-        ClassicAssert.AreEqual(x2, 1, 0.3);
+        Assert.That(x1, Is.EqualTo(1).Within(0.3));
+        Assert.That(x2, Is.EqualTo(1).Within(0.3));
     }
 
     [Test]
@@ -92,7 +91,7 @@ public static class GaussOptimizationTest
         (x1, x2) = gaussOptimization.Optimize(func, n, step, eps, x1, x2);
 
         // Assert
-        ClassicAssert.AreEqual(x1, -1, 0.3);
-        ClassicAssert.AreEqual(x2, -1, 0.3);
+        Assert.That(x1, Is.EqualTo(-1).Within(0.3));
+        Assert.That(x2, Is.EqualTo(-1).Within(0.3));
     }
 }

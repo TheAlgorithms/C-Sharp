@@ -2,7 +2,6 @@ using System;
 using System.Text;
 using DataStructures.Queue;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace DataStructures.Tests.Queue;
 
@@ -26,8 +25,8 @@ public static class ListBasedQueueTests
 
         // Assert
         Assert.That("ABC", Is.EqualTo(result.ToString()));
-        ClassicAssert.IsTrue(q.IsEmpty(), "Queue is empty");
-        ClassicAssert.IsFalse(q.IsFull(), "Queue is full");
+        Assert.That(q.IsEmpty(), Is.True, "Queue is empty");
+        Assert.That(q.IsFull(), Is.False, "Queue is full");
     }
 
     [Test]
@@ -47,8 +46,8 @@ public static class ListBasedQueueTests
 
         // Assert
         Assert.That(1, Is.EqualTo(peeked));
-        ClassicAssert.IsFalse(q.IsEmpty(), "Queue is empty");
-        ClassicAssert.IsFalse(q.IsFull(), "Queue is full");
+        Assert.That(q.IsEmpty(), Is.False, "Queue is empty");
+        Assert.That(q.IsFull(), Is.False, "Queue is full");
     }
 
     [Test]
@@ -105,7 +104,7 @@ public static class ListBasedQueueTests
         q.Clear();
 
         // Assert
-        ClassicAssert.IsTrue(q.IsEmpty(), "Queue is empty");
-        ClassicAssert.IsFalse(q.IsFull(), "Queue is full");
+        Assert.That(q.IsEmpty(), Is.True, "Queue is empty");
+        Assert.That(q.IsFull(), Is.False, "Queue is full");
     }
 }

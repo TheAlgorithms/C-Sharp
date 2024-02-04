@@ -1,6 +1,5 @@
 using DataStructures.Stack;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 using System;
 using System.Text;
 
@@ -27,7 +26,7 @@ public static class QueueBasedStackTests
 
         //Assert
         Assert.That("CBA", Is.EqualTo(result.ToString()));
-        ClassicAssert.IsTrue(s.IsEmpty(), "Stack is Empty");
+        Assert.That(s.IsEmpty(), Is.True, "Stack is Empty");
     }
     [Test]
     public static void PeekWorksCorrectly()
@@ -48,7 +47,7 @@ public static class QueueBasedStackTests
 
         //Assert
         Assert.That(3, Is.EqualTo(peeked));
-        ClassicAssert.IsFalse(s.IsEmpty(), "Stack is Empty");
+        Assert.That(s.IsEmpty(), Is.False, "Stack is Empty");
     }
     [Test]
     public static void PopEmptyStackThrowsInvalidOperationException()
@@ -102,7 +101,7 @@ public static class QueueBasedStackTests
         s.Clear();
 
         // Assert
-        ClassicAssert.IsTrue(s.IsEmpty(), "Queue is empty");
+        Assert.That(s.IsEmpty(), Is.False, "Queue is empty");
 
     }
     [Test]

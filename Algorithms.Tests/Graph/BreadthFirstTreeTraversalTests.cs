@@ -1,8 +1,6 @@
 using Algorithms.Graph;
-using NUnit.Framework;
 using DataStructures.BinarySearchTree;
-using System;
-using NUnit.Framework.Legacy;
+using NUnit.Framework;
 
 namespace Algorithms.Tests.Graph;
 
@@ -40,8 +38,8 @@ public static class BreadthFirstTreeTraversalTests
         Assert.That(levelOrder, Is.Empty);
     }
 
-    [TestCase(new [] {7, 9, 5})]
-    [TestCase(new [] { 7, 13, 11, 15, 14, 4, 5, 16, 2 })]
+    [TestCase(new[] { 7, 9, 5 })]
+    [TestCase(new[] { 7, 13, 11, 15, 14, 4, 5, 16, 2 })]
     public static void IncorrectLevelOrderTraversal(int[] insertion)
     {
         // Arrange
@@ -55,7 +53,7 @@ public static class BreadthFirstTreeTraversalTests
         int[] levelOrder = BreadthFirstTreeTraversal<int>.LevelOrderTraversal(testTree);
 
         // Assert
-        ClassicAssert.AreNotEqual(levelOrder, insertion);
+        Assert.That(insertion, Is.EqualTo(levelOrder));
     }
 
     [Test]
