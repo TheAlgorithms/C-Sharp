@@ -61,7 +61,7 @@ public class ScapegoatTreeNodeTests
 
         var result = instance.Key.CompareTo(other.Key);
 
-        Assert.That(-1, Is.EqualTo(result));
+        Assert.That(result, Is.EqualTo(-1));
     }
 
     [TestCase(2, 1)]
