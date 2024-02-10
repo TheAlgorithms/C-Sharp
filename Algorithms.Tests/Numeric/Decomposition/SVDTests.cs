@@ -113,12 +113,12 @@ public class SvdTests
             if (s[i] > epsilon)
             {
                 // if the singular value is non-zero, then the basis vector in v should be a unit vector
-                Assert.That(extracted, Is.EqualTo(1).Within(epsilon));
+                Assert.That(extracted.Magnitude(), Is.EqualTo(1).Within(epsilon));
             }
             else
             {
                 // if the singular value is zero, then the basis vector in v should be zeroed out
-                Assert.That(extracted, Is.EqualTo(0).Within(epsilon));
+                Assert.That(extracted.Magnitude(), Is.EqualTo(0).Within(epsilon));
 
             }
         }

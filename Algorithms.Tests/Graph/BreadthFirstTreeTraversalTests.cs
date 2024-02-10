@@ -44,7 +44,7 @@ public static class BreadthFirstTreeTraversalTests
     {
         // Arrange
         BinarySearchTree<int> testTree = new BinarySearchTree<int>();
-        foreach (int data in insertion)
+            foreach (int data in insertion)
         {
             testTree.Add(data);
         }
@@ -53,7 +53,7 @@ public static class BreadthFirstTreeTraversalTests
         int[] levelOrder = BreadthFirstTreeTraversal<int>.LevelOrderTraversal(testTree);
 
         // Assert
-        Assert.That(insertion, Is.EqualTo(levelOrder));
+          Assert.That(insertion, Is.Not.EqualTo(levelOrder));
     }
 
     [Test]

@@ -101,7 +101,7 @@ public static class QueueBasedStackTests
         s.Clear();
 
         // Assert
-        Assert.That(s.IsEmpty(), Is.False, "Queue is empty");
+        Assert.That(s.IsEmpty(), Is.True, "Queue is empty");
 
     }
     [Test]
