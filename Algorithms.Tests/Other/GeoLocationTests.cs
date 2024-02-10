@@ -1,7 +1,6 @@
 using System;
 using Algorithms.Other;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Algorithms.Tests.Other;
 
