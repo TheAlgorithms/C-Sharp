@@ -29,8 +29,8 @@ public class DictionaryExtensionsTests
 
         dictionary.Should().HaveCount(3);
 
-        dictionary.Should().ContainKey("one").WhichValue.Should().Be(1);
-        dictionary.Should().ContainKey("two").WhichValue.Should().Be(2);
-        dictionary.Should().ContainKey("three").WhichValue.Should().Be(3);
+        dictionary.Should().ContainKey("one").WhoseValue.Should().Be(1);
+        dictionary.Should().ContainKey("two").WhoseValue.Should().Be(2);
+        dictionary.Should().ContainKey("three").WhoseValue.Should().Be(3);
     }
 }

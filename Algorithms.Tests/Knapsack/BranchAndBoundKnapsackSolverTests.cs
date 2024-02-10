@@ -11,9 +11,9 @@ public static class BranchAndBoundKnapsackSolverTests
     public static void BranchAndBoundTest_Example1_Success()
     {
         // Arrange
-        var items = new[] {'A', 'B', 'C', 'D'};
-        var values = new[] {18, 20, 14, 18};
-        var weights = new[] {2, 4, 6, 9};
+        var items = new[] { 'A', 'B', 'C', 'D' };
+        var values = new[] { 18, 20, 14, 18 };
+        var weights = new[] { 2, 4, 6, 9 };
 
         var capacity = 15;
 
@@ -25,16 +25,16 @@ public static class BranchAndBoundKnapsackSolverTests
         var actualResult = solver.Solve(items, capacity, weightSelector, valueSelector);
 
         // Assert
-        actualResult.Should().BeEquivalentTo('A', 'B', 'D');
+        actualResult.Should().BeEquivalentTo(new[] { 'A', 'B', 'D' });
     }
 
     [Test]
     public static void BranchAndBoundTest_Example2_Success()
     {
         // Arrange
-        var items = new[] {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+        var items = new[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
         var values = new[] { 505, 352, 458, 220, 354, 414, 498, 545, 473, 543 };
-        var weights = new[] {23, 26, 20, 18, 32, 27, 29, 26, 30, 27};
+        var weights = new[] { 23, 26, 20, 18, 32, 27, 29, 26, 30, 27 };
 
         var capacity = 67;
 
@@ -46,16 +46,16 @@ public static class BranchAndBoundKnapsackSolverTests
         var actualResult = solver.Solve(items, capacity, weightSelector, valueSelector);
 
         // Assert
-        actualResult.Should().BeEquivalentTo('H', 'D', 'A');
+        actualResult.Should().BeEquivalentTo(new[] { 'H', 'D', 'A' });
     }
 
     [Test]
     public static void BranchAndBoundTest_CapacityIsZero_NothingTaken()
     {
         // Arrange
-        var items = new[] {'A', 'B', 'C', 'D'};
-        var values = new[] {18, 20, 14, 18};
-        var weights = new[] {2, 4, 6, 9};
+        var items = new[] { 'A', 'B', 'C', 'D' };
+        var values = new[] { 18, 20, 14, 18 };
+        var weights = new[] { 2, 4, 6, 9 };
 
         var capacity = 0;
 
@@ -74,9 +74,9 @@ public static class BranchAndBoundKnapsackSolverTests
     public static void BranchAndBoundTest_PlentyCapacity_EverythingIsTaken()
     {
         // Arrange
-        var items = new[] {'A', 'B', 'C', 'D'};
-        var values = new[] {18, 20, 14, 18};
-        var weights = new[] {2, 4, 6, 9};
+        var items = new[] { 'A', 'B', 'C', 'D' };
+        var values = new[] { 18, 20, 14, 18 };
+        var weights = new[] { 2, 4, 6, 9 };
 
         var capacity = 1000;
 
