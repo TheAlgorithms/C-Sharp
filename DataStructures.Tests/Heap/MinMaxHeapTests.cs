@@ -9,19 +9,11 @@ namespace DataStructures.Tests.Heap;
 [TestFixture]
 public static class MinMaxHeapTests
 {
-    private static readonly object[] CollectionsSourceInt =
+    private static readonly object[] CollectionsSource =
     {
-        new[] { 5, 10, -2, 0, 3, 13, 5, -8, 41, -5, -7, -60, -12 }
-    };
-
-    private static readonly object[] CollectionsSourceString =
-    {
-        new[] { "abc", "abc", "xyz", "bcd", "klm", "opq", "ijk" }
-    };
-
-    private static readonly object[] CollectionsSourceChar =
-    {
-        new[] { 'e', '4', 'x', 'D', '!', '$', '-', '_', '2', ')', 'Z', 'q' }
+        new[] { 5, 10, -2, 0, 3, 13, 5, -8, 41, -5, -7, -60, -12 },
+        new[] { 'e', '4', 'x', 'D', '!', '$', '-', '_', '2', ')', 'Z', 'q' },
+        new[] { "abc", "abc", "xyz", "bcd", "klm", "opq", "ijk" },
     };
 
     [Test]
@@ -42,44 +34,10 @@ public static class MinMaxHeapTests
     }
 
     #region AddTest
-    [TestCaseSource(nameof(CollectionsSourceInt))]
-    public static void AddTestInt(IEnumerable<int> collection)
+    [TestCaseSource(nameof(CollectionsSource))]
+    public static void AddTest<T>(IEnumerable<T> collection)
     {
-        var mmh = new MinMaxHeap<int>();
-        foreach (var item in collection)
-        {
-            mmh.Add(item);
-        }
-
-        var minValue = mmh.GetMin();
-        var maxValue = mmh.GetMax();
-
-        Assert.That(collection.Min(), Is.EqualTo(minValue));
-        Assert.That(collection.Max(), Is.EqualTo(maxValue));
-        Assert.That(collection.Count(), Is.EqualTo(mmh.Count));
-    }
-
-    [TestCaseSource(nameof(CollectionsSourceString))]
-    public static void AddTestString(IEnumerable<string> collection)
-    {
-        var mmh = new MinMaxHeap<string>();
-        foreach (var item in collection)
-        {
-            mmh.Add(item);
-        }
-
-        var minValue = mmh.GetMin();
-        var maxValue = mmh.GetMax();
-
-        Assert.That(collection.Min(), Is.EqualTo(minValue));
-        Assert.That(collection.Max(), Is.EqualTo(maxValue));
-        Assert.That(collection.Count(), Is.EqualTo(mmh.Count));
-    }
-
-    [TestCaseSource(nameof(CollectionsSourceChar))]
-    public static void AddTestChar(IEnumerable<char> collection)
-    {
-        var mmh = new MinMaxHeap<char>();
+        var mmh = new MinMaxHeap<T>();
         foreach (var item in collection)
         {
             mmh.Add(item);
@@ -95,44 +53,12 @@ public static class MinMaxHeapTests
     #endregion
 
     #region ExtractMaxTest
-    [TestCaseSource(nameof(CollectionsSourceInt))]
-    public static void ExtractMaxTestInt(IEnumerable<int> collection)
+    [TestCaseSource(nameof(CollectionsSource))]
+    public static void ExtractMaxTest<T>(IEnumerable<T> collection)
     {
         var ordered = collection.OrderByDescending(x => x);
-        var mmh = new MinMaxHeap<int>(collection);
+        var mmh = new MinMaxHeap<T>(collection);
         var emptyHeap = new MinMaxHeap<int>();
-
-        var first = mmh.ExtractMax();
-        var second = mmh.GetMax();
-
-        Assert.Throws<InvalidOperationException>(() => emptyHeap.ExtractMax());
-        Assert.That(ordered.ElementAt(0), Is.EqualTo(first));
-        Assert.That(ordered.ElementAt(1), Is.EqualTo(second));
-        Assert.That(collection.Count() - 1, Is.EqualTo(mmh.Count));
-    }
-
-    [TestCaseSource(nameof(CollectionsSourceString))]
-    public static void ExtractMaxTestString(IEnumerable<string> collection)
-    {
-        var ordered = collection.OrderByDescending(x => x);
-        var mmh = new MinMaxHeap<string>(collection);
-        var emptyHeap = new MinMaxHeap<string>();
-
-        var first = mmh.ExtractMax();
-        var second = mmh.GetMax();
-
-        Assert.Throws<InvalidOperationException>(() => emptyHeap.ExtractMax());
-        Assert.That(ordered.ElementAt(0), Is.EqualTo(first));
-        Assert.That(ordered.ElementAt(1), Is.EqualTo(second));
-        Assert.That(collection.Count() - 1, Is.EqualTo(mmh.Count));
-    }
-
-    [TestCaseSource(nameof(CollectionsSourceChar))]
-    public static void ExtractMaxTestChar(IEnumerable<char> collection)
-    {
-        var ordered = collection.OrderByDescending(x => x);
-        var mmh = new MinMaxHeap<char>(collection);
-        var emptyHeap = new MinMaxHeap<char>();
 
         var first = mmh.ExtractMax();
         var second = mmh.GetMax();
@@ -145,44 +71,12 @@ public static class MinMaxHeapTests
     #endregion
 
     #region ExtractMinTest
-    [TestCaseSource(nameof(CollectionsSourceInt))]
-    public static void ExtractMinTestInt(IEnumerable<int> collection)
+    [TestCaseSource(nameof(CollectionsSource))]
+    public static void ExtractMinTest<T>(IEnumerable<T> collection)
     {
         var ordered = collection.OrderBy(x => x);
-        var mmh = new MinMaxHeap<int>(collection);
+        var mmh = new MinMaxHeap<T>(collection);
         var emptyHeap = new MinMaxHeap<int>();
-
-        var first = mmh.ExtractMin();
-        var second = mmh.GetMin();
-
-        Assert.Throws<InvalidOperationException>(() => emptyHeap.ExtractMin());
-        Assert.That(ordered.ElementAt(0), Is.EqualTo(first));
-        Assert.That(ordered.ElementAt(1), Is.EqualTo(second));
-        Assert.That(collection.Count() - 1, Is.EqualTo(mmh.Count));
-    }
-
-    [TestCaseSource(nameof(CollectionsSourceString))]
-    public static void ExtractMinTestString(IEnumerable<string> collection)
-    {
-        var ordered = collection.OrderBy(x => x);
-        var mmh = new MinMaxHeap<string>(collection);
-        var emptyHeap = new MinMaxHeap<string>();
-
-        var first = mmh.ExtractMin();
-        var second = mmh.GetMin();
-
-        Assert.Throws<InvalidOperationException>(() => emptyHeap.ExtractMin());
-        Assert.That(ordered.ElementAt(0), Is.EqualTo(first));
-        Assert.That(ordered.ElementAt(1), Is.EqualTo(second));
-        Assert.That(collection.Count() - 1, Is.EqualTo(mmh.Count));
-    }
-
-    [TestCaseSource(nameof(CollectionsSourceChar))]
-    public static void ExtractMinTestChar(IEnumerable<char> collection)
-    {
-        var ordered = collection.OrderBy(x => x);
-        var mmh = new MinMaxHeap<char>(collection);
-        var emptyHeap = new MinMaxHeap<char>();
 
         var first = mmh.ExtractMin();
         var second = mmh.GetMin();
@@ -195,35 +89,11 @@ public static class MinMaxHeapTests
     #endregion
 
     #region GetMaxTest
-    [TestCaseSource(nameof(CollectionsSourceInt))]
-    public static void GetMaxTestInt(IEnumerable<int> collection)
+    [TestCaseSource(nameof(CollectionsSource))]
+    public static void GetMaxTest<T>(IEnumerable<T> collection)
     {
-        var emptyHeap = new MinMaxHeap<int>();
-        var mmh = new MinMaxHeap<int>(collection);
-
-        var maxValue = mmh.GetMax();
-
-        Assert.Throws<InvalidOperationException>(() => emptyHeap.GetMax());
-        Assert.That(collection.Max(), Is.EqualTo(maxValue));
-    }
-
-    [TestCaseSource(nameof(CollectionsSourceString))]
-    public static void GetMaxTestString(IEnumerable<string> collection)
-    {
-        var emptyHeap = new MinMaxHeap<string>();
-        var mmh = new MinMaxHeap<string>(collection);
-
-        var maxValue = mmh.GetMax();
-
-        Assert.Throws<InvalidOperationException>(() => emptyHeap.GetMax());
-        Assert.That(collection.Max(), Is.EqualTo(maxValue));
-    }
-
-    [TestCaseSource(nameof(CollectionsSourceChar))]
-    public static void GetMaxTestChar(IEnumerable<char> collection)
-    {
-        var emptyHeap = new MinMaxHeap<char>();
-        var mmh = new MinMaxHeap<char>(collection);
+        var emptyHeap = new MinMaxHeap<T>();
+        var mmh = new MinMaxHeap<T>(collection);
 
         var maxValue = mmh.GetMax();
 
@@ -233,35 +103,11 @@ public static class MinMaxHeapTests
     #endregion
 
     #region GetMinTest
-    [TestCaseSource(nameof(CollectionsSourceInt))]
-    public static void GetMinTestInt(IEnumerable<int> collection)
+    [TestCaseSource(nameof(CollectionsSource))]
+    public static void GetMinTest<T>(IEnumerable<T> collection)
     {
-        var emptyHeap = new MinMaxHeap<int>();
-        var mmh = new MinMaxHeap<int>(collection);
-
-        var minValue = mmh.GetMin();
-
-        Assert.Throws<InvalidOperationException>(() => emptyHeap.GetMin());
-        Assert.That(collection.Min(), Is.EqualTo(minValue));
-    }
-
-    [TestCaseSource(nameof(CollectionsSourceString))]
-    public static void GetMinTestString(IEnumerable<string> collection)
-    {
-        var emptyHeap = new MinMaxHeap<string>();
-        var mmh = new MinMaxHeap<string>(collection);
-
-        var minValue = mmh.GetMin();
-
-        Assert.Throws<InvalidOperationException>(() => emptyHeap.GetMin());
-        Assert.That(collection.Min(), Is.EqualTo(minValue));
-    }
-
-    [TestCaseSource(nameof(CollectionsSourceChar))]
-    public static void GetMinTestChar(IEnumerable<char> collection)
-    {
-        var emptyHeap = new MinMaxHeap<char>();
-        var mmh = new MinMaxHeap<char>(collection);
+        var emptyHeap = new MinMaxHeap<T>();
+        var mmh = new MinMaxHeap<T>(collection);
 
         var minValue = mmh.GetMin();
 
@@ -272,17 +118,17 @@ public static class MinMaxHeapTests
 
     #region HeapSortUsingGet
     [Test]
-    public static void HeapSortUsingGet(
-        [ValueSource(nameof(CollectionsSourceInt))] IEnumerable<int> collection,
+    public static void HeapSortUsingGet<T>(
+        [ValueSource(nameof(CollectionsSource))] IEnumerable<T> collection,
         [Values] bool ascending)
     {
         var ordered = ascending ? collection.OrderBy(x => x) : collection.OrderByDescending(x => x);
-        var mmh = new MinMaxHeap<int>(collection);
-        var extracted = new List<int>();
+        var mmh = new MinMaxHeap<T>(collection);
+        var extracted = new List<T>();
 
         while (mmh.Count > 0)
         {
-            int value;
+            T value;
             if (ascending)
             {
                 value = mmh.GetMin();
@@ -303,13 +149,13 @@ public static class MinMaxHeapTests
 
     #region HeapSortUsingExtract
     [Test]
-    public static void HeapSortUsingExtract(
-        [ValueSource(nameof(CollectionsSourceInt))] IEnumerable<int> collection,
+    public static void HeapSortUsingExtract<T>(
+        [ValueSource(nameof(CollectionsSource))] IEnumerable<T> collection,
         [Values] bool ascending)
     {
         var ordered = ascending ? collection.OrderBy(x => x) : collection.OrderByDescending(x => x);
-        var mmh = new MinMaxHeap<int>(collection);
-        var extracted = new List<int>();
+        var mmh = new MinMaxHeap<T>(collection);
+        var extracted = new List<T>();
 
         while (mmh.Count > 0)
         {
