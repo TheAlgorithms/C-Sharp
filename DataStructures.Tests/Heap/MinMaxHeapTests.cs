@@ -33,7 +33,6 @@ public static class MinMaxHeapTests
         Assert.That("aaaa", Is.EqualTo(mmh.GetMax()));
     }
 
-    #region AddTest
     [TestCaseSource(nameof(CollectionsSource))]
     public static void AddTest<T>(IEnumerable<T> collection)
     {
@@ -50,7 +49,6 @@ public static class MinMaxHeapTests
         Assert.That(collection.Max(), Is.EqualTo(maxValue));
         Assert.That(collection.Count(), Is.EqualTo(mmh.Count));
     }
-    #endregion
 
     #region ExtractMaxTest
     [TestCaseSource(nameof(CollectionsSource))]
@@ -68,9 +66,7 @@ public static class MinMaxHeapTests
         Assert.That(ordered.ElementAt(1), Is.EqualTo(second));
         Assert.That(collection.Count() - 1, Is.EqualTo(mmh.Count));
     }
-    #endregion
 
-    #region ExtractMinTest
     [TestCaseSource(nameof(CollectionsSource))]
     public static void ExtractMinTest<T>(IEnumerable<T> collection)
     {
@@ -86,9 +82,7 @@ public static class MinMaxHeapTests
         Assert.That(ordered.ElementAt(1), Is.EqualTo(second));
         Assert.That(collection.Count() - 1, Is.EqualTo(mmh.Count));
     }
-    #endregion
 
-    #region GetMaxTest
     [TestCaseSource(nameof(CollectionsSource))]
     public static void GetMaxTest<T>(IEnumerable<T> collection)
     {
@@ -100,9 +94,7 @@ public static class MinMaxHeapTests
         Assert.Throws<InvalidOperationException>(() => emptyHeap.GetMax());
         Assert.That(collection.Max(), Is.EqualTo(maxValue));
     }
-    #endregion
 
-    #region GetMinTest
     [TestCaseSource(nameof(CollectionsSource))]
     public static void GetMinTest<T>(IEnumerable<T> collection)
     {
@@ -114,9 +106,7 @@ public static class MinMaxHeapTests
         Assert.Throws<InvalidOperationException>(() => emptyHeap.GetMin());
         Assert.That(collection.Min(), Is.EqualTo(minValue));
     }
-    #endregion
 
-    #region HeapSortUsingGet
     [Test]
     public static void HeapSortUsingGet<T>(
         [ValueSource(nameof(CollectionsSource))] IEnumerable<T> collection,
@@ -145,9 +135,7 @@ public static class MinMaxHeapTests
 
         Assert.That(ordered.SequenceEqual(extracted), Is.True);
     }
-    #endregion
 
-    #region HeapSortUsingExtract
     [Test]
     public static void HeapSortUsingExtract<T>(
         [ValueSource(nameof(CollectionsSource))] IEnumerable<T> collection,
@@ -165,5 +153,4 @@ public static class MinMaxHeapTests
 
         Assert.That(ordered.SequenceEqual(extracted), Is.True);
     }
-    #endregion
 }
