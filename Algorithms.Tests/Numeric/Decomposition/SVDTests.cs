@@ -119,7 +119,6 @@ public class SvdTests
             {
                 // if the singular value is zero, then the basis vector in v should be zeroed out
                 Assert.That(extracted.Magnitude(), Is.EqualTo(0).Within(epsilon));
-
             }
         }
 
