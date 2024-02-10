@@ -50,7 +50,6 @@ public static class MinMaxHeapTests
         Assert.That(collection.Count(), Is.EqualTo(mmh.Count));
     }
 
-    #region ExtractMaxTest
     [TestCaseSource(nameof(CollectionsSource))]
     public static void ExtractMaxTest<T>(IEnumerable<T> collection)
     {
