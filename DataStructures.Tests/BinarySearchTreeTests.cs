@@ -17,6 +17,7 @@ public static class BinarySearchTreeTests
         tree.AddRange(elems);
 
         Assert.That(tree.Search("vvv"), Is.Not.Null);
+        Assert.That(tree.Search("vvv")!.Right, Is.Not.Null);
         Assert.That(tree.Search("vvv")!.Right!.Key, Is.EqualTo("bbbb"));
     }
 
