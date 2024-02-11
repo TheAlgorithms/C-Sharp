@@ -22,6 +22,6 @@ public static class SelectionSorterTests
         Array.Sort(correctArray, intComparer);
 
         // Assert
-        Assert.AreEqual(testArray, correctArray);
+        Assert.That(correctArray, Is.EqualTo(testArray));
     }
 }

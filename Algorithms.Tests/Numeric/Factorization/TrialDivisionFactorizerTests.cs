@@ -18,7 +18,7 @@ public static class TrialDivisionFactorizerTests
         var success = factorizer.TryFactor(p, out _);
 
         // Assert
-        Assert.IsFalse(success);
+        Assert.That(success, Is.False);
     }
 
     [TestCase(4, 2)]
@@ -38,7 +38,7 @@ public static class TrialDivisionFactorizerTests
         var success = factorizer.TryFactor(n, out var factor);
 
         // Assert
-        Assert.IsTrue(success);
-        Assert.AreEqual(expected, factor);
+        Assert.That(success, Is.True);
+        Assert.That(factor, Is.EqualTo(expected));
     }
 }

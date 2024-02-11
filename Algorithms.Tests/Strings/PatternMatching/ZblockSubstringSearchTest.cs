@@ -18,6 +18,6 @@ public class ZblockSubstringSearchTest
     public void Test(string pattern, string text, int expectedOccurences)
     {
         var occurencesFound = ZblockSubstringSearch.FindSubstring(pattern, text);
-        Assert.AreEqual(expectedOccurences, occurencesFound);
+        Assert.That(occurencesFound, Is.EqualTo(expectedOccurences));
     }
 }

@@ -21,13 +21,21 @@ public static class CountingSorterTests
         Array.Sort(correctArray);
 
         // Assert
-        Assert.AreEqual(correctArray, testArray);
+        Assert.That(testArray, Is.EqualTo(correctArray));
     }
 
     [Test]
     public static void SortsEmptyArray()
     {
+        // Arrange
         var sorter = new CountingSorter();
-        sorter.Sort(Array.Empty<int>());
+        var (correctArray, testArray) = RandomHelper.GetArrays(0);
+
+        // Act
+        sorter.Sort(testArray);
+        Array.Sort(correctArray);
+
+        // Assert
+        Assert.That(testArray, Is.Empty);
     }
 }

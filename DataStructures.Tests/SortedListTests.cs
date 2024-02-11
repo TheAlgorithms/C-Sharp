@@ -20,7 +20,7 @@ public class SortedListTests
             list.Add(value);
         }
 
-        CollectionAssert.AreEqual(values.OrderBy(i => i), list);
+        Assert.That(list, Is.EqualTo(values.OrderBy(i => i)));
     }
 
     [Test]
@@ -37,7 +37,7 @@ public class SortedListTests
             list.Add(i);
         }
 
-        Assert.IsFalse(list.Contains(value));
+        Assert.That(list.Contains(value), Is.False);
     }
 
     [Test]
@@ -54,7 +54,7 @@ public class SortedListTests
             list.Add(i);
         }
 
-        Assert.IsTrue(list.Contains(value));
+        Assert.That(list.Contains(value), Is.True);
     }
 
 
@@ -72,7 +72,7 @@ public class SortedListTests
             list.Add(i);
         }
 
-        Assert.IsFalse(list.TryRemove(value));
+        Assert.That(list.TryRemove(value), Is.False);
     }
 
     [Test]
@@ -95,8 +95,8 @@ public class SortedListTests
 
         expectingValues.Remove(value);
 
-        Assert.IsTrue(list.TryRemove(value));
-        CollectionAssert.AreEqual(expectingValues, list);
+        Assert.That(list.TryRemove(value), Is.True);
+        Assert.That(list, Is.EqualTo(expectingValues));
     }
 
     [Test]
@@ -114,7 +114,7 @@ public class SortedListTests
 
         list.Clear();
 
-        CollectionAssert.IsEmpty(list);
+        Assert.That(list, Is.Empty);
     }
 
     private static List<int> GetValues(int count)

@@ -17,7 +17,7 @@ public static class ChineseRemainderTheoremTest
         var x = ChineseRemainderTheorem.Compute(new List<long> { 1L, 1L, 3L, 1L }, new List<long> { 2L, 3L, 5L, 7L });
 
         // Assert
-        Assert.AreEqual(expected, x);
+        Assert.That(x, Is.EqualTo(expected));
     }
 
     [Test]
@@ -29,7 +29,7 @@ public static class ChineseRemainderTheoremTest
         var x = ChineseRemainderTheorem.Compute(new List<long> { 0L, 0L, 2L, 1L, 1L }, new List<long> { 2L, 5L, 7L, 9L, 11L });
 
         // Assert
-        Assert.AreEqual(expected, x);
+        Assert.That(x, Is.EqualTo(expected));
     }
 
     [Test]
@@ -41,7 +41,7 @@ public static class ChineseRemainderTheoremTest
         var x = ChineseRemainderTheorem.Compute(new List<long> { 1L, 4L, 13L }, new List<long> { 4L, 9L, 25L });
 
         // Assert
-        Assert.AreEqual(expected, x);
+        Assert.That(x, Is.EqualTo(expected));
     }
 
     [Test]
@@ -105,7 +105,7 @@ public static class ChineseRemainderTheoremTest
         );
 
         // Assert
-        Assert.AreEqual(expected, x);
+        Assert.That(x, Is.EqualTo(expected));
     }
 
     [Test]
@@ -120,7 +120,7 @@ public static class ChineseRemainderTheoremTest
         );
 
         // Assert
-        Assert.AreEqual(expected, x);
+        Assert.That(x, Is.EqualTo(expected));
     }
 
     [Test]
@@ -135,7 +135,7 @@ public static class ChineseRemainderTheoremTest
         );
 
         // Assert
-        Assert.AreEqual(expected, x);
+        Assert.That(x, Is.EqualTo(expected));
     }
 
     [Test]

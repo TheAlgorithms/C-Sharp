@@ -23,7 +23,7 @@ public static class FeistelCipherTests
         var decoded = encoder.Decode(encoded, key);
 
         // Assert
-        Assert.AreEqual(message, decoded);
+        Assert.That(decoded, Is.EqualTo(message));
     }
 
     [TestCase("00001111",                           (uint)0x12345678)]

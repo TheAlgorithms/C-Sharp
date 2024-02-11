@@ -71,10 +71,10 @@ public class BloomFilterTests
             }
             filter.Insert(k);
             set.Add(k);
-            Assert.IsTrue(filter.Search(k));
+            Assert.That(filter.Search(k), Is.True);
         }
 
-        Assert.True(.05 > falsePositives / 1000.0); // be a bit generous in our fault tolerance here
+        Assert.That(.05 > falsePositives / 1000.0, Is.True); // be a bit generous in our fault tolerance here
     }
 
     [Test]
@@ -86,7 +86,7 @@ public class BloomFilterTests
         {
             var simpleObject = new SimpleObject(TestNames[rand.Next(TestNames.Length)], rand.Next(15));
             filter.Insert(simpleObject);
-            Assert.IsTrue(filter.Search(simpleObject));
+            Assert.That(filter.Search(simpleObject), Is.True);
         }
     }
 
@@ -98,9 +98,9 @@ public class BloomFilterTests
         var simpleObjectInserted2 = new SimpleObjectOverridenHash("foo", 1);
         var simpleObjectNotInserted = new SimpleObjectOverridenHash("bar", 2);
         filter.Insert(simpleObjectInserted);
-        Assert.IsTrue(filter.Search(simpleObjectInserted));
-        Assert.IsTrue(filter.Search(simpleObjectInserted2));
-        Assert.IsFalse(filter.Search(simpleObjectNotInserted));
+        Assert.That(filter.Search(simpleObjectInserted), Is.True);
+        Assert.That(filter.Search(simpleObjectInserted2), Is.True);
+        Assert.That(filter.Search(simpleObjectNotInserted), Is.False);
     }
 
     [Test]
@@ -110,8 +110,8 @@ public class BloomFilterTests
         var simpleObjectInserted = new SimpleObject("foo", 1);
         var simpleObjectNotInserted = new SimpleObject("foo", 1);
         filter.Insert(simpleObjectInserted);
-        Assert.False(filter.Search(simpleObjectNotInserted));
-        Assert.True(filter.Search(simpleObjectInserted));
+        Assert.That(filter.Search(simpleObjectNotInserted), Is.False);
+        Assert.That(filter.Search(simpleObjectInserted), Is.True);
 
     }
 }

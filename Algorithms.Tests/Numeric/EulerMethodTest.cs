@@ -41,8 +41,8 @@ public static class EulerMethodTest
         List<double[]> points = EulerMethod.EulerFull(0, 0.05, 0.025, 1, exampleEquation);
         var y1 = points[1][1];
         var y2 = points[2][1];
-        Assert.AreEqual(y1, 1.025);
-        Assert.AreEqual(y2, 1.051890625);
+        Assert.That(1.025, Is.EqualTo(y1));
+        Assert.That(1.051890625, Is.EqualTo(y2));
     }
 
     [Test]

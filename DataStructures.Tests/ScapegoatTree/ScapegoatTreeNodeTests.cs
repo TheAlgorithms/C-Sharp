@@ -61,7 +61,7 @@ public class ScapegoatTreeNodeTests
 
         var result = instance.Key.CompareTo(other.Key);
 
-        Assert.AreEqual(result, -1);
+        Assert.That(result, Is.EqualTo(-1));
     }
 
     [TestCase(2, 1)]
@@ -74,7 +74,7 @@ public class ScapegoatTreeNodeTests
 
         var result = instance.Key.CompareTo(other.Key);
 
-        Assert.AreEqual(result, 1);
+        Assert.That(1, Is.EqualTo(result));
     }
 
     [TestCase(1, 1)]
@@ -87,7 +87,7 @@ public class ScapegoatTreeNodeTests
 
         var result = instance.Key.CompareTo(other.Key);
 
-        Assert.AreEqual(result, 0);
+        Assert.That(0, Is.EqualTo(result));
     }
 
     [Test]
@@ -95,7 +95,7 @@ public class ScapegoatTreeNodeTests
     {
         var node = new Node<int>(1);
 
-        Assert.AreEqual(node.GetSize(), 1);
+        Assert.That(1, Is.EqualTo(node.GetSize()));
     }
 
     [Test]
@@ -103,7 +103,7 @@ public class ScapegoatTreeNodeTests
     {
         var node = new Node<int>(1, new Node<int>(2), new Node<int>(0));
 
-        Assert.AreEqual(node.GetSize(), 3);
+        Assert.That(3, Is.EqualTo(node.GetSize()));
     }
 
     [Test]
@@ -111,7 +111,7 @@ public class ScapegoatTreeNodeTests
     {
         var node = new Node<int>(1);
 
-        Assert.AreEqual(node.GetSmallestKeyNode(), node);
+        Assert.That(node, Is.EqualTo(node.GetSmallestKeyNode()));
     }
 
     [Test]
@@ -123,7 +123,7 @@ public class ScapegoatTreeNodeTests
         node.Left = smaller;
         smaller.Left = smallest;
 
-        Assert.AreEqual(node.GetSmallestKeyNode(), smallest);
+        Assert.That(smallest, Is.EqualTo(node.GetSmallestKeyNode()));
     }
 
     [Test]
@@ -131,7 +131,7 @@ public class ScapegoatTreeNodeTests
     {
         var node = new Node<int>(1);
 
-        Assert.AreEqual(node.GetLargestKeyNode(), node);
+        Assert.That(node, Is.EqualTo(node.GetLargestKeyNode()));
     }
 
     [Test]
@@ -143,7 +143,7 @@ public class ScapegoatTreeNodeTests
         node.Right = larger;
         larger.Right = largest;
 
-        Assert.AreEqual(node.GetLargestKeyNode(), largest);
+        Assert.That(largest, Is.EqualTo(node.GetLargestKeyNode()));
     }
 
     [Test]
@@ -160,7 +160,7 @@ public class ScapegoatTreeNodeTests
         b.Left = c;
         root.Right = d;
 
-        Assert.IsFalse(root.IsAlphaWeightBalanced(0.5));
+        Assert.That(root.IsAlphaWeightBalanced(0.5), Is.False);
     }
 
     [Test]
@@ -175,6 +175,6 @@ public class ScapegoatTreeNodeTests
         a.Left = b;
         root.Right = d;
 
-        Assert.IsTrue(root.IsAlphaWeightBalanced(0.5));
+        Assert.That(root.IsAlphaWeightBalanced(0.5), Is.True);
     }
 }

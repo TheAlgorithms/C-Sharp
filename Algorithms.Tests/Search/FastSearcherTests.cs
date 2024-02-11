@@ -13,7 +13,7 @@ public static class FastSearcherTests
         var arr = Helper.GetSortedArray(1000);
         var present = Helper.GetItemIn(arr);
         var index = searcher.FindIndex(arr, present);
-        Assert.AreEqual(present, arr[index]);
+        Assert.That(arr[index], Is.EqualTo(present));
     }
 
     [TestCase(new[] { 1, 2 }, 1)]
@@ -23,7 +23,7 @@ public static class FastSearcherTests
     {
         var searcher = new FastSearcher();
         var index = searcher.FindIndex(arr, present);
-        Assert.AreEqual(present, arr[index]);
+        Assert.That(arr[index], Is.EqualTo(present));
     }
 
     [Test]
@@ -67,7 +67,7 @@ public static class FastSearcherTests
         var arr = new int[1000];
         var present = 0;
         var index = searcher.FindIndex(arr, present);
-        Assert.AreEqual(0, arr[index]);
+        Assert.That(arr[index], Is.EqualTo(0));
     }
 
     [Test]

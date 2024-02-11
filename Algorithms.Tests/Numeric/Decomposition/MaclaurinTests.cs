@@ -18,7 +18,7 @@ public class MaclaurinTests
         var actual = Maclaurin.Exp(point, terms);
 
         // Assert
-        Assert.IsTrue(Math.Abs(expected - actual) < expectedError);
+        Assert.That(Math.Abs(expected - actual) < expectedError, Is.True);
     }
 
     [Test]
@@ -38,7 +38,7 @@ public class MaclaurinTests
         var actual = Maclaurin.Sin(point, terms);
 
         // Assert
-        Assert.IsTrue(Math.Abs(expected - actual) < expectedError);
+        Assert.That(Math.Abs(expected - actual) < expectedError, Is.True);
     }
 
     [Test]
@@ -58,7 +58,7 @@ public class MaclaurinTests
         var actual = Maclaurin.Cos(point, terms);
 
         // Assert
-        Assert.IsTrue(Math.Abs(expected - actual) < expectedError);
+        Assert.That(Math.Abs(expected - actual) < expectedError, Is.True);
     }
 
     [Test]
@@ -78,7 +78,7 @@ public class MaclaurinTests
         var actual = Maclaurin.Exp(point, error);
 
         // Assert
-        Assert.IsTrue(Math.Abs(expected - actual) < error);
+        Assert.That(Math.Abs(expected - actual) < error, Is.True);
     }
 
     [TestCase(0.0)]
@@ -99,7 +99,7 @@ public class MaclaurinTests
         var actual = Maclaurin.Sin(point, error);
 
         // Assert
-        Assert.IsTrue(Math.Abs(expected - actual) < error);
+        Assert.That(Math.Abs(expected - actual) < error, Is.True);
     }
 
     [TestCase(0.0)]
@@ -120,7 +120,7 @@ public class MaclaurinTests
         var actual = Maclaurin.Cos(point, error);
 
         // Assert
-        Assert.IsTrue(Math.Abs(expected - actual) < error);
+        Assert.That(Math.Abs(expected - actual) < error, Is.True);
     }
 
     [TestCase(0.0)]

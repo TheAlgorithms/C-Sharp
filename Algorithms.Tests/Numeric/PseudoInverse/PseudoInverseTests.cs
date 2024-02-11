@@ -20,7 +20,7 @@ public static class PseudoInverseTests
         var rounded = aainva.RoundToNextInt();
         var isequal = rounded.IsEqual(inMatCopy);
         // Assert
-        Assert.IsTrue(isequal);
+        Assert.That(isequal, Is.True);
     }
 
     [Test]
@@ -39,6 +39,6 @@ public static class PseudoInverseTests
 
         var isequal = rounded.IsEqual(inMatCopy);
         // Assert
-        Assert.IsTrue(isequal);
+        Assert.That(isequal, Is.True);
     }
 }

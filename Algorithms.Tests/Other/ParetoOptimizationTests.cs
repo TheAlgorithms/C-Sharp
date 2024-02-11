@@ -36,6 +36,6 @@ public static class ParetoOptimizationTests
         var optimizedMatrix = paretoOptimization.Optimize(matrix);
 
         // Assert
-        Assert.AreEqual(optimizedMatrix, expectedMatrix);
+        Assert.That(expectedMatrix, Is.EqualTo(optimizedMatrix));
     }
 }

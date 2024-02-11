@@ -30,10 +30,10 @@ public static class MandelbrotTest
     {
         Bitmap bitmap = Mandelbrot.GetBitmap(useDistanceColorCoding: false);
         // Pixel outside the Mandelbrot set should be white.
-        Assert.AreEqual(bitmap.GetPixel(0, 0), Color.FromArgb(255, 255, 255, 255));
+        Assert.That(Color.FromArgb(255, 255, 255, 255), Is.EqualTo(bitmap.GetPixel(0, 0)));
 
         // Pixel inside the Mandelbrot set should be black.
-        Assert.AreEqual(bitmap.GetPixel(400, 300), Color.FromArgb(255, 0, 0, 0));
+        Assert.That(Color.FromArgb(255, 0, 0, 0), Is.EqualTo(bitmap.GetPixel(400, 300)));
     }
 
     [Test]
@@ -41,9 +41,9 @@ public static class MandelbrotTest
     {
         Bitmap bitmap = Mandelbrot.GetBitmap(useDistanceColorCoding: true);
         // Pixel distant to the Mandelbrot set should be red.
-        Assert.AreEqual(bitmap.GetPixel(0, 0), Color.FromArgb(255, 255, 0, 0));
+        Assert.That(Color.FromArgb(255, 255, 0, 0), Is.EqualTo(bitmap.GetPixel(0, 0)));
 
         // Pixel inside the Mandelbrot set should be black.
-        Assert.AreEqual(bitmap.GetPixel(400, 300), Color.FromArgb(255, 0, 0, 0));
+        Assert.That(Color.FromArgb(255, 0, 0, 0), Is.EqualTo(bitmap.GetPixel(400, 300)));
     }
 }

@@ -13,6 +13,6 @@ public class BoyerMooreTests
     public void FindFirstOccurrence_IndexCheck(string t, string p, int expectedIndex)
     {
         var resultIndex = BoyerMoore.FindFirstOccurrence(t, p);
-        Assert.AreEqual(resultIndex, expectedIndex);
+        Assert.That(expectedIndex, Is.EqualTo(resultIndex));
     }
 }

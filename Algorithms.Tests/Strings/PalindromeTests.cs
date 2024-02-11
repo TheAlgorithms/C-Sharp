@@ -14,7 +14,7 @@ public static class PalindromeTests
         var isPalindrome = Palindrome.IsStringPalindrome(text);
 
         // Assert
-        Assert.True(isPalindrome);
+        Assert.That(isPalindrome, Is.True);
     }
 
     [TestCase("hallo")]
@@ -26,6 +26,6 @@ public static class PalindromeTests
         var isPalindrome = Palindrome.IsStringPalindrome(text);
 
         // Assert
-        Assert.False(isPalindrome);
+        Assert.That(isPalindrome, Is.False);
     }
 }

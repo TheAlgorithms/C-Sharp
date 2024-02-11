@@ -18,7 +18,7 @@ public static class PerfectNumberTests
         var result = PerfectNumberChecker.IsPerfectNumber(number);
 
         // Assert
-        Assert.IsTrue(result);
+        Assert.That(result, Is.True);
     }
 
     [TestCase(-2)]

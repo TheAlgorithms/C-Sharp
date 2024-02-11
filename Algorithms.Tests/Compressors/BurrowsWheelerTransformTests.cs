@@ -15,8 +15,8 @@ public class BurrowsWheelerTransformTests
 
         var (encoded, index) = bwt.Encode(input);
 
-        Assert.AreEqual(expectedString, encoded);
-        Assert.AreEqual(expectedIndex, index);
+        Assert.That(encoded, Is.EqualTo(expectedString));
+        Assert.That(index, Is.EqualTo(expectedIndex));
     }
 
     [TestCase("nnbaaa", 3, "banana")]
@@ -28,7 +28,7 @@ public class BurrowsWheelerTransformTests
 
         var result = bwt.Decode(encoded, index);
 
-        Assert.AreEqual(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
     [Test]
@@ -42,6 +42,6 @@ public class BurrowsWheelerTransformTests
         var (encoded, index) = bwt.Encode(inputString);
         var result = bwt.Decode(encoded, index);
 
-        Assert.AreEqual(inputString, result);
+        Assert.That(result, Is.EqualTo(inputString));
     }
 }

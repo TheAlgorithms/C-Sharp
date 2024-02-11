@@ -19,7 +19,7 @@ public static class Int2BinaryTests
         var result = Int2Binary.Int2Bin(input);
 
         // Assert
-        Assert.AreEqual(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
 
@@ -38,7 +38,7 @@ public static class Int2BinaryTests
         var result = Int2Binary.Int2Bin(input);
 
         // Assert
-        Assert.AreEqual(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
     [TestCase((ulong)0, "0000000000000000000000000000000000000000000000000000000000000000")]
@@ -59,6 +59,6 @@ public static class Int2BinaryTests
         var result = Int2Binary.Int2Bin(input);
 
         // Assert
-        Assert.AreEqual(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 }

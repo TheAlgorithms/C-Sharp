@@ -22,7 +22,7 @@ public static class CombSorterTests
         Array.Sort(correctArray, intComparer);
 
         // Assert
-        Assert.AreEqual(testArray, correctArray);
+        Assert.That(correctArray, Is.EqualTo(testArray));
     }
 
     [Test]
@@ -40,6 +40,6 @@ public static class CombSorterTests
         Array.Sort(correctArray, intComparer);
 
         // Assert
-        Assert.AreEqual(testArray, correctArray);
+        Assert.That(correctArray, Is.EqualTo(testArray));
     }
 }

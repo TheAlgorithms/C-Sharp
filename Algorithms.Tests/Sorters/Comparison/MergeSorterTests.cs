@@ -25,6 +25,6 @@ public static class MergeSorterTests
         Array.Sort(correctArray);
 
         // Assert
-        Assert.AreEqual(correctArray, testArray);
+        Assert.That(testArray, Is.EqualTo(correctArray));
     }
 }

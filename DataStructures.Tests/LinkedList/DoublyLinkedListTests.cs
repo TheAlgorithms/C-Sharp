@@ -13,8 +13,8 @@ public static class DoublyLinkedListTests
         var dll = new DoublyLinkedList<int>(new[] { 0, 1, 2, 3, 4 });
         var arr = dll.GetData().ToArray();
 
-        Assert.AreEqual(dll.Count, 5);
-        Assert.AreEqual(new[] { 0, 1, 2, 3, 4 }, arr);
+        Assert.That(dll.Count, Is.EqualTo(5));
+        Assert.That(new[] { 0, 1, 2, 3, 4 }, Is.EqualTo(arr));
     }
 
     [Test]
@@ -25,8 +25,8 @@ public static class DoublyLinkedListTests
         var one = dll.GetAt(1);
         var three = dll.GetAt(3);
 
-        Assert.AreEqual(one.Data, 1);
-        Assert.AreEqual(three.Data, 3);
+        Assert.That(one.Data, Is.EqualTo(1));
+        Assert.That(three.Data, Is.EqualTo(3));
         Assert.Throws<ArgumentOutOfRangeException>(
             () => dll.GetAt(-1)
         );
@@ -48,9 +48,9 @@ public static class DoublyLinkedListTests
         var arr = dll.GetData().ToArray();
         var reversedArr = dll.GetDataReversed().ToArray();
 
-        Assert.AreEqual(dll.Count, 5);
-        Assert.AreEqual(new[] { 0, 1, 2, 3, 4 }, arr);
-        Assert.AreEqual(new[] { 4, 3, 2, 1, 0 }, reversedArr);
+        Assert.That(dll.Count, Is.EqualTo(5));
+        Assert.That(new[] { 0, 1, 2, 3, 4 }, Is.EqualTo(arr));
+        Assert.That(new[] { 4, 3, 2, 1, 0 }, Is.EqualTo(reversedArr));
     }
 
     [Test]
@@ -65,9 +65,9 @@ public static class DoublyLinkedListTests
         var arr = dll.GetData().ToArray();
         var reversedArr = dll.GetDataReversed().ToArray();
 
-        Assert.AreEqual(dll.Count, 2);
-        Assert.AreEqual(new[] { 1, 3 }, arr);
-        Assert.AreEqual(new[] { 3, 1 }, reversedArr);
+        Assert.That(dll.Count, Is.EqualTo(2)    );
+        Assert.That(new[] { 1, 3 }, Is.EqualTo(arr));
+        Assert.That(new[] { 3, 1 }, Is.EqualTo(reversedArr));
     }
 
     [Test]
@@ -78,8 +78,8 @@ public static class DoublyLinkedListTests
         var one = dll.Find(1);
         var three = dll.Find(3);
 
-        Assert.AreEqual(one.Data, 1);
-        Assert.AreEqual(three.Data, 3);
+        Assert.That(one.Data, Is.EqualTo(1));
+        Assert.That(three.Data, Is.EqualTo(3));
     }
 
     [Test]
@@ -90,8 +90,8 @@ public static class DoublyLinkedListTests
         var one = dll.IndexOf(1);
         var three = dll.IndexOf(3);
 
-        Assert.AreEqual(one, 1);
-        Assert.AreEqual(three, 3);
+        Assert.That(one, Is.EqualTo(1));
+        Assert.That(three, Is.EqualTo(3));
     }
 
     [Test]
@@ -102,8 +102,8 @@ public static class DoublyLinkedListTests
         var one = dll.Contains(1);
         var six = dll.Contains(6);
 
-        Assert.IsTrue(one);
-        Assert.IsFalse(six);
+        Assert.That(one, Is.True);
+        Assert.That(six, Is.False);
     }
 
     [Test]
@@ -117,8 +117,8 @@ public static class DoublyLinkedListTests
         empty.Reverse();
         var emptyArr = empty.GetData().ToArray();
 
-        Assert.AreEqual(arr, new[] { 4, 3, 2, 1, 0 });
-        Assert.AreEqual(emptyArr, new int[] { });
+        Assert.That(arr, Is.EqualTo(new[] { 4, 3, 2, 1, 0 }));
+        Assert.That(emptyArr, Is.EqualTo(new int[] { }));
     }
 
     [Test]
@@ -128,7 +128,7 @@ public static class DoublyLinkedListTests
         var arr = dll.GetData().ToArray();
         var reversedArr = dll.GetDataReversed().ToArray();
 
-        Assert.AreEqual(arr, new[] { 0, 1, 2, 3, 4 });
-        Assert.AreEqual(reversedArr, new[] { 4, 3, 2, 1, 0 });
+        Assert.That(arr, Is.EqualTo(new[] { 0, 1, 2, 3, 4 }));
+        Assert.That(reversedArr, Is.EqualTo(new[] { 4, 3, 2, 1, 0 }));
     }
 }

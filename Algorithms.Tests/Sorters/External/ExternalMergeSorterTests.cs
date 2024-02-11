@@ -26,7 +26,7 @@ public static class ExternalMergeSorterTests
         Array.Sort(correctArray, intComparer);
 
         // Assert
-        Assert.AreEqual(testArray, correctArray);
+        Assert.That(correctArray, Is.EqualTo(testArray));
     }
 
     [Test]
@@ -61,6 +61,6 @@ public static class ExternalMergeSorterTests
             testArray[i] = reader.Read();
         }
 
-        Assert.AreEqual(testArray, correctArray);
+        Assert.That(correctArray, Is.EqualTo(testArray));
     }
 }

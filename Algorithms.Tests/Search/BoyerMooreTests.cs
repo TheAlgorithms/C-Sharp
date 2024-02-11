@@ -30,6 +30,6 @@ public class BoyerMoore_Tests
         var expected = majorityElement;
         var actual = BoyerMoore<int>.FindMajority(randomNumbers);
 
-        Assert.AreEqual(actual, expected);
+        Assert.That(expected, Is.EqualTo(actual));
     }
 }

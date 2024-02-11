@@ -29,7 +29,7 @@ public static class DecisionsConvolutionsTest
         var optimizedMatrix = DecisionsConvolutions.Linear(matrix, priorities);
 
         // Assert
-        Assert.AreEqual(optimizedMatrix, expectedMatrix);
+        Assert.That(expectedMatrix, Is.EqualTo(optimizedMatrix));
     }
 
     [Test]
@@ -55,6 +55,6 @@ public static class DecisionsConvolutionsTest
         var optimizedMatrix = DecisionsConvolutions.MaxMin(matrix, priorities);
 
         // Assert
-        Assert.AreEqual(optimizedMatrix, expectedMatrix);
+        Assert.That(expectedMatrix, Is.EqualTo(optimizedMatrix));
     }
 }

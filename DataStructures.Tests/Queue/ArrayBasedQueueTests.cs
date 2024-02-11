@@ -24,9 +24,9 @@ public static class ArrayBasedQueueTests
         }
 
         // Assert
-        Assert.AreEqual("ABC", result.ToString());
-        Assert.IsTrue(q.IsEmpty(), "Queue is empty");
-        Assert.IsFalse(q.IsFull(), "Queue is full");
+        Assert.That("ABC", Is.EqualTo(result.ToString()));
+        Assert.That(q.IsEmpty(), Is.True, "Queue is empty");
+        Assert.That(q.IsFull(), Is.False, "Queue is full");
     }
 
     [Test]
@@ -45,9 +45,9 @@ public static class ArrayBasedQueueTests
         }
 
         // Assert
-        Assert.AreEqual(1, peeked);
-        Assert.IsFalse(q.IsEmpty(), "Queue is empty");
-        Assert.IsTrue(q.IsFull(), "Queue is full");
+        Assert.That(1, Is.EqualTo(peeked));
+        Assert.That(q.IsEmpty(), Is.False, "Queue is empty");
+        Assert.That(q.IsFull(), Is.True, "Queue is full");
     }
 
     [Test]
@@ -68,7 +68,7 @@ public static class ArrayBasedQueueTests
         }
 
         // Assert
-        Assert.AreEqual(typeof(InvalidOperationException), exception?.GetType());
+        Assert.That(typeof(InvalidOperationException), Is.EqualTo(exception?.GetType()));
     }
 
     [Test]
@@ -90,7 +90,7 @@ public static class ArrayBasedQueueTests
         }
 
         // Assert
-        Assert.AreEqual(typeof(InvalidOperationException), exception?.GetType());
+        Assert.That(typeof(InvalidOperationException), Is.EqualTo(exception?.GetType()));
     }
 
     [Test]
@@ -111,7 +111,7 @@ public static class ArrayBasedQueueTests
         }
 
         // Assert
-        Assert.AreEqual(typeof(InvalidOperationException), exception?.GetType());
+        Assert.That(typeof(InvalidOperationException), Is.EqualTo(exception?.GetType()));
     }
 
     [Test]
@@ -126,7 +126,7 @@ public static class ArrayBasedQueueTests
         q.Clear();
 
         // Assert
-        Assert.IsTrue(q.IsEmpty(), "Queue is empty");
-        Assert.IsFalse(q.IsFull(), "Queue is full");
+        Assert.That(q.IsEmpty(), Is.True, "Queue is empty");
+        Assert.That(q.IsFull(), Is.False, "Queue is full");
     }
 }

@@ -19,9 +19,9 @@ public static class BitArrayTests
         testObj.Compile(24);
 
         // Assert
-        Assert.IsTrue(testObj[0]);
-        Assert.IsTrue(testObj[1]);
-        Assert.IsFalse(testObj[3]);
+        Assert.That(testObj[0], Is.True);
+        Assert.That(testObj[1], Is.True);
+        Assert.That(testObj[3], Is.False);
     }
 
     [TestCase(19, 3)]
@@ -34,7 +34,7 @@ public static class BitArrayTests
         testObj.Compile(number);
 
         // Assert
-        Assert.AreEqual(expected, testObj.NumberOfOneBits());
+        Assert.That(expected, Is.EqualTo(testObj.NumberOfOneBits()));
     }
 
     [TestCase(26, 2)]
@@ -47,7 +47,7 @@ public static class BitArrayTests
         testObj.Compile(number);
 
         // Assert
-        Assert.AreEqual(expected, testObj.NumberOfZeroBits());
+        Assert.That(expected, Is.EqualTo(testObj.NumberOfZeroBits()));
     }
 
     [TestCase(33, 33)]
@@ -60,7 +60,7 @@ public static class BitArrayTests
         testObj.Compile(number);
 
         // Assert
-        Assert.AreEqual(expected, testObj.ToInt64());
+        Assert.That(expected, Is.EqualTo(testObj.ToInt64()));
     }
 
     [Test]
@@ -97,7 +97,7 @@ public static class BitArrayTests
         testObj.ResetField();
 
         // Assert
-        Assert.AreEqual(0, testObj.ToInt64());
+        Assert.That(0, Is.EqualTo(testObj.ToInt64()));
     }
 
     [TestCase("101001", 63)]
@@ -110,7 +110,7 @@ public static class BitArrayTests
         testObj.SetAll(true);
 
         // Assert
-        Assert.AreEqual(expected, testObj.ToInt64());
+        Assert.That(expected, Is.EqualTo(testObj.ToInt64()));
     }
 
     [Test]
@@ -123,7 +123,7 @@ public static class BitArrayTests
         var testObj2 = (BitArray)testObj1.Clone();
 
         // Assert
-        Assert.IsTrue(testObj1.Equals(testObj2));
+        Assert.That(testObj1.Equals(testObj2), Is.True);
     }
 
     [Test]
@@ -154,8 +154,8 @@ public static class BitArrayTests
         var result = testObj.GetHashCode();
 
         // Assert
-        Assert.NotNull(result);
-        Assert.AreEqual(5, result);
+        Assert.That(result, Is.Not.Null);
+        Assert.That(5, Is.EqualTo(result));
     }
 
     [Test]
@@ -178,8 +178,8 @@ public static class BitArrayTests
             }
         }
 
-        Assert.AreEqual(counterOnes, 5);
-        Assert.AreEqual(counterZeros, 2);
+        Assert.That(counterOnes, Is.EqualTo(5));
+        Assert.That(counterZeros, Is.EqualTo(2));
     }
 
     [Test]
@@ -216,7 +216,7 @@ public static class BitArrayTests
         testObj.Compile(sequence);
 
         // Assert
-        Assert.AreEqual(expectedSequence, testObj.ToString());
+        Assert.That(expectedSequence, Is.EqualTo(testObj.ToString()));
     }
 
     [TestCase("klgml", 5)]
@@ -245,7 +245,7 @@ public static class BitArrayTests
         testObj.Compile((long)number);
 
         // Assert
-        Assert.AreEqual(expected, testObj.ToString());
+        Assert.That(expected, Is.EqualTo(testObj.ToString()));
     }
 
     [TestCase(46, 3)]
@@ -274,7 +274,7 @@ public static class BitArrayTests
         testObj.Compile(number);
 
         // Assert
-        Assert.AreEqual(expected, testObj.ToString());
+        Assert.That(expected, Is.EqualTo(testObj.ToString()));
     }
 
     [TestCase(-8, 5)]
@@ -304,7 +304,7 @@ public static class BitArrayTests
         // Act
 
         // Assert
-        Assert.AreEqual(expected, testObj1.ToInt64());
+        Assert.That(expected, Is.EqualTo(testObj1.ToInt64()));
     }
 
     [TestCase(new[] { true, false, true }, 5)]
@@ -316,7 +316,7 @@ public static class BitArrayTests
         // Act
 
         // Assert
-        Assert.AreEqual(expected, testObj3.ToInt64());
+        Assert.That(expected, Is.EqualTo(testObj3.ToInt64()));
     }
 
     [TestCase("000120")]
@@ -351,7 +351,7 @@ public static class BitArrayTests
         var result = testObj1 & testObj2;
 
         // Assert
-        Assert.AreEqual(expected, result.ToString());
+        Assert.That(expected, Is.EqualTo(result.ToString()));
     }
 
     [TestCase(1, 1, 1, 1, "0")]
@@ -369,7 +369,7 @@ public static class BitArrayTests
         var result = testObj1 ^ testObj2;
 
         // Assert
-        Assert.AreEqual(expected, result.ToString());
+        Assert.That(expected, Is.EqualTo(result.ToString()));
     }
 
     [TestCase(9, 4, 4, 3, "1101")]
@@ -387,7 +387,7 @@ public static class BitArrayTests
         var result = testObj1 | testObj2;
 
         // Assert
-        Assert.AreEqual(expected, result.ToString());
+        Assert.That(expected, Is.EqualTo(result.ToString()));
     }
 
     [TestCase(1, 1, 1, 1, "1")]
@@ -405,7 +405,7 @@ public static class BitArrayTests
         var result = testObj1 & testObj2;
 
         // Assert
-        Assert.AreEqual(expected, result.ToString());
+        Assert.That(expected, Is.EqualTo(result.ToString()));
     }
 
     [TestCase(25, 30, "11111")]
@@ -422,7 +422,7 @@ public static class BitArrayTests
         var result = testObj1 | testObj2;
 
         // Assert
-        Assert.AreEqual(expected, result.ToString());
+        Assert.That(expected, Is.EqualTo(result.ToString()));
     }
 
     [TestCase(16, "01111")]
@@ -436,7 +436,7 @@ public static class BitArrayTests
         testObj = ~testObj;
 
         // Assert
-        Assert.AreEqual(expected, testObj.ToString());
+        Assert.That(expected, Is.EqualTo(testObj.ToString()));
     }
 
     [TestCase(25, 30, 7)]
@@ -453,7 +453,7 @@ public static class BitArrayTests
         var result = testObj1 ^ testObj2;
 
         // Assert
-        Assert.AreEqual(expected, result.ToInt32());
+        Assert.That(expected, Is.EqualTo(result.ToInt32()));
     }
 
     [TestCase(16, "10000000")]
@@ -467,7 +467,7 @@ public static class BitArrayTests
         testObj <<= 3;
 
         // Assert
-        Assert.AreEqual(expected, testObj.ToString());
+        Assert.That(expected, Is.EqualTo(testObj.ToString()));
     }
 
     [TestCase(24, "110")]
@@ -481,7 +481,7 @@ public static class BitArrayTests
         testObj >>= 2;
 
         // Assert
-        Assert.AreEqual(expected, testObj.ToString());
+        Assert.That(expected, Is.EqualTo(testObj.ToString()));
     }
 
     #endregion OPERATOR TESTS
@@ -498,8 +498,8 @@ public static class BitArrayTests
         testObj.Compile(26);
 
         // Assert
-        Assert.IsFalse(testObj.EvenParity());
-        Assert.IsTrue(testObj.OddParity());
+        Assert.That(testObj.EvenParity(), Is.False);
+        Assert.That(testObj.OddParity(), Is.True);
     }
 
     [Test]
@@ -513,8 +513,8 @@ public static class BitArrayTests
         // Act
 
         // Assert
-        Assert.IsTrue(testObj1 == testObj2);
-        Assert.IsTrue(testObj1 != testObj3);
+        Assert.That(testObj1 == testObj2, Is.True);
+        Assert.That(testObj1 != testObj3, Is.True);
     }
 
     [Test]
@@ -527,7 +527,7 @@ public static class BitArrayTests
         // Act
 
         // Assert
-        Assert.False(testObj1 == testObj2);
+        Assert.That(testObj1 == testObj2, Is.False);
     }
 
     #endregion COMPARE TESTS

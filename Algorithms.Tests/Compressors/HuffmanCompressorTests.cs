@@ -25,8 +25,8 @@ public static class HuffmanCompressorTests
         var decompressedText = translator.Translate(compressedText, decompressionKeys);
 
         //Assert
-        Assert.AreEqual(expectedCompressedText, compressedText);
-        Assert.AreEqual(uncompressedText, decompressedText);
+        Assert.That(compressedText, Is.EqualTo(expectedCompressedText));
+        Assert.That(decompressedText, Is.EqualTo(uncompressedText));
     }
 
     [Test]
@@ -45,7 +45,7 @@ public static class HuffmanCompressorTests
         var decompressedText = translator.Translate(compressedText, decompressionKeys);
 
         //Assert
-        Assert.AreEqual(text, decompressedText);
+        Assert.That(decompressedText, Is.EqualTo(text));
     }
 
     [Test]

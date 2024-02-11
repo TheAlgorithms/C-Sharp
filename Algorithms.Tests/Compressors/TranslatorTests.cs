@@ -23,6 +23,6 @@ public static class TranslatorTests
         var translatedText = translator.Translate("Hey man!", dict);
 
         // Assert
-        Assert.AreEqual("Good day sir.", translatedText);
+        Assert.That(translatedText, Is.EqualTo("Good day sir."));
     }
 }

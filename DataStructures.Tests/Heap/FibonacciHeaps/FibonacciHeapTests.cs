@@ -41,22 +41,22 @@ internal static class FibonacciHeapTests
     {
         var heap = BuildTestHeap();
 
-        Assert.AreEqual(1, heap.Peek());
-        Assert.AreEqual(10, heap.Count);
+        Assert.That(heap.Peek(),Is.EqualTo(1));
+        Assert.That(heap.Count, Is.EqualTo(10));
     }
 
     public static void Pop_RemoveElements_HeapStillValid()
     {
         var heap = BuildTestHeap();
 
-        Assert.AreEqual(1, heap.Peek());
-        Assert.AreEqual(10, heap.Count);
+        Assert.That(heap.Peek(), Is.EqualTo(1));
+        Assert.That(heap.Count, Is.EqualTo(10));
 
-        Assert.AreEqual(1, heap.Pop());
-        Assert.AreEqual(9, heap.Count);
+        Assert.That(heap.Pop(), Is.EqualTo(1));
+        Assert.That(heap.Count, Is.EqualTo(9));
 
-        Assert.AreEqual(2, heap.Pop());
-        Assert.AreEqual(8, heap.Count);
+        Assert.That(heap.Pop(), Is.EqualTo(2));
+        Assert.That(heap.Count, Is.EqualTo(8));
     }
 
     [Test]
@@ -85,11 +85,11 @@ internal static class FibonacciHeapTests
         for (var i = 0; i < heapSize - 1; i++)
         {
             var newElement = heap.Pop();
-            Assert.LessOrEqual(element, newElement);
+            Assert.That(element, Is.LessThanOrEqualTo(newElement));
             element = newElement;
         }
 
-        Assert.Zero(heap.Count);
+        Assert.That(heap.Count, Is.Zero);
     }
 
     [Test]
@@ -108,15 +108,15 @@ internal static class FibonacciHeapTests
         var node = heap.Push(11);
         heap.DecreaseKey(node, -1);
 
-        Assert.AreEqual(heap.Pop(), -1);
-        Assert.AreEqual(heap.Pop(), 1);
+        Assert.That(heap.Pop(), Is.EqualTo(-1));
+        Assert.That(heap.Pop(), Is.EqualTo(1));
 
         node = heap.Push(5);
         heap.DecreaseKey(node, 1);
-        Assert.AreEqual(heap.Pop(), 1);
+        Assert.That(heap.Pop(), Is.EqualTo(1));
 
-        Assert.AreEqual(heap.Pop(), 2);
-        Assert.AreEqual(heap.Pop(), 3);
+        Assert.That(heap.Pop(), Is.EqualTo(2));
+        Assert.That(heap.Pop(), Is.EqualTo(3));
     }
 
     [Test]
@@ -140,11 +140,11 @@ internal static class FibonacciHeapTests
 
         for (var i = 0; i < 10; i++)
         {
-            Assert.AreEqual(i, oddHeap.Pop());
+            Assert.That(oddHeap.Pop(), Is.EqualTo(i));
         }
 
-        Assert.Zero(oddHeap.Count);
-        Assert.Zero(evenHeap.Count);
+        Assert.That(oddHeap.Count, Is.Zero);
+        Assert.That(evenHeap.Count, Is.Zero);
     }
 
     [Test]
@@ -156,15 +156,15 @@ internal static class FibonacciHeapTests
         var minNode = otherHeap.Peek();
         var otherCount = otherHeap.Count;
 
-        Assert.Zero(thisHeap.Count);
+        Assert.That(thisHeap.Count, Is.Zero);
 
         thisHeap.Union(otherHeap);
 
-        Assert.Zero(otherHeap.Count);
-        Assert.AreEqual(thisHeap.Peek(), minNode);
+        Assert.That(otherHeap.Count, Is.Zero);
+        Assert.That(minNode, Is.EqualTo(thisHeap.Peek()));
         Assert.Throws<InvalidOperationException>(() => otherHeap.Peek());
 
-        Assert.AreEqual(otherCount, thisHeap.Count);
+        Assert.That(thisHeap.Count, Is.EqualTo(otherCount));
     }
 
     [Test]
@@ -178,8 +178,8 @@ internal static class FibonacciHeapTests
 
         thisHeap.Union(otherHeap);
 
-        Assert.AreEqual(thisHeap.Count, previousCount);
-        Assert.AreEqual(thisHeap.Peek(), previousMin);
+        Assert.That(previousCount, Is.EqualTo(thisHeap.Count));
+        Assert.That(previousMin, Is.EqualTo(thisHeap.Peek()));
     }
 
     [Test]
@@ -220,25 +220,25 @@ internal static class FibonacciHeapTests
         var bigItem = heap.Push(20);
 
         heap.DecreaseKey(item, -1);
-        Assert.AreEqual(heap.Pop(), -1);
+        Assert.That(-1, Is.EqualTo(heap.Pop()));
 
         var currentVal = -1;
         for (var i = 0; i < 10; i++)
         {
             var newVal = heap.Pop();
-            Assert.True(currentVal < newVal);
+            Assert.That(currentVal < newVal, Is.True);
 
             currentVal = newVal;
         }
 
         heap.DecreaseKey(bigItem, -1);
-        Assert.AreEqual(heap.Pop(), -1);
+        Assert.That(-1, Is.EqualTo(heap.Pop()));
 
         currentVal = -1;
         for (var i = 0; i < 9; i++)
         {
             var newVal = heap.Pop();
-            Assert.True(currentVal < newVal);
+            Assert.That(currentVal < newVal, Is.True);
 
             currentVal = newVal;
         }

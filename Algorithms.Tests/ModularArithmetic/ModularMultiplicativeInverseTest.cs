@@ -16,7 +16,7 @@ public static class ModularMultiplicativeInverseTest
         var inverse = ModularMultiplicativeInverse.Compute(a, n);
 
         // Assert
-        Assert.AreEqual(expected, inverse);
+        Assert.That(inverse, Is.EqualTo(expected));
     }
 
     [TestCase(46, 240)]
@@ -43,7 +43,7 @@ public static class ModularMultiplicativeInverseTest
         var inverse = ModularMultiplicativeInverse.Compute(new BigInteger(a), new BigInteger(n));
 
         // Assert
-        Assert.AreEqual(new BigInteger(expected), inverse);
+        Assert.That(inverse, Is.EqualTo(new BigInteger(expected)));
     }
 
     [TestCase(46, 240)]

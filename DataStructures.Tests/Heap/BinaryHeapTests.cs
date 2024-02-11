@@ -28,10 +28,10 @@ internal static class BinaryHeapTests
             revHeap.Push(i);
         }
 
-        Assert.AreEqual(10, revHeap.Count);
-        Assert.AreEqual(1, revHeap.Peek());
-        Assert.AreEqual(1, revHeap.Pop());
-        Assert.AreEqual(2, revHeap.Peek());
+        Assert.That(revHeap.Count, Is.EqualTo(10));
+        Assert.That(revHeap.Peek(), Is.EqualTo(1));
+        Assert.That(revHeap.Pop(), Is.EqualTo(1));
+        Assert.That(revHeap.Peek(), Is.EqualTo(2));
     }
 
     [Test]
@@ -39,24 +39,24 @@ internal static class BinaryHeapTests
     {
         var heap = BuildTestHeap();
 
-        Assert.AreEqual(10, heap.Peek());
-        Assert.AreEqual(10, heap.Count);
+        Assert.That(heap.Peek(), Is.EqualTo(10));
+        Assert.That(heap.Count, Is.EqualTo(10));
     }
 
     public static void Pop_RemoveElements_HeapStillValid()
     {
         var heap = BuildTestHeap();
 
-        Assert.AreEqual(10, heap.Peek());
-        Assert.AreEqual(10, heap.Count);
+        Assert.That(heap.Peek(), Is.EqualTo(10));
+        Assert.That(heap.Count, Is.EqualTo(10));
 
-        Assert.AreEqual(10, heap.Pop());
-        Assert.AreEqual(9, heap.Count);
-        Assert.IsFalse(heap.Contains(10));
+        Assert.That(heap.Pop(), Is.EqualTo(10));
+        Assert.That(heap.Count, Is.EqualTo(9));
+        Assert.That(heap.Contains(10),Is.False);
 
-        Assert.AreEqual(9, heap.Pop());
-        Assert.AreEqual(8, heap.Count);
-        Assert.IsFalse(heap.Contains(9));
+        Assert.That(heap.Pop(), Is.EqualTo(9));
+        Assert.That(heap.Count, Is.EqualTo(8));
+        Assert.That(heap.Contains(9), Is.False);
     }
 
     [Test]
@@ -72,7 +72,7 @@ internal static class BinaryHeapTests
     {
         var heap = BuildTestHeap();
 
-        Assert.AreEqual(10, heap.Peek());
+        Assert.That(heap.Peek(), Is.EqualTo(10));
     }
 
     [Test]
@@ -88,7 +88,7 @@ internal static class BinaryHeapTests
     {
         var heap = new BinaryHeap<int>();
 
-        Assert.AreEqual(10, heap.PushPop(10));
+        Assert.That(heap.PushPop(10), Is.EqualTo(10));
     }
 
     [Test]
@@ -96,8 +96,8 @@ internal static class BinaryHeapTests
     {
         var heap = BuildTestHeap();
 
-        Assert.AreEqual(20, heap.PushPop(20));
-        Assert.AreEqual(10, heap.PushPop(-10));
+        Assert.That(heap.PushPop(20), Is.EqualTo(20));
+        Assert.That(heap.PushPop(-10), Is.EqualTo(10));
     }
 
     [Test]
@@ -105,10 +105,10 @@ internal static class BinaryHeapTests
     {
         var heap = BuildTestHeap();
 
-        Assert.IsTrue(heap.Contains(1));
-        Assert.IsTrue(heap.Contains(5));
-        Assert.IsTrue(heap.Contains(10));
-        Assert.IsFalse(heap.Contains(11));
+        Assert.That(heap.Contains(1), Is.True);
+        Assert.That(heap.Contains(5), Is.True);
+        Assert.That(heap.Contains(10), Is.True);
+        Assert.That(heap.Contains(11), Is.False);
     }
 
     [Test]
@@ -116,10 +116,10 @@ internal static class BinaryHeapTests
     {
         var heap = new BinaryHeap<int>();
 
-        Assert.IsFalse(heap.Contains(1));
-        Assert.IsFalse(heap.Contains(5));
-        Assert.IsFalse(heap.Contains(10));
-        Assert.IsFalse(heap.Contains(11));
+        Assert.That(heap.Contains(1), Is.False);
+        Assert.That(heap.Contains(5), Is.False);
+        Assert.That(heap.Contains(10), Is.False);
+        Assert.That(heap.Contains(11), Is.False);
     }
 
     [Test]
@@ -128,19 +128,19 @@ internal static class BinaryHeapTests
         var heap = BuildTestHeap();
 
         heap.Remove(2);
-        Assert.IsFalse(heap.Contains(2));
-        Assert.AreEqual(10, heap.Peek());
-        Assert.AreEqual(9, heap.Count);
+        Assert.That(heap.Contains(2), Is.False);
+        Assert.That(heap.Peek(), Is.EqualTo(10));
+        Assert.That(heap.Count, Is.EqualTo(9));
 
         heap.Remove(8);
-        Assert.IsFalse(heap.Contains(8));
-        Assert.AreEqual(10, heap.Peek());
-        Assert.AreEqual(8, heap.Count);
+        Assert.That(heap.Contains(8), Is.False);
+        Assert.That(heap.Peek(), Is.EqualTo(10));
+        Assert.That(heap.Count, Is.EqualTo(8));
 
         heap.Remove(5);
-        Assert.IsFalse(heap.Contains(5));
-        Assert.AreEqual(10, heap.Peek());
-        Assert.AreEqual(7, heap.Count);
+        Assert.That(heap.Contains(5), Is.False);
+        Assert.That(heap.Peek(), Is.EqualTo(10));
+        Assert.That(heap.Count, Is.EqualTo(7));
 
         Assert.Throws<ArgumentException>(() => heap.Remove(11));
     }

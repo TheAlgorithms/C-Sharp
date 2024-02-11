@@ -26,7 +26,7 @@ public static class QueueBasedStackTests
 
         //Assert
         Assert.That("CBA", Is.EqualTo(result.ToString()));
-        Assert.IsTrue(s.IsEmpty(), "Stack is Empty");
+        Assert.That(s.IsEmpty(), Is.True, "Stack is Empty");
     }
     [Test]
     public static void PeekWorksCorrectly()
@@ -47,7 +47,7 @@ public static class QueueBasedStackTests
 
         //Assert
         Assert.That(3, Is.EqualTo(peeked));
-        Assert.IsFalse(s.IsEmpty(), "Stack is Empty");
+        Assert.That(s.IsEmpty(), Is.False, "Stack is Empty");
     }
     [Test]
     public static void PopEmptyStackThrowsInvalidOperationException()
@@ -101,7 +101,7 @@ public static class QueueBasedStackTests
         s.Clear();
 
         // Assert
-        Assert.IsTrue(s.IsEmpty(), "Queue is empty");
+        Assert.That(s.IsEmpty(), Is.True, "Queue is empty");
 
     }
     [Test]

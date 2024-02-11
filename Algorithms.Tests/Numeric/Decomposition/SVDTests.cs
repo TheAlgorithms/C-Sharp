@@ -45,7 +45,7 @@ public class SvdTests
         {
             for (var j = 0; j < matrix1.GetLength(1); j++)
             {
-                Assert.AreEqual(matrix1[i, j], matrix2[i, j], epsilon, $"At index ({i}, {j})");
+                Assert.That(matrix1[i, j], Is.EqualTo(matrix2[i, j]).Within(epsilon), $"At index ({i}, {j})");
             }
         }
     }
@@ -113,12 +113,12 @@ public class SvdTests
             if (s[i] > epsilon)
             {
                 // if the singular value is non-zero, then the basis vector in v should be a unit vector
-                Assert.AreEqual(1, extracted.Magnitude(), epsilon);
+                Assert.That(extracted.Magnitude(), Is.EqualTo(1).Within(epsilon));
             }
             else
             {
                 // if the singular value is zero, then the basis vector in v should be zeroed out
-                Assert.AreEqual(0, extracted.Magnitude(), epsilon);
+                Assert.That(extracted.Magnitude(), Is.EqualTo(0).Within(epsilon));
             }
         }
 

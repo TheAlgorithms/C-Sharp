@@ -13,7 +13,7 @@ public class HammingDistanceTests
     public void Calculate_ReturnsCorrectHammingDistance(string s1, string s2, int expectedDistance)
     {
         var result = HammingDistance.Calculate(s1, s2);
-        Assert.AreEqual(expectedDistance, result);
+        Assert.That(result, Is.EqualTo(expectedDistance));
     }
 
     [Test]

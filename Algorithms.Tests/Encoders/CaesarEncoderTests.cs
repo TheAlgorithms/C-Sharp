@@ -19,6 +19,6 @@ public static class CaesarEncoderTests
         var decoded = encoder.Decode(encoded, key);
 
         // Assert
-        Assert.AreEqual(message, decoded);
+        Assert.That(decoded, Is.EqualTo(message));
     }
 }

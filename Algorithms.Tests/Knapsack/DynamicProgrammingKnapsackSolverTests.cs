@@ -28,7 +28,7 @@ public static class DynamicProgrammingKnapsackSolverTests
         var actual = solver.Solve(items, capacity, weightSelector, valueSelector);
 
         //Assert
-        Assert.AreEqual(expected.OrderBy(x => x), actual.OrderBy(x => x));
+        Assert.That(actual.OrderBy(x => x), Is.EqualTo(expected.OrderBy(x => x)));
     }
 
     [Test]
@@ -53,7 +53,7 @@ public static class DynamicProgrammingKnapsackSolverTests
         var actual = solver.Solve(items, capacity, weightSelector, valueSelector);
 
         //Assert
-        Assert.AreEqual(expected.OrderBy(x => x), actual.OrderBy(x => x));
+        Assert.That(actual.OrderBy(x => x), Is.EqualTo(expected.OrderBy(x => x)));
     }
 
     [Test]
@@ -80,7 +80,7 @@ public static class DynamicProgrammingKnapsackSolverTests
         var actual = solver.Solve(items, capacity * 10, weightSelector, valueSelector);
 
         //Assert
-        Assert.AreEqual(expected.OrderBy(x => x), actual.OrderBy(x => x));
+        Assert.That(actual.OrderBy(x => x), Is.EqualTo(expected.OrderBy(x => x)));
     }
 
 
@@ -98,6 +98,6 @@ public static class DynamicProgrammingKnapsackSolverTests
         var result = solver.Solve(items, length, _ => 1, _ => 1);
 
         //Assert
-        Assert.AreEqual(expectedResult, result);
+        Assert.That(result, Is.EqualTo(expectedResult));
     }
 }

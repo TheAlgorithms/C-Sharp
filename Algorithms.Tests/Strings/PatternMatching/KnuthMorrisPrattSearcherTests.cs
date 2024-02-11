@@ -19,7 +19,7 @@ public static class KnuthMorrisPrattSearcherTests
         var actualItem = searcher.FindIndexes(str, pat);
 
         // Assert
-        CollectionAssert.AreEqual(expectedItem, actualItem);
+        Assert.That(actualItem, Is.EqualTo(expectedItem));
     }
 
     [Test]
@@ -34,7 +34,7 @@ public static class KnuthMorrisPrattSearcherTests
         var indexes = searcher.FindIndexes(str, pat);
 
         // Assert
-        Assert.IsEmpty(indexes);
+        Assert.That(indexes, Is.Empty);
     }
 
     [Test]
@@ -49,7 +49,7 @@ public static class KnuthMorrisPrattSearcherTests
         var actualItem = searcher.FindLongestPrefixSuffixValues(s);
 
         // Assert
-        CollectionAssert.AreEqual(expectedItem, actualItem);
+        Assert.That(actualItem, Is.EqualTo(expectedItem));
     }
 
     [Test]
@@ -64,7 +64,7 @@ public static class KnuthMorrisPrattSearcherTests
         var actualItem = searcher.FindLongestPrefixSuffixValues(s);
 
         // Assert
-        CollectionAssert.AreEqual(expectedItem, actualItem);
+        Assert.That(actualItem, Is.EqualTo(expectedItem));
     }
 
     [Test]
@@ -79,6 +79,6 @@ public static class KnuthMorrisPrattSearcherTests
         var actualItem = searcher.FindLongestPrefixSuffixValues(s);
 
         // Assert
-        CollectionAssert.AreEqual(expectedItem, actualItem);
+        Assert.That(actualItem, Is.EqualTo(expectedItem));
     }
 }

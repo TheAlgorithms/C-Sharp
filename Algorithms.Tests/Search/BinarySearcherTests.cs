@@ -20,7 +20,7 @@ public static class BinarySearcherTests
         var actualIndex = searcher.FindIndex(arrayToSearch, arrayToSearch[selectedIndex]);
 
         // Assert
-        Assert.AreEqual(arrayToSearch[selectedIndex], arrayToSearch[actualIndex]);
+        Assert.That(arrayToSearch[actualIndex], Is.EqualTo(arrayToSearch[selectedIndex]));
     }
 
     [Test]
@@ -40,7 +40,7 @@ public static class BinarySearcherTests
         var actualIndex = searcher.FindIndex(arrayToSearch, missingItem);
 
         // Assert
-        Assert.AreEqual(-1, actualIndex);
+        Assert.That(actualIndex, Is.EqualTo(-1));
     }
 
     [Test]
@@ -54,6 +54,6 @@ public static class BinarySearcherTests
         var actualIndex = searcher.FindIndex(arrayToSearch, itemToSearch);
 
         // Assert
-        Assert.AreEqual(-1, actualIndex);
+        Assert.That(actualIndex, Is.EqualTo(-1));
     }
 }

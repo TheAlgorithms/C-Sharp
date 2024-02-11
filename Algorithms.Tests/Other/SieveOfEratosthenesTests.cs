@@ -669,15 +669,15 @@ public static class SieveOfEratosthenesTests
 
     [Test]
     public static void First10_000PrimesCorrect() => 
-        Assert.AreEqual(First10000PrimeNumbers, new SieveOfEratosthenes(104729).GetPrimes());
+        Assert.That(new SieveOfEratosthenes(104729).GetPrimes(), Is.EqualTo(First10000PrimeNumbers));
 
     [Test]
-    public static void TestMaxNumber() => Assert.AreEqual(new SieveOfEratosthenes(69).MaximumNumber, 69);
+    public static void TestMaxNumber() => Assert.That(new SieveOfEratosthenes(69).MaximumNumber, Is.EqualTo(69));
 
     [TestCase(13, true)]
     [TestCase(10, false)]
     public static void TestIsPrime(int input, bool expected)
     {
-        Assert.AreEqual(new SieveOfEratosthenes(100).IsPrime(input), expected);
+        Assert.That(expected, Is.EqualTo(new SieveOfEratosthenes(100).IsPrime(input)));
     }
 }

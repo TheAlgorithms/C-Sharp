@@ -1,7 +1,6 @@
 using Algorithms.Graph;
-using NUnit.Framework;
 using DataStructures.BinarySearchTree;
-using System;
+using NUnit.Framework;
 
 namespace Algorithms.Tests.Graph;
 
@@ -23,7 +22,7 @@ public static class BreadthFirstTreeTraversalTests
         int[] levelOrder = BreadthFirstTreeTraversal<int>.LevelOrderTraversal(testTree);
 
         // Assert
-        Assert.AreEqual(levelOrder, correctPath);
+        Assert.That(correctPath, Is.EqualTo(levelOrder));
     }
 
     [Test]
@@ -36,11 +35,11 @@ public static class BreadthFirstTreeTraversalTests
         int[] levelOrder = BreadthFirstTreeTraversal<int>.LevelOrderTraversal(testTree);
 
         // Assert
-        Assert.IsEmpty(levelOrder);
+        Assert.That(levelOrder, Is.Empty);
     }
 
-    [TestCase(new [] {7, 9, 5})]
-    [TestCase(new [] { 7, 13, 11, 15, 14, 4, 5, 16, 2 })]
+    [TestCase(new[] { 7, 9, 5 })]
+    [TestCase(new[] { 7, 13, 11, 15, 14, 4, 5, 16, 2 })]
     public static void IncorrectLevelOrderTraversal(int[] insertion)
     {
         // Arrange
@@ -54,7 +53,7 @@ public static class BreadthFirstTreeTraversalTests
         int[] levelOrder = BreadthFirstTreeTraversal<int>.LevelOrderTraversal(testTree);
 
         // Assert
-        Assert.AreNotEqual(levelOrder, insertion);
+        Assert.That(insertion, Is.Not.EqualTo(levelOrder));
     }
 
     [Test]
@@ -72,7 +71,7 @@ public static class BreadthFirstTreeTraversalTests
         int deepest = BreadthFirstTreeTraversal<int>.DeepestNode(testTree);
 
         // Assert
-        Assert.AreEqual(12, deepest);
+        Assert.That(deepest, Is.EqualTo(12));
     }
 
     [Test]
@@ -85,7 +84,7 @@ public static class BreadthFirstTreeTraversalTests
         int? deepest = BreadthFirstTreeTraversal<int?>.DeepestNode(testTree);
 
         // Assert
-        Assert.IsNull(deepest);
+        Assert.That(deepest, Is.Null);
     }
 }
 

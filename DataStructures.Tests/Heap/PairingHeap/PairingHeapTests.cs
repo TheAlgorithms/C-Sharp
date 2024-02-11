@@ -74,10 +74,10 @@ internal class PairingHeapTests
         for (var i = 0; i <= nodeCount; i++)
         {
             min = minHeap.Extract();
-            Assert.AreEqual(min, i - 1);
+            Assert.That(min, Is.EqualTo(i - 1));
         }
 
-        Assert.AreEqual(minHeap.Count, minHeap.Count);
+        Assert.That(minHeap.Count, Is.EqualTo(minHeap.Count));
 
         var rnd = new Random();
         var testSeries = Enumerable.Range(0, nodeCount - 1).OrderBy(_ => rnd.Next()).ToList();
@@ -99,10 +99,10 @@ internal class PairingHeapTests
         for (var i = 0; i < nodeCount - 2; i++)
         {
             min = minHeap.Extract();
-            Assert.AreEqual(testSeries[i], min);
+            Assert.That(testSeries[i], Is.EqualTo(min));
         }
 
-        Assert.AreEqual(minHeap.Count, minHeap.Count);
+        Assert.That(minHeap.Count, Is.EqualTo(minHeap.Count));
     }
 
     [Test]
@@ -120,13 +120,13 @@ internal class PairingHeapTests
             maxHeap.UpdateKey(i, i + 1);
         }
 
-        Assert.AreEqual(maxHeap.Count, maxHeap.Count);
+        Assert.That(maxHeap.Count, Is.EqualTo(maxHeap.Count));
 
         var max = 0;
         for (var i = nodeCount; i >= 0; i--)
         {
             max = maxHeap.Extract();
-            Assert.AreEqual(max, i + 1);
+            Assert.That(max, Is.EqualTo(i + 1));
         }
 
         var rnd = new Random();
@@ -148,9 +148,9 @@ internal class PairingHeapTests
         for (var i = 0; i < nodeCount - 2; i++)
         {
             max = maxHeap.Extract();
-            Assert.AreEqual(testSeries[i], max);
+            Assert.That(testSeries[i], Is.EqualTo(max));
         }
 
-        Assert.AreEqual(maxHeap.Count, maxHeap.Count);
+        Assert.That(maxHeap.Count, Is.EqualTo(maxHeap.Count));
     }
 }

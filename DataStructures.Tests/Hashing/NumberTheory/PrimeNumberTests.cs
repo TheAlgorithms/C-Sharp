@@ -93,17 +93,17 @@ public static class PrimeNumberTests
         new object[] { 10, 1, true, 7 }
     };
 
-    [TestCaseSource("IsPrimeSource")]
+    [TestCaseSource(nameof(IsPrimeSource))]
     public static void IsPrimeTest(int number, bool expected)
     {
         var actual = PrimeNumber.IsPrime(number);
-        Assert.AreEqual(expected, actual);
+        Assert.That(expected, Is.EqualTo(actual));
     }
 
-    [TestCaseSource("NextPrimeSource")]
+    [TestCaseSource(nameof(NextPrimeSource))]
     public static void NextPrimeTest(int number, int factor, bool desc, int expected)
     {
         var actual = PrimeNumber.NextPrime(number, factor, desc);
-        Assert.AreEqual(expected, actual);
+        Assert.That(expected, Is.EqualTo(actual));
     }
 }

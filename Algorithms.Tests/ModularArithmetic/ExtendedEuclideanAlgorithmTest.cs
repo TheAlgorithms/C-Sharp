@@ -23,9 +23,9 @@ public static class ExtendedEuclideanAlgorithmTest
         var eeaResult = ExtendedEuclideanAlgorithm.Compute(a, b);
 
         // Assert
-        Assert.AreEqual(expectedGCD, eeaResult.gcd);
-        Assert.AreEqual(expectedBezoutOfA, eeaResult.bezoutA);
-        Assert.AreEqual(expectedBezoutOfB, eeaResult.bezoutB);
+        Assert.That(eeaResult.gcd, Is.EqualTo(expectedGCD));
+        Assert.That(eeaResult.bezoutA, Is.EqualTo(expectedBezoutOfA));
+        Assert.That(eeaResult.bezoutB, Is.EqualTo(expectedBezoutOfB));
     }
 
     [TestCase(240, 46, 2, -9, 47)]
@@ -45,8 +45,8 @@ public static class ExtendedEuclideanAlgorithmTest
         var eeaResult = ExtendedEuclideanAlgorithm.Compute(new BigInteger(a), new BigInteger(b));
 
         // Assert
-        Assert.AreEqual(new BigInteger(expectedGCD), eeaResult.gcd);
-        Assert.AreEqual(new BigInteger(expectedBezoutOfA), eeaResult.bezoutA);
-        Assert.AreEqual(new BigInteger(expectedBezoutOfB), eeaResult.bezoutB);
+        Assert.That(eeaResult.gcd, Is.EqualTo(new BigInteger(expectedGCD)));
+        Assert.That(eeaResult.bezoutA, Is.EqualTo(new BigInteger(expectedBezoutOfA)));
+        Assert.That(eeaResult.bezoutB, Is.EqualTo(new BigInteger(expectedBezoutOfB)));
     }
 }

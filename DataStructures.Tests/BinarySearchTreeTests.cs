@@ -16,8 +16,9 @@ public static class BinarySearchTreeTests
         var elems = new[] { "z", "yy", "vvv", "bbbb", "fffff", "pppppp" };
         tree.AddRange(elems);
 
-        Assert.IsNotNull(tree.Search("vvv"));
-        Assert.AreEqual("bbbb", tree.Search("vvv")!.Right!.Key);
+        Assert.That(tree.Search("vvv"), Is.Not.Null);
+        Assert.That(tree.Search("vvv")!.Right, Is.Not.Null);
+        Assert.That(tree.Search("vvv")!.Right!.Key, Is.EqualTo("bbbb"));
     }
 
     [Test]
@@ -26,34 +27,34 @@ public static class BinarySearchTreeTests
         var tree = new BinarySearchTree<int>();
 
         tree.Add(5);
-        Assert.AreEqual(1, tree.Count);
+        Assert.That(tree.Count, Is.EqualTo(1));
 
         tree.Add(3);
-        Assert.AreEqual(2, tree.Count);
+        Assert.That(tree.Count, Is.EqualTo(2));
 
         tree.Add(4);
-        Assert.AreEqual(3, tree.Count);
+        Assert.That(tree.Count, Is.EqualTo(3));
 
         tree.Add(2);
-        Assert.AreEqual(4, tree.Count);
+        Assert.That(tree.Count, Is.EqualTo(4));
 
         var rootNode = tree.Search(5);
-        Assert.AreEqual(5, rootNode!.Key);
-        Assert.AreEqual(3, rootNode!.Left!.Key);
-        Assert.IsNull(rootNode!.Right);
+        Assert.That(rootNode!.Key, Is.EqualTo(5));
+        Assert.That(rootNode!.Left!.Key, Is.EqualTo(3));
+        Assert.That(rootNode!.Right, Is.Null);
 
         var threeNode = tree.Search(3);
-        Assert.AreEqual(3, threeNode!.Key);
-        Assert.AreEqual(2, threeNode!.Left!.Key);
-        Assert.AreEqual(4, threeNode!.Right!.Key);
+        Assert.That(threeNode!.Key, Is.EqualTo(3));
+        Assert.That(threeNode!.Left!.Key, Is.EqualTo(2));
+        Assert.That(threeNode!.Right!.Key, Is.EqualTo(4));
 
         var twoNode = tree.Search(2);
-        Assert.IsNull(twoNode!.Left);
-        Assert.IsNull(twoNode!.Right);
+        Assert.That(twoNode!.Left, Is.Null);
+        Assert.That(twoNode!.Right, Is.Null);
 
         var fourNode = tree.Search(4);
-        Assert.IsNull(fourNode!.Left);
-        Assert.IsNull(fourNode!.Right);
+        Assert.That(fourNode!.Left, Is.Null);
+        Assert.That(fourNode!.Right, Is.Null);
     }
 
     [Test]
@@ -72,22 +73,22 @@ public static class BinarySearchTreeTests
         tree.AddRange(new List<int> { 5, 3, 4, 2 });
 
         var rootNode = tree.Search(5);
-        Assert.AreEqual(5, rootNode!.Key);
-        Assert.AreEqual(3, rootNode!.Left!.Key);
-        Assert.IsNull(rootNode!.Right);
+        Assert.That(rootNode!.Key, Is.EqualTo(5));
+        Assert.That(rootNode!.Left!.Key, Is.EqualTo(3));
+        Assert.That(rootNode!.Right, Is.Null);
 
         var threeNode = tree.Search(3);
-        Assert.AreEqual(3, threeNode!.Key);
-        Assert.AreEqual(2, threeNode!.Left!.Key);
-        Assert.AreEqual(4, threeNode!.Right!.Key);
+        Assert.That(threeNode!.Key, Is.EqualTo(3));
+        Assert.That(threeNode!.Left!.Key, Is.EqualTo(2));
+        Assert.That(threeNode!.Right!.Key, Is.EqualTo(4));
 
         var twoNode = tree.Search(2);
-        Assert.IsNull(twoNode!.Left);
-        Assert.IsNull(twoNode!.Right);
+        Assert.That(twoNode!.Left, Is.Null);
+        Assert.That(twoNode!.Right, Is.Null);
 
         var fourNode = tree.Search(4);
-        Assert.IsNull(fourNode!.Left);
-        Assert.IsNull(fourNode!.Right);
+        Assert.That(fourNode!.Left, Is.Null);
+        Assert.That(fourNode!.Right, Is.Null);
     }
 
     [Test]
@@ -96,13 +97,13 @@ public static class BinarySearchTreeTests
         var tree = new BinarySearchTree<int>();
         tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
-        Assert.AreEqual(2, tree.Search(2)!.Key);
-        Assert.AreEqual(3, tree.Search(3)!.Key);
-        Assert.AreEqual(4, tree.Search(4)!.Key);
-        Assert.AreEqual(5, tree.Search(5)!.Key);
-        Assert.AreEqual(6, tree.Search(6)!.Key);
-        Assert.AreEqual(7, tree.Search(7)!.Key);
-        Assert.AreEqual(8, tree.Search(8)!.Key);
+        Assert.That(tree.Search(2)!.Key, Is.EqualTo(2));
+        Assert.That(tree.Search(3)!.Key, Is.EqualTo(3));
+        Assert.That(tree.Search(4)!.Key, Is.EqualTo(4));
+        Assert.That(tree.Search(5)!.Key, Is.EqualTo(5));
+        Assert.That(tree.Search(6)!.Key, Is.EqualTo(6));
+        Assert.That(tree.Search(7)!.Key, Is.EqualTo(7));
+        Assert.That(tree.Search(8)!.Key, Is.EqualTo(8));
     }
 
     [Test]
@@ -111,13 +112,13 @@ public static class BinarySearchTreeTests
         var tree = new BinarySearchTree<int>();
         tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
-        Assert.IsTrue(tree.Contains(2));
-        Assert.IsTrue(tree.Contains(3));
-        Assert.IsTrue(tree.Contains(4));
-        Assert.IsTrue(tree.Contains(5));
-        Assert.IsTrue(tree.Contains(6));
-        Assert.IsTrue(tree.Contains(7));
-        Assert.IsTrue(tree.Contains(8));
+        Assert.That(tree.Contains(2), Is.True);
+        Assert.That(tree.Contains(3), Is.True);
+        Assert.That(tree.Contains(4), Is.True);
+        Assert.That(tree.Contains(5), Is.True);
+        Assert.That(tree.Contains(6), Is.True);
+        Assert.That(tree.Contains(7), Is.True);
+        Assert.That(tree.Contains(8), Is.True);
     }
 
     [Test]
@@ -127,18 +128,18 @@ public static class BinarySearchTreeTests
         tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
         var twoRemoveResult = tree.Remove(2);
-        Assert.IsTrue(twoRemoveResult);
-        Assert.IsNull(tree.Search(2));
-        Assert.IsNull(tree.Search(3)!.Left);
-        Assert.IsNotNull(tree.Search(3)!.Right);
-        Assert.AreEqual(6, tree.Count);
+        Assert.That(twoRemoveResult, Is.True);
+        Assert.That(tree.Search(2), Is.Null);
+        Assert.That(tree.Search(3)!.Left, Is.Null);
+        Assert.That(tree.Search(3)!.Right, Is.Not.Null);
+        Assert.That(tree.Count, Is.EqualTo(6));
 
         var fourRemoveResult = tree.Remove(4);
-        Assert.IsTrue(fourRemoveResult);
-        Assert.IsNull(tree.Search(4));
-        Assert.IsNull(tree.Search(3)!.Left);
-        Assert.IsNull(tree.Search(3)!.Right);
-        Assert.AreEqual(5, tree.Count);
+        Assert.That(fourRemoveResult, Is.True);
+        Assert.That(tree.Search(4), Is.Null);
+        Assert.That(tree.Search(3)!.Left, Is.Null);
+        Assert.That(tree.Search(3)!.Right, Is.Null);
+        Assert.That(tree.Count, Is.EqualTo(5));
     }
 
     [Test]
@@ -149,19 +150,19 @@ public static class BinarySearchTreeTests
 
         tree.Remove(4);
         var threeRemoveResult = tree.Remove(3);
-        Assert.IsTrue(threeRemoveResult);
-        Assert.IsNull(tree.Search(3));
-        Assert.IsNull(tree.Search(2)!.Left);
-        Assert.IsNull(tree.Search(2)!.Right);
-        Assert.AreEqual(5, tree.Count);
+        Assert.That(threeRemoveResult, Is.True);
+        Assert.That(tree.Search(3), Is.Null);
+        Assert.That(tree.Search(2)!.Left, Is.Null);
+        Assert.That(tree.Search(2)!.Right, Is.Null);
+        Assert.That(tree.Count, Is.EqualTo(5));
 
         tree.Remove(6);
         var sevenRemoveResult = tree.Remove(7);
-        Assert.IsTrue(sevenRemoveResult);
-        Assert.IsNull(tree.Search(7));
-        Assert.IsNull(tree.Search(8)!.Left);
-        Assert.IsNull(tree.Search(8)!.Right);
-        Assert.AreEqual(3, tree.Count);
+        Assert.That(sevenRemoveResult, Is.True);
+        Assert.That(tree.Search(7), Is.Null);
+        Assert.That(tree.Search(8)!.Left, Is.Null);
+        Assert.That(tree.Search(8)!.Right, Is.Null);
+        Assert.That(tree.Count, Is.EqualTo(3));
     }
 
     [Test]
@@ -171,11 +172,11 @@ public static class BinarySearchTreeTests
         tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
         var sevenRemoveResult = tree.Remove(7);
-        Assert.IsTrue(sevenRemoveResult);
-        Assert.IsNull(tree.Search(7));
-        Assert.IsNull(tree.Search(6)!.Left);
-        Assert.IsNotNull(tree.Search(6)!.Right);
-        Assert.AreEqual(6, tree.Count);
+        Assert.That(sevenRemoveResult, Is.True);
+        Assert.That(tree.Search(7), Is.Null);
+        Assert.That(tree.Search(6)!.Left, Is.Null);
+        Assert.That(tree.Search(6)!.Right, Is.Not.Null);
+        Assert.That(tree.Count, Is.EqualTo(6));
     }
 
     [Test]
@@ -184,16 +185,16 @@ public static class BinarySearchTreeTests
         var tree = new BinarySearchTree<int>();
         tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
-        Assert.IsFalse(tree.Remove(999));
-        Assert.AreEqual(7, tree.Count);
+        Assert.That(tree.Remove(999), Is.False);
+        Assert.That(tree.Count, Is.EqualTo(7));
     }
 
     [Test]
     public static void Remove_EmptyTree_ReturnsFalse()
     {
         var tree = new BinarySearchTree<int>();
-        Assert.IsFalse(tree.Remove(8));
-        Assert.AreEqual(0, tree.Count);
+        Assert.That(tree.Remove(8), Is.False);
+        Assert.That(tree.Count, Is.EqualTo(0));
     }
 
     [Test]
@@ -203,17 +204,17 @@ public static class BinarySearchTreeTests
         tree.Add(5);
         tree.Remove(5);
 
-        Assert.AreEqual(0, tree.Count);
-        Assert.IsNull(tree.Search(5));
+        Assert.That(tree.Count, Is.EqualTo(0));
+        Assert.That(tree.Search(5), Is.Null);
 
         tree.AddRange(new List<int> { 5, 4, 6 });
         tree.Remove(5);
 
-        Assert.AreEqual(2, tree.Count);
-        Assert.IsNull(tree.Search(5));
-        Assert.IsNotNull(tree.Search(4));
-        Assert.IsNotNull(tree.Search(6));
-        Assert.AreEqual(6, tree.Search(4)!.Right!.Key);
+        Assert.That(tree.Count, Is.EqualTo(2));
+        Assert.That(tree.Search(5), Is.Null);
+        Assert.That(tree.Search(4), Is.Not.Null);
+        Assert.That(tree.Search(6), Is.Not.Null);
+        Assert.That(tree.Search(4)!.Right!.Key, Is.EqualTo(6));
     }
 
     [Test]
@@ -222,14 +223,14 @@ public static class BinarySearchTreeTests
         var tree = new BinarySearchTree<int>();
         tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
-        Assert.AreEqual(8, tree.GetMax()!.Key);
+        Assert.That(tree.GetMax()!.Key, Is.EqualTo(8));
     }
 
     [Test]
     public static void GetMax_EmptyTree_ReturnsDefaultValue()
     {
         var tree = new BinarySearchTree<int>();
-        Assert.IsNull(tree.GetMax());
+        Assert.That(tree.GetMax(), Is.Null);
     }
 
     [Test]
@@ -238,14 +239,14 @@ public static class BinarySearchTreeTests
         var tree = new BinarySearchTree<int>();
         tree.AddRange(new List<int> { 5, 3, 4, 2, 7, 6, 8 });
 
-        Assert.AreEqual(2, tree.GetMin()!.Key);
+        Assert.That(tree.GetMin()!.Key, Is.EqualTo(2));
     }
 
     [Test]
     public static void GetMin_EmptyTree_ReturnsDefaultValue()
     {
         var tree = new BinarySearchTree<int>();
-        Assert.IsNull(tree.GetMin());
+        Assert.That(tree.GetMin(), Is.Null);
     }
 
     [Test]
@@ -256,7 +257,7 @@ public static class BinarySearchTreeTests
 
         var keys = tree.GetKeysInOrder();
         var expected = new List<int> { 2, 3, 4, 5, 6, 7, 8 };
-        Assert.IsTrue(keys.SequenceEqual(expected));
+        Assert.That(keys.SequenceEqual(expected), Is.True);
     }
 
     [Test]
@@ -267,7 +268,7 @@ public static class BinarySearchTreeTests
 
         var keys = tree.GetKeysPreOrder();
         var expected = new List<int> { 5, 3, 2, 4, 7, 6, 8 };
-        Assert.IsTrue(keys.SequenceEqual(expected));
+        Assert.That(keys.SequenceEqual(expected), Is.True);
     }
 
     [Test]
@@ -278,6 +279,6 @@ public static class BinarySearchTreeTests
 
         var keys = tree.GetKeysPostOrder();
         var expected = new List<int> { 2, 4, 3, 6, 8, 7, 5 };
-        Assert.IsTrue(keys.SequenceEqual(expected));
+        Assert.That(keys.SequenceEqual(expected), Is.True);
     }
 }

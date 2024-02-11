@@ -20,6 +20,6 @@ public static class NaiveKnapsackSolverTests
         var result = solver.Solve(items, length, _ => 1, _ => 1);
 
         //Assert
-        Assert.AreEqual(expectedResult, result);
+        Assert.That(result, Is.EqualTo(expectedResult));
     }
 }
