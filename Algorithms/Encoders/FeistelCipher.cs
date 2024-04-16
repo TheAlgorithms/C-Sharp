@@ -36,11 +36,9 @@ public class FeistelCipher : IEncoder<uint>
         {
             uint temp = 0;
 
-            // the BitConverter Method provides More readability
-            // splitting the block into 2 32-bit left and right blocks
-            byte[] blockBytes = BitConverter.GetBytes(block);
-            uint rightSubblock = BitConverter.ToUInt32(blockBytes, 0);
-            uint leftSubblock = BitConverter.ToUInt32(blockBytes, 4);
+            // decompose a block to two subblocks 0x0123456789ABCDEF => 0x01234567 & 0x89ABCDEF
+            uint rightSubblock = (uint)(block & 0x00000000FFFFFFFF);
+            uint leftSubblock = (uint)(block >> 32);
 
             uint roundKey;
 
@@ -85,11 +83,9 @@ public class FeistelCipher : IEncoder<uint>
         {
             uint temp = 0;
 
-            // the BitConverter Method provides More readability
-            // splitting the block into 2 32-bit left and right blocks
-            byte[] blockBytes = BitConverter.GetBytes(block);
-            uint rightSubblock = BitConverter.ToUInt32(blockBytes, 0);
-            uint leftSubblock = BitConverter.ToUInt32(blockBytes, 4);
+            // decompose a block to two subblocks 0x0123456789ABCDEF => 0x01234567 & 0x89ABCDEF
+            uint rightSubblock = (uint)(block & 0x00000000FFFFFFFF);
+            uint leftSubblock = (uint)(block >> 32);
 
             // Feistel "network" - decoding, the order of rounds and operations on the blocks is reverted
             uint roundKey;
