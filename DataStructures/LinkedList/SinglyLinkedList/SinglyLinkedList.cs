@@ -153,4 +153,56 @@ public class SinglyLinkedList<T>
 
         return false;
     }
+
+    /// <summary>
+    /// Deletes the first element of the list.
+    /// </summary>
+    /// <returns> true if the operation is successul.</returns>
+    public bool DeleteFirst()
+    {
+        // checks if the List is empty
+        if(Head is null)
+        {
+            return false;
+        }
+
+        // if not, the head is overwritten with the next element and the old head is deleted
+        SinglyLinkedListNode<T>? temp = Head;
+        Head = Head.Next;
+        temp = null;
+        return true;
+    }
+
+    /// <summary>
+    /// Deletes the last element of the list.
+    /// </summary>
+    /// <returns> returns true if the operation is successful. </returns>
+    public bool DeleteLast()
+    {
+        // checks if the List is empty
+        if(Head is null)
+        {
+            return false;
+        }
+
+        // checks if the List has only one element
+        else if(Head.Next is null)
+        {
+            Head = null;
+            return true;
+        }
+
+        // if not, iterates through the list to the second last element and deletes the last one
+        else
+        {
+            SinglyLinkedListNode<T>? secondlast = Head;
+            while(secondlast.Next?.Next is not null)
+            {
+                secondlast = secondlast.Next;
+            }
+
+            secondlast.Next = null;
+            return true;
+        }
+    }
 }

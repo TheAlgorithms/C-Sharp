@@ -35,8 +35,9 @@ public class FeistelCipher : IEncoder<uint>
         foreach (ulong block in blocksListPlain)
         {
             uint temp = 0;
+
             // the BitConverter Method provides More readability
-            //splitting the block into 2 32-bit left and right blocks 
+            // splitting the block into 2 32-bit left and right blocks
             byte[] blockBytes = BitConverter.GetBytes(block);
             uint rightSubblock = BitConverter.ToUInt32(blockBytes, 0);
             uint leftSubblock = BitConverter.ToUInt32(blockBytes, 4);
@@ -83,8 +84,9 @@ public class FeistelCipher : IEncoder<uint>
         foreach (ulong block in blocksListEncoded)
         {
             uint temp = 0;
+
             // the BitConverter Method provides More readability
-            //splitting the block into 2 32-bit left and right blocks 
+            // splitting the block into 2 32-bit left and right blocks
             byte[] blockBytes = BitConverter.GetBytes(block);
             uint rightSubblock = BitConverter.ToUInt32(blockBytes, 0);
             uint leftSubblock = BitConverter.ToUInt32(blockBytes, 4);
