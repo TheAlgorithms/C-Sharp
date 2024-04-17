@@ -106,6 +106,7 @@ public static class LinkedListTests
         Assert.That(l3RemoveSucess, Is.False);
         Assert.That(nonExistantRemoveSucess, Is.False);
     }
+
     [Test]
     public static void DeleteFirstFromList()
     {
