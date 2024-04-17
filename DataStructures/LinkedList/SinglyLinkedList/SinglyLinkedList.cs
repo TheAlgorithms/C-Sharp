@@ -167,9 +167,7 @@ public class SinglyLinkedList<T>
         }
 
         // if not, the head is overwritten with the next element and the old head is deleted
-        SinglyLinkedListNode<T>? temp = Head;
         Head = Head.Next;
-        temp = null;
         return true;
     }
 
@@ -186,15 +184,13 @@ public class SinglyLinkedList<T>
         }
 
         // checks if the List has only one element
-        else if(Head.Next is null)
+        if(Head.Next is null)
         {
             Head = null;
             return true;
         }
 
         // if not, iterates through the list to the second last element and deletes the last one
-        else
-        {
             SinglyLinkedListNode<T>? secondlast = Head;
             while(secondlast.Next?.Next is not null)
             {
@@ -203,6 +199,5 @@ public class SinglyLinkedList<T>
 
             secondlast.Next = null;
             return true;
-        }
     }
 }
