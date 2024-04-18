@@ -191,13 +191,13 @@ public class SinglyLinkedList<T>
         }
 
         // if not, iterates through the list to the second last element and deletes the last one
-            SinglyLinkedListNode<T>? secondlast = Head;
-            while(secondlast.Next?.Next is not null)
-            {
-                secondlast = secondlast.Next;
-            }
+        SinglyLinkedListNode<T>? secondlast = Head;
+        while(secondlast.Next?.Next is not null)
+        {
+            secondlast = secondlast.Next;
+        }
 
-            secondlast.Next = null;
-            return true;
+        secondlast.Next = null;
+        return true;
     }
 }
