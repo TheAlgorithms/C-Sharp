@@ -86,13 +86,49 @@ public class DirectedWeightedGraph<T> : IDirectedWeightedGraph<T>
     {
         ThrowIfVertexNotInGraph(vertex);
 
-        Vertices[vertex.Index] = null;
+        int indexToRemove = vertex.Index;
+        vertex.Index = -1;
         vertex.SetGraphNull();
 
-        for (var i = 0; i < Count; i++)
+        // Update the vertex array and the index of vertices.
+        for (int i = indexToRemove; i < Count - 1; i++)
         {
-            adjacencyMatrix[i, vertex.Index] = 0;
-            adjacencyMatrix[vertex.Index, i] = 0;
+            Vertices[i] = Vertices[i + 1];
+            Vertices[i] !.Index = i;
+        }
+
+        Vertices[Count - 1] = null;
+
+        // Update adjacency matrix to remove the row and column of the removed vertex.
+        for (int i = 0; i < Count; i++)
+        {
+            for (int j = 0; j < Count; j++)
+            {
+                if (i < indexToRemove && j < indexToRemove)
+                {
+                    continue;
+                }
+                else if (i < indexToRemove && j >= indexToRemove && j < Count - 1)
+                {
+                    adjacencyMatrix[i, j] = adjacencyMatrix[i, j + 1];
+                }
+                else if (i >= indexToRemove && i < Count - 1 && j < indexToRemove)
+                {
+                    adjacencyMatrix[i, j] = adjacencyMatrix[i + 1, j];
+                }
+                else if (i >= indexToRemove && i < Count - 1 && j >= indexToRemove && j < Count - 1)
+                {
+                    adjacencyMatrix[i, j] = adjacencyMatrix[i + 1, j + 1];
+                }
+                else if (i == Count - 1 || j == Count - 1)
+                {
+                    adjacencyMatrix[i, j] = 0;
+                }
+                else
+                {
+                    throw new InvalidOperationException();
+                }
+            }
         }
 
         Count--;
