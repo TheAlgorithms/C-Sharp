@@ -54,7 +54,7 @@ find more than one implementation for the same objective but using different alg
     * [Naive solver](./Algorithms/Knapsack/NaiveKnapsackSolver.cs)
     * [Dynamic Programming solver](./Algorithms/Knapsack/DynamicProgrammingKnapsackSolver.cs)
     * [Branch and bound solver](./Algorithms/Knapsack/BranchAndBoundKnapsackSolver.cs)
-    * [IHeuristicSolver](./Algorithms/Knapsack/IHeuristicKnapsackSolver.cs)
+    * [IHeuristicKnapsackSolver](./Algorithms/Knapsack/IHeuristicKnapsackSolver.cs)
   * [Linear Algebra](./Algorithms/LinearAlgebra)
     * [Distances](./Algorithms/LinearAlgebra/Distances)
       * [Euclidean](./Algorithms/LinearAlgebra/Distances/Euclidean.cs)
