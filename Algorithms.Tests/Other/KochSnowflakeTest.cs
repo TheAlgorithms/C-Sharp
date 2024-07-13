@@ -39,7 +39,6 @@ public static class KochSnowflakeTest
         var bitmapWidth = 600;
         var offsetX = bitmapWidth / 10f;
         var offsetY = bitmapWidth / 3.7f;
-        
         SKBitmap bitmap = KochSnowflake.GetKochSnowflake();
         bitmap.GetPixel(0, 0)
             .Should()
