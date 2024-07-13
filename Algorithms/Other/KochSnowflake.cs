@@ -153,7 +153,7 @@ public static class KochSnowflake
             var x2 = vectors[i + 1].X;
             var y2 = vectors[i + 1].Y;
 
-            canvas.DrawLine(x1, y1, x2, y2, paint);
+            canvas.DrawLine(new SKPoint(x1, y1), new SKPoint(x2, y2), paint);
         }
 
         return bitmap;

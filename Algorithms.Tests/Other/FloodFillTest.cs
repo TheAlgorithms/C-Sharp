@@ -2,16 +2,18 @@ using FluentAssertions;
 using NUnit.Framework;
 using SkiaSharp;
 using System;
+using System.Drawing;
 
 namespace Algorithms.Tests.Other;
 
 public static class Tests
 {
-    private static readonly SKColor Black = SKColor.FromHsl(0, 0, 0);
-    private static readonly SKColor Green = SKColor.FromHsl(120, 100, 25);
-    private static readonly SKColor Violet = SKColor.FromHsl(300, 76, 72);
-    private static readonly SKColor White = SKColor.FromHsl(0, 0, 100);
-    private static readonly SKColor Orange = SKColor.FromHsl(39, 100, 50);
+    private const byte Alpha = 255;
+    private static readonly SKColor Black = new(0, 0, 0, Alpha);
+    private static readonly SKColor Green = new(0, 255, 0, Alpha);
+    private static readonly SKColor Violet = new(255, 0, 255, Alpha);
+    private static readonly SKColor White = new(255, 255, 255, Alpha);
+    private static readonly SKColor Orange = new(255, 128, 0, Alpha);
 
     [Test]
     public static void BreadthFirstSearch_ThrowsArgumentOutOfRangeException()
@@ -30,6 +32,11 @@ public static class Tests
     [Test]
     public static void BreadthFirstSearch_Test1()
     {
+        var g = SKColors.White;
+        var gg = White;
+        var ggg = Color.White;
+
+
         TestAlgorithm(Algorithms.Other.FloodFill.BreadthFirstSearch, (1, 1), Green, Orange, (1, 1), Orange);
     }
 

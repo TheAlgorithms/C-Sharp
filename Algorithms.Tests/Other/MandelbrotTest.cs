@@ -30,10 +30,10 @@ public static class MandelbrotTest
     {
         SKBitmap bitmap = Mandelbrot.GetBitmap(useDistanceColorCoding: false);
         // Pixel outside the Mandelbrot set should be white.
-        Assert.That(SKColor.FromHsl(255, 255, 255, 255), Is.EqualTo(bitmap.GetPixel(0, 0)));
+        Assert.That(new SKColor(255, 255, 255, 255), Is.EqualTo(bitmap.GetPixel(0, 0)));
 
         // Pixel inside the Mandelbrot set should be black.
-        Assert.That(SKColor.FromHsl(255, 0, 0, 0), Is.EqualTo(bitmap.GetPixel(400, 300)));
+        Assert.That(new SKColor(0, 0, 0, 255), Is.EqualTo(bitmap.GetPixel(400, 300)));
     }
 
     [Test]
@@ -41,9 +41,9 @@ public static class MandelbrotTest
     {
         SKBitmap bitmap = Mandelbrot.GetBitmap(useDistanceColorCoding: true);
         // Pixel distant to the Mandelbrot set should be red.
-        Assert.That(SKColor.FromHsl(255, 255, 0, 0), Is.EqualTo(bitmap.GetPixel(0, 0)));
+        Assert.That(new SKColor(255, 0, 0, 255), Is.EqualTo(bitmap.GetPixel(0, 0)));
 
         // Pixel inside the Mandelbrot set should be black.
-        Assert.That(SKColor.FromHsl(255, 0, 0, 0), Is.EqualTo(bitmap.GetPixel(400, 300)));
+        Assert.That(new SKColor(0, 0, 0, 255), Is.EqualTo(bitmap.GetPixel(400, 300)));
     }
 }
