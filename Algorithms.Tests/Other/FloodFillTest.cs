@@ -2,7 +2,6 @@ using FluentAssertions;
 using NUnit.Framework;
 using SkiaSharp;
 using System;
-using System.Drawing;
 
 namespace Algorithms.Tests.Other;
 
@@ -32,11 +31,6 @@ public static class Tests
     [Test]
     public static void BreadthFirstSearch_Test1()
     {
-        var g = SKColors.White;
-        var gg = White;
-        var ggg = Color.White;
-
-
         TestAlgorithm(Algorithms.Other.FloodFill.BreadthFirstSearch, (1, 1), Green, Orange, (1, 1), Orange);
     }
 
