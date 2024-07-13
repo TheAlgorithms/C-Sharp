@@ -1,7 +1,7 @@
 using System;
-using System.Drawing;
 using Algorithms.Other;
 using NUnit.Framework;
+using SkiaSharp;
 
 namespace Algorithms.Tests.Other;
 
@@ -28,22 +28,22 @@ public static class MandelbrotTest
     [Test]
     public static void TestBlackAndWhite()
     {
-        Bitmap bitmap = Mandelbrot.GetBitmap(useDistanceColorCoding: false);
+        SKBitmap bitmap = Mandelbrot.GetBitmap(useDistanceColorCoding: false);
         // Pixel outside the Mandelbrot set should be white.
-        Assert.That(Color.FromArgb(255, 255, 255, 255), Is.EqualTo(bitmap.GetPixel(0, 0)));
+        Assert.That(new SKColor(255, 255, 255, 255), Is.EqualTo(bitmap.GetPixel(0, 0)));
 
         // Pixel inside the Mandelbrot set should be black.
-        Assert.That(Color.FromArgb(255, 0, 0, 0), Is.EqualTo(bitmap.GetPixel(400, 300)));
+        Assert.That(new SKColor(0, 0, 0, 255), Is.EqualTo(bitmap.GetPixel(400, 300)));
     }
 
     [Test]
     public static void TestColorCoded()
     {
-        Bitmap bitmap = Mandelbrot.GetBitmap(useDistanceColorCoding: true);
+        SKBitmap bitmap = Mandelbrot.GetBitmap(useDistanceColorCoding: true);
         // Pixel distant to the Mandelbrot set should be red.
-        Assert.That(Color.FromArgb(255, 255, 0, 0), Is.EqualTo(bitmap.GetPixel(0, 0)));
+        Assert.That(new SKColor(255, 0, 0, 255), Is.EqualTo(bitmap.GetPixel(0, 0)));
 
         // Pixel inside the Mandelbrot set should be black.
-        Assert.That(Color.FromArgb(255, 0, 0, 0), Is.EqualTo(bitmap.GetPixel(400, 300)));
+        Assert.That(new SKColor(0, 0, 0, 255), Is.EqualTo(bitmap.GetPixel(400, 300)));
     }
 }

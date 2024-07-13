@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Numerics;
+using SkiaSharp;
 
 namespace Algorithms.Other;
 
@@ -52,7 +52,7 @@ public static class KochSnowflake
     /// <param name="bitmapWidth">The width of the rendered bitmap.</param>
     /// <param name="steps">The number of iterations.</param>
     /// <returns>The bitmap of the rendered Koch snowflake.</returns>
-    public static Bitmap GetKochSnowflake(
+    public static SKBitmap GetKochSnowflake(
         int bitmapWidth = 600,
         int steps = 5)
     {
@@ -124,31 +124,36 @@ public static class KochSnowflake
     /// <param name="bitmapWidth">The width of the rendered bitmap.</param>
     /// <param name="bitmapHeight">The height of the rendered bitmap.</param>
     /// <returns>The bitmap of the rendered edges.</returns>
-    private static Bitmap GetBitmap(
+    private static SKBitmap GetBitmap(
         List<Vector2> vectors,
         int bitmapWidth,
         int bitmapHeight)
     {
-        Bitmap bitmap = new(bitmapWidth, bitmapHeight);
+        SKBitmap bitmap = new(bitmapWidth, bitmapHeight);
+        var canvas = new SKCanvas(bitmap);
 
-        using (Graphics graphics = Graphics.FromImage(bitmap))
+        // Set the background white
+        var rect = SKRect.Create(0, 0, bitmapWidth, bitmapHeight);
+
+        var paint = new SKPaint
         {
-            // Set the background white
-            var imageSize = new Rectangle(0, 0, bitmapWidth, bitmapHeight);
-            graphics.FillRectangle(Brushes.White, imageSize);
+            Style = SKPaintStyle.Fill,
+            Color = SKColors.White,
+        };
 
-            // Draw the edges
-            for (var i = 0; i < vectors.Count - 1; i++)
-            {
-                Pen blackPen = new(Color.Black, 1);
+        canvas.DrawRect(rect, paint);
 
-                var x1 = vectors[i].X;
-                var y1 = vectors[i].Y;
-                var x2 = vectors[i + 1].X;
-                var y2 = vectors[i + 1].Y;
+        paint.Color = SKColors.Black;
 
-                graphics.DrawLine(blackPen, x1, y1, x2, y2);
-            }
+        // Draw the edges
+        for (var i = 0; i < vectors.Count - 1; i++)
+        {
+            var x1 = vectors[i].X;
+            var y1 = vectors[i].Y;
+            var x2 = vectors[i + 1].X;
+            var y2 = vectors[i + 1].Y;
+
+            canvas.DrawLine(new SKPoint(x1, y1), new SKPoint(x2, y2), paint);
         }
 
         return bitmap;
