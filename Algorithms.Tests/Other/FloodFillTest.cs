@@ -1,17 +1,17 @@
-using System;
-using System.Drawing;
 using FluentAssertions;
 using NUnit.Framework;
+using SkiaSharp;
+using System;
 
 namespace Algorithms.Tests.Other;
 
 public static class Tests
 {
-    private static readonly Color Black = Color.FromArgb(255, 0, 0, 0);
-    private static readonly Color Green = Color.FromArgb(255, 0, 255, 0);
-    private static readonly Color Violet = Color.FromArgb(255, 255, 0, 255);
-    private static readonly Color White = Color.FromArgb(255, 255, 255, 255);
-    private static readonly Color Orange = Color.FromArgb(255, 255, 128, 0);
+    private static readonly SKColor Black = SKColor.FromHsl(0, 0, 0);
+    private static readonly SKColor Green = SKColor.FromHsl(120, 100, 25);
+    private static readonly SKColor Violet = SKColor.FromHsl(300, 76, 72);
+    private static readonly SKColor White = SKColor.FromHsl(0, 0, 100);
+    private static readonly SKColor Orange = SKColor.FromHsl(39, 100, 50);
 
     [Test]
     public static void BreadthFirstSearch_ThrowsArgumentOutOfRangeException()
@@ -63,9 +63,9 @@ public static class Tests
         TestAlgorithm(Algorithms.Other.FloodFill.DepthFirstSearch, (1, 1), Green, Orange, (6, 4), White);
     }
 
-    private static Bitmap GenerateTestBitmap()
+    private static SKBitmap GenerateTestBitmap()
     {
-        Color[,] layout =
+        SKColor[,] layout =
         {
             {Violet, Violet, Green, Green, Black, Green, Green},
             {Violet, Green, Green, Black, Green, Green, Green},
@@ -76,7 +76,7 @@ public static class Tests
             {Violet, Violet, Violet, Violet, Violet, Violet, Violet},
         };
 
-        Bitmap bitmap = new(7, 7);
+        SKBitmap bitmap = new(7, 7);
         for (int x = 0; x < layout.GetLength(0); x++)
         {
             for (int y = 0; y < layout.GetLength(1); y++)
@@ -89,16 +89,16 @@ public static class Tests
     }
 
     private static void TestAlgorithm(
-        Action<Bitmap, ValueTuple<int, int>, Color, Color> algorithm,
+        Action<SKBitmap, ValueTuple<int, int>, SKColor, SKColor> algorithm,
         ValueTuple<int, int> fillLocation,
-        Color targetColor,
-        Color replacementColor,
+        SKColor targetColor,
+        SKColor replacementColor,
         ValueTuple<int, int> testLocation,
-        Color expectedColor)
+        SKColor expectedColor)
     {
-        Bitmap bitmap = GenerateTestBitmap();
+        SKBitmap bitmap = GenerateTestBitmap();
         algorithm(bitmap, fillLocation, targetColor, replacementColor);
-        Color actualColor = bitmap.GetPixel(testLocation.Item1, testLocation.Item2);
+        SKColor actualColor = bitmap.GetPixel(testLocation.Item1, testLocation.Item2);
         actualColor.Should().Be(expectedColor);
     }
 }

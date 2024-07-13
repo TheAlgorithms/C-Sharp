@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using SkiaSharp;
 
 namespace Algorithms.Other;
 
@@ -23,7 +23,7 @@ public static class FloodFill
     /// <param name="location">The start location on the bitmap.</param>
     /// <param name="targetColor">The old color to be replaced.</param>
     /// <param name="replacementColor">The new color to replace the old one.</param>
-    public static void BreadthFirstSearch(Bitmap bitmap, (int x, int y) location, Color targetColor, Color replacementColor)
+    public static void BreadthFirstSearch(SKBitmap bitmap, (int x, int y) location, SKColor targetColor, SKColor replacementColor)
     {
         if (location.x < 0 || location.x >= bitmap.Width || location.y < 0 || location.y >= bitmap.Height)
         {
@@ -46,7 +46,7 @@ public static class FloodFill
     /// <param name="location">The start location on the bitmap.</param>
     /// <param name="targetColor">The old color to be replaced.</param>
     /// <param name="replacementColor">The new color to replace the old one.</param>
-    public static void DepthFirstSearch(Bitmap bitmap, (int x, int y) location, Color targetColor, Color replacementColor)
+    public static void DepthFirstSearch(SKBitmap bitmap, (int x, int y) location, SKColor targetColor, SKColor replacementColor)
     {
         if (location.x < 0 || location.x >= bitmap.Width || location.y < 0 || location.y >= bitmap.Height)
         {
@@ -56,7 +56,7 @@ public static class FloodFill
         DepthFirstFill(bitmap, location, targetColor, replacementColor);
     }
 
-    private static void BreadthFirstFill(Bitmap bitmap, (int x, int y) location, Color targetColor, Color replacementColor, List<(int x, int y)> queue)
+    private static void BreadthFirstFill(SKBitmap bitmap, (int x, int y) location, SKColor targetColor, SKColor replacementColor, List<(int x, int y)> queue)
     {
         (int x, int y) currentLocation = queue[0];
         queue.RemoveAt(0);
@@ -77,7 +77,7 @@ public static class FloodFill
         }
     }
 
-    private static void DepthFirstFill(Bitmap bitmap, (int x, int y) location, Color targetColor, Color replacementColor)
+    private static void DepthFirstFill(SKBitmap bitmap, (int x, int y) location, SKColor targetColor, SKColor replacementColor)
     {
         if (bitmap.GetPixel(location.x, location.y) == targetColor)
         {
