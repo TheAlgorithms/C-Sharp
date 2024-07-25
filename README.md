@@ -182,6 +182,7 @@ find more than one implementation for the same objective but using different alg
       * [Jaro Similarity](./Algorithms/Strings/Similarity/JaroSimilarity.cs)
       * [Jaro-Winkler Distance](./Algorithms/Strings/Similarity/JaroWinklerDistance.cs)
     * [Pattern Matching](./Algorithms/Strings/PatternMatching/)
+      * [Bitop Pattern Matching](./Algorithms/Strings/PatternMatching/Bitap.cs)
       * [Naive String Search](./Algorithms/Strings/PatternMatching/NaiveStringSearch.cs)
       * [Rabin Karp](./Algorithms/Strings/PatternMatching/RabinKarp.cs)
       * [Boyer Moore](./Algorithms/Strings/PatternMatching/BoyerMoore.cs)
