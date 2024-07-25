@@ -45,7 +45,7 @@ namespace Algorithms.Strings.PatternMatching;
 /// If this distance is within the allowed threshold, it's considered a valid match.
 /// </para>
 /// </summary>
-public class Bitap
+public static class Bitap
 {
     /// <summary>
     /// <para>

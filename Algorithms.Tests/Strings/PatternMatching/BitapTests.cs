@@ -8,9 +8,15 @@ namespace Algorithms.Tests.Strings.PatternMatching;
 public class BitapTests
 {
     [Test]
-    public void FindExactPattern_EmptyTextReturnsZero()
+    public void FindExactPattern_EmptyTextReturnsError()
     {
-        Assert.That(Bitap.FindExactPattern("", "abc"), Is.EqualTo(0));
+        Assert.That(Bitap.FindExactPattern("", "abc"), Is.EqualTo(-1));
+    }
+
+    [Test]
+    public void FindExactPattern_EmptyPatternReturnsZero()
+    {
+        Assert.That(Bitap.FindExactPattern("abc", ""), Is.EqualTo(0));
     }
 
     [Test]
