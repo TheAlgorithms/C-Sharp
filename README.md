@@ -178,6 +178,7 @@ find more than one implementation for the same objective but using different alg
     * [A181391 Van Eck's](./Algorithms/Sequences/VanEcksSequence.cs)
   * [String](./Algorithms/Strings)
     * [Similarity](./Algorithms/Strings/Similarity/)
+      * [Cosine Similarity](./Algorithms/Strings/Similarity/CosineSimilarity.cs)
       * [Hamming Distance](./Algorithms/Strings/Similarity/HammingDistance.cs)
       * [Jaro Similarity](./Algorithms/Strings/Similarity/JaroSimilarity.cs)
       * [Jaro-Winkler Distance](./Algorithms/Strings/Similarity/JaroWinklerDistance.cs)
