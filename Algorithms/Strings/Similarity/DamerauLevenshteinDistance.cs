@@ -2,7 +2,7 @@
 
 namespace Algorithms.Strings.Similarity;
 
-public class DamerauLevenshteinDistance
+public static class DamerauLevenshteinDistance
 {
     /// <summary>
     /// Calculates the Damerau-Levenshtein distance between two strings.
