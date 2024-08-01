@@ -78,7 +78,7 @@ public class CosineSimilarityTests
         var str2 = "nacht";
         var result = CosineSimilarity.Calculate(str1, str2);
         // Assuming the correct calculation gives an expected value
-        var expected = 3 / (Math.Sqrt(5) * Math.Sqrt(5));
+        var expected = 3.0 / 5.0;
         Assert.That(result, Is.EqualTo(expected).Within(1e-6), "Partially matching strings should have the correct cosine similarity.");
     }
 }
