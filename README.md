@@ -179,6 +179,7 @@ find more than one implementation for the same objective but using different alg
   * [String](./Algorithms/Strings)
     * [Similarity](./Algorithms/Strings/Similarity/)
       * [Cosine Similarity](./Algorithms/Strings/Similarity/CosineSimilarity.cs)
+      * [Damerau-Levenshtein Distance](./Algorithms/Strings/Similarity/DamerauLevenshteinDistance.cs)
       * [Hamming Distance](./Algorithms/Strings/Similarity/HammingDistance.cs)
       * [Jaro Similarity](./Algorithms/Strings/Similarity/JaroSimilarity.cs)
       * [Jaro-Winkler Distance](./Algorithms/Strings/Similarity/JaroWinklerDistance.cs)
