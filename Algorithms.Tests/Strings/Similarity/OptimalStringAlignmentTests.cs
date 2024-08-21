@@ -75,9 +75,9 @@ namespace Algorithms.Tests.Strings.Similarity
         public void Calculate_FirstStringNull_ThrowsArgumentNullException()
         {
             string? nullString = null;
-#pragma warning disable CS8604 // Possible null reference argument.
+#nullable disable
             Action act = () => OptimalStringAlignment.Calculate(nullString, "example");
-#pragma warning restore CS8604 // Possible null reference argument.
+#nullable restore
             act.Should().Throw<ArgumentNullException>().WithMessage("*firstString*");
         }
 
@@ -85,9 +85,9 @@ namespace Algorithms.Tests.Strings.Similarity
         public void Calculate_SecondStringNull_ThrowsArgumentNullException()
         {
             string? nullString = null;
-#pragma warning disable CS8604 // Possible null reference argument.
+#nullable disable
             Action act = () => OptimalStringAlignment.Calculate("example", nullString);
-#pragma warning restore CS8604 // Possible null reference argument.
+#nullable restore
             act.Should().Throw<ArgumentNullException>().WithMessage("*secondString*");
         }
     }

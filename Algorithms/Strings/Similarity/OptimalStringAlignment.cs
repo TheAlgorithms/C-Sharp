@@ -45,7 +45,7 @@ namespace Algorithms.Strings.Similarity
     /// This algorithm has a time complexity of O(n * m), where n and m are the lengths of the two input strings.
     /// It is efficient for moderate-sized strings but may become computationally expensive for very long strings.
     /// </remarks>
-    public class OptimalStringAlignment
+    public static class OptimalStringAlignment
     {
         /// <summary>
         /// Calculates the Optimal String Alignment distance between two strings.
@@ -56,8 +56,8 @@ namespace Algorithms.Strings.Similarity
         /// <exception cref="ArgumentNullException">Thrown when either of the input strings is null.</exception>
         public static double Calculate(string firstString, string secondString)
         {
-            ArgumentNullException.ThrowIfNull(firstString, nameof(firstString));
-            ArgumentNullException.ThrowIfNull(secondString, nameof(secondString));
+            ArgumentNullException.ThrowIfNull(nameof(firstString));
+            ArgumentNullException.ThrowIfNull(nameof(secondString));
 
             if (firstString == secondString)
             {
