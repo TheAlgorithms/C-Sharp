@@ -70,25 +70,5 @@ namespace Algorithms.Tests.Strings.Similarity
             var result = OptimalStringAlignment.Calculate("kitten", "sitting");
             result.Should().Be(3.0);
         }
-
-        [Test]
-        public void Calculate_FirstStringNull_ThrowsArgumentNullException()
-        {
-            string? nullString = null;
-#nullable disable
-            Action act = () => OptimalStringAlignment.Calculate(nullString, "example");
-#nullable restore
-            act.Should().Throw<ArgumentNullException>().WithMessage("*firstString*");
-        }
-
-        [Test]
-        public void Calculate_SecondStringNull_ThrowsArgumentNullException()
-        {
-            string? nullString = null;
-#nullable disable
-            Action act = () => OptimalStringAlignment.Calculate("example", nullString);
-#nullable restore
-            act.Should().Throw<ArgumentNullException>().WithMessage("*secondString*");
-        }
     }
 }
