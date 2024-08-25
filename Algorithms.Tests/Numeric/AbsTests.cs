@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 using Algorithms.Numeric;
 using NUnit.Framework;
@@ -32,6 +33,15 @@ public static class AbsTests
         Assert.That(result, Is.EqualTo(expected));
     }
 
+    public static void AbsMaxThrowsArgumentException()
+    {
+        // Arrange
+        var inputNums = Array.Empty<int>();
+
+        // Assert
+        Assert.Throws<ArgumentException>(() => Abs.AbsMax(inputNums));
+    }
+
     [TestCase(new[] { -3, -1, 2, -11 }, -1)]
     [TestCase(new[] { -3, -5, 1, -11 }, 1)]
     [TestCase(new[] { 0, 5, 1, 11 }, 0)]
@@ -42,5 +52,14 @@ public static class AbsTests
 
         // Assert
         Assert.That(result, Is.EqualTo(expected));
+    }
+
+    public static void AbsMinThrowsArgumentException()
+    {
+        // Arrange
+        var inputNums = Array.Empty<int>();
+
+        // Assert
+        Assert.Throws<ArgumentException>(() => Abs.AbsMin(inputNums));
     }
 }
