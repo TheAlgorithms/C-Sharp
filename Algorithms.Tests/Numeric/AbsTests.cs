@@ -33,6 +33,7 @@ public static class AbsTests
         Assert.That(result, Is.EqualTo(expected));
     }
 
+    [Test]
     public static void AbsMaxThrowsArgumentException()
     {
         // Arrange
@@ -54,6 +55,7 @@ public static class AbsTests
         Assert.That(result, Is.EqualTo(expected));
     }
 
+    [Test]
     public static void AbsMinThrowsArgumentException()
     {
         // Arrange
