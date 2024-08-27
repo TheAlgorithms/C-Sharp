@@ -95,6 +95,7 @@ find more than one implementation for the same objective but using different alg
     * [Automorphic Number](./Algorithms/Numeric/AutomorphicNumber.cs)
     * [Josephus Problem](./Algorithms/Numeric/JosephusProblem.cs)
     * [Newton's Square Root Calculation](./Algorithms/NewtonSquareRoot.cs)
+    * [SoftMax Function](./Algorithms/Numeric/SoftMax.cs)
   * [Searches](./Algorithms/Search)
     * [A-Star](./Algorithms/Search/AStar/)
     * [Binary Search](./Algorithms/Search/BinarySearcher.cs)
