@@ -2,8 +2,25 @@ using System;
 
 namespace Algorithms.Strings.PatternMatching;
 
+/// <summary>
+///     Implentation of regular expression matching with support for '.' and '*'.
+///     '.' Matches any single character.
+///     '*' Matches zero or more of the preceding element.
+///     The matching should cover the entire input string (not partial).
+/// </summary>
 public static class WildCardMatcher
 {
+    /// <summary>
+    ///    Using bottom-up dynamic programming for matching the input string with the pattern.
+    ///
+    ///    Time complexity: O(n*m), where n is the length of the input string and m is the length of the pattern.
+    ///
+    ///    Constrain: The pattern cannot start with '*'.
+    /// </summary>
+    /// <param name="inputString">The input string to match.</param>
+    /// <param name="pattern">The pattern to match.</param>
+    /// <returns>True if the input string matches the pattern, false otherwise.</returns>
+    /// <exception cref="ArgumentException">Thrown when the pattern starts with '*'.</exception>
     public static bool MatchPattern(string inputString, string pattern)
     {
         if (pattern.Length > 0 && pattern[0] == '*')
