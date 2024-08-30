@@ -52,25 +52,46 @@ public static class WildCardMatcher
         {
             for (var j = 1; j < patternLength; j++)
             {
-                // If the characters match or the pattern has a ., then the result is the same as the previous positions.
-                if (inputString[i - 1] == pattern[j - 1] || pattern[j - 1] == '.')
-                {
-                    dp[i, j] = dp[i - 1, j - 1];
-                }
-                else if (pattern[j - 1] == '*')
-                {
-                    if (dp[i, j - 2])
-                    {
-                        dp[i, j] = true;
-                    }
-                    else if (inputString[i - 1] == pattern[j - 2] || pattern[j - 2] == '.')
-                    {
-                        dp[i, j] = dp[i - 1, j];
-                    }
-                }
+                MatchRemainingLenghts(inputString, pattern, dp, i, j);
             }
         }
 
         return dp[inputLength - 1, patternLength - 1];
+    }
+
+    // Helper method to match the remaining lengths of the input string and the pattern
+    // This method is called for all i and j where i > 0 and j > 0
+    private static void MatchRemainingLenghts(string inputString, string pattern, bool[,] dp, int i, int j)
+    {
+        // If the characters match or the pattern has a ., then the result is the same as the previous positions.
+        if (inputString[i - 1] == pattern[j - 1] || pattern[j - 1] == '.')
+        {
+            dp[i, j] = dp[i - 1, j - 1];
+        }
+        else if (pattern[j - 1] == '*')
+        {
+            MatchForZeroOrMore(inputString, pattern, dp, i, j);
+        }
+        else
+        {
+            // If the characters do not match, then the result is false, which is the default value.
+        }
+    }
+
+    // Helper method to match for the "*" pattern.
+    private static void MatchForZeroOrMore(string inputString, string pattern, bool[,] dp, int i, int j)
+    {
+        if (dp[i, j - 2])
+        {
+            dp[i, j] = true;
+        }
+        else if (inputString[i - 1] == pattern[j - 2] || pattern[j - 2] == '.')
+        {
+            dp[i, j] = dp[i - 1, j];
+        }
+        else
+        {
+            // Leave the default value of false
+        }
     }
 }
