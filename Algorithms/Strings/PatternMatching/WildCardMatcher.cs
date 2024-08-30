@@ -6,7 +6,7 @@ public static class WildCardMatcher
 {
     public static bool MatchPattern(string inputString, string pattern)
     {
-        if (pattern.Length > 0 & pattern[0] == '*')
+        if (pattern.Length > 0 && pattern[0] == '*')
         {
             throw new ArgumentException("Pattern cannot start with *");
         }
@@ -35,7 +35,7 @@ public static class WildCardMatcher
         {
             for (var j = 1; j < patternLength; j++)
             {
-                // If the characters match or the pattern has a ., then the result is the same as the previous characters
+                // If the characters match or the pattern has a ., then the result is the same as the previous positions.
                 if (inputString[i - 1] == pattern[j - 1] || pattern[j - 1] == '.')
                 {
                     dp[i, j] = dp[i - 1, j - 1];
