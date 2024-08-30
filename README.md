@@ -191,6 +191,7 @@ find more than one implementation for the same objective but using different alg
       * [Rabin Karp](./Algorithms/Strings/PatternMatching/RabinKarp.cs)
       * [Boyer Moore](./Algorithms/Strings/PatternMatching/BoyerMoore.cs)
       * [Knuth–Morris–Pratt Search](./Algorithms/Strings/PatternMatching/KnuthMorrisPrattSearcher.cs)
+      * [WildCard Pattern Matching](./Algorithms/Strings/PatternMatching/WildCardMatcher.cs)
       * [Z-block substring search](./Algorithms/Strings/PatternMatching/ZblockSubstringSearch.cs)
     * [Longest Consecutive Character](./Algorithms/Strings/GeneralStringAlgorithms.cs)
     * [Palindrome Checker](./Algorithms/Strings/Palindrome.cs)
