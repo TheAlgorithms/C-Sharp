@@ -27,6 +27,10 @@ public class TimSorter<T> : IComparisonSorter<T>
 {
     private readonly int minMerge;
     private readonly int initMinGallop;
+
+    // Pool of reusable TimChunk objects for memory efficiency.
+    private readonly TimChunk<T>[] chunkPool = new TimChunk<T>[2];
+
     private readonly int[] runBase;
     private readonly int[] runLengths;
 
@@ -50,15 +54,16 @@ public class TimSorter<T> : IComparisonSorter<T>
         public int Wins { get; set; }
     }
 
-    public TimSorter(int minMerge = 32, int minGallop = 7)
+    public TimSorter(TimSorterSettings settings)
     {
         initMinGallop = minGallop;
-        this.minMerge = minMerge;
         runBase = new int[85];
         runLengths = new int[85];
 
         stackSize = 0;
-        this.minGallop = minGallop;
+
+        minGallop = settings.MinGallop;
+        minMerge = settings.MinMerge;
     }
 
     /// <summary>
@@ -629,5 +634,18 @@ public class TimSorter<T> : IComparisonSorter<T>
         }
 
         return false;
+    }
+}
+
+public class TimSorterSettings
+{
+    public int MinMerge { get; }
+
+    public int MinGallop { get; }
+
+    public TimSorterSettings(int minMerge = 32, int minGallop = 7)
+    {
+        MinMerge = minMerge;
+        MinGallop = minGallop;
     }
 }

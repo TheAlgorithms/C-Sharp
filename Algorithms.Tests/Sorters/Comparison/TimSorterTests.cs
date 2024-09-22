@@ -15,7 +15,7 @@ public static class TimSorterTests
         [Random(0, 10_000, 2000)] int n)
     {
         // Arrange
-        var sorter = new TimSorter<int>();
+        var sorter = new TimSorter<int>(new TimSorterSettings());
         var (correctArray, testArray) = RandomHelper.GetArrays(n);
 
         // Act
@@ -30,7 +30,7 @@ public static class TimSorterTests
     public static void TinyArray()
     {
         // Arrange
-        var sorter = new TimSorter<int>();
+        var sorter = new TimSorter<int>(new TimSorterSettings());
         var tinyArray = new[] { 1 };
         var correctArray = new[] { 1 };
 
@@ -45,7 +45,7 @@ public static class TimSorterTests
     public static void SmallChunks()
     {
         // Arrange
-        var sorter = new TimSorter<int>();
+        var sorter = new TimSorter<int>(new TimSorterSettings());
         var (correctArray, testArray) = RandomHelper.GetArrays(800);
         Array.Sort(correctArray, IntComparer);
         Array.Sort(testArray, IntComparer);
