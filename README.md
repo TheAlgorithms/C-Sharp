@@ -124,6 +124,7 @@ find more than one implementation for the same objective but using different alg
       * [Selection Sort](./Algorithms/Sorters/Comparison/SelectionSorter.cs)
       * [Shell Sort](./Algorithms/Sorters/Comparison/ShellSorter.cs)
       * [Tim Sort](./Algorithms/Sorters/Comparison/TimSorter.cs)
+      * [Simplified Tim Sort](./Algorithms/Sorters/Comparison/BasicTimSorter.cs)
     * [External](./Algorithms/Sorters/External)
       * [Merge Sort](./Algorithms/Sorters/External/ExternalMergeSorter.cs)
     * [Integer](./Algorithms/Sorters/Integer)
