@@ -381,4 +381,37 @@ public class HashTableTests
             Console.WriteLine(value);
              });
     }
+
+    [Test]
+    public void Test_NegativeHashKey_ReturnsCorrectValue()
+    {
+        var hashTable = new HashTable<NegativeHashKey, int>(4);
+        hashTable.Add(new NegativeHashKey(1), 1);
+        Assert.That(hashTable[new NegativeHashKey(1)], Is.EqualTo(1));
+    }
+}
+
+public class NegativeHashKey
+{
+    private readonly int id;
+
+    public NegativeHashKey(int id)
+    {
+        this.id = id;
+    }
+
+    public override int GetHashCode()
+    {
+        // Return a negative hash code
+        return -id;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is NegativeHashKey other)
+        {
+            return id == other.id;
+        }
+        return false;
+    }
 }
