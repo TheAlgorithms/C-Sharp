@@ -19,7 +19,7 @@ namespace DataStructures.Stack
 {
     public class StackUtils
     {
-        private static readonly Dictionary<char, char> parenthesesMap = new Dictionary<char, char>()
+        private static readonly Dictionary<char, char> parenthesesMap = new Dictionary<char, char>
         {
             { '(', ')' },
             { '{', '}' },
@@ -31,7 +31,6 @@ namespace DataStructures.Stack
         {
             private readonly Stack<int> mainStack;
             private readonly Stack<int> minStack;
-
            
 
             public MinStack()

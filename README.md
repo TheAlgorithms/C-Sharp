@@ -242,6 +242,7 @@ find more than one implementation for the same objective but using different alg
     * [Array-based Stack](./DataStructures/Stack/ArrayBasedStack.cs)
     * [List-based Stack](./DataStructures/Stack/ListBasedStack.cs)
     * [Queue-based Stack](./DataStructures/Stack/QueueBasedStack.cs)
+    * [Stack Utils](./DataStructures/Stack/StackUtils.cs)
   * [Heap](./DataStructures/Heap)
     * [Min-Max Heap](./DataStructures/Heap/MinMaxHeap.cs)
     * [Binary Heap](./DataStructures/Heap/BinaryHeap.cs)
