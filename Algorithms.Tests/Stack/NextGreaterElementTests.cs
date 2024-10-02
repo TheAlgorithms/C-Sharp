@@ -66,7 +66,7 @@ namespace Algorithms.Tests.Stack
             var result = FindNextGreaterElement(input);
 
             // Assert
-            Assert.That(result, Is.EqualTo(result));
+            Assert.That(result, Is.EqualTo(expected));
         }
 
         [Test]

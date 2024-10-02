@@ -58,7 +58,7 @@ namespace Algorithms.Tests.Stack
             Assert.That(stack.Count, Is.EqualTo(3));
             Assert.That(stack.Pop(), Is.EqualTo(1)); // Should return 1
             Assert.That(stack.Pop(), Is.EqualTo(2)); // Should return 2
-            Assert.That(stack.Pop(), Is.EqualTo(3)); ; // Should return 3
+            Assert.That(stack.Pop(), Is.EqualTo(3)); // Should return 3
         }
 
         [Test]
