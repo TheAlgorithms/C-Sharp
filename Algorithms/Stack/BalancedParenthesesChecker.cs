@@ -1,26 +1,43 @@
 using System;
-namespace DataStructures.Stack
+using System.Collections.Generic;
+
+namespace Algorithms.Stack
 {
     /// <summary>
     ///     It checks if an expression has matching and balanced parentheses.
-    /// @author Mohit Singh
-    /// @author <a href="https://github.com/mohit-gogitter">mohit-gogitter</a>
+    /// @author Mohit Singh. <a href="https://github.com/mohit-gogitter">mohit-gogitter</a>
     /// </summary>
     public class BalancedParenthesesChecker
     {
-        private static readonly Dictionary<char, char> ParenthesesMap = new Dictionary<char, char>()
+        private static readonly Dictionary<char, char> ParenthesesMap = new Dictionary<char, char>
         {
             { '(', ')' },
             { '{', '}' },
             { '[', ']' },
         };
+
         /// <summary>
-        ///     This method checks if an expression has matching and balanced parentheses.
+        /// Determines if a given string expression containing brackets is balanced.
+        /// A string is considered balanced if all opening brackets have corresponding closing brackets
+        /// in the correct order. The supported brackets are '()', '{}', and '[]'.
         /// </summary>
-        /// <param name="expression">string containing parenthesis</param>
-        /// <returns>Boolean value</returns>
-        public static bool IsBalanced(string expression)
+        /// <param name="expression">
+        /// The input string expression containing the brackets to check for balance.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the brackets in the expression are balanced; otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown when the input expression contains invalid characters or is null/empty.
+        /// Only '(', ')', '{', '}', '[', ']' characters are allowed.
+        /// </exception>
+        public bool IsBalanced(string expression)
         {
+            if (string.IsNullOrEmpty(expression))
+            {
+                throw new ArgumentException("The input expression cannot be null or empty.");
+            }
+
             Stack<char> stack = new Stack<char>();
             foreach (char c in expression)
             {
@@ -34,6 +51,7 @@ namespace DataStructures.Stack
                     {
                         return false;
                     }
+
                     char open = stack.Pop();
 
                     if (!IsMatchingPair(open, c))
@@ -43,11 +61,14 @@ namespace DataStructures.Stack
                 }
                 else
                 {
-                    //since there are no other brackets, this is unreachable code
+                    // Throw an exception if an invalid character is found
+                    throw new ArgumentException($"Invalid character '{c}' found in the expression.");
                 }
             }
+
             return stack.Count == 0;
         }
+
         private static bool IsMatchingPair(char open, char close)
         {
             return ParenthesesMap.ContainsKey(open) && ParenthesesMap[open] == close;

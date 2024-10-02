@@ -1,29 +1,33 @@
 using System;
-namespace DataStructures.Stack
+using System.Collections.Generic;
+
+namespace Algorithms.Stack
 {
     /// <summary>
     ///     Reverses the elements in a stack using recursion.
-    /// @author Mohit Singh
-    /// @author <a href="https://github.com/mohit-gogitter">mohit-gogitter</a>
+    /// @author Mohit Singh. <a href="https://github.com/mohit-gogitter">mohit-gogitter</a>
     /// </summary>
     public class ReverseStack
     {
         /// <summary>
-        ///    This method reverses the elements in a stack using recursion.
+        /// Recursively reverses the elements of the specified stack.
         /// </summary>
-        /// <param name="stack">A Stack of Generic Type</param>
-        public static void Reverse<T>(Stack<T> stack)
+        /// <typeparam name="T">The type of elements in the stack.</typeparam>
+        /// <param name="stack">The stack to be reversed. This parameter cannot be null.</param>
+        /// <exception cref="ArgumentNullException">Thrown when the stack parameter is null.</exception>
+        public void Reverse<T>(Stack<T> stack)
         {
             if (stack.Count == 0)
             {
                 return;
             }
+
             T temp = stack.Pop();
             Reverse(stack);
             InsertAtBottom(stack, temp);
         }
 
-        private static void InsertAtBottom<T>(Stack<T> stack, T value)
+        private void InsertAtBottom<T>(Stack<T> stack, T value)
         {
             if (stack.Count == 0)
             {
