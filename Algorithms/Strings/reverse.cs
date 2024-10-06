@@ -1,5 +1,7 @@
 using System;
 
+namespace Algorithms.Strings;
+
 public static class ReversedString
 {
     //comment
