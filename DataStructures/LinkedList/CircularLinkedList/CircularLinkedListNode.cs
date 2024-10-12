@@ -19,6 +19,6 @@ namespace DataStructures.LinkedList.CircularLinkedList
         /// <summary>
         /// Gets or sets the reference to the next node in the list.
         /// </summary>
-        public CircularLinkedListNode<T>? Next { get; set; } = null;
+        public CircularLinkedListNode<T>? Next { get; set; }
     }
 }
