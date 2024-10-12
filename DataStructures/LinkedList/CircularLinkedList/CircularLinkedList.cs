@@ -79,8 +79,7 @@ namespace DataStructures.LinkedList.CircularLinkedList
         {
             if (IsEmpty())
             {
-                Console.WriteLine("List is empty.");
-                return;
+                throw new InvalidOperationException("List is empty.");
             }
 
             var current = tail!.Next;
@@ -103,8 +102,6 @@ namespace DataStructures.LinkedList.CircularLinkedList
                 current = current.Next;
             }
             while (current != tail.Next);
-
-            Console.WriteLine($"Node with value {value} not found.");
         }
 
         /// <summary>
@@ -115,8 +112,7 @@ namespace DataStructures.LinkedList.CircularLinkedList
         {
             if (IsEmpty())
             {
-                Console.WriteLine("List is empty.");
-                return;
+                throw new InvalidOperationException("List is empty.");
             }
 
             var current = tail!.Next;
@@ -144,7 +140,6 @@ namespace DataStructures.LinkedList.CircularLinkedList
                         previous!.Next = current.Next;
                     }
 
-                    Console.WriteLine($"Node with value {value} deleted.");
                     return;
                 }
 
@@ -152,8 +147,6 @@ namespace DataStructures.LinkedList.CircularLinkedList
                 current = current.Next;
             }
             while (current != tail!.Next);
-
-            Console.WriteLine($"Node with value {value} not found.");
         }
 
         /// <summary>
@@ -163,8 +156,7 @@ namespace DataStructures.LinkedList.CircularLinkedList
         {
             if (IsEmpty())
             {
-                Console.WriteLine("List is empty.");
-                return;
+                throw new InvalidOperationException("List is empty.");
             }
 
             CircularLinkedListNode<T>? current = tail!.Next;

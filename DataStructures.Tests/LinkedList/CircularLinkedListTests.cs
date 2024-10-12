@@ -1,6 +1,5 @@
 using System;
 using DataStructures.LinkedList.CircularLinkedList;
-using Microsoft.VisualStudio.TestPlatform.Utilities;
 using NUnit.Framework;
 
 namespace DataStructures.Tests.LinkedList;
@@ -22,10 +21,10 @@ public static class CircularLinkedListTests
     [Test]
     public static void TestDisplayEmptyList()
     {
-        var cll = new CircularLinkedList<int>();
-        cll.Display();
+        var cll = new CircularLinkedList<int>();       
+        var ex = Assert.Throws<InvalidOperationException>(() => cll.Display());
 
-        Assert.That("List is empty.", Is.EqualTo(GetDisplayOutput(cll).Trim()));
+        Assert.That(ex!.Message, Is.EqualTo("List is empty."));
     }
 
     [Test]
@@ -57,8 +56,8 @@ public static class CircularLinkedListTests
         cll.InsertAtEnd(10);
         cll.InsertAtEnd(20);
         cll.InsertAtEnd(30);
-
         cll.InsertAfter(20, 25);
+
         Assert.That("10 20 25 30", Is.EqualTo(GetDisplayOutput(cll).Trim()));
     }
 
@@ -67,6 +66,7 @@ public static class CircularLinkedListTests
     {
         var cll = new CircularLinkedList<int>();
         cll.InsertAtBeginning(10);
+
         Assert.That("10", Is.EqualTo(GetDisplayOutput(cll).Trim()));
     }
 
@@ -83,12 +83,10 @@ public static class CircularLinkedListTests
     public static void TestInsertAfterInEmptyList()
     {
         var cll = new CircularLinkedList<int>();
-        cll.InsertAfter(10, 20);
+        var ex = Assert.Throws<InvalidOperationException>(() => cll.InsertAfter(10, 20));
 
-        Assert.That("List is empty.", Is.EqualTo(GetDisplayOutput(cll).Trim()));
+        Assert.That(ex!.Message, Is.EqualTo("List is empty."));       
     }
-
-
 
     [Test]
     public static void TestInsertAfterSpecificNode()
@@ -97,8 +95,8 @@ public static class CircularLinkedListTests
         cll.InsertAtEnd(10);
         cll.InsertAtEnd(20);
         cll.InsertAtEnd(30);
-
         cll.InsertAfter(20, 25); // Insert after node with value 20
+
         Assert.That("10 20 25 30", Is.EqualTo(GetDisplayOutput(cll).Trim()));
     }
 
@@ -108,6 +106,7 @@ public static class CircularLinkedListTests
         var cll = new CircularLinkedList<int>();
         cll.InsertAtEnd(10);
         cll.InsertAfter(99, 25); // 99 does not exist
+
         Assert.That("10", Is.EqualTo(GetDisplayOutput(cll).Trim()));
     }
 
@@ -118,8 +117,8 @@ public static class CircularLinkedListTests
         cll.InsertAtEnd(10);
         cll.InsertAtEnd(20);
         cll.InsertAtEnd(30);
-
         cll.DeleteNode(20);
+
         Assert.That("10 30", Is.EqualTo(GetDisplayOutput(cll).Trim()));
     }
 
@@ -129,6 +128,7 @@ public static class CircularLinkedListTests
         var cll = new CircularLinkedList<int>();
         cll.InsertAtBeginning(10);
         cll.DeleteNode(10);
+
         Assert.That(cll.IsEmpty(), Is.EqualTo(true));
     }
 
@@ -140,6 +140,7 @@ public static class CircularLinkedListTests
         cll.InsertAtEnd(20);
         cll.InsertAtEnd(30);
         cll.DeleteNode(10);
+
         Assert.That("20 30", Is.EqualTo(GetDisplayOutput(cll).Trim()));
     }
 
@@ -151,6 +152,7 @@ public static class CircularLinkedListTests
         cll.InsertAtEnd(20);
         cll.InsertAtEnd(30);
         cll.DeleteNode(30);
+
         Assert.That("10 20", Is.EqualTo(GetDisplayOutput(cll).Trim()));
     }
 
@@ -158,8 +160,9 @@ public static class CircularLinkedListTests
     public static void TestDeleteFromEmptyList()
     {
         var cll = new CircularLinkedList<int>();
-        cll.DeleteNode(10);
-        Assert.That(cll.IsEmpty(), Is.EqualTo(true));
+        var ex = Assert.Throws<InvalidOperationException>(() => cll.DeleteNode(10));
+
+        Assert.That(ex!.Message, Is.EqualTo("List is empty."));
     }
 
     [Test]
@@ -169,8 +172,8 @@ public static class CircularLinkedListTests
         cll.InsertAtEnd(10);
         cll.InsertAtEnd(20);
         cll.InsertAtEnd(30);
-
         cll.DeleteNode(40); // Attempting to delete a node that doesn't exist
+
         Assert.That("10 20 30", Is.EqualTo(GetDisplayOutput(cll).Trim()));
     }
 
