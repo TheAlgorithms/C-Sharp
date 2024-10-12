@@ -263,6 +263,7 @@ find more than one implementation for the same objective but using different alg
     * [Singly Linked List](./DataStructures/LinkedList/SinglyLinkedList/SinglyLinkedList.cs)
     * [Doubly Linked List](./DataStructures/LinkedList/DoublyLinkedList/DoublyLinkedList.cs)
     * [Skip List](./DataStructures/LinkedList/SkipList/SkipList.cs)
+    * [Circular Linked List](./DataStructures/LinkedList/CircularLinkedList/CircularLinkedList.cs)	
   * [Graph](./DataStructures/Graph)
     * [Directed Weighted Graph Via Adjacency Matrix](./DataStructures/Graph/DirectedWeightedGraph.cs)
   * [Disjoint Set](./DataStructures/DisjointSet)
