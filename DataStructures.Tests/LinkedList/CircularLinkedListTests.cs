@@ -1,5 +1,6 @@
 using System;
 using DataStructures.LinkedList.CircularLinkedList;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
 using NUnit.Framework;
 
 namespace DataStructures.Tests.LinkedList;
@@ -16,6 +17,15 @@ public static class CircularLinkedListTests
         cll.InsertAtEnd(30);
 
         Assert.That("10 20 30", Is.EqualTo(GetDisplayOutput(cll).Trim()));
+    }
+
+    [Test]
+    public static void TestDisplayEmptyList()
+    {
+        var cll = new CircularLinkedList<int>();
+        cll.Display();
+
+        Assert.That("List is empty.", Is.EqualTo(GetDisplayOutput(cll).Trim()));
     }
 
     [Test]
@@ -68,6 +78,17 @@ public static class CircularLinkedListTests
 
         Assert.That("10", Is.EqualTo(GetDisplayOutput(cll).Trim()));
     }
+
+    [Test]
+    public static void TestInsertAfterInEmptyList()
+    {
+        var cll = new CircularLinkedList<int>();
+        cll.InsertAfter(10, 20);
+
+        Assert.That("List is empty.", Is.EqualTo(GetDisplayOutput(cll).Trim()));
+    }
+
+
 
     [Test]
     public static void TestInsertAfterSpecificNode()
