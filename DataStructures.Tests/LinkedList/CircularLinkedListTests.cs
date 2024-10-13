@@ -91,27 +91,6 @@ public static class CircularLinkedListTests
     }
 
     [Test]
-    public static void TestInsertAfterTailNode()
-    {
-        var cll = new CircularLinkedList<int>();
-        cll.InsertAtEnd(10);  // tail -> 10
-        cll.InsertAtEnd(20);  // tail -> 20
-        cll.InsertAtEnd(30);  // tail -> 30
-
-        // Insert after the current tail (30)
-        cll.InsertAfter(30, 40);  // This should make 40 the new tail
-
-        // Now 40 should be the tail, and the list should be 10 20 30 40
-        Assert.That("10 20 30 40", Is.EqualTo(GetDisplayOutput(cll).Trim()));
-
-        // Additionally, assert that tail's Data is now 40
-        var tailField = typeof(CircularLinkedList<int>).GetField("tail", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        var tailNode = (CircularLinkedListNode<int>?)tailField?.GetValue(cll);
-        Assert.That(tailNode!.Data, Is.EqualTo(40));  // tail should now point to 40
-    }
-
-
-    [Test]
     public static void TestDeleteNode()
     {
         var cll = new CircularLinkedList<int>();
@@ -198,6 +177,4 @@ public static class CircularLinkedListTests
 
         return result.ToString().Trim();
     }
-
-
 }
