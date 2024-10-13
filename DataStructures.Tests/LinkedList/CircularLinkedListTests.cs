@@ -8,26 +8,6 @@ namespace DataStructures.Tests.LinkedList;
 public static class CircularLinkedListTests
 {
     [Test]
-    public static void TestDisplay()
-    {
-        var cll = new CircularLinkedList<int>();
-        cll.InsertAtEnd(10);
-        cll.InsertAtEnd(20);
-        cll.InsertAtEnd(30);
-
-        Assert.That("10 20 30", Is.EqualTo(GetDisplayOutput(cll).Trim()));
-    }
-
-    [Test]
-    public static void TestDisplayEmptyList()
-    {
-        var cll = new CircularLinkedList<int>();       
-        var ex = Assert.Throws<InvalidOperationException>(() => cll.Display());
-
-        Assert.That(ex!.Message, Is.EqualTo("List is empty."));
-    }
-
-    [Test]
     public static void TestInsertAtBeginning()
     {
         var cll = new CircularLinkedList<int>();
@@ -177,35 +157,26 @@ public static class CircularLinkedListTests
         Assert.That("10 20 30", Is.EqualTo(GetDisplayOutput(cll).Trim()));
     }
 
-    /// <summary>
-    /// Helper method to capture the output of the Display method for assertions.
-    /// </summary>
-    /// <param name="list">The CircularLinkedList instance.</param>
-    /// <returns>A string representation of the list.</returns>
-    private static string GetDisplayOutput(CircularLinkedList<int> list)
+    private static string GetDisplayOutput<T>(CircularLinkedList<T> list)
     {
-        // Save the original output (the default Console output stream)
-        var originalConsoleOut = Console.Out;
-
-        // Use a StringWriter to capture Console output
-        using (var sw = new System.IO.StringWriter())
+        var head = list.GetHead();
+        if (head == null)
         {
-            try
-            {
-                // Redirect Console output to StringWriter
-                Console.SetOut(sw);
-
-                // Call the method that outputs to the console
-                list.Display();
-
-                // Return the captured output
-                return sw.ToString();
-            }
-            finally
-            {
-                // Restore the original Console output stream
-                Console.SetOut(originalConsoleOut);
-            }
+            return string.Empty;
         }
+
+        var current = head;
+        var result = new System.Text.StringBuilder();
+
+        do
+        {
+            result.Append(current!.Data + " ");
+            current = current.Next;
+        }
+        while (current != head);
+
+        return result.ToString().Trim();
     }
+
+
 }

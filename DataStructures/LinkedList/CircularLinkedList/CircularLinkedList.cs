@@ -23,6 +23,14 @@ namespace DataStructures.LinkedList.CircularLinkedList
         }
 
         /// <summary>
+        /// Gets the head node (tail.Next) of the Circular Linked List.
+        /// </summary>
+        public CircularLinkedListNode<T>? GetHead()
+        {
+            return tail?.Next;
+        }
+
+        /// <summary>
         /// Determines whether the Circular Linked List is empty.
         /// </summary>
         /// <returns>True if the list is empty; otherwise, false.</returns>
@@ -147,27 +155,6 @@ namespace DataStructures.LinkedList.CircularLinkedList
                 current = current.Next;
             }
             while (current != tail!.Next);
-        }
-
-        /// <summary>
-        /// Displays the contents of the Circular Linked List.
-        /// </summary>
-        public void Display()
-        {
-            if (IsEmpty())
-            {
-                throw new InvalidOperationException("List is empty.");
-            }
-
-            CircularLinkedListNode<T>? current = tail!.Next;
-            do
-            {
-                Console.Write($"{current!.Data} ");
-                current = current.Next;
-            }
-            while (current != tail!.Next);
-
-            Console.WriteLine();
         }
     }
 }
