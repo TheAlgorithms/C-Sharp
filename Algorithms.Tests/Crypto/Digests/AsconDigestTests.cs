@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using Algorithms.Crypto.Digests;
+using Algorithms.Crypto.Exceptions;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -40,6 +41,116 @@ public class AsconDigestTests
         var result = asconHashA.Digest(inputBytes);
 
         result.Should().Be(expected);
+    }
+
+   [Test]
+        public void BlockUpdate_WithValidOffsetAndLength_ShouldProcessCorrectly()
+        {
+            // Arrange
+            var input = new byte[] { 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99 };
+            var offset = 2;
+            var length = 6;  // Picking 6 bytes starting from offset 2
+
+            // Act
+            var act = () => asconHash.BlockUpdate(input, offset, length);
+
+            // Assert
+            act.Should().NotThrow(); // Ensure no exceptions are thrown during processing
+
+            // Finalize the hash and check the output size
+            var output = new byte[asconHash.GetDigestSize()];
+            asconHash.DoFinal(output, 0);
+            output.Should().HaveCount(32); // Ascon hash size is 32 bytes
+        }
+
+        [Test]
+        public void BlockUpdate_WithInvalidOffset_ShouldThrowDataLengthException()
+        {
+            // Arrange
+            var input = new byte[] { 0x00, 0x11, 0x22, 0x33 };
+            var offset = 3;  // Offset goes too close to the end
+            var length = 3;  // Length would exceed buffer size
+
+            // Act
+            var act = () => asconHash.BlockUpdate(input, offset, length);
+
+            // Assert
+            act.Should().Throw<DataLengthException>()
+               .WithMessage("input buffer too short");
+        }
+
+        [Test]
+        public void BlockUpdate_WithInvalidLength_ShouldThrowDataLengthException()
+        {
+            // Arrange
+            var input = new byte[] { 0x00, 0x11, 0x22, 0x33, 0x44, 0x55 };
+            var offset = 1;  // Valid offset
+            var length = 10; // Invalid length (exceeds buffer)
+
+            // Act
+            var act = () => asconHash.BlockUpdate(input, offset, length);
+
+            // Assert
+            act.Should().Throw<DataLengthException>()
+               .WithMessage("input buffer too short");
+        }
+
+        [Test]
+        public void BlockUpdate_WithPartialBlock_ShouldProcessCorrectly()
+        {
+            // Arrange
+            var input = new byte[] { 0x00, 0x11, 0x22, 0x33, 0x44 };
+            var offset = 0;
+            var length = 5; // Less than 8 bytes, partial block
+
+            // Act
+            asconHash.BlockUpdate(input, offset, length);
+
+            // Assert
+            var output = new byte[asconHash.GetDigestSize()];
+            asconHash.DoFinal(output, 0);
+            output.Should().HaveCount(32); // Ensure valid hash output
+        }
+
+        [Test]
+        public void BlockUpdate_WithFullBlock_ShouldProcessCorrectly()
+        {
+            // Arrange
+            var input = new byte[] { 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77 };
+            var offset = 0;
+            var length = 8;  // Full block
+
+            // Act
+            asconHash.BlockUpdate(input, offset, length);
+
+            // Assert
+            var output = new byte[asconHash.GetDigestSize()];
+            asconHash.DoFinal(output, 0);
+            output.Should().HaveCount(32); // Ensure valid hash output
+        }
+
+        [Test]
+        public void BlockUpdate_MultipleCalls_ShouldProcessCorrectly()
+        {
+            // Arrange
+            var input1 = new byte[] { 0x00, 0x11, 0x22 };
+            var input2 = new byte[] { 0x33, 0x44, 0x55, 0x66, 0x77 };
+
+            // Act
+            asconHash.BlockUpdate(input1, 0, input1.Length);
+            asconHash.BlockUpdate(input2, 0, input2.Length);
+
+            // Assert
+            var output = new byte[asconHash.GetDigestSize()];
+            asconHash.DoFinal(output, 0);
+            output.Should().HaveCount(32); // Ensure valid hash output
+        }
+
+    [Test]
+    public void AsconHash_WhenGetNameIsCalled_ReturnsCorrectValue()
+    {
+        asconHash.AlgorithmName.Should().Be("Ascon-Hash");
+        asconHashA.AlgorithmName.Should().Be("Ascon-HashA");
     }
 
     private static string ToHexString(byte[] bytes)
