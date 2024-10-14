@@ -11,7 +11,6 @@ public class CryptoException : Exception
     /// Initializes a new instance of the <see cref="CryptoException"/> class.
     /// </summary>
     public CryptoException()
-        : base()
     {
     }
 

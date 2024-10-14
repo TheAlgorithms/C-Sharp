@@ -24,7 +24,6 @@ public class OutputLengthException : DataLengthException
     /// It is commonly used when a generic output length issue needs to be raised without specific details.
     /// </remarks>
     public OutputLengthException()
-        : base()
     {
     }
 

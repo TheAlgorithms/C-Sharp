@@ -11,8 +11,16 @@ namespace Algorithms.Crypto.Digests;
 /// The <see cref="AsconDigest"/> class implements the Ascon hash function, a lightweight cryptographic algorithm designed for
 /// resource-constrained environments such as IoT devices. It provides two variants:
 /// <list type="bullet">
-/// <item><description><see cref="AsconParameters.AsconHash"/>: The standard Ascon-Hash variant with 12 rounds of the permutation function for enhanced security.</description></item>
-/// <item><description><see cref="AsconParameters.AsconHashA"/>: A performance-optimized variant with 8 rounds of the permutation function, offering a trade-off between security and performance.</description></item>
+/// <item>
+/// <description>
+/// <see cref="AsconParameters.AsconHash"/>: The standard Ascon-Hash variant with 12 rounds of the permutation function for enhanced security.
+/// </description>
+/// </item>
+/// <item>
+/// <description>
+/// <see cref="AsconParameters.AsconHashA"/>: A performance-optimized variant with 8 rounds of the permutation function, offering a trade-off between security and performance.
+/// </description>
+/// </item>
 /// </list>
 /// <br />
 /// The AsconDigest processes data in 8-byte blocks, accumulating input until a block is complete, at which point it applies

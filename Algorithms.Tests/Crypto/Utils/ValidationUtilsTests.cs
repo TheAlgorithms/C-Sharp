@@ -42,6 +42,20 @@ namespace Algorithms.Tests.Crypto.Utils
         }
 
         [Test]
+        public void CheckOutputLength_WithCondition_ShouldNotThrowOutputLengthException()
+        {
+            // Arrange
+            var condition = false;
+            var errorMessage = "Output length is invalid";
+
+            // Act
+            var act = () => ValidationUtils.CheckOutputLength(condition, errorMessage);
+
+            // Assert
+            act.Should().NotThrow<OutputLengthException>();
+        }
+
+        [Test]
         public void CheckOutputLength_WithBufferOutOfBounds_ShouldThrowOutputLengthException()
         {
             // Arrange
@@ -56,6 +70,22 @@ namespace Algorithms.Tests.Crypto.Utils
             // Assert
             act.Should().Throw<OutputLengthException>()
                .WithMessage(errorMessage);
+        }
+
+        [Test]
+        public void CheckOutputLength_WithBProperBufferSize_ShouldThrowOutputLengthException()
+        {
+            // Arrange
+            var buffer = new byte[5];
+            var offset = 0;
+            var length = 4;
+            var errorMessage = "Output buffer is too short";
+
+            // Act
+            var act = () => ValidationUtils.CheckOutputLength(buffer, offset, length, errorMessage);
+
+            // Assert
+            act.Should().NotThrow<OutputLengthException>();
         }
 
         [Test]
@@ -75,6 +105,20 @@ namespace Algorithms.Tests.Crypto.Utils
                 .WithMessage(errorMessage);
         }
 
+        [Test]
+        public void CheckOutputLength_SpanDoesNotExceedLimit_ShouldThrowOutputLengthException()
+        {
+            // Arrange
+            Span<byte> output = new byte[10];
+            var outputLength = output.Length;
+            var maxLength = 15;
+            var errorMessage = "Output exceeds maximum length";
 
+            // Act
+            var act = () => ValidationUtils.CheckOutputLength(outputLength > maxLength, errorMessage); // Capture the length
+
+            // Assert
+            act.Should().NotThrow<OutputLengthException>();
+        }
     }
 }
