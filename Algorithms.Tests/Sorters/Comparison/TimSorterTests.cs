@@ -9,13 +9,14 @@ namespace Algorithms.Tests.Sorters.Comparison;
 public static class TimSorterTests
 {
     private static readonly IntComparer IntComparer = new();
+    private static readonly TimSorterSettings Settings = new();
 
     [Test]
     public static void ArraySorted(
         [Random(0, 10_000, 2000)] int n)
     {
         // Arrange
-        var sorter = new TimSorter<int>();
+        var sorter = new TimSorter<int>(Settings, IntComparer);
         var (correctArray, testArray) = RandomHelper.GetArrays(n);
 
         // Act
@@ -30,7 +31,7 @@ public static class TimSorterTests
     public static void TinyArray()
     {
         // Arrange
-        var sorter = new TimSorter<int>();
+        var sorter = new TimSorter<int>(Settings, IntComparer);
         var tinyArray = new[] { 1 };
         var correctArray = new[] { 1 };
 
@@ -45,7 +46,7 @@ public static class TimSorterTests
     public static void SmallChunks()
     {
         // Arrange
-        var sorter = new TimSorter<int>();
+        var sorter = new TimSorter<int>(Settings, IntComparer);
         var (correctArray, testArray) = RandomHelper.GetArrays(800);
         Array.Sort(correctArray, IntComparer);
         Array.Sort(testArray, IntComparer);

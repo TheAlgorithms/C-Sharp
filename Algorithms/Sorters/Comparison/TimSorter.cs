@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Algorithms.Sorters.Utils;
 
 namespace Algorithms.Sorters.Comparison;
 
@@ -27,6 +28,10 @@ public class TimSorter<T> : IComparisonSorter<T>
 {
     private readonly int minMerge;
     private readonly int initMinGallop;
+
+    // Pool of reusable TimChunk objects for memory efficiency.
+    private readonly TimChunk<T>[] chunkPool = new TimChunk<T>[2];
+
     private readonly int[] runBase;
     private readonly int[] runLengths;
 
@@ -50,15 +55,18 @@ public class TimSorter<T> : IComparisonSorter<T>
         public int Wins { get; set; }
     }
 
-    public TimSorter(int minMerge = 32, int minGallop = 7)
+    public TimSorter(TimSorterSettings settings, IComparer<T> comparer)
     {
         initMinGallop = minGallop;
-        this.minMerge = minMerge;
         runBase = new int[85];
         runLengths = new int[85];
 
         stackSize = 0;
-        this.minGallop = minGallop;
+
+        minGallop = settings.MinGallop;
+        minMerge = settings.MinMerge;
+
+        this.comparer = comparer ?? Comparer<T>.Default;
     }
 
     /// <summary>
@@ -159,15 +167,6 @@ public class TimSorter<T> : IComparisonSorter<T>
     }
 
     /// <summary>
-    /// Left shift a value, preventing a roll over to negative numbers.
-    /// </summary>
-    /// <param name="shiftable">int value to left shift.</param>
-    /// <returns>Left shifted value, bound to 2,147,483,647.</returns>
-    private static int BoundLeftShift(int shiftable) => (shiftable << 1) < 0
-            ? (shiftable << 1) + 1
-            : int.MaxValue;
-
-    /// <summary>
     /// Check the chunks before getting in to a merge to make sure there's something to actually do.
     /// </summary>
     /// <param name="left">TimChunk of the left hand side.</param>
@@ -263,105 +262,6 @@ public class TimSorter<T> : IComparisonSorter<T>
         }
 
         return runHi - start;
-    }
-
-    /// <summary>
-    /// Find the position in the array that a key should fit to the left of where it currently sits.
-    /// </summary>
-    /// <param name="array">Array to search.</param>
-    /// <param name="key">Key to place in the array.</param>
-    /// <param name="i">Base index for the key.</param>
-    /// <param name="len">Length of the chunk to run through.</param>
-    /// <param name="hint">Initial starting position to start from.</param>
-    /// <returns>Offset for the key's location.</returns>
-    private int GallopLeft(T[] array, T key, int i, int len, int hint)
-    {
-        var (offset, lastOfs) = comparer.Compare(key, array[i + hint]) > 0
-            ? RightRun(array, key, i, len, hint, 0)
-            : LeftRun(array, key, i, hint, 1);
-
-        return FinalOffset(array, key, i, offset, lastOfs, 1);
-    }
-
-    /// <summary>
-    /// Find the position in the array that a key should fit to the right of where it currently sits.
-    /// </summary>
-    /// <param name="array">Array to search.</param>
-    /// <param name="key">Key to place in the array.</param>
-    /// <param name="i">Base index for the key.</param>
-    /// <param name="len">Length of the chunk to run through.</param>
-    /// <param name="hint">Initial starting position to start from.</param>
-    /// <returns>Offset for the key's location.</returns>
-    private int GallopRight(T[] array, T key, int i, int len, int hint)
-    {
-        var (offset, lastOfs) = comparer.Compare(key, array[i + hint]) < 0
-            ? LeftRun(array, key, i, hint, 0)
-            : RightRun(array, key, i, len, hint, -1);
-
-        return FinalOffset(array, key, i, offset, lastOfs, 0);
-    }
-
-    private (int offset, int lastOfs) LeftRun(T[] array, T key, int i, int hint, int lt)
-    {
-        var maxOfs = hint + 1;
-        var (offset, tmp) = (1, 0);
-
-        while (offset < maxOfs && comparer.Compare(key, array[i + hint - offset]) < lt)
-        {
-            tmp = offset;
-            offset = BoundLeftShift(offset);
-        }
-
-        if (offset > maxOfs)
-        {
-            offset = maxOfs;
-        }
-
-        var lastOfs = hint - offset;
-        offset = hint - tmp;
-
-        return (offset, lastOfs);
-    }
-
-    private (int offset, int lastOfs) RightRun(T[] array, T key, int i, int len, int hint, int gt)
-    {
-        var (offset, lastOfs) = (1, 0);
-        var maxOfs = len - hint;
-        while (offset < maxOfs && comparer.Compare(key, array[i + hint + offset]) > gt)
-        {
-            lastOfs = offset;
-            offset = BoundLeftShift(offset);
-        }
-
-        if (offset > maxOfs)
-        {
-            offset = maxOfs;
-        }
-
-        offset += hint;
-        lastOfs += hint;
-
-        return (offset, lastOfs);
-    }
-
-    private int FinalOffset(T[] array, T key, int i, int offset, int lastOfs, int lt)
-    {
-        lastOfs++;
-        while (lastOfs < offset)
-        {
-            var m = lastOfs + (int)((uint)(offset - lastOfs) >> 1);
-
-            if (comparer.Compare(key, array[i + m]) < lt)
-            {
-                offset = m;
-            }
-            else
-            {
-                lastOfs = m + 1;
-            }
-        }
-
-        return offset;
     }
 
     /// <summary>
@@ -465,7 +365,7 @@ public class TimSorter<T> : IComparisonSorter<T>
 
         stackSize--;
 
-        var k = GallopRight(array, array[baseB], baseA, lenA, 0);
+        var k = GallopingStrategy<T>.GallopRight(array, array[baseB], baseA, lenA, comparer);
 
         baseA += k;
         lenA -= k;
@@ -475,7 +375,7 @@ public class TimSorter<T> : IComparisonSorter<T>
             return;
         }
 
-        lenB = GallopLeft(array, array[baseA + lenA - 1], baseB, lenB, lenB - 1);
+        lenB = GallopingStrategy<T>.GallopLeft(array, array[baseA + lenA - 1], baseB, lenB, comparer);
 
         if (lenB <= 0)
         {
@@ -590,7 +490,7 @@ public class TimSorter<T> : IComparisonSorter<T>
 
     private bool GallopMerge(TimChunk<T> left, TimChunk<T> right, ref int dest)
     {
-        left.Wins = GallopRight(left.Array, right.Array[right.Index], left.Index, left.Remaining, 0);
+        left.Wins = GallopingStrategy<T>.GallopRight(left.Array, right.Array[right.Index], left.Index, left.Remaining, comparer);
         if (left.Wins != 0)
         {
             Array.Copy(left.Array, left.Index, right.Array, dest, left.Wins);
@@ -609,7 +509,7 @@ public class TimSorter<T> : IComparisonSorter<T>
             return true;
         }
 
-        right.Wins = GallopLeft(right.Array, left.Array[left.Index], right.Index, right.Remaining, 0);
+        right.Wins = GallopingStrategy<T>.GallopLeft(right.Array, left.Array[left.Index], right.Index, right.Remaining, comparer);
         if (right.Wins != 0)
         {
             Array.Copy(right.Array, right.Index, right.Array, dest, right.Wins);
@@ -629,5 +529,18 @@ public class TimSorter<T> : IComparisonSorter<T>
         }
 
         return false;
+    }
+}
+
+public class TimSorterSettings
+{
+    public int MinMerge { get; }
+
+    public int MinGallop { get; }
+
+    public TimSorterSettings(int minMerge = 32, int minGallop = 7)
+    {
+        MinMerge = minMerge;
+        MinGallop = minGallop;
     }
 }
