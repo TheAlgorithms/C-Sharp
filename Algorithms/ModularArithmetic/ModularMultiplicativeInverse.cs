@@ -20,13 +20,13 @@ public static class ModularMultiplicativeInverse
         var eeaResult = ExtendedEuclideanAlgorithm.Compute(a, n);
 
         // Check if there is an inverse:
-        if (eeaResult.gcd != 1)
+        if (eeaResult.Gcd != 1)
         {
             throw new ArithmeticException($"{a} is not invertible in Z/{n}Z.");
         }
 
         // Make sure, inverseOfA (i.e. the bezout coefficient of a) is in the interval [0, n).
-        var inverseOfA = eeaResult.bezoutA;
+        var inverseOfA = eeaResult.BezoutA;
         if (inverseOfA < 0)
         {
             inverseOfA += n;
@@ -47,13 +47,13 @@ public static class ModularMultiplicativeInverse
         var eeaResult = ExtendedEuclideanAlgorithm.Compute(a, n);
 
         // Check if there is an inverse:
-        if (eeaResult.gcd != 1)
+        if (eeaResult.Gcd != 1)
         {
             throw new ArithmeticException($"{a} is not invertible in Z/{n}Z.");
         }
 
         // Make sure, inverseOfA (i.e. the bezout coefficient of a) is in the interval [0, n).
-        var inverseOfA = eeaResult.bezoutA;
+        var inverseOfA = eeaResult.BezoutA;
         if (inverseOfA < 0)
         {
             inverseOfA += n;
