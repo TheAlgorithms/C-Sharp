@@ -67,6 +67,7 @@ find more than one implementation for the same objective but using different alg
     * [Modular Multiplicative Inverse](./Algorithms/ModularArithmetic/ModularMultiplicativeInverse.cs)
   * [Numeric](./Algorithms/Numeric)
     * [Absolute](./Algorithms/Numeric/Abs.cs) 
+    * [Addition Without Arithmetic](./Algorithms/Numeric/AdditionWithoutArithmetic.cs) 
     * [Aliquot Sum Calculator](./Algorithms/Numeric/AliquotSumCalculator.cs)
     * [Amicable Numbers Checker](./Algorithms/Numeric/AmicableNumbersChecker.cs)
     * [Decomposition](./Algorithms/Numeric/Decomposition)
