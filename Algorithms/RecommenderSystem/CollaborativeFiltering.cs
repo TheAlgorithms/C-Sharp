@@ -29,6 +29,7 @@ namespace Algorithms.RecommenderSystem
             double numerator = 0;
             double sumSquare1 = 0;
             double sumSquare2 = 0;
+            double epsilon = 1e-10;
 
             for (var i = 0; i < commonItems.Count; i++)
             {
@@ -41,7 +42,7 @@ namespace Algorithms.RecommenderSystem
             }
 
             var denominator = Math.Sqrt(sumSquare1 * sumSquare2);
-            return denominator == 0 ? 0 : numerator / denominator;
+            return Math.Abs(denominator) < epsilon ? 0 : numerator / denominator;
         }
 
         /// <summary>
@@ -62,6 +63,7 @@ namespace Algorithms.RecommenderSystem
             var targetUserRatings = ratings[targetUser];
             double totalSimilarity = 0;
             double weightedSum = 0;
+            double epsilon = 1e-10;
 
             foreach (var otherUser in ratings.Keys.Where(u => u != targetUser))
             {
@@ -74,7 +76,7 @@ namespace Algorithms.RecommenderSystem
                 }
             }
 
-            return totalSimilarity == 0 ? 0 : weightedSum / totalSimilarity;
+            return Math.Abs(totalSimilarity) < epsilon ? 0 : weightedSum / totalSimilarity;
         }
     }
 }
