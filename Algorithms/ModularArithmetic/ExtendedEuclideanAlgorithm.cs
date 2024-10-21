@@ -8,12 +8,12 @@ namespace Algorithms.ModularArithmetic;
 public static class ExtendedEuclideanAlgorithm
 {
     /// <summary>
-    ///     Computes the greatest common divisor (gcd) of integers a and b, also the coefficients of Bézout's identity,
-    ///     which are integers x and y such that a*bezoutCoefficientOfA + b*bezoutCoefficientOfB = gcd(a, b).
+    ///     Computes the greatest common divisor (Gcd) of integers a and b, also the coefficients of Bézout's identity,
+    ///     which are integers x and y such that a*bezoutCoefficientOfA + b*bezoutCoefficientOfB = Gcd(a, b).
     /// </summary>
     /// <param name="a">Input number.</param>
     /// <param name="b">Second input number.</param>
-    /// <returns>A record of ExtendedEuclideanAlgorithmResult containing the bezout coefficients of a and b as well as the gcd(a,b).</returns>
+    /// <returns>A record of ExtendedEuclideanAlgorithmResult containing the bezout coefficients of a and b as well as the Gcd(a,b).</returns>
     public static ExtendedEuclideanAlgorithmResult<long> Compute(long a, long b)
     {
         long quotient;
@@ -46,12 +46,12 @@ public static class ExtendedEuclideanAlgorithm
     }
 
     /// <summary>
-    ///     Computes the greatest common divisor (gcd) of integers a and b, also the coefficients of Bézout's identity,
-    ///     which are integers x and y such that a*bezoutCoefficientOfA + b*bezoutCoefficientOfB = gcd(a, b).
+    ///     Computes the greatest common divisor (Gcd) of integers a and b, also the coefficients of Bézout's identity,
+    ///     which are integers x and y such that a*bezoutCoefficientOfA + b*bezoutCoefficientOfB = Gcd(a, b).
     /// </summary>
     /// <param name="a">Input number.</param>
     /// <param name="b">Second input number.</param>
-    /// <returns>A record of ExtendedEuclideanAlgorithmResult containing the bezout coefficients of a and b as well as the gcd(a,b).</returns>
+    /// <returns>A record of ExtendedEuclideanAlgorithmResult containing the bezout coefficients of a and b as well as the Gcd(a,b).</returns>
     public static ExtendedEuclideanAlgorithmResult<BigInteger> Compute(BigInteger a, BigInteger b)
     {
         BigInteger quotient;
@@ -87,8 +87,8 @@ public static class ExtendedEuclideanAlgorithm
     /// The result type for the computation of the Extended Euclidean Algorithm.
     /// </summary>
     /// <typeparam name="T">The data type of the computation (i.e. long or BigInteger).</typeparam>
-    /// <param name="bezoutA">The bezout coefficient of the parameter a to the computation.</param>
-    /// <param name="bezoutB">The bezout coefficient of the parameter b to the computation.</param>
-    /// <param name="gcd">The greatest common divisor of the parameters a and b to the computation.</param>
-    public record ExtendedEuclideanAlgorithmResult<T>(T bezoutA, T bezoutB, T gcd);
+    /// <param name="BezoutA">The bezout coefficient of the parameter a to the computation.</param>
+    /// <param name="BezoutB">The bezout coefficient of the parameter b to the computation.</param>
+    /// <param name="Gcd">The greatest common divisor of the parameters a and b to the computation.</param>
+    public record ExtendedEuclideanAlgorithmResult<T>(T BezoutA, T BezoutB, T Gcd);
 }

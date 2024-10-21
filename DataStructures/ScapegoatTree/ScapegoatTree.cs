@@ -247,7 +247,7 @@ public class ScapegoatTree<TKey> where TKey : IComparable
     /// <returns>Scapegoat node with its parent node. Parent can be null if scapegoat node is root node.</returns>
     /// <exception cref="ArgumentException">Thrown if path stack is empty.</exception>
     /// <exception cref="InvalidOperationException">Thrown if scapegoat wasn't found.</exception>
-    public (Node<TKey>? parent, Node<TKey> scapegoat) FindScapegoatInPath(Stack<Node<TKey>> path)
+    public (Node<TKey>? Parent, Node<TKey> Scapegoat) FindScapegoatInPath(Stack<Node<TKey>> path)
     {
         if (path.Count == 0)
         {

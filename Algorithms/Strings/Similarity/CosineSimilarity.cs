@@ -21,8 +21,8 @@ public static class CosineSimilarity
         // Step 1: Get the vectors for the two strings
         // Each vector represents the frequency of each character in the string.
         var vectors = GetVectors(left.ToLowerInvariant(), right.ToLowerInvariant());
-        var leftVector = vectors.leftVector;
-        var rightVector = vectors.rightVector;
+        var leftVector = vectors.LeftVector;
+        var rightVector = vectors.RightVector;
 
         // Step 2: Calculate the intersection of the two vectors
         // The intersection is the set of characters that appear in both strings.
@@ -64,7 +64,7 @@ public static class CosineSimilarity
     /// <param name="left">The first string.</param>
     /// <param name="right">The second string.</param>
     /// <returns>A tuple containing the vectors for the two strings.</returns>
-    private static (Dictionary<char, int> leftVector, Dictionary<char, int> rightVector) GetVectors(string left, string right)
+    private static (Dictionary<char, int> LeftVector, Dictionary<char, int> RightVector) GetVectors(string left, string right)
     {
         var leftVector = new Dictionary<char, int>();
         var rightVector = new Dictionary<char, int>();
