@@ -40,7 +40,7 @@ namespace Algorithms.Sorters.Utils
         ? (shiftable << 1) + 1
         : int.MaxValue;
 
-        private static (int offset, int lastOfs) LeftRun(T[] array, T key, int baseIndex, int hint, IComparer<T> comparer)
+        private static (int Offset, int LastOfs) LeftRun(T[] array, T key, int baseIndex, int hint, IComparer<T> comparer)
         {
             var maxOfs = hint + 1;
             var (offset, tmp) = (1, 0);
@@ -62,7 +62,7 @@ namespace Algorithms.Sorters.Utils
             return (offset, lastOfs);
         }
 
-        private static (int offset, int lastOfs) RightRun(T[] array, T key, int baseIndex, int len, int hint, IComparer<T> comparer)
+        private static (int Offset, int LastOfs) RightRun(T[] array, T key, int baseIndex, int len, int hint, IComparer<T> comparer)
         {
             var (offset, lastOfs) = (1, 0);
             var maxOfs = len - hint;

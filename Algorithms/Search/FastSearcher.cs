@@ -44,7 +44,7 @@ public class FastSearcher
         return from + FindIndex(array.Slice(from, to - from + 1), item);
     }
 
-    private (int left, int right) ComputeIndices(Span<int> array, int item)
+    private (int Left, int Right) ComputeIndices(Span<int> array, int item)
     {
         var indexBinary = array.Length / 2;
 
@@ -62,7 +62,7 @@ public class FastSearcher
             : (indexInterpolation, indexBinary);
     }
 
-    private (int from, int to) SelectSegment(Span<int> array, int left, int right, int item)
+    private (int From, int To) SelectSegment(Span<int> array, int left, int right, int item)
     {
         if (item < array[left])
         {
