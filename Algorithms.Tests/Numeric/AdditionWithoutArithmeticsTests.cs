@@ -20,5 +20,4 @@ public static class AdditionWithoutArithmeticTests
         // Assert
         Assert.That(result, Is.EqualTo(expectedResult));
     }
-
 }

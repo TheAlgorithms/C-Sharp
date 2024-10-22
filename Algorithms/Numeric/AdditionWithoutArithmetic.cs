@@ -25,5 +25,4 @@ public static class AdditionWithoutArithmetic
 
         return first;
     }
-    
 }
