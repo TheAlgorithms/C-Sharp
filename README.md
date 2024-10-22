@@ -27,6 +27,7 @@ find more than one implementation for the same objective but using different alg
       * [TBC Padding](./Algorithms/Crypto/Paddings/TbcPadding.cs)
       * [PKCS7 Padding](./Algorithms/Crypto/Paddings/Pkcs7Padding.cs)
     * [Digests](./Algorithms/Crypto/Digests/)
+      * [Ascon Hash Digest](./Algorithms/Crypto/Digests/AsconDigest.cs)
       * [MD2 Digest](./Algorithms/Crypto/Digests/Md2Digest.cs)
   * [Data Compression](./Algorithms/DataCompression)
     * [Burrows-Wheeler transform](./Algorithms/DataCompression/BurrowsWheelerTransform.cs)
