@@ -150,7 +150,7 @@ public class HashTable<TKey, TValue>
         var index = GetIndex(key);
         if (
             entries[index] != null &&
-            EqualityComparer<TKey>.Default.Equals(entries[index] !.Key!, key))
+            EqualityComparer<TKey>.Default.Equals(entries[index]!.Key!, key))
         {
             throw new ArgumentException("Key already exists");
         }

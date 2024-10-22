@@ -22,7 +22,7 @@ public static class RgbHsvConversion
     /// <param name="saturation">Saturation of the color.</param>
     /// <param name="value">Brightness-value of the color.</param>
     /// <returns>The tuple of RGB-components.</returns>
-    public static (byte red, byte green, byte blue) HsvToRgb(
+    public static (byte Red, byte Green, byte Blue) HsvToRgb(
         double hue,
         double saturation,
         double value)
@@ -59,7 +59,7 @@ public static class RgbHsvConversion
     /// <param name="green">Green-component of the color.</param>
     /// <param name="blue">Blue-component of the color.</param>
     /// <returns>The tuple of HSV-components.</returns>
-    public static (double hue, double saturation, double value) RgbToHsv(
+    public static (double Hue, double Saturation, double Value) RgbToHsv(
         byte red,
         byte green,
         byte blue)
@@ -94,7 +94,7 @@ public static class RgbHsvConversion
         return (hue, saturation, value);
     }
 
-    private static (byte red, byte green, byte blue) GetRgbBySection(
+    private static (byte Red, byte Green, byte Blue) GetRgbBySection(
         double hueSection,
         double chroma,
         double matchValue,

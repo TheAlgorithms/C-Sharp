@@ -36,7 +36,7 @@ public static class DamerauLevenshteinDistance
                 // Calculate the minimum distance by considering three possible operations:
                 // deletion, insertion, and substitution.
                 distances[i, j] = Math.Min(
-                    Math.Min( // deletion
+                    Math.Min(// deletion
                         distances[i - 1, j] + 1, // delete the character from the left string
                         distances[i, j - 1] + 1), // insert the character into the right string
                     distances[i - 1, j - 1] + cost); // substitute the character in the left string with the character in the right string
