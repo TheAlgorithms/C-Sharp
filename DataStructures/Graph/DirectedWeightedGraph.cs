@@ -94,7 +94,7 @@ public class DirectedWeightedGraph<T> : IDirectedWeightedGraph<T>
         for (int i = indexToRemove; i < Count - 1; i++)
         {
             Vertices[i] = Vertices[i + 1];
-            Vertices[i] !.Index = i;
+            Vertices[i]!.Index = i;
         }
 
         Vertices[Count - 1] = null;

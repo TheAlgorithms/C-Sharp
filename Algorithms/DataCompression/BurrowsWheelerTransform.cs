@@ -16,7 +16,7 @@ public class BurrowsWheelerTransform
     ///     rotation matrix.
     /// </summary>
     /// <param name="s">Input string.</param>
-    public (string encoded, int index) Encode(string s)
+    public (string Encoded, int Index) Encode(string s)
     {
         if (s.Length == 0)
         {

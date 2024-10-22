@@ -51,13 +51,13 @@ public class NysiisEncoder
 
     private string TrimEnd(string text)
     {
-        var checks = new (string from, string to)?[]
+        var checks = new (string From, string To)?[]
         {
             ("S", string.Empty),
             ("AY", "Y"),
             ("A", string.Empty),
         };
-        var replacement = checks.FirstOrDefault(t => text.EndsWith(t!.Value.from));
+        var replacement = checks.FirstOrDefault(t => text.EndsWith(t!.Value.From));
         if (replacement is { })
         {
             var (from, to) = replacement!.Value;
@@ -69,7 +69,7 @@ public class NysiisEncoder
 
     private string ReplaceStep(string text, int i)
     {
-        (string from, string to)[] replacements =
+        (string From, string To)[] replacements =
         {
             ("EV", "AF"),
             ("E", "A"),
@@ -134,7 +134,7 @@ public class NysiisEncoder
 
     private string StartReplace(string start)
     {
-        var checks = new (string from, string to)?[]
+        var checks = new (string From, string To)?[]
         {
             ("MAC", "MCC"),
             ("KN", "NN"),
@@ -143,7 +143,7 @@ public class NysiisEncoder
             ("PF", "FF"),
             ("SCH", "SSS"),
         };
-        var replacement = checks.FirstOrDefault(t => start.StartsWith(t!.Value.from));
+        var replacement = checks.FirstOrDefault(t => start.StartsWith(t!.Value.From));
         if (replacement is { })
         {
             var (from, to) = replacement!.Value;
@@ -155,7 +155,7 @@ public class NysiisEncoder
 
     private string EndReplace(string end)
     {
-        var checks = new (string from, string to)?[]
+        var checks = new (string From, string To)?[]
         {
             ("EE", "Y"),
             ("IE", "Y"),
@@ -164,7 +164,7 @@ public class NysiisEncoder
             ("NT", "D"),
             ("ND", "D"),
         };
-        var replacement = checks.FirstOrDefault(t => end.EndsWith(t!.Value.from));
+        var replacement = checks.FirstOrDefault(t => end.EndsWith(t!.Value.From));
         if (replacement is { })
         {
             var (from, to) = replacement!.Value;
@@ -175,5 +175,5 @@ public class NysiisEncoder
     }
 
     private string Replace(string text, int index, int length, string substitute) =>
-        text[..index] + substitute + text[(index + length) ..];
+        text[..index] + substitute + text[(index + length)..];
 }

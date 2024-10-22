@@ -27,7 +27,7 @@ public class HuffmanCompressor
     /// </summary>
     /// <param name="uncompressedText">Text message to compress.</param>
     /// <returns>Compressed string and keys to decompress it.</returns>
-    public (string compressedText, Dictionary<string, string> decompressionKeys) Compress(string uncompressedText)
+    public (string CompressedText, Dictionary<string, string> DecompressionKeys) Compress(string uncompressedText)
     {
         if (string.IsNullOrEmpty(uncompressedText))
         {
@@ -70,7 +70,7 @@ public class HuffmanCompressor
         return occurenceCounts.Select(kvp => new ListNode(kvp.Key, 1d * kvp.Value / text.Length)).ToArray();
     }
 
-    private (Dictionary<string, string> compressionKeys, Dictionary<string, string> decompressionKeys) GetKeys(
+    private (Dictionary<string, string> CompressionKeys, Dictionary<string, string> DecompressionKeys) GetKeys(
         ListNode tree)
     {
         var compressionKeys = new Dictionary<string, string>();

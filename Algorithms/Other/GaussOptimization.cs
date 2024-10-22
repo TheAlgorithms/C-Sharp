@@ -24,7 +24,7 @@ public class GaussOptimization
     /// <param name="x1">The first function parameter.</param>
     /// <param name="x2">The second function parameter.</param>
     /// <returns>A tuple of coordinates of function extremum.</returns>
-    public (double, double) Optimize(
+    public (double X1, double X2) Optimize(
         Func<double, double, double> func,
         double n,
         double step,
