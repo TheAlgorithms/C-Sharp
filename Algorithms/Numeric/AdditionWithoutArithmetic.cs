@@ -22,6 +22,8 @@ public static class AdditionWithoutArithmetic
             first ^= second;             // Sum without carry
             second = c << 1;            // Carry shifted left
         }
+
         return first;
     }
+    
 }
