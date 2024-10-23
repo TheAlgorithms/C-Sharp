@@ -531,16 +531,3 @@ public class TimSorter<T> : IComparisonSorter<T>
         return false;
     }
 }
-
-public class TimSorterSettings
-{
-    public int MinMerge { get; }
-
-    public int MinGallop { get; }
-
-    public TimSorterSettings(int minMerge = 32, int minGallop = 7)
-    {
-        MinMerge = minMerge;
-        MinGallop = minGallop;
-    }
-}

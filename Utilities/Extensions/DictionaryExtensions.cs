@@ -17,7 +17,7 @@ public static class DictionaryExtensions
     /// </exception>
     public static void AddMany<TKey, TValue>(
         this Dictionary<TKey, TValue> keys,
-        IEnumerable<(TKey, TValue)> enumerable) where TKey : notnull
+        IEnumerable<(TKey Key, TValue Value)> enumerable) where TKey : notnull
     {
         foreach (var (key, value) in enumerable)
         {
