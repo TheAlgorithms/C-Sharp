@@ -1,0 +1,15 @@
+{
+	"name": "The Algorithms C#",
+	"image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0-bookworm",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-dotnettools.csharp",
+				"ms-dotnettools.csdevkit",
+				"nunit.nunit-adapter",
+				"fluentassertions.fluentassertions"
+			]
+		}
+	},
+	"postCreateCommand": "sudo chown -R $(whoami) /workspaces"
+}
