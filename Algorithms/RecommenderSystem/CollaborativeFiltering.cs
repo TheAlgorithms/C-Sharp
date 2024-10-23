@@ -6,6 +6,13 @@ namespace Algorithms.RecommenderSystem
 {
     public class CollaborativeFiltering
     {
+        private readonly ISimilarityCalculator similarityCalculator;
+
+        public CollaborativeFiltering(ISimilarityCalculator similarityCalculator)
+        {
+            this.similarityCalculator = similarityCalculator;
+        }
+
         /// <summary>
         /// Method to calculate similarity between two users using Pearson correlation.
         /// </summary>
@@ -70,7 +77,7 @@ namespace Algorithms.RecommenderSystem
                 var otherUserRatings = ratings[otherUser];
                 if (otherUserRatings.ContainsKey(targetItem))
                 {
-                    var similarity = CalculateSimilarity(targetUserRatings, otherUserRatings);
+                    var similarity = similarityCalculator.CalculateSimilarity(targetUserRatings, otherUserRatings);
                     totalSimilarity += Math.Abs(similarity);
                     weightedSum += similarity * otherUserRatings[targetItem];
                 }
