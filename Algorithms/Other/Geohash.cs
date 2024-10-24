@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Algorithms.Other
 {
-    public class Geohash
+    public static class Geohash
     {
-        private static readonly string Base32Characters = "0123456789bcdefghjkmnpqrstuvwxyz"; // Convert latitude and longitude coordinates into a concise string
-        private static readonly int GeohashLength = 12; // ± 1.86 cm
+        private const string Base32Characters = "0123456789bcdefghjkmnpqrstuvwxyz"; // Convert latitude and longitude coordinates into a concise string
+        private const int GeohashLength = 12; // ± 1.86 cm
 
         /// <summary>
         /// Encodes the provided latitude and longitude coordinates into a Geohash string.
