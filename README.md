@@ -223,6 +223,7 @@ find more than one implementation for the same objective but using different alg
     * [Julian Easter](./Algorithms/Other/JulianEaster.cs)
     * [Pollard's Rho](./Algorithms/Other/PollardsRhoFactorizing.cs)
     * [GeoLocation Hash](./Algorithms/Other/Geohash.cs)
+    * [Triangulation Algorithm](./Algorithms/Other/Triangulator.cs)
   * [Problems](./Algorithms/Problems)
     * [Stable Marriage](./Algorithms/Problems/StableMarriage)
       * [Gale-Shapley](./Algorithms/Problems/StableMarriage/GaleShapley.cs)
