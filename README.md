@@ -71,6 +71,7 @@ find more than one implementation for the same objective but using different alg
     * [Addition Without Arithmetic](./Algorithms/Numeric/AdditionWithoutArithmetic.cs) 
     * [Aliquot Sum Calculator](./Algorithms/Numeric/AliquotSumCalculator.cs)
     * [Amicable Numbers Checker](./Algorithms/Numeric/AmicableNumbersChecker.cs)
+    * [Ceil](./Algorithms/Numeric/Ceil.cs)
     * [Decomposition](./Algorithms/Numeric/Decomposition)
       * [LU Decomposition](./Algorithms/Numeric/Decomposition/LU.cs)
       * [Thin Singular Vector Decomposition](./Algorithms/Numeric/Decomposition/ThinSVD.cs)
