@@ -8,7 +8,7 @@
 [![Donate](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/TheAlgorithms/donate)
 
 ## All Algorithms implemented in C# - for education purposes
-.
+
 The repository is a collection of a variety of algorithms implemented in C#. The algorithms span over a variety of topics
 from computer science, mathematics and statistics, data science, machine learning, engineering, etc. The implementations
 and their associated documentations are meant to provide a learning resource for educators and students. Hence, one may
