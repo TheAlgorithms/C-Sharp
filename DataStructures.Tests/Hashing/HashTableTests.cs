@@ -285,8 +285,7 @@ public class HashTableTests
         var hashTable = new HashTable<int, string>();
         hashTable.Add(1, "one");
         hashTable.Add(2, "two");
-        hashTable.Add(3, "three");
-        hashTable.Add(4, "four");
+        hashTable.Add(3, "three"); 
         var values = new List<string> { "one", "two", "three", "four" };
 
         Assert.That(values, Is.EquivalentTo(hashTable.Values));
