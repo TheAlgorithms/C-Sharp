@@ -75,6 +75,7 @@ find more than one implementation for the same objective but using different alg
     * [Decomposition](./Algorithms/Numeric/Decomposition)
       * [LU Decomposition](./Algorithms/Numeric/Decomposition/LU.cs)
       * [Thin Singular Vector Decomposition](./Algorithms/Numeric/Decomposition/ThinSVD.cs)
+    * [Floor](./Algorithms/Floor.cs)
     * [Greatest Common Divisor](./Algorithms/Numeric/GreatestCommonDivisor)
       * [Euclidean GCD](./Algorithms/Numeric/GreatestCommonDivisor/EuclideanGreatestCommonDivisorFinder.cs)
       * [Binary GCD](./Algorithms/Numeric/GreatestCommonDivisor/BinaryGreatestCommonDivisorFinder.cs)
