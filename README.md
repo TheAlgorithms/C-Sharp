@@ -60,6 +60,7 @@ find more than one implementation for the same objective but using different alg
     * [Distances](./Algorithms/LinearAlgebra/Distances)
       * [Euclidean](./Algorithms/LinearAlgebra/Distances/Euclidean.cs)
       * [Manhattan](./Algorithms/LinearAlgebra/Distances/Manhattan.cs)
+      * [Minkowski](./Algorithms/LinearAlgebra/Distances/Minkowski.cs)
     * [Eigenvalue](./Algorithms/LinearAlgebra/Eigenvalue)
       * [Power Iteration](./Algorithms/LinearAlgebra/Eigenvalue/PowerIteration.cs)
   * [Modular Arithmetic](./Algorithms/ModularArithmetic)
