@@ -22,7 +22,7 @@ public static class PresentValueTests
 
 
     [TestCase(-1.0, new[] { 10.0, 20.70, -293.0, 297.0 })]
-    [TestCase(-1.0,new double[] {})]
+    [TestCase(1.0,new double[] {})]
 
     public static void Present_Value_Exception_Tests(double discountRate, double[] cashFlow)
     => Assert.Throws<ArgumentException>(() => PresentValue.Calculate(discountRate, cashFlow.ToList()));
