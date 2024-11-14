@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Algorithms.Financial;
 using FluentAssertions;
 using NUnit.Framework;
@@ -8,30 +9,21 @@ namespace Algorithms.Tests.Financial;
 
 public static class PresentValueTests
 {
-    [Test]
-    public static void Present_Value_General_Tests()
-    {
-        PresentValue.Calculate(0.13, [10.0, 20.70, -293.0, 297.0])
-            .Should()
-            .Be(4.69);
+    [TestCase(0.13,new[] { 10.0, 20.70, -293.0, 297.0 },4.69)]
+    [TestCase(0.07,new[] { -109129.39, 30923.23, 15098.93, 29734.0, 39.0 }, -42739.63)]
+    [TestCase(0.07, new[] { 109129.39, 30923.23, 15098.93, 29734.0, 39.0 }, 175519.15)]
+    [TestCase(0.0, new[] { 109129.39, 30923.23, 15098.93, 29734.0, 39.0 }, 184924.55)]
 
-        PresentValue.Calculate(0.07, [-109129.39, 30923.23, 15098.93, 29734.0, 39.0])
-            .Should()
-            .Be(-42739.63);
+    public static void Present_Value_General_Tests(double discountRate,double[] cashFlow ,double expected)
+    =>
+        PresentValue.Calculate(discountRate, cashFlow.ToList())
+           .Should()
+           .Be(expected);
 
-        PresentValue.Calculate(0.07, [109129.39, 30923.23, 15098.93, 29734.0, 39.0])
-            .Should()
-            .Be(175519.15);
 
-        PresentValue.Calculate(0.0, [109129.39, 30923.23, 15098.93, 29734.0, 39.0])
-            .Should()
-            .Be(184924.55);
-    }
+    [TestCase(-1.0, new[] { 10.0, 20.70, -293.0, 297.0 })]
+    [TestCase(-1.0,new double[] {})]
 
-    [Test]
-    public static void Present_Value_Exception_Tests()
-    {
-        Assert.Throws<ArgumentException>(() => PresentValue.Calculate(-1.0, [10.0, 20.70, -293.0, 297.0]));
-        Assert.Throws<ArgumentException>(() => PresentValue.Calculate(1.0, []));
-    }
+    public static void Present_Value_Exception_Tests(double discountRate, double[] cashFlow)
+    => Assert.Throws<ArgumentException>(() => PresentValue.Calculate(discountRate, cashFlow.ToList()));
 }
