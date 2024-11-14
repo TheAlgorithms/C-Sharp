@@ -16,7 +16,7 @@ public static class PresentValue
             throw new ArgumentException("Discount rate cannot be negative");
         }
 
-        if (cashFlows == null || cashFlows.Count == 0)
+        if (cashFlows.Count == 0)
         {
             throw new ArgumentException("Cash flows list cannot be empty");
         }
