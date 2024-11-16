@@ -58,6 +58,7 @@ find more than one implementation for the same objective but using different alg
     * [IHeuristicKnapsackSolver](./Algorithms/Knapsack/IHeuristicKnapsackSolver.cs)
   * [Linear Algebra](./Algorithms/LinearAlgebra)
     * [Distances](./Algorithms/LinearAlgebra/Distances)
+      * [Chebyshev](./Algorithms/LinearAlgebra/Distances/Chebyshev.cs)
       * [Euclidean](./Algorithms/LinearAlgebra/Distances/Euclidean.cs)
       * [Manhattan](./Algorithms/LinearAlgebra/Distances/Manhattan.cs)
       * [Minkowski](./Algorithms/LinearAlgebra/Distances/Minkowski.cs)
