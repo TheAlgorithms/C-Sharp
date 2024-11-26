@@ -14,7 +14,7 @@ public class Vertex<T>
     /// <summary>
     ///     Gets an index of the vertex in graph adjacency matrix.
     /// </summary>
-    public int Index { get; }
+    public int Index { get; internal set; }
 
     /// <summary>
     ///     Gets reference to the graph this vertex belongs to.

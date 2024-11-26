@@ -57,7 +57,7 @@ public class MergeSorter<T> : IComparisonSorter<T>
         }
     }
 
-    private static (T[] left, T[] right) Split(T[] array)
+    private static (T[] Left, T[] Right) Split(T[] array)
     {
         var mid = array.Length / 2;
         return (array.Take(mid).ToArray(), array.Skip(mid).ToArray());

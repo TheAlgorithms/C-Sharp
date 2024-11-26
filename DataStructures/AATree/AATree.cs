@@ -216,7 +216,7 @@ public class AaTree<TKey>
             throw new ArgumentException($"Key \"{key}\" already in tree!", nameof(key));
         }
 
-        return Split(Skew(node)) !;
+        return Split(Skew(node))!;
     }
 
     /// <summary>

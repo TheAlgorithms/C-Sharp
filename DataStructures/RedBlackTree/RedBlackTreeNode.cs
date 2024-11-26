@@ -6,12 +6,12 @@ namespace DataStructures.RedBlackTree;
 public enum NodeColor : byte
 {
     /// <summary>
-    ///     Represents red node
+    ///     Represents red node.
     /// </summary>
     Red,
 
     /// <summary>
-    ///     Represents black node
+    ///     Represents black node.
     /// </summary>
     Black,
 }
