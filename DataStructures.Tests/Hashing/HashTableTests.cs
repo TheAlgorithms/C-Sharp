@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DataStructures.Hashing;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace DataStructures.Tests.Hashing;
@@ -388,6 +389,99 @@ public class HashTableTests
         var hashTable = new HashTable<NegativeHashKey, int>(4);
         hashTable.Add(new NegativeHashKey(1), 1);
         Assert.That(hashTable[new NegativeHashKey(1)], Is.EqualTo(1));
+    }
+
+    [Test]
+    public void Add_ShouldTriggerResize_WhenThresholdExceeded()
+    {
+        // Arrange
+        var initialCapacity = 4;
+        var hashTable = new HashTable<int, string>(initialCapacity);
+
+        // Act
+        for (int i = 1; i <= 4; i++) // Start keys from 1 to avoid default(TKey) = 0 issue
+        {
+            hashTable.Add(i, $"Value{i}");
+        }
+
+        // Assert
+        hashTable.Capacity.Should().BeGreaterThan(initialCapacity); // Ensure resizing occurred
+        hashTable.Count.Should().Be(4); // Verify count reflects number of added items
+    }
+
+    
+    [Test]
+    public void Add_ThrowsException_WhenKeyIsDefault()
+    {
+        // Arrange
+        var hashTable = new HashTable<int, string>();
+
+        // Act & Assert
+        Action act = () => hashTable.Add(default, "Value");
+        act.Should().Throw<ArgumentNullException>().WithMessage("*key*");
+    }
+
+    [Test]
+    public void Add_ThrowsException_WhenValueIsDefault()
+    {
+        // Arrange
+        var hashTable = new HashTable<int, string>();
+
+        // Act & Assert
+        Action act = () => hashTable.Add(1, default);
+        act.Should().Throw<ArgumentNullException>().WithMessage("*value*");
+    }
+
+    [Test]
+    public void Add_StoresValueCorrectly()
+    {
+        // Arrange
+        var hashTable = new HashTable<int, string>();
+
+        // Act
+        hashTable.Add(1, "Value1");
+
+        // Assert
+        hashTable[1].Should().Be("Value1");
+    }
+
+    [Test]
+    public void Get_ReturnsCorrectValue_ForExistingKey()
+    {
+        // Arrange
+        var hashTable = new HashTable<string, int>();
+        hashTable.Add("key", 42);
+
+        // Act
+        var value = hashTable["key"];
+
+        // Assert
+        value.Should().Be(42);
+    }
+
+    [Test]
+    public void Get_ThrowsException_WhenKeyDoesNotExist()
+    {
+        // Arrange
+        var hashTable = new HashTable<string, int>();
+
+        // Act & Assert
+        Action act = () => _ = hashTable["nonexistent"];
+        act.Should().Throw<KeyNotFoundException>();
+    }
+
+    [Test]
+    public void Capacity_Increases_WhenResizeOccurs()
+    {
+        var initialCapacity = 4;
+        var hashTable = new HashTable<int, string>(initialCapacity);
+
+        for (int i = 1; i <= 5; i++)
+        {
+            hashTable.Add(i, $"Value{i}");
+        }
+
+        hashTable.Capacity.Should().BeGreaterThan(initialCapacity);
     }
 }
 
