@@ -27,7 +27,7 @@ public static class PowerIteration
     /// <returns>Dominant eigenvalue and eigenvector pair.</returns>
     /// <exception cref="ArgumentException">The <paramref name="source" /> matrix is not square-shaped.</exception>
     /// <exception cref="ArgumentException">The length of the start vector doesn't equal the size of the source matrix.</exception>
-    public static (double eigenvalue, double[] eigenvector) Dominant(
+    public static (double Eigenvalue, double[] Eigenvector) Dominant(
         double[,] source,
         double[] startVector,
         double error = 0.00001)
@@ -61,7 +61,7 @@ public static class PowerIteration
 
         var eigenvalue = source.Multiply(currentEigenVector.ToColumnVector()).ToRowVector().Magnitude();
 
-        return (eigenvalue, eigenvector: currentEigenVector);
+        return (eigenvalue, Eigenvector: currentEigenVector);
     }
 
     /// <summary>
@@ -81,6 +81,6 @@ public static class PowerIteration
     /// <returns>Dominant eigenvalue and eigenvector pair.</returns>
     /// <exception cref="ArgumentException">The <paramref name="source" /> matrix is not square-shaped.</exception>
     /// <exception cref="ArgumentException">The length of the start vector doesn't equal the size of the source matrix.</exception>
-    public static (double eigenvalue, double[] eigenvector) Dominant(double[,] source, double error = 0.00001) =>
+    public static (double Eigenvalue, double[] Eigenvector) Dominant(double[,] source, double error = 0.00001) =>
         Dominant(source, new Random().NextVector(source.GetLength(1)), error);
 }

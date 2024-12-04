@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Numerics;
 using Algorithms.Other;
 using FluentAssertions;
 using NUnit.Framework;
+using SkiaSharp;
+using System;
+using System.Collections.Generic;
+using System.Numerics;
 
 namespace Algorithms.Tests.Other;
 
@@ -39,13 +39,12 @@ public static class KochSnowflakeTest
         var bitmapWidth = 600;
         var offsetX = bitmapWidth / 10f;
         var offsetY = bitmapWidth / 3.7f;
-
-        Bitmap bitmap = KochSnowflake.GetKochSnowflake();
+        SKBitmap bitmap = KochSnowflake.GetKochSnowflake();
         bitmap.GetPixel(0, 0)
             .Should()
-            .Be(Color.FromArgb(255, 255, 255, 255), "because the background should be white");
+            .Be(new SKColor(255, 255, 255, 255), "because the background should be white");
         bitmap.GetPixel((int)offsetX, (int)offsetY)
             .Should()
-            .Be(Color.FromArgb(255, 0, 0, 0), "because the snowflake is drawn in black and this is the position of the first vector");
+            .Be(new SKColor(0, 0, 0, 255), "because the snowflake is drawn in black and this is the position of the first vector");
     }
 }

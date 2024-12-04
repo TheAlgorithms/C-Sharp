@@ -1,5 +1,5 @@
 using System;
-using System.Drawing;
+using SkiaSharp;
 
 namespace Algorithms.Other;
 
@@ -22,6 +22,8 @@ namespace Algorithms.Other;
 /// </summary>
 public static class Mandelbrot
 {
+    private const byte Alpha = 255;
+
     /// <summary>
     ///     Method to generate the bitmap of the Mandelbrot set. Two types of coordinates
     ///     are used: bitmap-coordinates that refer to the pixels and figure-coordinates
@@ -39,7 +41,7 @@ public static class Mandelbrot
     /// <param name="maxStep">Maximum number of steps to check for divergent behavior.</param>
     /// <param name="useDistanceColorCoding">Render in color or black and white.</param>
     /// <returns>The bitmap of the rendered Mandelbrot set.</returns>
-    public static Bitmap GetBitmap(
+    public static SKBitmap GetBitmap(
         int bitmapWidth = 800,
         int bitmapHeight = 600,
         double figureCenterX = -0.6,
@@ -69,7 +71,7 @@ public static class Mandelbrot
                 $"{nameof(maxStep)} should be greater than zero");
         }
 
-        var bitmap = new Bitmap(bitmapWidth, bitmapHeight);
+        var bitmap = new SKBitmap(bitmapWidth, bitmapHeight);
         var figureHeight = figureWidth / bitmapWidth * bitmapHeight;
 
         // loop through the bitmap-coordinates
@@ -100,10 +102,10 @@ public static class Mandelbrot
     /// </summary>
     /// <param name="distance">Distance until divergence threshold.</param>
     /// <returns>The color corresponding to the distance.</returns>
-    private static Color BlackAndWhiteColorMap(double distance) =>
+    private static SKColor BlackAndWhiteColorMap(double distance) =>
         distance >= 1
-            ? Color.FromArgb(255, 0, 0, 0)
-            : Color.FromArgb(255, 255, 255, 255);
+            ? new SKColor(0, 0, 0, Alpha)
+            : new SKColor(255, 255, 255, Alpha);
 
     /// <summary>
     ///     Color-coding taking the relative distance into account. The Mandelbrot set
@@ -111,11 +113,11 @@ public static class Mandelbrot
     /// </summary>
     /// <param name="distance">Distance until divergence threshold.</param>
     /// <returns>The color corresponding to the distance.</returns>
-    private static Color ColorCodedColorMap(double distance)
+    private static SKColor ColorCodedColorMap(double distance)
     {
         if (distance >= 1)
         {
-            return Color.FromArgb(255, 0, 0, 0);
+            return new SKColor(0, 0, 0, Alpha);
         }
 
         // simplified transformation of HSV to RGB
@@ -126,19 +128,19 @@ public static class Mandelbrot
         var hi = (int)Math.Floor(hue / 60) % 6;
         var f = hue / 60 - Math.Floor(hue / 60);
 
-        var v = (int)val;
-        var p = 0;
-        var q = (int)(val * (1 - f * saturation));
-        var t = (int)(val * (1 - (1 - f) * saturation));
+        var v = (byte)val;
+        const byte p = 0;
+        var q = (byte)(val * (1 - f * saturation));
+        var t = (byte)(val * (1 - (1 - f) * saturation));
 
         switch (hi)
         {
-            case 0: return Color.FromArgb(255, v, t, p);
-            case 1: return Color.FromArgb(255, q, v, p);
-            case 2: return Color.FromArgb(255, p, v, t);
-            case 3: return Color.FromArgb(255, p, q, v);
-            case 4: return Color.FromArgb(255, t, p, v);
-            default: return Color.FromArgb(255, v, p, q);
+            case 0: return new SKColor(v, t, p, Alpha);
+            case 1: return new SKColor(q, v, p, Alpha);
+            case 2: return new SKColor(p, v, t, Alpha);
+            case 3: return new SKColor(p, q, v, Alpha);
+            case 4: return new SKColor(t, p, v, Alpha);
+            default: return new SKColor(v, p, q, Alpha);
         }
     }
 

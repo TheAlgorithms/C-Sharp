@@ -106,4 +106,71 @@ public static class LinkedListTests
         Assert.That(l3RemoveSucess, Is.False);
         Assert.That(nonExistantRemoveSucess, Is.False);
     }
+
+    [Test]
+    public static void DeleteFirstFromList()
+    {
+        // Arrange
+        var testObj = new SinglyLinkedList<string>();
+        _ = testObj.AddLast("H");
+        _ = testObj.AddLast("E");
+        _ = testObj.AddLast("L");
+        _ = testObj.AddLast("L");
+        _ = testObj.AddLast("O");
+
+        // Act
+        var deleteSuccess = testObj.DeleteFirst();
+
+        // Assert
+        Assert.That(deleteSuccess, Is.True);
+        Assert.That(4, Is.EqualTo(testObj.Length()));
+        Assert.That("E", Is.EqualTo(testObj.GetElementByIndex(0)));
+    }
+
+    [Test]
+    public static void DeleteFirstFromEmptyList()
+    {
+        // Arrange
+        var testObj = new SinglyLinkedList<string>();
+
+        // Act
+        var deleteSuccess = testObj.DeleteFirst();
+
+        // Assert
+        Assert.That(deleteSuccess, Is.False);
+    }
+
+    [Test]
+    public static void DeleteLastFromList()
+    {
+        // Arrange
+        var testObj = new SinglyLinkedList<string>();
+        _ = testObj.AddLast("H");
+        _ = testObj.AddLast("E");
+        _ = testObj.AddLast("L");
+        _ = testObj.AddLast("L");
+        _ = testObj.AddLast("O");
+
+        // Act
+        var deleteSuccess = testObj.DeleteLast();
+
+        // Assert
+        Assert.That(deleteSuccess, Is.True);
+        Assert.That(4, Is.EqualTo(testObj.Length()));
+        Assert.That("L", Is.EqualTo(testObj.GetElementByIndex(testObj.Length() - 1)));
+    }
+
+    [Test]
+    public static void DeleteLastFromEmptyList()
+    {
+        // Arrange
+        var testObj = new SinglyLinkedList<string>();
+
+        // Act
+        var deleteSuccess = testObj.DeleteLast();
+
+        // Assert
+        Assert.That(deleteSuccess, Is.False);
+    }
+
 }

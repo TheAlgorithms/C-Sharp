@@ -19,5 +19,19 @@ jobs:
         run: dotnet build --no-restore
       - name: Test
         run: dotnet test --no-restore --collect "XPlat Code Coverage"
-      - name: Upload code coverage to Codecov
-        run: bash <(curl -s https://codecov.io/bash)
+      - name: Upload coverage to codecov (tokenless)
+        if: >-
+          github.event_name == 'pull_request' &&
+          github.event.pull_request.head.repo.full_name != github.repository
+        uses: codecov/codecov-action@v4
+        with:
+          fail_ci_if_error: true
+      - name: Upload coverage to codecov (with token)
+        if: >
+          github.repository == 'TheAlgorithms/C-Sharp' &&
+          (github.event_name != 'pull_request' ||
+          github.event.pull_request.head.repo.full_name == github.repository)
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true

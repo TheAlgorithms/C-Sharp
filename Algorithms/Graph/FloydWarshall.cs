@@ -49,7 +49,7 @@ public class FloydWarshall<T>
         {
             for (var j = 0; j < distances.GetLength(0); j++)
             {
-                var dist = graph.AdjacentDistance(graph.Vertices[i] !, graph.Vertices[j] !);
+                var dist = graph.AdjacentDistance(graph.Vertices[i]!, graph.Vertices[j]!);
                 distances[i, j] = dist != 0 ? dist : double.PositiveInfinity;
             }
         }

@@ -25,44 +25,43 @@ public static class DijkstraAlgorithm
 
         var distanceArray = InitializeDistanceArray(graph, startVertex);
 
-        var currentVertex = startVertex;
+        var distanceRecord = new PriorityQueue<DistanceModel<T>, double>();
 
-        var currentPath = 0d;
+        distanceRecord.Enqueue(distanceArray[0], distanceArray[0].Distance);
 
-        while (true)
+        while (visitedVertices.Count != distanceArray.Length && distanceRecord.Count != 0)
         {
-            visitedVertices.Add(currentVertex);
+            while(visitedVertices.Contains(distanceRecord.Peek().Vertex!))
+            {
+                distanceRecord.Dequeue();
+            }
+
+            var minDistance = distanceRecord.Dequeue();
+
+            var currentPath = minDistance.Distance;
+
+            visitedVertices.Add(minDistance.Vertex!);
 
             var neighborVertices = graph
-                .GetNeighbors(currentVertex)
+                .GetNeighbors(minDistance.Vertex!)
                 .Where(x => x != null && !visitedVertices.Contains(x))
                 .ToList();
 
             foreach (var vertex in neighborVertices)
             {
-                var adjacentDistance = graph.AdjacentDistance(currentVertex, vertex!);
+                var adjacentDistance = graph.AdjacentDistance(minDistance.Vertex!, vertex!);
 
                 var distance = distanceArray[vertex!.Index];
 
-                if (distance.Distance <= currentPath + adjacentDistance)
+                var fullDistance = currentPath + adjacentDistance;
+
+                if (distance.Distance > fullDistance)
                 {
-                    continue;
+                    distance.Distance = fullDistance;
+                    distance.PreviousVertex = minDistance.Vertex;
+                    distanceRecord.Enqueue(distance, fullDistance);
                 }
-
-                distance.Distance = currentPath + adjacentDistance;
-                distance.PreviousVertex = currentVertex;
             }
-
-            var minimalAdjacentVertex = GetMinimalUnvisitedAdjacentVertex(graph, currentVertex, neighborVertices);
-
-            if (neighborVertices.Count == 0 || minimalAdjacentVertex is null)
-            {
-                break;
-            }
-
-            currentPath += graph.AdjacentDistance(currentVertex, minimalAdjacentVertex);
-
-            currentVertex = minimalAdjacentVertex;
         }
 
         return distanceArray;
@@ -95,29 +94,5 @@ public static class DijkstraAlgorithm
         {
             throw new ArgumentNullException(nameof(graph));
         }
-    }
-
-    private static Vertex<T>? GetMinimalUnvisitedAdjacentVertex<T>(
-        IDirectedWeightedGraph<T> graph,
-        Vertex<T> startVertex,
-        IEnumerable<Vertex<T>?> adjacentVertices)
-    {
-        var minDistance = double.MaxValue;
-        Vertex<T>? minVertex = default;
-
-        foreach (var vertex in adjacentVertices)
-        {
-            var currentDistance = graph.AdjacentDistance(startVertex, vertex!);
-
-            if (minDistance <= currentDistance)
-            {
-                continue;
-            }
-
-            minDistance = currentDistance;
-            minVertex = vertex;
-        }
-
-        return minVertex;
     }
 }

@@ -130,6 +130,4 @@ public class DictionaryExtensionsTests
         dictionary.Should().HaveCount(10000);
         dictionary[9999].Should().Be("Value9999");
     }
-
-
 }
