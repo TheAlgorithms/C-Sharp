@@ -1,5 +1,7 @@
 using Algorithms.Search;
+using FluentAssertions;
 using NUnit.Framework;
+using System;
 using Utilities.Exceptions;
 
 namespace Algorithms.Tests.Search;
@@ -9,11 +11,16 @@ public static class FastSearcherTests
     [Test]
     public static void FindIndex_ItemPresent_IndexCorrect()
     {
+        // Arrange
         var searcher = new FastSearcher();
         var arr = Helper.GetSortedArray(1000);
         var present = Helper.GetItemIn(arr);
+
+        // Act
         var index = searcher.FindIndex(arr, present);
-        Assert.That(arr[index], Is.EqualTo(present));
+
+        // Assert
+        arr[index].Should().Be(present);
     }
 
     [TestCase(new[] { 1, 2 }, 1)]
@@ -21,61 +28,81 @@ public static class FastSearcherTests
     [TestCase(new[] { 1, 2, 3, 3, 3 }, 2)]
     public static void FindIndex_ItemPresentInSpecificCase_IndexCorrect(int[] arr, int present)
     {
+        // Arrange
         var searcher = new FastSearcher();
+
+        // Act
         var index = searcher.FindIndex(arr, present);
-        Assert.That(arr[index], Is.EqualTo(present));
+
+        // Assert
+        arr[index].Should().Be(present);
     }
 
     [Test]
-    public static void FindIndex_ItemMissing_ItemNotFoundExceptionThrown()
+    public static void FindIndex_ItemPresentInArrayOfDuplicates_IndexCorrect()
     {
+        // Arrange
         var searcher = new FastSearcher();
-        var arr = Helper.GetSortedArray(1000);
-        var missing = Helper.GetItemNotIn(arr);
-        _ = Assert.Throws<ItemNotFoundException>(() => searcher.FindIndex(arr, missing));
-    }
-
-    [TestCase(new int[0], 2)]
-    public static void FindIndex_ItemMissingInSpecificCase_ItemNotFoundExceptionThrown(int[] arr, int missing)
-    {
-        var searcher = new FastSearcher();
-        _ = Assert.Throws<ItemNotFoundException>(() => searcher.FindIndex(arr, missing));
-    }
-
-    [Test]
-    public static void FindIndex_ItemSmallerThanAllMissing_ItemNotFoundExceptionThrown()
-    {
-        var searcher = new FastSearcher();
-        var arr = Helper.GetSortedArray(1000);
-        var missing = Helper.GetItemSmallerThanAllIn(arr);
-        _ = Assert.Throws<ItemNotFoundException>(() => searcher.FindIndex(arr, missing));
-    }
-
-    [Test]
-    public static void FindIndex_ItemBiggerThanAllMissing_ItemNotFoundExceptionThrown()
-    {
-        var searcher = new FastSearcher();
-        var arr = Helper.GetSortedArray(1000);
-        var missing = Helper.GetItemBiggerThanAllIn(arr);
-        _ = Assert.Throws<ItemNotFoundException>(() => searcher.FindIndex(arr, missing));
-    }
-
-    [Test]
-    public static void FindIndex_ArrayOfDuplicatesItemPresent_IndexCorrect()
-    {
-        var searcher = new FastSearcher();
-        var arr = new int[1000];
+        var arr = CreateArrayOfDuplicates(1000, 0); // Helper for large duplicate arrays
         var present = 0;
+
+        // Act
         var index = searcher.FindIndex(arr, present);
-        Assert.That(arr[index], Is.EqualTo(0));
+
+        // Assert
+        arr[index].Should().Be(0);
+    }
+
+    [TestCase(new int[0], 2)] // Empty array
+    [TestCase(new[] { 1, 2, 3 }, 4)] // Item missing in array
+    public static void FindIndex_ItemMissing_ItemNotFoundExceptionThrown(int[] arr, int missing)
+    {
+        // Arrange
+        var searcher = new FastSearcher();
+
+        // Act
+        Action act = () => searcher.FindIndex(arr, missing);
+
+        // Assert
+        act.Should().Throw<ItemNotFoundException>();
     }
 
     [Test]
-    public static void FindIndex_ArrayOfDuplicatesItemMissing_ItemNotFoundExceptionThrown()
+    public static void FindIndex_ItemMissingInArrayOfDuplicates_ItemNotFoundExceptionThrown()
     {
+        // Arrange
         var searcher = new FastSearcher();
-        var arr = new int[1000];
+        var arr = CreateArrayOfDuplicates(1000, 0); // Helper for large duplicate arrays
         var missing = 1;
-        _ = Assert.Throws<ItemNotFoundException>(() => searcher.FindIndex(arr, missing));
+
+        // Act
+        Action act = () => searcher.FindIndex(arr, missing);
+
+        // Assert
+        act.Should().Throw<ItemNotFoundException>();
+    }
+
+    [Test]
+    public static void FindIndex_ItemOutOfRange_ItemNotFoundExceptionThrown()
+    {
+        // Arrange
+        var searcher = new FastSearcher();
+        var arr = Helper.GetSortedArray(1000);
+        var smaller = Helper.GetItemSmallerThanAllIn(arr);
+        var bigger = Helper.GetItemBiggerThanAllIn(arr);
+
+        // Act & Assert
+        Action act1 = () => searcher.FindIndex(arr, smaller);
+        Action act2 = () => searcher.FindIndex(arr, bigger);
+
+        act1.Should().Throw<ItemNotFoundException>();
+        act2.Should().Throw<ItemNotFoundException>();
+    }
+
+    private static int[] CreateArrayOfDuplicates(int length, int value)
+    {
+        var arr = new int[length];
+        Array.Fill(arr, value);
+        return arr;
     }
 }
