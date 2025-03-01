@@ -23,5 +23,5 @@ public class DistanceModel<T>
     }
 
     public override string ToString() =>
-        $"Vertex: {Vertex} - Distance: {Distance} - Previous: {PreviousVertex}";
+        $"From Previous Vertex: {PreviousVertex} to Vertex {Vertex} is Distance: {Distance}";
 }
