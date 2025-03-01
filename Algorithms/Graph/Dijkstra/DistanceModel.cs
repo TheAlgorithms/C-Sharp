@@ -13,6 +13,8 @@ public class DistanceModel<T>
 
     public Vertex<T>? PreviousVertex { get; set; }
 
+    public Vertex<T>? StartVertex { get; set; }
+
     public double Distance { get; set; }
 
     public DistanceModel(Vertex<T>? vertex, Vertex<T>? previousVertex, double distance)
@@ -22,6 +24,17 @@ public class DistanceModel<T>
         Distance = distance;
     }
 
+    public DistanceModel(Vertex<T>? vertex, Vertex<T>? previousVertex, Vertex<T>? startVertex, double distance)
+    {
+        Vertex = vertex;
+        PreviousVertex = previousVertex;
+        Distance = distance;
+        StartVertex = startVertex;
+    }
+
     public override string ToString() =>
         $"From Previous Vertex: {PreviousVertex} to Vertex {Vertex} is Distance: {Distance}";
+
+    public string PrintDistance() =>
+        $"Start from Vertex: {StartVertex} to Vertex {Vertex} is Distance: {Distance}";
 }

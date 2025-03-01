@@ -73,11 +73,11 @@ public static class DijkstraAlgorithm
     {
         var distArray = new DistanceModel<T>[graph.Count];
 
-        distArray[startVertex.Index] = new DistanceModel<T>(startVertex, startVertex, 0);
+        distArray[startVertex.Index] = new DistanceModel<T>(startVertex, startVertex, startVertex, 0);
 
         foreach (var vertex in graph.Vertices.Where(x => x != null && !x.Equals(startVertex)))
         {
-            distArray[vertex!.Index] = new DistanceModel<T>(vertex, null, double.MaxValue);
+            distArray[vertex!.Index] = new DistanceModel<T>(vertex, null, startVertex, double.MaxValue);
         }
 
         return distArray;
