@@ -41,6 +41,7 @@ find more than one implementation for the same objective but using different alg
     * [Soundex](./Algorithms/Encoders/SoundexEncoder.cs)
     * [Feistel](./Algorithms/Encoders/FeistelCipher.cs)
     * [Blowfish](./Algorithms/Encoders/BlowfishEncoder.cs)
+    * [Autokey](./Algorithms/Encoders/AutokeyEncoder.cs)
   * [Graph](./Algorithms/Graph)
     * [Minimum Spanning Tree](./Algorithms/Graph/MinimumSpanningTree)
       * [Prim's Algorithm (Adjacency Matrix)](./Algorithms/Graph/MinimumSpanningTree/PrimMatrix.cs)
