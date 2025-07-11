@@ -18,6 +18,7 @@ namespace Algorithms.Tests.Strings
         }
 
         [TestCase("([)[}")]
+        [TestCase("([}}])")]
         public static void IsValidParentheses_FalseExpected(string parentheses)
         {
             // Arrange

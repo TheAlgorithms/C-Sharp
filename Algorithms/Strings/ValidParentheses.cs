@@ -7,7 +7,7 @@ namespace Algorithms.Strings
     ///     This is a class for checking if the parentheses is valid.
     ///     A valid parentheses should have opening brace and closing brace.
     /// </summary>
-    public class ValidParentheses
+    public static class ValidParentheses
     {
         /// <summary>
         ///     Function to check if the parentheses is valid.
@@ -22,27 +22,42 @@ namespace Algorithms.Strings
 
             Stack<char> stack = new Stack<char>();
 
-            foreach(char c in parentheses.ToCharArray())
+            foreach(char c in parentheses)
             {
-                if(c == '(' || c == '{' || c == '[')
+                switch (c)
                 {
-                    stack.Push(c);
-                }
-                else if (c == ')' && stack.Count != 0 && stack.Peek() == '(')
-                {
-                    stack.Pop();
-                }
-                else if (c == '}' && stack.Count != 0 && stack.Peek() == '{')
-                {
-                    stack.Pop();
-                }
-                else if (c == ']' && stack.Count != 0 && stack.Peek() == '[')
-                {
-                    stack.Pop();
-                }
-                else
-                {
-                    stack.Push(c);
+                    case '(':
+                    case '{':
+                    case '[':
+                        stack.Push(c);
+                        break;
+
+                    case ')':
+                        if (stack.Count == 0 || stack.Pop() != '(')
+                        {
+                            return false;
+                        }
+
+                        break;
+
+                    case '}':
+                        if (stack.Count == 0 || stack.Pop() != '{')
+                        {
+                            return false;
+                        }
+
+                        break;
+
+                    case ']':
+                        if (stack.Count == 0 || stack.Pop() != '[')
+                        {
+                            return false;
+                        }
+
+                        break;
+
+                    default:
+                        return false;
                 }
             }
 
