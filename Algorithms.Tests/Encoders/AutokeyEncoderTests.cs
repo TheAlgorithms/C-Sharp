@@ -5,7 +5,7 @@ using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Encoders
 {
-    public class AutokeyEncoderTests
+    public static class AutokeyEncoderTests
     {
         [Test]
         public static void DecodedStringIsTheSame()
