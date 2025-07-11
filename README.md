@@ -213,6 +213,7 @@ find more than one implementation for the same objective but using different alg
     * [Longest Consecutive Character](./Algorithms/Strings/GeneralStringAlgorithms.cs)
     * [Palindrome Checker](./Algorithms/Strings/Palindrome.cs)
     * [Get all permutations of a string](./Algorithms/Strings/Permutation.cs)
+    * [Valid Parentheses Checker](./Algorithms/Strings/ValidParentheses.cs)
   * [Other](./Algorithms/Other)
     * [Fermat Prime Checker](./Algorithms/Other/FermatPrimeChecker.cs)
     * [Sieve of Eratosthenes](./Algorithms/Other/SieveOfEratosthenes.cs)
