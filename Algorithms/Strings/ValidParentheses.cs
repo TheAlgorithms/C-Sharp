@@ -20,44 +20,31 @@ namespace Algorithms.Strings
                 return false;
             }
 
+            Dictionary<char, char> bracketPairs = new Dictionary<char, char>
+        {
+            { ')', '(' },
+            { '}', '{' },
+            { ']', '[' },
+        };
+
             Stack<char> stack = new Stack<char>();
 
-            foreach(char c in parentheses)
+            foreach (char c in parentheses)
             {
-                switch (c)
+                if (bracketPairs.ContainsValue(c))
                 {
-                    case '(':
-                    case '{':
-                    case '[':
-                        stack.Push(c);
-                        break;
-
-                    case ')':
-                        if (stack.Count == 0 || stack.Pop() != '(')
-                        {
-                            return false;
-                        }
-
-                        break;
-
-                    case '}':
-                        if (stack.Count == 0 || stack.Pop() != '{')
-                        {
-                            return false;
-                        }
-
-                        break;
-
-                    case ']':
-                        if (stack.Count == 0 || stack.Pop() != '[')
-                        {
-                            return false;
-                        }
-
-                        break;
-
-                    default:
+                    stack.Push(c);
+                }
+                else if (bracketPairs.ContainsKey(c))
+                {
+                    if (stack.Count == 0 || stack.Pop() != bracketPairs[c])
+                    {
                         return false;
+                    }
+                }
+                else
+                {
+                    return false;
                 }
             }
 
