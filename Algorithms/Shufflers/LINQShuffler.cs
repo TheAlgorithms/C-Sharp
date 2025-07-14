@@ -12,7 +12,7 @@ namespace Algorithms.Shufflers
     ///     LINQ queries and lambda expressions in C#.
     /// </summary>
     /// <typeparam name="T">Type array input.</typeparam>
-    public class LINQShuffler<T> : IShuffler<T>
+    public class LinqShuffler<T>
     {
         /// <summary>
         /// First, it will generate a random value for each element.
@@ -21,10 +21,10 @@ namespace Algorithms.Shufflers
         /// </summary>
         /// <param name="array">Array to shuffle.</param>
         /// <param name="seed">Random generator seed. Used to repeat the shuffle.</param>
-        public void Shuffle(T[] array, int? seed = null)
+        public T[] Shuffle(T[] array, int? seed = null)
         {
             var random = seed is null ? new Random() : new Random(seed.Value);
-            array = array.OrderBy(x => random.Next()).ToArray();
+            return array.OrderBy(x => random.Next()).ToArray();
         }
     }
 }

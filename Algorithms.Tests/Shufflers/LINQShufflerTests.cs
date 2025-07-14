@@ -6,7 +6,7 @@ using System;
 
 namespace Algorithms.Tests.Shufflers
 {
-    public static class LINQShufflerTests
+    public static class LinqShufflerTests
     {
         [Test]
         public static void ArrayShuffled_NewArraySameSize(
@@ -14,7 +14,7 @@ namespace Algorithms.Tests.Shufflers
             int n)
         {
             // Arrange
-            var shuffler = new LINQShuffler<int>();
+            var shuffler = new LinqShuffler<int>();
             var (correctArray, testArray) = RandomHelper.GetArrays(n);
 
             // Act
@@ -30,7 +30,7 @@ namespace Algorithms.Tests.Shufflers
             int n)
         {
             // Arrange
-            var shuffler = new LINQShuffler<int>();
+            var shuffler = new LinqShuffler<int>();
             var (correctArray, testArray) = RandomHelper.GetArrays(n);
 
             // Act
@@ -46,7 +46,7 @@ namespace Algorithms.Tests.Shufflers
             [Random(1000, 10000, 5, Distinct = true)] int seed)
         {
             // Arrange
-            var shuffle = new LINQShuffler<int>();
+            var shuffle = new LinqShuffler<int>();
             var (correctArray, testArray) = RandomHelper.GetArrays(n);
 
             // Act
