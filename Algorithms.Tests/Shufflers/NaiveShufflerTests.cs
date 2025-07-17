@@ -46,7 +46,7 @@ namespace Algorithms.Tests.Shufflers
             [Random(1000, 10000, 5, Distinct = true)] int seed)
         {
             // Arrange
-            var shuffle = new LinqShuffler<int>();
+            var shuffle = new NaiveShuffler<int>();
             var (correctArray, testArray) = RandomHelper.GetArrays(n);
 
             // Act
