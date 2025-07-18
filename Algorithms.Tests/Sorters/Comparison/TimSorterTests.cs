@@ -66,4 +66,20 @@ public static class TimSorterTests
         // Assert
         Assert.That(correctArray, Is.EqualTo(testArray));
     }
+
+    [Test]
+    public static void SkipsEntireLeftRun()
+    {
+        // Arrange
+        var sorter = new TimSorter<int>(Settings, IntComparer);
+        var testArray = new[] { 0, 1, 2, 3, 4, 5, 100, 101, 102, 103, 104, 105 };
+        var correctArray = (int[])testArray.Clone();
+
+        // Act
+        sorter.Sort(testArray, IntComparer);
+        Array.Sort(correctArray, IntComparer);
+
+        // Assert
+        Assert.That(testArray, Is.EqualTo(correctArray));
+    }
 }
