@@ -150,6 +150,7 @@ find more than one implementation for the same objective but using different alg
     * [Fisher-Yates Shuffler](./Algorithms/Shufflers/FisherYatesShuffler.cs)
     * [LINQ Shuffler](./Algorithms/Shufflers/LinqShuffler.cs)
     * [Naive Shuffler](./Algorithms/Shufflers/NaiveShuffler.cs)
+    * [Recursive Shuffler](./Algorithms/Shufflers/RecursiveShuffler.cs)
   * [Sequences](./Algorithms/Sequences)
     * [A000002 Kolakoski](./Algorithms/Sequences/KolakoskiSequence.cs)
     * [A000004 Zero](./Algorithms/Sequences/ZeroSequence.cs)
