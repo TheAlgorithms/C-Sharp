@@ -12,24 +12,25 @@ namespace Algorithms.Shufflers
     {
         /// <summary>
         /// First, it will check the length of the array on the base case.
-        /// Next, if there's still element left, it will shuffle the sub-array.
-        /// Lastly, it will randomly select index from 0 to length of array then
-        /// swap the elements array[arrayLength] and array[index].
+        /// Next, if there's still items left, it will shuffle the sub-array.
+        /// Lastly, it will randomly select index from 0 to number of items of the array
+        /// then swap the elements array[items] and array[index].
         /// </summary>
         /// <param name="array">Array to shuffle.</param>
-        /// <param name="arrayLength">The length of the array. Used for terminator.</param>
+        /// <param name="items">Number of items in the array.</param>
         /// <param name="seed">Random generator seed. Used to repeat the shuffle.</param>
-        public void Shuffle(T[] array, int arrayLength, int? seed = null)
+        public void Shuffle(T[] array, int items, int? seed = null)
         {
-            if(arrayLength <= 0)
+            if(items <= 0)
             {
                 return;
             }
 
-            Shuffle(array, arrayLength - 1, seed);
+            Shuffle(array, items - 1, seed);
             var random = seed is null ? new Random() : new Random(seed.Value);
-            int index = random.Next(arrayLength + 1);
-            (array[arrayLength], array[index]) = (array[index], array[arrayLength]);
+            int index = random.Next(items + 1);
+            (array[items], array[index]) = (array[index], array[items]);
+            (array[items], array[index]) = (array[index], array[items]);
         }
     }
 }
