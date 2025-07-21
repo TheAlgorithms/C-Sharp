@@ -18,7 +18,7 @@ namespace Algorithms.Tests.Shufflers
             var (correctArray, testArray) = RandomHelper.GetArrays(n);
 
             // Act
-            shuffler.Shuffle(testArray, testArray.Length - 1);
+            shuffler.Shuffle(testArray);
 
             // Assert
             testArray.Length.Should().Be(correctArray.Length);
@@ -34,7 +34,7 @@ namespace Algorithms.Tests.Shufflers
             var (correctArray, testArray) = RandomHelper.GetArrays(n);
 
             // Act
-            shuffler.Shuffle(testArray, testArray.Length - 1);
+            shuffler.Shuffle(testArray);
 
             // Assert
             testArray.Should().BeEquivalentTo(correctArray);
@@ -50,8 +50,8 @@ namespace Algorithms.Tests.Shufflers
             var (correctArray, testArray) = RandomHelper.GetArrays(n);
 
             // Act
-            shuffler.Shuffle(testArray, testArray.Length - 1, seed);
-            shuffler.Shuffle(correctArray, correctArray.Length - 1, seed);
+            shuffler.Shuffle(testArray, seed);
+            shuffler.Shuffle(correctArray, seed);
 
             // Assert
             correctArray.Should().BeEquivalentTo(testArray, options => options.WithStrictOrdering());
