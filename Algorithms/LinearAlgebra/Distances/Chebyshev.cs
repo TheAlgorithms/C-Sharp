@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 namespace Algorithms.LinearAlgebra.Distances;
 
 /// <summary>

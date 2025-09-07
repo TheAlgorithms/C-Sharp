@@ -1,5 +1,3 @@
-using System;
-
 namespace Algorithms.Graph.MinimumSpanningTree;
 
 /// <summary>

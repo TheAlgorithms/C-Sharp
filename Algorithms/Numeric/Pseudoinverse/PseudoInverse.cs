@@ -1,6 +1,4 @@
-using System;
 using Algorithms.Numeric.Decomposition;
-using Utilities.Extensions;
 
 namespace Algorithms.Numeric.Pseudoinverse;
 

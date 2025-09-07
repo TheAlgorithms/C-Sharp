@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Algorithms.Sorters.Comparison;
-using Utilities.Extensions;
 
 namespace Algorithms.DataCompression;
 

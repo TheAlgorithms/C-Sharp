@@ -1,6 +1,3 @@
-using System;
-using Utilities.Extensions;
-
 namespace Algorithms.Numeric.Decomposition;
 
 /// <summary>

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace Algorithms.Encoders;
 
 /// <summary>
@@ -101,7 +97,7 @@ public class FeistelCipher : IEncoder<uint>
             ulong decodedBlock = leftSubblock;
             decodedBlock = (decodedBlock << 32) | rightSubblock;
 
-            for(int i = 0; i < 8; i++)
+            for (int i = 0; i < 8; i++)
             {
                 ulong a = (decodedBlock & 0xFF00000000000000) >> 56;
 
@@ -125,7 +121,7 @@ public class FeistelCipher : IEncoder<uint>
         List<ulong> blocksListPlain = new();
         byte[] textArray = Encoding.ASCII.GetBytes(text);
         int offset = 8;
-        for(int i = 0; i < text.Length; i += 8)
+        for (int i = 0; i < text.Length; i += 8)
         {
             // text not always has len%16 == 0, that's why the offset should be adjusted for the last part of the text
             if (i > text.Length - 8)
@@ -144,7 +140,7 @@ public class FeistelCipher : IEncoder<uint>
     private static List<ulong> GetBlocksFromEncodedText(string text)
     {
         List<ulong> blocksListPlain = new();
-        for(int i = 0; i < text.Length; i += 16)
+        for (int i = 0; i < text.Length; i += 16)
         {
             ulong block = Convert.ToUInt64(text.Substring(i, 16), 16);
             blocksListPlain.Add(block);

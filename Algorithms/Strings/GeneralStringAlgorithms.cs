@@ -1,5 +1,3 @@
-using System;
-
 namespace Algorithms.Strings;
 
 /// <summary>

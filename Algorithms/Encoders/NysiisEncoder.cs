@@ -1,7 +1,3 @@
-using System.Globalization;
-using System.Linq;
-using System.Text;
-
 namespace Algorithms.Encoders;
 
 /// <summary>

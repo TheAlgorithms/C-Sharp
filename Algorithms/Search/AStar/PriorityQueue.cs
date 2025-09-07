@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 // todo: extract to data structures
 namespace Algorithms.Search.AStar;
 

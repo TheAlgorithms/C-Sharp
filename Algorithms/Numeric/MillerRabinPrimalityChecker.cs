@@ -1,6 +1,3 @@
-using System;
-using System.Numerics;
-
 namespace Algorithms.Numeric;
 
 /// <summary>

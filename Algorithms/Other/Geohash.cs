@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace Algorithms.Other;
 
 public static class Geohash

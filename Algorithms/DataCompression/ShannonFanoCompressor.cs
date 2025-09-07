@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
 using Algorithms.Knapsack;
-using Utilities.Extensions;
 
 namespace Algorithms.DataCompression;
 

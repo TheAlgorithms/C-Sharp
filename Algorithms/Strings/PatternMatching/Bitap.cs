@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Algorithms.Strings.PatternMatching;
+﻿namespace Algorithms.Strings.PatternMatching;
 
 /// <summary>
 /// The Bitap algorithm is a fuzzy string matching technique. It ains to find approximate matches of a pattern within a

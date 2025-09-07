@@ -1,5 +1,3 @@
-using System;
-
 namespace Algorithms.Knapsack;
 
 /// <summary>

@@ -1,5 +1,3 @@
-using System;
-
 namespace Algorithms.Crypto.Exceptions;
 
 /// <summary>

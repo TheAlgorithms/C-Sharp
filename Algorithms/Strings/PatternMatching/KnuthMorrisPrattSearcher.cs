@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Algorithms.Strings.PatternMatching;
 
 public class KnuthMorrisPrattSearcher

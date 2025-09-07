@@ -1,6 +1,3 @@
-using System;
-using SkiaSharp;
-
 namespace Algorithms.Other;
 
 /// <summary>

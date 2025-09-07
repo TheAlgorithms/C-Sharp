@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-
-namespace Algorithms.Encoders;
+﻿namespace Algorithms.Encoders;
 
 /// <summary>
 /// <para>

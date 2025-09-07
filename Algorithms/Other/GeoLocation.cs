@@ -1,5 +1,3 @@
-using System;
-
 namespace Algorithms.Other;
 
 public static class GeoLocation

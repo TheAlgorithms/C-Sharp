@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using DataStructures.Graph;
 
 namespace Algorithms.Graph.Dijkstra;
@@ -31,7 +28,7 @@ public static class DijkstraAlgorithm
 
         while (visitedVertices.Count != distanceArray.Length && distanceRecord.Count != 0)
         {
-            while(visitedVertices.Contains(distanceRecord.Peek().Vertex!))
+            while (visitedVertices.Contains(distanceRecord.Peek().Vertex!))
             {
                 distanceRecord.Dequeue();
             }

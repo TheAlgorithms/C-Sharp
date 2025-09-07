@@ -1,5 +1,3 @@
-using System.Numerics;
-
 namespace Algorithms.Crypto.Utils;
 
 /// <summary>
