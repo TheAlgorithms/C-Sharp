@@ -1,5 +1,3 @@
-using System;
-
 namespace DataStructures.Heap.FibonacciHeap;
 
 /// <summary>

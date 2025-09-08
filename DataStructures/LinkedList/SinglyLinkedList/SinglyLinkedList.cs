@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace DataStructures.LinkedList.SinglyLinkedList;
 
 public class SinglyLinkedList<T>
@@ -161,7 +158,7 @@ public class SinglyLinkedList<T>
     public bool DeleteFirst()
     {
         // checks if the List is empty
-        if(Head is null)
+        if (Head is null)
         {
             return false;
         }
@@ -178,13 +175,13 @@ public class SinglyLinkedList<T>
     public bool DeleteLast()
     {
         // checks if the List is empty
-        if(Head is null)
+        if (Head is null)
         {
             return false;
         }
 
         // checks if the List has only one element
-        if(Head.Next is null)
+        if (Head.Next is null)
         {
             Head = null;
             return true;
@@ -192,7 +189,7 @@ public class SinglyLinkedList<T>
 
         // if not, iterates through the list to the second last element and deletes the last one
         SinglyLinkedListNode<T>? secondlast = Head;
-        while(secondlast.Next?.Next is not null)
+        while (secondlast.Next?.Next is not null)
         {
             secondlast = secondlast.Next;
         }
