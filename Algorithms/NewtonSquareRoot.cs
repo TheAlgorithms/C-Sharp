@@ -1,7 +1,4 @@
-﻿using System;
-using System.Numerics;
-
-namespace Algorithms;
+﻿namespace Algorithms;
 
 public static class NewtonSquareRoot
 {

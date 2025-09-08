@@ -1,6 +1,3 @@
-using System;
-using System.Numerics;
-
 namespace Algorithms.ModularArithmetic;
 
 /// <summary>

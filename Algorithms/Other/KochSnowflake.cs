@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Numerics;
 using SkiaSharp;
 
 namespace Algorithms.Other;

@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace Algorithms.Other;
 
 /// <summary>
@@ -24,14 +21,14 @@ public class SieveOfEratosthenes
         // initialize primes array
         Array.Fill(this.primes, true, 2, primes.Length - 2);
 
-        for(long i = 2; i * i <= maximumNumberToCheck; i++)
+        for (long i = 2; i * i <= maximumNumberToCheck; i++)
         {
             if (!primes[i])
             {
                 continue;
             }
 
-            for(long composite = i * i; composite <= maximumNumberToCheck; composite += i)
+            for (long composite = i * i; composite <= maximumNumberToCheck; composite += i)
             {
                 primes[composite] = false;
             }
@@ -56,7 +53,7 @@ public class SieveOfEratosthenes
     /// <returns>Primes in ascending order.</returns>
     public IEnumerable<long> GetPrimes()
     {
-        for(long i = 2; i < primes.Length; i++)
+        for (long i = 2; i < primes.Length; i++)
         {
             if (primes[i])
             {

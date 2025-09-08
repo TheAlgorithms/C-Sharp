@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Algorithms.Numeric;
+﻿namespace Algorithms.Numeric;
 
 public static class JosephusProblem
 {

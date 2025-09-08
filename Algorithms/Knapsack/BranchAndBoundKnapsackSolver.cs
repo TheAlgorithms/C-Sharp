@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Algorithms.Knapsack;
 
 /// <summary>
@@ -111,7 +107,7 @@ public class BranchAndBoundKnapsackSolver<T>
         // only bogus initial node has no parent
         for (var current = lastNodeOfPath; current.Parent is not null; current = current.Parent)
         {
-            if(current.IsTaken)
+            if (current.IsTaken)
             {
                 takenItems.Add(items[current.Level]);
             }

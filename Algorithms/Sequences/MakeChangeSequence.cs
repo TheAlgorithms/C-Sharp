@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Numerics;
-
 namespace Algorithms.Sequences;
 
 /// <summary>
@@ -41,7 +38,7 @@ public class MakeChangeSequence : ISequence
                 yield return value;
             }
 
-            for(var index = 17; ; index++)
+            for (var index = 17; ; index++)
             {
                 BigInteger newValue = seed[index - 2] + seed[index - 5] - seed[index - 7]
                                     + seed[index - 10] - seed[index - 12] - seed[index - 15]

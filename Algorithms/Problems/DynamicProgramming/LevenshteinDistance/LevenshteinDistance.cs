@@ -1,5 +1,3 @@
-using System;
-
 namespace Algorithms.Problems.DynamicProgramming;
 
 /// <summary>
@@ -23,7 +21,7 @@ public static class LevenshteinDistance
     {
         var distances = new int[source.Length + 1, target.Length + 1];
 
-        for(var i = 0; i <= source.Length; i++)
+        for (var i = 0; i <= source.Length; i++)
         {
             distances[i, 0] = i;
         }

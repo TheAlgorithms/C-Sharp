@@ -1,4 +1,3 @@
-using System;
 using Utilities.Exceptions;
 
 namespace Algorithms.Search;

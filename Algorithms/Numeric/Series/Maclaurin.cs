@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 namespace Algorithms.Numeric.Series;
 
 /// <summary>

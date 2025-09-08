@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Algorithms.Sorters.Utils;
 
 namespace Algorithms.Sorters.Comparison;

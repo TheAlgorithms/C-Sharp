@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace Algorithms.Encoders;
 
 /// <summary>

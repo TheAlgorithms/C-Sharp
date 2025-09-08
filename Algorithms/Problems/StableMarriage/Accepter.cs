@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Algorithms.Problems.StableMarriage;
 
 public class Accepter

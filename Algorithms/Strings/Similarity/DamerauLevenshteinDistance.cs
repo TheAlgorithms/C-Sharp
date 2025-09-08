@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Algorithms.Strings.Similarity;
+﻿namespace Algorithms.Strings.Similarity;
 
 public static class DamerauLevenshteinDistance
 {

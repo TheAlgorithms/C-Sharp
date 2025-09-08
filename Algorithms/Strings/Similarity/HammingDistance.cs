@@ -1,5 +1,3 @@
-using System;
-
 namespace Algorithms.Strings.Similarity;
 
 /// <summary>
@@ -21,7 +19,7 @@ public static class HammingDistance
     /// <returns>Levenshtein distance between source and target strings.</returns>
     public static int Calculate(string s1, string s2)
     {
-        if(s1.Length != s2.Length)
+        if (s1.Length != s2.Length)
         {
             throw new ArgumentException("Strings must be equal length.");
         }

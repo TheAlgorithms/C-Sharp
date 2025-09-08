@@ -1,8 +1,3 @@
-using System;
-using System.Globalization;
-using System.Text;
-using System.Text.RegularExpressions;
-
 namespace Algorithms.Encoders
 {
     /// <summary>
@@ -27,7 +22,7 @@ namespace Algorithms.Encoders
 
             StringBuilder cipherText = new StringBuilder();
 
-            for(int i = 0; i < plainText.Length; i++)
+            for (int i = 0; i < plainText.Length; i++)
             {
                 char plainCharacter = plainText[i];
                 char keyCharacter = keyword[i];
@@ -53,7 +48,7 @@ namespace Algorithms.Encoders
             StringBuilder plainText = new StringBuilder();
             StringBuilder extendedKeyword = new StringBuilder(keyword);
 
-            for(int i = 0; i < cipherText.Length; i++)
+            for (int i = 0; i < cipherText.Length; i++)
             {
                 char cipherCharacter = cipherText[i];
                 char keywordCharacter = extendedKeyword[i];

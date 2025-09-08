@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace Algorithms.Sorters.External;
 
 public class ExternalMergeSorter<T> : IExternalSorter<T>

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Algorithms.RecommenderSystem
 {
     public interface ISimilarityCalculator

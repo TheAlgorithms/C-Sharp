@@ -1,7 +1,3 @@
-using System;
-using System.Linq;
-using Utilities.Extensions;
-
 namespace Algorithms.LinearAlgebra.Eigenvalue;
 
 /// <summary>

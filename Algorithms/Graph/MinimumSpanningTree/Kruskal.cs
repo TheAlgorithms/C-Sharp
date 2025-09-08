@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using DataStructures.DisjointSet;
 
 namespace Algorithms.Graph.MinimumSpanningTree;
@@ -97,7 +95,7 @@ public static class Kruskal
         {
             nodes[i] = set.MakeSet(i);
 
-            foreach(var (node, weight) in adjacencyList[i])
+            foreach (var (node, weight) in adjacencyList[i])
             {
                 edgeWeightList.Add(weight);
                 nodeConnectList.Add((i, node));

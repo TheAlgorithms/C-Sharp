@@ -1,4 +1,3 @@
-using System;
 using Algorithms.Numeric.GreatestCommonDivisor;
 
 namespace Algorithms.Other;

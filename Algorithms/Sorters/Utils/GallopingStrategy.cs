@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Algorithms.Sorters.Utils;
 
 public static class GallopingStrategy<T>

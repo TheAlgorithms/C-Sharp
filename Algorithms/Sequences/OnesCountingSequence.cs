@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Numerics;
-
-namespace Algorithms.Sequences;
+﻿namespace Algorithms.Sequences;
 
 /// <summary>
 ///     <para>

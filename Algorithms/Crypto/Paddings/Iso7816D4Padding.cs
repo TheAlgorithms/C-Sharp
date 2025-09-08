@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Algorithms.Crypto.Paddings;
+﻿namespace Algorithms.Crypto.Paddings;
 
 /// <summary>
 /// <para>

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Algorithms.Crypto.Paddings;
+﻿namespace Algorithms.Crypto.Paddings;
 
 /// <summary>
 /// A common interface that all block cipher padding schemes should follow.
