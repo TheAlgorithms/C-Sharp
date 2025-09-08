@@ -1,7 +1,4 @@
-using System;
-using System.Linq;
 using DataStructures.LinkedList.DoublyLinkedList;
-using NUnit.Framework;
 
 namespace DataStructures.Tests.LinkedList;
 
@@ -65,7 +62,7 @@ public static class DoublyLinkedListTests
         var arr = dll.GetData().ToArray();
         var reversedArr = dll.GetDataReversed().ToArray();
 
-        Assert.That(dll.Count, Is.EqualTo(2)    );
+        Assert.That(dll.Count, Is.EqualTo(2));
         Assert.That(new[] { 1, 3 }, Is.EqualTo(arr));
         Assert.That(new[] { 3, 1 }, Is.EqualTo(reversedArr));
     }

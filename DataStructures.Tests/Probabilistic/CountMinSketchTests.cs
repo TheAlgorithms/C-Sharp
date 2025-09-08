@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
 using DataStructures.Probabilistic;
-using NUnit.Framework;
-using FluentAssertions;
 
 namespace DataStructures.Tests.Probabilistic;
 
@@ -61,7 +57,7 @@ public class CountMinSketchTests
     {
         var sketch = new CountMinSketch<int>(.01, .05);
         var random = new Random();
-        var insertedItems = new Dictionary<int,int>();
+        var insertedItems = new Dictionary<int, int>();
         for (var i = 0; i < 10000; i++)
         {
             var item = random.Next(0, 1000000);
