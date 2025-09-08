@@ -1,8 +1,3 @@
-using System;
-using FluentAssertions;
-using NUnit.Framework;
-using Utilities.Extensions;
-
 namespace Utilities.Tests.Extensions;
 
 public class MatrixExtensionsTests

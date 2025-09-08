@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 namespace Utilities.Extensions;
 
 public static class RandomExtensions
