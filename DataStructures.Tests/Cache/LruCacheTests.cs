@@ -1,6 +1,4 @@
 using DataStructures.Cache;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace DataStructures.Tests.Cache;
 

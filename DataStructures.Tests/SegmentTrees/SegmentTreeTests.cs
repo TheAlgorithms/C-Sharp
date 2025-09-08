@@ -1,5 +1,4 @@
 using DataStructures.SegmentTrees;
-using NUnit.Framework;
 
 namespace DataStructures.Tests.SegmentTrees;
 

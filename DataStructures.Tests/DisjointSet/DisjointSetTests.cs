@@ -1,6 +1,4 @@
 using DataStructures.DisjointSet;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace DataStructures.Tests.DisjointSet;
 
