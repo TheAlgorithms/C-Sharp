@@ -201,7 +201,7 @@ public class BinarySearchTree<TKey>
         // Key is already in tree.
         else
         {
-            throw new ArgumentException($"Key \"{key}\" already exists in tree!");
+            throw new ArgumentException($"""Key "{key}" already exists in tree!""");
         }
     }
 
