@@ -1,5 +1,3 @@
-using System;
-
 namespace DataStructures.UnrolledList;
 
 /// <summary>

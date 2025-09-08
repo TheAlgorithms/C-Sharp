@@ -1,5 +1,3 @@
-using System;
-
 namespace DataStructures.Probabilistic;
 
 public class CountMinSketch<T> where T : notnull

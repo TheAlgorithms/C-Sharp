@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace DataStructures.Tries;
 
 /// <summary>
@@ -70,10 +67,10 @@ public class Trie
         s += Mark;
         int index = 0;
         TrieNode match = PrefixQuery(s, ref index);
-        while(match.IsLeaf())
+        while (match.IsLeaf())
         {
             char c = match.Value;
-            if(match.Parent == null)
+            if (match.Parent == null)
             {
                 break;
             }

@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 
 namespace DataStructures.LinkedList.SkipList;
 
@@ -49,7 +46,7 @@ public class SkipList<TValue>
         head = new(int.MinValue, default(TValue), maxLevels);
         tail = new(int.MaxValue, default(TValue), maxLevels);
 
-        for(int i = 0; i < maxLevels; i++)
+        for (int i = 0; i < maxLevels; i++)
         {
             head.Next[i] = tail;
         }
@@ -69,7 +66,7 @@ public class SkipList<TValue>
         get
         {
             var previousNode = GetSkipNodes(key).First();
-            if(previousNode.Next[0].Key == key)
+            if (previousNode.Next[0].Key == key)
             {
                 return previousNode.Next[0].Value!;
             }

@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace DataStructures.ScapegoatTree;
 
 public static class Extensions

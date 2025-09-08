@@ -114,11 +114,7 @@
 // returns true if there inputs aren't equal otherwise false.
 // assumes: the input bit-arrays must have same length.
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace DataStructures;
 
