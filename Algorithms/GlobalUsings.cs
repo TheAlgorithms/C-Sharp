@@ -18,5 +18,4 @@ global using System.Numerics;               // Numeric types such as BigInteger 
 global using System.Security.Cryptography;  // Cryptographic services (hashing, encryption, random numbers)
 global using System.Text;                   // Text encoding, StringBuilder, etc.
 global using System.Text.RegularExpressions; // Regular expression support
-global using SkiaSharp;
 global using Utilities.Extensions;          // Common extension methods used across the solution
