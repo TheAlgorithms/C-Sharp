@@ -360,8 +360,7 @@ public class AvlTree<TKey>
         }
         else
         {
-            throw new ArgumentException(
-                $"Key \"{key}\" already exists in AVL tree.");
+            throw new ArgumentException($"""Key "{key}" already exists in AVL tree.""");
         }
 
         // Check all of the new node's ancestors for inbalance and perform
@@ -382,7 +381,7 @@ public class AvlTree<TKey>
         if (node == null)
         {
             throw new KeyNotFoundException(
-                $"Key \"{key}\" is not in the AVL tree.");
+                $"""Key "{key}" is not in the AVL tree.""");
         }
 
         // Normal binary search tree removal
