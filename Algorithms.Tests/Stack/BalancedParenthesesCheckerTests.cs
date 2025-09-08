@@ -1,6 +1,4 @@
-using System;
 using Algorithms.Stack;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Stack
 {
@@ -9,7 +7,7 @@ namespace Algorithms.Tests.Stack
     {
         public static bool IsBalanced(string expression)
         {
-            var checker = new BalancedParenthesesChecker();            
+            var checker = new BalancedParenthesesChecker();
             return checker.IsBalanced(expression);
         }
 
@@ -22,11 +20,11 @@ namespace Algorithms.Tests.Stack
             // Act & Assert
             var ex = Assert.Throws<ArgumentException>(() => IsBalanced(expression));
 
-            if(ex!=null)
+            if (ex != null)
             {
                 Assert.That(ex.Message, Is.EqualTo("The input expression cannot be null or empty."));
             }
-            
+
         }
 
         [Test]

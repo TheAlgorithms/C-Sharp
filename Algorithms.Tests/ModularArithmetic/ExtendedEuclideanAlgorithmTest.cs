@@ -1,6 +1,4 @@
 using Algorithms.ModularArithmetic;
-using NUnit.Framework;
-using System.Numerics;
 
 namespace Algorithms.Tests.ModularArithmetic;
 

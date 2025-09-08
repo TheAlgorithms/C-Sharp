@@ -1,8 +1,4 @@
-using System;
-using System.Linq;
 using Algorithms.Numeric.Decomposition;
-using NUnit.Framework;
-using Utilities.Extensions;
 
 namespace Algorithms.Tests.Numeric.Decomposition;
 

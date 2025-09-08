@@ -1,5 +1,4 @@
 using Algorithms.Other;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Other;
 
@@ -98,7 +97,7 @@ public class WelfordsVarianceTest
     public void WelfordVariance_Example8()
     {
         var stats = new WelfordsVariance();
-        stats.AddRange(new [] { 51.3, 55.6, 49.9, 52.0 });
+        stats.AddRange(new[] { 51.3, 55.6, 49.9, 52.0 });
         Assert.That(stats.Count, Is.EqualTo(4));
         Assert.That(stats.Mean, Is.EqualTo(52.2).Within(0.0000001));
         Assert.That(stats.Variance, Is.EqualTo(4.4250000).Within(0.0000001));

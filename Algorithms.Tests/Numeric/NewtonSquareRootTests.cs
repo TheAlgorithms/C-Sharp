@@ -1,8 +1,4 @@
-﻿using System;
-using System.Numerics;
-using NUnit.Framework;
-
-namespace Algorithms.Tests.Numeric;
+﻿namespace Algorithms.Tests.Numeric;
 
 public class NewtonSquareRootTests
 {

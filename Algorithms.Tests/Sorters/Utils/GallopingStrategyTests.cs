@@ -1,6 +1,4 @@
 using Algorithms.Sorters.Utils;
-using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace Algorithms.Tests.Sorters.Utils
 {
@@ -9,7 +7,7 @@ namespace Algorithms.Tests.Sorters.Utils
     {
         private readonly IComparer<int> comparer = Comparer<int>.Default;
 
-[Test]
+        [Test]
         public void GallopLeft_KeyPresent_ReturnsCorrectIndex()
         {
             var array = new[] { 1, 2, 3, 4, 5 };

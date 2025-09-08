@@ -1,5 +1,3 @@
-using NUnit.Framework;
-using FluentAssertions;
 using Algorithms.Crypto.Utils;
 
 namespace Algorithms.Tests.Crypto.Utils

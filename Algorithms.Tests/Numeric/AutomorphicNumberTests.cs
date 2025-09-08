@@ -1,7 +1,4 @@
 using Algorithms.Numeric;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 
 namespace Algorithms.Tests.Numeric;
 
@@ -17,7 +14,7 @@ public class AutomorphicNumberTests
     [TestCase(9376)]
     [TestCase(90625)]
     [TestCase(109376)]
-    
+
     public void TestAutomorphicNumbers(int number)
     {
         Assert.That(AutomorphicNumber.IsAutomorphic(number), Is.True);
@@ -69,14 +66,14 @@ public class AutomorphicNumberTests
         Assert.That(AutomorphicNumber.GetAutomorphicNumbers(lower, upper), Is.EqualTo(automorphicList));
     }
 
-    [TestCase(25,25)]
+    [TestCase(25, 25)]
     public void TestAutomorphicNumberSequenceSameBounds(int lower, int upper)
     {
         List<long> automorphicList = new() { 25 };
         Assert.That(AutomorphicNumber.GetAutomorphicNumbers(lower, upper), Is.EqualTo(automorphicList));
     }
 
-    [TestCase(-1,1)]
+    [TestCase(-1, 1)]
     [TestCase(0, 1)]
     public void TestAutomorphicNumberSequenceInvalidLowerBound(int lower, int upper)
     {

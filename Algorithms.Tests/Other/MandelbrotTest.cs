@@ -1,6 +1,4 @@
-using System;
 using Algorithms.Other;
-using NUnit.Framework;
 using SkiaSharp;
 
 namespace Algorithms.Tests.Other;

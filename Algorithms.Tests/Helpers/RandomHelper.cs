@@ -1,5 +1,3 @@
-using NUnit.Framework;
-
 namespace Algorithms.Tests.Helpers;
 
 internal static class RandomHelper

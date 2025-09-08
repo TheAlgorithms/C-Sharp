@@ -1,7 +1,4 @@
-using System;
-using System.Numerics;
 using Algorithms.Numeric;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Numeric;
 

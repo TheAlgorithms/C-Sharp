@@ -1,6 +1,5 @@
 using Algorithms.Graph;
 using DataStructures.BinarySearchTree;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Graph;
 

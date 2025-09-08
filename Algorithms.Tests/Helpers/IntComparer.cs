@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Algorithms.Tests.Helpers;
 
 internal class IntComparer : IComparer<int>

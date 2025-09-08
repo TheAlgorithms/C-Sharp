@@ -1,7 +1,5 @@
 using Algorithms.RecommenderSystem;
 using Moq;
-using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace Algorithms.Tests.RecommenderSystem
 {

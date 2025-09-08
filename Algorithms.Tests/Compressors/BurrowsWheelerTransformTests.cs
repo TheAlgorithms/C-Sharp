@@ -1,6 +1,4 @@
 using Algorithms.DataCompression;
-using NUnit.Framework;
-using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Compressors;
 

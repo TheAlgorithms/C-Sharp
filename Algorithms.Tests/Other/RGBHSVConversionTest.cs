@@ -1,7 +1,4 @@
-using System;
 using Algorithms.Other;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Other;
 

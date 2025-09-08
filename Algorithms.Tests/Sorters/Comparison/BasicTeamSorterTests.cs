@@ -1,8 +1,4 @@
 using Algorithms.Sorters.Comparison;
-using FluentAssertions;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 
 namespace Algorithms.Tests.Sorters.Comparison
 {

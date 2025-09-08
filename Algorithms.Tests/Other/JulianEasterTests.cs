@@ -1,7 +1,4 @@
-using System;
-using System.Globalization;
 using Algorithms.Other;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Other;
 

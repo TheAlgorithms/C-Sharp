@@ -1,9 +1,6 @@
-using System;
 using Algorithms.Sorters.External;
 using Algorithms.Sorters.External.Storages;
 using Algorithms.Tests.Helpers;
-using NUnit.Framework;
-using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Sorters.External;
 

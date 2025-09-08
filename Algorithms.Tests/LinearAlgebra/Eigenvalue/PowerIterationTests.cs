@@ -1,8 +1,4 @@
-using System;
 using Algorithms.LinearAlgebra.Eigenvalue;
-using FluentAssertions;
-using NUnit.Framework;
-using Utilities.Extensions;
 
 namespace Algorithms.Tests.LinearAlgebra.Eigenvalue;
 

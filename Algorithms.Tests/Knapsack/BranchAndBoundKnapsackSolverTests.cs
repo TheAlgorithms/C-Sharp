@@ -1,7 +1,4 @@
-using System;
 using Algorithms.Knapsack;
-using NUnit.Framework;
-using FluentAssertions;
 
 namespace Algorithms.Tests.Knapsack;
 

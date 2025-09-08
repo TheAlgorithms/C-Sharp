@@ -1,6 +1,3 @@
-using System.Linq;
-using NUnit.Framework;
-
 namespace Algorithms.Tests.Search;
 
 public static class Helper

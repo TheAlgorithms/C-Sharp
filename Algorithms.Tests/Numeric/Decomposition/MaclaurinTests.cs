@@ -1,6 +1,4 @@
-using System;
 using Algorithms.Numeric.Series;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Numeric.Decomposition;
 

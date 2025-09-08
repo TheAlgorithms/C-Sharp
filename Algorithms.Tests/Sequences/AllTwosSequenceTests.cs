@@ -1,11 +1,7 @@
 using Algorithms.Sequences;
-using FluentAssertions;
-using NUnit.Framework;
-using System;
-using System.Linq;
-using System.Numerics;
 
 namespace Algorithms.Tests.Sequences;
+
 public class AllTwosSequenceTests
 {
     [Test]

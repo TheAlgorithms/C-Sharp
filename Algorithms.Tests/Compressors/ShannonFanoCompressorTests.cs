@@ -1,7 +1,5 @@
 using Algorithms.DataCompression;
 using Algorithms.Knapsack;
-using NUnit.Framework;
-using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Compressors;
 

@@ -1,7 +1,4 @@
-using System.Linq;
 using Algorithms.Search;
-using NUnit.Framework;
-using NUnit.Framework.Internal;
 
 namespace Algorithms.Tests.Search;
 

@@ -1,7 +1,4 @@
 using Algorithms.Strings.Similarity;
-using FluentAssertions;
-using NUnit.Framework;
-using System;
 
 namespace Algorithms.Tests.Strings.Similarity
 {

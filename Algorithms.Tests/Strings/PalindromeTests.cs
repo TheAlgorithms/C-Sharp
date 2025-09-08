@@ -1,5 +1,4 @@
 using Algorithms.Strings;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Strings;
 

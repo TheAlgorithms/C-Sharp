@@ -1,7 +1,4 @@
-using FluentAssertions;
-using NUnit.Framework;
 using SkiaSharp;
-using System;
 
 namespace Algorithms.Tests.Other;
 

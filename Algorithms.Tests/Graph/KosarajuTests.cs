@@ -1,9 +1,5 @@
 using Algorithms.Graph;
 using DataStructures.Graph;
-using NUnit.Framework;
-using FluentAssertions;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Algorithms.Tests.Graph;
 
@@ -34,7 +30,7 @@ public class KosarajuTests
         graph.AddEdge(vertex5, vertex6, 1);
 
         // Run the agorithm and obtain the representative vertex of the SCC to which each vertex belongs.
-        Dictionary<Vertex<int>,Vertex<int>> result = Kosaraju<int>.GetRepresentatives(graph);
+        Dictionary<Vertex<int>, Vertex<int>> result = Kosaraju<int>.GetRepresentatives(graph);
 
         // Check every Vertex belongs to a SCC
         result.Should().ContainKey(vertex1);
