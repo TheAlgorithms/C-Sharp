@@ -1,13 +1,11 @@
-using System;
 using DataStructures.ScapegoatTree;
-using NUnit.Framework;
 
 namespace DataStructures.Tests.ScapegoatTree;
 
 [TestFixture]
 public class ScapegoatTreeNodeTests
 {
-    [TestCase(2,1)]
+    [TestCase(2, 1)]
     [TestCase("B", "A")]
     public void RightSetter_OtherKeyPrecedesRightKey_ThrowsException<TKey>(TKey a, TKey b)
         where TKey : IComparable
@@ -18,8 +16,8 @@ public class ScapegoatTreeNodeTests
         Assert.Throws<ArgumentException>(() => instance.Right = other);
     }
 
-    [TestCase(1,2)]
-    [TestCase("A","B")]
+    [TestCase(1, 2)]
+    [TestCase("A", "B")]
     public void RightSetter_OtherKeyFollowsRightKey_AddsChild<TKey>(TKey a, TKey b)
         where TKey : IComparable
     {
@@ -29,8 +27,8 @@ public class ScapegoatTreeNodeTests
         Assert.DoesNotThrow(() => instance.Right = other);
     }
 
-    [TestCase(1,2)]
-    [TestCase("A","B")]
+    [TestCase(1, 2)]
+    [TestCase("A", "B")]
     public void LeftSetter_OtherKeyFollowsLeftKey_ThrowsException<TKey>(TKey a, TKey b)
         where TKey : IComparable
     {
@@ -40,7 +38,7 @@ public class ScapegoatTreeNodeTests
         Assert.Throws<ArgumentException>(() => instance.Left = other);
     }
 
-    [TestCase(2,1)]
+    [TestCase(2, 1)]
     [TestCase("B", "A")]
     public void LeftSetter_OtherKeyPrecedesLeftKey_AddsChild<TKey>(TKey a, TKey b)
         where TKey : IComparable
@@ -51,8 +49,8 @@ public class ScapegoatTreeNodeTests
         Assert.DoesNotThrow(() => instance.Left = other);
     }
 
-    [TestCase(1,2)]
-    [TestCase("A","B")]
+    [TestCase(1, 2)]
+    [TestCase("A", "B")]
     public void CompareTo_InstanceKeyPrecedesOtherKey_ReturnsMinusOne<TKey>(TKey a, TKey b)
         where TKey : IComparable
     {
@@ -65,7 +63,7 @@ public class ScapegoatTreeNodeTests
     }
 
     [TestCase(2, 1)]
-    [TestCase("B","A")]
+    [TestCase("B", "A")]
     public void CompareTo_InstanceKeyFollowsOtherKey_ReturnsOne<TKey>(TKey a, TKey b)
         where TKey : IComparable
     {
@@ -78,7 +76,7 @@ public class ScapegoatTreeNodeTests
     }
 
     [TestCase(1, 1)]
-    [TestCase("A","A")]
+    [TestCase("A", "A")]
     public void CompareTo_InstanceKeyEqualsOtherKey_ReturnsZero<TKey>(TKey a, TKey b)
         where TKey : IComparable
     {

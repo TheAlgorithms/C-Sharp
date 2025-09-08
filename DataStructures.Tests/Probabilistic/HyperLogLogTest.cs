@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
 using DataStructures.Probabilistic;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace DataStructures.Tests.Probabilistic;
 
@@ -12,7 +8,7 @@ public class HyperLogLogTest
     public void TestHyperLogLog()
     {
         var hll = new HyperLogLog<int>();
-        HashSet<int> actual = new ();
+        HashSet<int> actual = new();
 
         var rand = new Random();
         var tolerance = .05;
@@ -36,7 +32,7 @@ public class HyperLogLogTest
         var hll2 = new HyperLogLog<int>();
         var rand = new Random();
         var tolerance = .05;
-        HashSet<int> actual = new ();
+        HashSet<int> actual = new();
         for (var i = 0; i < 5000; i++)
         {
             var k = rand.Next(20000);

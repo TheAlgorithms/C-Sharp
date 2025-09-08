@@ -1,6 +1,4 @@
-using System;
 using DataStructures.LinkedList.CircularLinkedList;
-using NUnit.Framework;
 
 namespace DataStructures.Tests.LinkedList;
 
@@ -65,7 +63,7 @@ public static class CircularLinkedListTests
         var cll = new CircularLinkedList<int>();
         var ex = Assert.Throws<InvalidOperationException>(() => cll.InsertAfter(10, 20));
 
-        Assert.That(ex!.Message, Is.EqualTo("List is empty."));       
+        Assert.That(ex!.Message, Is.EqualTo("List is empty."));
     }
 
     [Test]
