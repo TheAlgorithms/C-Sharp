@@ -1,7 +1,4 @@
 using Algorithms.Search;
-using FluentAssertions;
-using NUnit.Framework;
-using System;
 using Utilities.Exceptions;
 
 namespace Algorithms.Tests.Search;

@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using Algorithms.Problems.DynamicProgramming;
 
 namespace Algorithms.Tests.DynamicProgramming;

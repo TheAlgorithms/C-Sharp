@@ -1,5 +1,4 @@
 using Algorithms.Numeric.GreatestCommonDivisor;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Numeric.GreatestCommonDivisor;
 
