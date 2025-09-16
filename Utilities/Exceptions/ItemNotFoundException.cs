@@ -1,5 +1,3 @@
-using System;
-
 namespace Utilities.Exceptions;
 
 /// <summary>
