@@ -5,6 +5,36 @@ namespace Algorithms.Encoders;
 /// </summary>
 public class SoundexEncoder
 {
+    private static readonly Dictionary<char, int> CharacterMapping = new()
+    {
+        ['a'] = 0,
+        ['e'] = 0,
+        ['i'] = 0,
+        ['o'] = 0,
+        ['u'] = 0,
+        ['y'] = 0,
+        ['h'] = 8,
+        ['w'] = 8,
+        ['b'] = 1,
+        ['f'] = 1,
+        ['p'] = 1,
+        ['v'] = 1,
+        ['c'] = 2,
+        ['g'] = 2,
+        ['j'] = 2,
+        ['k'] = 2,
+        ['q'] = 2,
+        ['s'] = 2,
+        ['x'] = 2,
+        ['z'] = 2,
+        ['d'] = 3,
+        ['t'] = 3,
+        ['l'] = 4,
+        ['m'] = 5,
+        ['n'] = 5,
+        ['r'] = 6,
+    };
+
     /// <summary>
     ///     Encodes a string using the Soundex Algorithm.
     /// </summary>
@@ -72,36 +102,6 @@ public class SoundexEncoder
 
     private int MapToNumber(char ch)
     {
-        var mapping = new Dictionary<char, int>
-        {
-            ['a'] = 0,
-            ['e'] = 0,
-            ['i'] = 0,
-            ['o'] = 0,
-            ['u'] = 0,
-            ['y'] = 0,
-            ['h'] = 8,
-            ['w'] = 8,
-            ['b'] = 1,
-            ['f'] = 1,
-            ['p'] = 1,
-            ['v'] = 1,
-            ['c'] = 2,
-            ['g'] = 2,
-            ['j'] = 2,
-            ['k'] = 2,
-            ['q'] = 2,
-            ['s'] = 2,
-            ['x'] = 2,
-            ['z'] = 2,
-            ['d'] = 3,
-            ['t'] = 3,
-            ['l'] = 4,
-            ['m'] = 5,
-            ['n'] = 5,
-            ['r'] = 6,
-        };
-
-        return mapping[ch];
+        return CharacterMapping[ch];
     }
 }
