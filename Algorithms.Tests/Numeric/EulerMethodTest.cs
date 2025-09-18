@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
 using Algorithms.Numeric;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Numeric;
 

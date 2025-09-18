@@ -1,6 +1,4 @@
-using System;
 using Algorithms.Other;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Other;
 

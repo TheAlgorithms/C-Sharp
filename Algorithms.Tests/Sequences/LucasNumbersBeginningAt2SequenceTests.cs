@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using System.Numerics;
-using Algorithms.Sequences;
-using FluentAssertions;
-using NUnit.Framework;
+﻿using Algorithms.Sequences;
 
 namespace Algorithms.Tests.Sequences;
 
@@ -102,7 +98,7 @@ public class LucasNumbersBeginningAt2SequenceTests
                                    "627376215338105766356982006981782561278127",
                                };
 
-        var check    = bigNumbers.Select(BigInteger.Parse).ToArray();
+        var check = bigNumbers.Select(BigInteger.Parse).ToArray();
         var sequence = new LucasNumbersBeginningAt2Sequence().Sequence.Take(check.Length);
         sequence.SequenceEqual(check).Should().BeTrue();
     }

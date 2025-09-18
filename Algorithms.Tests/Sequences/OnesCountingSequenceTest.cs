@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using Algorithms.Sequences;
-using FluentAssertions;
-using NUnit.Framework;
+﻿using Algorithms.Sequences;
 
 namespace Algorithms.Tests.Sequences;
 
@@ -73,11 +68,12 @@ public class OnesCountingSequenceTest
     /// <returns>Number of 1s in binary representation of number.</returns>
     private int CountOnes(BigInteger i)
     {
-        var        temp      = i;
+        var temp = i;
         BigInteger remainder = 0;
-        var        result    = 0;
+        var result = 0;
 
-        while (temp != BigInteger.Zero) {
+        while (temp != BigInteger.Zero)
+        {
             temp = BigInteger.DivRem(temp, 2, out remainder);
             result += remainder.IsOne ? 1 : 0;
         }
@@ -99,7 +95,8 @@ public class OnesCountingSequenceTest
     {
         //  Calculate 1s in binary value the old fashioned way.
         var calculated = new List<BigInteger>();
-        for (var i = 0; i < oeisValues.Length; i++) {
+        for (var i = 0; i < oeisValues.Length; i++)
+        {
             calculated.Add(CountOnes(new BigInteger(i)));
         }
 

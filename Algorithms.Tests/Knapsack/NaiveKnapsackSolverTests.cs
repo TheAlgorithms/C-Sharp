@@ -1,6 +1,4 @@
-using System.Linq;
 using Algorithms.Knapsack;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Knapsack;
 

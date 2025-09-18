@@ -1,6 +1,4 @@
 using Algorithms.Other;
-using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace Algorithms.Tests.Other;
 

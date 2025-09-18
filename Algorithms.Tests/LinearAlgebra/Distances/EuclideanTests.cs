@@ -1,7 +1,4 @@
-using NUnit.Framework;
 using Algorithms.LinearAlgebra.Distances;
-using FluentAssertions;
-using System;
 
 namespace Algorithms.Tests.LinearAlgebra.Distances;
 

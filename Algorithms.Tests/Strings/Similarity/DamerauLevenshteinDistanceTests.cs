@@ -1,5 +1,4 @@
 ﻿using Algorithms.Strings.Similarity;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Strings.Similarity;
 
@@ -21,7 +20,7 @@ public class DamerauLevenshteinDistanceTests
         var str1 = "abc";
         var str2 = "xyz";
         var result = DamerauLevenshteinDistance.Calculate(str1, str2);
-        Assert.That(result, Is.EqualTo(3),"Completely different strings should have a Damerau-Levenshtein distance equal to the length of the longest string.");
+        Assert.That(result, Is.EqualTo(3), "Completely different strings should have a Damerau-Levenshtein distance equal to the length of the longest string.");
     }
 
     [Test]
@@ -30,7 +29,7 @@ public class DamerauLevenshteinDistanceTests
         var str1 = "test";
         var str2 = "";
         var result = DamerauLevenshteinDistance.Calculate(str1, str2);
-        Assert.That(result, Is.EqualTo(4),"One empty string should have a Damerau-Levenshtein distance equal to the length of the other string.");
+        Assert.That(result, Is.EqualTo(4), "One empty string should have a Damerau-Levenshtein distance equal to the length of the other string.");
     }
 
     [Test]
