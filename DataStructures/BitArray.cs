@@ -139,7 +139,7 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
     /// <param name="n">length of the array.</param>
     public BitArray(int n)
     {
-        field = n < 1 ? new bool[0] : new bool[n];
+        field = n <= 0 ? new bool[0] : new bool[n];
     }
 
     /// <summary>
