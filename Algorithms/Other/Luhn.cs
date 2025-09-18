@@ -21,49 +21,49 @@ public static class Luhn
     public static bool Validate(string number) => GetSum(number) % 10 == 0;
 
     /// <summary>
-    ///     This algorithm only finds one number.
+    ///     This algorithm finds one missing digit.
     ///     In place of the unknown digit, put "x".
     /// </summary>
     /// <param name="number">The number in which to find the missing digit.</param>
     /// <returns>Missing digit.</returns>
     public static int GetLostNum(string number)
     {
-        var lostIndex = number.Length - 1 - number.LastIndexOf("x", StringComparison.CurrentCultureIgnoreCase);
-        var lostNum = GetSum(number.Replace("x", "0", StringComparison.CurrentCultureIgnoreCase)) * 9 % 10;
+        var missingDigitIndex = number.Length - 1 - number.LastIndexOf("x", StringComparison.CurrentCultureIgnoreCase);
+        var checkDigit = GetSum(number.Replace("x", "0", StringComparison.CurrentCultureIgnoreCase)) * 9 % 10;
 
-        // Case 1: If the index of the lost digit is even.
-        if (lostIndex % 2 == 0)
+        // Case 1: If the index of the missing digit is even.
+        if (missingDigitIndex % 2 == 0)
         {
-            return lostNum;
+            return checkDigit;
         }
 
-        var tempLostNum = lostNum / 2;
+        var candidateDigit = checkDigit / 2;
 
-        // Case 2: if the index of the lost digit isn`t even and that number <= 4.
-        // Case 3: if the index of the lost digit isn`t even and that number > 4.
-        return Validate(number.Replace("x", tempLostNum.ToString())) ? tempLostNum : (lostNum + 9) / 2;
+        // Case 2: if the index of the missing digit is odd and the candidate is valid.
+        // Case 3: if the index of the missing digit is odd and we need the alternative.
+        return Validate(number.Replace("x", candidateDigit.ToString())) ? candidateDigit : (checkDigit + 9) / 2;
     }
 
     /// <summary>
-    ///     Computes the sum found by the algorithm.
+    ///     Computes the sum found by the Luhn algorithm.
     /// </summary>
-    /// <param name="number">The number for which the sum will be found.</param>
+    /// <param name="number">The number for which the sum will be calculated.</param>
     /// <returns>Sum.</returns>
     private static int GetSum(string number)
     {
         var sum = 0;
         for (var i = 0; i < number.Length; i++)
         {
-            var d = number[i] - '0';
-            d = (i + number.Length) % 2 == 0
-                ? 2 * d
-                : d;
-            if (d > 9)
+            var digit = number[i] - '0';
+            digit = (i + number.Length) % 2 == 0
+                ? 2 * digit
+                : digit;
+            if (digit > 9)
             {
-                d -= 9;
+                digit -= 9;
             }
 
-            sum += d;
+            sum += digit;
         }
 
         return sum;
