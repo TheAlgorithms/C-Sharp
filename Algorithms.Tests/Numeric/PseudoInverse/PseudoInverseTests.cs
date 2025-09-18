@@ -1,6 +1,3 @@
-using NUnit.Framework;
-using Utilities.Extensions;
-
 namespace Algorithms.Tests.Numeric.PseudoInverse;
 
 public static class PseudoInverseTests

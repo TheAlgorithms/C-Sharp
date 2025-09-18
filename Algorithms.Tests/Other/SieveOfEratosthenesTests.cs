@@ -1,7 +1,4 @@
-using System.Numerics;
 using Algorithms.Other;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Other;
 
@@ -668,7 +665,7 @@ public static class SieveOfEratosthenesTests
     };
 
     [Test]
-    public static void First10_000PrimesCorrect() => 
+    public static void First10_000PrimesCorrect() =>
         Assert.That(new SieveOfEratosthenes(104729).GetPrimes(), Is.EqualTo(First10000PrimeNumbers));
 
     [Test]

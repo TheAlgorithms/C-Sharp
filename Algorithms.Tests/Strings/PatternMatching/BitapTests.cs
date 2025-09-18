@@ -1,6 +1,4 @@
-﻿using System;
-using Algorithms.Strings.PatternMatching;
-using NUnit.Framework;
+﻿using Algorithms.Strings.PatternMatching;
 
 namespace Algorithms.Tests.Strings.PatternMatching;
 
