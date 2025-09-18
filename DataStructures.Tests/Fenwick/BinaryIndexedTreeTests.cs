@@ -1,6 +1,4 @@
 using DataStructures.Fenwick;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace DataStructures.Tests.Fenwick;
 

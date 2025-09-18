@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using DataStructures.AVLTree;
-using FluentAssertions;
-using NUnit.Framework;
 using static FluentAssertions.FluentActions;
 
 namespace DataStructures.Tests;
@@ -233,19 +228,19 @@ internal class AvlTreeTests
         tree.GetKeysInOrder()
             .Should()
             .BeEquivalentTo(
-                new[] { 4,6,8 },
+                new[] { 4, 6, 8 },
                 config => config.WithStrictOrdering());
 
         tree.GetKeysPreOrder()
             .Should()
             .BeEquivalentTo(
-                new[] { 6,4,8 },
+                new[] { 6, 4, 8 },
                 config => config.WithStrictOrdering());
 
         tree.GetKeysPostOrder()
             .Should()
             .BeEquivalentTo(
-                new[] { 4,8,6 },
+                new[] { 4, 8, 6 },
                 config => config.WithStrictOrdering());
     }
 

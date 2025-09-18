@@ -1,7 +1,4 @@
 using DataStructures.Stack;
-using NUnit.Framework;
-using System;
-using System.Text;
 
 namespace DataStructures.Tests.Stack;
 

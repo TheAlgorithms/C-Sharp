@@ -1,5 +1,4 @@
 using DataStructures.Tries;
-using NUnit.Framework;
 
 namespace DataStructures.Tests.Tries;
 

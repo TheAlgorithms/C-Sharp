@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
 using DataStructures.Hashing;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace DataStructures.Tests.Hashing;
 
@@ -275,7 +271,7 @@ public class HashTableTests
         hashTable.Add(2, "two");
         hashTable.Add(3, "three");
 
-        var keys = new List<int> { 1,2,3 };
+        var keys = new List<int> { 1, 2, 3 };
 
         Assert.That(keys, Is.EquivalentTo(hashTable.Keys));
     }
@@ -377,10 +373,11 @@ public class HashTableTests
     public void This_Get_KeyNotFoundException_WhenKeyDoesNotExist()
     {
         var hashTable = new HashTable<string, int>(4);
-        Assert.Throws<KeyNotFoundException>(() => {
+        Assert.Throws<KeyNotFoundException>(() =>
+        {
             var value = hashTable["one"];
             Console.WriteLine(value);
-             });
+        });
     }
 
     [Test]
@@ -409,7 +406,7 @@ public class HashTableTests
         hashTable.Count.Should().Be(4); // Verify count reflects number of added items
     }
 
-    
+
     [Test]
     public void Add_ThrowsException_WhenKeyIsDefault()
     {
