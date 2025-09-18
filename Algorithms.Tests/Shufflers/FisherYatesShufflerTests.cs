@@ -1,8 +1,5 @@
 using Algorithms.Shufflers;
 using Algorithms.Tests.Helpers;
-using FluentAssertions;
-using NUnit.Framework;
-using System;
 
 namespace Algorithms.Tests.Shufflers;
 

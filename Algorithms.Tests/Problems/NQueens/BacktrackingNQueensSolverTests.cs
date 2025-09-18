@@ -1,8 +1,4 @@
-using System;
-using System.Linq;
 using Algorithms.Problems.NQueens;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Problems.NQueens;
 

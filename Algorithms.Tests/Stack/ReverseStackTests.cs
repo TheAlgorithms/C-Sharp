@@ -1,7 +1,4 @@
 using Algorithms.Stack;
-using NUnit.Framework;
-using System.Collections.Generic;
-
 
 namespace Algorithms.Tests.Stack
 {

@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using System.Numerics;
-using Algorithms.Sequences;
-using FluentAssertions;
-using NUnit.Framework;
+﻿using Algorithms.Sequences;
 
 namespace Algorithms.Tests.Sequences;
 

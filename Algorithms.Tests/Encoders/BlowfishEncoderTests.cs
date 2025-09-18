@@ -1,6 +1,4 @@
 ﻿using Algorithms.Encoders;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Encoders;
 

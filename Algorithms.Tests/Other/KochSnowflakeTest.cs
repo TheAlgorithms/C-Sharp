@@ -1,10 +1,5 @@
 using Algorithms.Other;
-using FluentAssertions;
-using NUnit.Framework;
 using SkiaSharp;
-using System;
-using System.Collections.Generic;
-using System.Numerics;
 
 namespace Algorithms.Tests.Other;
 
