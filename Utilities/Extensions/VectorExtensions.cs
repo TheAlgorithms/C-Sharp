@@ -68,9 +68,7 @@ public static class VectorExtensions
     /// <returns>The magnitude.</returns>
     public static double Magnitude(this double[] vector)
     {
-        var magnitude = Dot(vector, vector);
-        magnitude = Math.Sqrt(magnitude);
-        return magnitude;
+        return Math.Sqrt(Dot(vector, vector));
     }
 
     /// <summary>
