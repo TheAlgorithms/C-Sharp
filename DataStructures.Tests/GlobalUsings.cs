@@ -15,6 +15,4 @@ global using System.Collections.Generic;    // Generic collection types (List, D
 global using System.Linq;                   // LINQ query operators for collections
 global using System.Text;                   // Text encoding, StringBuilder, etc.
 global using NUnit.Framework;               // Testing framework providing attributes and assertions for test cases
-global using NUnit.Framework.Internal;      // Internal NUnit infrastructure (test context, utilities) — generally used for advanced or framework-level test control
 global using FluentAssertions;              // Assertion library for more readable and expressive unit tests
-global using System.Collections;            // Non-generic collection types (e.g., ArrayList, Hashtable, IDictionary, ICollection)
