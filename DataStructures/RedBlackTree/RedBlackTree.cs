@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace DataStructures.RedBlackTree;
 
 /// <summary>
@@ -101,7 +98,7 @@ public class RedBlackTree<TKey>
         {
             addCase = GetAddCase(node);
 
-            switch(addCase)
+            switch (addCase)
             {
                 case 1:
                     break;
@@ -339,7 +336,7 @@ public class RedBlackTree<TKey>
             }
             else
             {
-                throw new ArgumentException($"Key \"{key}\" already exists in tree!");
+                throw new ArgumentException($"""Key "{key}" already exists in tree!""");
             }
         }
 

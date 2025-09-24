@@ -1,8 +1,5 @@
-using System;
-using System.Linq;
 using Algorithms.Sorters.Comparison;
 using Algorithms.Tests.Helpers;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Sorters.Comparison;
 
@@ -55,7 +52,7 @@ public static class TimSorterTests
         var min = testArray.Min();
 
         correctArray[0] = max;
-        correctArray[800-1] = min;
+        correctArray[800 - 1] = min;
         testArray[0] = max;
         testArray[800 - 1] = min;
 

@@ -1,14 +1,12 @@
-using System.Linq;
-using System.Numerics;
 using Algorithms.Sequences;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Sequences;
 
-public class ThreeNPlusOneStepsSequenceTests {
+public class ThreeNPlusOneStepsSequenceTests
+{
     [Test]
-    public void First50ElementsCorrect() {
+    public void First50ElementsCorrect()
+    {
         var sequence = new ThreeNPlusOneStepsSequence().Sequence.Take(50);
         var first50 = new BigInteger[] {
             0, 1, 7, 2, 5, 8, 16, 3, 19, 6,

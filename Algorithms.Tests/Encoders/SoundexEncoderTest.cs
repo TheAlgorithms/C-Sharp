@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
 using Algorithms.Encoders;
-using NUnit.Framework;
 
 namespace Algorithms.Tests.Encoders;
 

@@ -1,7 +1,4 @@
-﻿using System;
-using Algorithms.Crypto.Paddings;
-using FluentAssertions;
-using NUnit.Framework;
+﻿using Algorithms.Crypto.Paddings;
 
 namespace Algorithms.Tests.Crypto.Paddings;
 
@@ -18,7 +15,7 @@ public class TbcPaddingTests
         var result = padding.AddPadding(input, inputOffset);
 
         result.Should().Be(4);
-        input.Should().BeEquivalentTo(new byte[]{0xff, 0xff, 0xff, 0xff});
+        input.Should().BeEquivalentTo(new byte[] { 0xff, 0xff, 0xff, 0xff });
     }
 
     [Test]
