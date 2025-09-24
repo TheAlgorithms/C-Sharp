@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using DataStructures.RedBlackTree;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace DataStructures.Tests;
 
