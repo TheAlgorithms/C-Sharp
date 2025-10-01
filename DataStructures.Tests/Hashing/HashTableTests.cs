@@ -193,6 +193,23 @@ public class HashTableTests
     }
 
     [Test]
+    public void Remove_TriggersResizeDown_MinimumOfDefaultCapacity()
+    {
+        var hashTable = new HashTable<int, string>(4);
+        for (var i = 1; i <= 50; i++)
+        {
+            hashTable.Add(i, $"Value{i}");
+        }
+
+        for (var i = 1; i <= 48; i++)
+        {
+            hashTable.Remove(i);
+        }
+
+        Assert.That(hashTable.Capacity, Is.EqualTo(16));
+    }
+
+    [Test]
     public void ContainsValue_ReturnsFalse_WhenValueDoesNotExist()
     {
         var hashTable = new HashTable<string, int>();

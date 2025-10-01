@@ -286,7 +286,7 @@ public class HashTable<TKey, TValue>
     public void Resize()
     {
         var newCapacity = size <= threshold / 2
-            ? Math.Min(capacity / 2, DefaultCapacity)
+            ? Math.Max(capacity / 2, DefaultCapacity)
             : capacity * 2;
         var newEntries = new Entry<TKey, TValue>[newCapacity];
 
