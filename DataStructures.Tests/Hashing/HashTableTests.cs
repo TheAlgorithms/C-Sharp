@@ -455,6 +455,23 @@ public class HashTableTests
     }
 
     [Test]
+    public void Resize_HandlesNegativeHashCodeCorrectly()
+    {
+        // Arrange
+        var hashTable = new HashTable<NegativeHashKey, string>(2);
+
+        // Act
+        hashTable.Add(new NegativeHashKey(1), "A");
+        hashTable.Add(new NegativeHashKey(2), "B");
+        hashTable.Add(new NegativeHashKey(3), "C");
+
+        // Assert
+        Assert.That(hashTable[new NegativeHashKey(1)], Is.EqualTo("A"));
+        Assert.That(hashTable[new NegativeHashKey(2)], Is.EqualTo("B"));
+        Assert.That(hashTable[new NegativeHashKey(3)], Is.EqualTo("C"));
+    }
+
+    [Test]
     public void Add_ShouldTriggerResize_WhenThresholdExceeded()
     {
         // Arrange
@@ -462,14 +479,14 @@ public class HashTableTests
         var hashTable = new HashTable<int, string>(initialCapacity);
 
         // Act
-        for (var i = 1; i <= 4; i++) // Start keys from 1 to avoid default(TKey) = 0 issue
+        for (var i = 1; i <= 32; i++)
         {
             hashTable.Add(i, $"Value{i}");
         }
 
         // Assert
-        hashTable.Capacity.Should().BeGreaterThan(initialCapacity); // Ensure resizing occurred
-        hashTable.Count.Should().Be(4); // Verify count reflects number of added items
+        hashTable.Capacity.Should().BeGreaterThan(initialCapacity);
+        hashTable.Count.Should().Be(32);
     }
 
     
