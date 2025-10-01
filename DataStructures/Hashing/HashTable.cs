@@ -14,12 +14,10 @@ public class HashTable<TKey, TValue>
 {
     private const int DefaultCapacity = 16;
     private const float DefaultLoadFactor = 0.75f;
-
     private readonly float loadFactor;
     private int capacity;
     private int size;
     private int threshold;
-    private int version;
 
     private Entry<TKey, TValue>?[] entries;
 
@@ -57,35 +55,26 @@ public class HashTable<TKey, TValue>
     {
         get
         {
-            if (EqualityComparer<TKey>.Default.Equals(key, default(TKey)))
+            if (EqualityComparer<TKey>.Default.Equals(key, default))
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            var entry = FindEntry(key);
-            if (entry == null)
-            {
-                throw new KeyNotFoundException();
-            }
-
+            var entry = FindEntry(key)
+                ?? throw new KeyNotFoundException();
             return entry.Value!;
         }
 
         set
         {
-            if (EqualityComparer<TKey>.Default.Equals(key, default(TKey)))
+            if (EqualityComparer<TKey>.Default.Equals(key, default))
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            var entry = FindEntry(key);
-            if (entry == null)
-            {
-                throw new KeyNotFoundException();
-            }
-
+            var entry = FindEntry(key)
+                ?? throw new KeyNotFoundException();
             entry.Value = value;
-            version++;
         }
     }
 
@@ -137,7 +126,7 @@ public class HashTable<TKey, TValue>
     /// </remarks>
     public void Add(TKey? key, TValue? value)
     {
-        if (EqualityComparer<TKey>.Default.Equals(key, default(TKey)))
+        if (EqualityComparer<TKey>.Default.Equals(key, default))
         {
             throw new ArgumentNullException(nameof(key));
         }
@@ -148,21 +137,19 @@ public class HashTable<TKey, TValue>
         }
 
         var index = GetIndex(key);
-        if (
-            entries[index] != null &&
+        if (entries[index] != null &&
             EqualityComparer<TKey>.Default.Equals(entries[index]!.Key!, key))
         {
             throw new ArgumentException("Key already exists");
         }
 
-        if (EqualityComparer<TValue>.Default.Equals(value, default(TValue)))
+        if (EqualityComparer<TValue>.Default.Equals(value, default))
         {
             throw new ArgumentNullException(nameof(value));
         }
 
         entries[index] = new Entry<TKey, TValue>(key!, value!);
         size++;
-        version++;
     }
 
     /// <summary>
@@ -176,7 +163,7 @@ public class HashTable<TKey, TValue>
     /// </remarks>
     public bool Remove(TKey? key)
     {
-        if (EqualityComparer<TKey>.Default.Equals(key, default(TKey)))
+        if (EqualityComparer<TKey>.Default.Equals(key, default))
         {
             throw new ArgumentNullException(nameof(key));
         }
@@ -189,7 +176,6 @@ public class HashTable<TKey, TValue>
 
         entries[index] = null;
         size--;
-        version++;
 
         if (size <= threshold / 4)
         {
@@ -207,7 +193,7 @@ public class HashTable<TKey, TValue>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="key"/> is null.</exception>
     public int GetIndex(TKey? key)
     {
-        if (EqualityComparer<TKey>.Default.Equals(key, default(TKey)))
+        if (EqualityComparer<TKey>.Default.Equals(key, default))
         {
             throw new ArgumentNullException(nameof(key));
         }
@@ -234,7 +220,7 @@ public class HashTable<TKey, TValue>
     /// </remarks>
     public Entry<TKey, TValue>? FindEntry(TKey? key)
     {
-        if (EqualityComparer<TKey>.Default.Equals(key, default(TKey)))
+        if (EqualityComparer<TKey>.Default.Equals(key, default))
         {
             throw new ArgumentNullException(nameof(key));
         }
@@ -254,7 +240,7 @@ public class HashTable<TKey, TValue>
     /// </remarks>
     public bool ContainsKey(TKey? key)
     {
-        if (EqualityComparer<TKey>.Default.Equals(key, default(TKey)))
+        if (EqualityComparer<TKey>.Default.Equals(key, default))
         {
             throw new ArgumentNullException(nameof(key));
         }
@@ -269,7 +255,7 @@ public class HashTable<TKey, TValue>
     /// <returns>True if the hash table contains the value, false otherwise.</returns>
     public bool ContainsValue(TValue? value)
     {
-        if (EqualityComparer<TValue>.Default.Equals(value, default(TValue)))
+        if (EqualityComparer<TValue>.Default.Equals(value, default))
         {
             throw new ArgumentNullException(nameof(value));
         }
@@ -289,18 +275,19 @@ public class HashTable<TKey, TValue>
         threshold = (int)(capacity * loadFactor);
         entries = new Entry<TKey, TValue>[capacity];
         size = 0;
-        version++;
     }
 
     /// <summary>
     /// Resizes the hash table.
     /// </summary>
     /// <remarks>
-    /// This method doubles the capacity of the hash table and rehashes all the elements.
+    /// This method doubles or halves the capacity of the hash table and rehashes all the elements.
     /// </remarks>
     public void Resize()
     {
-        var newCapacity = capacity * 2;
+        var newCapacity = size <= threshold / 2
+            ? capacity / 2
+            : capacity * 2;
         var newEntries = new Entry<TKey, TValue>[newCapacity];
 
         foreach (var entry in entries)
@@ -322,6 +309,5 @@ public class HashTable<TKey, TValue>
         capacity = newCapacity;
         threshold = (int)(capacity * loadFactor);
         entries = newEntries;
-        version++;
     }
 }
