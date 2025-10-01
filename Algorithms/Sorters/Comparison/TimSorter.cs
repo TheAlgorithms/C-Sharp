@@ -80,7 +80,6 @@ public class TimSorter<T> : IComparisonSorter<T>
     public void Sort(T[] array, IComparer<T> comparer)
     {
         ArgumentNullException.ThrowIfNull(array);
-        this.comparer = comparer ?? Comparer<T>.Default;
 
         var start = 0;
         var remaining = array.Length;
