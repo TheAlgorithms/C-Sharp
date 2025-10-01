@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using DataStructures.Heap;
-using NUnit.Framework;
 
 namespace DataStructures.Tests.Heap;
 
@@ -52,7 +49,7 @@ internal static class BinaryHeapTests
 
         Assert.That(heap.Pop(), Is.EqualTo(10));
         Assert.That(heap.Count, Is.EqualTo(9));
-        Assert.That(heap.Contains(10),Is.False);
+        Assert.That(heap.Contains(10), Is.False);
 
         Assert.That(heap.Pop(), Is.EqualTo(9));
         Assert.That(heap.Count, Is.EqualTo(8));

@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace DataStructures.Tests;
 
 public class InvertedIndexTests

@@ -1,12 +1,5 @@
 using DataStructures.Stack;
 
-using FluentAssertions;
-
-using NUnit.Framework;
-
-using System;
-using System.Linq;
-
 namespace DataStructures.Tests.Stack;
 
 public static class ArrayBasedStackTests
@@ -34,7 +27,7 @@ public static class ArrayBasedStackTests
     public static void ContainsTest()
     {
         var stack = new ArrayBasedStack<int>(new[] { 0, 1, 2, 3, 4 });
-        
+
         Assert.Multiple(() =>
         {
             stack.Contains(0).Should().BeTrue();

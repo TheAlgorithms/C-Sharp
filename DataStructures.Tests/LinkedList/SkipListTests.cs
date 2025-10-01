@@ -1,8 +1,4 @@
-using System;
 using DataStructures.LinkedList.SkipList;
-using NUnit.Framework;
-using FluentAssertions;
-using System.Collections.Generic;
 
 namespace DataStructures.Tests.LinkedList;
 
@@ -92,7 +88,7 @@ public static class SkipListTests
         isRemoved.Should().BeTrue();
     }
 
-     [Test]
+    [Test]
     public static void TestRemove_ItemNotFound()
     {
         var list = new SkipList<int>();

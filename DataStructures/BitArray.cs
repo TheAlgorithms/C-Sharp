@@ -114,11 +114,7 @@
 // returns true if there inputs aren't equal otherwise false.
 // assumes: the input bit-arrays must have same length.
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace DataStructures;
 
@@ -139,12 +135,7 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
     /// <param name="n">length of the array.</param>
     public BitArray(int n)
     {
-        if (n < 1)
-        {
-            field = new bool[0];
-        }
-
-        field = new bool[n];
+        field = n <= 0 ? new bool[0] : new bool[n];
     }
 
     /// <summary>
@@ -332,12 +323,12 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
     {
         var sequence1 = one.ToString();
         var sequence2 = two.ToString();
-        var result = string.Empty;
-        var tmp = string.Empty;
+        var result = new StringBuilder();
 
         // for scaling of same length.
         if (one.Length != two.Length)
         {
+            var tmp = new StringBuilder();
             int difference;
             if (one.Length > two.Length)
             {
@@ -345,13 +336,9 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
                 difference = one.Length - two.Length;
 
                 // fills up with 0's
-                for (var i = 0; i < difference; i++)
-                {
-                    tmp += '0';
-                }
-
-                tmp += two.ToString();
-                sequence2 = tmp;
+                tmp.Append('0', difference);
+                tmp.Append(two.ToString());
+                sequence2 = tmp.ToString();
             }
             else
             {
@@ -359,13 +346,9 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
                 difference = two.Length - one.Length;
 
                 // fills up with 0's
-                for (var i = 0; i < difference; i++)
-                {
-                    tmp += '0';
-                }
-
-                tmp += one.ToString();
-                sequence1 = tmp;
+                tmp.Append('0', difference);
+                tmp.Append(one.ToString());
+                sequence1 = tmp.ToString();
             }
         } // end scaling
 
@@ -374,11 +357,10 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
 
         for (var i = 0; i < len; i++)
         {
-            result += sequence1[i].Equals('0') && sequence2[i].Equals('0') ? '0' : '1';
+            result.Append(sequence1[i].Equals('0') && sequence2[i].Equals('0') ? '0' : '1');
         }
 
-        result = result.Trim();
-        ans.Compile(result);
+        ans.Compile(result.ToString());
 
         return ans;
     }
@@ -393,22 +375,14 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
     {
         var ans = new BitArray(one.Length);
         var sequence = one.ToString();
-        var result = string.Empty;
+        var result = new StringBuilder(sequence.Length);
 
         foreach (var ch in sequence)
         {
-            if (ch == '1')
-            {
-                result += '0';
-            }
-            else
-            {
-                result += '1';
-            }
+            result.Append(ch == '1' ? '0' : '1');
         }
 
-        result = result.Trim();
-        ans.Compile(result);
+        ans.Compile(result.ToString());
 
         return ans;
     }
@@ -444,11 +418,11 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
     {
         var sequence1 = one.ToString();
         var sequence2 = two.ToString();
-        var tmp = string.Empty;
 
         // for scaling of same length.
         if (one.Length != two.Length)
         {
+            var tmp = new StringBuilder();
             int difference;
             if (one.Length > two.Length)
             {
@@ -456,13 +430,9 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
                 difference = one.Length - two.Length;
 
                 // fills up with 0's
-                for (var i = 0; i < difference; i++)
-                {
-                    tmp += '0';
-                }
-
-                tmp += two.ToString();
-                sequence2 = tmp;
+                tmp.Append('0', difference);
+                tmp.Append(two.ToString());
+                sequence2 = tmp.ToString();
             }
             else
             {
@@ -470,28 +440,23 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
                 difference = two.Length - one.Length;
 
                 // fills up with 0's
-                for (var i = 0; i < difference; i++)
-                {
-                    tmp += '0';
-                }
-
-                tmp += one.ToString();
-                sequence1 = tmp;
+                tmp.Append('0', difference);
+                tmp.Append(one.ToString());
+                sequence1 = tmp.ToString();
             }
         } // end scaling
 
         var len = one.Length > two.Length ? one.Length : two.Length;
         var ans = new BitArray(len);
 
-        var sb = new StringBuilder();
+        var sb = new StringBuilder(len);
 
         for (var i = 0; i < len; i++)
         {
-            _ = sb.Append(sequence1[i] == sequence2[i] ? '0' : '1');
+            sb.Append(sequence1[i] == sequence2[i] ? '0' : '1');
         }
 
-        var result = sb.ToString().Trim();
-        ans.Compile(result);
+        ans.Compile(sb.ToString());
 
         return ans;
     }
@@ -575,18 +540,10 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
         ThrowIfSequenceIsInvalid(sequence);
 
         // for appropriate scaling
-        var tmp = string.Empty;
         if (sequence.Length < field.Length)
         {
             var difference = field.Length - sequence.Length;
-
-            for (var i = 0; i < difference; i++)
-            {
-                tmp += '0';
-            }
-
-            tmp += sequence;
-            sequence = tmp;
+            sequence = new string('0', difference) + sequence;
         }
 
         // actual compile procedure.
@@ -603,8 +560,6 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
     /// <param name="number">A positive integer number.</param>
     public void Compile(int number)
     {
-        var tmp = string.Empty;
-
         // precondition I
         if (number <= 0)
         {
@@ -624,14 +579,7 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
         if (binaryNumber.Length < field.Length)
         {
             var difference = field.Length - binaryNumber.Length;
-
-            for (var i = 0; i < difference; i++)
-            {
-                tmp += '0';
-            }
-
-            tmp += binaryNumber;
-            binaryNumber = tmp;
+            binaryNumber = new string('0', difference) + binaryNumber;
         }
 
         // actual compile procedure.
@@ -648,8 +596,6 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
     /// <param name="number">A positive long integer number.</param>
     public void Compile(long number)
     {
-        var tmp = string.Empty;
-
         // precondition I
         if (number <= 0)
         {
@@ -669,14 +615,7 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
         if (binaryNumber.Length < field.Length)
         {
             var difference = field.Length - binaryNumber.Length;
-
-            for (var i = 0; i < difference; i++)
-            {
-                tmp += '0';
-            }
-
-            tmp += binaryNumber;
-            binaryNumber = tmp;
+            binaryNumber = new string('0', difference) + binaryNumber;
         }
 
         // actual compile procedure.
@@ -832,7 +771,7 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
     }
 
     /// <summary>
-    ///     Utility method foir checking a given sequence contains only zeros and ones.
+    ///     Utility method for checking a given sequence contains only zeros and ones.
     ///     This method will used in Constructor (sequence : string) and Compile(sequence : string).
     /// </summary>
     /// <param name="sequence">String sequence.</param>

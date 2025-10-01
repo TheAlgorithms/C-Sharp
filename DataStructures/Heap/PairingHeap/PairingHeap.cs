@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace DataStructures.Heap.PairingHeap;
 
@@ -57,7 +54,7 @@ public class PairingHeap<T> : IEnumerable<T> where T : IComparable
     /// </summary>
     public void UpdateKey(T currentValue, T newValue)
     {
-        if(!mapping.ContainsKey(currentValue))
+        if (!mapping.ContainsKey(currentValue))
         {
             throw new ArgumentException("Current value is not present in this heap.");
         }
