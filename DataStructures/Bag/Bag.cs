@@ -57,12 +57,8 @@ public class Bag<T> : IEnumerable<T> where T : notnull
             current = current.Next;
         }
 
-        // Item not found, add it
-        if (previous != null)
-        {
-            previous.Next = new BagNode<T>(item);
-            totalCount++;
-        }
+        previous!.Next = new BagNode<T>(item);
+        totalCount++;
     }
 
     /// <summary>
@@ -78,11 +74,6 @@ public class Bag<T> : IEnumerable<T> where T : notnull
     /// Gets the number of items in the bag.
     /// </summary>
     public int Count => totalCount;
-
-    /// <summary>
-    /// Gets the total number of items in the bag, including all multiplicities.
-    /// </summary>
-    public int TotalCount => totalCount;
 
     /// <summary>
     /// Returns a boolean indicating whether the bag is empty.

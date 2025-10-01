@@ -10,5 +10,5 @@ public class BagNode<T>(T item)
 
     public int Multiplicity { get; set; } = 1;
 
-    public BagNode<T>? Next { get; set; } = null;
+    public BagNode<T>? Next { get; set; }
 }
