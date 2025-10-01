@@ -114,6 +114,18 @@ public class HashTableTests
     }
 
     [Test]
+    public void Add_ThrowsException_OnCollision()
+    {
+        // Arrange
+        var hashTable = new HashTable<Collider, int>();
+        hashTable.Add(new Collider(1), 1);
+
+
+        // Act & Assert
+        Assert.Throws<ArgumentException>(() => hashTable.Add(new Collider(1), 2));
+    }
+
+    [Test]
     public void Remove_ThrowsException_WhenKeyIsNull()
     {
         var hashTable = new HashTable<string, int>();
@@ -154,10 +166,43 @@ public class HashTableTests
     public void Remove_DoesNotDecreaseCount_WhenKeyDoesNotExist()
     {
         var hashTable = new HashTable<string, int>();
-
         hashTable.Remove("a");
 
         Assert.That(hashTable.Count, Is.EqualTo(0));
+    }
+
+    [Test]
+    public void Remove_TriggersResizeDown()
+    {
+        var hashTable = new HashTable<int, string>(4);
+        for (var i = 1; i <= 50; i++)
+        {
+            hashTable.Add(i, $"Value{i}");
+        }
+
+        for (var i = 1; i <= 40; i++)
+        {
+            hashTable.Remove(i);
+        }
+
+        Assert.That(hashTable.Capacity, Is.EqualTo(40));
+    }
+
+    [Test]
+    public void Remove_TriggersResizeDown_MinimumOfDefaultCapacity()
+    {
+        var hashTable = new HashTable<int, string>(4);
+        for (var i = 1; i <= 50; i++)
+        {
+            hashTable.Add(i, $"Value{i}");
+        }
+
+        for (var i = 1; i <= 48; i++)
+        {
+            hashTable.Remove(i);
+        }
+
+        Assert.That(hashTable.Capacity, Is.EqualTo(16));
     }
 
     [Test]
@@ -232,6 +277,17 @@ public class HashTableTests
         hashTable.Clear();
 
         Assert.That(hashTable.ContainsKey("a"), Is.False);
+    }
+
+    [Test]
+    public void Clear_ResetsTable()
+    {
+        var hashTable = new HashTable<int, string>();
+        hashTable.Add(1, "A");
+        hashTable.Clear();
+        hashTable.Add(2, "B");
+        Assert.That(hashTable.Count, Is.EqualTo(1));
+        Assert.That(hashTable[2], Is.EqualTo("B"));
     }
 
     [Test]
@@ -314,6 +370,13 @@ public class HashTableTests
     }
 
     [Test]
+    public void Constructor_RoundsCapacityToPrime()
+    {
+        var hashTable = new HashTable<int, string>(17);
+        Assert.That(hashTable.Capacity, Is.EqualTo(19));
+    }
+
+    [Test]
     public void GetIndex_ThrowsException_WhenKeyIsNull()
     {
         var hashTable = new HashTable<string, int>(4);
@@ -389,6 +452,23 @@ public class HashTableTests
     }
 
     [Test]
+    public void Resize_HandlesNegativeHashCodeCorrectly()
+    {
+        // Arrange
+        var hashTable = new HashTable<NegativeHashKey, string>(2);
+
+        // Act
+        hashTable.Add(new NegativeHashKey(1), "A");
+        hashTable.Add(new NegativeHashKey(2), "B");
+        hashTable.Add(new NegativeHashKey(3), "C");
+
+        // Assert
+        Assert.That(hashTable[new NegativeHashKey(1)], Is.EqualTo("A"));
+        Assert.That(hashTable[new NegativeHashKey(2)], Is.EqualTo("B"));
+        Assert.That(hashTable[new NegativeHashKey(3)], Is.EqualTo("C"));
+    }
+
+    [Test]
     public void Add_ShouldTriggerResize_WhenThresholdExceeded()
     {
         // Arrange
@@ -396,14 +476,14 @@ public class HashTableTests
         var hashTable = new HashTable<int, string>(initialCapacity);
 
         // Act
-        for (int i = 1; i <= 4; i++) // Start keys from 1 to avoid default(TKey) = 0 issue
+        for (var i = 1; i <= 32; i++)
         {
             hashTable.Add(i, $"Value{i}");
         }
 
         // Assert
-        hashTable.Capacity.Should().BeGreaterThan(initialCapacity); // Ensure resizing occurred
-        hashTable.Count.Should().Be(4); // Verify count reflects number of added items
+        hashTable.Capacity.Should().BeGreaterThan(initialCapacity);
+        hashTable.Count.Should().Be(32);
     }
 
 
@@ -473,23 +553,28 @@ public class HashTableTests
         var initialCapacity = 4;
         var hashTable = new HashTable<int, string>(initialCapacity);
 
-        for (int i = 1; i <= 5; i++)
+        for (var i = 1; i <= 5; i++)
         {
             hashTable.Add(i, $"Value{i}");
         }
 
         hashTable.Capacity.Should().BeGreaterThan(initialCapacity);
     }
+
+    [Test]
+    public void IndexerSet_Throws_KeyNotFound()
+    {
+        // Arrange
+        var hashTable = new HashTable<int, string>();
+
+        // Act & Assert
+        Assert.Throws<KeyNotFoundException>(() => hashTable[1] = "A");
+    }
 }
 
-public class NegativeHashKey
+public class NegativeHashKey(int id)
 {
-    private readonly int id;
-
-    public NegativeHashKey(int id)
-    {
-        this.id = id;
-    }
+    private readonly int id = id;
 
     public override int GetHashCode()
     {
@@ -505,4 +590,15 @@ public class NegativeHashKey
         }
         return false;
     }
+}
+
+/// <summary>
+/// Class to simulate hash collisions
+/// </summary>
+/// <param name="id">Id of this object</param>
+public class Collider(int id)
+{
+    private readonly int id = id;
+    public override int GetHashCode() => 42; // Force all instances to collide
+    public override bool Equals(object? obj) => obj is Collider other && other.id == id;
 }
