@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace DataStructures.Graph;
 
 public interface IDirectedWeightedGraph<T>

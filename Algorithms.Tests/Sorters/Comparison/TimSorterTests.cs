@@ -9,8 +9,8 @@ public static class TimSorterTests
     private static readonly TimSorterSettings Settings = new();
 
     [Test]
-    public static void ArraySorted(
-        [Random(0, 10_000, 2000)] int n)
+    public static void Sort_ShouldBeEquivalentToSuccessfulBasicSort(
+        [Random(0, 10_000, 5000)] int n)
     {
         // Arrange
         var sorter = new TimSorter<int>(Settings, IntComparer);
@@ -25,7 +25,7 @@ public static class TimSorterTests
     }
 
     [Test]
-    public static void TinyArray()
+    public static void Sort_TinyArray_ShouldSortCorrectly()
     {
         // Arrange
         var sorter = new TimSorter<int>(Settings, IntComparer);
@@ -40,7 +40,7 @@ public static class TimSorterTests
     }
 
     [Test]
-    public static void SmallChunks()
+    public static void Sort_SmallChunks_ShouldSortCorrectly()
     {
         // Arrange
         var sorter = new TimSorter<int>(Settings, IntComparer);
@@ -62,5 +62,75 @@ public static class TimSorterTests
 
         // Assert
         Assert.That(correctArray, Is.EqualTo(testArray));
+    }
+
+    [Test]
+    public static void Sort_ThrowsArgumentNullException_WhenArrayIsNull()
+    {
+        // Arrange
+        var sorter = new TimSorter<int>(Settings, IntComparer);
+
+        // Act & Assert
+        Assert.Throws<ArgumentNullException>(() => sorter.Sort(null!, IntComparer));
+    }
+
+    [Test]
+    public static void Sort_UsesDefaultComparer_WhenComparerIsNull()
+    {
+        // Arrange
+        var sorter = new TimSorter<int>(Settings, null!);
+        var (correctArray, testArray) = RandomHelper.GetArrays(20);
+
+        // Act
+        sorter.Sort(testArray, IntComparer);
+        Array.Sort(correctArray, IntComparer);
+
+        // Assert
+        Assert.That(correctArray, Is.EqualTo(testArray));
+    }
+
+    [Test]
+    public static void Sort_AlreadySortedArray_RemainsUnchanged()
+    {
+        // Arrange
+        var sorter = new TimSorter<int>(Settings, IntComparer);
+        var array = new[] { 1, 2, 3, 4, 5 };
+        var expected = new[] { 1, 2, 3, 4, 5 };
+
+        // Act
+        sorter.Sort(array, IntComparer);
+
+        // Assert
+        Assert.That(array, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public static void MergeAt_ShouldReturnEarly_WhenLenAIsZero()
+    {
+        // Arrange: left run is all less than right run's first element
+        var array = Enumerable.Range(1, 25).Concat(Enumerable.Range(100, 25)).ToArray();
+        var sortedArray = Enumerable.Range(1, 25).Concat(Enumerable.Range(100, 25)).ToArray();
+        var sorter = new TimSorter<int>(new TimSorterSettings(), Comparer<int>.Default);
+
+        // Act
+        sorter.Sort(array, Comparer<int>.Default);
+
+        // Assert: Array order will not have changed, and the lenA <= 0 branch should be hit
+        Assert.That(sortedArray, Is.EqualTo(array));
+    }
+
+    [Test]
+    public static void MergeAt_ShouldReturnEarly_WhenLenBIsZero()
+    {
+        // Arrange: right run is all less than left run's last element
+        var array = Enumerable.Range(100, 25).Concat(Enumerable.Range(1, 25)).ToArray();
+        var sortedArray = Enumerable.Range(1, 25).Concat(Enumerable.Range(100, 25)).ToArray();
+        var sorter = new TimSorter<int>(new TimSorterSettings(), Comparer<int>.Default);
+
+        // Act
+        sorter.Sort(array, Comparer<int>.Default);
+
+        // Assert: The left and right sides of the array should have swapped places, and the lenB <= 0 branch should be hit
+        Assert.That(sortedArray, Is.EqualTo(array));
     }
 }

@@ -1,6 +1,4 @@
-using System;
 using DataStructures.Heap.FibonacciHeap;
-using NUnit.Framework;
 
 namespace DataStructures.Tests.Heap.FibonacciHeaps;
 
@@ -41,7 +39,7 @@ internal static class FibonacciHeapTests
     {
         var heap = BuildTestHeap();
 
-        Assert.That(heap.Peek(),Is.EqualTo(1));
+        Assert.That(heap.Peek(), Is.EqualTo(1));
         Assert.That(heap.Count, Is.EqualTo(10));
     }
 
