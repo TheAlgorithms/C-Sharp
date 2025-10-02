@@ -1,7 +1,4 @@
-using System.Collections.Generic;
 using DataStructures.Heap.PairingHeap;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace DataStructures.Tests.Heap.PairingHeap;
 

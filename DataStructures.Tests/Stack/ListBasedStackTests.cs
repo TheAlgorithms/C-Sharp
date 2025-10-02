@@ -1,11 +1,5 @@
 using DataStructures.Stack;
 
-using FluentAssertions;
-
-using NUnit.Framework;
-
-using System.Linq;
-
 namespace DataStructures.Tests.Stack;
 
 public static class ListBasedStackTests

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Utilities.Exceptions;
 
 namespace DataStructures.LinkedList.DoublyLinkedList;
