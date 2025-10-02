@@ -102,8 +102,5 @@ public class Bag<T> : IEnumerable<T> where T : notnull
     /// <summary>
     /// Returns an enumerator that iterates through the bag.
     /// </summary>
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }

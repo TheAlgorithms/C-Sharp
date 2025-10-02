@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using DataStructures.Bag;
 using FluentAssertions;
@@ -121,5 +122,32 @@ internal class BagTests
 
         // Act & Assert
         bag.Count.Should().Be(3);
+    }
+
+    [Test]
+    public void IEnumerableGetEnumerator_YieldsAllItemsWithCorrectMultiplicity()
+    {
+        // Arrange
+        var bag = new Bag<string>
+        {
+            "apple",
+            "banana",
+            "apple"
+        };
+        var genericBag = bag as System.Collections.IEnumerable;
+
+        // Act
+        var enumerator = genericBag.GetEnumerator();
+        var items = new List<object>();
+        while (enumerator.MoveNext())
+        {
+            items.Add(enumerator.Current!);
+        }
+
+        // Assert
+        items.Count(i => (string)i == "apple").Should().Be(2);
+        items.Count(i => (string)i == "banana").Should().Be(1);
+        items.Count.Should().Be(3);
+        items.Should().BeEquivalentTo(["apple", "apple", "banana"]);
     }
 }
