@@ -9,7 +9,7 @@ public class UnrolledLinkedListNode(int nodeSize)
 
     public UnrolledLinkedListNode Next { get; set; } = null!;
 
-    public int Count { get; set; } = 0;
+    public int Count { get; set; }
 
     /// <summary>
     /// Set new item in array buffer.
