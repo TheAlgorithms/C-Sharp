@@ -2,38 +2,28 @@ using System.IO;
 
 namespace Algorithms.Sorters.External.Storages;
 
-public class IntFileStorage : ISequentialStorage<int>
+public class IntFileStorage(string filename, int length) : ISequentialStorage<int>
 {
-    private readonly string filename;
+    private readonly string filename = filename;
 
-    public IntFileStorage(string filename, int length)
-    {
-        Length = length;
-        this.filename = filename;
-    }
-
-    public int Length { get; }
+    public int Length { get; } = length;
 
     public ISequentialStorageReader<int> GetReader() => new FileReader(filename);
 
     public ISequentialStorageWriter<int> GetWriter() => new FileWriter(filename);
 
-    private class FileReader : ISequentialStorageReader<int>
+    private class FileReader(string filename) : ISequentialStorageReader<int>
     {
-        private readonly BinaryReader reader;
-
-        public FileReader(string filename) => reader = new BinaryReader(File.OpenRead(filename));
+        private readonly BinaryReader reader = new BinaryReader(File.OpenRead(filename));
 
         public void Dispose() => reader.Dispose();
 
         public int Read() => reader.ReadInt32();
     }
 
-    private class FileWriter : ISequentialStorageWriter<int>
+    private class FileWriter(string filename) : ISequentialStorageWriter<int>
     {
-        private readonly BinaryWriter writer;
-
-        public FileWriter(string filename) => writer = new BinaryWriter(File.OpenWrite(filename));
+        private readonly BinaryWriter writer = new BinaryWriter(File.OpenWrite(filename));
 
         public void Write(int value) => writer.Write(value);
 

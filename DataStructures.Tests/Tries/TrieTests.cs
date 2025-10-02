@@ -9,12 +9,12 @@ public static class TrieTests
     public static void FindWordInTrie()
     {
         // Arrange
-        string[] words = {
+        string[] words = [
             "trie",
             "node",
             "none",
             "treatment",
-        };
+        ];
 
         // Act
         Trie trie = new(words);
@@ -34,12 +34,12 @@ public static class TrieTests
     public static void InsertInTrie()
     {
         // Arrange
-        string[] words = {
+        string[] words = [
             "trie",
             "node",
             "none",
             "treatment",
-        };
+        ];
 
         Trie trie = new();
 
@@ -60,12 +60,12 @@ public static class TrieTests
     public static void RemoveFromTrie()
     {
         // Arrange
-        string[] words = {
+        string[] words = [
             "trie",
             "node",
             "none",
             "treatment",
-        };
+        ];
 
         Trie trie = new();
 

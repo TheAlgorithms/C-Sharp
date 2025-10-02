@@ -184,6 +184,6 @@ public class HillEncoder : IEncoder<double[,]>
 
         _ = linearEquationSolver.Solve(augM);
 
-        return new[] { augM[0, 3], augM[1, 3], augM[2, 3] };
+        return [augM[0, 3], augM[1, 3], augM[2, 3]];
     }
 }

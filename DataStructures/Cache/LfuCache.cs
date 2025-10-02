@@ -25,7 +25,11 @@ namespace DataStructures.Cache;
 /// https://www.educative.io/answers/what-is-least-frequently-used-cache-replace-policy
 /// https://leetcode.com/problems/lfu-cache/ .
 /// </remarks>
-public class LfuCache<TKey, TValue> where TKey : notnull
+/// <remarks>
+/// Initializes a new instance of the <see cref="LfuCache{TKey, TValue}"/> class.
+/// </remarks>
+/// <param name="capacity">The max number of items the cache can store.</param>
+public class LfuCache<TKey, TValue>(int capacity = LfuCache<TKey, TValue>.DefaultCapacity) where TKey : notnull
 {
     private class CachedItem
     {
@@ -38,7 +42,7 @@ public class LfuCache<TKey, TValue> where TKey : notnull
 
     private const int DefaultCapacity = 100;
 
-    private readonly int capacity;
+    private readonly int capacity = capacity;
 
     // Note that <c>Dictionary</c> stores <c>LinkedListNode</c> as it allows
     // removing the node from the <c>LinkedList</c> in O(1) time.
@@ -53,15 +57,6 @@ public class LfuCache<TKey, TValue> where TKey : notnull
     // the <c>minFrequency</c> is increased.
     // When a new item is added, the <c>minFrequency</c> is set to 1.
     private int minFrequency = -1;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="LfuCache{TKey, TValue}"/> class.
-    /// </summary>
-    /// <param name="capacity">The max number of items the cache can store.</param>
-    public LfuCache(int capacity = DefaultCapacity)
-    {
-        this.capacity = capacity;
-    }
 
     public bool Contains(TKey key) => cache.ContainsKey(key);
 

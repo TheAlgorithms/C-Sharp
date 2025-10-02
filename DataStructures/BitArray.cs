@@ -141,7 +141,7 @@ public sealed class BitArray : ICloneable, IEnumerator<bool>, IEnumerable<bool>
     {
         if (n < 1)
         {
-            field = new bool[0];
+            field = [];
         }
 
         field = new bool[n];

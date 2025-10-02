@@ -45,7 +45,7 @@ public static class EulerMethod
         }
 
         List<double[]> points = new();
-        double[] firstPoint = { xStart, yStart };
+        double[] firstPoint = [xStart, yStart];
         points.Add(firstPoint);
         var yCurrent = yStart;
         var xCurrent = xStart;
@@ -54,7 +54,7 @@ public static class EulerMethod
         {
             yCurrent = EulerStep(xCurrent, stepSize, yCurrent, yDerivative);
             xCurrent += stepSize;
-            double[] point = { xCurrent, yCurrent };
+            double[] point = [xCurrent, yCurrent];
             points.Add(point);
         }
 

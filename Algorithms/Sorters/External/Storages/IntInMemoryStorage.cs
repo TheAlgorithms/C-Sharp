@@ -1,10 +1,8 @@
 namespace Algorithms.Sorters.External.Storages;
 
-public class IntInMemoryStorage : ISequentialStorage<int>
+public class IntInMemoryStorage(int[] array) : ISequentialStorage<int>
 {
-    private readonly int[] storage;
-
-    public IntInMemoryStorage(int[] array) => storage = array;
+    private readonly int[] storage = array;
 
     public int Length => storage.Length;
 
@@ -12,12 +10,10 @@ public class IntInMemoryStorage : ISequentialStorage<int>
 
     public ISequentialStorageWriter<int> GetWriter() => new InMemoryWriter(storage);
 
-    private class InMemoryReader : ISequentialStorageReader<int>
+    private class InMemoryReader(int[] storage) : ISequentialStorageReader<int>
     {
-        private readonly int[] storage;
+        private readonly int[] storage = storage;
         private int offset;
-
-        public InMemoryReader(int[] storage) => this.storage = storage;
 
         public void Dispose()
         {
@@ -27,12 +23,10 @@ public class IntInMemoryStorage : ISequentialStorage<int>
         public int Read() => storage[offset++];
     }
 
-    private class InMemoryWriter : ISequentialStorageWriter<int>
+    private class InMemoryWriter(int[] storage) : ISequentialStorageWriter<int>
     {
-        private readonly int[] storage;
+        private readonly int[] storage = storage;
         private int offset;
-
-        public InMemoryWriter(int[] storage) => this.storage = storage;
 
         public void Write(int value) => storage[offset++] = value;
 

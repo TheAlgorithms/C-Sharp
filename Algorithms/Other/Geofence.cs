@@ -1,19 +1,12 @@
 namespace Algorithms.Other;
 
-public class Geofence
+public class Geofence(double latitude, double longitude, double radiusInMeters)
 {
-    public double Latitude { get; set; }
+    public double Latitude { get; set; } = latitude;
 
-    public double Longitude { get; set; }
+    public double Longitude { get; set; } = longitude;
 
-    public double RadiusInMeters { get; set; }
-
-    public Geofence(double latitude, double longitude, double radiusInMeters)
-    {
-        Latitude = latitude;
-        Longitude = longitude;
-        RadiusInMeters = radiusInMeters;
-    }
+    public double RadiusInMeters { get; set; } = radiusInMeters;
 
     /// <summary>
     /// Checks whether the provided user location (latitude and longitude) is within the geofence boundary.

@@ -485,14 +485,9 @@ public class HashTableTests
     }
 }
 
-public class NegativeHashKey
+public class NegativeHashKey(int id)
 {
-    private readonly int id;
-
-    public NegativeHashKey(int id)
-    {
-        this.id = id;
-    }
+    private readonly int id = id;
 
     public override int GetHashCode()
     {

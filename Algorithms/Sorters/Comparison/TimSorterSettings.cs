@@ -1,14 +1,8 @@
 namespace Algorithms.Sorters.Comparison;
 
-public class TimSorterSettings
+public class TimSorterSettings(int minMerge = 32, int minGallop = 7)
 {
-    public int MinMerge { get; }
+    public int MinMerge { get; } = minMerge;
 
-    public int MinGallop { get; }
-
-    public TimSorterSettings(int minMerge = 32, int minGallop = 7)
-    {
-        MinMerge = minMerge;
-        MinGallop = minGallop;
-    }
+    public int MinGallop { get; } = minGallop;
 }

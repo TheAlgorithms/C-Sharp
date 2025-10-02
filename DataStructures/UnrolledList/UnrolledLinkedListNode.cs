@@ -5,21 +5,13 @@ namespace DataStructures.UnrolledList;
 /// <summary>
 /// Single node with array buffer for unrolled list.
 /// </summary>
-public class UnrolledLinkedListNode
+public class UnrolledLinkedListNode(int nodeSize)
 {
-    private readonly int[] array;
+    private readonly int[] array = new int[nodeSize];
 
-    public UnrolledLinkedListNode(int nodeSize)
-    {
-        Next = null!;
+    public UnrolledLinkedListNode Next { get; set; } = null!;
 
-        Count = 0;
-        array = new int[nodeSize];
-    }
-
-    public UnrolledLinkedListNode Next { get; set; }
-
-    public int Count { get; set; }
+    public int Count { get; set; } = 0;
 
     /// <summary>
     /// Set new item in array buffer.

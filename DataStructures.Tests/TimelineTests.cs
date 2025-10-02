@@ -97,7 +97,7 @@ public static class TimelineTests
             { new DateTime(2015, 1, 1), "TestTime5" },
         };
 
-        timeline[new DateTime(2000, 1, 1)] = new[] { eventName };
+        timeline[new DateTime(2000, 1, 1)] = [eventName];
 
         timeline[new DateTime(2000, 1, 1)][0]
             .Should()
