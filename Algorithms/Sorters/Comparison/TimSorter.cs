@@ -8,7 +8,7 @@ namespace Algorithms.Sorters.Comparison;
 ///
 ///     This class is based on a Java interpretation of Tim Peter's original work.
 ///     Java class is viewable here:
-///     http://cr.openjdk.java.net/~martin/webrevs/openjdk7/timsort/raw_files/new/src/share/classes/java/util/TimSort.java
+///     https://web.archive.org/web/20190119032242/http://cr.openjdk.java.net:80/~martin/webrevs/openjdk7/timsort/raw_files/new/src/share/classes/java/util/TimSort.java
 ///
 ///     Tim Peters's list sort for Python, is described in detail here:
 ///     http://svn.python.org/projects/python/trunk/Objects/listsort.txt
@@ -26,9 +26,6 @@ public class TimSorter<T> : IComparisonSorter<T>
 {
     private readonly int minMerge;
     private readonly int initMinGallop;
-
-    // Pool of reusable TimChunk objects for memory efficiency.
-    private readonly TimChunk<T>[] chunkPool = new TimChunk<T>[2];
 
     private readonly int[] runBase;
     private readonly int[] runLengths;
@@ -56,6 +53,11 @@ public class TimSorter<T> : IComparisonSorter<T>
     public TimSorter(TimSorterSettings settings, IComparer<T> comparer)
     {
         initMinGallop = minGallop;
+
+        // Using the worst case stack size from the C implementation.
+        // Based on the findings in the original listsort.txt:
+        // ... the stack can never grow larger than about log_base_phi(N) entries, where phi = (1 + sqrt(5)) / 2 ~= 1.618.
+        // Thus a small # of stack slots suffice for very large arrays ...
         runBase = new int[85];
         runLengths = new int[85];
 
@@ -77,7 +79,8 @@ public class TimSorter<T> : IComparisonSorter<T>
     /// <param name="comparer">Compares elements.</param>
     public void Sort(T[] array, IComparer<T> comparer)
     {
-        this.comparer = comparer;
+        ArgumentNullException.ThrowIfNull(array);
+
         var start = 0;
         var remaining = array.Length;
 
