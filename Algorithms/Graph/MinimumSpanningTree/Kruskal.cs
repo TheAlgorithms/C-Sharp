@@ -108,7 +108,7 @@ public static class Kruskal
         var mst = new Dictionary<int, float>[numNodes];
         for (var i = 0; i < numNodes; i++)
         {
-            mst[i] = new Dictionary<int, float>();
+            mst[i] = [];
         }
 
         foreach (var (node1, node2) in edges)

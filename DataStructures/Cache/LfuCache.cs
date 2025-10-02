@@ -46,11 +46,11 @@ public class LfuCache<TKey, TValue>(int capacity = LfuCache<TKey, TValue>.Defaul
 
     // Note that <c>Dictionary</c> stores <c>LinkedListNode</c> as it allows
     // removing the node from the <c>LinkedList</c> in O(1) time.
-    private readonly Dictionary<TKey, LinkedListNode<CachedItem>> cache = new();
+    private readonly Dictionary<TKey, LinkedListNode<CachedItem>> cache = [];
 
     // Map frequency (number of times the item was requested or updated)
     // to the LRU linked list.
-    private readonly Dictionary<int, LinkedList<CachedItem>> frequencies = new();
+    private readonly Dictionary<int, LinkedList<CachedItem>> frequencies = [];
 
     // Track the minimum frequency with non-empty linked list in <c>frequencies</c>.
     // When the last item with the minFrequency is promoted (after being requested or updated),

@@ -12,7 +12,7 @@ namespace DataStructures;
 /// </summary>
 public class InvertedIndex
 {
-    private readonly Dictionary<string, List<string>> invertedIndex = new();
+    private readonly Dictionary<string, List<string>> invertedIndex = [];
 
     /// <summary>
     /// Build inverted index with source name and source content.
@@ -26,7 +26,7 @@ public class InvertedIndex
         {
             if (!invertedIndex.ContainsKey(word))
             {
-                invertedIndex.Add(word, new List<string> { sourceName });
+                invertedIndex.Add(word, [sourceName]);
             }
             else
             {

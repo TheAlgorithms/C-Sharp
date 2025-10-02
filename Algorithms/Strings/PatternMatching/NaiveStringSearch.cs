@@ -17,7 +17,7 @@ public static class NaiveStringSearch
     {
         var m = pattern.Length;
         var n = content.Length;
-        List<int> indices = new();
+        List<int> indices = [];
         for (var e = 0; e <= n - m; e++)
         {
             int j;

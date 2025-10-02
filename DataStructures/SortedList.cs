@@ -14,7 +14,7 @@ namespace DataStructures;
 public class SortedList<T>(IComparer<T> comparer) : IEnumerable<T>
 {
     private readonly IComparer<T> comparer = comparer;
-    private readonly List<T> memory = new List<T>();
+    private readonly List<T> memory = [];
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="SortedList{T}" /> class. Uses a Comparer.Default for type T.

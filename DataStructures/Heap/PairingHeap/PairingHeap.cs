@@ -13,7 +13,7 @@ public class PairingHeap<T>(Sorting sortDirection = Sorting.Ascending) : IEnumer
 {
     private readonly Sorting sorting = sortDirection;
     private readonly IComparer<T> comparer = new PairingNodeComparer<T>(sortDirection, Comparer<T>.Default);
-    private readonly Dictionary<T, List<PairingHeapNode<T>>> mapping = new();
+    private readonly Dictionary<T, List<PairingHeapNode<T>>> mapping = [];
 
     private PairingHeapNode<T> root = null!;
 

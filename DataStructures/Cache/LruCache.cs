@@ -44,7 +44,7 @@ public class LruCache<TKey, TValue>(int capacity = LruCache<TKey, TValue>.Defaul
 
     // Note that <c>Dictionary</c> stores <c>LinkedListNode</c> as it allows
     // removing the node from the <c>LinkedList</c> in O(1) time.
-    private readonly Dictionary<TKey, LinkedListNode<CachedItem>> cache = new();
+    private readonly Dictionary<TKey, LinkedListNode<CachedItem>> cache = [];
     private readonly LinkedList<CachedItem> lruList = new();
 
     public bool Contains(TKey key) => cache.ContainsKey(key);

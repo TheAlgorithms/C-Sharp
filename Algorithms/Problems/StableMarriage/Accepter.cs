@@ -4,7 +4,7 @@ public class Accepter
 {
     public Proposer? EngagedTo { get; set; }
 
-    public List<Proposer> PreferenceOrder { get; set; } = new();
+    public List<Proposer> PreferenceOrder { get; set; } = [];
 
     public bool PrefersOverCurrent(Proposer newProposer) =>
         EngagedTo is null ||

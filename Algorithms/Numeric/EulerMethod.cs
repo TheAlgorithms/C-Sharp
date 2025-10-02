@@ -44,7 +44,7 @@ public static class EulerMethod
                 $"{nameof(stepSize)} should be greater than zero");
         }
 
-        List<double[]> points = new();
+        List<double[]> points = [];
         double[] firstPoint = [xStart, yStart];
         points.Add(firstPoint);
         var yCurrent = yStart;

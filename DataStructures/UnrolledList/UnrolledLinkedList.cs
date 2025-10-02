@@ -63,7 +63,7 @@ public class UnrolledLinkedList(int chunkSize)
     public IEnumerable<int> GetRolledItems()
     {
         UnrolledLinkedListNode pointer = start;
-        List<int> result = new();
+        List<int> result = [];
 
         while (pointer != null)
         {

@@ -33,7 +33,7 @@ public class BinaryHeap<T>
     /// </summary>
     public BinaryHeap()
     {
-        data = new List<T>();
+        data = [];
         comparer = Comparer<T>.Default;
     }
 
@@ -43,7 +43,7 @@ public class BinaryHeap<T>
     /// <param name="customComparer">The custom comparing function to use to compare elements.</param>
     public BinaryHeap(Comparer<T> customComparer)
     {
-        data = new List<T>();
+        data = [];
         comparer = customComparer;
     }
 
