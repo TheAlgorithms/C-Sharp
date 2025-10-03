@@ -14,7 +14,7 @@ public struct VecN(params double[] vals) : IEquatable<VecN>
     /// <summary>
     ///     Gets the dimension count of this vector.
     /// </summary>
-    public readonly int N => data.Length;
+    public int N => data.Length;
 
     /// <summary>
     ///     Returns the Length squared.
@@ -107,30 +107,5 @@ public struct VecN(params double[] vals) : IEquatable<VecN>
         }
 
         return true;
-    }
-
-    /// <summary>
-    ///     Determines whether the specified object is equal to the current instance.
-    /// </summary>
-    /// <param name="obj">The object to compare with the current instance. Can be <see langword="null"/>.</param>
-    /// <returns><see langword="true"/> if the specified object is a <c>VecN</c> and is equal to the current instance; otherwise <see langword="false"/>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is VecN other && Equals(other);
-    }
-
-    /// <summary>
-    /// Computes a hash code for the current object based on the values in the <c>data</c> collection.
-    /// </summary>
-    /// <returns>An integer representing the hash code for the current object.</returns>
-    public override int GetHashCode()
-    {
-        var hash = default(HashCode);
-        foreach (var d in data)
-        {
-            hash.Add(d);
-        }
-
-        return hash.ToHashCode();
     }
 }
