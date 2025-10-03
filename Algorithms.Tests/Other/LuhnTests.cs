@@ -56,4 +56,29 @@ public class LuhnTests
         // Assert
         Assert.That(validate, Is.True);
     }
+
+    [TestCase("")]
+    [TestCase("xxxx")] 
+    [TestCase("abcde")]
+    [TestCase("1x345678901234567")]
+    [TestCase("x1234567890123456")]
+    [TestCase("1234567890123456x")]
+    [TestCase("1111111111111111")]
+    [TestCase("1a2b3c4d5e6f7g8h9i0j")]
+    public void EdgeCases_GetLostNum(string number)
+    {
+        // Act
+        int lostNum = Luhn.GetLostNum(number.Replace("x", "0"));
+        // Assert
+        Assert.That(lostNum, Is.InRange(0, 9));
+    }
+
+    [TestCase("1a2b3c4d5e6f7g8h9i0j")]
+    public void EdgeCases_Validate(string number)
+    {
+        // Act
+        bool result = Luhn.Validate(number);
+        // Assert
+        Assert.That(result, Is.False);
+    }
 }
