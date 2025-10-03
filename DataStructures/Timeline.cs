@@ -78,12 +78,7 @@ public class Timeline<TValue> : ICollection<(DateTime Time, TValue Value)>, IEqu
         get => GetValuesByTime(time);
         set
         {
-            var overridenEvents = timeline.Where(@event => @event.Time == time).ToList();
-            foreach (var @event in overridenEvents)
-            {
-                timeline.Remove(@event);
-            }
-
+            timeline.RemoveAll(@event => @event.Time == time);
             foreach (var v in value)
             {
                 Add(time, v);
