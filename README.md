@@ -245,6 +245,8 @@ find more than one implementation for the same objective but using different alg
     * [Dynamic Programming](./Algorithms/Problems/DynamicProgramming)
       * [Coin Change](./Algorithms/Problems/DynamicProgramming/CoinChange/DynamicCoinChangeSolver.cs)
       * [Levenshtein Distance](./Algorithms/Problems/DynamicProgramming/LevenshteinDistance/LevenshteinDistance.cs)
+    * [Traveling Salesman Problem (TSP)](./Algorithms/Problems/TravelingSalesman/TravelingSalesmanSolver.cs)
+      * [Brute-force and Nearest Neighbor algorithms](./Algorithms/Problems/TravelingSalesman/TravelingSalesmanSolver.cs)
 
 * [Data Structures](./DataStructures)
   * [Bag](./DataStructures/Bag) 
