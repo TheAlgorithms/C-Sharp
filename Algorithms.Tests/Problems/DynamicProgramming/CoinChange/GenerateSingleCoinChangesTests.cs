@@ -9,22 +9,22 @@ public class GenerateSingleCoinChangesTests
     public void GenerateSingleCoinChangesTests_Success()
     {
         DynamicCoinChangeSolver
-            .GenerateSingleCoinChanges(6, new[] { 1, 2, 3 })
+            .GenerateSingleCoinChanges(6, [1, 2, 3])
             .SequenceEqual(new[] { 3, 4, 5 })
             .Should().BeTrue();
 
         DynamicCoinChangeSolver
-            .GenerateSingleCoinChanges(10, new[] { 1, 2, 3, 7, 12, 15, 14 })
+            .GenerateSingleCoinChanges(10, [1, 2, 3, 7, 12, 15, 14])
             .SequenceEqual(new[] { 3, 7, 8, 9 })
             .Should().BeTrue();
 
         DynamicCoinChangeSolver
-            .GenerateSingleCoinChanges(1, new[] { 1, 2, 3, 7, 12, 15, 14 })
+            .GenerateSingleCoinChanges(1, [1, 2, 3, 7, 12, 15, 14])
             .SequenceEqual(new[] { 0 })
             .Should().BeTrue();
 
         DynamicCoinChangeSolver
-            .GenerateSingleCoinChanges(2, new[] { 1, 2, 3, 7, 12, 15, 14 })
+            .GenerateSingleCoinChanges(2, [1, 2, 3, 7, 12, 15, 14])
             .SequenceEqual(new[] { 0, 1 })
             .Should().BeTrue();
     }

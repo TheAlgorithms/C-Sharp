@@ -18,7 +18,7 @@ public class DepthFirstSearch<T> : IGraphSearch<T> where T : IComparable<T>
     /// <param name="action">Action that needs to be executed on each graph vertex.</param>
     public void VisitAll(IDirectedWeightedGraph<T> graph, Vertex<T> startVertex, Action<Vertex<T>>? action = default)
     {
-        Dfs(graph, startVertex, action, new HashSet<Vertex<T>>());
+        Dfs(graph, startVertex, action, []);
     }
 
     /// <summary>

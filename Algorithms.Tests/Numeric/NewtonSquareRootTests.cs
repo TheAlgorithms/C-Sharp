@@ -1,9 +1,9 @@
-﻿namespace Algorithms.Tests.Numeric;
+namespace Algorithms.Tests.Numeric;
 
 public class NewtonSquareRootTests
 {
     private static readonly object[] CalculateSquareRootInput =
-    {
+    [
         new object[] {BigInteger.One, BigInteger.One},
         new object[] {new BigInteger(221295376), new BigInteger(14876)},
         new object[] {new BigInteger(2530995481), new BigInteger(50309)},
@@ -13,7 +13,7 @@ public class NewtonSquareRootTests
         new object[] {new BigInteger(5551442064), new BigInteger(74508)},
         new object[] {new BigInteger(6980435401), new BigInteger(83549)},
         new object[] {new BigInteger(8036226025), new BigInteger(89645)},
-    };
+    ];
 
     [TestCaseSource(nameof(CalculateSquareRootInput))]
     public void CalculateSquareRootTest(BigInteger number, BigInteger result)

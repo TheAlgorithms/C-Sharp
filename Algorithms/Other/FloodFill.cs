@@ -12,7 +12,7 @@ namespace Algorithms.Other;
 /// </summary>
 public static class FloodFill
 {
-    private static readonly List<(int XOffset, int YOffset)> Neighbors = new() { (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1) };
+    private static readonly List<(int XOffset, int YOffset)> Neighbors = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)];
 
     /// <summary>
     /// Implements the flood fill algorithm through a breadth-first approach using a queue.
@@ -28,8 +28,10 @@ public static class FloodFill
             throw new ArgumentOutOfRangeException(nameof(location), $"{nameof(location)} should point to a pixel within the bitmap");
         }
 
-        var queue = new List<(int X, int Y)>();
-        queue.Add(location);
+        var queue = new List<(int X, int Y)>
+        {
+            location,
+        };
 
         while (queue.Count > 0)
         {

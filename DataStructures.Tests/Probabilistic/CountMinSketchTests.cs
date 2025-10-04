@@ -4,16 +4,10 @@ namespace DataStructures.Tests.Probabilistic;
 
 public class CountMinSketchTests
 {
-    public class SimpleObject
+    public class SimpleObject(string name, int number)
     {
-        public string Name { get; set; }
-        public int Number { get; set; }
-
-        public SimpleObject(string name, int number)
-        {
-            Name = name;
-            Number = number;
-        }
+        public string Name { get; set; } = name;
+        public int Number { get; set; } = number;
     }
 
     [Test]

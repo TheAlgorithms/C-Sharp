@@ -118,7 +118,7 @@ public class FeistelCipher : IEncoder<uint>
     // the last block is extended up to 8 bytes if the tail of the text is smaller than 8 bytes
     private static List<ulong> SplitTextToBlocks(string text)
     {
-        List<ulong> blocksListPlain = new();
+        List<ulong> blocksListPlain = [];
         byte[] textArray = Encoding.ASCII.GetBytes(text);
         int offset = 8;
         for (int i = 0; i < text.Length; i += 8)
@@ -139,7 +139,7 @@ public class FeistelCipher : IEncoder<uint>
     // convert the encoded text to the set of ulong values (blocks for decoding)
     private static List<ulong> GetBlocksFromEncodedText(string text)
     {
-        List<ulong> blocksListPlain = new();
+        List<ulong> blocksListPlain = [];
         for (int i = 0; i < text.Length; i += 16)
         {
             ulong block = Convert.ToUInt64(text.Substring(i, 16), 16);

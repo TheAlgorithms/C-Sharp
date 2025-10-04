@@ -74,9 +74,9 @@ public static class Kosaraju<T>
     /// <returns>A dictionary that assigns to each vertex a root vertex of the SCC they belong. </returns>
     public static Dictionary<Vertex<T>, Vertex<T>> GetRepresentatives(IDirectedWeightedGraph<T> graph)
     {
-        HashSet<Vertex<T>> visited = new HashSet<Vertex<T>>();
+        HashSet<Vertex<T>> visited = [];
         Stack<Vertex<T>> reversedL = new Stack<Vertex<T>>();
-        Dictionary<Vertex<T>, Vertex<T>> representatives = new Dictionary<Vertex<T>, Vertex<T>>();
+        Dictionary<Vertex<T>, Vertex<T>> representatives = [];
 
         foreach (var v in graph.Vertices)
         {
@@ -105,7 +105,7 @@ public static class Kosaraju<T>
     public static IEnumerable<Vertex<T>>[] GetScc(IDirectedWeightedGraph<T> graph)
     {
         var representatives = GetRepresentatives(graph);
-        Dictionary<Vertex<T>, List<Vertex<T>>> scc = new Dictionary<Vertex<T>, List<Vertex<T>>>();
+        Dictionary<Vertex<T>, List<Vertex<T>>> scc = [];
         foreach (var kv in representatives)
         {
             // Assign all vertex (key) that have the seem root (value) to a single list.
@@ -115,7 +115,7 @@ public static class Kosaraju<T>
             }
             else
             {
-                scc.Add(kv.Value, new List<Vertex<T>> { kv.Key });
+                scc.Add(kv.Value, [kv.Key]);
             }
         }
 

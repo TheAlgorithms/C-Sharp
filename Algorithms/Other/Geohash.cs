@@ -20,8 +20,8 @@ public static class Geohash
     /// </returns>
     public static string Encode(double latitude, double longitude)
     {
-        double[] latitudeRange = new[] { -90.0, 90.0 };
-        double[] longitudeRange = new[] { -180.0, 180.0 };
+        double[] latitudeRange = [-90.0, 90.0];
+        double[] longitudeRange = [-180.0, 180.0];
         bool isEncodingLongitude = true;
         int currentBit = 0;
         int base32Index = 0;

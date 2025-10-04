@@ -3,15 +3,13 @@ namespace Algorithms.Search.AStar;
 /// <summary>
 ///     Vector Struct with N Dimensions.
 /// </summary>
-public struct VecN : IEquatable<VecN>
+/// <remarks>
+///     Initializes a new instance of the <see cref="VecN" /> struct.
+/// </remarks>
+/// <param name="vals">Vector components as array.</param>
+public struct VecN(params double[] vals) : IEquatable<VecN>
 {
-    private readonly double[] data;
-
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="VecN" /> struct.
-    /// </summary>
-    /// <param name="vals">Vector components as array.</param>
-    public VecN(params double[] vals) => data = vals;
+    private readonly double[] data = vals;
 
     /// <summary>
     ///     Gets the dimension count of this vector.

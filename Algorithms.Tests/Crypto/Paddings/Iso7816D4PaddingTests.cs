@@ -1,4 +1,4 @@
-﻿using Algorithms.Crypto.Paddings;
+using Algorithms.Crypto.Paddings;
 
 namespace Algorithms.Tests.Crypto.Paddings;
 
@@ -75,7 +75,7 @@ public class Iso7816D4PaddingTests
 
         var result = padding.RemovePadding(inputData);
 
-        result.Should().Equal(new byte[] { 1, 2, 3, 4, 5 });
+        result.Should().Equal([1, 2, 3, 4, 5]);
     }
 
     [Test]

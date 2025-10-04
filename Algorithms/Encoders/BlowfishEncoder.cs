@@ -1,4 +1,4 @@
-﻿namespace Algorithms.Encoders;
+namespace Algorithms.Encoders;
 
 /// <summary>
 /// <para>
@@ -26,9 +26,8 @@ public class BlowfishEncoder
 
     // Initialize the substitution boxes
     private readonly string[][] s =
-    {
-        new[]
-        {
+    [
+        [
             "d1310ba6", "98dfb5ac", "2ffd72db", "d01adfb7", "b8e1afed", "6a267e96", "ba7c9045", "f12c7f99",
             "24a19947", "b3916cf7", "0801f2e2", "858efc16", "636920d8", "71574e69", "a458fea3", "f4933d7e",
             "0d95748f", "728eb658", "718bcd58", "82154aee", "7b54a41d", "c25a59b5", "9c30d539", "2af26013",
@@ -61,9 +60,8 @@ public class BlowfishEncoder
             "83260376", "6295cfa9", "11c81968", "4e734a41", "b3472dca", "7b14a94a", "1b510052", "9a532915",
             "d60f573f", "bc9bc6e4", "2b60a476", "81e67400", "08ba6fb5", "571be91f", "f296ec6b", "2a0dd915",
             "b6636521", "e7b9f9b6", "ff34052e", "c5855664", "53b02d5d", "a99f8fa1", "08ba4799", "6e85076a",
-        },
-        new[]
-        {
+        ],
+        [
             "4b7a70e9", "b5b32944", "db75092e", "c4192623", "ad6ea6b0", "49a7df7d", "9cee60b8", "8fedb266",
             "ecaa8c71", "699a17ff", "5664526c", "c2b19ee1", "193602a5", "75094c29", "a0591340", "e4183a3e",
             "3f54989a", "5b429d65", "6b8fe4d6", "99f73fd6", "a1d29c07", "efe830f5", "4d2d38e6", "f0255dc1",
@@ -96,9 +94,8 @@ public class BlowfishEncoder
             "a6078084", "19f8509e", "e8efd855", "61d99735", "a969a7aa", "c50c06c2", "5a04abfc", "800bcadc",
             "9e447a2e", "c3453484", "fdd56705", "0e1e9ec9", "db73dbd3", "105588cd", "675fda79", "e3674340",
             "c5c43465", "713e38d8", "3d28f89e", "f16dff20", "153e21e7", "8fb03d4a", "e6e39f2b", "db83adf7",
-        },
-        new[]
-        {
+        ],
+        [
             "e93d5a68", "948140f7", "f64c261c", "94692934", "411520f7", "7602d4f7", "bcf46b2e", "d4a20068",
             "d4082471", "3320f46a", "43b7d4b7", "500061af", "1e39f62e", "97244546", "14214f74", "bf8b8840",
             "4d95fc1d", "96b591af", "70f4ddd3", "66a02f45", "bfbc09ec", "03bd9785", "7fac6dd0", "31cb8504",
@@ -131,9 +128,8 @@ public class BlowfishEncoder
             "6f05e409", "4b7c0188", "39720a3d", "7c927c24", "86e3725f", "724d9db9", "1ac15bb4", "d39eb8fc",
             "ed545578", "08fca5b5", "d83d7cd3", "4dad0fc4", "1e50ef5e", "b161e6f8", "a28514d9", "6c51133c",
             "6fd5c7e7", "56e14ec4", "362abfce", "ddc6c837", "d79a3234", "92638212", "670efa8e", "406000e0",
-        },
-        new[]
-        {
+        ],
+        [
             "3a39ce37", "d3faf5cf", "abc27737", "5ac52d1b", "5cb0679e", "4fa33742", "d3822740", "99bc9bbe",
             "d5118e9d", "bf0f7315", "d62d1c7e", "c700c47b", "b78c1b6b", "21a19045", "b26eb1be", "6a366eb4",
             "5748ab2f", "bc946e79", "c6a376d2", "6549c2c8", "530ff8ee", "468dde7d", "d5730a1d", "4cd04dc6",
@@ -166,15 +162,15 @@ public class BlowfishEncoder
             "53113ec0", "1640e3d3", "38abbd60", "2547adf0", "ba38209c", "f746ce76", "77afa1c5", "20756060",
             "85cbfe4e", "8ae88dd8", "7aaaf9b0", "4cf9aa7e", "1948c25c", "02fb8a8c", "01c36ae4", "d6ebe1f9",
             "90d4f869", "a65cdea0", "3f09252d", "c208e69f", "b74e6132", "ce77e25b", "578fdfe3", "3ac372e6",
-        },
-    };
+        ],
+    ];
 
     // Initialize the P-array sub-keys
     private readonly string[] p =
-    {
+    [
         "243f6a88", "85a308d3", "13198a2e", "03707344", "a4093822", "299f31d0", "082efa98", "ec4e6c89", "452821e6",
         "38d01377", "be5466cf", "34e90c6c", "c0ac29b7", "c97c50dd", "3f84d5b5", "b5470917", "9216d5d9", "8979fb1b",
-    };
+    ];
 
     /// <summary>
     ///     Generate a key for the encryption algorithm based on the given string parameter.

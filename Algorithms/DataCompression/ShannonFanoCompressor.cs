@@ -5,18 +5,12 @@ namespace Algorithms.DataCompression;
 /// <summary>
 ///     Greedy lossless compression algorithm.
 /// </summary>
-public class ShannonFanoCompressor
+public class ShannonFanoCompressor(
+    IHeuristicKnapsackSolver<(char Symbol, double Frequency)> splitter,
+    Translator translator)
 {
-    private readonly IHeuristicKnapsackSolver<(char Symbol, double Frequency)> splitter;
-    private readonly Translator translator;
-
-    public ShannonFanoCompressor(
-        IHeuristicKnapsackSolver<(char Symbol, double Frequency)> splitter,
-        Translator translator)
-    {
-        this.splitter = splitter;
-        this.translator = translator;
-    }
+    private readonly IHeuristicKnapsackSolver<(char Symbol, double Frequency)> splitter = splitter;
+    private readonly Translator translator = translator;
 
     /// <summary>
     ///     Given an input string, returns a new compressed string
@@ -117,11 +111,9 @@ public class ShannonFanoCompressor
     /// <summary>
     ///     Represents tree structure for the algorithm.
     /// </summary>
-    public class ListNode
+    public class ListNode((char Symbol, double Frequency)[] data)
     {
-        public ListNode((char Symbol, double Frequency)[] data) => Data = data;
-
-        public (char Symbol, double Frequency)[] Data { get; }
+        public (char Symbol, double Frequency)[] Data { get; } = data;
 
         public ListNode? RightChild { get; set; }
 
