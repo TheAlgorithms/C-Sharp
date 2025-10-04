@@ -23,7 +23,11 @@ namespace DataStructures.Cache;
 /// just remove the last node from the linked list in the method <c>Put</c>
 /// (replace <c>RemoveFirst</c> with <c>RemoveLast</c>).
 /// </remarks>
-public class LruCache<TKey, TValue> where TKey : notnull
+/// <remarks>
+/// Initializes a new instance of the <see cref="LruCache{TKey, TValue}"/> class.
+/// </remarks>
+/// <param name="capacity">The max number of items the cache can store.</param>
+public class LruCache<TKey, TValue>(int capacity = LruCache<TKey, TValue>.DefaultCapacity) where TKey : notnull
 {
     private class CachedItem
     {
@@ -34,21 +38,12 @@ public class LruCache<TKey, TValue> where TKey : notnull
 
     private const int DefaultCapacity = 100;
 
-    private readonly int capacity;
+    private readonly int capacity = capacity;
 
     // Note that <c>Dictionary</c> stores <c>LinkedListNode</c> as it allows
     // removing the node from the <c>LinkedList</c> in O(1) time.
-    private readonly Dictionary<TKey, LinkedListNode<CachedItem>> cache = new();
+    private readonly Dictionary<TKey, LinkedListNode<CachedItem>> cache = [];
     private readonly LinkedList<CachedItem> lruList = new();
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="LruCache{TKey, TValue}"/> class.
-    /// </summary>
-    /// <param name="capacity">The max number of items the cache can store.</param>
-    public LruCache(int capacity = DefaultCapacity)
-    {
-        this.capacity = capacity;
-    }
 
     public bool Contains(TKey key) => cache.ContainsKey(key);
 

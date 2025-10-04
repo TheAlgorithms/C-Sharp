@@ -6,7 +6,7 @@ namespace DataStructures.Tests.Hashing.NumberTheory;
 public static class PrimeNumberTests
 {
     private static readonly object[] IsPrimeSource =
-    {
+    [
         new object[] { 0, false },
         new object[] { 1, false },
         new object[] { 2, true },
@@ -48,10 +48,10 @@ public static class PrimeNumberTests
         new object[] { 38, false },
         new object[] { 39, false },
         new object[] { 40, false },
-    };
+    ];
 
     private static readonly object[] NextPrimeSource =
-    {
+    [
         new object[] { 0, 1, false, 2 },
         new object[] { 1, 1, false, 2 },
         new object[] { 3, 1, false, 5 },
@@ -88,7 +88,7 @@ public static class PrimeNumberTests
         new object[] { 8, 1, true, 7 },
         new object[] { 9, 1, true, 7 },
         new object[] { 10, 1, true, 7 }
-    };
+    ];
 
     [TestCaseSource(nameof(IsPrimeSource))]
     public static void IsPrimeTest(int number, bool expected)

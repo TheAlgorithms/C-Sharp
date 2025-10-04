@@ -5,7 +5,7 @@ namespace Algorithms.Encoders;
 /// </summary>
 public class NysiisEncoder
 {
-    private static readonly char[] Vowels = { 'A', 'E', 'I', 'O', 'U' };
+    private static readonly char[] Vowels = ['A', 'E', 'I', 'O', 'U'];
 
     /// <summary>
     ///     Encodes a string using the NYSIIS Algorithm.
@@ -66,7 +66,7 @@ public class NysiisEncoder
     private string ReplaceStep(string text, int i)
     {
         (string From, string To)[] replacements =
-        {
+        [
             ("EV", "AF"),
             ("E", "A"),
             ("I", "A"),
@@ -79,7 +79,7 @@ public class NysiisEncoder
             ("K", "C"),
             ("SCH", "SSS"),
             ("PH", "FF"),
-        };
+        ];
         var replaced = TryReplace(text, i, replacements, out text);
         if (replaced)
         {

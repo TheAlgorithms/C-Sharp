@@ -323,7 +323,7 @@ public class BinarySearchTree<TKey>
     {
         if (node is null)
         {
-            return new List<TKey>();
+            return [];
         }
 
         var result = new List<TKey>();
@@ -342,11 +342,13 @@ public class BinarySearchTree<TKey>
     {
         if (node is null)
         {
-            return new List<TKey>();
+            return [];
         }
 
-        var result = new List<TKey>();
-        result.Add(node.Key);
+        var result = new List<TKey>
+        {
+            node.Key,
+        };
         result.AddRange(GetKeysPreOrder(node.Left));
         result.AddRange(GetKeysPreOrder(node.Right));
         return result;
@@ -361,7 +363,7 @@ public class BinarySearchTree<TKey>
     {
         if (node is null)
         {
-            return new List<TKey>();
+            return [];
         }
 
         var result = new List<TKey>();

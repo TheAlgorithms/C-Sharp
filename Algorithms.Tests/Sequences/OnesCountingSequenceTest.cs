@@ -1,4 +1,4 @@
-﻿using Algorithms.Sequences;
+using Algorithms.Sequences;
 
 namespace Algorithms.Tests.Sequences;
 
@@ -13,7 +13,7 @@ public class OnesCountingSequenceTest
     ///         While the file contains 10,000 values, this only tests 1000.
     ///     </para>
     /// </summary>
-    private readonly BigInteger[] oeisValues = {
+    private readonly BigInteger[] oeisValues = [
                                                    0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2, 2, 3, 2, 3, 3, 4, 2,
                                                    3, 3, 4, 3, 4, 4, 5, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3,
                                                    3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3,
@@ -54,7 +54,7 @@ public class OnesCountingSequenceTest
                                                    7, 7, 8, 4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8, 5, 6, 6, 7, 6, 7,
                                                    7, 8, 6, 7, 7, 8, 7, 8, 8, 9, 4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7,
                                                    8, 5, 6, 6, 7, 6, 7, 7, 8, 6, 7, 7, 8, 7, 8, 8, 9, 5, 6, 6, 7, 6, 7, 7, 8,
-                                               };
+                                               ];
 
     /// <summary>
     ///     <para>

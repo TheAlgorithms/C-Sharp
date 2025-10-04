@@ -65,7 +65,7 @@ public static class KochSnowflake
         var vector1 = new Vector2(offsetX, offsetY);
         var vector2 = new Vector2(bitmapWidth / 2, (float)Math.Sin(Math.PI / 3) * bitmapWidth * 0.8f + offsetY);
         var vector3 = new Vector2(bitmapWidth - offsetX, offsetY);
-        List<Vector2> initialVectors = new() { vector1, vector2, vector3, vector1 };
+        List<Vector2> initialVectors = [vector1, vector2, vector3, vector1];
         List<Vector2> vectors = Iterate(initialVectors, steps);
         return GetBitmap(vectors, bitmapWidth, bitmapWidth);
     }
@@ -83,7 +83,7 @@ public static class KochSnowflake
     /// <returns>The transformed vectors after the iteration-step.</returns>
     private static List<Vector2> IterationStep(List<Vector2> vectors)
     {
-        List<Vector2> newVectors = new();
+        List<Vector2> newVectors = [];
         for (var i = 0; i < vectors.Count - 1; i++)
         {
             var startVector = vectors[i];

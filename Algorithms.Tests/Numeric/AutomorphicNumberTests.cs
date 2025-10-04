@@ -55,21 +55,21 @@ public class AutomorphicNumberTests
     [TestCase(1, 100)]
     public void TestAutomorphicNumberSequence(int lower, int upper)
     {
-        List<long> automorphicList = new() { 1, 5, 6, 25, 76 };
+        List<long> automorphicList = [1, 5, 6, 25, 76];
         Assert.That(AutomorphicNumber.GetAutomorphicNumbers(lower, upper), Is.EqualTo(automorphicList));
     }
 
     [TestCase(8, 12)]
     public void TestNoAutomorphicNumberInTheSequence(int lower, int upper)
     {
-        List<long> automorphicList = new();
+        List<long> automorphicList = [];
         Assert.That(AutomorphicNumber.GetAutomorphicNumbers(lower, upper), Is.EqualTo(automorphicList));
     }
 
     [TestCase(25, 25)]
     public void TestAutomorphicNumberSequenceSameBounds(int lower, int upper)
     {
-        List<long> automorphicList = new() { 25 };
+        List<long> automorphicList = [25];
         Assert.That(AutomorphicNumber.GetAutomorphicNumbers(lower, upper), Is.EqualTo(automorphicList));
     }
 

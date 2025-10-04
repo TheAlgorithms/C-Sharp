@@ -8,7 +8,7 @@ public static class KochSnowflakeTest
     [Test]
     public static void TestIterateMethod()
     {
-        List<Vector2> vectors = new() { new Vector2(0, 0), new Vector2(1, 0) };
+        List<Vector2> vectors = [new Vector2(0, 0), new Vector2(1, 0)];
         List<Vector2> result = KochSnowflake.Iterate(vectors, 1);
         result[0].Should().Be(new Vector2(0, 0));
         result[1].Should().Be(new Vector2((float)1 / 3, 0));
