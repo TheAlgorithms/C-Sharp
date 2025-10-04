@@ -11,8 +11,8 @@ public class EulerTotientSequenceTests
         //  Initial test of 69 number from table at https://oeis.org/A000010/list and passed test.
         //  Extended out to 500 values from https://primefan.tripod.com/Phi500.html and passed initial 69
         // along with remaining values.
-        var check = new BigInteger[]
-                    {
+        BigInteger[] check =
+        [
                         1,     1,   2,   2,   4,   2,   6,   4,   6,   4,  10,   4,  12,   6,   8,   8,  16,   6,  18,   8,
                         12,   10,  22,   8,  20,  12,  18,  12,  28,   8,  30,  16,  20,  16,  24,  12,  36,  18,  24,  16,
                         40,   12,  42,  20,  24,  22,  46,  16,  42,  20,  32,  24,  52,  18,  40,  24,  36,  28,  58,  16,
@@ -38,7 +38,7 @@ public class EulerTotientSequenceTests
                         252, 192, 442, 144, 352, 222, 296, 192, 448, 120, 400, 224, 300, 226, 288, 144, 456, 228, 288, 176,
                         460, 120, 462, 224, 240, 232, 466, 144, 396, 184, 312, 232, 420, 156, 360, 192, 312, 238, 478, 128,
                         432, 240, 264, 220, 384, 162, 486, 240, 324, 168, 490, 160, 448, 216, 240, 240, 420, 164, 498, 200,
-                    };
+        ];
 
         var sequence = new EulerTotientSequence().Sequence.Take(check.Length);
         sequence.SequenceEqual(check).Should().BeTrue();

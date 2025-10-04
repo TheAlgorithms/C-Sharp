@@ -7,14 +7,14 @@ public static class ListBasedStackTests
     [Test]
     public static void CountTest()
     {
-        var stack = new ListBasedStack<int>(new[] { 0, 1, 2, 3, 4 });
+        var stack = new ListBasedStack<int>([0, 1, 2, 3, 4]);
         stack.Count.Should().Be(5);
     }
 
     [Test]
     public static void ClearTest()
     {
-        var stack = new ListBasedStack<int>(new[] { 0, 1, 2, 3, 4 });
+        var stack = new ListBasedStack<int>([0, 1, 2, 3, 4]);
         stack.Clear();
         stack.Count.Should().Be(0);
     }
@@ -22,7 +22,7 @@ public static class ListBasedStackTests
     [Test]
     public static void ContainsTest()
     {
-        var stack = new ListBasedStack<int>(new[] { 0, 1, 2, 3, 4 });
+        var stack = new ListBasedStack<int>([0, 1, 2, 3, 4]);
 
         Assert.Multiple(() =>
         {
@@ -37,7 +37,7 @@ public static class ListBasedStackTests
     [Test]
     public static void PeekTest()
     {
-        var stack = new ListBasedStack<int>(new[] { 0, 1, 2, 3, 4 });
+        var stack = new ListBasedStack<int>([0, 1, 2, 3, 4]);
 
         Assert.Multiple(() =>
         {
@@ -50,7 +50,7 @@ public static class ListBasedStackTests
     [Test]
     public static void PopTest()
     {
-        var stack = new ListBasedStack<int>(new[] { 0, 1, 2, 3, 4 });
+        var stack = new ListBasedStack<int>([0, 1, 2, 3, 4]);
 
         Assert.Multiple(() =>
         {

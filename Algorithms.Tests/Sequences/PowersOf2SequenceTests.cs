@@ -8,7 +8,8 @@ public class PowersOf2SequenceTests
     public void First10ElementsCorrect()
     {
         var sequence = new PowersOf2Sequence().Sequence.Take(10);
-        sequence.SequenceEqual(new BigInteger[] { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512 })
+        BigInteger[] expected = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512];
+        sequence.SequenceEqual(expected)
             .Should().BeTrue();
     }
 }
