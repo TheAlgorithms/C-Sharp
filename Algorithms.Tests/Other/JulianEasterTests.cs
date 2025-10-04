@@ -16,12 +16,12 @@ public static class JulianEasterTest
     }
 
     private static readonly object[] CalculateCases =
-    {
+    [
         new object[] { 1800, new DateTime(1800, 04, 08, 00, 00, 00, DateTimeKind.Utc) },
         new object[] { 1950, new DateTime(1950, 03, 27, 00, 00, 00, DateTimeKind.Utc) },
         new object[] { 1991, new DateTime(1991, 03, 25, 00, 00, 00, DateTimeKind.Utc) },
         new object[] { 2000, new DateTime(2000, 04, 17, 00, 00, 00, DateTimeKind.Utc) },
         new object[] { 2199, new DateTime(2199, 04, 07, 00, 00, 00, DateTimeKind.Utc) }
-    };
+    ];
 
 }

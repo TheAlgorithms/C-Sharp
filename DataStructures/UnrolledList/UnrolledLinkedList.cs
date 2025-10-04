@@ -5,22 +5,17 @@ namespace DataStructures.UnrolledList;
 /// all of the same size where each is so small that the insertion
 /// or deletion is fast and quick, but large enough to fill the cache line.
 /// </summary>
-public class UnrolledLinkedList
+/// <remarks>
+/// Initializes a new instance of the <see cref="UnrolledLinkedList"/> class.
+/// Create a unrolled list with start chunk size.
+/// </remarks>
+/// <param name="chunkSize">The size of signe chunk.</param>
+public class UnrolledLinkedList(int chunkSize)
 {
-    private readonly int sizeNode;
+    private readonly int sizeNode = chunkSize + 1;
 
     private UnrolledLinkedListNode start = null!;
     private UnrolledLinkedListNode end = null!;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="UnrolledLinkedList"/> class.
-    /// Create a unrolled list with start chunk size.
-    /// </summary>
-    /// <param name="chunkSize">The size of signe chunk.</param>
-    public UnrolledLinkedList(int chunkSize)
-    {
-        sizeNode = chunkSize + 1;
-    }
 
     /// <summary>
     /// Add value to list [O(n)].
@@ -66,7 +61,7 @@ public class UnrolledLinkedList
     public IEnumerable<int> GetRolledItems()
     {
         UnrolledLinkedListNode pointer = start;
-        List<int> result = new();
+        List<int> result = [];
 
         while (pointer != null)
         {

@@ -102,7 +102,7 @@ public class BranchAndBoundKnapsackSolver<T>
     // determine items taken based on the path
     private static T[] GetItemsFromPath(T[] items, BranchAndBoundNode lastNodeOfPath)
     {
-        List<T> takenItems = new();
+        List<T> takenItems = [];
 
         // only bogus initial node has no parent
         for (var current = lastNodeOfPath; current.Parent is not null; current = current.Parent)

@@ -4,18 +4,16 @@ namespace DataStructures.LinkedList.DoublyLinkedList;
 ///     Generic node class for Doubly Linked List.
 /// </summary>
 /// <typeparam name="T">Generic type.</typeparam>
-public class DoublyLinkedListNode<T>
+/// <remarks>
+///     Initializes a new instance of the <see cref="DoublyLinkedListNode{T}" /> class.
+/// </remarks>
+/// <param name="data">Data to be stored in this node.</param>
+public class DoublyLinkedListNode<T>(T data)
 {
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="DoublyLinkedListNode{T}" /> class.
-    /// </summary>
-    /// <param name="data">Data to be stored in this node.</param>
-    public DoublyLinkedListNode(T data) => Data = data;
-
     /// <summary>
     ///     Gets the data stored on this node.
     /// </summary>
-    public T Data { get; }
+    public T Data { get; } = data;
 
     /// <summary>
     ///     Gets or sets the reference to the next node in the Doubly Linked List.

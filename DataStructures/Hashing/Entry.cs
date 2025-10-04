@@ -8,15 +8,9 @@ namespace DataStructures.Hashing;
 /// <remarks>
 /// This class is used to store the key-value pairs in the hash table.
 /// </remarks>
-public class Entry<TKey, TValue>
+public class Entry<TKey, TValue>(TKey key, TValue value)
 {
-    public TKey? Key { get; set; }
+    public TKey? Key { get; set; } = key;
 
-    public TValue? Value { get; set; }
-
-    public Entry(TKey key, TValue value)
-    {
-        Key = key;
-        Value = value;
-    }
+    public TValue? Value { get; set; } = value;
 }

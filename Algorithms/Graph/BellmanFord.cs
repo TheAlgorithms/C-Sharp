@@ -6,18 +6,11 @@ namespace Algorithms.Graph;
 /// Bellman-Ford algorithm on directed weighted graph.
 /// </summary>
 /// <typeparam name="T">Generic type of data in the graph.</typeparam>
-public class BellmanFord<T>
+public class BellmanFord<T>(DirectedWeightedGraph<T> graph, Dictionary<Vertex<T>, double> distances, Dictionary<Vertex<T>, Vertex<T>?> predecessors)
 {
-    private readonly DirectedWeightedGraph<T> graph;
-    private readonly Dictionary<Vertex<T>, double> distances;
-    private readonly Dictionary<Vertex<T>, Vertex<T>?> predecessors;
-
-    public BellmanFord(DirectedWeightedGraph<T> graph, Dictionary<Vertex<T>, double> distances, Dictionary<Vertex<T>, Vertex<T>?> predecessors)
-    {
-        this.graph = graph;
-        this.distances = distances;
-        this.predecessors = predecessors;
-    }
+    private readonly DirectedWeightedGraph<T> graph = graph;
+    private readonly Dictionary<Vertex<T>, double> distances = distances;
+    private readonly Dictionary<Vertex<T>, Vertex<T>?> predecessors = predecessors;
 
     /// <summary>
     /// Runs the Bellman-Ford algorithm to find the shortest distances from the source vertex to all other vertices.

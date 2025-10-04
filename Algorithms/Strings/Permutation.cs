@@ -10,10 +10,10 @@ public static class Permutation
     {
         if (word.Length < 2)
         {
-            return new List<string>
-            {
+            return
+            [
                 word,
-            };
+            ];
         }
 
         var result = new HashSet<string>();

@@ -7,20 +7,13 @@ namespace Algorithms.Graph.Dijkstra;
 /// Contains: Vertex, Previous Vertex and minimal distance from start vertex.
 /// </summary>
 /// <typeparam name="T">Generic parameter.</typeparam>
-public class DistanceModel<T>
+public class DistanceModel<T>(Vertex<T>? vertex, Vertex<T>? previousVertex, double distance)
 {
-    public Vertex<T>? Vertex { get; }
+    public Vertex<T>? Vertex { get; } = vertex;
 
-    public Vertex<T>? PreviousVertex { get; set; }
+    public Vertex<T>? PreviousVertex { get; set; } = previousVertex;
 
-    public double Distance { get; set; }
-
-    public DistanceModel(Vertex<T>? vertex, Vertex<T>? previousVertex, double distance)
-    {
-        Vertex = vertex;
-        PreviousVertex = previousVertex;
-        Distance = distance;
-    }
+    public double Distance { get; set; } = distance;
 
     public override string ToString() =>
         $"Vertex: {Vertex} - Distance: {Distance} - Previous: {PreviousVertex}";

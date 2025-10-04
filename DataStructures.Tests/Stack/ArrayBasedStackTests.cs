@@ -9,14 +9,14 @@ public static class ArrayBasedStackTests
     [Test]
     public static void CountTest()
     {
-        var stack = new ArrayBasedStack<int>(new[] { 0, 1, 2, 3, 4 });
+        var stack = new ArrayBasedStack<int>([0, 1, 2, 3, 4]);
         stack.Top.Should().Be(4);
     }
 
     [Test]
     public static void ClearTest()
     {
-        var stack = new ArrayBasedStack<int>(new[] { 0, 1, 2, 3, 4 });
+        var stack = new ArrayBasedStack<int>([0, 1, 2, 3, 4]);
 
         stack.Clear();
 
@@ -26,7 +26,7 @@ public static class ArrayBasedStackTests
     [Test]
     public static void ContainsTest()
     {
-        var stack = new ArrayBasedStack<int>(new[] { 0, 1, 2, 3, 4 });
+        var stack = new ArrayBasedStack<int>([0, 1, 2, 3, 4]);
 
         Assert.Multiple(() =>
         {
@@ -41,7 +41,7 @@ public static class ArrayBasedStackTests
     [Test]
     public static void PeekTest()
     {
-        var stack = new ArrayBasedStack<int>(new[] { 0, 1, 2, 3, 4 });
+        var stack = new ArrayBasedStack<int>([0, 1, 2, 3, 4]);
 
         Assert.Multiple(() =>
         {
@@ -54,7 +54,7 @@ public static class ArrayBasedStackTests
     [Test]
     public static void PopTest()
     {
-        var stack = new ArrayBasedStack<int>(new[] { 0, 1, 2, 3, 4 });
+        var stack = new ArrayBasedStack<int>([0, 1, 2, 3, 4]);
 
         Assert.Multiple(() =>
         {

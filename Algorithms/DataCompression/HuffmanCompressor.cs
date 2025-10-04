@@ -5,17 +5,11 @@ namespace Algorithms.DataCompression;
 /// <summary>
 ///     Greedy lossless compression algorithm.
 /// </summary>
-public class HuffmanCompressor
+public class HuffmanCompressor(IComparisonSorter<HuffmanCompressor.ListNode> sorter, Translator translator)
 {
     // TODO: Use partial sorter
-    private readonly IComparisonSorter<ListNode> sorter;
-    private readonly Translator translator;
-
-    public HuffmanCompressor(IComparisonSorter<ListNode> sorter, Translator translator)
-    {
-        this.sorter = sorter;
-        this.translator = translator;
-    }
+    private readonly IComparisonSorter<ListNode> sorter = sorter;
+    private readonly Translator translator = translator;
 
     /// <summary>
     ///     Given an input string, returns a new compressed string

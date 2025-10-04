@@ -4,12 +4,12 @@ namespace DataStructures.ScapegoatTree;
 /// Scapegoat tree node class.
 /// </summary>
 /// <typeparam name="TKey">Scapegoat tree node key type.</typeparam>
-public class Node<TKey> where TKey : IComparable
+public class Node<TKey>(TKey key) where TKey : IComparable
 {
     private Node<TKey>? right;
     private Node<TKey>? left;
 
-    public TKey Key { get; }
+    public TKey Key { get; } = key;
 
     public Node<TKey>? Right
     {
@@ -38,8 +38,6 @@ public class Node<TKey> where TKey : IComparable
             left = value;
         }
     }
-
-    public Node(TKey key) => Key = key;
 
     public Node(TKey key, Node<TKey>? right, Node<TKey>? left)
         : this(key)

@@ -64,7 +64,7 @@ public class WelfordsVarianceTest
     [Test]
     public void WelfordVariance_Example5()
     {
-        var stats = new WelfordsVariance(new double[] { 2, 2, 5, 7 });
+        var stats = new WelfordsVariance([2, 2, 5, 7]);
         Assert.That(stats.Count, Is.EqualTo(4));
         Assert.That(stats.Mean, Is.EqualTo(4).Within(0.0000001));
         Assert.That(stats.Variance, Is.EqualTo(4.5).Within(0.0000001));
@@ -75,7 +75,7 @@ public class WelfordsVarianceTest
     public void WelfordVariance_Example6()
     {
         var stats = new WelfordsVariance();
-        stats.AddRange(new double[] { 2, 4, 4, 4, 5, 5, 7, 9 });
+        stats.AddRange([2, 4, 4, 4, 5, 5, 7, 9]);
         Assert.That(stats.Count, Is.EqualTo(8));
         Assert.That(stats.Mean, Is.EqualTo(5).Within(0.0000001));
         Assert.That(stats.Variance, Is.EqualTo(4).Within(0.0000001));
@@ -86,7 +86,7 @@ public class WelfordsVarianceTest
     public void WelfordVariance_Example7()
     {
         var stats = new WelfordsVariance();
-        stats.AddRange(new double[] { 9, 2, 5, 4, 12, 7, 8, 11, 9, 3, 7, 4, 12, 5, 4, 10, 9, 6, 9, 4 });
+        stats.AddRange([9, 2, 5, 4, 12, 7, 8, 11, 9, 3, 7, 4, 12, 5, 4, 10, 9, 6, 9, 4]);
         Assert.That(stats.Count, Is.EqualTo(20));
         Assert.That(stats.Mean, Is.EqualTo(7).Within(0.0000001));
         Assert.That(stats.Variance, Is.EqualTo(8.9).Within(0.0000001));
@@ -97,7 +97,7 @@ public class WelfordsVarianceTest
     public void WelfordVariance_Example8()
     {
         var stats = new WelfordsVariance();
-        stats.AddRange(new[] { 51.3, 55.6, 49.9, 52.0 });
+        stats.AddRange([51.3, 55.6, 49.9, 52.0]);
         Assert.That(stats.Count, Is.EqualTo(4));
         Assert.That(stats.Mean, Is.EqualTo(52.2).Within(0.0000001));
         Assert.That(stats.Variance, Is.EqualTo(4.4250000).Within(0.0000001));
@@ -108,7 +108,7 @@ public class WelfordsVarianceTest
     public void WelfordVariance_Example9()
     {
         var stats = new WelfordsVariance();
-        stats.AddRange(new double[] { -5, -3, -1, 1, 3 });
+        stats.AddRange([-5, -3, -1, 1, 3]);
         Assert.That(stats.Count, Is.EqualTo(5));
         Assert.That(stats.Mean, Is.EqualTo(-1).Within(0.0000001));
         Assert.That(stats.Variance, Is.EqualTo(8).Within(0.0000001));
@@ -119,7 +119,7 @@ public class WelfordsVarianceTest
     public void WelfordVariance_Example10()
     {
         var stats = new WelfordsVariance();
-        stats.AddRange(new double[] { -1, 0, 1 });
+        stats.AddRange([-1, 0, 1]);
         Assert.That(stats.Count, Is.EqualTo(3));
         Assert.That(stats.Mean, Is.EqualTo(0).Within(0.0000001));
         Assert.That(stats.Variance, Is.EqualTo(0.6666667).Within(0.0000001));

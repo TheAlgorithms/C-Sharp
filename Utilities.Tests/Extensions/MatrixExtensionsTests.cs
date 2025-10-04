@@ -3,7 +3,7 @@ namespace Utilities.Tests.Extensions;
 public class MatrixExtensionsTests
 {
     private static readonly object[] MatrixMultiplyTestCases =
-    {
+    [
         new object[]
         {
             new double[,] { { 2, 2, -1 }, { 0, -2, -1 }, { 0, 0, 5 } },
@@ -16,10 +16,10 @@ public class MatrixExtensionsTests
             new double[,] { { 3, 2, 5 }, { 4, -1, 3 }, { 9, 6, 5 } },
             new double[,] { { 11, -22, 29 }, { 9, -27, 32 }, { 13, -17, 26 } },
         },
-    };
+    ];
 
     private static readonly object[] MatrixTransposeTestCases =
-    {
+    [
         new object[]
         {
             new double[,] { { 2, 2, 3 } },
@@ -30,10 +30,10 @@ public class MatrixExtensionsTests
             new double[,] { { 5, 8 }, { 6, 9 } },
             new double[,] { { 5, 6 }, { 8, 9 } },
         },
-    };
+    ];
 
     private static readonly object[] MatrixSubtractTestCases =
-    {
+    [
         new object[]
         {
             new double[,] { { 0, 0 }, { 0, 0 } },
@@ -52,7 +52,7 @@ public class MatrixExtensionsTests
             new double[,] { { 2, 5, 12 }, { 0, 5, 1 }, { 1, 1, 4 } },
             new double[,] { { -3, -7, -12 }, { 2, -8, 1 }, { 2, 3, -3 } },
         },
-    };
+    ];
 
     [Test]
     public void Multiply_ShouldThrowInvalidOperationException_WhenOperandsAreNotCompatible()

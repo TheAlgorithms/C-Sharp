@@ -9,7 +9,7 @@ namespace Algorithms.Tests.Crypto.Utils
         public void BigEndianToUint64_ByteArray_ShouldConvertCorrectly()
         {
             // Arrange
-            byte[] input = { 0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF };
+            byte[] input = [0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF];
             var expected = 0x0123456789ABCDEFUL;
 
             // Act
@@ -23,7 +23,7 @@ namespace Algorithms.Tests.Crypto.Utils
         public void BigEndianToUint64_ByteArray_WithOffset_ShouldConvertCorrectly()
         {
             // Arrange
-            byte[] input = { 0x00, 0x00, 0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF };
+            byte[] input = [0x00, 0x00, 0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF];
             var expected = 0x0123456789ABCDEFUL;
 
             // Act
@@ -53,7 +53,7 @@ namespace Algorithms.Tests.Crypto.Utils
             // Arrange
             var value = 0x0123456789ABCDEFUL;
             Span<byte> output = stackalloc byte[8];
-            byte[] expected = { 0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF };
+            byte[] expected = [0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF];
 
             // Act
             ByteEncodingUtils.UInt64ToBigEndian(value, output);
@@ -66,7 +66,7 @@ namespace Algorithms.Tests.Crypto.Utils
         public void BigEndianToUint64_InvalidOffset_ShouldThrowException()
         {
             // Arrange
-            byte[] input = { 0x01, 0x23 };
+            byte[] input = [0x01, 0x23];
 
             // Act
             Action act = () => ByteEncodingUtils.BigEndianToUint64(input, 1);
