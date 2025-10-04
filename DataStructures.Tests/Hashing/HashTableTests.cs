@@ -469,6 +469,21 @@ public class HashTableTests
     }
 
     [Test]
+    public void Resize_HandlesNegativeIndexCorrectly()
+    {
+        // Arrange
+        var hashTable = new HashTable<NegativeHashKey, string>(2);
+        var key = new NegativeHashKey(111);
+        hashTable.Add(key, "Value");
+
+        // Act
+        hashTable.Resize();
+
+        // Assert
+        Assert.That(hashTable[key], Is.EqualTo("Value"));
+    }
+
+    [Test]
     public void Add_ShouldTriggerResize_WhenThresholdExceeded()
     {
         // Arrange
