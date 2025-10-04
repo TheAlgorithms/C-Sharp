@@ -106,6 +106,8 @@ find more than one implementation for the same objective but using different alg
     * [SoftMax Function](./Algorithms/Numeric/SoftMax.cs)
   * [RecommenderSystem](./Algorithms/RecommenderSystem)
     * [CollaborativeFiltering](./Algorithms/RecommenderSystem/CollaborativeFiltering)
+  * [Machine Learning](./Algorithms/MachineLearning)
+    * [Linear Regression](./Algorithms/MachineLearning/LinearRegression.cs)
   * [Searches](./Algorithms/Search)
     * [A-Star](./Algorithms/Search/AStar/)
     * [Binary Search](./Algorithms/Search/BinarySearcher.cs)
@@ -247,8 +249,6 @@ find more than one implementation for the same objective but using different alg
       * [Levenshtein Distance](./Algorithms/Problems/DynamicProgramming/LevenshteinDistance/LevenshteinDistance.cs)
       * [Job Scheduling](./Algorithms/Problems/JobScheduling)
         * [Interval Scheduling (Greedy)](./Algorithms/Problems/JobScheduling/IntervalSchedulingSolver.cs)
-        * [Weighted Interval Scheduling (DP)](./Algorithms/Problems/JobScheduling/WeightedIntervalSchedulingSolver.cs)
-          * **Applications:** Work schedule management, room booking, production optimization, and more.
 
 * [Data Structures](./DataStructures)
   * [Bag](./DataStructures/Bag) 
