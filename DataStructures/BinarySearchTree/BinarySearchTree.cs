@@ -25,19 +25,9 @@ public class BinarySearchTree<TKey>
     /// </summary>
     public BinarySearchTreeNode<TKey>? Root { get; private set; }
 
-    public BinarySearchTree()
-    {
-        Root = null;
-        Count = 0;
-        comparer = Comparer<TKey>.Default;
-    }
+    public BinarySearchTree() => (Root, Count, comparer) = (null, 0, Comparer<TKey>.Default);
 
-    public BinarySearchTree(Comparer<TKey> customComparer)
-    {
-        Root = null;
-        Count = 0;
-        comparer = customComparer;
-    }
+    public BinarySearchTree(Comparer<TKey> customComparer) => (Root, Count, comparer) = (null, 0, customComparer);
 
     /// <summary>
     ///     Gets the number nodes currently in the BST.
@@ -323,7 +313,7 @@ public class BinarySearchTree<TKey>
     {
         if (node is null)
         {
-            return new List<TKey>();
+            return [];
         }
 
         var result = new List<TKey>();
@@ -342,11 +332,13 @@ public class BinarySearchTree<TKey>
     {
         if (node is null)
         {
-            return new List<TKey>();
+            return [];
         }
 
-        var result = new List<TKey>();
-        result.Add(node.Key);
+        var result = new List<TKey>
+        {
+            node.Key,
+        };
         result.AddRange(GetKeysPreOrder(node.Left));
         result.AddRange(GetKeysPreOrder(node.Right));
         return result;
@@ -361,7 +353,7 @@ public class BinarySearchTree<TKey>
     {
         if (node is null)
         {
-            return new List<TKey>();
+            return [];
         }
 
         var result = new List<TKey>();

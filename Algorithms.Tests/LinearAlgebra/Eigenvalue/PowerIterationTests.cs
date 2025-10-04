@@ -5,7 +5,7 @@ namespace Algorithms.Tests.LinearAlgebra.Eigenvalue;
 public class PowerIterationTests
 {
     private static readonly object[] DominantVectorTestCases =
-    {
+    [
         new object[]
         {
             3.0,
@@ -18,7 +18,7 @@ public class PowerIterationTests
             new[] { 0.91287093, 0.40824829 },
             new[,] { { 2.0, 5.0 }, { 1.0, 2.0 } },
         },
-    };
+    ];
 
     private readonly double epsilon = Math.Pow(10, -5);
 

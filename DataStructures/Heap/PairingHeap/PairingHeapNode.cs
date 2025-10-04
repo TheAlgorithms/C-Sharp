@@ -4,14 +4,9 @@ namespace DataStructures.Heap.PairingHeap;
 /// Node represented the value and connections.
 /// </summary>
 /// <typeparam name="T">Type, supported comparing.</typeparam>
-public class PairingHeapNode<T>
+public class PairingHeapNode<T>(T value)
 {
-    public PairingHeapNode(T value)
-    {
-        Value = value;
-    }
-
-    public T Value { get; set; }
+    public T Value { get; set; } = value;
 
     public PairingHeapNode<T> ChildrenHead { get; set; } = null!;
 

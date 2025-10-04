@@ -157,7 +157,7 @@ public class AvlTree<TKey>
     /// <returns>Keys in tree in order from smallest to largest.</returns>
     public IEnumerable<TKey> GetKeysInOrder()
     {
-        List<TKey> result = new();
+        List<TKey> result = [];
         InOrderWalk(root);
         return result;
 

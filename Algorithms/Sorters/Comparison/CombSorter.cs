@@ -4,11 +4,9 @@ namespace Algorithms.Sorters.Comparison;
 ///     Comb sort is a relatively simple sorting algorithm that improves on bubble sort.
 /// </summary>
 /// <typeparam name="T">Type of array element.</typeparam>
-public class CombSorter<T> : IComparisonSorter<T>
+public class CombSorter<T>(double shrinkFactor = 1.3) : IComparisonSorter<T>
 {
-    public CombSorter(double shrinkFactor = 1.3) => ShrinkFactor = shrinkFactor;
-
-    private double ShrinkFactor { get; }
+    private double ShrinkFactor { get; } = shrinkFactor;
 
     /// <summary>
     ///     Sorts array using specified comparer,

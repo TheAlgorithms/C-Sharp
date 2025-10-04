@@ -1,4 +1,4 @@
-﻿namespace Algorithms.Crypto.Paddings;
+namespace Algorithms.Crypto.Paddings;
 
 /// <summary>
 /// <para>
@@ -15,16 +15,13 @@
 /// bytes.
 /// </para>
 /// </summary>
-public class X932Padding : IBlockCipherPadding
+/// <remarks>
+/// Initializes a new instance of the <see cref="X932Padding"/> class with the specified padding mode.
+/// </remarks>
+/// <param name="useRandomPadding">A boolean value that indicates whether to use random bytes as padding or not.</param>
+public class X932Padding(bool useRandomPadding) : IBlockCipherPadding
 {
-    private readonly bool useRandomPadding;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="X932Padding"/> class with the specified padding mode.
-    /// </summary>
-    /// <param name="useRandomPadding">A boolean value that indicates whether to use random bytes as padding or not.</param>
-    public X932Padding(bool useRandomPadding) =>
-        this.useRandomPadding = useRandomPadding;
+    private readonly bool useRandomPadding = useRandomPadding;
 
     /// <summary>
     /// Adds padding to the input data according to the X9.23 padding scheme.

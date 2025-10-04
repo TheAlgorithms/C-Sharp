@@ -92,7 +92,7 @@ public static class TimelineTests
             { new DateTime(2015, 1, 1), "TestTime5" },
         };
 
-        timeline[new DateTime(2000, 1, 1)] = new[] { eventName };
+        timeline[new DateTime(2000, 1, 1)] = [eventName];
 
         timeline[new DateTime(2000, 1, 1)][0]
             .Should()
@@ -657,9 +657,10 @@ public static class TimelineTests
         var eventDate = new DateTime(2015, 1, 1);
         const string eventName = "TestTime";
 
-        var timeline = new Timeline<string>();
-
-        timeline.Add(eventDate, eventName);
+        var timeline = new Timeline<string>
+        {
+            { eventDate, eventName }
+        };
 
         timeline.Count
             .Should()
@@ -679,11 +680,13 @@ public static class TimelineTests
         var eventDate2 = new DateTime(1750, 1, 1);
         const string eventName2 = "TestTime2";
 
-        var timeline = new Timeline<string>();
-
-        timeline.Add(
-            (eventDate1, eventName1),
-            (eventDate2, eventName2));
+        var timeline = new Timeline<string>
+        {
+            {
+                (eventDate1, eventName1),
+                (eventDate2, eventName2)
+            }
+        };
 
         using (new AssertionScope())
         {
@@ -707,9 +710,10 @@ public static class TimelineTests
         var eventDate = new DateTime(2015, 1, 1);
         const string eventName = "TestTime";
 
-        var timeline = new Timeline<string>();
-
-        timeline.Add(new Timeline<string>(eventDate, eventName));
+        var timeline = new Timeline<string>
+        {
+            new Timeline<string>(eventDate, eventName)
+        };
 
         using (new AssertionScope())
         {

@@ -159,7 +159,7 @@ public class AsconDigestTests
     public void Update_ShouldProcessByte_WhenBufferIsFull()
     {
         // Arrange
-        byte[] inputBytes = { 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77 }; // 8 bytes to fill the buffer
+        byte[] inputBytes = [0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77]; // 8 bytes to fill the buffer
 
         // Act
         foreach (var input in inputBytes)
@@ -178,7 +178,7 @@ public class AsconDigestTests
     public void Update_ShouldNotProcess_WhenBufferIsNotFull()
     {
         // Arrange
-        byte[] inputBytes = { 0x00, 0x11, 0x22, 0x33 }; // Only 4 bytes (buffer is not full)
+        byte[] inputBytes = [0x00, 0x11, 0x22, 0x33]; // Only 4 bytes (buffer is not full)
 
         // Act
         foreach (var input in inputBytes)
@@ -233,7 +233,7 @@ public class AsconDigestTests
     public void Update_ShouldAccumulateStateWithMultipleUpdates()
     {
         // Arrange
-        byte[] inputBytes = { 0x00, 0x11, 0x22 }; // Partial input
+        byte[] inputBytes = [0x00, 0x11, 0x22]; // Partial input
 
         // Act
         foreach (var input in inputBytes)
@@ -242,7 +242,7 @@ public class AsconDigestTests
         }
 
         // Add more data to fill the buffer.
-        byte[] additionalBytes = { 0x33, 0x44, 0x55, 0x66, 0x77 };
+        byte[] additionalBytes = [0x33, 0x44, 0x55, 0x66, 0x77];
         foreach (var input in additionalBytes)
         {
             asconHashA.Update(input);

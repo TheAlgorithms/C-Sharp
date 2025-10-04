@@ -14,7 +14,7 @@ public class HyperLogLog<T> where T : notnull
     {
         var m = 1 << P;
         registers = new int[m];
-        setRegisters = new HashSet<int>();
+        setRegisters = [];
     }
 
     /// <summary>

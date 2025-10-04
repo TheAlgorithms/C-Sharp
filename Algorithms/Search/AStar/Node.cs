@@ -3,15 +3,8 @@ namespace Algorithms.Search.AStar;
 /// <summary>
 ///     Contains Positional and other information about a single node.
 /// </summary>
-public class Node : IComparable<Node>, IEquatable<Node>
+public class Node(VecN position, bool traversable, double traverseMultiplier) : IComparable<Node>, IEquatable<Node>
 {
-    public Node(VecN position, bool traversable, double traverseMultiplier)
-    {
-        Traversable = traversable;
-        Position = position;
-        TraversalCostMultiplier = traverseMultiplier;
-    }
-
     /// <summary>
     ///     Gets the Total cost of the Node.
     ///     The Current Costs + the estimated costs.
@@ -26,7 +19,7 @@ public class Node : IComparable<Node>, IEquatable<Node>
     /// <summary>
     ///     Gets a value indicating whether how costly it is to traverse over this node.
     /// </summary>
-    public double TraversalCostMultiplier { get; }
+    public double TraversalCostMultiplier { get; } = traverseMultiplier;
 
     /// <summary>
     ///     Gets or sets a value indicating whether to go from the start node to this node.
@@ -42,12 +35,12 @@ public class Node : IComparable<Node>, IEquatable<Node>
     /// <summary>
     ///     Gets a value indicating whether the node is traversable.
     /// </summary>
-    public bool Traversable { get; }
+    public bool Traversable { get; } = traversable;
 
     /// <summary>
     ///     Gets or sets a list of all connected nodes.
     /// </summary>
-    public Node[] ConnectedNodes { get; set; } = new Node[0];
+    public Node[] ConnectedNodes { get; set; } = [];
 
     /// <summary>
     ///     Gets or sets he "previous" node that was processed before this node.
@@ -57,7 +50,7 @@ public class Node : IComparable<Node>, IEquatable<Node>
     /// <summary>
     ///     Gets the positional information of the node.
     /// </summary>
-    public VecN Position { get; }
+    public VecN Position { get; } = position;
 
     /// <summary>
     ///     Compares the Nodes based on their total costs.

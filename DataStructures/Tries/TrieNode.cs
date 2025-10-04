@@ -21,7 +21,7 @@ internal class TrieNode
     /// <param name="parent">The parent or ancestor of the node in the trie structure.</param>
     internal TrieNode(char value, TrieNode? parent)
     {
-        Children = new SortedList<char, TrieNode>();
+        Children = [];
         Parent = parent;
         Value = value;
     }

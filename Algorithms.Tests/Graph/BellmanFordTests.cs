@@ -35,7 +35,7 @@ public class BellmanFordTests
             { vertex5, -4 }
         };
 
-        var bellmanFord = new BellmanFord<int>(graph, new Dictionary<Vertex<int>, double>(), new Dictionary<Vertex<int>, Vertex<int>?>());
+        var bellmanFord = new BellmanFord<int>(graph, [], []);
 
         var calculatedDistances = bellmanFord.Run(vertex1);
 
@@ -61,7 +61,7 @@ public class BellmanFordTests
         graph.AddEdge(vertex2, vertex3, -2);
         graph.AddEdge(vertex3, vertex1, -3);
 
-        var bellmanFord = new BellmanFord<int>(graph, new Dictionary<Vertex<int>, double>(), new Dictionary<Vertex<int>, Vertex<int>?>());
+        var bellmanFord = new BellmanFord<int>(graph, [], []);
 
         Action action = () => bellmanFord.Run(vertex1);
 

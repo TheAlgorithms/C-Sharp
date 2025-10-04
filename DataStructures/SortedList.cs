@@ -6,10 +6,14 @@ namespace DataStructures;
 ///     Implementation of SortedList using binary search.
 /// </summary>
 /// <typeparam name="T">Generic Type.</typeparam>
-public class SortedList<T> : IEnumerable<T>
+/// <remarks>
+///     Initializes a new instance of the <see cref="SortedList{T}" /> class.
+/// </remarks>
+/// <param name="comparer">Comparer user for binary search.</param>
+public class SortedList<T>(IComparer<T> comparer) : IEnumerable<T>
 {
-    private readonly IComparer<T> comparer;
-    private readonly List<T> memory;
+    private readonly IComparer<T> comparer = comparer;
+    private readonly List<T> memory = [];
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="SortedList{T}" /> class. Uses a Comparer.Default for type T.
@@ -23,16 +27,6 @@ public class SortedList<T> : IEnumerable<T>
     ///     Gets the number of elements containing in <see cref="SortedList{T}" />.
     /// </summary>
     public int Count => memory.Count;
-
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="SortedList{T}" /> class.
-    /// </summary>
-    /// <param name="comparer">Comparer user for binary search.</param>
-    public SortedList(IComparer<T> comparer)
-    {
-        memory = new List<T>();
-        this.comparer = comparer;
-    }
 
     /// <summary>
     ///     Adds new item to <see cref="SortedList{T}" /> instance, maintaining the order.

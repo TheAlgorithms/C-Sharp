@@ -5,12 +5,17 @@ namespace DataStructures.AVLTree;
 ///     instance.
 /// </summary>
 /// <typeparam name="TKey">The type of key for the node.</typeparam>
-internal class AvlTreeNode<TKey>
+/// <remarks>
+///     Initializes a new instance of the
+///     <see cref="AvlTreeNode{TKey}"/> class.
+/// </remarks>
+/// <param name="key">Key value for node.</param>
+internal class AvlTreeNode<TKey>(TKey key)
 {
     /// <summary>
     ///     Gets or sets key value of node.
     /// </summary>
-    public TKey Key { get; set; }
+    public TKey Key { get; set; } = key;
 
     /// <summary>
     ///     Gets the balance factor of the node.
@@ -31,16 +36,6 @@ internal class AvlTreeNode<TKey>
     ///     Gets or sets the height of the node.
     /// </summary>
     private int Height { get; set; }
-
-    /// <summary>
-    ///     Initializes a new instance of the
-    ///     <see cref="AvlTreeNode{TKey}"/> class.
-    /// </summary>
-    /// <param name="key">Key value for node.</param>
-    public AvlTreeNode(TKey key)
-    {
-        Key = key;
-    }
 
     /// <summary>
     ///     Update the node's height and balance factor.
