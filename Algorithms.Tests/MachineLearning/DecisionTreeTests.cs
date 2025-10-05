@@ -80,4 +80,48 @@ public class DecisionTreeTests
         // Value 2 is unseen in feature 0
         Assert.That(tree.Predict(new[] { 2, 0 }), Is.EqualTo(0));
     }
+
+    [Test]
+    public void BuildTree_ReturnsNodeWithMostCommonLabel_WhenNoFeaturesLeft()
+    {
+        int[][] X = { new[] { 0 }, new[] { 1 }, new[] { 2 } };
+        int[] y = { 1, 0, 1 };
+        var tree = new DecisionTree();
+        tree.Fit(X, y);
+        // All features used, fallback to most common label (0)
+        Assert.That(tree.Predict(new[] { 3 }), Is.EqualTo(0));
+    }
+
+    [Test]
+    public void BuildTree_ReturnsNodeWithSingleLabel_WhenAllLabelsSame()
+    {
+        int[][] X = { new[] { 0 }, new[] { 1 }, new[] { 2 } };
+        int[] y = { 1, 1, 1 };
+        var tree = new DecisionTree();
+        tree.Fit(X, y);
+        Assert.That(tree.Predict(new[] { 0 }), Is.EqualTo(1));
+        Assert.That(tree.Predict(new[] { 1 }), Is.EqualTo(1));
+        Assert.That(tree.Predict(new[] { 2 }), Is.EqualTo(1));
+    }
+
+    [Test]
+    public void Entropy_ReturnsZero_WhenEmptyLabels()
+    {
+        // Use reflection to call private static Entropy
+        var method = typeof(DecisionTree).GetMethod("Entropy", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+        Assert.That(method!.Invoke(null, new object[] { Array.Empty<int>() }), Is.EqualTo(0d));
+    }
+
+    [Test]
+    public void BestFeature_SkipsEmptyIdxBranch()
+    {
+        // Feature 1 has value 2 which is never present, triggers idx.Length == 0 branch
+        int[][] X = { new[] { 0, 1 }, new[] { 1, 1 } };
+        int[] y = { 0, 1 };
+        var method = typeof(DecisionTree).GetMethod("BestFeature", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+        var features = new System.Collections.Generic.List<int> { 0, 1 };
+    var resultObj = method!.Invoke(null, new object[] { X, y, features });
+    Assert.That(resultObj, Is.Not.Null);
+    Assert.That((int)resultObj!, Is.EqualTo(0));
+    }
 }
