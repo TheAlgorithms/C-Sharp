@@ -96,12 +96,12 @@ public class DecisionTree
         }
 
         int v = x[node.Feature!.Value];
-        if (node.Children!.TryGetValue(v, out var child))
+        if (node.Children != null && node.Children.TryGetValue(v, out var child))
         {
             return Traverse(child, x);
         }
 
-        // fallback to 0 if unseen value
+        // fallback to 0 if unseen value or Children is null
         return 0;
     }
 

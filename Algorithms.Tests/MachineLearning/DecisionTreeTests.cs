@@ -93,6 +93,57 @@ public class DecisionTreeTests
     }
 
     [Test]
+    public void BuildTree_ReturnsNodeWithMostCommonLabel_WhenNoFeaturesLeft_MultipleLabels()
+    {
+        int[][] X = { new[] { 0 }, new[] { 1 }, new[] { 2 }, new[] { 3 } };
+        int[] y = { 1, 0, 1, 0 };
+        var tree = new DecisionTree();
+        tree.Fit(X, y);
+        // Most common label is 0 (2 times)
+        Assert.That(tree.Predict(new[] { 4 }), Is.EqualTo(0));
+    }
+
+    [Test]
+    public void BuildTree_ReturnsNodeWithSingleLabel_WhenAllLabelsZero()
+    {
+        int[][] X = { new[] { 0 }, new[] { 1 } };
+        int[] y = { 0, 0 };
+        var tree = new DecisionTree();
+        tree.Fit(X, y);
+        Assert.That(tree.Predict(new[] { 0 }), Is.EqualTo(0));
+        Assert.That(tree.Predict(new[] { 1 }), Is.EqualTo(0));
+    }
+
+    [Test]
+    public void Entropy_ReturnsZero_WhenAllZeroOrAllOne()
+    {
+        var method = typeof(DecisionTree).GetMethod("Entropy", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+        Assert.That(method!.Invoke(null, new object[] { new int[] { 0, 0, 0 } }), Is.EqualTo(0d));
+        Assert.That(method!.Invoke(null, new object[] { new int[] { 1, 1, 1 } }), Is.EqualTo(0d));
+    }
+
+    [Test]
+    public void MostCommon_ReturnsCorrectLabel()
+    {
+        var method = typeof(DecisionTree).GetMethod("MostCommon", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+        Assert.That(method!.Invoke(null, new object[] { new int[] { 1, 0, 1, 1, 0, 0, 0 } }), Is.EqualTo(0));
+        Assert.That(method!.Invoke(null, new object[] { new int[] { 1, 1, 1, 0 } }), Is.EqualTo(1));
+    }
+
+    [Test]
+    public void Traverse_FallbacksToZero_WhenChildrenIsNull()
+    {
+        // Create a node with Children = null and Label = null
+        var nodeType = typeof(DecisionTree).GetNestedType("Node", System.Reflection.BindingFlags.NonPublic);
+        var node = Activator.CreateInstance(nodeType!);
+        nodeType!.GetProperty("Feature")!.SetValue(node, 0);
+        nodeType!.GetProperty("Label")!.SetValue(node, null);
+        nodeType!.GetProperty("Children")!.SetValue(node, null);
+        var method = typeof(DecisionTree).GetMethod("Traverse", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+        Assert.That(method!.Invoke(null, new object[] { node!, new int[] { 99 } }), Is.EqualTo(0));
+    }
+
+    [Test]
     public void BuildTree_ReturnsNodeWithSingleLabel_WhenAllLabelsSame()
     {
         int[][] X = { new[] { 0 }, new[] { 1 }, new[] { 2 } };
@@ -120,8 +171,8 @@ public class DecisionTreeTests
         int[] y = { 0, 1 };
         var method = typeof(DecisionTree).GetMethod("BestFeature", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
         var features = new System.Collections.Generic.List<int> { 0, 1 };
-    var resultObj = method!.Invoke(null, new object[] { X, y, features });
-    Assert.That(resultObj, Is.Not.Null);
-    Assert.That((int)resultObj!, Is.EqualTo(0));
+        var resultObj = method!.Invoke(null, new object[] { X, y, features });
+        Assert.That(resultObj, Is.Not.Null);
+        Assert.That((int)resultObj!, Is.EqualTo(0));
     }
 }
