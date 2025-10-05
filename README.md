@@ -249,7 +249,6 @@ find more than one implementation for the same objective but using different alg
       * [Levenshtein Distance](./Algorithms/Problems/DynamicProgramming/LevenshteinDistance/LevenshteinDistance.cs)
       * [Job Scheduling](./Algorithms/Problems/JobScheduling)
         * [Interval Scheduling (Greedy)](./Algorithms/Problems/JobScheduling/IntervalSchedulingSolver.cs)
-
 * [Data Structures](./DataStructures)
   * [Bag](./DataStructures/Bag) 
   * [Bit Array](./DataStructures/BitArray.cs)
