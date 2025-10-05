@@ -4,32 +4,20 @@ namespace DataStructures.Tests.Probabilistic;
 
 public class BloomFilterTests
 {
-    static readonly string[] TestNames = { "kal;jsnfka", "alkjsdfn;lakm", "aljfopiawjf", "afowjeaofeij", "oajwsefoaiwje", "aoiwjfaoiejmf", "aoijfoawiejf" };
+    static readonly string[] TestNames = ["kal;jsnfka", "alkjsdfn;lakm", "aljfopiawjf", "afowjeaofeij", "oajwsefoaiwje", "aoiwjfaoiejmf", "aoijfoawiejf"];
 
-    private class SimpleObject
+    private class SimpleObject(string name, int number)
     {
-        public string Name { get; set; }
-        public int Number { get; set; }
-
-        public SimpleObject(string name, int number)
-        {
-            Name = name;
-            Number = number;
-        }
+        public string Name { get; set; } = name;
+        public int Number { get; set; } = number;
     }
 
-    private class SimpleObjectOverridenHash
+    private class SimpleObjectOverridenHash(string name, int number)
     {
         private const uint FnvPrime = 16777619;
         private const uint FnvOffsetBasis = 2166136261;
-        public string Name { get; set; }
-        public int Number { get; set; }
-
-        public SimpleObjectOverridenHash(string name, int number)
-        {
-            Name = name;
-            Number = number;
-        }
+        public string Name { get; set; } = name;
+        public int Number { get; set; } = number;
 
         public override int GetHashCode()
         {

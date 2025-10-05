@@ -72,7 +72,7 @@ public static class AStar
             {
                 ResetNodes(done);
                 ResetNodes(open.GetData());
-                return new List<Node>();
+                return [];
             }
 
             // Selecting next Element from queue

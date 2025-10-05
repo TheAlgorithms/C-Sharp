@@ -26,7 +26,7 @@ public class Timeline<TValue> : ICollection<(DateTime Time, TValue Value)>, IEqu
     /// <summary>
     ///     Inner collection storing the timeline events as key-tuples.
     /// </summary>
-    private readonly List<(DateTime Time, TValue Value)> timeline = new();
+    private readonly List<(DateTime Time, TValue Value)> timeline = [];
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="Timeline{TValue}"/> class.
@@ -41,10 +41,10 @@ public class Timeline<TValue> : ICollection<(DateTime Time, TValue Value)>, IEqu
     /// <param name="time">The time at which the given event occurred.</param>
     /// <param name="value">The event's content.</param>
     public Timeline(DateTime time, TValue value)
-        => timeline = new List<(DateTime, TValue)>
-        {
+        => timeline =
+        [
             (time, value),
-        };
+        ];
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="Timeline{TValue}"/> class containing the provided events
@@ -78,12 +78,7 @@ public class Timeline<TValue> : ICollection<(DateTime Time, TValue Value)>, IEqu
         get => GetValuesByTime(time);
         set
         {
-            var overridenEvents = timeline.Where(@event => @event.Time == time).ToList();
-            foreach (var @event in overridenEvents)
-            {
-                timeline.Remove(@event);
-            }
-
+            timeline.RemoveAll(@event => @event.Time == time);
             foreach (var v in value)
             {
                 Add(time, v);

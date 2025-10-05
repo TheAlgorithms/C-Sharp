@@ -48,11 +48,11 @@ public class FastSearcher
         var indexBinary = array.Length / 2;
 
         int[] section =
-        {
+        [
             array.Length - 1,
             item - array[0],
             array[^1] - array[0],
-        };
+        ];
         var indexInterpolation = section[0] * section[1] / section[2];
 
         // Left is min and right is max of the indices

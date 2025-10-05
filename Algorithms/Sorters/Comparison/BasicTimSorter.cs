@@ -4,19 +4,14 @@ namespace Algorithms.Sorters.Comparison;
 /// A basic implementation of the TimSort algorithm for sorting arrays.
 /// </summary>
 /// <typeparam name="T">The type of elements in the array.</typeparam>
-public class BasicTimSorter<T>
+/// <remarks>
+/// Initializes a new instance of the <see cref="BasicTimSorter{T}"/> class.
+/// </remarks>
+/// <param name="comparer">The comparer to use for comparing elements.</param>
+public class BasicTimSorter<T>(IComparer<T> comparer)
 {
     private readonly int minRuns = 32;
-    private readonly IComparer<T> comparer;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="BasicTimSorter{T}"/> class.
-    /// </summary>
-    /// <param name="comparer">The comparer to use for comparing elements.</param>
-    public BasicTimSorter(IComparer<T> comparer)
-    {
-        this.comparer = comparer ?? Comparer<T>.Default;
-    }
+    private readonly IComparer<T> comparer = comparer ?? Comparer<T>.Default;
 
     /// <summary>
     /// Sorts the specified array using the TimSort algorithm.

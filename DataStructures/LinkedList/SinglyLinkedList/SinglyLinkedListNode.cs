@@ -1,14 +1,8 @@
 namespace DataStructures.LinkedList.SinglyLinkedList;
 
-public class SinglyLinkedListNode<T>
+public class SinglyLinkedListNode<T>(T data)
 {
-    public SinglyLinkedListNode(T data)
-    {
-        Data = data;
-        Next = null;
-    }
-
-    public T Data { get; }
+    public T Data { get; } = data;
 
     public SinglyLinkedListNode<T>? Next { get; set; }
 }

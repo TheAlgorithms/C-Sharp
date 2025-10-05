@@ -39,8 +39,8 @@ public static class RungeKuttaMethod
                 $"{nameof(stepSize)} should be greater than zero");
         }
 
-        List<double[]> points = new();
-        double[] firstPoint = { xStart, yStart };
+        List<double[]> points = [];
+        double[] firstPoint = [xStart, yStart];
         points.Add(firstPoint);
 
         var yCurrent = yStart;
@@ -56,7 +56,7 @@ public static class RungeKuttaMethod
             yCurrent += (1.0 / 6.0) * stepSize * (k1 + 2 * k2 + 2 * k3 + k4);
             xCurrent += stepSize;
 
-            double[] newPoint = { xCurrent, yCurrent };
+            double[] newPoint = [xCurrent, yCurrent];
             points.Add(newPoint);
         }
 

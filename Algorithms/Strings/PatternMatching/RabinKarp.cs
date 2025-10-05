@@ -47,7 +47,7 @@ public static class RabinKarp
         }
 
         // In the next step you iterate over the text with the pattern.
-        List<int> occurrences = new();
+        List<int> occurrences = [];
         for (var i = 0; i + pattern.Length - 1 < text.Length; i++)
         {
             // In each step you calculate the hash value of the substring to be tested.

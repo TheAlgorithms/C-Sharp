@@ -6,11 +6,11 @@ namespace DataStructures.Tests.Heap;
 public static class MinMaxHeapTests
 {
     private static readonly object[] CollectionsSource =
-    {
+    [
         new[] { 5, 10, -2, 0, 3, 13, 5, -8, 41, -5, -7, -60, -12 },
         new[] { 'e', '4', 'x', 'D', '!', '$', '-', '_', '2', ')', 'Z', 'q' },
         new[] { "abc", "abc", "xyz", "bcd", "klm", "opq", "ijk" },
-    };
+    ];
 
     [Test]
     public static void CustomComparerTest()

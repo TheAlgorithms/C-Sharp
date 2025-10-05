@@ -11,12 +11,16 @@ namespace DataStructures.AATree;
 ///     More information: https://en.wikipedia.org/wiki/AA_tree .
 /// </remarks>
 /// <typeparam name="TKey">The type of key for the AA tree.</typeparam>
-public class AaTree<TKey>
+/// <remarks>
+///     Initializes a new instance of the <see cref="AaTree{TKey}" /> class with a custom comparer.
+/// </remarks>
+/// <param name="customComparer">The custom comparer to use to compare keys.</param>
+public class AaTree<TKey>(Comparer<TKey> customComparer)
 {
     /// <summary>
     ///     The comparer function to use to compare the keys.
     /// </summary>
-    private readonly Comparer<TKey> comparer;
+    private readonly Comparer<TKey> comparer = customComparer;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="AaTree{TKey}" /> class.
@@ -25,12 +29,6 @@ public class AaTree<TKey>
         : this(Comparer<TKey>.Default)
     {
     }
-
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="AaTree{TKey}" /> class with a custom comparer.
-    /// </summary>
-    /// <param name="customComparer">The custom comparer to use to compare keys.</param>
-    public AaTree(Comparer<TKey> customComparer) => comparer = customComparer;
 
     /// <summary>
     ///     Gets the root of the tree.

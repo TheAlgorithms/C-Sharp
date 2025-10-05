@@ -20,7 +20,7 @@ public class PriorityQueue<T>
     public PriorityQueue(bool isDescending = false)
     {
         this.isDescending = isDescending;
-        list = new List<T>();
+        list = [];
     }
 
     /// <summary>

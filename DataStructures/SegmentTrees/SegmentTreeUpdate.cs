@@ -3,18 +3,13 @@ namespace DataStructures.SegmentTrees;
 /// <summary>
 ///     This is an extension of a segment tree, which allows the update of a single element.
 /// </summary>
-public class SegmentTreeUpdate : SegmentTree
+/// <remarks>
+///     Initializes a new instance of the <see cref="SegmentTreeUpdate" /> class.
+///     Runtime complexity: O(n) where n equals the array-length.
+/// </remarks>
+/// <param name="arr">Array on which the queries should be made.</param>
+public class SegmentTreeUpdate(int[] arr) : SegmentTree(arr)
 {
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="SegmentTreeUpdate" /> class.
-    ///     Runtime complexity: O(n) where n equals the array-length.
-    /// </summary>
-    /// <param name="arr">Array on which the queries should be made.</param>
-    public SegmentTreeUpdate(int[] arr)
-        : base(arr)
-    {
-    }
-
     /// <summary>
     ///     Updates a single element of the input array.
     ///     Changes the leaf first and updates its parents afterwards.

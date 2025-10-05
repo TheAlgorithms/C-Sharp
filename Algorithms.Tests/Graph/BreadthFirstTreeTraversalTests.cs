@@ -9,8 +9,8 @@ public static class BreadthFirstTreeTraversalTests
     public static void CorrectLevelOrderTraversal()
     {
         // Arrange
-        int[] correctPath = { 7, 4, 13, 2, 5, 11, 15, 14, 16 };
-        int[] insertionOrder = { 7, 13, 11, 15, 14, 4, 5, 16, 2 };
+        int[] correctPath = [7, 4, 13, 2, 5, 11, 15, 14, 16];
+        int[] insertionOrder = [7, 13, 11, 15, 14, 4, 5, 16, 2];
         BinarySearchTree<int> testTree = new BinarySearchTree<int>();
         foreach (int data in insertionOrder)
         {
@@ -60,7 +60,7 @@ public static class BreadthFirstTreeTraversalTests
     {
         // Arrange
         BinarySearchTree<int> testTree = new BinarySearchTree<int>();
-        int[] insertion = { 7, 13, 11, 15, 4, 5, 12, 2, 9 };
+        int[] insertion = [7, 13, 11, 15, 4, 5, 12, 2, 9];
         foreach (int data in insertion)
         {
             testTree.Add(data);

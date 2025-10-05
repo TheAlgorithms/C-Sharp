@@ -5,9 +5,9 @@ namespace DataStructures.Tests;
 
 internal class AvlTreeTests
 {
-    private static readonly int[] Data = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-    private static readonly int[] PreOrder = { 4, 2, 1, 3, 8, 6, 5, 7, 9, 10 };
-    private static readonly int[] PostOrder = { 1, 3, 2, 5, 7, 6, 10, 9, 8, 4 };
+    private static readonly int[] Data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    private static readonly int[] PreOrder = [4, 2, 1, 3, 8, 6, 5, 7, 9, 10];
+    private static readonly int[] PostOrder = [1, 3, 2, 5, 7, 6, 10, 9, 8, 4];
 
     [Test]
     public void Constructor_UseCustomComparer_FormsCorrectTree()
