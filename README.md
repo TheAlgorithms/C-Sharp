@@ -108,6 +108,7 @@ find more than one implementation for the same objective but using different alg
     * [CollaborativeFiltering](./Algorithms/RecommenderSystem/CollaborativeFiltering)
   * [Machine Learning](./Algorithms/MachineLearning)
     * [Linear Regression](./Algorithms/MachineLearning/LinearRegression.cs)
+    * [Decision Tree](./Algorithms/MachineLearning/DecisionTree.cs)
   * [Searches](./Algorithms/Search)
     * [A-Star](./Algorithms/Search/AStar/)
     * [Binary Search](./Algorithms/Search/BinarySearcher.cs)
