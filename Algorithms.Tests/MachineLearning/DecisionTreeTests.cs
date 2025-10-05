@@ -1,6 +1,6 @@
 using NUnit.Framework;
 using Algorithms.MachineLearning;
-using System;
+using System;       
 
 namespace Algorithms.Tests.MachineLearning;
 
@@ -118,16 +118,16 @@ public class DecisionTreeTests
     public void Entropy_ReturnsZero_WhenAllZeroOrAllOne()
     {
         var method = typeof(DecisionTree).GetMethod("Entropy", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-        Assert.That(method!.Invoke(null, new [] { new int[] { 0, 0, 0 } }), Is.EqualTo(0d));
-        Assert.That(method!.Invoke(null, new [] { new int[] { 1, 1, 1 } }), Is.EqualTo(0d));
+        Assert.That(method!.Invoke(null, new[] { new int[] { 0, 0, 0 } }), Is.EqualTo(0d));
+        Assert.That(method!.Invoke(null, new[] { new int[] { 1, 1, 1 } }), Is.EqualTo(0d));
     }
 
     [Test]
     public void MostCommon_ReturnsCorrectLabel()
     {
         var method = typeof(DecisionTree).GetMethod("MostCommon", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-        Assert.That(method!.Invoke(null, new [] { new int[] { 1, 0, 1, 1, 0, 0, 0 } }), Is.EqualTo(0));
-        Assert.That(method!.Invoke(null, new [] { new int[] { 1, 1, 1, 0 } }), Is.EqualTo(1));
+        Assert.That(method!.Invoke(null, new[] { new int[] { 1, 0, 1, 1, 0, 0, 0 } }), Is.EqualTo(0));
+        Assert.That(method!.Invoke(null, new[] { new int[] { 1, 1, 1, 0 } }), Is.EqualTo(1));
     }
 
     [Test]
@@ -174,5 +174,35 @@ public class DecisionTreeTests
         var resultObj = method!.Invoke(null, new object[] { X, y, features });
         Assert.That(resultObj, Is.Not.Null);
         Assert.That((int)resultObj!, Is.EqualTo(0));
+    }
+
+    [Test]
+    public void BuildTree_MostCommonLabelBranch_IsCovered()
+    {
+        int[][] X = { new[] { 0 }, new[] { 1 } };
+        int[] y = { 0, 1 };
+        var tree = new DecisionTree();
+        tree.Fit(X, y);
+        Assert.That(tree.Predict(new[] { 2 }), Is.EqualTo(0));
+    }
+    
+        [Test]
+    public void BuildTree_ContinueBranch_IsCovered()
+    {
+        int[][] X = { new[] { 0 }, new[] { 1 } };
+        int[] y = { 0, 1 };
+        var method = typeof(DecisionTree).GetMethod("BuildTree", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+        var features = new System.Collections.Generic.List<int> { 0 };
+        Assert.DoesNotThrow(() => method!.Invoke(null, new object[] { X, y, features }));
+    }
+
+    [Test]
+    public void BestFeature_ContinueBranch_IsCovered()
+    {
+        int[][] X = { new[] { 0, 1 }, new[] { 1, 1 } };
+        int[] y = { 0, 1 };
+        var method = typeof(DecisionTree).GetMethod("BestFeature", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+        var features = new System.Collections.Generic.List<int> { 0, 1 };
+        Assert.DoesNotThrow(() => method!.Invoke(null, new object[] { X, y, features }));
     }
 }
