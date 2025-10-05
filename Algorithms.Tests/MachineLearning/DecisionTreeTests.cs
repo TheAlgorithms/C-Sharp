@@ -118,16 +118,16 @@ public class DecisionTreeTests
     public void Entropy_ReturnsZero_WhenAllZeroOrAllOne()
     {
         var method = typeof(DecisionTree).GetMethod("Entropy", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-        Assert.That(method!.Invoke(null, new object[] { new int[] { 0, 0, 0 } }), Is.EqualTo(0d));
-        Assert.That(method!.Invoke(null, new object[] { new int[] { 1, 1, 1 } }), Is.EqualTo(0d));
+        Assert.That(method!.Invoke(null, new [] { new int[] { 0, 0, 0 } }), Is.EqualTo(0d));
+        Assert.That(method!.Invoke(null, new [] { new int[] { 1, 1, 1 } }), Is.EqualTo(0d));
     }
 
     [Test]
     public void MostCommon_ReturnsCorrectLabel()
     {
         var method = typeof(DecisionTree).GetMethod("MostCommon", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-        Assert.That(method!.Invoke(null, new object[] { new int[] { 1, 0, 1, 1, 0, 0, 0 } }), Is.EqualTo(0));
-        Assert.That(method!.Invoke(null, new object[] { new int[] { 1, 1, 1, 0 } }), Is.EqualTo(1));
+        Assert.That(method!.Invoke(null, new [] { new int[] { 1, 0, 1, 1, 0, 0, 0 } }), Is.EqualTo(0));
+        Assert.That(method!.Invoke(null, new [] { new int[] { 1, 1, 1, 0 } }), Is.EqualTo(1));
     }
 
     [Test]
@@ -140,7 +140,7 @@ public class DecisionTreeTests
         nodeType!.GetProperty("Label")!.SetValue(node, null);
         nodeType!.GetProperty("Children")!.SetValue(node, null);
         var method = typeof(DecisionTree).GetMethod("Traverse", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-        Assert.That(method!.Invoke(null, new object[] { node!, new int[] { 99 } }), Is.EqualTo(0));
+        Assert.That(method!.Invoke(null, new[] { node!, new int[] { 99 } }), Is.EqualTo(0));
     }
 
     [Test]
