@@ -9,13 +9,9 @@ namespace Algorithms.MachineLearning;
 public class LogisticRegression
 {
     private double[] weights = [];
-    private double bias = 0;
+    private double bias;
 
     public int FeatureCount => weights.Length;
-
-    public LogisticRegression()
-    {
-    }
 
     /// <summary>
     /// Fit the model using gradient descent.
