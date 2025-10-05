@@ -64,6 +64,23 @@ public class TravelingSalesmanSolverTests
         Assert.Throws<ArgumentOutOfRangeException>(() => TravelingSalesmanSolver.SolveNearestNeighbor(matrix, -1));
         Assert.Throws<ArgumentOutOfRangeException>(() => TravelingSalesmanSolver.SolveNearestNeighbor(matrix, 2));
     }
+    
+    /// <summary>
+    /// Tests nearest neighbor when no unvisited cities remain (should throw InvalidOperationException).
+    /// </summary>
+    [Test]
+    public void SolveNearestNeighbor_NoUnvisitedCities_ThrowsException()
+    {
+        // Construct a matrix where one city cannot be reached (simulate unreachable city)
+        double[,] matrix =
+        {
+            { 0, double.MaxValue, 1 },
+            { double.MaxValue, 0, double.MaxValue },
+            { 1, double.MaxValue, 0 }
+        };
+        // Start at city 0, city 1 is unreachable from both 0 and 2
+        Assert.Throws<InvalidOperationException>(() => TravelingSalesmanSolver.SolveNearestNeighbor(matrix, 0));
+    }
 
     /// <summary>
     /// Tests brute-force and nearest neighbor with non-square matrix.
