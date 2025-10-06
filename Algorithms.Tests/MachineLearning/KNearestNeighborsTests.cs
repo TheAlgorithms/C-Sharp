@@ -57,8 +57,8 @@ public class KNearestNeighborsTests
     public void Predict_SingleNeighbor_CorrectLabel()
     {
         var knn = new KNearestNeighbors<string>(1);
-        knn.AddSample(new double[] { 1.0, 2.0 }, "A");
-        knn.AddSample(new double[] { 3.0, 4.0 }, "B");
+        knn.AddSample(new[] { 1.0, 2.0 }, "A");
+        knn.AddSample(new[] { 3.0, 4.0 }, "B");
         var label = knn.Predict(new[] { 1.1, 2.1 });
         Assert.That(label, Is.EqualTo("A"));
     }
@@ -67,9 +67,9 @@ public class KNearestNeighborsTests
     public void Predict_MajorityVote_CorrectLabel()
     {
         var knn = new KNearestNeighbors<string>(3);
-        knn.AddSample(new double[] { 0.0, 0.0 }, "A");
-        knn.AddSample(new double[] { 0.1, 0.1 }, "A");
-        knn.AddSample(new double[] { 1.0, 1.0 }, "B");
+        knn.AddSample(new[] { 0.0, 0.0 }, "A");
+        knn.AddSample(new[] { 0.1, 0.1 }, "A");
+        knn.AddSample(new[] { 1.0, 1.0 }, "B");
         var label = knn.Predict(new[] { 0.05, 0.05 });
         Assert.That(label, Is.EqualTo("A"));
     }
@@ -78,8 +78,8 @@ public class KNearestNeighborsTests
     public void Predict_TieBreaker_ReturnsConsistentLabel()
     {
         var knn = new KNearestNeighbors<string>(2);
-        knn.AddSample(new double[] { 0.0, 0.0 }, "A");
-        knn.AddSample(new double[] { 1.0, 1.0 }, "B");
+        knn.AddSample(new[] { 0.0, 0.0 }, "A");
+        knn.AddSample(new[] { 1.0, 1.0 }, "B");
         var label = knn.Predict(new[] { 0.5, 0.5 });
         Assert.That(label, Is.EqualTo("A"));
     }
