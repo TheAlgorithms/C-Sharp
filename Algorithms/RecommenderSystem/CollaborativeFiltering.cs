@@ -1,13 +1,8 @@
 namespace Algorithms.RecommenderSystem;
 
-public class CollaborativeFiltering
+public class CollaborativeFiltering(ISimilarityCalculator similarityCalculator)
 {
-    private readonly ISimilarityCalculator similarityCalculator;
-
-    public CollaborativeFiltering(ISimilarityCalculator similarityCalculator)
-    {
-        this.similarityCalculator = similarityCalculator;
-    }
+    private readonly ISimilarityCalculator similarityCalculator = similarityCalculator;
 
     /// <summary>
     /// Method to calculate similarity between two users using Pearson correlation.
