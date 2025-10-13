@@ -21,14 +21,14 @@ public class HuffmanCompressor(IComparisonSorter<HuffmanCompressor.ListNode> sor
     {
         if (string.IsNullOrEmpty(uncompressedText))
         {
-            return (string.Empty, new Dictionary<string, string>());
+            return (string.Empty, []);
         }
 
         if (uncompressedText.Distinct().Count() == 1)
         {
             var dict = new Dictionary<string, string>
             {
-                { "1", uncompressedText[0].ToString() },
+                ["1"] = uncompressedText[0].ToString(),
             };
             return (new string('1', uncompressedText.Length), dict);
         }

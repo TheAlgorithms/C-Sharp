@@ -316,11 +316,7 @@ public class BinarySearchTree<TKey>
             return [];
         }
 
-        var result = new List<TKey>();
-        result.AddRange(GetKeysInOrder(node.Left));
-        result.Add(node.Key);
-        result.AddRange(GetKeysInOrder(node.Right));
-        return result;
+        return [..GetKeysInOrder(node.Left), node.Key, ..GetKeysInOrder(node.Right)];
     }
 
     /// <summary>
@@ -335,13 +331,7 @@ public class BinarySearchTree<TKey>
             return [];
         }
 
-        var result = new List<TKey>
-        {
-            node.Key,
-        };
-        result.AddRange(GetKeysPreOrder(node.Left));
-        result.AddRange(GetKeysPreOrder(node.Right));
-        return result;
+        return [node.Key, ..GetKeysPreOrder(node.Left), ..GetKeysPreOrder(node.Right)];
     }
 
     /// <summary>
@@ -356,11 +346,7 @@ public class BinarySearchTree<TKey>
             return [];
         }
 
-        var result = new List<TKey>();
-        result.AddRange(GetKeysPostOrder(node.Left));
-        result.AddRange(GetKeysPostOrder(node.Right));
-        result.Add(node.Key);
-        return result;
+        return [..GetKeysPostOrder(node.Left), ..GetKeysPostOrder(node.Right), node.Key];
     }
 
     /// <summary>

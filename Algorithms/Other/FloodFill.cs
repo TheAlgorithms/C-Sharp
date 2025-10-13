@@ -28,10 +28,7 @@ public static class FloodFill
             throw new ArgumentOutOfRangeException(nameof(location), $"{nameof(location)} should point to a pixel within the bitmap");
         }
 
-        var queue = new List<(int X, int Y)>
-        {
-            location,
-        };
+        var queue = new List<(int X, int Y)> { location };
 
         while (queue.Count > 0)
         {

@@ -305,9 +305,7 @@ public class TimSorter<T> : IComparisonSorter<T>
             }
         }
 
-        return comparer.Compare(target, array[left]) < 0
-            ? left
-            : left + 1;
+        return comparer.Compare(target, array[left]) < 0 ? left : left + 1;
     }
 
     private void MergeCollapse(T[] array)
