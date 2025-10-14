@@ -16,7 +16,7 @@ public static class Permutation
             ];
         }
 
-        var result = [];
+        var result = new HashSet<string>();
 
         for (var i = 0; i < word.Length; i++)
         {
