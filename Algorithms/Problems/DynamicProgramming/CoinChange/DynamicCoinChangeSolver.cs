@@ -21,7 +21,7 @@ public static class DynamicCoinChangeSolver
         Array.Sort(coinsArrayCopy);
         Array.Reverse(coinsArrayCopy);
 
-        var list = new List<int>();
+        List<int> list = [];
 
         foreach (var item in coinsArrayCopy)
         {
@@ -50,7 +50,7 @@ public static class DynamicCoinChangeSolver
     /// <returns>Change dictionary for all values [1,N], where N is the coin.</returns>
     public static Dictionary<int, int[]> GenerateChangesDictionary(int coin, int[] coins)
     {
-        var dict = new Dictionary<int, int[]>();
+        Dictionary<int, int[]> dict = [];
         var currentCoin = 1;
 
         while (currentCoin <= coin)

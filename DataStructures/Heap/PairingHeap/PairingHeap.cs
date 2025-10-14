@@ -223,7 +223,7 @@ public class PairingHeap<T>(Sorting sortDirection = Sorting.Ascending) : IEnumer
         }
         else
         {
-            mapping[newItem] = new List<PairingHeapNode<T>>(new[] { newNode });
+            mapping[newItem] = [newNode];
         }
     }
 

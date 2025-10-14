@@ -78,7 +78,7 @@ public static class TravelingSalesmanSolver
         }
 
         var visited = new bool[n];
-        var route = new List<int> { start };
+        List<int> route = [start];
         visited[start] = true;
         double totalDistance = 0;
         int current = start;
@@ -120,16 +120,15 @@ public static class TravelingSalesmanSolver
         if (arr.Length == 1)
         {
             yield return arr;
+            yield break;
         }
-        else
+
+        for (int i = 0; i < arr.Length; i++)
         {
-            for (int i = 0; i < arr.Length; i++)
+            var rest = arr.Where((_, idx) => idx != i).ToArray();
+            foreach (var perm in Permute(rest))
             {
-                var rest = arr.Where((_, idx) => idx != i).ToArray();
-                foreach (var perm in Permute(rest))
-                {
-                    yield return new[] { arr[i] }.Concat(perm).ToArray();
-                }
+                yield return [arr[i], ..perm];
             }
         }
     }

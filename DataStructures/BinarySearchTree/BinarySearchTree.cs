@@ -316,6 +316,7 @@ public class BinarySearchTree<TKey>
             return [];
         }
 
+        // Use mutable list approach instead of spread operator for better performance
         var result = new List<TKey>();
         result.AddRange(GetKeysInOrder(node.Left));
         result.Add(node.Key);
@@ -335,6 +336,7 @@ public class BinarySearchTree<TKey>
             return [];
         }
 
+        // Use mutable list approach instead of spread operator for better performance
         var result = new List<TKey>
         {
             node.Key,
@@ -356,6 +358,7 @@ public class BinarySearchTree<TKey>
             return [];
         }
 
+        // Use mutable list approach instead of spread operator for better performance
         var result = new List<TKey>();
         result.AddRange(GetKeysPostOrder(node.Left));
         result.AddRange(GetKeysPostOrder(node.Right));
