@@ -246,6 +246,8 @@ find more than one implementation for the same objective but using different alg
       * [Proposer](./Algorithms/Problems/StableMarriage/Proposer.cs)
     * [N-Queens](./Algorithms/Problems/NQueens)
       * [Backtracking](./Algorithms/Problems/NQueens/BacktrackingNQueensSolver.cs)
+    * [Knight Tour](./Algorithms/Problems/KnightTour/)
+      * [Open Knight Tour](./Algorithms/Problems/KnightTour/OpenKnightTour.cs)
     * [Dynamic Programming](./Algorithms/Problems/DynamicProgramming)
       * [Coin Change](./Algorithms/Problems/DynamicProgramming/CoinChange/DynamicCoinChangeSolver.cs)
       * [Levenshtein Distance](./Algorithms/Problems/DynamicProgramming/LevenshteinDistance/LevenshteinDistance.cs)

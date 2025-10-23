@@ -21,7 +21,11 @@ namespace Algorithms.Tests.Problems.KnightTour
                 for (var c = 0; c < n; c++)
                 {
                     var v = board[r, c];
-                    if (v <= 0) continue; // ignore zeros in partial/invalid boards
+                    if (v <= 0)
+                    {
+                        continue;
+                    }
+                    // ignore zeros in partial/invalid boards
                     if (!map.TryAdd(v, (r, c)))
                     {
                         throw new AssertionException($"Duplicate visit number detected: {v}.");
@@ -37,7 +41,9 @@ namespace Algorithms.Tests.Problems.KnightTour
             Assert.That(board.GetLength(1), Is.EqualTo(n), "Board must be square.");
 
             // 1) All cells visited and within [1..n*n]
-            int min = int.MaxValue, max = int.MinValue;
+            int min = int.MaxValue;
+            int max = int.MinValue;
+            
             var seen = new bool[n * n + 1]; // 1..n*n
             for (var r = 0; r < n; r++)
             {
@@ -48,8 +54,15 @@ namespace Algorithms.Tests.Problems.KnightTour
                         $"Cell [{r},{c}] has out-of-range value {v}.");
                     Assert.That(seen[v], Is.False, $"Duplicate value {v} found.");
                     seen[v] = true;
-                    if (v < min) min = v;
-                    if (v > max) max = v;
+                    if (v < min)
+                    {
+                        min = v;
+                    }
+
+                    if (v > max)
+                    {
+                        max = v;
+                    }
                 }
             }
             Assert.That(min, Is.EqualTo(1), "Tour must start at 1.");
@@ -82,7 +95,7 @@ namespace Algorithms.Tests.Problems.KnightTour
         public void Tour_Throws_On_Unsolvable_N_2_3_4(int n)
         {
             var solver = new OpenKnightTour();
-            var ex = Assert.Throws<ArgumentException>(() => solver.Tour(n));
+            Assert.Throws<ArgumentException>(() => solver.Tour(n));
         }
 
         [Test]

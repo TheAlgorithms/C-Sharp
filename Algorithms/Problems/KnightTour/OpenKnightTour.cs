@@ -129,7 +129,8 @@ public sealed class OpenKnightTour
     /// </remarks>
     private IEnumerable<(int R, int C)> GetValidMoves((int R, int C) position, int n)
     {
-        int r = position.R, c = position.C;
+        var r = position.R;
+        var c = position.C;
 
         var candidates = new (int Dr, int Dc)[]
         {
@@ -139,7 +140,9 @@ public sealed class OpenKnightTour
 
         foreach (var (dr, dc) in candidates)
         {
-            int nr = r + dr, nc = c + dc;
+            var nr = r + dr;
+            var nc = c + dc;
+
             if (nr >= 0 && nr < n && nc >= 0 && nc < n)
             {
                 yield return (nr, nc);
