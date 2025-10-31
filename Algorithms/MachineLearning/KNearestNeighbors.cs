@@ -98,9 +98,9 @@ public class KNearestNeighbors<TLabel>
         // Majority vote
         var labelCounts = distances
             .GroupBy(x => x.Label)
-            .Select(g => new { Label = g.Key, Count = g.Count() })
+            .Select(g => new { Label = g.Key, Count = g.Count(), MinDistance = g.Min(item => item.Distance) })
             .OrderByDescending(x => x.Count)
-            .ThenBy(x => x.Label?.GetHashCode() ?? 0)
+            .ThenBy(x => x.MinDistance)
             .ToList();
 
         return labelCounts.First().Label;
