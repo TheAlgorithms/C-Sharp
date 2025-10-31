@@ -92,10 +92,7 @@ public sealed class GraphColoringSolver
         var colors = new int[numVertices];
 
         // Initialize all vertices as uncolored (-1)
-        for (var i = 0; i < numVertices; i++)
-        {
-            colors[i] = -1;
-        }
+        Array.Fill(colors, -1);
 
         if (!ColorVertex(adjacencyMatrix, colors, 0, numColors))
         {
