@@ -248,6 +248,8 @@ find more than one implementation for the same objective but using different alg
       * [Backtracking](./Algorithms/Problems/NQueens/BacktrackingNQueensSolver.cs)
     * [Knight Tour](./Algorithms/Problems/KnightTour/)
       * [Open Knight Tour](./Algorithms/Problems/KnightTour/OpenKnightTour.cs)
+    * [Graph Coloring](./Algorithms/Problems/GraphColoring)
+      * [Backtracking Graph Coloring Solver](./Algorithms/Problems/GraphColoring/GraphColoringSolver.cs)
     * [Dynamic Programming](./Algorithms/Problems/DynamicProgramming)
       * [Coin Change](./Algorithms/Problems/DynamicProgramming/CoinChange/DynamicCoinChangeSolver.cs)
       * [Levenshtein Distance](./Algorithms/Problems/DynamicProgramming/LevenshteinDistance/LevenshteinDistance.cs)
