@@ -35,6 +35,17 @@ internal class BTreeTests
     }
 
     [Test]
+    public void Constructor_CustomComparerMinimumDegreeLessThan2_ThrowsException()
+    {
+        var comparer = Comparer<int>.Create((x, y) => y.CompareTo(x));
+
+        Invoking(() => new BTree<int>(1, comparer))
+            .Should()
+            .ThrowExactly<ArgumentException>()
+            .WithMessage("Minimum degree must be at least 2.*");
+    }
+
+    [Test]
     public void Constructor_UseCustomComparer_FormsCorrectTree()
     {
         var tree = new BTree<int>(2, Comparer<int>.Create((x, y) => y.CompareTo(x)));
@@ -90,6 +101,18 @@ internal class BTreeTests
             .Should()
             .ThrowExactly<ArgumentException>()
             .WithMessage("""Key "3" already exists in B-Tree.""");
+    }
+
+    [Test]
+    public void Add_DuplicateKeyInLeaf_ThrowsException()
+    {
+        var tree = new BTree<int>(3);
+        tree.AddRange(new[] { 10, 20 });
+
+        Invoking(() => tree.Add(10))
+            .Should()
+            .ThrowExactly<ArgumentException>()
+            .WithMessage("""Key "10" already exists in B-Tree.""");
     }
 
     [Test]
@@ -753,7 +776,7 @@ internal class BTreeTests
 
         var remaining = tree.GetKeysInOrder().ToArray();
         remaining.Should().BeEquivalentTo(
-            Enumerable.Range(1, 40).Where(x => x % 2 == 1),
+            Enumerable.Range(1, 40).Where(x => x % 2 != 0),
             config => config.WithStrictOrdering());
 
         tree.Add(2);

@@ -345,50 +345,83 @@ public class BTree<TKey>
     /// </exception>
     private void InsertNonFull(BTreeNode<TKey> node, TKey key)
     {
-        var i = node.KeyCount - 1;
-
         if (node.IsLeaf)
         {
-            while (i >= 0 && comparer.Compare(key, node.Keys[i]) < 0)
-            {
-                node.Keys[i + 1] = node.Keys[i];
-                i--;
-            }
-
-            if (i >= 0 && comparer.Compare(key, node.Keys[i]) == 0)
-            {
-                throw new ArgumentException($"""Key "{key}" already exists in B-Tree.""");
-            }
-
-            node.Keys[i + 1] = key;
-            node.KeyCount++;
+            InsertIntoLeaf(node, key);
         }
         else
         {
-            while (i >= 0 && comparer.Compare(key, node.Keys[i]) < 0)
-            {
-                i--;
-            }
-
-            if (i >= 0 && comparer.Compare(key, node.Keys[i]) == 0)
-            {
-                throw new ArgumentException($"""Key "{key}" already exists in B-Tree.""");
-            }
-
-            i++;
-
-            if (node.Children[i]!.IsFull())
-            {
-                SplitChild(node, i);
-
-                if (comparer.Compare(key, node.Keys[i]) > 0)
-                {
-                    i++;
-                }
-            }
-
-            InsertNonFull(node.Children[i]!, key);
+            InsertIntoNonLeaf(node, key);
         }
+    }
+
+    /// <summary>
+    ///     Insert a key into a leaf node.
+    /// </summary>
+    /// <param name="node">Leaf node to insert into.</param>
+    /// <param name="key">Key to insert.</param>
+    private void InsertIntoLeaf(BTreeNode<TKey> node, TKey key)
+    {
+        var i = node.KeyCount - 1;
+
+        while (i >= 0 && comparer.Compare(key, node.Keys[i]) < 0)
+        {
+            node.Keys[i + 1] = node.Keys[i];
+            i--;
+        }
+
+        if (i >= 0 && comparer.Compare(key, node.Keys[i]) == 0)
+        {
+            throw new ArgumentException($"""Key "{key}" already exists in B-Tree.""");
+        }
+
+        node.Keys[i + 1] = key;
+        node.KeyCount++;
+    }
+
+    /// <summary>
+    ///     Insert a key into a non-leaf node.
+    /// </summary>
+    /// <param name="node">Non-leaf node to insert into.</param>
+    /// <param name="key">Key to insert.</param>
+    private void InsertIntoNonLeaf(BTreeNode<TKey> node, TKey key)
+    {
+        var i = FindInsertionIndex(node, key);
+
+        if (node.Children[i]!.IsFull())
+        {
+            SplitChild(node, i);
+
+            if (comparer.Compare(key, node.Keys[i]) > 0)
+            {
+                i++;
+            }
+        }
+
+        InsertNonFull(node.Children[i]!, key);
+    }
+
+    /// <summary>
+    ///     Find the index where a key should be inserted in a non-leaf node.
+    /// </summary>
+    /// <param name="node">Node to search in.</param>
+    /// <param name="key">Key to insert.</param>
+    /// <returns>Index where the key should be inserted.</returns>
+    private int FindInsertionIndex(BTreeNode<TKey> node, TKey key)
+    {
+        var i = node.KeyCount - 1;
+
+        while (i >= 0 && comparer.Compare(key, node.Keys[i]) < 0)
+        {
+            i--;
+        }
+
+        if (i >= 0 && comparer.Compare(key, node.Keys[i]) == 0)
+        {
+            throw new ArgumentException($"""Key "{key}" already exists in B-Tree.""");
+        }
+
+        return i + 1;
     }
 
     /// <summary>
@@ -588,14 +621,7 @@ public class BTree<TKey>
         }
         else
         {
-            if (idx != node.KeyCount)
-            {
-                Merge(node, idx);
-            }
-            else
-            {
-                Merge(node, idx - 1);
-            }
+            Merge(node, idx != node.KeyCount ? idx : idx - 1);
         }
     }
 

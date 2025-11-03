@@ -78,20 +78,6 @@ internal class BTreeNode<TKey>(int minDegree, bool isLeaf)
     }
 
     /// <summary>
-    ///     Removes the child pointer at the specified position.
-    /// </summary>
-    /// <param name="index">Position of the child to remove.</param>
-    public void RemoveChild(int index)
-    {
-        for (var i = index; i < KeyCount; i++)
-        {
-            Children[i] = Children[i + 1];
-        }
-
-        Children[KeyCount] = null;
-    }
-
-    /// <summary>
     ///     Checks if the node is full (contains maximum number of keys).
     /// </summary>
     /// <returns>True if the node is full, false otherwise.</returns>
