@@ -96,10 +96,4 @@ internal class BTreeNode<TKey>(int minDegree, bool isLeaf)
     /// </summary>
     /// <returns>True if the node is full, false otherwise.</returns>
     public bool IsFull() => KeyCount == 2 * MinDegree - 1;
-
-    /// <summary>
-    ///     Checks if the node has minimum number of keys.
-    /// </summary>
-    /// <returns>True if the node has minimum keys, false otherwise.</returns>
-    public bool HasMinimumKeys() => KeyCount >= MinDegree - 1;
 }

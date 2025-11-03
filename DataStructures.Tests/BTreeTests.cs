@@ -564,4 +564,243 @@ internal class BTreeTests
                 new[] { 1, 2, 3, 4, 5 },
                 config => config.WithStrictOrdering());
     }
+
+    [Test]
+    public void Remove_BorrowFromPreviousSibling_TreeStillValid()
+    {
+        var tree = new BTree<int>(3);
+
+        tree.AddRange(new[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 });
+
+        tree.Remove(100);
+
+        tree.Count.Should().Be(9);
+        tree.Contains(100).Should().BeFalse();
+
+        tree.GetKeysInOrder()
+            .Should()
+            .BeEquivalentTo(
+                new[] { 10, 20, 30, 40, 50, 60, 70, 80, 90 },
+                config => config.WithStrictOrdering());
+    }
+
+    [Test]
+    public void Remove_BorrowFromNextSibling_TreeStillValid()
+    {
+        var tree = new BTree<int>(3);
+
+        tree.AddRange(new[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 });
+
+        tree.Remove(10);
+
+        tree.Count.Should().Be(9);
+        tree.Contains(10).Should().BeFalse();
+
+        tree.GetKeysInOrder()
+            .Should()
+            .BeEquivalentTo(
+                new[] { 20, 30, 40, 50, 60, 70, 80, 90, 100 },
+                config => config.WithStrictOrdering());
+    }
+
+    [Test]
+    public void Remove_UsesPredecessor_TreeStillValid()
+    {
+        var tree = new BTree<int>(3);
+
+        tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+
+        var rootKeys = tree.GetKeysPreOrder().Take(3).ToArray();
+        var keyToRemove = rootKeys[0];
+
+        tree.Remove(keyToRemove);
+
+        tree.Contains(keyToRemove).Should().BeFalse();
+        tree.Count.Should().Be(14);
+
+        var inOrder = tree.GetKeysInOrder().ToArray();
+        inOrder.Should().HaveCount(14);
+        inOrder.Should().BeInAscendingOrder();
+    }
+
+    [Test]
+    public void Remove_UsesSuccessor_TreeStillValid()
+    {
+        var tree = new BTree<int>(2);
+
+        tree.AddRange(new[] { 10, 20, 30, 40, 50, 60, 70 });
+
+        tree.Remove(40);
+
+        tree.Contains(40).Should().BeFalse();
+        tree.Count.Should().Be(6);
+
+        tree.GetKeysInOrder()
+            .Should()
+            .BeEquivalentTo(
+                new[] { 10, 20, 30, 50, 60, 70 },
+                config => config.WithStrictOrdering());
+    }
+
+    [Test]
+    public void Remove_MergeWithSibling_TreeStillValid()
+    {
+        var tree = new BTree<int>(2);
+
+        tree.AddRange(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+
+        tree.Remove(9);
+        tree.Remove(8);
+        tree.Remove(7);
+
+        tree.Count.Should().Be(6);
+
+        tree.GetKeysInOrder()
+            .Should()
+            .BeEquivalentTo(
+                new[] { 1, 2, 3, 4, 5, 6 },
+                config => config.WithStrictOrdering());
+    }
+
+    [Test]
+    public void Remove_ComplexRebalancing_TreeStillValid()
+    {
+        var tree = new BTree<int>(3);
+
+        tree.AddRange(Enumerable.Range(1, 30));
+
+        var keysToRemove = new[] { 5, 15, 25, 10, 20, 30, 1, 29 };
+
+        foreach (var key in keysToRemove)
+        {
+            tree.Remove(key);
+            tree.Contains(key).Should().BeFalse();
+        }
+
+        tree.Count.Should().Be(22);
+
+        var expected = Enumerable.Range(1, 30).Except(keysToRemove).OrderBy(x => x);
+        tree.GetKeysInOrder()
+            .Should()
+            .BeEquivalentTo(
+                expected,
+                config => config.WithStrictOrdering());
+    }
+
+    [Test]
+    public void Remove_FromMinimumDegree3_AllRebalancingPaths()
+    {
+        var tree = new BTree<int>(3);
+
+        tree.AddRange(Enumerable.Range(1, 50));
+        var keysToRemove = new[] { 25, 12, 37, 6, 44, 18, 31, 3, 47, 15 };
+
+        foreach (var key in keysToRemove)
+        {
+            var countBefore = tree.Count;
+            tree.Remove(key);
+
+            tree.Count.Should().Be(countBefore - 1);
+            tree.Contains(key).Should().BeFalse();
+
+            var inOrder = tree.GetKeysInOrder().ToArray();
+            inOrder.Should().BeInAscendingOrder();
+        }
+
+        tree.Count.Should().Be(40);
+    }
+
+    [Test]
+    public void Remove_SequentialFromLargeTree_MaintainsStructure()
+    {
+        var tree = new BTree<int>(4);
+
+        tree.AddRange(Enumerable.Range(1, 100));
+        for (var i = 3; i <= 99; i += 3)
+        {
+            tree.Remove(i);
+        }
+
+        tree.Count.Should().Be(67);
+
+        var inOrder = tree.GetKeysInOrder().ToArray();
+        inOrder.Should().HaveCount(67);
+        inOrder.Should().BeInAscendingOrder();
+
+        tree.Contains(3).Should().BeFalse();
+        tree.Contains(6).Should().BeFalse();
+        tree.Contains(99).Should().BeFalse();
+        tree.Contains(1).Should().BeTrue();
+        tree.Contains(2).Should().BeTrue();
+        tree.Contains(100).Should().BeTrue();
+    }
+
+    [Test]
+    public void BTree_DegreeThree_CompleteInsertDeleteCycle()
+    {
+        var tree = new BTree<int>(3);
+
+        var keys = Enumerable.Range(1, 40).ToArray();
+        tree.AddRange(keys);
+        tree.Count.Should().Be(40);
+
+        for (var i = 2; i <= 40; i += 2)
+        {
+            tree.Remove(i);
+        }
+
+        tree.Count.Should().Be(20);
+
+        var remaining = tree.GetKeysInOrder().ToArray();
+        remaining.Should().BeEquivalentTo(
+            Enumerable.Range(1, 40).Where(x => x % 2 == 1),
+            config => config.WithStrictOrdering());
+
+        tree.Add(2);
+        tree.Add(4);
+        tree.Count.Should().Be(22);
+
+        tree.Contains(2).Should().BeTrue();
+        tree.Contains(4).Should().BeTrue();
+    }
+
+    [Test]
+    public void Remove_RootWithMultipleChildren_HandledCorrectly()
+    {
+        var tree = new BTree<int>(2);
+
+        tree.AddRange(new[] { 1, 2, 3, 4, 5 });
+        tree.Remove(3);
+        tree.Count.Should().Be(4);
+
+        tree.GetKeysInOrder()
+            .Should()
+            .BeEquivalentTo(
+                new[] { 1, 2, 4, 5 },
+                config => config.WithStrictOrdering());
+    }
+
+    [Test]
+    public void BTree_HighDegree_StressTest()
+    {
+        var tree = new BTree<int>(10);
+
+        tree.AddRange(Enumerable.Range(1, 200));
+        tree.Count.Should().Be(200);
+
+        for (var i = 10; i <= 200; i += 10)
+        {
+            tree.Remove(i);
+        }
+
+        tree.Count.Should().Be(180);
+
+        var inOrder = tree.GetKeysInOrder().ToArray();
+        inOrder.Should().HaveCount(180);
+        inOrder.Should().BeInAscendingOrder();
+
+        tree.Contains(10).Should().BeFalse();
+        tree.Contains(100).Should().BeFalse();
+        tree.Contains(200).Should().BeFalse();
+    }
 }
