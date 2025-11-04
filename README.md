@@ -270,6 +270,7 @@ find more than one implementation for the same objective but using different alg
   * [Fenwick tree (or Binary Indexed Tree)](./DataStructures/Fenwick/BinaryIndexedTree.cs)
   * [AA Tree](./DataStructures/AATree)
   * [AVL Tree](./DataStructures/AVLTree)
+  * [B-Tree](./DataStructures/BTree)
   * [Red-Black Tree](./DataStructures/RedBlackTree)
   * [Stack](./DataStructures/Stack)
     * [Array-based Stack](./DataStructures/Stack/ArrayBasedStack.cs)
