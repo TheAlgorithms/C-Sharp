@@ -7,13 +7,14 @@ namespace Algorithms.Knapsack;
 public class NaiveKnapsackSolver<T> : IHeuristicKnapsackSolver<T>
 {
     /// <summary>
-    ///     TODO.
+    ///     Solves the knapsack problem using a naive greedy approach.
+    ///     Items are added in order until capacity is reached.
     /// </summary>
-    /// <param name="items">TODO. 2.</param>
-    /// <param name="capacity">TODO. 3.</param>
-    /// <param name="weightSelector">TODO. 4.</param>
-    /// <param name="valueSelector">TODO. 5.</param>
-    /// <returns>TODO. 6.</returns>
+    /// <param name="items">Array of items to consider for the knapsack.</param>
+    /// <param name="capacity">Maximum weight capacity of the knapsack.</param>
+    /// <param name="weightSelector">Function to get the weight of an item.</param>
+    /// <param name="valueSelector">Function to get the value of an item.</param>
+    /// <returns>Array of items that fit in the knapsack.</returns>
     public T[] Solve(T[] items, double capacity, Func<T, double> weightSelector, Func<T, double> valueSelector)
     {
         var weight = 0d;

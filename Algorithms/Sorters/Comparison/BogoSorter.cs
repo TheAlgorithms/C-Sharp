@@ -9,10 +9,16 @@ public class BogoSorter<T> : IComparisonSorter<T>
     private readonly Random random = new();
 
     /// <summary>
-    ///     TODO.
+    ///     Sorts array using specified comparer,
+    ///     randomly shuffles elements until array is sorted,
+    ///     internal, in-place, unstable,
+    ///     worst-case time complexity: unbounded (infinite),
+    ///     average time complexity: O((n+1)!),
+    ///     space complexity: O(n),
+    ///     where n - array length.
     /// </summary>
-    /// <param name="array">TODO. 2.</param>
-    /// <param name="comparer">TODO. 3.</param>
+    /// <param name="array">Array to sort.</param>
+    /// <param name="comparer">Compares elements.</param>
     public void Sort(T[] array, IComparer<T> comparer)
     {
         while (!IsSorted(array, comparer))

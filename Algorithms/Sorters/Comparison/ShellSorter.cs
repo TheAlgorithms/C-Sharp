@@ -1,9 +1,9 @@
 namespace Algorithms.Sorters.Comparison;
 
 /// <summary>
-///     TODO.
+///     Class that implements Shell sort algorithm.
 /// </summary>
-/// <typeparam name="T">TODO. 2.</typeparam>
+/// <typeparam name="T">Type of array element.</typeparam>
 public class ShellSorter<T> : IComparisonSorter<T>
 {
     /// <summary>
