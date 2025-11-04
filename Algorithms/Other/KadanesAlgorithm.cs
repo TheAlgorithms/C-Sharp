@@ -19,8 +19,8 @@ public static class KadanesAlgorithm
     /// <returns>The maximum sum of a contiguous subarray.</returns>
     /// <exception cref="ArgumentException">Thrown when the input array is null or empty.</exception>
     /// <example>
-    ///     Input: [-2, 1, -3, 4, -1, 2, 1, -5, 4]
-    ///     Output: 6 (subarray [4, -1, 2, 1])
+    ///     Input: [-2, 1, -3, 4, -1, 2, 1, -5, 4].
+    ///     Output: 6 (subarray [4, -1, 2, 1]).
     /// </example>
     public static int FindMaximumSubarraySum(int[] array)
     {
@@ -33,6 +33,7 @@ public static class KadanesAlgorithm
         // Initialize both variables with the first element
         // maxSoFar tracks the best sum we've seen across all subarrays
         int maxSoFar = array[0];
+
         // maxEndingHere tracks the best sum ending at the current position
         int maxEndingHere = array[0];
 
@@ -43,7 +44,7 @@ public static class KadanesAlgorithm
             // If adding current element to existing sum is worse than the element alone,
             // it's better to start a new subarray from current element
             maxEndingHere = Math.Max(array[i], maxEndingHere + array[i]);
-            
+
             // Update the global maximum if current subarray sum is better
             maxSoFar = Math.Max(maxSoFar, maxEndingHere);
         }
@@ -60,9 +61,9 @@ public static class KadanesAlgorithm
     /// <returns>A tuple containing the maximum sum, start index, and end index.</returns>
     /// <exception cref="ArgumentException">Thrown when the input array is null or empty.</exception>
     /// <example>
-    ///     Input: [-2, 1, -3, 4, -1, 2, 1, -5, 4]
-    ///     Output: (MaxSum: 6, StartIndex: 3, EndIndex: 6)
-    ///     The subarray is [4, -1, 2, 1]
+    ///     Input: [-2, 1, -3, 4, -1, 2, 1, -5, 4].
+    ///     Output: (MaxSum: 6, StartIndex: 3, EndIndex: 6).
+    ///     The subarray is [4, -1, 2, 1].
     /// </example>
     public static (int MaxSum, int StartIndex, int EndIndex) FindMaximumSubarrayWithIndices(int[] array)
     {
@@ -116,8 +117,8 @@ public static class KadanesAlgorithm
     /// <returns>The maximum sum of a contiguous subarray.</returns>
     /// <exception cref="ArgumentException">Thrown when the input array is null or empty.</exception>
     /// <example>
-    ///     Input: [1000000000L, -500000000L, 1000000000L]
-    ///     Output: 1500000000L (entire array)
+    ///     Input: [1000000000L, -500000000L, 1000000000L].
+    ///     Output: 1500000000L (entire array).
     /// </example>
     public static long FindMaximumSubarraySum(long[] array)
     {
@@ -136,6 +137,7 @@ public static class KadanesAlgorithm
         {
             // Decide: extend current subarray or start new one
             maxEndingHere = Math.Max(array[i], maxEndingHere + array[i]);
+
             // Update global maximum
             maxSoFar = Math.Max(maxSoFar, maxEndingHere);
         }

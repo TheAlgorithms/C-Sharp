@@ -4,19 +4,19 @@ namespace DataStructures.Deque;
 ///     Implementation of a Deque (Double-Ended Queue) data structure.
 ///     A deque allows insertion and deletion of elements from both ends (front and rear).
 ///     This implementation uses a circular array for efficient operations.
-///     
+///
 ///     Key Features:
 ///     - O(1) time complexity for AddFront, AddRear, RemoveFront, RemoveRear operations
 ///     - O(1) amortized time for insertions (due to dynamic resizing)
 ///     - Space efficient with circular array implementation
 ///     - Automatic capacity doubling when full
-///     
+///
 ///     Use Cases:
 ///     - Implementing sliding window algorithms
 ///     - Palindrome checking
 ///     - Undo/Redo functionality
 ///     - Task scheduling with priority at both ends
-///     
+///
 ///     Reference: "Data Structures and Algorithms in C#" by Michael T. Goodrich.
 /// </summary>
 /// <typeparam name="T">The type of elements in the deque.</typeparam>
@@ -24,13 +24,13 @@ public class Deque<T>
 {
     // Internal circular array to store elements
     private T[] items;
-    
+
     // Index of the front element (next element to remove from front)
     private int front;
-    
+
     // Index where the next element will be added at rear
     private int rear;
-    
+
     // Current number of elements in the deque
     private int count;
 
@@ -39,7 +39,8 @@ public class Deque<T>
     ///     Default capacity is 16 elements, which provides a good balance between
     ///     memory usage and avoiding early resizing for typical use cases.
     /// </summary>
-    public Deque() : this(16)
+    public Deque()
+        : this(16)
     {
     }
 
@@ -77,8 +78,8 @@ public class Deque<T>
     /// </summary>
     /// <param name="item">The item to add.</param>
     /// <example>
-    ///     deque.AddFront(5);  // Deque: [5]
-    ///     deque.AddFront(3);  // Deque: [3, 5]
+    ///     deque.AddFront(5);  // Deque: [5].
+    ///     deque.AddFront(3);  // Deque: [3, 5].
     /// </example>
     public void AddFront(T item)
     {
@@ -101,8 +102,8 @@ public class Deque<T>
     /// </summary>
     /// <param name="item">The item to add.</param>
     /// <example>
-    ///     deque.AddRear(5);  // Deque: [5]
-    ///     deque.AddRear(7);  // Deque: [5, 7]
+    ///     deque.AddRear(5);  // Deque: [5].
+    ///     deque.AddRear(7);  // Deque: [5, 7].
     /// </example>
     public void AddRear(T item)
     {
@@ -114,6 +115,7 @@ public class Deque<T>
 
         // Add item at rear position
         items[rear] = item;
+
         // Move rear pointer forward in circular fashion
         rear = (rear + 1) % items.Length;
         count++;
@@ -126,8 +128,8 @@ public class Deque<T>
     /// <returns>The element at the front of the deque.</returns>
     /// <exception cref="InvalidOperationException">Thrown when the deque is empty.</exception>
     /// <example>
-    ///     // Deque: [3, 5, 7]
-    ///     int value = deque.RemoveFront();  // Returns 3, Deque: [5, 7]
+    ///     // Deque: [3, 5, 7].
+    ///     int value = deque.RemoveFront();  // Returns 3, Deque: [5, 7].
     /// </example>
     public T RemoveFront()
     {
@@ -139,8 +141,10 @@ public class Deque<T>
 
         // Retrieve the front element
         T item = items[front];
+
         // Clear the reference to help garbage collection
         items[front] = default!;
+
         // Move front pointer forward in circular fashion
         front = (front + 1) % items.Length;
         count--;
@@ -155,8 +159,8 @@ public class Deque<T>
     /// <returns>The element at the rear of the deque.</returns>
     /// <exception cref="InvalidOperationException">Thrown when the deque is empty.</exception>
     /// <example>
-    ///     // Deque: [3, 5, 7]
-    ///     int value = deque.RemoveRear();  // Returns 7, Deque: [3, 5]
+    ///     // Deque: [3, 5, 7].
+    ///     int value = deque.RemoveRear();  // Returns 7, Deque: [3, 5].
     /// </example>
     public T RemoveRear()
     {
@@ -168,8 +172,10 @@ public class Deque<T>
 
         // Move rear pointer backward to the last element
         rear = (rear - 1 + items.Length) % items.Length;
+
         // Retrieve the rear element
         T item = items[rear];
+
         // Clear the reference to help garbage collection
         items[rear] = default!;
         count--;
@@ -184,8 +190,8 @@ public class Deque<T>
     /// <returns>The element at the front of the deque.</returns>
     /// <exception cref="InvalidOperationException">Thrown when the deque is empty.</exception>
     /// <example>
-    ///     // Deque: [3, 5, 7]
-    ///     int value = deque.PeekFront();  // Returns 3, Deque unchanged: [3, 5, 7]
+    ///     // Deque: [3, 5, 7].
+    ///     int value = deque.PeekFront();  // Returns 3, Deque unchanged: [3, 5, 7].
     /// </example>
     public T PeekFront()
     {
@@ -205,8 +211,8 @@ public class Deque<T>
     /// <returns>The element at the rear of the deque.</returns>
     /// <exception cref="InvalidOperationException">Thrown when the deque is empty.</exception>
     /// <example>
-    ///     // Deque: [3, 5, 7]
-    ///     int value = deque.PeekRear();  // Returns 7, Deque unchanged: [3, 5, 7]
+    ///     // Deque: [3, 5, 7].
+    ///     int value = deque.PeekRear();  // Returns 7, Deque unchanged: [3, 5, 7].
     /// </example>
     public T PeekRear()
     {
@@ -230,6 +236,7 @@ public class Deque<T>
     {
         // Clear all references in the array to help garbage collection
         Array.Clear(items, 0, items.Length);
+
         // Reset pointers to initial state
         front = 0;
         rear = 0;
@@ -243,8 +250,8 @@ public class Deque<T>
     /// </summary>
     /// <returns>An array containing all elements in the deque from front to rear.</returns>
     /// <example>
-    ///     // Deque: [3, 5, 7]
-    ///     int[] array = deque.ToArray();  // Returns [3, 5, 7]
+    ///     // Deque: [3, 5, 7].
+    ///     int[] array = deque.ToArray();  // Returns [3, 5, 7].
     /// </example>
     public T[] ToArray()
     {
@@ -270,9 +277,9 @@ public class Deque<T>
     /// <param name="item">The item to locate in the deque.</param>
     /// <returns>true if the item is found; otherwise, false.</returns>
     /// <example>
-    ///     // Deque: [3, 5, 7]
-    ///     bool exists = deque.Contains(5);  // Returns true
-    ///     bool missing = deque.Contains(9);  // Returns false
+    ///     // Deque: [3, 5, 7].
+    ///     bool exists = deque.Contains(5);  // Returns true.
+    ///     bool missing = deque.Contains(9);  // Returns false.
     /// </example>
     public bool Contains(T item)
     {
@@ -317,6 +324,7 @@ public class Deque<T>
 
         // Replace old array with new larger array
         items = newItems;
+
         // Reset pointers: front at 0, rear at position after last element
         front = 0;
         rear = count;
