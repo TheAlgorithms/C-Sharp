@@ -381,7 +381,7 @@ public static class ManachersAlgorithmTests
         string input = new string('a', 1000) + "racecar" + new string('b', 1000);
 
         // Act
-        var (palindrome, startIndex, length) = ManachersAlgorithm.FindLongestPalindromeWithDetails(input);
+        var (palindrome, _, length) = ManachersAlgorithm.FindLongestPalindromeWithDetails(input);
 
         // Assert: Should find the longest palindrome (either the 'a's or 'b's or "racecar")
         // The 1000 'a's form a palindrome
