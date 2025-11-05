@@ -218,6 +218,7 @@ find more than one implementation for the same objective but using different alg
       * [WildCard Pattern Matching](./Algorithms/Strings/PatternMatching/WildCardMatcher.cs)
       * [Z-block substring search](./Algorithms/Strings/PatternMatching/ZblockSubstringSearch.cs)
     * [Longest Consecutive Character](./Algorithms/Strings/GeneralStringAlgorithms.cs)
+    * [Manacher's Algorithm](./Algorithms/Strings/ManachersAlgorithm.cs)
     * [Palindrome Checker](./Algorithms/Strings/Palindrome.cs)
     * [Get all permutations of a string](./Algorithms/Strings/Permutation.cs)
   * [Other](./Algorithms/Other)
