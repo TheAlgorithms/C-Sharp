@@ -57,7 +57,7 @@ namespace Algorithms.Tests.Strings.Similarity
         [Test]
         public void Calculate_OneTransposition_ReturnsOne()
         {
-            var result = OptimalStringAlignment.Calculate("example", "exmaple");
+            var result = OptimalStringAlignment.Calculate("example", "example");
             result.Should().Be(1.0);
         }
 
