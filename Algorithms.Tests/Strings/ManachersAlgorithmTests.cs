@@ -387,4 +387,59 @@ public static class ManachersAlgorithmTests
         // The 1000 'a's form a palindrome
         Assert.That(length, Is.GreaterThanOrEqualTo(7)); // At least "racecar"
     }
+
+    [Test]
+    public static void FindLongestPalindrome_WithVeryLongPalindrome_HandlesGracefully()
+    {
+        // Arrange: Test with a very long palindrome to ensure exception handling works
+        string input = new string('a', 10000);
+
+        // Act
+        string result = ManachersAlgorithm.FindLongestPalindrome(input);
+
+        // Assert: Should handle the entire palindrome without throwing
+        Assert.That(result.Length, Is.EqualTo(10000));
+        Assert.That(result, Is.EqualTo(input));
+    }
+
+    [Test]
+    public static void IsPalindrome_WithVeryLongPalindrome_HandlesGracefully()
+    {
+        // Arrange: Test with a very long palindrome
+        string input = new string('x', 5000);
+
+        // Act
+        bool result = ManachersAlgorithm.IsPalindrome(input);
+
+        // Assert: Should correctly identify as palindrome
+        Assert.That(result, Is.True);
+    }
+
+    [Test]
+    public static void FindLongestPalindrome_WithAlternatingCharacters_HandlesEdgeCases()
+    {
+        // Arrange: Test with alternating characters (minimal palindromes)
+        string input = "abababababababababababababababab";
+
+        // Act
+        string result = ManachersAlgorithm.FindLongestPalindrome(input);
+
+        // Assert: Should find at least a 3-character palindrome like "aba" or "bab"
+        Assert.That(result.Length, Is.GreaterThanOrEqualTo(3));
+    }
+
+    [Test]
+    public static void FindLongestPalindromeWithDetails_WithSpecialCharacters_HandlesCorrectly()
+    {
+        // Arrange: Test with special characters to ensure proper handling
+        string input = "abc!@#@!xyz";
+
+        // Act
+        var (palindrome, startIndex, length) = ManachersAlgorithm.FindLongestPalindromeWithDetails(input);
+
+        // Assert: Should find the palindrome with special characters
+        Assert.That(palindrome, Is.EqualTo("!@#@!"));
+        Assert.That(length, Is.EqualTo(5));
+        Assert.That(startIndex, Is.EqualTo(3));
+    }
 }
