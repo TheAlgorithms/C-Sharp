@@ -360,7 +360,7 @@ public class AvlTree<TKey>
             throw new ArgumentException($"""Key "{key}" already exists in AVL tree.""");
         }
 
-        // Check all of the new node's ancestors for inbalance and perform
+        // Check all of the new node's ancestors for imbalance and perform
         // necessary rotations
         node.UpdateBalanceFactor();
 
