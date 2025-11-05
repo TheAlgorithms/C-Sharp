@@ -150,19 +150,12 @@ public static class ManachersAlgorithm
             // transformed[i-2] == transformed[i+2] and
             // transformed[i-1] == transformed[i+1].
             // So we start checking at distance 3.
-            try
+            //
+            // The sentinels (^ and $) guarantee we never go out of bounds.
+            // Expansion stops naturally when characters don't match.
+            while (transformed[i + palindromeRadii[i] + 1] == transformed[i - palindromeRadii[i] - 1])
             {
-                // Expand while characters match on both sides.
-                // +1 because we're checking the NEXT position beyond current radius.
-                while (transformed[i + palindromeRadii[i] + 1] == transformed[i - palindromeRadii[i] - 1])
-                {
-                    palindromeRadii[i]++;
-                }
-            }
-            catch (IndexOutOfRangeException)
-            {
-                // Sentinels (^ and $) should prevent this, but handle gracefully.
-                // This catch is a safety net for unexpected edge cases.
+                palindromeRadii[i]++;
             }
 
             // UPDATE TRACKING: If this palindrome extends further right than any before.
@@ -267,16 +260,10 @@ public static class ManachersAlgorithm
             }
 
             // Expand palindrome.
-            try
+            // Sentinels guarantee no out-of-bounds access.
+            while (transformed[i + palindromeRadii[i] + 1] == transformed[i - palindromeRadii[i] - 1])
             {
-                while (transformed[i + palindromeRadii[i] + 1] == transformed[i - palindromeRadii[i] - 1])
-                {
-                    palindromeRadii[i]++;
-                }
-            }
-            catch (IndexOutOfRangeException)
-            {
-                // Handle gracefully.
+                palindromeRadii[i]++;
             }
 
             // Update rightmost boundary.

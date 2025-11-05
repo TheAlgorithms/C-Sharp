@@ -381,7 +381,7 @@ public static class ManachersAlgorithmTests
         string input = new string('a', 1000) + "racecar" + new string('b', 1000);
 
         // Act
-        var (palindrome, _, length) = ManachersAlgorithm.FindLongestPalindromeWithDetails(input);
+        var (_, _, length) = ManachersAlgorithm.FindLongestPalindromeWithDetails(input);
 
         // Assert: Should find the longest palindrome (either the 'a's or 'b's or "racecar")
         // The 1000 'a's form a palindrome
@@ -391,13 +391,13 @@ public static class ManachersAlgorithmTests
     [Test]
     public static void FindLongestPalindrome_WithVeryLongPalindrome_HandlesGracefully()
     {
-        // Arrange: Test with a very long palindrome to ensure exception handling works
+        // Arrange: Test with a very long palindrome to verify O(n) performance
         string input = new string('a', 10000);
 
         // Act
         string result = ManachersAlgorithm.FindLongestPalindrome(input);
 
-        // Assert: Should handle the entire palindrome without throwing
+        // Assert: Should correctly identify the entire string as a palindrome
         Assert.That(result.Length, Is.EqualTo(10000));
         Assert.That(result, Is.EqualTo(input));
     }
@@ -405,13 +405,13 @@ public static class ManachersAlgorithmTests
     [Test]
     public static void IsPalindrome_WithVeryLongPalindrome_HandlesGracefully()
     {
-        // Arrange: Test with a very long palindrome
+        // Arrange: Test with a very long palindrome to verify performance
         string input = new string('x', 5000);
 
         // Act
         bool result = ManachersAlgorithm.IsPalindrome(input);
 
-        // Assert: Should correctly identify as palindrome
+        // Assert: Should correctly identify as palindrome in O(n) time
         Assert.That(result, Is.True);
     }
 
