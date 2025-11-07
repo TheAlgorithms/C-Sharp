@@ -74,7 +74,7 @@ public class Pkcs7Padding : IBlockCipherPadding
     /// <summary>
     /// Removes the PKCS7 padding from the given input data.
     /// </summary>
-    /// <param name="input">The input data with PKCS7 padding. Must not be null and must have a vaild length and padding.</param>
+    /// <param name="input">The input data with PKCS7 padding. Must not be null and must have a valid length and padding.</param>
     /// <returns>The input data without the padding as a new byte array.</returns>
     /// <exception cref="ArgumentException">
     /// Thrown if the input data is null, has an invalid length, or has an invalid padding.
