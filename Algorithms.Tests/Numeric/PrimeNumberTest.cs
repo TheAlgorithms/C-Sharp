@@ -18,7 +18,9 @@ public static class PrimeNumberTests
     [TestCase(9, ExpectedResult = false)] // Composite (3*3)
     [TestCase(13, ExpectedResult = true)] // Prime
     [TestCase(15, ExpectedResult = false)] // Composite (3*5)
+    [TestCase(25, ExpectedResult = false)] // Composite (5*5)
     [TestCase(29, ExpectedResult = true)] // Prime
+    [TestCase(35, ExpectedResult = false)] // Composite (5*7)
     [TestCase(49, ExpectedResult = false)] // Composite (7*7)
     [TestCase(97, ExpectedResult = true)] // Larger prime
     [TestCase(100, ExpectedResult = false)] // Larger composite
