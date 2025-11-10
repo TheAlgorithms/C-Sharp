@@ -34,7 +34,7 @@ public static class PrimeChecker
 
         // Check for divisibility by numbers of the form 6k ± 1 up to sqrt(number).
         // The loop increments by 6 to skip known non-prime divisors.
-        for (int i = 5; i * i <= number; i = i + 6)
+        for (int i = 5; i <= number / i; i = i + 6)
         {
             // Check 6k - 1
             if (number % i == 0)
