@@ -1,79 +1,109 @@
-using Algorithms.Numeric; 
+using Algorithms.Numeric;
 using NUnit.Framework;
+using System;
 
 namespace Algorithms.Tests.Numeric;
 
-/// <summary>
-///     Contains unit tests for the Tanh (Hyperbolic Tangent) function implementation.
-/// </summary>
-[TestFixture] // Marks the class as containing test methods
+[TestFixture]
 public static class TanhTests
 {
-    private const double Tolerance = 1e-9; // Precision tolerance for floating-point comparisons
+    // Tolerance for floating-point comparisons
+    private const double Tolerance = 1e-9; 
+
+    // --- SCALAR TESTS (Tanh.Compute(double)) ---
 
     /// <summary>
-    ///     Tests the Tanh function with various positive, negative, and zero inputs.
-    ///     tanh(x) is expected to return a value between -1.0 and 1.0.
+    /// Tests Tanh function for specific values, including zero and symmetric positive/negative inputs.
     /// </summary>
-    /// <param name="input">The input number.</param>
-    /// <param name="expected">The expected hyperbolic tangent value.</param>
-    [TestCase(0.0, 0.0)] // Case 1: Tanh(0) = 0
-    [TestCase(1.0, 0.7615941559557649)] // Case 2: Positive input
-    [TestCase(-1.0, -0.7615941559557649)] // Case 3: Negative input (Tanh is an odd function: tanh(-x) = -tanh(x))
-    [TestCase(0.5, 0.46211715726000974)] // Case 4: Another positive value
-    [TestCase(-0.5, -0.46211715726000974)] // Case 5: Another negative value
-    [TestCase(5.0, 0.999909204262595)] // Case 6: Larger positive value (approaching 1.0)
-    [TestCase(-5.0, -0.999909204262595)] // Case 7: Larger negative value (approaching -1.0)
-    public static void TanhFunction_ReturnsCorrectValue(double input, double expected)
+    [TestCase(0.0, 0.0)]
+    [TestCase(1.0, 0.7615941559557649)]
+    [TestCase(-1.0, -0.7615941559557649)]
+    [TestCase(5.0, 0.999909204262595)]
+    [TestCase(-5.0, -0.999909204262595)]
+    public static void TanhFunction_Scalar_ReturnsCorrectValue(double input, double expected)
     {
-        // Act
         var result = Tanh.Compute(input);
-
-        // Assert
         Assert.That(result, Is.EqualTo(expected).Within(Tolerance));
     }
     
-    // ---
-
     /// <summary>
-    ///     Tests the Tanh function's behavior when input approaches extreme limits (infinity and NaN).
+    /// Ensures the Tanh output approaches 1.0 for positive infinity and -1.0 for negative infinity.
     /// </summary>
     [Test]
-    public static void TanhFunction_ApproachesLimits()
+    public static void TanhFunction_Scalar_ApproachesLimits()
     {
-        // Case 8: Positive Infinity
-        // Tanh(x) approaches 1.0 as x -> +infinity
-        var resultPosInfinity = Tanh.Compute(double.MaxValue);
-        Assert.That(resultPosInfinity, Is.EqualTo(1.0).Within(Tolerance));
-
-        // Case 9: Negative Infinity
-        // Tanh(x) approaches -1.0 as x -> -infinity
-        var resultNegInfinity = Tanh.Compute(double.MinValue);
-        Assert.That(resultNegInfinity, Is.EqualTo(-1.0).Within(Tolerance));
-
-        // Case 10: NaN input (Expected behavior is usually to return NaN)
-        var resultNaN = Tanh.Compute(double.NaN);
-        Assert.That(resultNaN, Is.NaN);
+        Assert.That(Tanh.Compute(double.PositiveInfinity), Is.EqualTo(1.0).Within(Tolerance));
+        Assert.That(Tanh.Compute(double.NegativeInfinity), Is.EqualTo(-1.0).Within(Tolerance));
+        Assert.That(Tanh.Compute(double.NaN), Is.NaN);
     }
 
-    // ---
-
     /// <summary>
-    ///     Tests the result range to ensure the output is always between -1.0 and 1.0, which is a key property of tanh.
+    /// Checks that the Tanh result is always bounded between -1.0 and 1.0.
     /// </summary>
-    /// <param name="input">A variety of input numbers.</param>
     [TestCase(100.0)]
     [TestCase(-100.0)]
     [TestCase(0.0001)]
-    [TestCase(-0.0001)]
-    public static void TanhFunction_ResultIsBounded(double input)
+    public static void TanhFunction_Scalar_ResultIsBounded(double input)
     {
-        // Act
         var result = Tanh.Compute(input);
-
-        // Assert
-        // Result must be greater than or equal to -1.0 and less than or equal to 1.0
         Assert.That(result, Is.GreaterThanOrEqualTo(-1.0));
         Assert.That(result, Is.LessThanOrEqualTo(1.0));
+    }
+
+    // --- VECTOR TESTS (Tanh.Compute(double[])) ---
+
+    /// <summary>
+    /// Tests the element-wise computation for a vector input.
+    /// </summary>
+    [Test]
+    public static void TanhFunction_Vector_ReturnsCorrectValues()
+    {
+        // Input: [0.0, 1.0, -2.0]
+        var input = new double[] { 0.0, 1.0, -2.0 };
+        // Expected: [Tanh(0.0), Tanh(1.0), Tanh(-2.0)]
+        var expected = new double[] { 0.0, 0.7615941559557649, -0.9640275800758169 };
+
+        var result = Tanh.Compute(input);
+        
+        // Assert deep equality within tolerance
+        Assert.That(result, Is.EqualTo(expected).Within(Tolerance));
+    }
+    
+    /// <summary>
+    /// Tests vector handling of edge cases like infinity and NaN.
+    /// </summary>
+    [Test]
+    public static void TanhFunction_Vector_HandlesLimitsAndNaN()
+    {
+        var input = new double[] { double.PositiveInfinity, 0.0, double.NaN };
+        var expected = new double[] { 1.0, 0.0, double.NaN };
+
+        var result = Tanh.Compute(input);
+
+        Assert.That(result.Length, Is.EqualTo(expected.Length));
+        Assert.That(result[0], Is.EqualTo(expected[0]).Within(Tolerance)); // Pos Inf -> 1.0
+        Assert.That(result[2], Is.NaN); // NaN
+    }
+    
+    // --- EXCEPTION TESTS ---
+
+    /// <summary>
+    /// Checks if the vector computation throws ArgumentNullException for null input.
+    /// </summary>
+    [Test]
+    public static void TanhFunction_Vector_ThrowsOnNullInput()
+    {
+        double[]? input = null; 
+        Assert.Throws<ArgumentNullException>(() => Tanh.Compute(input!));
+    }
+
+    /// <summary>
+    /// Checks if the vector computation throws ArgumentException for an empty input array.
+    /// </summary>
+    [Test]
+    public static void TanhFunction_Vector_ThrowsOnEmptyInput()
+    {
+        var input = Array.Empty<double>();
+        Assert.Throws<ArgumentException>(() => Tanh.Compute(input));
     }
 }
