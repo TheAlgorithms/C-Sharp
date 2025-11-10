@@ -13,13 +13,13 @@ public static class BoyerMooreMajorityVote
     /// <returns>Majority element or null.</returns>
     public static int? FindMajority(int[] nums)
     {
-        if (nums?.Length == 0)
+        if (nums == null || nums.Length == 0)
         {
             return null;
         }
 
-        var candidate = FindCandidate(nums!);
-        return IsMajority(nums!, candidate) ? candidate : null;
+        var candidate = FindCandidate(nums);
+        return IsMajority(nums, candidate) ? candidate : null;
     }
 
     private static int FindCandidate(int[] nums)
