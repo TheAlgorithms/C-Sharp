@@ -138,7 +138,7 @@ public class TarjanStronglyConnectedComponentsTests
         var condensation = tarjan.BuildCondensationGraph();
 
         condensation.Should().NotBeNull();
-        condensation.Length.Should().Be(2);
+        condensation.Length.Should().Be(3); // {0,1}, {2}, {3,4,5}
     }
 
     [Test]
