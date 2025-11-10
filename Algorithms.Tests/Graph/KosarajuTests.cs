@@ -29,7 +29,7 @@ public class KosarajuTests
         graph.AddEdge(vertex5, vertex4, 1);
         graph.AddEdge(vertex5, vertex6, 1);
 
-        // Run the agorithm and obtain the representative vertex of the SCC to which each vertex belongs.
+        // Run the algorithm and obtain the representative vertex of the SCC to which each vertex belongs.
         Dictionary<Vertex<int>, Vertex<int>> result = Kosaraju<int>.GetRepresentatives(graph);
 
         // Check every Vertex belongs to a SCC
