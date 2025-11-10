@@ -28,6 +28,10 @@ public static class Tanh
     /// <returns>The output vector of real numbers, where each element is in the range [-1, 1].</returns>
     public static double[] Compute(double[] input)
     {
+        if (input is null)
+        {
+            throw new ArgumentNullException(nameof(input));
+        }
         if (input.Length == 0)
         {
             throw new ArgumentException("Array is empty.");
