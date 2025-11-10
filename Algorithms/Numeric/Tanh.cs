@@ -32,6 +32,7 @@ public static class Tanh
         {
             throw new ArgumentNullException(nameof(input));
         }
+
         if (input.Length == 0)
         {
             throw new ArgumentException("Array is empty.");
