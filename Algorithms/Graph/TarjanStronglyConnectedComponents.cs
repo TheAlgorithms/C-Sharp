@@ -179,6 +179,7 @@ public class TarjanStronglyConnectedComponents
                     break;
                 }
             }
+
             sccs.Add(scc);
         }
     }
