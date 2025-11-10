@@ -59,9 +59,9 @@ public static class TanhTests
     public static void TanhFunction_Vector_ReturnsCorrectValues()
     {
         // Input: [0.0, 1.0, -2.0]
-        var input = new double[] { 0.0, 1.0, -2.0 };
+        var input = new[] { 0.0, 1.0, -2.0 }; 
         // Expected: [Tanh(0.0), Tanh(1.0), Tanh(-2.0)]
-        var expected = new double[] { 0.0, 0.7615941559557649, -0.9640275800758169 };
+        var expected = new[] { 0.0, 0.7615941559557649, -0.9640275800758169 };
 
         var result = Tanh.Compute(input);
         
@@ -75,8 +75,8 @@ public static class TanhTests
     [Test]
     public static void TanhFunction_Vector_HandlesLimitsAndNaN()
     {
-        var input = new double[] { double.PositiveInfinity, 0.0, double.NaN };
-        var expected = new double[] { 1.0, 0.0, double.NaN };
+        var input = new[] { double.PositiveInfinity, 0.0, double.NaN }; 
+        var expected = new[] { 1.0, 0.0, double.NaN };
 
         var result = Tanh.Compute(input);
 
