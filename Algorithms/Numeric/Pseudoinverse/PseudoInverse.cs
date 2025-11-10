@@ -6,7 +6,7 @@ namespace Algorithms.Numeric.Pseudoinverse;
 ///     The Moore–Penrose pseudo-inverse A+ of a matrix A,
 ///     is a general way to find the solution to the following system of linear equations:
 ///     ~b = A ~y. ~b e R^m; ~y e R^n; A e Rm×n.
-///     There are varios methods for construction the pseudo-inverse.
+///     There are various methods for construction the pseudo-inverse.
 ///     This one is based on Singular Value Decomposition (SVD).
 /// </summary>
 public static class PseudoInverse
