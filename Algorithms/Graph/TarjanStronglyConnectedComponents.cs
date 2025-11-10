@@ -40,7 +40,9 @@ public class TarjanStronglyConnectedComponents
     public void AddEdge(int u, int v)
     {
         if (u < 0 || u >= graph.Length || v < 0 || v >= graph.Length)
-            throw new ArgumentOutOfRangeException();
+        {
+            throw new ArgumentOutOfRangeException(nameof(u), "Vertex indices must be within valid range.");
+        }
 
         graph[u].Add(v);
     }
@@ -54,7 +56,9 @@ public class TarjanStronglyConnectedComponents
         for (int i = 0; i < graph.Length; i++)
         {
             if (ids[i] == -1)
+            {
                 Dfs(i);
+            }
         }
 
         return sccs;
@@ -63,19 +67,24 @@ public class TarjanStronglyConnectedComponents
     /// <summary>
     /// Gets the number of strongly connected components.
     /// </summary>
-    public int GetSCCCount() => sccs.Count;
+    public int GetSccCount() => sccs.Count;
 
     /// <summary>
     /// Checks if two vertices are in the same SCC.
     /// </summary>
-    public bool InSameSCC(int u, int v)
+    public bool InSameScc(int u, int v)
     {
-        if (sccs.Count == 0) FindSCCs();
+        if (sccs.Count == 0)
+        {
+            FindSCCs();
+        }
 
         foreach (var scc in sccs)
         {
             if (scc.Contains(u) && scc.Contains(v))
+            {
                 return true;
+            }
         }
 
         return false;
@@ -84,9 +93,12 @@ public class TarjanStronglyConnectedComponents
     /// <summary>
     /// Gets the SCC containing the given vertex.
     /// </summary>
-    public List<int>? GetSCC(int vertex)
+    public List<int>? GetScc(int vertex)
     {
-        if (sccs.Count == 0) FindSCCs();
+        if (sccs.Count == 0)
+        {
+            FindSCCs();
+        }
 
         return sccs.FirstOrDefault(scc => scc.Contains(vertex));
     }
@@ -96,18 +108,25 @@ public class TarjanStronglyConnectedComponents
     /// </summary>
     public List<int>[] BuildCondensationGraph()
     {
-        if (sccs.Count == 0) FindSCCs();
+        if (sccs.Count == 0)
+        {
+            FindSCCs();
+        }
 
         var sccIndex = new int[graph.Length];
         for (int i = 0; i < sccs.Count; i++)
         {
             foreach (var vertex in sccs[i])
+            {
                 sccIndex[vertex] = i;
+            }
         }
 
         var condensation = new List<int>[sccs.Count];
         for (int i = 0; i < sccs.Count; i++)
+        {
             condensation[i] = new List<int>();
+        }
 
         var edges = new HashSet<(int, int)>();
         for (int u = 0; u < graph.Length; u++)
@@ -136,8 +155,15 @@ public class TarjanStronglyConnectedComponents
 
         foreach (var to in graph[at])
         {
-            if (ids[to] == -1) Dfs(to);
-            if (onStack[to]) low[at] = Math.Min(low[at], low[to]);
+            if (ids[to] == -1)
+            {
+                Dfs(to);
+            }
+
+            if (onStack[to])
+            {
+                low[at] = Math.Min(low[at], low[to]);
+            }
         }
 
         if (ids[at] == low[at])
@@ -148,7 +174,10 @@ public class TarjanStronglyConnectedComponents
                 int node = stack.Pop();
                 onStack[node] = false;
                 scc.Add(node);
-                if (node == at) break;
+                if (node == at)
+                {
+                    break;
+                }
             }
             sccs.Add(scc);
         }

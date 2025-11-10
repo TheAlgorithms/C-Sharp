@@ -67,7 +67,7 @@ public class TarjanStronglyConnectedComponentsTests
     }
 
     [Test]
-    public void GetSCCCount_AfterFindingSCCs_ReturnsCorrectCount()
+    public void GetSccCount_AfterFindingSCCs_ReturnsCorrectCount()
     {
         var tarjan = new TarjanStronglyConnectedComponents(5);
         tarjan.AddEdge(0, 1);
@@ -77,46 +77,46 @@ public class TarjanStronglyConnectedComponentsTests
         tarjan.AddEdge(4, 2);
 
         tarjan.FindSCCs();
-        var count = tarjan.GetSCCCount();
+        var count = tarjan.GetSccCount();
 
         count.Should().Be(2);
     }
 
     [Test]
-    public void InSameSCC_VerticesInSameSCC_ReturnsTrue()
+    public void InSameScc_VerticesInSameScc_ReturnsTrue()
     {
         var tarjan = new TarjanStronglyConnectedComponents(3);
         tarjan.AddEdge(0, 1);
         tarjan.AddEdge(1, 2);
         tarjan.AddEdge(2, 0);
 
-        var result = tarjan.InSameSCC(0, 2);
+        var result = tarjan.InSameScc(0, 2);
 
         result.Should().BeTrue();
     }
 
     [Test]
-    public void InSameSCC_VerticesInDifferentSCCs_ReturnsFalse()
+    public void InSameScc_VerticesInDifferentSccs_ReturnsFalse()
     {
         var tarjan = new TarjanStronglyConnectedComponents(4);
         tarjan.AddEdge(0, 1);
         tarjan.AddEdge(1, 0);
         tarjan.AddEdge(2, 3);
 
-        var result = tarjan.InSameSCC(0, 2);
+        var result = tarjan.InSameScc(0, 2);
 
         result.Should().BeFalse();
     }
 
     [Test]
-    public void GetSCC_ValidVertex_ReturnsSCCContainingVertex()
+    public void GetScc_ValidVertex_ReturnsSccContainingVertex()
     {
         var tarjan = new TarjanStronglyConnectedComponents(3);
         tarjan.AddEdge(0, 1);
         tarjan.AddEdge(1, 2);
         tarjan.AddEdge(2, 0);
 
-        var scc = tarjan.GetSCC(1);
+        var scc = tarjan.GetScc(1);
 
         scc.Should().NotBeNull();
         scc.Should().Contain(1);
