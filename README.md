@@ -52,6 +52,7 @@ find more than one implementation for the same objective but using different alg
     * [Dijkstra Shortest Path](./Algorithms/Graph/Dijkstra/DijkstraAlgorithm.cs)
     * [FloydWarshall](./Algorithms/Graph/FloydWarshall.cs)
     * [Kosaraju](./Algorithms/Graph/Kosaraju.cs)
+    * [Topological Sort](./Algorithms/Graph/TopologicalSort.cs)
   * [Knapsack problem](./Algorithms/Knapsack)
     * [Naive solver](./Algorithms/Knapsack/NaiveKnapsackSolver.cs)
     * [Dynamic Programming solver](./Algorithms/Knapsack/DynamicProgrammingKnapsackSolver.cs)
