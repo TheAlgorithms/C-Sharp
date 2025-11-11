@@ -33,7 +33,7 @@ public static class DoubleFactorial
 
         // Start the iteration from the input number and step down by 2.
         // This handles both odd (n, n-2, ..., 3, 1) and even (n, n-2, ..., 4, 2) cases naturally.
-        BigInteger current = new BigInteger(inputNum);
+        BigInteger current = inputNum;
 
         while (BigInteger.Compare(current, BigInteger.One) >= 0)
         {
