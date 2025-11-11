@@ -14,7 +14,7 @@ public static class SinTests
 
     /// <summary>
     /// Tests the sine calculation for various common trigonometric angles 
-    /// using the default number of terms (now 15).
+    /// using the default number of terms (now 20).
     /// </summary>
     /// <param name="x">The angle in radians.</param>
     [TestCase(0.0)]
