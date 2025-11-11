@@ -40,7 +40,7 @@ public static class DoubleFactorial
             result = BigInteger.Multiply(result, current);
 
             // Decrease the current number by 2 for the next factor.
-            current = BigInteger.Subtract(current, new BigInteger(2));
+            current -= 2;
         }
 
         return result;
