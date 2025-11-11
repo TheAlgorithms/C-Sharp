@@ -59,14 +59,10 @@ public static class RabinKarp
         // Slide the pattern over text one by one
         for (int i = 0; i <= textLength - patternLength; i++)
         {
-            // Check if hash values match
-            if (patternHash == textHash)
+            // Check if hash values match and verify character by character
+            if (patternHash == textHash && VerifyMatch(text, pattern, i))
             {
-                // If hash values match, verify character by character
-                if (VerifyMatch(text, pattern, i))
-                {
-                    matches.Add(i);
-                }
+                matches.Add(i);
             }
 
             // Calculate hash for next window of text
