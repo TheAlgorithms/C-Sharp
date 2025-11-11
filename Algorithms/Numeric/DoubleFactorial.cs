@@ -37,7 +37,7 @@ public static class DoubleFactorial
 
         while (current > BigInteger.Zero)
         {
-            result = BigInteger.Multiply(result, current);
+            result *= current;
 
             // Decrease the current number by 2 for the next factor.
             current -= 2;
