@@ -35,7 +35,7 @@ public static class DoubleFactorial
         // This handles both odd (n, n-2, ..., 3, 1) and even (n, n-2, ..., 4, 2) cases naturally.
         BigInteger current = inputNum;
 
-        while (BigInteger.Compare(current, BigInteger.One) >= 0)
+        while (current > BigInteger.Zero)
         {
             result = BigInteger.Multiply(result, current);
 
