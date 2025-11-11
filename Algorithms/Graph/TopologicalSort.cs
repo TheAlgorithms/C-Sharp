@@ -134,7 +134,28 @@ public class TopologicalSort<T> where T : IComparable<T>
     public List<Vertex<T>> SortKahn(IDirectedWeightedGraph<T> graph)
     {
         // Calculate in-degree for each vertex.
-        // In-degree is the number of incoming edges to a vertex.
+        var inDegree = CalculateInDegrees(graph);
+
+        // Queue to process vertices with in-degree 0.
+        var queue = InitializeQueueWithZeroInDegreeVertices(inDegree);
+
+        // Process vertices in topological order.
+        var result = ProcessVerticesInTopologicalOrder(graph, inDegree, queue);
+
+        // Verify all vertices were processed (no cycles).
+        ValidateNoCycles(graph, result);
+
+        return result;
+    }
+
+    /// <summary>
+    ///     Calculates the in-degree for each vertex in the graph.
+    ///     In-degree is the number of incoming edges to a vertex.
+    /// </summary>
+    /// <param name="graph">The graph to analyze.</param>
+    /// <returns>Dictionary mapping each vertex to its in-degree.</returns>
+    private Dictionary<Vertex<T>, int> CalculateInDegrees(IDirectedWeightedGraph<T> graph)
+    {
         var inDegree = new Dictionary<Vertex<T>, int>();
 
         // Initialize in-degree for all vertices to 0.
@@ -151,26 +172,45 @@ public class TopologicalSort<T> where T : IComparable<T>
         for (int i = 0; i < graph.Count; i++)
         {
             var vertex = graph.Vertices[i];
-            if (vertex == null)
+            if (vertex != null)
             {
-                continue;
-            }
-
-            // For each neighbor, increment its in-degree.
-            foreach (var neighbor in graph.GetNeighbors(vertex))
-            {
-                if (neighbor != null)
-                {
-                    inDegree[neighbor]++;
-                }
+                IncrementNeighborInDegrees(graph, vertex, inDegree);
             }
         }
 
-        // Queue to process vertices with in-degree 0.
-        // These vertices have no dependencies and can be processed first.
+        return inDegree;
+    }
+
+    /// <summary>
+    ///     Increments the in-degree for all neighbors of a given vertex.
+    /// </summary>
+    /// <param name="graph">The graph containing the vertices.</param>
+    /// <param name="vertex">The vertex whose neighbors' in-degrees should be incremented.</param>
+    /// <param name="inDegree">Dictionary tracking in-degrees.</param>
+    private void IncrementNeighborInDegrees(
+        IDirectedWeightedGraph<T> graph,
+        Vertex<T> vertex,
+        Dictionary<Vertex<T>, int> inDegree)
+    {
+        foreach (var neighbor in graph.GetNeighbors(vertex))
+        {
+            if (neighbor != null)
+            {
+                inDegree[neighbor]++;
+            }
+        }
+    }
+
+    /// <summary>
+    ///     Initializes a queue with all vertices that have in-degree 0.
+    ///     These vertices have no dependencies and can be processed first.
+    /// </summary>
+    /// <param name="inDegree">Dictionary mapping vertices to their in-degrees.</param>
+    /// <returns>Queue containing all vertices with in-degree 0.</returns>
+    private Queue<Vertex<T>> InitializeQueueWithZeroInDegreeVertices(Dictionary<Vertex<T>, int> inDegree)
+    {
         var queue = new Queue<Vertex<T>>();
 
-        // Add all vertices with in-degree 0 to the queue.
         foreach (var kvp in inDegree)
         {
             if (kvp.Value == 0)
@@ -179,45 +219,78 @@ public class TopologicalSort<T> where T : IComparable<T>
             }
         }
 
-        // Result list to store the topological ordering.
+        return queue;
+    }
+
+    /// <summary>
+    ///     Processes vertices in topological order using Kahn's algorithm.
+    ///     Dequeues vertices with in-degree 0 and decreases in-degrees of their neighbors.
+    /// </summary>
+    /// <param name="graph">The graph being sorted.</param>
+    /// <param name="inDegree">Dictionary tracking in-degrees.</param>
+    /// <param name="queue">Queue of vertices with in-degree 0.</param>
+    /// <returns>List of vertices in topological order.</returns>
+    private List<Vertex<T>> ProcessVerticesInTopologicalOrder(
+        IDirectedWeightedGraph<T> graph,
+        Dictionary<Vertex<T>, int> inDegree,
+        Queue<Vertex<T>> queue)
+    {
         var result = new List<Vertex<T>>();
 
-        // Process vertices in topological order.
         while (queue.Count > 0)
         {
-            // Remove a vertex with in-degree 0.
             var vertex = queue.Dequeue();
             result.Add(vertex);
 
-            // For each neighbor, decrease its in-degree.
-            // This simulates "removing" the edge from vertex to neighbor.
-            foreach (var neighbor in graph.GetNeighbors(vertex))
-            {
-                if (neighbor == null)
-                {
-                    continue;
-                }
+            ProcessNeighbors(graph, vertex, inDegree, queue);
+        }
 
+        return result;
+    }
+
+    /// <summary>
+    ///     Processes neighbors of a vertex by decreasing their in-degrees.
+    ///     If a neighbor's in-degree becomes 0, it's added to the queue.
+    /// </summary>
+    /// <param name="graph">The graph being sorted.</param>
+    /// <param name="vertex">The vertex whose neighbors are being processed.</param>
+    /// <param name="inDegree">Dictionary tracking in-degrees.</param>
+    /// <param name="queue">Queue of vertices with in-degree 0.</param>
+    private void ProcessNeighbors(
+        IDirectedWeightedGraph<T> graph,
+        Vertex<T> vertex,
+        Dictionary<Vertex<T>, int> inDegree,
+        Queue<Vertex<T>> queue)
+    {
+        foreach (var neighbor in graph.GetNeighbors(vertex))
+        {
+            if (neighbor != null)
+            {
                 inDegree[neighbor]--;
 
-                // If in-degree becomes 0, the neighbor can now be processed.
                 if (inDegree[neighbor] == 0)
                 {
                     queue.Enqueue(neighbor);
                 }
             }
         }
+    }
 
-        // CYCLE DETECTION:
-        // If we haven't processed all vertices, there must be a cycle.
-        // Vertices in a cycle will never have in-degree 0 because they depend on each other.
+    /// <summary>
+    ///     Validates that all vertices were processed, ensuring no cycles exist.
+    /// </summary>
+    /// <param name="graph">The graph being sorted.</param>
+    /// <param name="result">The list of processed vertices.</param>
+    /// <exception cref="InvalidOperationException">
+    ///     Thrown when not all vertices were processed (cycle detected).
+    /// </exception>
+    private void ValidateNoCycles(IDirectedWeightedGraph<T> graph, List<Vertex<T>> result)
+    {
         if (result.Count != graph.Count)
         {
             throw new InvalidOperationException(
                 "Graph contains a cycle. Topological sort is only possible for Directed Acyclic Graphs (DAGs).");
         }
-
-        return result;
     }
 
     /// <summary>
