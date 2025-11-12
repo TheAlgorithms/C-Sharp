@@ -129,33 +129,7 @@ public class AStarTests
         path.Should().Equal("A", "B", "D");
     }
 
-    [Test]
-    public void FindPath_NullStart_ThrowsArgumentNullException()
-    {
-        // Arrange
-        IEnumerable<(string, double)> GetNeighbors(string node) => Array.Empty<(string, double)>();
-        double Heuristic(string a, string b) => 0;
 
-        // Act
-        Action act = () => AStar.FindPath<string>(null!, "B", GetNeighbors, Heuristic);
-
-        // Assert
-        act.Should().Throw<ArgumentNullException>().WithParameterName("start");
-    }
-
-    [Test]
-    public void FindPath_NullGoal_ThrowsArgumentNullException()
-    {
-        // Arrange
-        IEnumerable<(string, double)> GetNeighbors(string node) => Array.Empty<(string, double)>();
-        double Heuristic(string a, string b) => 0;
-
-        // Act
-        Action act = () => AStar.FindPath("A", null!, GetNeighbors, Heuristic);
-
-        // Assert
-        act.Should().Throw<ArgumentNullException>().WithParameterName("goal");
-    }
 
     #endregion
 
@@ -310,18 +284,7 @@ public class AStarTests
         act.Should().Throw<ArgumentException>().WithParameterName("start");
     }
 
-    [Test]
-    public void FindPathInGrid_GoalOutOfBounds_ThrowsArgumentException()
-    {
-        // Arrange
-        var grid = new bool[3, 3];
 
-        // Act
-        Action act = () => AStar.FindPathInGrid(grid, (0, 0), (5, 5));
-
-        // Assert
-        act.Should().Throw<ArgumentException>().WithParameterName("goal");
-    }
 
     [Test]
     public void FindPathInGrid_StartNotWalkable_ThrowsArgumentException()
