@@ -22,19 +22,9 @@ public static class AStar
     public static List<T>? FindPath<T>(
         T start,
         T goal,
-        Func<T, IEnumerable<(T node, double cost)>> getNeighbors,
+        Func<T, IEnumerable<(T Node, double Cost)>> getNeighbors,
         Func<T, T, double> heuristic) where T : notnull
     {
-        if (start == null)
-        {
-            throw new ArgumentNullException(nameof(start));
-        }
-
-        if (goal == null)
-        {
-            throw new ArgumentNullException(nameof(goal));
-        }
-
         if (getNeighbors == null)
         {
             throw new ArgumentNullException(nameof(getNeighbors));
@@ -87,10 +77,10 @@ public static class AStar
     /// <param name="goal">Goal position (row, col).</param>
     /// <param name="allowDiagonal">Whether diagonal movement is allowed.</param>
     /// <returns>List of positions representing the path, or null if no path exists.</returns>
-    public static List<(int row, int col)>? FindPathInGrid(
+    public static List<(int Row, int Col)>? FindPathInGrid(
         bool[,] grid,
-        (int row, int col) start,
-        (int row, int col) goal,
+        (int Row, int Col) start,
+        (int Row, int Col) goal,
         bool allowDiagonal = false)
     {
         if (grid == null)
@@ -101,77 +91,94 @@ public static class AStar
         int rows = grid.GetLength(0);
         int cols = grid.GetLength(1);
 
-        if (start.row < 0 || start.row >= rows || start.col < 0 || start.col >= cols)
+        ValidateGridPosition(grid, start, rows, cols, nameof(start));
+        ValidateGridPosition(grid, goal, rows, cols, nameof(goal));
+
+        IEnumerable<((int Row, int Col) Node, double Cost)> GetNeighbors((int Row, int Col) pos)
         {
-            throw new ArgumentException("Start position is out of bounds.", nameof(start));
+            return GetGridNeighbors(pos, rows, cols, grid, allowDiagonal);
         }
 
-        if (goal.row < 0 || goal.row >= rows || goal.col < 0 || goal.col >= cols)
+        double ManhattanDistance((int Row, int Col) a, (int Row, int Col) b)
         {
-            throw new ArgumentException("Goal position is out of bounds.", nameof(goal));
+            return Math.Abs(a.Row - b.Row) + Math.Abs(a.Col - b.Col);
         }
 
-        if (!grid[start.row, start.col])
+        double EuclideanDistance((int Row, int Col) a, (int Row, int Col) b)
         {
-            throw new ArgumentException("Start position is not walkable.", nameof(start));
-        }
-
-        if (!grid[goal.row, goal.col])
-        {
-            throw new ArgumentException("Goal position is not walkable.", nameof(goal));
-        }
-
-        IEnumerable<((int row, int col) node, double cost)> GetNeighbors((int row, int col) pos)
-        {
-            var neighbors = new List<((int row, int col), double)>();
-
-            // Cardinal directions (up, down, left, right)
-            var directions = new[]
-            {
-                (-1, 0), (1, 0), (0, -1), (0, 1),
-            };
-
-            // Add diagonal directions if allowed
-            if (allowDiagonal)
-            {
-                directions = directions.Concat(new[]
-                {
-                    (-1, -1), (-1, 1), (1, -1), (1, 1),
-                }).ToArray();
-            }
-
-            foreach (var (dr, dc) in directions)
-            {
-                int newRow = pos.row + dr;
-                int newCol = pos.col + dc;
-
-                if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols && grid[newRow, newCol])
-                {
-                    // Cost is sqrt(2) for diagonal, 1 for cardinal
-                    double cost = (dr != 0 && dc != 0) ? Math.Sqrt(2) : 1.0;
-                    neighbors.Add(((newRow, newCol), cost));
-                }
-            }
-
-            return neighbors;
-        }
-
-        double ManhattanDistance((int row, int col) a, (int row, int col) b)
-        {
-            return Math.Abs(a.row - b.row) + Math.Abs(a.col - b.col);
-        }
-
-        double EuclideanDistance((int row, int col) a, (int row, int col) b)
-        {
-            int dr = a.row - b.row;
-            int dc = a.col - b.col;
+            int dr = a.Row - b.Row;
+            int dc = a.Col - b.Col;
             return Math.Sqrt((dr * dr) + (dc * dc));
         }
 
-        // Use Euclidean distance for diagonal movement, Manhattan for cardinal only
-        var heuristic = allowDiagonal ? EuclideanDistance : ManhattanDistance;
+        Func<(int Row, int Col), (int Row, int Col), double> heuristic = allowDiagonal
+            ? EuclideanDistance
+            : ManhattanDistance;
 
         return FindPath(start, goal, GetNeighbors, heuristic);
+    }
+
+    private static void ValidateGridPosition(
+        bool[,] grid,
+        (int Row, int Col) position,
+        int rows,
+        int cols,
+        string paramName)
+    {
+        bool isOutOfBounds = position.Row < 0 || position.Row >= rows;
+        isOutOfBounds = isOutOfBounds || position.Col < 0 || position.Col >= cols;
+
+        if (isOutOfBounds)
+        {
+            throw new ArgumentException("Position is out of bounds.", paramName);
+        }
+
+        if (!grid[position.Row, position.Col])
+        {
+            throw new ArgumentException("Position is not walkable.", paramName);
+        }
+    }
+
+    private static IEnumerable<((int Row, int Col), double)> GetGridNeighbors(
+        (int Row, int Col) pos,
+        int rows,
+        int cols,
+        bool[,] grid,
+        bool allowDiagonal)
+    {
+        var neighbors = new List<((int Row, int Col), double)>();
+
+        var directions = new[]
+            {
+                (-1, 0), (1, 0), (0, -1), (0, 1),
+        };
+
+        if (allowDiagonal)
+        {
+            directions = directions.Concat(new[]
+                {
+                    (-1, -1), (-1, 1), (1, -1), (1, 1),
+            }).ToArray();
+        }
+
+        foreach (var (dr, dc) in directions)
+            {
+                int newRow = pos.Row + dr;
+                int newCol = pos.Col + dc;
+
+                bool isInBounds = newRow >= 0 && newRow < rows;
+                isInBounds = isInBounds && newCol >= 0 && newCol < cols;
+
+                if (isInBounds && grid[newRow, newCol])
+                {
+                    // Cost is sqrt(2) for diagonal, 1 for cardinal
+                    bool isDiagonal = dr != 0 && dc != 0;
+                    double cost = isDiagonal ? Math.Sqrt(2) : 1.0;
+                    neighbors.Add(((newRow, newCol), cost));
+            }
+        }
+
+        return neighbors;
     }
 
     /// <summary>
