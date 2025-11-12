@@ -135,6 +135,10 @@ public static class ArticulationPoints
                 // Back edge: update low value
                 state.Low[u] = Math.Min(state.Low[u], state.DiscoveryTime[v]);
             }
+            else
+            {
+                // Edge to parent: no action needed
+            }
         }
     }
 
