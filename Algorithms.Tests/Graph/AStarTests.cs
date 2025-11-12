@@ -200,7 +200,7 @@ public class AStarTests
         path.Should().NotBeNull();
         path.Should().NotContain((1, 1)); // Should avoid obstacle
         path!.First().Should().Be((0, 0));
-        path.Last().Should().Be((2, 2));
+        path!.Last().Should().Be((2, 2));
     }
 
     [Test]
@@ -284,7 +284,7 @@ public class AStarTests
         // Assert
         path.Should().NotBeNull();
         path!.First().Should().Be((0, 0));
-        path.Last().Should().Be((4, 4));
+        path!.Last().Should().Be((4, 4));
     }
 
     [Test]
