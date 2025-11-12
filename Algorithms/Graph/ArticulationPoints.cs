@@ -48,56 +48,19 @@ public static class ArticulationPoints
         {
             if (!visited.Contains(vertex))
             {
-                DFS(vertex, ref time, visited, discoveryTime, low, parent, articulationPoints, getNeighbors);
+                var state = new DfsState<T>
+                {
+                    Visited = visited,
+                    DiscoveryTime = discoveryTime,
+                    Low = low,
+                    Parent = parent,
+                    ArticulationPoints = articulationPoints,
+                };
+                Dfs(vertex, ref time, state, getNeighbors);
             }
         }
 
         return articulationPoints;
-    }
-
-    private static void DFS<T>(
-        T u,
-        ref int time,
-        HashSet<T> visited,
-        Dictionary<T, int> discoveryTime,
-        Dictionary<T, int> low,
-        Dictionary<T, T?> parent,
-        HashSet<T> articulationPoints,
-        Func<T, IEnumerable<T>> getNeighbors) where T : notnull
-    {
-        visited.Add(u);
-        discoveryTime[u] = time;
-        low[u] = time;
-        time++;
-
-        int children = 0;
-
-        foreach (var v in getNeighbors(u))
-        {
-            if (!visited.Contains(v))
-            {
-                children++;
-                parent[v] = u;
-                DFS(v, ref time, visited, discoveryTime, low, parent, articulationPoints, getNeighbors);
-
-                low[u] = Math.Min(low[u], low[v]);
-
-                // Check if u is an articulation point
-                if (!parent.ContainsKey(u) && children > 1)
-                {
-                    articulationPoints.Add(u);
-                }
-
-                if (parent.ContainsKey(u) && low[v] >= discoveryTime[u])
-                {
-                    articulationPoints.Add(u);
-                }
-            }
-            else if (!EqualityComparer<T>.Default.Equals(v, parent.GetValueOrDefault(u)))
-            {
-                low[u] = Math.Min(low[u], discoveryTime[v]);
-            }
-        }
     }
 
     /// <summary>
@@ -129,5 +92,63 @@ public static class ArticulationPoints
         Func<T, IEnumerable<T>> getNeighbors) where T : notnull
     {
         return Find(vertices, getNeighbors).Count;
+    }
+
+    private static void Dfs<T>(
+        T u,
+        ref int time,
+        DfsState<T> state,
+        Func<T, IEnumerable<T>> getNeighbors) where T : notnull
+    {
+        state.Visited.Add(u);
+        state.DiscoveryTime[u] = time;
+        state.Low[u] = time;
+        time++;
+
+        int children = 0;
+
+        foreach (var v in getNeighbors(u))
+        {
+            if (!state.Visited.Contains(v))
+            {
+                children++;
+                state.Parent[v] = u;
+                Dfs(v, ref time, state, getNeighbors);
+
+                state.Low[u] = Math.Min(state.Low[u], state.Low[v]);
+
+                // Check if u is an articulation point
+                bool isRoot = !state.Parent.ContainsKey(u);
+                if (isRoot && children > 1)
+                {
+                    state.ArticulationPoints.Add(u);
+                }
+
+                bool isNonRootArticulation = state.Parent.ContainsKey(u) && state.Low[v] >= state.DiscoveryTime[u];
+                if (isNonRootArticulation)
+                {
+                    state.ArticulationPoints.Add(u);
+                }
+            }
+            else if (!EqualityComparer<T>.Default.Equals(v, state.Parent.GetValueOrDefault(u)))
+            {
+                // Back edge: update low value
+                state.Low[u] = Math.Min(state.Low[u], state.DiscoveryTime[v]);
+            }
+        }
+    }
+
+    private sealed class DfsState<T>
+        where T : notnull
+    {
+        public required HashSet<T> Visited { get; init; }
+
+        public required Dictionary<T, int> DiscoveryTime { get; init; }
+
+        public required Dictionary<T, int> Low { get; init; }
+
+        public required Dictionary<T, T?> Parent { get; init; }
+
+        public required HashSet<T> ArticulationPoints { get; init; }
     }
 }
