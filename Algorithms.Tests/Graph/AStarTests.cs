@@ -129,7 +129,31 @@ public class AStarTests
         path.Should().Equal("A", "B", "D");
     }
 
+    [Test]
+    public void FindPath_NullGetNeighbors_ThrowsArgumentNullException()
+    {
+        // Arrange
+        double Heuristic(string a, string b) => 0;
 
+        // Act
+        Action act = () => AStar.FindPath("A", "B", null!, Heuristic);
+
+        // Assert
+        act.Should().Throw<ArgumentNullException>().WithParameterName("getNeighbors");
+    }
+
+    [Test]
+    public void FindPath_NullHeuristic_ThrowsArgumentNullException()
+    {
+        // Arrange
+        IEnumerable<(string, double)> GetNeighbors(string node) => Array.Empty<(string, double)>();
+
+        // Act
+        Action act = () => AStar.FindPath("A", "B", GetNeighbors, null!);
+
+        // Assert
+        act.Should().Throw<ArgumentNullException>().WithParameterName("heuristic");
+    }
 
     #endregion
 
