@@ -118,6 +118,30 @@ public static class AStar
         return FindPath(start, goal, GetNeighbors, heuristic);
     }
 
+    /// <summary>
+    /// Calculates the total cost of a path.
+    /// </summary>
+    /// <typeparam name="T">Type of node identifier.</typeparam>
+    /// <param name="path">The path to calculate cost for.</param>
+    /// <param name="getCost">Function to get the cost between two adjacent nodes.</param>
+    /// <returns>Total cost of the path.</returns>
+    public static double CalculatePathCost<T>(List<T> path, Func<T, T, double> getCost)
+        where T : notnull
+    {
+        if (path == null || path.Count < 2)
+        {
+            return 0;
+        }
+
+        double totalCost = 0;
+        for (int i = 0; i < path.Count - 1; i++)
+        {
+            totalCost += getCost(path[i], path[i + 1]);
+        }
+
+        return totalCost;
+    }
+
     private static void ValidateGridPosition(
         bool[,] grid,
         (int Row, int Col) position,
@@ -139,7 +163,7 @@ public static class AStar
         }
     }
 
-    private static IEnumerable<((int Row, int Col), double)> GetGridNeighbors(
+    private static IEnumerable<((int Row, int Col) Position, double Cost)> GetGridNeighbors(
         (int Row, int Col) pos,
         int rows,
         int cols,
@@ -149,59 +173,36 @@ public static class AStar
         var neighbors = new List<((int Row, int Col), double)>();
 
         var directions = new[]
-            {
-                (-1, 0), (1, 0), (0, -1), (0, 1),
+        {
+            (-1, 0), (1, 0), (0, -1), (0, 1),
         };
 
         if (allowDiagonal)
         {
             directions = directions.Concat(new[]
-                {
-                    (-1, -1), (-1, 1), (1, -1), (1, 1),
+            {
+                (-1, -1), (-1, 1), (1, -1), (1, 1),
             }).ToArray();
         }
 
         foreach (var (dr, dc) in directions)
+        {
+            int newRow = pos.Row + dr;
+            int newCol = pos.Col + dc;
+
+            bool isInBounds = newRow >= 0 && newRow < rows;
+            isInBounds = isInBounds && newCol >= 0 && newCol < cols;
+
+            if (isInBounds && grid[newRow, newCol])
             {
-                int newRow = pos.Row + dr;
-                int newCol = pos.Col + dc;
-
-                bool isInBounds = newRow >= 0 && newRow < rows;
-                isInBounds = isInBounds && newCol >= 0 && newCol < cols;
-
-                if (isInBounds && grid[newRow, newCol])
-                {
-                    // Cost is sqrt(2) for diagonal, 1 for cardinal
-                    bool isDiagonal = dr != 0 && dc != 0;
-                    double cost = isDiagonal ? Math.Sqrt(2) : 1.0;
-                    neighbors.Add(((newRow, newCol), cost));
+                // Cost is sqrt(2) for diagonal, 1 for cardinal
+                bool isDiagonal = dr != 0 && dc != 0;
+                double cost = isDiagonal ? Math.Sqrt(2) : 1.0;
+                neighbors.Add(((newRow, newCol), cost));
             }
         }
 
         return neighbors;
-    }
-
-    /// <summary>
-    /// Calculates the total cost of a path.
-    /// </summary>
-    /// <typeparam name="T">Type of node identifier.</typeparam>
-    /// <param name="path">The path to calculate cost for.</param>
-    /// <param name="getCost">Function to get the cost between two adjacent nodes.</param>
-    /// <returns>Total cost of the path.</returns>
-    public static double CalculatePathCost<T>(List<T> path, Func<T, T, double> getCost) where T : notnull
-    {
-        if (path == null || path.Count < 2)
-        {
-            return 0;
-        }
-
-        double totalCost = 0;
-        for (int i = 0; i < path.Count - 1; i++)
-        {
-            totalCost += getCost(path[i], path[i + 1]);
-        }
-
-        return totalCost;
     }
 
     private static List<T> ReconstructPath<T>(Dictionary<T, T> cameFrom, T current) where T : notnull
