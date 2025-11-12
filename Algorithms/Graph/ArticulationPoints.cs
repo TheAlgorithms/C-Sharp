@@ -138,17 +138,36 @@ public static class ArticulationPoints
         }
     }
 
+    /// <summary>
+    /// Encapsulates the state for DFS traversal in articulation point detection.
+    /// </summary>
+    /// <typeparam name="T">Type of vertex.</typeparam>
     private sealed class DfsState<T>
         where T : notnull
     {
+        /// <summary>
+        /// Gets set of visited vertices.
+        /// </summary>
         public required HashSet<T> Visited { get; init; }
 
+        /// <summary>
+        /// Gets discovery time for each vertex.
+        /// </summary>
         public required Dictionary<T, int> DiscoveryTime { get; init; }
 
+        /// <summary>
+        /// Gets lowest discovery time reachable from each vertex.
+        /// </summary>
         public required Dictionary<T, int> Low { get; init; }
 
+        /// <summary>
+        /// Gets parent vertex in DFS tree.
+        /// </summary>
         public required Dictionary<T, T?> Parent { get; init; }
 
+        /// <summary>
+        /// Gets set of detected articulation points.
+        /// </summary>
         public required HashSet<T> ArticulationPoints { get; init; }
     }
 }
