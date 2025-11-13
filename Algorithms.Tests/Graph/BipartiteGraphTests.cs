@@ -335,24 +335,11 @@ public class BipartiteGraphTests
         var vertices = Enumerable.Range(0, 100).ToArray();
         IEnumerable<int> GetNeighbors(int v)
         {
-            var neighbors = new List<int>();
-            if (v > 0)
+            var neighbors = new List<int>
             {
-                neighbors.Add(v - 1);
-            }
-            else
-            {
-                neighbors.Add(99); // Close the cycle
-            }
-
-            if (v < 99)
-            {
-                neighbors.Add(v + 1);
-            }
-            else
-            {
-                neighbors.Add(0); // Close the cycle
-            }
+                v > 0 ? v - 1 : 99, // Previous or close cycle
+                v < 99 ? v + 1 : 0, // Next or close cycle
+            };
 
             return neighbors;
         }
@@ -371,24 +358,11 @@ public class BipartiteGraphTests
         var vertices = Enumerable.Range(0, 101).ToArray();
         IEnumerable<int> GetNeighbors(int v)
         {
-            var neighbors = new List<int>();
-            if (v > 0)
+            var neighbors = new List<int>
             {
-                neighbors.Add(v - 1);
-            }
-            else
-            {
-                neighbors.Add(100);
-            }
-
-            if (v < 100)
-            {
-                neighbors.Add(v + 1);
-            }
-            else
-            {
-                neighbors.Add(0);
-            }
+                v > 0 ? v - 1 : 100, // Previous or close cycle
+                v < 100 ? v + 1 : 0, // Next or close cycle
+            };
 
             return neighbors;
         }
