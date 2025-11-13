@@ -288,6 +288,29 @@ public class BipartiteGraphTests
     }
 
     [Test]
+    public void GetPartitions_NullVertices_ThrowsArgumentNullException()
+    {
+        // Act
+        Action act = () => BipartiteGraph.GetPartitions<string>(null!, v => Array.Empty<string>());
+
+        // Assert
+        act.Should().Throw<ArgumentNullException>().WithParameterName("vertices");
+    }
+
+    [Test]
+    public void GetPartitions_NullGetNeighbors_ThrowsArgumentNullException()
+    {
+        // Arrange
+        var vertices = new[] { "A" };
+
+        // Act
+        Action act = () => BipartiteGraph.GetPartitions(vertices, null!);
+
+        // Assert
+        act.Should().Throw<ArgumentNullException>().WithParameterName("getNeighbors");
+    }
+
+    [Test]
     public void IsBipartiteDfs_BipartiteGraph_ReturnsTrue()
     {
         // Arrange: Square
@@ -326,6 +349,29 @@ public class BipartiteGraphTests
 
         // Assert
         result.Should().BeFalse();
+    }
+
+    [Test]
+    public void IsBipartiteDfs_NullVertices_ThrowsArgumentNullException()
+    {
+        // Act
+        Action act = () => BipartiteGraph.IsBipartiteDfs<string>(null!, v => Array.Empty<string>());
+
+        // Assert
+        act.Should().Throw<ArgumentNullException>().WithParameterName("vertices");
+    }
+
+    [Test]
+    public void IsBipartiteDfs_NullGetNeighbors_ThrowsArgumentNullException()
+    {
+        // Arrange
+        var vertices = new[] { "A" };
+
+        // Act
+        Action act = () => BipartiteGraph.IsBipartiteDfs(vertices, null!);
+
+        // Assert
+        act.Should().Throw<ArgumentNullException>().WithParameterName("getNeighbors");
     }
 
     [Test]
