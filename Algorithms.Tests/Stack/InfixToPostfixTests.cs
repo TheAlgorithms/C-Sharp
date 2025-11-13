@@ -1,57 +1,96 @@
 using Algorithms.Stack;
+using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Algorithms.Tests.Stack
 {
     [TestFixture]
     public class InfixToPostfixTests
     {
-        private static string Convert(string infixExpression) => InfixToPostfix.InfixToPostfixConversion(infixExpression);
-        private static int Evaluate(string postfixExpression) => InfixToPostfix.PostfixExpressionEvaluation(postfixExpression);
+        private static string Convert(string infixExpression) =>
+            InfixToPostfix.InfixToPostfixConversion(infixExpression);
+
+        private static int Evaluate(string postfixExpression) =>
+            InfixToPostfix.PostfixExpressionEvaluation(postfixExpression);
+
+        // ---------- Infix to Postfix Tests ---------- //
 
         [Test]
         public void InfixToPostfix_EmptyString_ThrowsArgumentException()
         {
-            //Arrange
-            var exp = string.Empty;
-
-            //Act & Assert
-            var ex = Assert.Throws<ArgumentException>(() => Convert(exp));
-            if (ex != null)
-            {
-                Assert.That(ex.Message, Is.EqualTo("The input infix expression cannot be null or empty."));
-            }
+            var ex = Assert.Throws<ArgumentException>(() => Convert(""));
+            Assert.That(ex!.Message, Is.EqualTo("Infix cannot be null or empty."));
         }
 
         [Test]
         public void InfixToPostfix_SimpleExpression_ReturnsCorrectPostfix()
         {
-            // Arrange
-            var expression = "A+B";
-
-            // Act
-            var result = Convert(expression);
-
-            // Assert
-            Assert.That(result, Is.EqualTo("AB+"));
+            Assert.That(Convert("A+B"), Is.EqualTo("AB+"));
         }
+
+        [Test]
+        public void InfixToPostfix_WithParentheses_ReturnsCorrectPostfix()
+        {
+            Assert.That(Convert("(A+B)*C"), Is.EqualTo("AB+C*"));
+        }
+
+        [Test]
+        public void InfixToPostfix_ComplexExpression_ReturnsCorrectPostfix()
+        {
+            Assert.That(Convert("A+(B*C-(D/E^F)*G)*H"), Is.EqualTo("ABC*DEF^/G*-H*+"));
+        }
+
+        [Test]
+        public void InfixToPostfix_InvalidCharacter_ThrowsArgumentException()
+        {
+            var ex = Assert.Throws<ArgumentException>(() => Convert("A+B#C"));
+            Assert.That(ex!.Message, Does.Contain("Invalid character"));
+        }
+
+        [Test]
+        public void InfixToPostfix_MismatchedParentheses_ThrowsInvalidOperation()
+        {
+            Assert.Throws<InvalidOperationException>(() => Convert("(A+B"));
+        }
+
+        // ---------- Postfix Evaluation Tests ---------- //
 
         [Test]
         public void PostfixEvaluation_ComplexExpression_ReturnsCorrectValue()
         {
-            // Arrange
-            var expression = "23*54*+";
-            // (2*3) + (5*4) = 6 + 20 = 26
+            Assert.That(Evaluate("23*54*+"), Is.EqualTo(26)); // (2*3)+(5*4)
+        }
 
-            // Act
-            var result = Evaluate(expression);
+        [Test]
+        public void PostfixEvaluation_EmptyString_ThrowsArgumentException()
+        {
+            var ex = Assert.Throws<ArgumentException>(() => Evaluate(""));
+            Assert.That(ex!.Message, Is.EqualTo("Postfix cannot be null or empty."));
+        }
 
-            // Assert
-            Assert.That(result, Is.EqualTo(26));
+        [Test]
+        public void PostfixEvaluation_DivideByZero_ThrowsException()
+        {
+            Assert.Throws<DivideByZeroException>(() => Evaluate("50/"));
+        }
+
+        [Test]
+        public void PostfixEvaluation_InsufficientOperands_ThrowsException()
+        {
+            Assert.Throws<InvalidOperationException>(() => Evaluate("2+"));
+        }
+
+        [Test]
+        public void PostfixEvaluation_InvalidCharacter_ThrowsException()
+        {
+            var ex = Assert.Throws<InvalidOperationException>(() => Evaluate("23*X"));
+            Assert.That(ex!.Message, Does.Contain("Invalid character"));
+        }
+
+        [Test]
+        public void PostfixEvaluation_LeftoverOperands_ThrowsException()
+        {
+            Assert.Throws<InvalidOperationException>(() => Evaluate("23"));
         }
     }
 }

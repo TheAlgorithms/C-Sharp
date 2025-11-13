@@ -6,7 +6,7 @@ namespace Algorithms.Stack
     /// The Code focuses on Converting an Infix Expression to a Postfix Expression and Evaluates the value for the expression.
     /// @author Aalok Choudhari. <a href="https://github.com/kaloa2025">kaloa2025</a>
     /// </summary>
-    public class InfixToPostfix
+    public static class InfixToPostfix
     {
         /// <summary>
         /// <param name="initialInfixExpression"> Infix Expression String to Convert.</param>
@@ -18,10 +18,7 @@ namespace Algorithms.Stack
         /// </summary>
         public static string InfixToPostfixConversion(string initialInfixExpression)
         {
-            if (string.IsNullOrEmpty(initialInfixExpression))
-            {
-                throw new ArgumentException("The input infix expression cannot be null or empty.");
-            }
+            ValidateInfix(initialInfixExpression);
 
             Stack<char> stack = new Stack<char>();
             StringBuilder postfixExpression = new StringBuilder();
@@ -38,49 +35,10 @@ namespace Algorithms.Stack
                     throw new ArgumentException($"Invalid character {c}.");
                 }
 
-                if (IsOperand(c))
-                {
-                    postfixExpression.Append(c);
-                }
-                else if (c == '(')
-                {
-                    stack.Push(c);
-                }
-                else if (c == ')')
-                {
-                    while(stack.Count > 0 && stack.Peek() != '(')
-                    {
-                        postfixExpression.Append(stack.Pop());
-                    }
-
-                    if(stack.Count == 0)
-                    {
-                        throw new InvalidOperationException("Mismatched parentheses in expression.");
-                    }
-
-                    stack.Pop();
-                }
-                else
-                {
-                    while(stack.Count > 0 && stack.Peek() != '(' && Precedence(stack.Peek()) >= Precedence(c))
-                    {
-                        postfixExpression.Append(stack.Pop());
-                    }
-
-                    stack.Push(c);
-                }
+                ProcessInfixCharacter(c, stack, postfixExpression);
             }
 
-            while (stack.Count > 0)
-            {
-                if(stack.Peek() == '(' || stack.Peek() == ')')
-                {
-                    throw new InvalidOperationException("Mismatched Parentheses in expression.");
-                }
-
-                postfixExpression.Append(stack.Pop());
-            }
-
+            EmptyRemainingStack(stack, postfixExpression);
             return postfixExpression.ToString();
         }
 
@@ -96,10 +54,7 @@ namespace Algorithms.Stack
         /// </summary>
         public static int PostfixExpressionEvaluation(string postfixExpression)
         {
-            if (string.IsNullOrEmpty(postfixExpression))
-            {
-                throw new ArgumentException("The input postfix expression cannot be null or empty.");
-            }
+            ValidatePostfix(postfixExpression);
 
             Stack<int> stack = new Stack<int>();
             foreach (char ch in postfixExpression)
@@ -112,38 +67,16 @@ namespace Algorithms.Stack
                 if(char.IsDigit(ch))
                 {
                     stack.Push(ch - '0');
+                    continue;
                 }
-                else if (IsOperator(ch))
+
+                if (IsOperator(ch))
                 {
-                    if(stack.Count < 2)
-                    {
-                        throw new InvalidOperationException("Invalid Postfix Expression: Insufficient Operands");
-                    }
-
-                    int b = stack.Pop();
-                    int a = stack.Pop();
-
-                    if(ch == '/' && b == 0)
-                    {
-                        throw new DivideByZeroException("Cannot divide by zero");
-                    }
-
-                    int result = ch switch
-                    {
-                        '+' => a + b,
-                        '-' => a - b,
-                        '*' => a * b,
-                        '/' => a / b,
-                        '^' => (int)Math.Pow(a, b),
-                        _ => throw new InvalidOperationException("Unknown operator."),
-                    };
-
-                    stack.Push(result);
+                    EvaluateOperator(stack, ch);
+                    continue;
                 }
-                else
-                {
-                    throw new InvalidOperationException($"Invalid character in expression: {ch}");
-                }
+
+                throw new InvalidOperationException($"Invalid character in expression: {ch}");
             }
 
             if (stack.Count != 1)
@@ -152,6 +85,111 @@ namespace Algorithms.Stack
             }
 
             return stack.Pop();
+        }
+
+        private static void ProcessInfixCharacter(char c, Stack<char> stack, StringBuilder postfixExpression)
+        {
+            if (IsOperand(c))
+            {
+                postfixExpression.Append(c);
+                return;
+            }
+
+            if (c == '(')
+            {
+                stack.Push(c);
+                return;
+            }
+
+            if (c == ')')
+            {
+                ProcessClosingParenthesis(stack, postfixExpression);
+                return;
+            }
+
+            ProcessOperator(c, stack, postfixExpression);
+        }
+
+        private static void ProcessClosingParenthesis(Stack<char> stack, StringBuilder postfixExpression)
+        {
+            while (stack.Count > 0 && stack.Peek() != '(')
+            {
+                postfixExpression.Append(stack.Pop());
+            }
+
+            if (stack.Count == 0)
+            {
+                throw new InvalidOperationException("Mismatched parentheses in expression.");
+            }
+
+            stack.Pop();
+        }
+
+        private static void ProcessOperator(char c, Stack<char> stack, StringBuilder postfixExpression)
+        {
+            while (stack.Count > 0 && stack.Peek() != '(' && Precedence(stack.Peek()) >= Precedence(c))
+            {
+                postfixExpression.Append(stack.Pop());
+            }
+
+            stack.Push(c);
+        }
+
+        private static void EmptyRemainingStack(Stack<char> stack, StringBuilder postfix)
+        {
+            while (stack.Count > 0)
+            {
+                if (stack.Peek() is '(' or ')')
+                {
+                    throw new InvalidOperationException("Mismatched parentheses.");
+                }
+
+                postfix.Append(stack.Pop());
+            }
+        }
+
+        private static void EvaluateOperator(Stack<int> stack, char op)
+        {
+            if (stack.Count < 2)
+            {
+                throw new InvalidOperationException("Insufficient operands");
+            }
+
+            int b = stack.Pop();
+            int a = stack.Pop();
+
+            if (op == '/' && b == 0)
+            {
+                throw new DivideByZeroException("Cannot divide by zero");
+            }
+
+            int result = op switch
+            {
+                '+' => a + b,
+                '-' => a - b,
+                '*' => a * b,
+                '/' => a / b,
+                '^' => (int)Math.Pow(a, b),
+                _ => throw new InvalidOperationException($"Unknown operator {op}"),
+            };
+
+            stack.Push(result);
+        }
+
+        private static void ValidateInfix(string expr)
+        {
+            if (string.IsNullOrEmpty(expr))
+            {
+                throw new ArgumentException("Infix cannot be null or empty.");
+            }
+        }
+
+        private static void ValidatePostfix(string expr)
+        {
+            if (string.IsNullOrEmpty(expr))
+            {
+                throw new ArgumentException("Postfix cannot be null or empty.");
+            }
         }
 
         /// <summary>
