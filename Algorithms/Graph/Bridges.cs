@@ -164,6 +164,6 @@ public static class Bridges
         /// <summary>
         /// Gets set of detected bridges.
         /// </summary>
-        public required HashSet<(T, T)> Bridges { get; init; }
+        public required HashSet<(T From, T To)> Bridges { get; init; }
     }
 }
