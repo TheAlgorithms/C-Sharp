@@ -219,17 +219,17 @@ namespace Algorithms.Stack
 
         /// <summary>
         /// Checks for character if its an Operand.
-        /// <param name="isOperand"> Character asked to verify whether its an operand.</param>
+        /// <param name="ch"> Character asked to verify whether its an operand.</param>
         /// <returns>True if its a digit or a Letter.</returns>
         /// </summary>
-        private static bool IsOperand(char isOperand) => char.IsLetterOrDigit(isOperand);
+        private static bool IsOperand(char ch) => char.IsLetterOrDigit(ch);
 
         /// <summary>
         /// Checks Operator.
-        /// <param name="isOperator"> Character asked to verify whether its an operator.</param>
+        /// <param name="ch"> Character asked to verify whether its an operator.</param>
         /// <returns>True if its allowded operator character.</returns>
         /// </summary>
-        private static bool IsOperator(char isOperator) => isOperator == '+' || isOperator == '-' || isOperator == '*' || isOperator == '/' || isOperator == '^';
+        private static bool IsOperator(char ch) => ch is '+' or '-' or '*' or '/' or '^';
 
         /// <summary>
         /// Checks Valid Character.
