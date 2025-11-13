@@ -224,12 +224,14 @@ namespace Algorithms.Stack
         /// </summary>
         private static bool IsOperand(char ch) => char.IsLetterOrDigit(ch);
 
+        private static readonly HashSet<char> Operators = new() { '+', '-', '*', '/', '^' };
+
         /// <summary>
         /// Checks Operator.
         /// <param name="ch"> Character asked to verify whether its an operator.</param>
         /// <returns>True if its allowded operator character.</returns>
         /// </summary>
-        private static bool IsOperator(char ch) => ch is '+' or '-' or '*' or '/' or '^';
+        private static bool IsOperator(char ch) => Operators.Contains(ch);
 
         /// <summary>
         /// Checks Valid Character.
