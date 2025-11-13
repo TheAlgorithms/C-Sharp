@@ -236,6 +236,12 @@ namespace Algorithms.Stack
         /// <param name="c"> Character asked to verify whether its an valid Character for expression.</param>
         /// <returns>True if its allowded character.</returns>
         /// </summary>
-        private static bool IsValidCharacter(char c) => IsOperand(c) || IsOperator(c) || c == '(' || c == ')';
+        private static bool IsValidCharacter(char c) => c switch
+        {
+            '(' or ')' => true,
+            _ when IsOperand(c) => true,
+            _ when IsOperator(c) => true,
+            _ => false,
+        };
     }
 }
