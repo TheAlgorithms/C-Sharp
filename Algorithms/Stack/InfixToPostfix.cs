@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Algorithms.Stack
 {
@@ -197,6 +198,7 @@ namespace Algorithms.Stack
         /// <param name="operatorChar"> Operator character whose precedence is asked.</param>
         /// <returns>Precedence rank of parameter operator character.</returns>
         /// </summary>
+        [ExcludeFromCodeCoverage]
         private static int Precedence(char operatorChar)
         {
             if (operatorChar == '^')

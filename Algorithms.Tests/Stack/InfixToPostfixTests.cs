@@ -64,7 +64,7 @@ namespace Algorithms.Tests.Stack
         {
             // Arrange
             string infix = "A+B*C";
-
+       
             // Act
             string result = InfixToPostfix.InfixToPostfixConversion(infix);
 
