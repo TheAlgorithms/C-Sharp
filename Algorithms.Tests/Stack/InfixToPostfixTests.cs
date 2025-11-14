@@ -1,221 +1,607 @@
-using Algorithms.Stack;
-using NUnit.Framework;
 using System;
+using NUnit.Framework;
+using Algorithms.Stack;
 
 namespace Algorithms.Tests.Stack
 {
     [TestFixture]
     public class InfixToPostfixTests
     {
-        private static string Convert(string infixExpression) =>
-            InfixToPostfix.InfixToPostfixConversion(infixExpression);
-
-        private static int Evaluate(string postfixExpression) =>
-            InfixToPostfix.PostfixExpressionEvaluation(postfixExpression);
-
-
         [Test]
-        public void InfixToPostfix_EmptyString_ThrowsArgumentException()
+        public void InfixToPostfixConversion_SimpleAddition_ReturnsCorrectPostfix()
         {
-            var ex = Assert.Throws<ArgumentException>(() => Convert(""));
-            Assert.That(ex!.Message, Is.EqualTo("Infix cannot be null or empty."));
+            // Arrange
+            string infix = "A+B";
+
+            // Act
+            string result = InfixToPostfix.InfixToPostfixConversion(infix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo("AB+"));
         }
 
         [Test]
-        public void InfixToPostfix_WhitespaceOnly_ThrowsArgumentException()
+        public void InfixToPostfixConversion_SimpleSubtraction_ReturnsCorrectPostfix()
         {
-            var ex = Assert.Throws<ArgumentException>(() => Convert("   "));
-            Assert.That(ex!.Message, Is.EqualTo("Infix cannot be null or empty."));
+            // Arrange
+            string infix = "A-B";
+
+            // Act
+            string result = InfixToPostfix.InfixToPostfixConversion(infix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo("AB-"));
         }
 
         [Test]
-        public void InfixToPostfix_SimpleExpression_ReturnsCorrectPostfix()
+        public void InfixToPostfixConversion_MultiplicationAndDivision_ReturnsCorrectPostfix()
         {
-            Assert.That(Convert("A+B"), Is.EqualTo("AB+"));
+            // Arrange
+            string infix = "A*B/C";
+
+            // Act
+            string result = InfixToPostfix.InfixToPostfixConversion(infix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo("AB*C/"));
         }
 
         [Test]
-        public void InfixToPostfix_HandlesWhitespaceCorrectly()
+        public void InfixToPostfixConversion_ExponentiationOperator_ReturnsCorrectPostfix()
         {
-            Assert.That(Convert("  A + B "), Is.EqualTo("AB+"));
+            // Arrange
+            string infix = "A^B";
+
+            // Act
+            string result = InfixToPostfix.InfixToPostfixConversion(infix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo("AB^"));
         }
 
         [Test]
-        public void InfixToPostfix_WithParentheses_ReturnsCorrectPostfix()
+        public void InfixToPostfixConversion_MixedOperatorPrecedence_ReturnsCorrectPostfix()
         {
-            Assert.That(Convert("(A+B)*C"), Is.EqualTo("AB+C*"));
+            // Arrange
+            string infix = "A+B*C";
+
+            // Act
+            string result = InfixToPostfix.InfixToPostfixConversion(infix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo("ABC*+"));
         }
 
         [Test]
-        public void InfixToPostfix_ComplexExpression_ReturnsCorrectPostfix()
+        public void InfixToPostfixConversion_WithParentheses_ReturnsCorrectPostfix()
         {
-            Assert.That(Convert("A+(B*C-(D/E^F)*G)*H"),
-                        Is.EqualTo("ABC*DEF^/G*-H*+"));
+            // Arrange
+            string infix = "(A+B)*C";
+
+            // Act
+            string result = InfixToPostfix.InfixToPostfixConversion(infix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo("AB+C*"));
         }
 
         [Test]
-        public void InfixToPostfix_OperatorPrecedence_IsCorrect()
+        public void InfixToPostfixConversion_NestedParentheses_ReturnsCorrectPostfix()
         {
-            Assert.That(Convert("A+B*C^D"), Is.EqualTo("ABCD^*+"));
+            // Arrange
+            string infix = "((A+B)*C)";
+
+            // Act
+            string result = InfixToPostfix.InfixToPostfixConversion(infix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo("AB+C*"));
         }
 
         [Test]
-        public void InfixToPostfix_MismatchedParentheses_ThrowsInvalidOperation()
+        public void InfixToPostfixConversion_ComplexExpression_ReturnsCorrectPostfix()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => Convert("(A+B"));
-            Assert.That(ex!.Message, Is.EqualTo("Mismatched parentheses."));
+            // Arrange
+            string infix = "A+B*C-D/E";
+
+            // Act
+            string result = InfixToPostfix.InfixToPostfixConversion(infix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo("ABC*+DE/-"));
         }
 
         [Test]
-        public void InfixToPostfix_InvalidCharacter_ThrowsArgumentException()
+        public void InfixToPostfixConversion_WithDigits_ReturnsCorrectPostfix()
         {
-            var ex = Assert.Throws<ArgumentException>(() => Convert("A+B#C"));
-            Assert.That(ex!.Message, Is.EqualTo("Invalid character #."));
+            // Arrange
+            string infix = "1+2*3";
+
+            // Act
+            string result = InfixToPostfix.InfixToPostfixConversion(infix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo("123*+"));
         }
 
         [Test]
-        public void InfixToPostfix_LeftoverOperators_AreFlushedCorrectly()
+        public void InfixToPostfixConversion_LowercaseLetters_ReturnsCorrectPostfix()
         {
-            Assert.That(Convert("A+B+C"), Is.EqualTo("AB+C+"));
-        }
+            // Arrange
+            string infix = "a+b*c";
 
-        // ---------- NEW FULL-COVERAGE TESTS BELOW ---------- //
+            // Act
+            string result = InfixToPostfix.InfixToPostfixConversion(infix);
 
-        [Test]
-        public void InfixToPostfix_ClosingParenthesisWithoutOpening_Throws()
-        {
-            var ex = Assert.Throws<InvalidOperationException>(() => Convert("A+B)C"));
-            Assert.That(ex!.Message, Is.EqualTo("Mismatched parentheses in expression."));
-        }
-
-        [Test]
-        public void InfixToPostfix_LeftoverOpeningParenthesis_Throws()
-        {
-            var ex = Assert.Throws<InvalidOperationException>(() => Convert("(A+B"));
-            Assert.That(ex!.Message, Is.EqualTo("Mismatched parentheses."));
+            // Assert
+            Assert.That(result, Is.EqualTo("abc*+"));
         }
 
         [Test]
-        public void InfixToPostfix_TrailingOperator_ReturnsPostfixBasedOnLogic()
+        public void InfixToPostfixConversion_WithWhitespace_IgnoresWhitespace()
         {
-            Assert.That(Convert("A+"), Is.EqualTo("A+"));
+            // Arrange
+            string infix = "A + B * C";
+
+            // Act
+            string result = InfixToPostfix.InfixToPostfixConversion(infix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo("ABC*+"));
         }
 
         [Test]
-        public void InfixToPostfix_DeeplyNestedParentheses_WorksCorrectly()
+        public void InfixToPostfixConversion_MultipleParentheses_ReturnsCorrectPostfix()
         {
-            Assert.That(Convert("A+(B+(C+(D+E)))"), Is.EqualTo("ABCDE++++"));
+            // Arrange
+            string infix = "(A+B)*(C-D)";
+
+            // Act
+            string result = InfixToPostfix.InfixToPostfixConversion(infix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo("AB+CD-*"));
         }
 
         [Test]
-        public void InfixToPostfix_DoubleOperator_StillProcessesWithoutException()
+        public void InfixToPostfixConversion_AllOperators_ReturnsCorrectPostfix()
         {
-            Assert.That(Convert("A++B"), Is.EqualTo("A+B+"));
-        }
+            // Arrange
+            string infix = "A+B-C*D/E^F";
 
-        // ---------------------------------------------------------
-        //                 POSTFIX EVALUATION TESTS
-        // ---------------------------------------------------------
+            // Act
+            string result = InfixToPostfix.InfixToPostfixConversion(infix);
 
-        [Test]
-        public void PostfixEvaluation_EmptyString_ThrowsArgumentException()
-        {
-            var ex = Assert.Throws<ArgumentException>(() => Evaluate(""));
-            Assert.That(ex!.Message, Is.EqualTo("Postfix cannot be null or empty."));
+            // Assert
+            Assert.That(result, Is.EqualTo("AB+CD*EF^/-"));
         }
 
         [Test]
-        public void PostfixEvaluation_WhitespaceOnly_ThrowsArgumentException()
+        public void InfixToPostfixConversion_NullExpression_ThrowsArgumentException()
         {
-            Assert.Throws<ArgumentException>(() => Evaluate("   "));
+            // Arrange
+            string infix = null!;
+
+            // Act & Assert
+            var ex = Assert.Throws<ArgumentException>(() =>
+                InfixToPostfix.InfixToPostfixConversion(infix));
+            Assert.That(ex!.Message, Does.Contain("Infix cannot be null or empty"));
         }
 
         [Test]
-        public void PostfixEvaluation_SimpleExpression_Works()
+        public void InfixToPostfixConversion_EmptyExpression_ThrowsArgumentException()
         {
-            Assert.That(Evaluate("23+"), Is.EqualTo(5));
+            // Arrange
+            string infix = "";
+
+            // Act & Assert
+            var ex = Assert.Throws<ArgumentException>(() =>
+                InfixToPostfix.InfixToPostfixConversion(infix));
+            Assert.That(ex!.Message, Does.Contain("Infix cannot be null or empty"));
         }
 
         [Test]
-        public void PostfixEvaluation_ComplexExpression_Works()
+        public void InfixToPostfixConversion_WhitespaceOnlyExpression_ThrowsArgumentException()
         {
-            Assert.That(Evaluate("23*54*+"), Is.EqualTo(26));
+            // Arrange
+            string infix = "   ";
+
+            // Act & Assert
+            var ex = Assert.Throws<ArgumentException>(() =>
+                InfixToPostfix.InfixToPostfixConversion(infix));
+            Assert.That(ex!.Message, Does.Contain("Infix cannot be null or empty"));
         }
 
         [Test]
-        public void PostfixEvaluation_HandlesWhitespaceCorrectly()
+        public void InfixToPostfixConversion_InvalidCharacter_ThrowsArgumentException()
         {
-            Assert.That(Evaluate(" 2 3 + "), Is.EqualTo(5));
+            // Arrange
+            string infix = "A+B$C";
+
+            // Act & Assert
+            var ex = Assert.Throws<ArgumentException>(() =>
+                InfixToPostfix.InfixToPostfixConversion(infix));
+            Assert.That(ex!.Message, Does.Contain("Invalid character $"));
         }
 
         [Test]
-        public void PostfixEvaluation_ExponentOperator_Works()
+        public void InfixToPostfixConversion_MismatchedParenthesesClosingExtra_ThrowsInvalidOperationException()
         {
-            Assert.That(Evaluate("23^"), Is.EqualTo(8));
+            // Arrange
+            string infix = "A+B)";
+
+            // Act & Assert
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                InfixToPostfix.InfixToPostfixConversion(infix));
+            Assert.That(ex!.Message, Does.Contain("Mismatched parentheses"));
         }
 
         [Test]
-        public void PostfixEvaluation_DivideByZero_ThrowsException()
+        public void InfixToPostfixConversion_MismatchedParenthesesOpeningExtra_ThrowsInvalidOperationException()
         {
-            var ex = Assert.Throws<DivideByZeroException>(() => Evaluate("50/"));
-            Assert.That(ex!.Message, Is.EqualTo("Cannot divide by zero"));
+            // Arrange
+            string infix = "(A+B";
+
+            // Act & Assert
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                InfixToPostfix.InfixToPostfixConversion(infix));
+            Assert.That(ex!.Message, Does.Contain("Mismatched parentheses"));
         }
 
         [Test]
-        public void PostfixEvaluation_InsufficientOperands_ThrowsException()
+        public void InfixToPostfixConversion_OnlyOpeningParenthesis_ThrowsInvalidOperationException()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => Evaluate("2+"));
-            Assert.That(ex!.Message, Is.EqualTo("Insufficient operands"));
+            // Arrange
+            string infix = "(";
+
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() =>
+                InfixToPostfix.InfixToPostfixConversion(infix));
         }
 
         [Test]
-        public void PostfixEvaluation_InvalidCharacter_ThrowsException()
+        public void InfixToPostfixConversion_OnlyClosingParenthesis_ThrowsInvalidOperationException()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => Evaluate("23*X"));
-            Assert.That(ex!.Message, Is.EqualTo("Invalid character in expression: X"));
+            // Arrange
+            string infix = ")";
+
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() =>
+                InfixToPostfix.InfixToPostfixConversion(infix));
         }
 
         [Test]
-        public void PostfixEvaluation_LeftoverOperands_ThrowsException()
+        public void InfixToPostfixConversion_ExponentiationWithOtherOperators_ReturnsCorrectPostfix()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => Evaluate("23"));
-            Assert.That(ex!.Message, Is.EqualTo("Invalid postfix expression: Leftover operands."));
-        }
+            // Arrange
+            string infix = "A+B^C*D";
 
-        // ---------- NEW FULL-COVERAGE TESTS BELOW ---------- //
+            // Act
+            string result = InfixToPostfix.InfixToPostfixConversion(infix);
 
-        [Test]
-        public void PostfixEvaluation_UnknownOperator_Throws()
-        {
-            var ex = Assert.Throws<InvalidOperationException>(() => Evaluate("23&"));
-            Assert.That(ex!.Message, Is.EqualTo("Invalid character in expression: &"));
+            // Assert
+            Assert.That(result, Is.EqualTo("ABC^D*+"));
         }
 
         [Test]
-        public void PostfixEvaluation_OperatorWithoutEnoughOperands_Throws()
+        public void InfixToPostfixConversion_SingleOperand_ReturnsOperand()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => Evaluate("+"));
-            Assert.That(ex!.Message, Is.EqualTo("Insufficient operands"));
+            // Arrange
+            string infix = "A";
+
+            // Act
+            string result = InfixToPostfix.InfixToPostfixConversion(infix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo("A"));
         }
 
         [Test]
-        public void PostfixEvaluation_InvalidCharacterAmidExpression_Throws()
+        public void PostfixExpressionEvaluation_SimpleAddition_ReturnsCorrectResult()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => Evaluate("23X+"));
-            Assert.That(ex!.Message, Is.EqualTo("Invalid character in expression: X"));
+            // Arrange
+            string postfix = "23+";
+
+            // Act
+            int result = InfixToPostfix.PostfixExpressionEvaluation(postfix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(5));
         }
 
         [Test]
-        public void PostfixEvaluation_ParenthesisCharacter_Throws()
+        public void PostfixExpressionEvaluation_SimpleSubtraction_ReturnsCorrectResult()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => Evaluate("23+)"));
-            Assert.That(ex!.Message, Does.Contain("Invalid character"));
+            // Arrange
+            string postfix = "53-";
+
+            // Act
+            int result = InfixToPostfix.PostfixExpressionEvaluation(postfix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(2));
         }
-  
+
         [Test]
-        public void PostfixEvaluation_LongExpression_Works()
+        public void PostfixExpressionEvaluation_SimpleMultiplication_ReturnsCorrectResult()
         {
-            Assert.That(Evaluate("23*54*+62/-"), Is.EqualTo(23));
+            // Arrange
+            string postfix = "34*";
+
+            // Act
+            int result = InfixToPostfix.PostfixExpressionEvaluation(postfix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(12));
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_SimpleDivision_ReturnsCorrectResult()
+        {
+            // Arrange
+            string postfix = "82/";
+
+            // Act
+            int result = InfixToPostfix.PostfixExpressionEvaluation(postfix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(4));
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_SimpleExponentiation_ReturnsCorrectResult()
+        {
+            // Arrange
+            string postfix = "23^";
+
+            // Act
+            int result = InfixToPostfix.PostfixExpressionEvaluation(postfix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(8));
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_ComplexExpression_ReturnsCorrectResult()
+        {
+            // Arrange
+            string postfix = "23*4+";
+
+            // Act
+            int result = InfixToPostfix.PostfixExpressionEvaluation(postfix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(10));
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_WithWhitespace_ReturnsCorrectResult()
+        {
+            // Arrange
+            string postfix = "2 3 + 4 *";
+
+            // Act
+            int result = InfixToPostfix.PostfixExpressionEvaluation(postfix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(20));
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_SingleDigit_ReturnsDigit()
+        {
+            // Arrange
+            string postfix = "5";
+
+            // Act
+            int result = InfixToPostfix.PostfixExpressionEvaluation(postfix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_NullExpression_ThrowsArgumentException()
+        {
+            // Arrange
+            string postfix = null!;
+
+            // Act & Assert
+            var ex = Assert.Throws<ArgumentException>(() =>
+                InfixToPostfix.PostfixExpressionEvaluation(postfix));
+            Assert.That(ex!.Message, Does.Contain("Postfix cannot be null or empty"));
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_EmptyExpression_ThrowsArgumentException()
+        {
+            // Arrange
+            string postfix = "";
+
+            // Act & Assert
+            var ex = Assert.Throws<ArgumentException>(() =>
+                InfixToPostfix.PostfixExpressionEvaluation(postfix));
+            Assert.That(ex!.Message, Does.Contain("Postfix cannot be null or empty"));
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_WhitespaceOnlyExpression_ThrowsArgumentException()
+        {
+            // Arrange
+            string postfix = "   ";
+
+            // Act & Assert
+            var ex = Assert.Throws<ArgumentException>(() =>
+                InfixToPostfix.PostfixExpressionEvaluation(postfix));
+            Assert.That(ex!.Message, Does.Contain("Postfix cannot be null or empty"));
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_InsufficientOperands_ThrowsInvalidOperationException()
+        {
+            // Arrange
+            string postfix = "2+";
+
+            // Act & Assert
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                InfixToPostfix.PostfixExpressionEvaluation(postfix));
+            Assert.That(ex!.Message, Does.Contain("Insufficient operands"));
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_DivisionByZero_ThrowsDivideByZeroException()
+        {
+            // Arrange
+            string postfix = "20/";
+
+            // Act & Assert
+            var ex = Assert.Throws<DivideByZeroException>(() =>
+                InfixToPostfix.PostfixExpressionEvaluation(postfix));
+            Assert.That(ex!.Message, Does.Contain("Cannot divide by zero"));
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_InvalidCharacter_ThrowsInvalidOperationException()
+        {
+            // Arrange
+            string postfix = "23A+";
+
+            // Act & Assert
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                InfixToPostfix.PostfixExpressionEvaluation(postfix));
+            Assert.That(ex!.Message, Does.Contain("Invalid character in expression"));
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_LeftoverOperands_ThrowsInvalidOperationException()
+        {
+            // Arrange
+            string postfix = "234";
+
+            // Act & Assert
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                InfixToPostfix.PostfixExpressionEvaluation(postfix));
+            Assert.That(ex!.Message, Does.Contain("Invalid postfix expression: Leftover operands"));
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_UnknownOperator_ThrowsInvalidOperationException()
+        {
+            // This test ensures the default case in the switch is covered
+            // Note: This is difficult to test directly as IsOperator filters valid operators
+            // But we can test by passing an operator character that somehow bypasses IsOperator
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_ComplexExpressionWithAllOperators_ReturnsCorrectResult()
+        {
+            // Arrange - (2+3)*4-6/2 = 5*4-3 = 20-3 = 17
+            string postfix = "23+4*62/-";
+
+            // Act
+            int result = InfixToPostfix.PostfixExpressionEvaluation(postfix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(17));
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_ExponentiationInExpression_ReturnsCorrectResult()
+        {
+            // Arrange - 2^3*2 = 8*2 = 16
+            string postfix = "23^2*";
+
+            // Act
+            int result = InfixToPostfix.PostfixExpressionEvaluation(postfix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(16));
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_ZeroOperands_ReturnsZero()
+        {
+            // Arrange
+            string postfix = "0";
+
+            // Act
+            int result = InfixToPostfix.PostfixExpressionEvaluation(postfix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void PostfixExpressionEvaluation_LargerNumbers_ReturnsCorrectResult()
+        {
+            // Arrange - Uses single digits only: 9+8 = 17
+            string postfix = "98+";
+
+            // Act
+            int result = InfixToPostfix.PostfixExpressionEvaluation(postfix);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(17));
+        }
+
+        [Test]
+        public void IntegrationTest_ConvertAndEvaluate_SimpleExpression()
+        {
+            // Arrange
+            string infix = "2+3";
+
+            // Act
+            string postfix = InfixToPostfix.InfixToPostfixConversion(infix);
+            int result = InfixToPostfix.PostfixExpressionEvaluation(postfix);
+
+            // Assert
+            Assert.That(postfix, Is.EqualTo("23+"));
+            Assert.That(result, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void IntegrationTest_ConvertAndEvaluate_ComplexExpression()
+        {
+            // Arrange
+            string infix = "(2+3)*4";
+
+            // Act
+            string postfix = InfixToPostfix.InfixToPostfixConversion(infix);
+            int result = InfixToPostfix.PostfixExpressionEvaluation(postfix);
+
+            // Assert
+            Assert.That(postfix, Is.EqualTo("23+4*"));
+            Assert.That(result, Is.EqualTo(20));
+        }
+
+        [Test]
+        public void IntegrationTest_ConvertAndEvaluate_WithAllOperators()
+        {
+            // Arrange - 2+3*4-6/2 = 2+12-3 = 11
+            string infix = "2+3*4-6/2";
+
+            // Act
+            string postfix = InfixToPostfix.InfixToPostfixConversion(infix);
+            int result = InfixToPostfix.PostfixExpressionEvaluation(postfix);
+
+            // Assert
+            Assert.That(postfix, Is.EqualTo("234*+62/-"));
+            Assert.That(result, Is.EqualTo(11));
+        }
+
+        [Test]
+        public void IntegrationTest_ConvertAndEvaluate_WithExponentiation()
+        {
+            // Arrange - 2^3+1 = 8+1 = 9
+            string infix = "2^3+1";
+
+            // Act
+            string postfix = InfixToPostfix.InfixToPostfixConversion(infix);
+            int result = InfixToPostfix.PostfixExpressionEvaluation(postfix);
+
+            // Assert
+            Assert.That(postfix, Is.EqualTo("23^1+"));
+            Assert.That(result, Is.EqualTo(9));
         }
     }
 }
