@@ -178,7 +178,7 @@ namespace Algorithms.Stack
 
         private static void ValidateInfix(string expr)
         {
-            if (string.IsNullOrEmpty(expr))
+            if (string.IsNullOrEmpty(expr) || string.IsNullOrWhiteSpace(expr))
             {
                 throw new ArgumentException("Infix cannot be null or empty.");
             }
@@ -186,7 +186,7 @@ namespace Algorithms.Stack
 
         private static void ValidatePostfix(string expr)
         {
-            if (string.IsNullOrEmpty(expr))
+            if (string.IsNullOrEmpty(expr) || string.IsNullOrWhiteSpace(expr))
             {
                 throw new ArgumentException("Postfix cannot be null or empty.");
             }
