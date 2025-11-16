@@ -35,6 +35,28 @@ public static class FastSearcherTests
         arr[index].Should().Be(present);
     }
 
+    [TestCase(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, 3)] // Item in left segment (< indexBinary)
+    [TestCase(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, 5)] // Item at binary index
+    [TestCase(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, 8)] // Item in right segment (> indexBinary)
+    [TestCase(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, 1)] // Item at start
+    [TestCase(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, 10)] // Item at end
+    [TestCase(new[] { 1, 10, 20, 30, 40, 50, 60, 70, 80, 90 }, 20)] // Non-uniform distribution, interpolation < binary
+    [TestCase(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 100 }, 100)] // Non-uniform distribution, interpolation > binary
+    [TestCase(new[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 }, 50)] // Uniform spacing
+    [TestCase(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 }, 7)] // Larger array
+    [TestCase(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 }, 15)] // Larger array, right side
+    public static void FindIndex_ItemPresentDeterministic_IndexCorrect(int[] arr, int present)
+    {
+        // Arrange
+        var searcher = new FastSearcher();
+
+        // Act
+        var index = searcher.FindIndex(arr, present);
+
+        // Assert
+        arr[index].Should().Be(present);
+    }
+
     [Test]
     public static void FindIndex_ItemPresentInArrayOfDuplicates_IndexCorrect()
     {
