@@ -176,3 +176,18 @@ public static class CircularLinkedListTests
         return result.ToString().Trim();
     }
 }
+[Test]
+public static void InsertAfter_InsertingAfterTail_UpdatesTailAndPreservesHead()
+{
+    var list = new CircularLinkedList<int>();
+    list.InsertAtEnd(10);
+
+    list.InsertAfter(10, 20);
+
+    var head = list.GetHead();
+    Assert.That(head, Is.Not.Null);
+    Assert.That(head!.Data, Is.EqualTo(10));
+    Assert.That(head.Next, Is.Not.Null);
+    Assert.That(head.Next!.Data, Is.EqualTo(20));
+    Assert.That(head.Next.Next, Is.SameAs(head));
+}
