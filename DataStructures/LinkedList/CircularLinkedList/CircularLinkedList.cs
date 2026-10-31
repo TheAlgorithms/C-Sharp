@@ -97,6 +97,11 @@ namespace DataStructures.LinkedList.CircularLinkedList
                     newNode.Next = current.Next;
                     current.Next = newNode;
 
+                    if (tail! == current)
+                    {
+                        tail = newNode;
+                    }
+
                     return;
                 }
 
